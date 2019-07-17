@@ -1,0 +1,49 @@
+
+#top {
+    position: relative;
+    background-color: #036fab;
+    color: white;
+    margin: 0px 0px 0px 0px;
+}
+
+#bottom {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    position: relative;
+    float: left;
+    background-color: #ece3a5;
+    padding: 0px;
+    width: 270px;
+    margin-top: 50px;
+}
+
+
+#content {
+    margin-left: 270px;
+    padding: 110px 60px 60px 60px;    
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#form.toggled #left {
+    margin-left: -270px;
+}
+#form.toggled #content {
+    margin: 110px 60px 0 60px;
+    padding: 0px;
+}

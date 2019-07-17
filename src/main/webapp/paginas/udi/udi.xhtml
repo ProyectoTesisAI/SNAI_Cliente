@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:body>
+        <ui:composition template="./../../templates/psicologo.xhtml">
+            
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+                <script src="../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+            
+            <ui:define name="content">
+                
+                <h:form>
+                    <b:dataTable  value="#{panelAdolescenteInfractorUDIControlador.listadoAdolescentesInfractoresUDI}"
+                                    var="ai"
+                                    searching="true"
+                                    select="true"
+                                    selectionMode="multiple"
+                                    responsive="true"
+                                    fixed-header="true"
+                                    scroll-x="true"
+                                    save-state="true"
+                                    scroll-size="1000px"
+                                    style="margin: auto; width: 100%;"
+                                    ajax="true"
+                                  
+                                  >
+                    <b:dataTableColumn value="#{ai.apellidos} #{ai.nombres}" />
+                    <b:dataTableColumn value="#{ai.cedula}"/>
+                    <b:dataTableColumn value="#{ai.edad}"/>
+                    <b:dataTableColumn label="Añadir Información">
+                        <b:commandButton value="Añadir Información" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorUDIControlador.agregarInformacion(ai)}">
+                            <f:ajax execute="@form" />
+                        </b:commandButton>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn  label="Editar Información">
+                        <b:commandButton value="Editar Información" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorUDIControlador.editarInformacion(ai)}">
+                            <f:ajax execute="@form" />
+                        </b:commandButton>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn  label="Eliminar">
+                        <b:commandButton value="Eliminar" class="btn btn-primary btn-block" action="#{panelAdolescenteInfractorUDIControlador.eliminarAdolescenteInfractor(ai)}">
+                            <f:ajax execute="@form" />
+                        </b:commandButton>
+                    </b:dataTableColumn>
+
+                </b:dataTable>
+
+            </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+    
+</html>
+

@@ -1,8 +1,10 @@
 package epn.edu.ec.servicios;
 
+import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.RegistroAsistencia;
 import epn.edu.ec.modelo.AsistenciaAdolescente;
+import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.utilidades.Constantes;
@@ -25,6 +27,21 @@ public class RegistroAsistenciaServicio {
         cliente= ClientBuilder.newClient();
     }   
     
+    public AsistenciaAdolescente guardarRegistroAsistenciaAdolescente(AsistenciaAdolescente asistenciaAdolescente){
+        
+        AsistenciaAdolescente asistenciaAdolescenteAux=null;
+        
+        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA);        
+        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
+        Response response =invocationBuilder.put(Entity.entity(asistenciaAdolescente, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        if(response.getStatus()==200){
+            asistenciaAdolescenteAux =response.readEntity(AsistenciaAdolescente.class);
+        }
+        
+        return asistenciaAdolescenteAux;
+
+    }
+    
     public List<AdolescenteInfractorUDI> listaAdolescentesInfractoresPorUzdi(UDI udi){
         
         List<AdolescenteInfractorUDI> registroAsistenciaUdi=null;
@@ -37,6 +54,21 @@ public class RegistroAsistenciaServicio {
         }
         
         return registroAsistenciaUdi;
+
+    }
+    
+    public List<AdolescenteInfractorCAI> listaAdolescentesInfractoresPorCai(CAI cai){
+        
+        List<AdolescenteInfractorCAI> registroAsistenciaCai=null;
+        
+        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorCai");        
+        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
+        Response response =invocationBuilder.post(Entity.entity(cai, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        if(response.getStatus()==200){
+            registroAsistenciaCai=response.readEntity(new GenericType<List<AdolescenteInfractorCAI>>(){});
+        }
+        
+        return registroAsistenciaCai;
 
     }
     

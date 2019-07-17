@@ -1,0 +1,301 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+       <ui:composition template="./../../templates/psicologo.xhtml">
+            
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+                <script src="../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+            
+            <ui:define name="content">
+               <!-- Panel para la creación de la Ficha de Informe de Taller-->
+                <div class="panel panel-default">
+
+                    <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center ">CREAR FICHA INFORME DE PSICOLOGÍA</div>
+                    <div class="panel-body" style="padding: 40px;">
+
+                        <b:form id="form">
+                            <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
+                                
+                                <b:tab title="Registro de Asistencia">
+                                    <h:form id="formRegistroAsistenciaPsicologia">
+                                        <b:panel style="border: transparent">
+                                            <div class="row" style="margin-top: 35px;">
+                                                <div class="col-md-12 col-md-offset-0">
+                                                    <b:dataTable id="dtRegistroAsistencia" value="#{informePsicologiaControlador.listaParaChequeo}"
+                                                                var="ai"
+                                                                fixed-header="true"
+                                                                scroll-x="true"
+                                                                scroll-size="1000px"
+                                                                responsive="true"
+                                                                searching="false"
+                                                                select="true"
+                                                                selectionMode="multiple"
+                                                                style="margin: auto; width: 100%;">
+                                                        <b:dataTableColumn value="#{ai.idAdolescenteUdi.nombres}"/>
+                                                        <b:dataTableColumn value="#{ai.idAdolescenteUdi.apellidos}"/>
+                                                        <b:dataTableColumn value="#{ai.idAdolescenteUdi.cedula}"/>
+                                                        <b:dataTableColumn label="¿Asistió?">
+                                                            <b:selectBooleanCheckbox value="#{ai.asistio}"/>
+                                                        </b:dataTableColumn>
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+                                                <div class=" col-md-2 col-md-offset-9">
+                                                    <div class="form-group">
+                                                        <b:commandButton id="btnRegistroAsistencia" value="Guardar" class="btn btn-primary btn-block" update="growlRegistroAsistencia" action="#{informePsicologiaControlador.guardarRegistroAsistencia()}"/>
+                                                        <b:growl id="growlRegistroAsistencia" globalOnly="false" severity="info,error"/>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </b:panel>
+                                    </h:form>
+                                </b:tab>
+                                
+                                <b:tab title="Informe Psicología">
+                                    <h:form id="formInformePsicologia">
+                                        <b:panel content-disabled="#{informePsicologiaControlador.informeGuardado}" style="border: transparent;">
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtTema" value="Tema"/>
+                                                        <b:inputText  placeholder="Tema" id="txtTema" disabled="true" required="true" style="text-transform:uppercase" value="#{informePsicologiaControlador.tallerPsicologia.tema}"/>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1 ">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtNumeroTaller" value="Taller Nro"/>
+                                                        <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" disabled="true" value="#{informePsicologiaControlador.tallerPsicologia.numeroTaller}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:panelGrid columns="1">
+                                                            <h:outputLabel for="txtFecha" value="Fecha" />
+                                                            <b:dateTimePicker id="txtFecha" placeholder="dd/mm/aa"  showTime="false" disabled="true" value="#{informePsicologiaControlador.tallerPsicologia.fecha}"/>  
+                                                        </b:panelGrid>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:panelGrid columns="1">
+                                                            <h:outputLabel for="txtHoraInicio" value="Hora Inicio" />
+                                                            <b:dateTimePicker id="txtHoraInifio" placeholder="hh:mm"  show-date="false" format="hh:mm" disabled="true" value="#{informePsicologiaControlador.informePsicologia.hora}"/>  
+                                                        </b:panelGrid>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:panelGrid columns="1">
+                                                            <h:outputLabel for="txtHoraFin" value="Hora Fin" />
+                                                            <b:dateTimePicker id="txtHoraFin" placeholder="hh:mm"  show-date="false" format="hh:mm" disabled="true" value="#{informePsicologiaControlador.informePsicologia.hora}"/>  
+                                                        </b:panelGrid>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtNumeroTotalParticipantes" value="Número Total Participantes"/>
+                                                        <b:inputText mask="integer" placeholder="Numero Total Participantes" disabled="true" id="txtNumeroTotalParticipantes" value="#{informePsicologiaControlador.informePsicologia.numAdolescentes}"/>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObjetivoGeneral" value="Objetivo General"/>
+                                                        <b:inputText id="txtObjetivoGeneral" placeholder="Objetivo" style="text-transform:uppercase" disabled="true" value="#{informePsicologiaControlador.tallerPsicologia.objetivo}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtAntecedentesJustificacion" value="Antecedentes y Justificacion" />
+                                                        <b:inputTextarea id="txtAntecedentesJustificacion" placeholder="Antecedentes y Justificacion" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.adolescentesJustificacion}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+                                                <div class="col-md-12 col-md-offset-0">
+                                                    <div class="form-group">
+                                                        <b:dataTable contentDisabled="true" id="tablaTallerPsicologia" value="#{tallerPsicologiaEditarControlador.listaItemsTallerPsicologia}" 
+                                                                    widgetVar="tableWidgetVar"
+                                                                    var="tp"
+                                                                    fixed-header="true"
+                                                                    scroll-x="true"
+                                                                    scroll-size="1000px"
+                                                                    responsive="false"
+                                                                    searching="false"
+                                                                    select="true"
+                                                                    paginated="false"
+                                                                    selectionMode="multiple"
+                                                                    style="margin: 0 auto; width: 100%;"
+                                                                    
+                                                                     >
+                                                            <b:dataTableColumn style="min-width: 60px;">
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Duración"/>
+                                                                </f:facet>
+                                                                <b:dateTimePicker style="color: #262626" id="txtDuracion" placeholder="hh:mm" format="mm" show-date="false" value="#{tp.hora}"/>  
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Actividad"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" required="true" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Objetivo Específico"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Materiales"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Responsable"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
+                                                            </b:dataTableColumn>
+                                                            
+                                                        </b:dataTable>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtDesarrollo" value="Desarrollo"/>
+                                                        <b:inputText id="txtDesarrollo" placeholder="Desarrollo" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.socializacionDesarrollo}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObjetivosEspecificos" value="Objetivos Especificos"/>
+                                                        <b:inputText id="txtObjetivosEspecificos" placeholder="Objetivos Especificos" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.socializacionObjetivos}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtCierreEvaluacion" value="Cierre y Evaluación"/>
+                                                        <b:inputTextarea id="txtCierreEvaluacion" placeholder="Cierre y Evaluación" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.cierreEvaluacion}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtConclusiones" value="Conclusiones"/>
+                                                        <b:inputTextarea id="txtConclusiones" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.conclusiones}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtRecomendaciones" value="Recomendaciones"/>
+                                                        <b:inputTextarea id="txtRecomendaciones" placeholder="Recomendaciones" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.recomendaciones}" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObservaciones" value="Observaciones"/>
+                                                        <b:inputTextarea id="txtObservaciones" placeholder="Observaciones" style="text-transform:uppercase" value="#{informePsicologiaControlador.informePsicologia.observaciones}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtElaborado" value="Elaborado por "/>
+                                                        <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+                                                <div class=" col-md-2 col-md-offset-9">
+                                                    <div class="form-group">
+                                                        <b:commandButton id="btnInforme" value="Guardar" class="btn btn-primary btn-block" update="growlInformePsicologia" action="#{informePsicologiaControlador.guardarInformePsicologia()}"/>
+                                                        <b:growl id="growlInformePsicologia" for="btnInforme" globalOnly="false" severity="info,error"/>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </b:panel>
+                                    </h:form>
+                                </b:tab>
+
+                                
+                                
+                                <b:tab title="Registro Fotográfico">
+                                    <h:form id="formRegistroFotografico">
+                                        <b:growl id="growlRegistroFotografico" globalOnly="false" severity="info,error"/>
+                                        <p:fileUpload id="idSubir"
+                                                      fileUploadListener="#{informePsicologiaControlador.subirFoto}"
+                                                      sizeLimit="500000"
+                                                      cancelLabel="Cancelar"
+                                                      uploadLabel="Guardar"
+                                                      label="Seleccionar imagen"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|JPG|png)$/"
+                                                      update="@form"
+                                                      
+                                                      />   
+
+                                        <b:carousel id="registroFotografico" style="width: 360px;" interval="2500">
+                                            <b:carouselItem >
+                                                <img src="#{informePsicologiaControlador.registroFotografico.foto}" alt="Valladolid" style="width: 360px; height: 240px" />
+                                                <b:carouselCaption>
+                                                    <h2>You'll love Valladolid!</h2>
+                                                </b:carouselCaption>
+                                            </b:carouselItem>
+                                        </b:carousel>
+                                    </h:form>
+                                </b:tab>
+                            </b:tabView>
+                        </b:form>
+                    </div>
+                </div>
+                <!-- Fin del Panel para la creación de Fichas de Planificación del Taller-->
+                    
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
