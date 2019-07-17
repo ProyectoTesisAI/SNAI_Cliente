@@ -1,0 +1,284 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21-jun-2019, 23:19:00
+    Author     : User
+*/
+
+body{
+  font: 15px/1.5 Arial, Helvetica,sans-serif;
+  padding:0;
+  margin:0;
+  background-color:#f4f4f4;
+}
+
+/* Global */
+.container{
+  width:80%;
+  margin:auto;
+  overflow:hidden;
+}
+
+ul{
+  margin:0;
+  padding:0;
+}
+
+
+/* Header **/
+header{
+  /*background:#35424a;*/
+  /*background-image: linear-gradient(to botton rigth,#263a47,#244457 ,#214d67);*/
+  background: #35424a;
+  color:#ffffff;
+  padding-top:30px;
+  min-height:70px;
+  border-bottom:#e8492b 3px solid;
+}
+
+header a{
+  color:#ffffff;
+  text-decoration:none;
+  text-transform: uppercase;
+  font-size:16px;
+}
+
+header li{
+  float:left;
+  display:inline;
+  padding: 0 20px 0 20px;
+}
+
+header #branding{
+  float:left;
+}
+
+header #branding h1{
+  margin:0;
+  font-size: 28px;
+  padding-bottom: 12px;
+}
+
+header nav{
+  float:right;
+  margin-top:10px;
+}
+
+header .highlight, header .current a{
+  color: #e8492b;
+  font-weight:bold;
+
+}
+
+header a:hover{
+  color:#cccccc;
+  font-weight:bold;
+  text-decoration: none;
+
+}
+
+/* Showcase */
+#showcase{
+  min-height:350px;
+  height: 700px;
+  background:url('../imagenes/background.jpg') no-repeat 0 -350px;
+  text-align:center;
+  color:#ffffff;
+  border-bottom:#35424a 40px solid;
+}
+
+#showcase h1{
+  margin-top:100px;
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+#showcase p{
+  font-size:20px;
+}
+
+
+/* Boxes */
+#boxes{
+  margin-top:20px;
+}
+
+#boxes .box{
+  float:left;
+  text-align: center;
+  width:45%;
+  padding:10px;
+}
+
+#boxes .box h3{
+  font-size: 20px;
+}
+
+#boxes .box #img1{
+  width:90px;
+}
+
+#boxes .box #img2{
+  height: 90px;
+}
+
+.contenedor{
+    display: flex;
+    /*flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;*/
+    width: 100%;
+
+}
+
+
+/*características del menú de navegaciòn*/
+.contenedor #menu_lateral{
+    /*order: 0;
+    flex: 0 0 250px;
+    align-self: stretch;
+    background: #2b2e33;
+    color: #fff; 
+    list-style: none;
+    min-height: 100%; */
+    float: left;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+}
+
+#menu_lateral .logo {
+  background-color: #191a1e;
+  line-height: 8vh; /*altura de la fila*/
+  font-size: 18px;
+}
+
+#menu_lateral li {
+  line-height: 38px; /*altura de la fila*/
+  text-indent: 20px; /*sangría de texto con respecto al primer objeto*/
+  padding-left: 0px;
+  border-bottom: 1px solid #23282e;
+}
+
+/*atributos para el texto de cada item del menu: color, tamaño*/
+#menu_lateral li a {
+
+  display: block;
+  text-decoration: none;
+  padding-left: 10px;
+  color: #fff;
+}
+
+
+#menu_lateral li a:hover {
+  /*background-color: #4f5b69;*/
+  background-color: #309db4;
+  /*border-left: 3px solid #d19b3d;*/
+}
+
+#menu_lateral .sub-menu li {
+  background-color: #191a1e;
+  border: none;
+  line-height: 38px;
+  border-bottom: 1px solid #23282e;
+
+}
+#menu_lateral .sub-menu li a::before {
+  content: '\f054'; /*flecha lateral*/
+  display: block;
+  position: absolute;
+  left: 20px;
+  font-family: FontAwesome;
+  font-size: 10px;
+
+
+}
+
+#menu_lateral .sub-menu li a {
+  padding-left: 35px;
+}
+
+#menu_lateral .sub-menu li a:hover {
+  background-color: #020203;
+  border-left: 3px solid #d19b3d;
+  padding-left: 36px;
+}
+
+.contenedor #contenido{    
+    /*order: 0;
+    flex: 1 1 600px;
+    align-self: stretch;
+    margin: 60px;*/
+    float: left;
+    width: calc(100%-250px);
+    height: 100%;
+
+
+}
+
+
+footer{
+  padding:20px;
+  margin-top:20px;
+  color:#ffffff;
+  background-color:#e8491d;
+  /*background-color: #ef6f24;*/
+  text-align: center;
+}
+
+/* Media Queries */
+@media(max-width: 768px){
+  header #branding,
+  header nav,
+  header nav li,
+  #newsletter h1,
+  #newsletter form,
+  #boxes .box,
+  article#main-col,
+  aside#sidebar{
+    float:none;
+    text-align:center;
+    width:100%;
+  }
+
+  header{
+    padding-bottom:20px;
+  }
+
+  #showcase h1{
+    margin-top:40px;
+  }
+
+
+}
+
+#login-form {
+
+    width: 340px;
+    margin: 60px auto;
+    color: #333333;
+
+
+
+}
+#login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    text-align: start;
+    opacity: 0.92;
+
+}
+ #login-form h2 {
+    margin: 0 0 15px;
+
+}
+#form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <h:head>
+        <title>LOGIN</title>   
+        <link rel="stylesheet" type="text/css" href="../../resources/css/login.css"/>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+        <h:outputStylesheet name="../../resources/css/login.css"/>
+    </h:head>
+    <h:body>
+        <header>
+            <div class="container">
+                <div id="branding">
+                    <h1>
+                        <span class="highlight">
+                            Ministerio de Justicia,Derechos Humanos y Cultos
+                        </span>
+                    </h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="current">
+                            <a href="menu.com">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                                Acerca
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section id="showcase">
+            <div class="container">
+                <div id="login-form">
+                    <b:form>
+                        <h2 class="text-center">
+                            Login
+                        </h2>
+                        <b:messages id="growl" global-only="true" severity="warn" escape="false" />
+
+                        <div class="form-group">
+                            <h:outputLabel for="txtUsuario" value="Usuario"/>
+                            <b:inputText class="form-control" placeholder="Usuario" id="txtUsuario" required="true" value="#{personalControlador.personal.usuario}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel for="txtContraseña" value="Contraseña"/>
+                            <b:inputText class="form-control" placeholder="Contraseña" id="txtContraseña" required="true" type="password" value="#{personalControlador.personal.password}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{personalControlador.login(personalControlador.personal)}"/> 
+                        </div>
+                    </b:form>
+                </div>
+            </div>
+        </section>
+
+        <section id="boxes">
+            <div class="container">
+                <div class="box">
+                    <img id="img1" src="imagenes/epn_logo.png"/>
+                    <h3>Escuela Politécnica Nacional</h3>
+                </div>
+                <div  class="box">
+                    <img id="img2" src="imagenes/mjdhc_logo.png"/>
+                    <h3>Ministerio de Justica, Derechos Humanos y Cultos</h3>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Oscar España - Javier Reyes, Copyright &copy; 2019</p>
+        </footer>
+    </h:body>
+</html>

@@ -12,7 +12,6 @@ import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.utilidades.Constantes;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

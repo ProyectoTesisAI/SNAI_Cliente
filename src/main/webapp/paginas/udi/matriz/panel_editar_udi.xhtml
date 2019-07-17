@@ -1,0 +1,1597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+        <ui:composition template="./../../../templates/psicologo.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
+                <script src="../../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h1>INFORMACIÓN COMPLETA</h1>
+
+                <b:form id="panelUDI" style="margin-top: 50px;">
+                    <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+
+                        <b:tab title="1" tooltip="UNIDAD ZONAL / ADOLESCENTE INFRACTOR / REPRESENTANTE">
+
+                            <!-- PANEL UNIDAD ZONAL GUARDAR INFORMACION -->
+                            <b:form id="formUnidadZonal">
+                                <b:panel look="primary"  content-disabled="#{!unidadZonalControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="UNIDAD ZONAL" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtUnidadZonal" value="Unidad Zonal"/>
+                                            <b:selectOneMenu id="txtUnidadZonal" value="#{unidadZonalControlador.unidadZonal.idUdi.udi}">
+                                                <f:selectItems value="#{unidadZonalControlador.listaUDI}"  var="u"  itemValue="#{u.udi}" itemLabel="#{u.udi}" />
+                                            </b:selectOneMenu>
+                                        </b:column>                                                
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtExpendiente" value="Expediente"/>                                             
+                                            <b:inputText id="txtExpendiente" placeholder="Expediente" maxlength="10" value="#{unidadZonalControlador.unidadZonal.numeroExpediente}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="3" offset="8">                                                
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{unidadZonalControlador.guardarUnidadZonal()}">
+                                                <f:ajax execute="formUnidadZonal" render="formUnidadZonal"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>                                   
+                                </b:panel>
+
+                            </b:form> 
+
+                            <!-- PANEL ADOLESCENTE INFRACTOR GUARDAR INFORMACION -->
+                            <b:form>
+                                <b:panel look="primary" content-disabled="#{!adolescenteInfractorUDIControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="ADOLESCENTE INFRACTOR" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:row>
+                                        <b:column span="4" offset="1">                                                    
+                                            <h:outputLabel for="txtNombres" value="Nombres"/>
+                                            <b:inputText id="txtNombres" placeholder="Nombres" maxlength="20" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.nombres}"/>
+                                        </b:column>
+                                        <b:column span="4" offset="2">                                                    
+                                            <h:outputLabel for="txtApellidos" value="Apellidos"/>
+                                            <b:inputText id="txtApellidos" placeholder="Apellidos" maxlength="30" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.apellidos}"/>
+                                        </b:column>                                                
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="4" offset="1">                                                   
+                                            <h:outputLabel for="txtCedula" value="Cédula"/>
+                                            <b:inputText id="txtCedula" placeholder="Cédula" maxlength="10" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.cedula}">
+                                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.limpiarMensajeCedulaEditar}" render="txtCedula mensaje-cedula" />
+                                                <f:ajax event="keyup" listener="#{adolescenteInfractorUDIControlador.validarCedulaEditar}" render="mensaje-cedula" />
+                                            </b:inputText>
+                                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje}"/>
+                                        </b:column>
+                                        <b:column span="4" offset="2">                               
+                                            <h:outputLabel for="txtGenero" value="Género"/>
+                                            <b:selectOneMenu id="txtGenero" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.genero}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                                                <f:selectItem itemLabel="MASCULINO"  itemValue="MASCULINO" />
+                                                <f:selectItem itemLabel="FEMENINO"  itemValue="FEMENINO" />
+                                            </b:selectOneMenu>
+
+                                        </b:column>
+                                        <b:column span="4" offset="1">          
+                                            <h:outputLabel for="txtEtnia" value="Etnia"/>
+                                            <b:selectOneMenu id="txtEtnia" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.etnia}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="MESTIZOS"  itemValue="MESTIZOS" />
+                                                <f:selectItem itemLabel="INDÍGENAS"  itemValue="INDÍGENAS" />
+                                                <f:selectItem itemLabel="AFROECUATORIANOS"  itemValue="AFROECUATORIANOS" />
+                                                <f:selectItem itemLabel="BLANCO"  itemValue="BLANCO" />
+                                                <f:selectItem itemLabel="MONTUVIO"  itemValue="MONTUVIO" />
+                                                <f:selectItem itemLabel="OTRO"  itemValue="OTRO" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <b:column span="4" offset="2">       
+                                            <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
+                                            <b:dateTimePicker id="txtFechaNacimiento" required="true" placeholder="Fecha"  showTime="false" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.fechaNacimiento}">
+                                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.validarFechaNacimientoEditar}" render="mensaje-edad txtEdad" />
+                                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.limpiarMensajeFechaNacimientoEditar}" render="txtFechaNacimiento mensaje-edad" />
+                                            </b:dateTimePicker>
+                                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-edad" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje1}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="4" offset="1">   
+                                            <h:outputLabel for="txtEdad" value="Edad "/>
+                                            <b:inputText mask="integer" id="txtEdad" placeholder="Edad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.edad}"/>                     
+                                        </b:column>
+                                        <b:column span="4" offset="2">                     
+                                            <h:outputLabel for="txtNumeroHijos" value="Número Hijos"/>
+                                            <b:inputText id="txtNumeroHijos" mask="integer" placeholder="Número Hijos" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.numeroHijos}"/>                                    
+                                        </b:column>
+
+                                        <b:column span="4" offset="1">     
+                                            <h:outputLabel for="txtEstadoCivil" value="Estado Civil"/>
+                                            <b:selectOneMenu id="txtEstadoCivil" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.estadoCivil}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SOLTERO"  itemValue="SOLTERO" />
+                                                <f:selectItem itemLabel="CASADO"  itemValue="CASADO" />
+                                                <f:selectItem itemLabel="VIUDO"  itemValue="VIUDO" />
+                                                <f:selectItem itemLabel="UNIÓN LIBRE"  itemValue="UNIÓN LIBRE" />
+                                            </b:selectOneMenu>          
+                                        </b:column>
+                                        <b:column span="4" offset="2">           
+                                            <h:outputLabel for="txtConQuienVive" value="Con quien Vive"/>
+                                            <b:inputText id="txtConQuienVive" placeholder="Con quien Vive" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.conQuienVive}"/>                                                 
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
+                                            <b:selectOneMenu id="txtDiscapacidad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.discapacidad}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="SI" />
+                                                <f:selectItem itemLabel="NO"  itemValue="NO" />
+                                                <f:selectItem itemLabel="EN PROCESO DE CERTIFICACION"  itemValue="EN PROCESO DE CERTIFICACION" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">                
+                                            <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
+                                            <b:selectOneMenu id="txtTipoDiscapacidad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.tipoDiscapacidad}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
+                                                <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
+                                                <f:selectItem itemLabel="AUDITIVA"  itemValue="AUDITIVA" />
+                                                <f:selectItem itemLabel="INTELECTUAL"  itemValue="INTELECTUAL" />
+                                                <f:selectItem itemLabel="LENGUAJE"  itemValue="LENGUAJE" />
+                                                <f:selectItem itemLabel="PSICO-SOCIAL"  itemValue="PSICO-SOCIAL" />
+                                                <f:selectItem itemLabel="VISUAL"  itemValue="VISUAL" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
+                                            <b:inputText id="txtPorcentajeDiscapacidad" mask="numeric" placeholder="Porcentaje Discapacidad"  value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.porcentajeDiscapacidad}"/>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtEnfermedadesRaras" value="Enfermedades Catastróficas Raras"/>
+                                            <b:selectOneMenu id="txtEnfermedadesRaras" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.enfermedadesCatastroficasRaras}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtRegistroSocial" value="Registro Social"/>
+                                            <b:selectOneMenu id="txtRegistroSocial" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.registroSocial}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block"/>
+                                        </b:column>
+                                    </b:row>
+                                </b:panel>
+                            </b:form>
+
+                            <!-- PANEL REPRESENTANTE - GUARDAR INFORMACION -->
+                            <b:form id="formRepresentante">
+                                <b:panel look="primary" content-disabled="#{!representanteControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="REPRESENTANTE" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtNacionalidad" value="Nacionalidad"/>
+                                            <b:selectOneMenu id="txtNacionalidad" update="tipoDocumentoRepresentante" process="@this" value="#{representanteControlador.tipoDocumento}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                                                <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
+                                                <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <h:panelGroup id="tipoDocumentoRepresentante">
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCedula1" rendered="#{representanteControlador.esCedula}" value="Cédula"/>
+                                                <b:inputText id="txtCedula1" placeholder="Cédula" maxlength="10" rendered="#{representanteControlador.esCedula}" value="#{representanteControlador.representante.cedula}">
+                                                    <f:ajax event="blur" listener="#{representanteControlador.limpiarMensajeCedula}" render="txtCedula1 mensaje-cedulaRepresentante" />
+                                                    <f:ajax event="keyup" listener="#{representanteControlador.validarCedula}" render="mensaje-cedulaRepresentante" />
+                                                </b:inputText>
+                                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControlador.mensaje}"/>
+
+                                                <h:outputLabel for="txtDocumentoR" value="Documento/Pasaporte" rendered="#{!representanteControlador.esCedula}"/>
+                                                <b:inputText id="txtDocumentoR" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControlador.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControlador.representante.documento}"/>
+                                            </b:column>
+                                        </h:panelGroup>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtNombres1" value="Apellidos y Nombres"/>
+                                            <b:inputText id="txtNombres1" placeholder="Nombres" maxlength="40" value="#{representanteControlador.representante.nombresApellidos}"/>
+                                        </b:column>
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtParentesco" value="Parentesco"/>
+                                            <b:inputText id="txtParentesco" placeholder="Parentesco" maxlength="15" value="#{representanteControlador.representante.parentesco}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{representanteControlador.guardarRepresentante()}">
+                                                <f:ajax execute="formRepresentante" render="formRepresentante"/>
+                                            </h:commandButton>
+
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                            </b:form>              
+
+                        </b:tab>
+
+                        <b:tab title="2" tooltip="IDENTIFICACIÓN GEOGRÁFICA / INFORMACIÓN INFRACCIÓN">
+
+                            <!-- PANEL  INFORMACION GEOGRAFICA -GUARDAR INFORMACION -->
+
+                            <b:form id="formInfoGeografica">
+                                <b:panel look="primary" content-disabled="#{!identificacionGeograficaControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:panel rendered="#{!identificacionGeograficaControlador.esEcuatoriana}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="LUGAR DE NACIMIENTO" style="color: #036fab; font-weight: bold"  />
+                                        </f:facet>
+                                        <b:row>
+                                            <b:column span="4" offset="0">
+                                                <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
+                                                <b:inputText id="txtPaisNacimiento" maxlength="50" placeholder="País de nacimiento" value="#{identificacionGeograficaControlador.identificacionGeografica.paisNacimiento}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="0">
+                                                <h:outputLabel for="txtEstadoProvincia" value="Estado/Provincia"/>
+                                                <b:inputText id="txtEstadoProvincia" maxlength="50" placeholder="Estado/Provincia" value="#{identificacionGeograficaControlador.identificacionGeografica.estadoProvinciaNacimiento}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="0">
+                                                <h:outputLabel for="txtCiudadNacimiento" value="Ciudad de nacimiento"/>
+                                                <b:inputText id="txtCiudadNacimiento" maxlength="50" placeholder="Ciudad de nacimiento" value="#{identificacionGeograficaControlador.identificacionGeografica.ciudadNacimiento}"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel rendered="#{identificacionGeograficaControlador.esEcuatoriana}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="LUGAR DE RESIDENCIA" style="color: #036fab; font-weight: bold"  />
+                                        </f:facet>
+                                        <b:row>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtProvincia" value="Provincia"/>
+                                                <b:selectOneMenu id="txtProvincia" update="txtCanton" process="@this" value="#{identificacionGeograficaControlador.identificacionGeografica.provinciaAdolescente}">
+                                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                    <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                                    <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                                    <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                                    <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                                    <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                                    <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                                    <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                                    <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                                    <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                                    <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                                    <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                                    <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                                    <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                                    <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                                    <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                                    <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                                    <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                                    <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                                    <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                                    <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                                    <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                                    <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                                    <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                                    <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCanton" value="Cantón"/>
+                                                <b:selectOneMenu id="txtCanton" value="#{identificacionGeograficaControlador.identificacionGeografica.cantonAdolescente}">
+                                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                    <f:selectItems value="#{identificacionGeograficaControlador.cantones}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>    
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtParroquia" value="Parroquia"/>
+                                                <b:inputText id="txtParroquia" maxlength="50" placeholder="Parroquia" value="#{identificacionGeograficaControlador.identificacionGeografica.parroquia}"/>
+                                            </b:column>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTelefono"  value="Teléfono"/>
+                                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{identificacionGeograficaControlador.identificacionGeografica.telefono}">
+                                                    <f:ajax event="blur" listener="#{identificacionGeograficaControlador.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
+                                                    <f:ajax event="keyup" listener="#{identificacionGeograficaControlador.validarNumeroContacto}" render="mensaje-telefono" />
+                                                </b:inputText>
+                                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-telefono" class="mensaje-error" value="#{identificacionGeograficaControlador.mensaje}"/>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>                                        
+                                            <b:column span="10" offset="1">
+                                                <h:outputLabel for="txtDireccionDomicilio" value="Dirección del domicilio"/>
+                                                <b:inputText id="txtDireccionDomicilio" maxlength="125" placeholder="Dirección del domicilio" value="#{identificacionGeograficaControlador.identificacionGeografica.direccionDomicilio}"/>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>                                                    
+                                            <b:column span="10" offset="1">                
+                                                <h:outputLabel for="txtRefenciaDomicilio" value="Referencia del domicilio"/>
+                                                <b:inputText id="txtRefenciaDomicilio" maxlength="125" placeholder="Referencia del domicilio" value="#{identificacionGeograficaControlador.identificacionGeografica.referenciaDomicilio}"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel >
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{identificacionGeograficaControlador.guardarIdentificacionGeograficaAux()}">
+                                                <f:ajax execute="formInfoGeografica" render="formInfoGeografica"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+                                </b:panel>    
+                            </b:form>
+
+                            <!-- PANEL  INFORMACION INFRACCION - GUARDAR INFORMACION-->
+                            <b:form id="formInfoInfraccion">
+                                <b:panel look="primary" content-disabled="#{!informacionInfraccionControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="INFORMACIÓN INFRACCIÓN" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
+                                            <b:selectOneMenu id="txtProvinciaDetencion" update="txtCantonDetencion" process="@this" value="#{informacionInfraccionControlador.informacionInfraccion.provinciaDetencion}">
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                                <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                                <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                                <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                                <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                                <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                                <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                                <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                                <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                                <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                                <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                                <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                                <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                                <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                                <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                                <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                                <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                                <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                                <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                                <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                                <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                                <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                                <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                                <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
+                                            <b:selectOneMenu id="txtCantonDetencion" value="#{informacionInfraccionControlador.informacionInfraccion.cantonDetencion}">
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItems value="#{informacionInfraccionControlador.cantones}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="10" offset="1">
+                                            <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
+                                            <b:selectOneMenu id="txtTipoInfraccion" value="#{informacionInfraccionControlador.informacionInfraccion.tipoInfraccion}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                <f:selectItems value="#{informacionInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionInfraccionControlador.guardarInformacionInfraccion()}">
+                                                <f:ajax execute="formInfoInfraccion" render="formInfoInfraccion"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+                                </b:panel>
+                            </b:form>    
+
+                        </b:tab>
+
+                        <b:tab title="3" tooltip="EJE SALUD / EJE LABORAL">
+
+                            <!-- PANEL EJE SALUD - GUARDAR INFORMACION-->                        
+                            <b:form id="formEjeSalud">
+                                <b:panel look="primary" content-disabled="#{ejeSaludUDIControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="EJE SALUD" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtSituacionSalud" value="Situación Salud"/>
+                                            <b:selectOneMenu id="txtSituacionSalud" value="#{ejeSaludUDIControlador.saludable}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SALUDABLE"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO SALUDABLE"  itemValue="false" />
+                                                <f:ajax render=":panelUDI:formEjeSalud:saludable"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+                                    <h:panelGroup id="saludable" style="margin: 0px; padding: 0px;">
+                                        <h:panelGroup rendered="#{!ejeSaludUDIControlador.saludable}">
+
+                                            <b:row>
+                                                <b:column span="10" offset="1">
+                                                    <h:outputLabel for="txtDiagnosticoEnfermedad" value="Diagnóstico Enfermedad"/>
+                                                    <b:inputText id="txtDiagnosticoEnfermedad" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludUDIControlador.ejeSaludUDI.diagnosticoEnfermedad}"/>
+                                                </b:column>
+                                            </b:row>
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtNumeroHistoriaClinica" value="N° Historia Clínica"/>
+                                                    <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludUDIControlador.ejeSaludUDI.numeroHistoriaClinica}">
+                                                        <!--<f:ajax event="blur" listener="{ejeSaludUDIControlador.limpiarMensaje}" render="txtNumeroHistoriaClinica mensaje-historia" />-->
+                                                        <!--                                                        <f:ajax event="keyup" listener="{ejeSaludUDIControlador.validarSoloNumero}" render="mensaje-historia" />-->
+                                                    </b:inputText>
+                                                    <h:outputText style="color: red; font-size: 14px;" id="mensaje-historia" class="mensaje-error" value="#{ejeSaludUDIControlador.mensaje}"/>
+                                                </b:column>
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtRecibeTratamiento" value="Recibe Tratamiento"/>
+                                                    <b:selectOneMenu id="txtRecibeTratamiento" update="txtTomaMedicacion" process="@this" value="#{ejeSaludUDIControlador.ejeSaludUDI.recibeTratamiento}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtTomaMedicacion" value="Toma medicación"/>
+                                                    <b:selectOneMenu id="txtTomaMedicacion" disabled="#{!ejeSaludUDIControlador.ejeSaludUDI.recibeTratamiento}" value="#{ejeSaludUDIControlador.ejeSaludUDI.tomaMedicacion}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtConsumeSustancias" value="Consume sustancias"/>
+                                                    <b:selectOneMenu id="txtConsumeSustancias"  value="#{ejeSaludUDIControlador.consumeSustancias}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                        <f:ajax render=":panelUDI:formEjeSalud:saludable:consumeSustancias"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <h:panelGroup id="consumeSustancias" style="margin: 0px; padding: 0px;">
+                                                    <h:panelGroup rendered="#{ejeSaludUDIControlador.consumeSustancias}">
+
+                                                        <b:column span="4" offset="1">
+                                                            <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
+                                                            <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludUDIControlador.ejeSaludUDI.tipoSustancia}"/>
+                                                        </b:column>
+
+                                                        <b:column span="4" offset="2">
+                                                            <h:outputLabel for="txtRecibeTratamientoDrogas" value="Recibe Tratamiento Drogas"/>
+                                                            <b:selectOneMenu id="txtRecibeTratamientoDrogas" value="#{ejeSaludUDIControlador.ejeSaludUDI.recibeTratamientoDrogas}">
+                                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                            </b:selectOneMenu>
+                                                        </b:column>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                            </b:row>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{ejeSaludUDIControlador.esMujer}">
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtEmbarazo" value="Embarazo"/>
+                                                <b:selectOneMenu id="txtEmbarazo" update="txtTiempGestacionMes" process="@this" value="#{ejeSaludUDIControlador.ejeSaludUDI.embarazo}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempGestacionMes" value="Tiempo de Gestación (Mes)"/>
+                                                <b:selectOneMenu id="txtTiempGestacionMes" value="#{ejeSaludUDIControlador.ejeSaludUDI.tiempoGestacionMes}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="1"  itemValue="1" />
+                                                    <f:selectItem itemLabel="2"  itemValue="2" />
+                                                    <f:selectItem itemLabel="3"  itemValue="3" />
+                                                    <f:selectItem itemLabel="4"  itemValue="4" />
+                                                    <f:selectItem itemLabel="5"  itemValue="5" />
+                                                    <f:selectItem itemLabel="6"  itemValue="6" />
+                                                    <f:selectItem itemLabel="7"  itemValue="7" />
+                                                    <f:selectItem itemLabel="8"  itemValue="8" />
+                                                    <f:selectItem itemLabel="9"  itemValue="9" />                                    
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                    </h:panelGroup>
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeSaludUDIControlador.guardarEjeSaludUDI()}">
+                                                <f:ajax execute="formEjeSalud" render="formEjeSalud"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+                                </b:panel>
+                            </b:form>
+
+
+                            <!-- PANEL EJE LABORAL - GUARDAR INFORMACION-->       
+                            <b:form id="formEjeLaboral">
+                                <b:panel look="primary" content-disabled="#{ejeLaboralControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="EJE LABORAL" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtTrabaja" value="Trabaja"/>
+                                            <b:selectOneMenu id="txtTrabaja" value="#{ejeLaboralControlador.trabaja}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                <f:ajax render=":panelUDI:formEjeLaboral:trabaja"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <b:column span="6" offset="1">
+                                            <h:outputLabel for="txtInclinacionVocacional" value="Inclinación Vocacional"/>
+                                            <b:inputText id="txtInclinacionVocacional" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
+                                        </b:column>
+                                    </b:row>
+
+                                    <h:panelGroup id="trabaja" style="margin: 0px; padding: 0px;">
+                                        <h:panelGroup  rendered="#{ejeLaboralControlador.trabaja}">
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtOcupacionAdolescente" value="Ocupación"/>
+                                                    <b:inputText id="txtOcupacionAdolescente" maxlength="30" placeholder="Ocupación" value="#{ejeLaboralControlador.ejeLaboral.ocupacionAdolescente}"/>
+                                                </b:column>
+                                                <b:column span="4" offset="2">
+
+                                                    <h:outputLabel for="txtRamaActividadEconomica" value="Rama Actividad Económica"/>
+                                                    <b:selectOneMenu id="txtRamaActividadEconomica" value="#{ejeLaboralControlador.ejeLaboral.ramaActividadEconomica}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="COMERCIO"  itemValue="COMERCIO" />
+                                                        <f:selectItem itemLabel="SERVICIOS"  itemValue="SERVICIOS" />
+                                                        <f:selectItem itemLabel="INDUSTRIA"  itemValue="INDUSTRIA" />
+                                                        <f:selectItem itemLabel="SERVICIO DOMÉSTICO"  itemValue="SERVICIO DOMÉSTICO" />
+                                                        <f:selectItem itemLabel="CONSTRUCCIÓN"  itemValue="CONSTRUCCIÓN" />
+                                                        <f:selectItem itemLabel="MANUFACTURAS"  itemValue="MANUFACTURAS" />
+                                                        <f:selectItem itemLabel="MINAS Y CANTERAS"  itemValue="MINAS Y CANTERAS" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtAfiliacionIess" value="Afiliación IESS"/>
+                                                    <b:selectOneMenu id="txtAfiliacionIess"  value="#{ejeLaboralControlador.ejeLaboral.afiliacionIess}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    </b:selectOneMenu>                                              
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtIngresoMensual" value="Ingreso Mensual"/>
+                                                    <b:selectOneMenu id="txtIngresoMensual" value="#{ejeLaboralControlador.ejeLaboral.ingresoMensual}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="$1,00 a $50,00"  itemValue="$1,00 a $50,00" />
+                                                        <f:selectItem itemLabel="$51,00 a $100,00"  itemValue="$51,00 a $100,00" />
+                                                        <f:selectItem itemLabel="$101,00 a $ 150,00"  itemValue="$101,00 a $ 150,00" />
+                                                        <f:selectItem itemLabel="$151,00 a $ 200,00"  itemValue="$151,00 a $ 200,00" />
+                                                        <f:selectItem itemLabel="$201,00 a $ 386,00"  itemValue="$201,00 a $ 386,00" />
+                                                        <f:selectItem itemLabel="MÁS DE $387,00"  itemValue="MÁS DE $387,00" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtNumeroHorasTrabajo" value="Número Horas Trabajo"/>
+                                                    <b:inputText id="txtNumeroHorasTrabajo" mask="integer" placeholder="Número Horas Trabajo" value="#{ejeLaboralControlador.ejeLaboral.numeroHorasTrabajo}"/>
+                                                </b:column>
+
+                                                <b:column span="10" offset="1">
+                                                    <h:outputLabel for="txtDescripcionActividad" value="Descripción Actividad"/>
+                                                    <b:inputText id="txtDescripcionActividad" maxlength="100" placeholder="Descripción Actividad"  value="#{ejeLaboralControlador.ejeLaboral.descripcionActividad}"/>
+                                                </b:column>
+
+                                            </b:row>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{!ejeLaboralControlador.trabaja}">
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel value="NO NECESITA LLENAR ESTA SECCION"/>
+                                                </b:column>
+                                            </b:row>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeLaboralControlador.guardarEjeLaboral()}">
+                                                <f:ajax execute="formEjeLaboral" render="formEjeLaboral"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>                                   
+                                </b:panel>
+                            </b:form>    
+
+                        </b:tab>
+
+                        <b:tab title="4" tooltip=" EJE EDUCATIVO">
+
+                            <!-- PANEL EJE EDUCATIVO -GUARDAR INFORMACION -->
+                            <b:form id="formEjeEducativo">
+                                <b:panel look="primary" content-disabled="#{!ejeEducativoUDIControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="EJE EDUCATIVO" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:panel>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtCodigoUnicoElectrico" value="Código Único Eléctrico"/>
+                                                <b:inputText id="txtCodigoUnicoElectrico" maxlength="10" placeholder="Código Unico Eléctrico" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.codigoUnicoElectrico}"/>
+                                            </b:column>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCoordinacionZonalEducacionDomicilioEstudiante" value="Coordinación Zonal Educación"/>
+                                                <b:selectOneMenu id="txtCoordinacionZonalEducacionDomicilioEstudiante" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.coordinacionZonalEducacionDomicilioEstudiante}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="ZONA 1"  itemValue="ZONA 1" />
+                                                    <f:selectItem itemLabel="ZONA 2"  itemValue="ZONA 2" />
+                                                    <f:selectItem itemLabel="ZONA 3"  itemValue="ZONA 3" />
+                                                    <f:selectItem itemLabel="ZONA 4"  itemValue="ZONA 4" />
+                                                    <f:selectItem itemLabel="ZONA 5"  itemValue="ZONA 5" />
+                                                    <f:selectItem itemLabel="ZONA 6"  itemValue="ZONA 6" />
+                                                    <f:selectItem itemLabel="ZONA 7"  itemValue="ZONA 7" />
+                                                    <f:selectItem itemLabel="ZONA 8"  itemValue="ZONA 8" />
+                                                    <f:selectItem itemLabel="ZONA 9"  itemValue="ZONA 9" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtDistritoEducativoDomicilioEstudiante" value="Distrito Educativo"/>
+                                                <b:inputText id="txtDistritoEducativoDomicilioEstudiante" maxlength="20" placeholder="Distrito Educativo" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.distritoEducativoDomicilioEstudiante}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtEstudia" value="Estudia"/>
+                                                <b:selectOneMenu id="txtEstudia" value="#{ejeEducativoUDIControlador.estudia}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true"/>
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    <f:ajax render=":panelUDI:formEjeEducativo:estudia"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+
+                                    <h:panelGroup id="estudia">
+                                        <b:panel rendered="#{!ejeEducativoUDIControlador.estudia}">
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtRazonNoEstudia" value="Razón no Estudia" />
+                                                    <b:inputText id="txtRazonNoEstudia" maxlength="100" placeholder="Razón no Estudia" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.razonNoEstudia}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtUltimoNivelEducativoAprobado" value="Último Nivel Educativo Aprobado"/>
+                                                    <b:selectOneMenu id="txtUltimoNivelEducativoAprobado" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.ultimoNivelEducativoAprobado}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="1er año de basica"  itemValue="1er año de basica" />
+                                                        <f:selectItem itemLabel="2do año de basica"  itemValue="2do año de basica" />
+                                                        <f:selectItem itemLabel="3er año de basica"  itemValue="3er año de basica" />
+                                                        <f:selectItem itemLabel="4to año de basica"  itemValue="4to año de basica" />
+                                                        <f:selectItem itemLabel="5to año de basica"  itemValue="5to año de basica" />
+                                                        <f:selectItem itemLabel="6to año de basica"  itemValue="6to año de basica" />
+                                                        <f:selectItem itemLabel="7mo año de basica"  itemValue="7mo año de basica" />
+                                                        <f:selectItem itemLabel="8vo año de basica"  itemValue="8vo año de basica" />
+                                                        <f:selectItem itemLabel="9no año de basica"  itemValue="9no año de basica" />
+                                                        <f:selectItem itemLabel="10mo año de basica"  itemValue="10mo año de basica" />
+                                                        <f:selectItem itemLabel="1er año bachillerato general unificado"  itemValue="1er año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="2do año bachillerato general unificado"  itemValue="2do año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="3er año bachillerato general unificado"  itemValue="3er año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="1er año bachillerato técnico"  itemValue="1er año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="2do año bachillerato técnico"  itemValue="2do año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="3er año bachillerato técnico"  itemValue="3er año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="1er año bachillerato internacional"  itemValue="1er año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="2do año bachillerato internacional"  itemValue="2do año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="3er año bachillerato internacional"  itemValue="3er año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="Alfabetizacion/Postalfabetizacion"  itemValue="Alfabetizacion/Postalfabetizacion" />
+                                                        <f:selectItem itemLabel="Basica Intensiva"  itemValue="Basica Intensiva" />
+                                                        <f:selectItem itemLabel="Bachillerato Intensivo"  itemValue="Bachillerato Intensivo" />
+                                                        <f:selectItem itemLabel="Tercer Nivel o Superior"  itemValue="Tercer Nivel o Superior" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtNombreUnidadEducativaUltimaAprobado" value="Nombre Unidad Educativa Ultima Aprobado"/>
+                                                    <b:inputText id="txtNombreUnidadEducativaUltimaAprobado" maxlength="50" placeholder="Nombre Unidad Educativa Ultima Aprobado" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.nombreUnidadEducativaUltimaAprobado}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtSostenimientoUltimoNivelAprobado" value="Sostenimiento Último Nivel Aprobado"/>
+                                                    <b:selectOneMenu id="txtSostenimientoUltimoNivelAprobado" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.sostenimientoUltimoNivelAprobado}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="FISCAL"  itemValue="FISCAL" />
+                                                        <f:selectItem itemLabel="FISCOMISIONAL"  itemValue="FISCOMISIONAL" />
+                                                        <f:selectItem itemLabel="MUNICIPAL"  itemValue="MUNICIPAL" />
+                                                        <f:selectItem itemLabel="PARTICULAR"  itemValue="PARTICULAR" />
+                                                        <f:selectItem itemLabel="NO APLICA"  itemValue="NO APLICA" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtAniosRezagoEscolar" value="Años de Rezago escolar"/>
+                                                    <b:selectOneMenu id="txtAniosRezagoEscolar" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.aniosRezagoEscolar}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="MENOS DE 1 AÑO"  itemValue="MENOS DE 1 AÑO" />
+                                                        <f:selectItem itemLabel="1 AÑO"  itemValue="1 AÑO" />
+                                                        <f:selectItem itemLabel="2 AÑOS"  itemValue="2 AÑOS" />
+                                                        <f:selectItem itemLabel="3 AÑOS"  itemValue="3 AÑOS" />
+                                                        <f:selectItem itemLabel="4 AÑOS"  itemValue="4 AÑOS" />
+                                                        <f:selectItem itemLabel="MAS DE 5 AÑOS"  itemValue="MAS DE 5 AÑOS" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                        <b:panel rendered="#{ejeEducativoUDIControlador.estudia}">
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtNivelEducativoActual" value="Nivel Educativo Actual"/>
+                                                    <b:selectOneMenu id="txtNivelEducativoActual" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.nivelEducativoActual}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="1er año de basica"  itemValue="1er año de basica" />
+                                                        <f:selectItem itemLabel="2do año de basica"  itemValue="2do año de basica" />
+                                                        <f:selectItem itemLabel="3er año de basica"  itemValue="3er año de basica" />
+                                                        <f:selectItem itemLabel="4to año de basica"  itemValue="4to año de basica" />
+                                                        <f:selectItem itemLabel="5to año de basica"  itemValue="5to año de basica" />
+                                                        <f:selectItem itemLabel="6to año de basica"  itemValue="6to año de basica" />
+                                                        <f:selectItem itemLabel="7mo año de basica"  itemValue="7mo año de basica" />
+                                                        <f:selectItem itemLabel="8vo año de basica"  itemValue="8vo año de basica" />
+                                                        <f:selectItem itemLabel="9no año de basica"  itemValue="9no año de basica" />
+                                                        <f:selectItem itemLabel="10mo año de basica"  itemValue="10mo año de basica" />
+                                                        <f:selectItem itemLabel="1er año bachillerato general unificado"  itemValue="1er año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="2do año bachillerato general unificado"  itemValue="2do año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="3er año bachillerato general unificado"  itemValue="3er año bachillerato general unificado" />
+                                                        <f:selectItem itemLabel="1er año bachillerato técnico"  itemValue="1er año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="2do año bachillerato técnico"  itemValue="2do año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="3er año bachillerato técnico"  itemValue="3er año bachillerato técnico" />
+                                                        <f:selectItem itemLabel="1er año bachillerato internacional"  itemValue="1er año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="2do año bachillerato internacional"  itemValue="2do año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="3er año bachillerato internacional"  itemValue="3er año bachillerato internacional" />
+                                                        <f:selectItem itemLabel="Alfabetizacion/Postalfabetizacion"  itemValue="Alfabetizacion/Postalfabetizacion" />
+                                                        <f:selectItem itemLabel="Basica Intensiva"  itemValue="Basica Intensiva" />
+                                                        <f:selectItem itemLabel="Bachillerato Intensivo"  itemValue="Bachillerato Intensivo" />
+                                                        <f:selectItem itemLabel="Tercer Nivel o Superior"  itemValue="Tercer Nivel o Superior" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtRegimenEducativo" value="Régimen Educativo"/>
+                                                    <b:selectOneMenu id="txtRegimenEducativo" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.regimenEducativo}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="COSTA"  itemValue="COSTA" />
+                                                        <f:selectItem itemLabel="SIERRA"  itemValue="SIERRA" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtNombreUnidadEducativa" value="Nombre Unidad Educativa"/>
+                                                    <b:inputText id="txtNombreUnidadEducativa" maxlength="50" placeholder="Nombre Unidad Educativa" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.nombreUnidadEducativa}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtTipoOferta" value="Tipo de Oferta"/>
+                                                    <b:selectOneMenu id="txtTipoOferta" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.tipoOferta}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="BASICA"  itemValue="BASICA" />
+                                                        <f:selectItem itemLabel="BACHILLERATO"  itemValue="BACHILLERATO" />
+                                                        <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                                        <f:selectItem itemLabel="INCONCLUSA"  itemValue="INCONCLUSA" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="5" offset="1">
+                                                    <h:outputLabel for="txtSostenimiento" value="Sostenimiento"/>
+                                                    <b:selectOneMenu id="txtSostenimiento" value="#{ejeEducativoUDIControlador.ejeEducativoUDI.sostenimiento}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="FISCAL"  itemValue="FISCAL" />
+                                                        <f:selectItem itemLabel="FISCOMISIONAL"  itemValue="FISCOMISIONAL" />
+                                                        <f:selectItem itemLabel="MUNICIPAL"  itemValue="MUNICIPAL" />
+                                                        <f:selectItem itemLabel="PARTICULAR"  itemValue="PARTICULAR" />
+                                                        <f:selectItem itemLabel="NO APLICA"  itemValue="NO APLICA" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+
+                                            </b:row>
+
+                                        </b:panel>
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeEducativoUDIControlador.guardarEjeEducativoUDI()}">
+                                                    <f:ajax execute="formEjeEducativo" render="formEjeEducativo"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </h:panelGroup>
+
+
+                                </b:panel>
+                            </b:form> 
+
+                        </b:tab>                       
+
+                        <b:tab title="5" tooltip="INFORMACIÓN JUDICIAL">
+
+                            <!-- PANEL INFORMACIÓN JUDICIAL  GUARDAR INFORMACION-->
+                            <b:form id="formInfoJuducial">
+                                <b:panel look="primary" content-disabled="#{!informacionJudicialControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="INFORMACIÓN JUDICIAL" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:panel>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtReincidencia" value="Reincidencia"/>
+                                                <b:selectOneMenu id="txtReincidencia" value="#{informacionJudicialControlador.informacionJudicial.reincidencia}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtNombreFiscal" value="Nombre Fiscal"/>
+                                                <b:inputText id="txtNombreFiscal" maxlength="40" placeholder="Nombre Fiscal" value="#{informacionJudicialControlador.informacionJudicial.nombreFiscal}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
+                                                <b:inputText id="txtNombreJuez" maxlength="40" placeholder="Nombre Juez" value="#{informacionJudicialControlador.informacionJudicial.nombreJuez}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
+                                                <b:selectOneMenu id="txtUnidadJudicial" value="#{informacionJudicialControlador.informacionJudicial.unidadJudicial}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                                    <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
+                                                    <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
+                                                    <f:selectItem itemLabel="UNIDAD JUDICIAL PENAL"  itemValue="UNIDAD JUDICIAL PENAL" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtNombreUnidadJudicial" value="Nombre Unidad Judicial"/>
+                                                <b:inputText id="txtNombreUnidadJudicial" maxlength="100" placeholder="Nombre Unidad Judicial" value="#{informacionJudicialControlador.informacionJudicial.nombreUnidadJudicial}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtDefensor" value="Defensor"/>
+                                                <b:selectOneMenu id="txtDefensor" value="#{informacionJudicialControlador.informacionJudicial.defensor}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="PÚBLICO"  itemValue="PÚBLICO" />
+                                                    <f:selectItem itemLabel="PRIVADO"  itemValue="PRIVADO" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtNombreDefensor" value="Nombre Defensor"/>
+                                                <b:inputText id="txtNombreDefensor" maxlength="40" placeholder="Nombre Defensor" value="#{informacionJudicialControlador.informacionJudicial.nombreDefensor}"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+
+                                    <b:panel>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
+                                                <b:inputText id="txtNumeroCausa" maxlength="10" placeholder="N° Causa" value="#{informacionJudicialControlador.informacionJudicial.numeroCausa}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtFechaImposicionMedida" value="Fecha Imposición Medida"/>
+                                                <b:dateTimePicker id="txtFechaImposicionMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaImposicionMedida}"/>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtFechaRepecionZonalResolucion" value="Fecha Recepción Zonal Resolución"/>
+                                                <b:dateTimePicker id="txtFechaRepecionZonalResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaRecepcionZonalResolucion}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtFormaImposicionMedida" value="Forma Imposición Medida"/>
+                                                <b:selectOneMenu id="txtFormaImposicionMedida" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SENTENCIA"  itemValue="SENTENCIA" />
+                                                    <f:selectItem itemLabel="TERMINACIÓN ANTICIPADA DEL PROCESO"  itemValue="TERMINACIÓN ANTICIPADA DEL PROCESO" />
+                                                    <f:selectItem itemLabel="RESOLUCIÓN"  itemValue="RESOLUCIÓN" />
+                                                    <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtFechaInicioCumplimientoMedida" value="Fecha Inicio Cumplimiento Medida"/>
+                                                <b:dateTimePicker id="txtFechaInicioCumplimientoMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaInicioCumplimientoMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTipoTerminacionAnticipadaMedida" value="Tipo Terminación Anticipada Medida"/>
+                                                <b:selectOneMenu id="txtTipoTerminacionAnticipadaMedida" value="#{informacionJudicialControlador.informacionJudicial.tipoTerminacionAnticipadaMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="CONCILIACIÓN FISCAL"  itemValue="CONCILIACIÓN FISCAL" />
+                                                    <f:selectItem itemLabel="CONCILIACIÓN JUDICIAL"  itemValue="CONCILIACIÓN JUDICIAL" />
+                                                    <f:selectItem itemLabel="MEDIACIÓN PENAL"  itemValue="MEDIACIÓN PENAL" />
+                                                    <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
+                                                    <f:selectItem itemLabel="REMISIÓN CON AUTORIZACIÓN JUDICIAL"  itemValue="REMISIÓN CON AUTORIZACIÓN JUDICIAL" />
+                                                    <f:selectItem itemLabel="REMISIÓN FISCAL"  itemValue="REMISIÓN FISCAL" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+
+                                    <b:panel>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtAmonestacionVerbal" value="Amonestación Verbal"/>
+                                                <b:selectOneMenu id="txtAmonestacionVerbal" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.amonestacionVerbal}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtImposicionReglasConducta" value="Imposición reglas Conducta"/>
+                                                <b:selectOneMenu id="txtImposicionReglasConducta" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.imposicionReglasConducta}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtOrientacionApoyoSocioFamiliar" value="Orientación Apoyo Psico Socio Familiar"/>
+                                                <b:selectOneMenu id="txtOrientacionApoyoSocioFamiliar" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.apoyoSocioFamiliar}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtServicioComunidad" value="Servicio Comunidad"/>
+                                                <b:selectOneMenu id="txtServicioComunidad"  update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.servicioComunidad}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtLibertadAsistida" value="Libertad Asistida"/>
+                                                <b:selectOneMenu id="txtLibertadAsistida" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.libertadAsistida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    <!--<f:ajax render=":panelUDI:numeroMedidas"/>-->
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                            <!--<h:panelGroup id="numeroMedidas">-->
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtNumeroMedidas" value="N° de medidas"/>
+                                                <b:inputText id="txtNumeroMedidas" disabled="true" placeholder="N° de medidas" value="#{informacionJudicialControlador.numeroMedidas}"/>
+                                            </b:column>
+                                            <!--</h:panelGroup>    -->
+                                        </b:row>
+                                    </b:panel>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionJudicialControlador.guardarInformacionJudicial()}">
+                                                <f:ajax execute="formInfoJuducial" render="formInfoJuducial"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                            </b:form>
+
+                        </b:tab>     
+
+                        <b:tab title="6" tooltip="MEDIDA SOCIOEDUCATIVA / MEDIDA MÁS ALTA">
+
+                            <!-- PANEL MEDIDA SOCIOEDUCATIVA GUARDAR INFORMACION-->
+
+                            <b:panel look="primary">
+                                <f:facet name="heading">
+                                    <h:outputText value="MEDIDA SOCIOEDUCATIVA" style="color: white; font-weight: bold"  />
+                                </f:facet>
+
+                                <b:row style="margin-top: 30px;margin-bottom: 30px;" rendered="#{!medidaSocioEducativaControlador.guardado}" >
+                                    <b:column span="10" offset="1">
+                                        <h:outputLabel style="color: #e8492b" value="NO DISPONIBLE, UNA VEZ QUE HAYA REGISTRADO EL MÓDULO INFORMACIÓN JUDICIAL SE HABILITARÁ EL MÓDULO"  />
+                                    </b:column>                                           
+                                </b:row>
+
+                                <b:form id="formMedidaSocioeducativa1">
+                                    <!--PANEL DE AMONESTACIÓN VERBAL -->
+                                    <b:panel rendered="#{medidaSocioEducativaControlador.activarAmonestacionVerbal}" content-disabled="#{!medidaSocioEducativaControlador.amonestacionVerbalGuardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="AMONESTACIÓN VERBAL"/>
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMedidaSocioeducativa" value="Medida Socioeducativa"/>
+                                                <b:inputText id="txtMedidaSocioeducativa" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.medidaSocioeducativa}"/>                 
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtInstitucionEjecutoraMedida" value="Institución Ejecutora Medida"/>
+                                                <b:inputText id="txtInstitucionEjecutoraMedida" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa.institucionEjecutoraMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoMeses" rendered="false" value="Tiempo(Meses)"/>
+                                                <b:inputText id="txtTiempoMeses" rendered="false" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoMeses}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempoDia1" rendered="false" value="Tiempo(Día)"/>
+                                                <b:inputText id="txtTiempoDia1" rendered="false" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoDia}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoHoras" rendered="false" value="Tiempo(Horas)"/>
+                                                <b:inputText id="txtTiempoHoras" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoHoras}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">                
+                                                <h:outputLabel for="txtFechaFinMedida" value="Fecha de ejecución de medida"/>
+                                                <b:dateTimePicker id="txtFechaFinMedida" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.fechaFinMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCumplioMedida" value="Cumplió medida"/>
+                                                <b:selectOneMenu id="txtCumplioMedida" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.cumplioMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                            
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa()}">
+                                                    <f:ajax execute="formMedidaSocioeducativa1" render="formMedidaSocioeducativa1"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+
+                                </b:form>
+
+                                <b:form id="formMedidaSocioeducativa2">
+                                    <!--PANEL DE IMPOSICIÓN REGLAS CONDUCTA -->
+                                    <b:panel rendered="#{medidaSocioEducativaControlador.activarImposicionReglasConducta}" content-disabled="#{!medidaSocioEducativaControlador.imposicionReglasConductaGuardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="IMPOSICIÓN REGLAS CONDUCTA"/>
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMedidaSocioeducativa2" value="Medida Socioeducativa"/>
+                                                <b:inputText id="txtMedidaSocioeducativa2" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.medidaSocioeducativa}"/>                 
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtInstitucionEjecutoraMedida2" value="Institución Ejecutora Medida"/>
+                                                <b:inputText id="txtInstitucionEjecutoraMedida2" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.institucionEjecutoraMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoMeses2" value="Tiempo(Meses)"/>
+                                                <b:inputText id="txtTiempoMeses2" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoMeses}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempoDia2" value="Tiempo(Día)"/>
+                                                <b:inputText id="txtTiempoDia2" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoDia}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoHoras2" rendered="false" value="Tiempo(Horas)"/>
+                                                <b:inputText id="txtTiempoHoras2" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoHoras}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">                
+                                                <h:outputLabel for="txtFechaFinMedida2" value="Fecha de fin de medida"/>
+                                                <b:dateTimePicker id="txtFechaFinMedida2" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.fechaFinMedida}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCumplioMedida2" value="Cumplió medida"/>
+                                                <b:selectOneMenu id="txtCumplioMedida2" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.cumplioMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa2()}">
+                                                    <f:ajax execute="formMedidaSocioeducativa2" render="formMedidaSocioeducativa2"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+                                </b:form>    
+
+                                <b:form id="formMedidaSocioeducativa3">
+                                    <!--PANEL DE APOYO SOCIO FAMILIAR -->
+                                    <b:panel rendered="#{medidaSocioEducativaControlador.activarApoyoSocioFamiliar}" content-disabled="#{!medidaSocioEducativaControlador.apoyoSocioFamiliarGuardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="APOYO PSICO-SOCIO FAMILIAR"/>
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMedidaSocioeducativa3" value="Medida Socioeducativa"/>
+                                                <b:inputText id="txtMedidaSocioeducativa3" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.medidaSocioeducativa}"/>                 
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtInstitucionEjecutoraMedida3" value="Institución Ejecutora Medida"/>
+                                                <b:inputText id="txtInstitucionEjecutoraMedida3" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.institucionEjecutoraMedida}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoMeses3" value="Tiempo(Meses)"/>
+                                                <b:inputText id="txtTiempoMeses3" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoMeses}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempoDia3" value="Tiempo(Día)"/>
+                                                <b:inputText id="txtTiempoDia3" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoDia}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoHoras3" rendered="false" value="Tiempo(Horas)"/>
+                                                <b:inputText id="txtTiempoHoras3" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoHoras}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">                
+                                                <h:outputLabel for="txtFechaFinMedida3" value="Fecha de fin de medida"/>
+                                                <b:dateTimePicker id="txtFechaFinMedida3" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.fechaFinMedida}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCumplioMedida3" value="Cumplió medida"/>
+                                                <b:selectOneMenu id="txtCumplioMedida3" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.cumplioMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa3()}">
+                                                    <f:ajax execute="formMedidaSocioeducativa3" render="formMedidaSocioeducativa3"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+                                </b:form>
+
+                                <b:form id="formMedidaSocioeducativa4">
+                                    <!--PANEL DE SERVICIO COMUNIDAD -->
+                                    <b:panel rendered="#{medidaSocioEducativaControlador.activarServicioComunidad}" content-disabled="#{!medidaSocioEducativaControlador.servicioComunidadGuardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="SERVICIO COMUNIDAD"/>
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMedidaSocioeducativa4" value="Medida Socioeducativa"/>
+                                                <b:inputText id="txtMedidaSocioeducativa4" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.medidaSocioeducativa}"/>                 
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtInstitucionEjecutoraMedida4" value="Institución Ejecutora Medida"/>
+                                                <b:inputText id="txtInstitucionEjecutoraMedida4" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.institucionEjecutoraMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoMeses4" rendered="false" value="Tiempo(Meses)"/>
+                                                <b:inputText id="txtTiempoMeses4" rendered="false" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoMeses}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempoDia4" rendered="false" value="Tiempo(Día)"/>
+                                                <b:inputText id="txtTiempoDia4" rendered="false" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoDia}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoHoras4" value="Tiempo(Horas)"/>
+                                                <b:inputText id="txtTiempoHoras4" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoHoras}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">                
+                                                <h:outputLabel for="txtFechaFinMedida4" value="Fecha de fin de medida"/>
+                                                <b:dateTimePicker id="txtFechaFinMedida4" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.fechaFinMedida}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtCumplioMedida4" value="Cumplió medida"/>
+                                                <b:selectOneMenu id="txtCumplioMedida4" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.cumplioMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa4()}">
+                                                    <f:ajax execute="formMedidaSocioeducativa4" render="formMedidaSocioeducativa4"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+                                </b:form>
+
+                                <b:form id="formMedidaSocioeducativa5">
+                                    <!--PANEL DE LIBERTAD ASISTIDA -->
+                                    <b:panel rendered="#{medidaSocioEducativaControlador.activarLibertadAsistida}" content-disabled="#{!medidaSocioEducativaControlador.libertadAsistidaGuardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="LIBERTAD ASISTIDA"/>
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMedidaSocioeducativa5" value="Medida Socioeducativa"/>
+                                                <b:inputText id="txtMedidaSocioeducativa5" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.medidaSocioeducativa}"/>                 
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtInstitucionEjecutoraMedida5" value="Institución Ejecutora Medida"/>
+                                                <b:inputText id="txtInstitucionEjecutoraMedida5" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.institucionEjecutoraMedida}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoMeses5" value="Tiempo(Meses)"/>
+                                                <b:inputText id="txtTiempoMeses5" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoMeses}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtTiempoDia5" value="Tiempo(Día)"/>
+                                                <b:inputText id="txtTiempoDia5" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoDia}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtTiempoHoras5" rendered="false" value="Tiempo(Horas)"/>
+                                                <b:inputText id="txtTiempoHoras5" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoHoras}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="1">                
+                                                <h:outputLabel for="txtFechaFinMedida5" value="Fecha de fin de medida"/>
+                                                <b:dateTimePicker id="txtFechaFinMedida5" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.fechaFinMedida}"/>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtCumplioMedida5" value="Cumplió medida"/>
+                                                <b:selectOneMenu id="txtCumplioMedida5" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.cumplioMedida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa5()}">
+                                                    <f:ajax execute="formMedidaSocioeducativa5" render="formMedidaSocioeducativa5"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+                                </b:form>
+                            </b:panel>
+
+
+                            <!-- PANEL MEDIDA MAS ALTA GUARDAR INFORMACION-->
+                            <b:form>
+                                <b:panel look="primary">
+                                    <f:facet name="heading">
+                                        <h:outputText value="MEDIDA MAS ALTA" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:row style="margin-top: 30px;margin-bottom: 30px;" rendered="#{medidaMasAltaControlador.guardado}" >
+                                        <b:column span="10" offset="1">
+                                            <h:outputLabel style="color: #e8492b" value="NO DISPONIBLE, AÚN NO SE HAN REGISTRADO MEDIDAS SOCIOEDUCATIVAS"  />
+                                        </b:column>                                           
+                                    </b:row>
+
+                                    <b:row rendered="#{!medidaMasAltaControlador.guardado}" content-disabled="true">
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtMedidaMasAlta" value="Medida Más Alta"/>
+                                            <b:inputText id="txtMedidaMasAlta" placeholder="Medida Más Alta" value="#{medidaMasAltaControlador.medidaMasAlta.medidaSocioeducativa}"/>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtTiempoMeses1" value="Tiempo(Meses)"/>
+                                            <b:inputText id="txtTiempoMeses1" placeholder="Tiempo(Meses)" value="#{medidaMasAltaControlador.medidaMasAlta.tiempoMeses}"/>
+                                        </b:column>
+
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtTiempoDia" value="Tiempo(Día)"/>
+                                            <b:inputText id="txtTiempoDia" placeholder="Tiempo(Día)" value="#{medidaMasAltaControlador.medidaMasAlta.tiempoDia}"/>
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                            </b:form>
+                        </b:tab>
+
+                        <b:tab title="7" tooltip="ACTIVIDADES E INSTRUMENTOS / ESTADO DE CUMPLIMIENTO MEDIDA">
+
+                            <!-- PANEL ACTIVIDADES E INSTRUMENTOS GUARDAR INFORMACION -->
+                            <b:form id="formActividadesInstrumentos">
+                                <b:panel look="primary" content-disabled="#{!actividadesInstrumentosControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="ACTIVIDADES E INSTRUMENTOS" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+                                    <b:row>
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtPlanEjecucionMedida" value="Plan Ejecución de Medida"/>
+                                            <b:selectOneMenu id="txtPlanEjecucionMedida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planEjecucionMedida}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtPlanGlobalFamilia" value="Plan Global Familia"/>
+                                            <b:selectOneMenu id="txtPlanGlobalFamilia" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planGlobalFamilia}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="1">
+                                            <h:outputLabel for="txtPlanVida" value="Plan Vida"/>
+                                            <b:selectOneMenu id="txtPlanVida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planVida}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+
+                                        <b:column span="4" offset="2">
+                                            <h:outputLabel for="txtPlanIndividualAplicacionMedida" value="Plan Individual Aplicación Medida"/>
+                                            <b:selectOneMenu id="txtPlanIndividualAplicacionMedida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planIndividualAplicacionMedida}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{actividadesInstrumentosControlador.guardarActividadesInstrumentos()}">
+                                                <f:ajax execute="formActividadesInstrumentos" render="formActividadesInstrumentos"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                            </b:form>
+
+                            <!-- PANEL ESTADO DE CUMPLIMIENTO MEDIDA GUARDAR INFORMACION-->
+                            <b:form id="formCumplimientoMedida">
+                                <b:panel look="primary" content-disabled="#{!estadoCumplimientoMedidaControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="ESTADO DE CUMPLIMIENTO MEDIDA" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:row>
+                                        <b:column span="2" offset="1">
+                                            <h:outputLabel for="txtSituacionActual" value="Situación Actual"/>
+                                            <b:selectOneMenu id="txtSituacionActual" value="#{estadoCumplimientoMedidaControlador.estado}">
+                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                <f:selectItem itemLabel="EN EJECUCIÓN"  itemValue="EN_EJECUCIÓN" />
+                                                <f:selectItem itemLabel="CULMINADA"  itemValue="CULMINADA" />
+                                                <f:selectItem itemLabel="DERIVADA"  itemValue="DERIVADA" />
+                                                <f:selectItem itemLabel="INCUMPLIMIENTO"  itemValue="INCUMPLIMIENTO" />
+                                                <f:ajax render="formCumplimientoMedida:estado"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                    </b:row>
+                                    <h:panelGroup id="estado">
+                                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarEjecucion}">
+                                            <h:outputText id="salida" value="#{estadoCumplimientoMedidaControlador.estado}"/>
+                                        </b:panel>
+                                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarCulminada}">
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtFechaReporteCulminacion" value="Fecha Reporte Culminación"/>
+                                                    <b:dateTimePicker id="txtFechaReporteCulminacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteCulminacion}"/>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarDerivada}">
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
+                                                    <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{estadoCumplimientoMedidaControlador.tipoCentro}" >
+                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="UZDI"  itemValue="UZDI"/>
+                                                        <f:selectItem itemLabel="CAI"  itemValue="CAI"/>
+
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                                <h:panelGroup id="tipoCentro">
+                                                    <b:column span="4" offset="2">
+                                                        <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}"/>
+                                                        <b:selectOneMenu id="txtUzdi" required="true" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.udi.udi}">
+                                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                            <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
+                                                        </b:selectOneMenu>
+
+                                                        <h:outputLabel for="txtCai" value="CAI" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}"/>
+                                                        <b:selectOneMenu id="txtCai" required="true" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.cai.cai}">
+                                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                            <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
+                                                        </b:selectOneMenu>
+                                                    </b:column>
+                                                </h:panelGroup>
+                                            </b:row>
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtFechaReporteDerivacion" value="Fecha Reporte Derivación"/>
+                                                    <b:dateTimePicker id="txtFechaReporteDerivacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteDerivacion}"/>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarIncumplimiento}">
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtFechaReporteIncumplimiento" value="Fecha Reporte Incumplimiento"/>
+                                                    <b:dateTimePicker id="txtFechaReporteIncumplimiento" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteIncumplimiento}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">                
+                                                    <h:outputLabel for="txtEstadoIncumplimiento" value="Estado de incumplimiento"/>
+                                                    <b:selectOneMenu id="txtEstadoIncumplimiento" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.estadoIncumplimiento}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="JUSTIFICADO"  itemValue="JUSTIFICADO" />
+                                                        <f:selectItem itemLabel="NO JUSTIFICADO"  itemValue="NO JUSTIFICADO" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>                                                
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtReanudacionMedida" value="Reanudación de medida"/>
+                                                    <b:selectOneMenu id="txtReanudacionMedida" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.reanudacionMedida}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtFechaReanudacion" value="Fecha Reanudación"/>
+                                                    <b:datepicker id="txtFechaReanudacion" placeholder="dd/mm/aa" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReanudacion}"/>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                    </h:panelGroup>
+
+                                    <b:row>
+                                        <b:column span="3" offset="8">
+                                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{estadoCumplimientoMedidaControlador.guardarEstadoCumplimientoMedida()}">
+                                                <f:ajax execute="formCumplimientoMedida" render="formCumplimientoMedida"/>
+                                            </h:commandButton>
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                            </b:form>
+                        </b:tab>
+                    </b:tabView>
+
+                </b:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

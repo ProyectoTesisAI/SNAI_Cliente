@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+
+    <h:head>
+        <ui:insert name="head">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <link rel="stylesheet" type="text/css" href="../resources/css/default.css"/>
+            <link rel="stylesheet" type="text/css" href="../resources/css/cssLayout.css"/>
+            <link rel="stylesheet" type="text/css" href="../resources/css/menu.css"/>
+            <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css"/>
+            <script src="../resources/js/bootstrap.min.js"></script>
+        </ui:insert>
+        
+    </h:head>
+
+    <h:body>
+        <div id="form">
+            
+            <div id="top">
+                
+                <ui:insert name="top">
+                    <nav style="background: #4a84ca;" id="menu_superior" class="navbar navbar-default navbar-fixed-top">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="menu.com" id="menu-toggle" ><img src="imagenes/icono_menu.png" height="15" style="padding-top: 3px;"/></a>                  
+                                <a style="height: 50px; line-height: 50px; text-decoration: none; color: white; font-size: 18px; font-weight: bold;">Sistema de Reeducación</a>
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_navbar" aria-expanded="false" aria-controls="menu_navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="menu_navbar" aria-expanded="false">     
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true"><span style="color: white;" class="glyphicon glyphicon-cog"/></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Cerrar Sesión</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Cambiar Contrasña</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </ui:insert>
+            </div>
+
+            <div id="left">
+                <ui:insert name="left">
+                    <div id="menu_lateral">
+                        <li class="logo text-center">MENU PRINCIPAL</li>
+                        <li><a href="#demo1" data-toggle="collapse" aria-expanded="false" data-parent="#MainMenu">Adolescentes Infractores</a></li>
+                        <div class="collapse sub-menu" id="demo1">
+                            <li><a href="#adolescentes_udi" data-toggle="collapse" aria-expanded="false" data-parent="#demo1">UDI</a></li>
+                            <div class="collapse sub-sub-menu" id="adolescentes_udi">
+                                <li ><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }">Crear AI</b:navLink></li>
+                                <li ><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_PANEL_UDI}">Ver / Agregar Información</b:navLink></li>
+                            </div>
+                            <li><a href="#adolescentes_cai" data-toggle="collapse" aria-expanded="false" data-parent="#demo1">CAI</a></li>
+                            <div class="collapse sub-sub-menu" id="adolescentes_cai">
+                                <li><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}">Crear AI</b:navLink></li>
+                                <li><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_PANEL_CAI}">Ver / Agregar Información</b:navLink></li>
+                            </div>
+                        </div>
+
+                        <li><a href="#fichas" data-toggle="collapse" aria-expanded="false" data-parent="#MainMenu">Fichas</a></li>
+                        <div class="collapse sub-menu" id="fichas">
+                            <li><a href="#psicologia" data-toggle="collapse" aria-expanded="false" data-parent="#demo1">Psicologia</a></li>
+                            <div class="collapse sub-sub-menu" id="psicologia">
+                                <li ><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_TALLER_PSCICOLOGIA_CREAR }">Crear Taller</b:navLink></li>
+                                <li ><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_PANEL_PSICOLOGIA}">Agregar Informe</b:navLink></li>
+                                <li ><b:navLink  href="#{enlacesPrograma.URL_BASE}#{enlacesPrograma.PATH_PANEL_INFORME_PSICOLOGIA}">Ver Informes</b:navLink></li>
+                            </div>
+                        </div>
+                        
+                        <li><b:navLink><a href="#demo3" data-toggle="collapse"  aria-expanded="false" data-parent="#MainMenu">Consultas</a></b:navLink></li>
+                        <div class="collapse sub-menu" id="demo3">
+                            <li><b:navLink href="#SubMenu1"   >Subitem 1 </b:navLink></li>
+                            <li><b:navLink href="#" >Subitem 2</b:navLink></li>
+                        </div>
+                    </div>
+                </ui:insert>
+            </div>
+            
+            <div id="content">
+                <ui:insert name="content" >
+
+                </ui:insert>
+            </div>
+        </div>
+
+        <script>
+            $("#menu-toggle").click(function(e) {
+              e.preventDefault();
+              $("#form").toggleClass("toggled");
+            });
+        </script>
+
+    </h:body>
+
+</html>
