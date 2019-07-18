@@ -53,7 +53,7 @@ public class InformacionJudicialControlador implements Serializable{
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
             
-            InformacionJudicial  informacionJudicialAux= servicio.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            InformacionJudicial  informacionJudicialAux= servicio.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(informacionJudicialAux != null){
                 informacionJudicial=informacionJudicialAux;
                 guardado=true;
@@ -211,7 +211,7 @@ public class InformacionJudicialControlador implements Serializable{
     public String guardarInformacionJudicial(){
         
         this.informacionJudicial.setNumeroMedidas(numeroMedidas);
-        this.informacionJudicial.setIdInformacionJudicial(adolescenteInfractorUDI);
+        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI); 
 
         InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
         if(informacionJudicialAux!=null){

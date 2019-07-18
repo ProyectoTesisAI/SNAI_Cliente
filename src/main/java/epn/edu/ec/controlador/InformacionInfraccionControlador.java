@@ -61,7 +61,7 @@ public class InformacionInfraccionControlador implements Serializable {
         if (adolescenteInfractorUDIAux != null) {
             
             adolescenteInfractorUDI= adolescenteInfractorUDIAux;
-            InformacionInfraccion informacionInfraccionAux = servicio.obtenerInformacionInfraccion(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            InformacionInfraccion informacionInfraccionAux = servicio.obtenerInformacionInfraccion(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if (informacionInfraccionAux != null) {
                 informacionInfraccion = informacionInfraccionAux;
                 guardado = true;
@@ -138,7 +138,7 @@ public class InformacionInfraccionControlador implements Serializable {
      */
     public String guardarInformacionInfraccion() {
 
-        this.informacionInfraccion.setIdInformacionInfraccion(adolescenteInfractorUDI);
+        this.informacionInfraccion.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         InformacionInfraccion informacionInfraccionAux = servicio.guardarInformacionInfraccion(informacionInfraccion);
         if (informacionInfraccionAux != null) {

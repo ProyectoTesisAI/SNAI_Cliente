@@ -41,14 +41,14 @@ public class InformacionCambioMedidaControlador implements Serializable{
         adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         
         if(adolescenteInfractorCAI != null){
-            InformacionCambioMedidaCAI informacionCambioMedidaAux= servicio.obtenerInformacionCambioMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
-            ejecucionMedida=servicioEM.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
+            InformacionCambioMedidaCAI informacionCambioMedidaAux= servicio.obtenerInformacionCambioMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            ejecucionMedida=servicioEM.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(informacionCambioMedidaAux!=null){
                 estadoCumplimientoMedida=informacionCambioMedidaAux;
-                estadoCumplimientoMedida.setEjecucionAux(ejecucionMedida);
+                //estadoCumplimientoMedida.setEjecucionAux(ejecucionMedida);
                 guardado=true;
             }else{
-                estadoCumplimientoMedida.setEjecucionAux(ejecucionMedida);
+                //estadoCumplimientoMedida.setEjecucionAux(ejecucionMedida);
             }
         }
         
@@ -86,7 +86,7 @@ public class InformacionCambioMedidaControlador implements Serializable{
     
     public String guardarInformacionCambioMedida(){
         
-        this.estadoCumplimientoMedida.setIdInformacionCambioMedida(detalleInfraccion);
+        //this.estadoCumplimientoMedida.set setIdInformacionCambioMedida(detalleInfraccion);
 
         InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(estadoCumplimientoMedida);
         if(informacionCambioMedidaAux!=null){
