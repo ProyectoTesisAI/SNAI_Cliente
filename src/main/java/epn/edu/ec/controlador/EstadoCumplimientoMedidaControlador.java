@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -118,7 +113,7 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
 
             adolescenteInfractorUDI = adolescenteInfractorUDIAux;
 
-            EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.obtenerEstadoCumplimientoMedida(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.obtenerEstadoCumplimientoMedida(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
             if (estadoCumplimientoMedidaAux != null) {
 
@@ -412,7 +407,7 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
         } else {
             this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
         }
-        this.estadoCumplimientoMedida.setIdEstadoCumplimientoMedida(adolescenteInfractorUDI);
+        this.estadoCumplimientoMedida.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
         this.estadoCumplimientoMedida.setSituacionActual(estado);
 
         EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.guardarEstadoCumplimientoMedida(estadoCumplimientoMedida);
