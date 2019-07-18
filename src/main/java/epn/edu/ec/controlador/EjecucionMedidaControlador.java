@@ -45,12 +45,12 @@ public class EjecucionMedidaControlador implements Serializable{
         adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         
         if(adolescenteInfractorCAI != null){
-            EjecucionMedidaCAI ejecucionMedidaAux= servicio.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
+            EjecucionMedidaCAI ejecucionMedidaAux= servicio.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(ejecucionMedidaAux!=null){
                 ejecucionMedida=ejecucionMedidaAux;
                 guardado=true;
             }else{
-                ejecucionMedida.setFechaReporteCAI(adolescenteInfractorCAI.getFechaReporte());
+                ejecucionMedida.setFechaReporteCAI(adolescenteInfractorCAI.getFechaIngresoProceso());
             }
         }
         
@@ -112,7 +112,7 @@ public class EjecucionMedidaControlador implements Serializable{
     
     public String guardarEstadoCumplimientoMedida(){
         
-        this.ejecucionMedida.setIdEjecucionMedida(detalleInfraccion);
+        this.ejecucionMedida.setIdDetalleInfraccion(detalleInfraccion);
 
         EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedida);
         if(ejecucionMedidaAux!=null){

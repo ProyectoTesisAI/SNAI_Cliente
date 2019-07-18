@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
-import epn.edu.ec.modelo.EjeSaludUDI;
-import epn.edu.ec.servicios.EjeSaludUDIServicio;
+import epn.edu.ec.modelo.EjeSalud;
+import epn.edu.ec.servicios.EjeSaludServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
@@ -17,9 +12,9 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "ejeSaludUDIControlador")
+@Named(value = "ejeSaludControlador")
 @ViewScoped
-public class EjeSaludUDIControlador implements Serializable{
+public class EjeSaludControlador implements Serializable{
 
     //mensajes que controlan las validaciones
     private String mensaje = "";
@@ -27,8 +22,10 @@ public class EjeSaludUDIControlador implements Serializable{
     private Validaciones validacion;
     
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
-    private EjeSaludUDI ejeSaludUDI;
-    private EjeSaludUDIServicio servicio;
+    private EjeSalud ejeSalud;
+    
+    private EjeSaludServicio servicio;
+    
     private boolean guardado;
     private boolean saludable;
     private boolean consumeSustancias;
@@ -42,9 +39,9 @@ public class EjeSaludUDIControlador implements Serializable{
         
         validacion = new Validaciones();
         enlaces= new EnlacesPrograma();
-        servicio= new EjeSaludUDIServicio();
+        servicio= new EjeSaludServicio();
         
-        ejeSaludUDI= new EjeSaludUDI();
+        ejeSalud= new EjeSalud();
         guardado=false;
         consumeSustancias=true;
         
@@ -60,9 +57,9 @@ public class EjeSaludUDIControlador implements Serializable{
         if(adolescenteInfractorUDIAux != null){
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            EjeSaludUDI ejeSaludUDIAux= servicio.obtenerEjeSaludUDI(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            EjeSalud ejeSaludUDIAux= servicio.obtenerEjeSalud(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(ejeSaludUDIAux!=null){
-                ejeSaludUDI=ejeSaludUDIAux;
+                ejeSalud=ejeSaludUDIAux;
                 guardado=true;
                 String saludableAux = ejeSaludUDIAux.getSituacionSalud();
                 System.out.println("salud: "+saludableAux);
@@ -73,7 +70,7 @@ public class EjeSaludUDIControlador implements Serializable{
                     System.out.println("no entro a saludable");
                     saludable=false;
                     
-                    if(ejeSaludUDI.getConsumeSustancias()==true){
+                    if(ejeSalud.getConsumeSustancias()==true){
                         consumeSustancias=true;
                     }
                     else{
@@ -81,7 +78,7 @@ public class EjeSaludUDIControlador implements Serializable{
                     }
                 }
             }
-            genero=adolescenteInfractorUDIAux.getGenero();
+            genero=adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
             if(genero.equals("MASCULINO")){
                 esMujer=false;
             }else if(genero.equals("FEMENINO")){
@@ -99,15 +96,15 @@ public class EjeSaludUDIControlador implements Serializable{
         this.adolescenteInfractorUDI = adolescenteInfractorUDI;
     }
 
-    public EjeSaludUDI getEjeSaludUDI() {
-        return ejeSaludUDI;
+    public EjeSalud getEjeSalud() {
+        return ejeSalud;
     }
 
-    public void setEjeSaludUDI(EjeSaludUDI ejeSaludUDI) {
-        this.ejeSaludUDI = ejeSaludUDI;
+    public void setEjeSaludUDI(EjeSalud ejeSalud) {
+        this.ejeSalud = ejeSalud;
     }
 
-    public EjeSaludUDIServicio getServicio() {
+    public EjeSaludServicio getServicio() {
         return servicio;
     }
 
@@ -126,9 +123,9 @@ public class EjeSaludUDIControlador implements Serializable{
     public void setSaludable(boolean saludable) {
         this.saludable = saludable;
         if(saludable==true){
-            ejeSaludUDI.setSituacionSalud("SALUDABLE");
+            ejeSalud.setSituacionSalud("SALUDABLE");
         }else if(saludable==false){
-            ejeSaludUDI.setSituacionSalud("NO SALUDABLE");
+            ejeSalud.setSituacionSalud("NO SALUDABLE");
         }
     }
 
@@ -140,9 +137,9 @@ public class EjeSaludUDIControlador implements Serializable{
         
         this.consumeSustancias = consumeSustancias;
         if(consumeSustancias==true){
-            ejeSaludUDI.setConsumeSustancias(true);
+            ejeSalud.setConsumeSustancias(true);
         }else{
-            ejeSaludUDI.setConsumeSustancias(false);
+            ejeSalud.setConsumeSustancias(false);
         }
         
     }
@@ -175,9 +172,9 @@ public class EjeSaludUDIControlador implements Serializable{
     
     public String guardarEjeSaludUDI(){
         
-        this.ejeSaludUDI.setIdEjeSalud(adolescenteInfractorUDI);
+        this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
-        EjeSaludUDI ejeSaludUDIAux = servicio.guardarEjeSaludUDI(ejeSaludUDI);
+        EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
         if(ejeSaludUDIAux!=null){
             return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";       
         }
@@ -187,7 +184,7 @@ public class EjeSaludUDIControlador implements Serializable{
     }
 
     public void limpiarMensaje(AjaxBehaviorEvent evento) {
-        String numero = ejeSaludUDI.getNumeroHistoriaClinica();
+        String numero = ejeSalud.getNumeroHistoriaClinica();
         if (validacion.verificadorSoloNumeros(numero)) {
             mensaje = "";
         } else {
@@ -196,7 +193,7 @@ public class EjeSaludUDIControlador implements Serializable{
     }
 
     public void validarSoloNumero(AjaxBehaviorEvent evento) {
-        String numero = ejeSaludUDI.getNumeroHistoriaClinica();
+        String numero = ejeSalud.getNumeroHistoriaClinica();
         if (validacion.verificadorSoloNumeros(numero)) {
             mensaje = "Número correcto";
         } else {

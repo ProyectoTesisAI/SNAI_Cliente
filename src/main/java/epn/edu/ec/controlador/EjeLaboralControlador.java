@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -22,6 +17,7 @@ public class EjeLaboralControlador implements Serializable{
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
     private EjeLaboral ejeLaboral;
     private EjeLaboralServicio servicio;
+    
     private boolean guardado;
     private boolean trabaja;
     private EnlacesPrograma enlaces;
@@ -48,7 +44,7 @@ public class EjeLaboralControlador implements Serializable{
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
             
-            EjeLaboral ejeLaboralAux= servicio.obtenerEjeLaboral(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            EjeLaboral ejeLaboralAux= servicio.obtenerEjeLaboral(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(ejeLaboralAux!=null){
                 ejeLaboral=ejeLaboralAux;
                 guardado=true;
@@ -104,7 +100,7 @@ public class EjeLaboralControlador implements Serializable{
     
     public String guardarEjeLaboral(){
         
-        this.ejeLaboral.setIdEjeLaboral(adolescenteInfractorUDI);
+        this.ejeLaboral.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
         if(ejeLaboralAux!=null){
