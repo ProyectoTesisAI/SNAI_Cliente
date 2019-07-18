@@ -17,7 +17,7 @@ import javax.enterprise.context.RequestScoped;
 @Dependent
 public class EnlacesPrograma {
 
-    public String URL_BASE="/SistemaReeducacionAI";
+    public String URL_BASE="/SistemaSNAI_Cliente";
     public String PATH_TALLER_PSCICOLOGIA_CREAR="/paginas/psicologia/taller_psicologia.com";
     public String PATH_PANEL_PSICOLOGIA = "/paginas/psicologia/panel_taller_psicologia.com";
     public String PATH_PANEL_INFORME_PSICOLOGIA = "/paginas/psicologia/panel_informe_psicologia.com";
