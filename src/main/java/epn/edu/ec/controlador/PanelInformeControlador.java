@@ -5,8 +5,8 @@
  */
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.InformePsicologia;
-import epn.edu.ec.servicios.InformePsicologiaServicio;
+import epn.edu.ec.modelo.Informe;
+import epn.edu.ec.servicios.InformeServicio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,39 +19,39 @@ import javax.inject.Named;
  *
  * @author User
  */
-@Named(value = "panelInformePsicologiaControlador")
+@Named(value = "panelInformeControlador")
 @ViewScoped
-public class PanelInformePsicologiaControlador implements Serializable{
+public class PanelInformeControlador implements Serializable{
 
-    private List<InformePsicologia> listaInformePsicologia;
-    private InformePsicologiaServicio servicio;
+    private List<Informe> listaInforme;
+    private InformeServicio servicio;
 
     @PostConstruct
     public void init() {
 
-        servicio = new InformePsicologiaServicio();
+        servicio = new InformeServicio();
 
-        listaInformePsicologia = new ArrayList<>();
-        listaInformePsicologia = servicio.listarInformePsicologia();
+        listaInforme = new ArrayList<>();
+        listaInforme = servicio.listarInforme();
 
     }
 
-    public List<InformePsicologia> getListaInformePsicologia() {
-        return listaInformePsicologia;
+    public List<Informe> getListaInforme() {
+        return listaInforme;
     }
 
-    public void setListaInformePsicologia(List<InformePsicologia> listaInformePsicologia) {
-        this.listaInformePsicologia = listaInformePsicologia;
+    public void setListaInforme(List<Informe> listaInforme) {
+        this.listaInforme = listaInforme;
     }
 
-    public InformePsicologiaServicio getServicio() {
+    public InformeServicio getServicio() {
         return servicio;
     }
 
-    public String verTallerPsicologia(InformePsicologia informe) {
+    public String verTaller(Informe informe) {
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", informe.getIdTallerPsicologia());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", informe.getIdTaller());
             return "/paginas/psicologia/taller_psicologia_ver.com?faces-redirect=true";
 
         } catch (Exception ex) {
@@ -59,9 +59,8 @@ public class PanelInformePsicologiaControlador implements Serializable{
         }
     }
 
-    public String verInformePsicologia(InformePsicologia informe){
+    public String verInforme(Informe informe){
         try {
-            informe.setEstado("ver");
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar", informe);
             return "/paginas/psicologia/informe_psicologia_editar.com?faces-redirect=true";
         } catch (Exception e) {
@@ -69,9 +68,9 @@ public class PanelInformePsicologiaControlador implements Serializable{
         }
     }
     
-    public String editarInformePsicologia(InformePsicologia informe){
+    public String editarInforme(Informe informe){
         try {
-            informe.setEstado("editar");
+            
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar", informe);
             return "/paginas/psicologia/informe_psicologia_editar.com?faces-redirect=true";
         } catch (Exception e) {

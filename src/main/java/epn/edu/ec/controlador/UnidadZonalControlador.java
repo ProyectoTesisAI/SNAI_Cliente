@@ -50,7 +50,7 @@ public class UnidadZonalControlador implements Serializable{
         if(adolescenteInfractorUDIAux != null){
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            UnidadZonal unidadZonalAux= obtenerUnidadZonal(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            UnidadZonal unidadZonalAux= obtenerUnidadZonal(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             
             if(unidadZonalAux!=null){
                 

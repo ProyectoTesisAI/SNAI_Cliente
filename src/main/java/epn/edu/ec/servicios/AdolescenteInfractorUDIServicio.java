@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class AdolescenteInfractorUDIServicio {
     
     private final Client cliente;
-    public String URL_ADOLESCENTE_INFRACTOR_UDI=Constantes.URL_ADOLESCENTE_UDI;
+    public String URL_ADOLESCENTE_INFRACTOR=Constantes.URL_ADOLESCENTE;
     
     public AdolescenteInfractorUDIServicio(){
         cliente= ClientBuilder.newClient();
@@ -25,7 +25,7 @@ public class AdolescenteInfractorUDIServicio {
         
         AdolescenteInfractorUDI adolescenteInfractorUDIAux=null;
                        
-        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR_UDI);        
+        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response = invocationBuilder.post(Entity.entity(adolescenteInfractorUDI, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         
@@ -41,7 +41,7 @@ public class AdolescenteInfractorUDIServicio {
         
         AdolescenteInfractorUDI adolescenteInfractorUDIAux=null;
                        
-        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR_UDI).path(id.toString());        
+        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR).path(id.toString());        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
@@ -55,7 +55,7 @@ public class AdolescenteInfractorUDIServicio {
         
         List<AdolescenteInfractorUDI> listaAdolescentesUDIAux=null;
         
-        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR_UDI);        
+        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
@@ -68,7 +68,7 @@ public class AdolescenteInfractorUDIServicio {
         
         int statusRespuesta=0;
         
-        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR_UDI).path(id.toString());        
+        WebTarget webTarget=cliente.target(URL_ADOLESCENTE_INFRACTOR).path(id.toString());        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+ ";charset=UTF-8");        
         Response response=invocationBuilder.delete();
         if(response.getStatus() == 200){

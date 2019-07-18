@@ -10,11 +10,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "panelTallerPsicologiaControlador")
+@Named(value = "panelTallerControlador")
 @ViewScoped
-public class PanelTallerPsicologiaControlador implements Serializable {
+public class PanelTallerControlador implements Serializable {
 
-    private List<Taller> listaTalleresPsicologia;
+    private List<Taller> listaTalleres;
     private TallerServicio servicio;
 
     @PostConstruct
@@ -22,24 +22,24 @@ public class PanelTallerPsicologiaControlador implements Serializable {
 
         servicio = new TallerServicio();
 
-        listaTalleresPsicologia = new ArrayList<>();
-        listaTalleresPsicologia = servicio.listaTalleresPsicologia();
+        listaTalleres = new ArrayList<>();
+        listaTalleres = servicio.listaTalleres();
 
     }
 
-    public List<Taller> getListaTalleresPsicologia() {
-        return listaTalleresPsicologia;
+    public List<Taller> getListaTalleres() {
+        return listaTalleres;
     }
 
-    public void setListaTalleresPsicologia(List<Taller> listaTalleresPsicologia) {
-        this.listaTalleresPsicologia = listaTalleresPsicologia;
+    public void setListaTalleres(List<Taller> listaTalleres) {
+        this.listaTalleres = listaTalleres;
     }
 
-    public TallerPsicologiaServicio getServicio() {
+    public TallerServicio getServicio() {
         return servicio;
     }
 
-    public String verTallerPsicologia(TallerPsicologia taller) {
+    public String verTaller(Taller taller) {
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
@@ -50,7 +50,7 @@ public class PanelTallerPsicologiaControlador implements Serializable {
         }
     }
     
-    public String editarTallerPsicologia(TallerPsicologia taller) {
+    public String editarTaller(Taller taller) {
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
@@ -61,7 +61,7 @@ public class PanelTallerPsicologiaControlador implements Serializable {
         }
     }
 
-    public String agregarInformePsicologia(TallerPsicologia taller) {
+    public String agregarInforme(Taller taller) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
             return "/paginas/psicologia/informe_psicologia.com?faces-redirect=true";

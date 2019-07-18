@@ -44,46 +44,39 @@ public class TallerControlador implements Serializable {
     private String materiales;
     private String responsable;
 
-    //////////variables usadas para el Taller /////////
     Taller tallerCrear;
+    RegistroAsistencia registroAsistencia;
     UDI udi;
     CAI cai;
+    
 
     List<UDI> listaUdi;
     List<CAI> listaCai;
-
     List<ItemTaller> listaItemsTaller;
-
+    List<AdolescenteInfractorUDI> listaAdolescentesUzdi;
+    List<AdolescenteInfractorCAI> listaAdolescentesCai;
+    
+    TallerServicio servicioTaller;
+    CaiServicio servicioCai;
+    UdiServicio servicioUdi;
+    ItemTallerServicio servicioItemTaller;
+    RegistroAsistenciaServicio controladorAsistencia;
+    
     String tipoCentro;
     boolean esUzdi;
     Integer numeroParticipantes;
 
-    TallerServicio controlador;
-
-    CaiServicio controladorCai;
-    UdiServicio controladorUdi;
-    ItemTallerServicio controladroItemTaller;
-
-    //////////////////////////////////////////variables usadas para el Registro Asistencia////////
-    List<AdolescenteInfractorUDI> listaAdolescentesUzdi;
-    List<AdolescenteInfractorCAI> listaAdolescentesCai;
-    RegistroAsistencia registroAsistencia;
-
-    RegistroAsistenciaServicio controladorAsistencia;
-    ///////////////////////////////////////////////////
-
     boolean tallerGuardado = false;
-
     int indiceTaller = 0;
 
     @PostConstruct
     public void init() {
 
-        controlador = new TallerServicio();
-        controladorCai = new CaiServicio();
-        controladorUdi = new UdiServicio();
+        servicioTaller = new TallerServicio();
+        servicioCai = new CaiServicio();
+        servicioUdi = new UdiServicio();
         controladorAsistencia = new RegistroAsistenciaServicio();
-        controladroItemTaller = new ItemTallerServicio();
+        servicioItemTaller = new ItemTallerServicio();
         
         tallerCrear = new Taller();
         registroAsistencia = new RegistroAsistencia();
@@ -98,14 +91,11 @@ public class TallerControlador implements Serializable {
 
         if (isEsUzdi()) {
             tipoCentro = "UZDI";
-            listaUdi = controladorUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de datos
-            udi = new UDI();
-            cai = new CAI();
+            listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de datos
+            
         } else {
             tipoCentro = "CAI";
-            listaCai = controladorCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
-            cai = new CAI();
-            udi = new UDI();
+            listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
 
     }
@@ -118,8 +108,8 @@ public class TallerControlador implements Serializable {
         this.tallerCrear = tallerCrear;
     }
 
-    public TallerServicio getControlador() {
-        return controlador;
+    public TallerServicio getServicioTaller() {
+        return servicioTaller;
     }
 
     public String getTipoCentro() {
@@ -128,18 +118,16 @@ public class TallerControlador implements Serializable {
 
     public void setTipoCentro(String tipoCentro) {
         this.tipoCentro = tipoCentro;
+        
         if ("UZDI".equals(tipoCentro)) {
-            System.out.println("Ha seleccionado UZDI");
             esUzdi = true;
-            udi = new UDI();
-            cai = new CAI();
-            listaUdi = controladorUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
+            udi= new UDI();
+            listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
+        
         } else if ("CAI".equals(tipoCentro)) {
-            System.out.println("Ha seleccionado CAI");
             esUzdi = false;
-            udi = new UDI();
-            cai = new CAI();
-            listaCai = controladorCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
+            cai= new CAI();
+            listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
     }
 
@@ -169,41 +157,34 @@ public class TallerControlador implements Serializable {
         this.listaCai = listaCai;
     }
 
-    public CaiServicio getControladorCai() {
-        return controladorCai;
+    public CaiServicio getServicioCai() {
+        return servicioCai;
     }
 
-    public UdiServicio getControladorUdi() {
-        return controladorUdi;
+    public UdiServicio getServicioUdi() {
+        return servicioUdi;
     }
 
     public Integer getNumeroParticipantes() {
 
-        if (tallerCrear.getNumeroTotalParticipantes() != null) {
-            numeroParticipantes = tallerCrear.getNumeroTotalParticipantes();
-        } else {
-            if (udi.getUdi() != null) {
-                for (UDI u : listaUdi) {
-                    if (u.getUdi().equals(udi.getUdi())) {
-                        udi = u;
-                        break;
-                    }
+        if (udi.getUdi() != null) {
+
+            for (UDI u : listaUdi) {
+                if (u.getUdi().equals(udi.getUdi())) {
+                    udi = u;
+                    break;
                 }
-                numeroParticipantes = controlador.obtenerNumeroAdolescentePorUdi(udi);
-            } else if (tallerCrear.getIdCai() != null) {
-                //return numeroParticipantes;
-            } else if (cai.getCai() != null) {
-                for (CAI c : listaCai) {
-                    if (c.getCai().equals(cai.getCai())) {
-                        cai = c;
-                        break;
-                    }
-                }
-                numeroParticipantes = controlador.obtenerNumeroAdolescentePorCai(cai);
-            } else if (tallerCrear.getIdUdi() != null) {
-                //return numeroParticipantes;
             }
-        }
+            numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(udi);
+        } else if (cai.getCai() != null) {
+            for (CAI c : listaCai) {
+                if (c.getCai().equals(cai.getCai())) {
+                    cai = c;
+                    break;
+                }
+            }
+            numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
+        } 
         return numeroParticipantes;
     }
 
@@ -239,8 +220,8 @@ public class TallerControlador implements Serializable {
         this.listaItemsTaller = listaItemsTaller;
     }
 
-    public ItemTallerServicio getControladroItemTaller() {
-        return controladroItemTaller;
+    public ItemTallerServicio getServicioItemTaller() {
+        return servicioItemTaller;
     }
 
     public boolean isTallerGuardado() {
@@ -337,13 +318,17 @@ public class TallerControlador implements Serializable {
 
         listaItemsTaller.add(itemAux);
         
+        limpiarActividad();
+    }
+
+    private void limpiarActividad(){
         duracion=null;
         actividad=null;
         materiales=null;
         objetivoEspecifico=null;
         responsable=null;
     }
-
+    
     public String guardarTaller() {
 
         try {
@@ -362,23 +347,21 @@ public class TallerControlador implements Serializable {
             }
             if (udi.getIdUdi() != null) {
                 tallerCrear.setIdUdi(udi);
-            } else {
-                tallerCrear.setIdUdi(null);
-            }
-            if (cai.getIdCai() != null) {
-                tallerCrear.setIdCai(cai);
-            } else {
                 tallerCrear.setIdCai(null);
             }
+            else if (cai.getIdCai() != null) {
+                tallerCrear.setIdCai(cai);
+                tallerCrear.setIdUdi(null);
+            }
+            
             tallerCrear.setNumeroTotalParticipantes(numeroParticipantes);
-            Taller taller = controlador.guardarTaller(tallerCrear);
+            Taller taller = servicioTaller.guardarTaller(tallerCrear);
 
             if (taller.getIdTaller() > 0) {
                 for (ItemTaller i : listaItemsTaller) {
                     i.setIdTaller(taller);
-                    controladroItemTaller.guardarItemTaller(i);
+                    servicioItemTaller.guardarItemTaller(i);
                     itemsGuardados++;
-
                 }
 
                 if (itemsGuardados > 0 && itemsGuardados == listaItemsTaller.size()) {
@@ -402,21 +385,30 @@ public class TallerControlador implements Serializable {
     public void generarRegistroAsistencia(Taller taller) {
 
         if (taller.getIdUdi() == null && taller.getIdCai() == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO SE HA SELECCIONADO UNIDAD ZONAL / CAI ", "Aviso"));
-        } else if (taller.getIdUdi() != null) {
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR, AL GENERAR EL REGISTRO DE ASISTENCIA ", "Aviso"));
+        } 
+        else if (taller.getIdUdi() != null) {
+        
             List<AdolescenteInfractorUDI> registroAux = controladorAsistencia.listaAdolescentesInfractoresPorUzdi(taller.getIdUdi());
+            
             if (registroAux == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO HAY ADOLESCENTES INFRACTORES EN LA " + taller.getIdUdi().getUdi(), "Aviso"));
-            } else {
+            } 
+            else {
                 if (registroAux.size() > 0) {
                     listaAdolescentesUzdi = registroAux;
                 }
             }
-        } else if (taller.getIdCai() != null) {
+        } 
+        else if (taller.getIdCai() != null) {
+        
             List<AdolescenteInfractorCAI> registroAux = controladorAsistencia.listaAdolescentesInfractoresPorCai(taller.getIdCai());
+            
             if (registroAux == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO HAY ADOLESCENTES INFRACTORES EN LA " + taller.getIdCai().getCai(), "Aviso"));
-            } else {
+            } 
+            else {
                 if (registroAux.size() > 0) {
                     listaAdolescentesCai = registroAux;
                 }

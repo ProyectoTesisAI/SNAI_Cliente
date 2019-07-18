@@ -92,7 +92,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
             
-            InformacionJudicial  informacionJudicialAux= servicioJudicial.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            InformacionJudicial  informacionJudicialAux= servicioJudicial.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
         
             if(informacionJudicialAux != null){
                 
@@ -305,7 +305,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     public String guardarMedidaSocioeducativa(){
         
-        this.medidaSocioeducativa.setIdAdolescenteUdi(adolescenteInfractorUDI);
+        this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
         if(medidaSocioeducativaAux!=null){
@@ -318,7 +318,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     public String guardarMedidaSocioeducativa2(){
         
-        this.medidaSocioeducativa2.setIdAdolescenteUdi(adolescenteInfractorUDI);
+        this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
         if(medidaSocioeducativaAux!=null){
@@ -331,7 +331,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     public String guardarMedidaSocioeducativa3(){
         
-        this.medidaSocioeducativa3.setIdAdolescenteUdi(adolescenteInfractorUDI);
+        this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
         if(medidaSocioeducativaAux!=null){
@@ -344,7 +344,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     public String guardarMedidaSocioeducativa4(){
         
-        this.medidaSocioeducativa4.setIdAdolescenteUdi(adolescenteInfractorUDI);
+        this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
         if(medidaSocioeducativaAux!=null){
@@ -357,7 +357,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     public String guardarMedidaSocioeducativa5(){
         
-        this.medidaSocioeducativa5.setIdAdolescenteUdi(adolescenteInfractorUDI);
+        this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
         if(medidaSocioeducativaAux!=null){
