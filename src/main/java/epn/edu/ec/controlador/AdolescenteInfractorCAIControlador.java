@@ -1,14 +1,11 @@
 package epn.edu.ec.controlador;
 
+import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
-import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
-import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,15 +22,16 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     private String mensaje1 = "";
     private String mensaje2 = "";
 
+    private AdolescenteInfractor adolescenteInfractor;
     private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
     private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
     private AdolescenteInfractorCAIServicio servicio;
     private boolean guardado;
-
+/*
     private List<DatosProvinciaCanton> provincias;
     private List<DatosProvinciaCanton> cantones;
     private DatosProvinciaCantonServicio servicioCAIPC;
-
+*/
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
     
@@ -46,16 +44,17 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         servicio = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
-
+/*
         provincias = new ArrayList<>();
         servicioCAIPC = new DatosProvinciaCantonServicio();
-        
+  */      
         if(isEsCedula()){
             tipoDocumento="ECUATORIANA";
         }else{
             tipoDocumento="EXTRANJERA";
         }
-
+        
+        adolescenteInfractor = new AdolescenteInfractor();
         adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
 
         adolescenteInfractorCAIEditar = new AdolescenteInfractorCAI();
@@ -63,9 +62,12 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         if (adolescenteInfractorCAIAux != null) {
             adolescenteInfractorCAIEditar = adolescenteInfractorCAIAux;
             guardado = true;
+        }else{
+            adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
+            adolescenteInfractorCAICrear.setIdAdolescenteInfractor(adolescenteInfractor);
         }
 
-        provincias = servicioCAIPC.listarDatosProvinciaCanton();
+//        provincias = servicioCAIPC.listarDatosProvinciaCanton();
     }
 
     public AdolescenteInfractorCAI getAdolescenteInfractorCAICrear() {
@@ -75,7 +77,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void setAdolescenteInfractorCAICrear(AdolescenteInfractorCAI adolescenteInfractorCAICrear) {
         this.adolescenteInfractorCAICrear = adolescenteInfractorCAICrear;
     }
-
+/*
     public List<DatosProvinciaCanton> getProvincias() {
         return provincias;
     }
@@ -83,7 +85,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void setProvincias(List<DatosProvinciaCanton> provincias) {
         this.provincias = provincias;
     }
-
+*/
     public AdolescenteInfractorCAI getAdolescenteInfractorCAIEditar() {
         return adolescenteInfractorCAIEditar;
     }
@@ -103,7 +105,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void setGuardado(boolean guardado) {
         this.guardado = guardado;
     }
-
+/*
     public List<DatosProvinciaCanton> listarCantonesPorProvincia(String provincia) {
         List<DatosProvinciaCanton> cantonesAux = new ArrayList<>();
 
@@ -134,7 +136,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
             return null;
         }
     }
-
+*/
     public String getMensaje() {
         return mensaje;
     }
@@ -189,8 +191,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public String guardarAdolescenteInfractor() {
         Boolean verificador1 = false;
         Boolean verificador2 = false;
-        verificador1 = this.adolescenteInfractorCAICrear.getVerificadorCedula();
-        verificador2 = this.adolescenteInfractorCAICrear.getVerificadorFechaNacimiento();
+        verificador1 = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getVerificadorCedula();
+        verificador2 = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getVerificadorFechaNacimiento();
         if (verificador1 == false || verificador2 == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Adolescente Infractor", "Error"));
             return null;
@@ -210,7 +212,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     }
 
     public void limpiarMensajeCedula(AjaxBehaviorEvent evento) {
-        String cedula = adolescenteInfractorCAICrear.getCedula();
+        String cedula = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
         if (validacion.cedulaValida(cedula)) {
             mensaje = "";
         } else {
@@ -220,7 +222,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     public void validarCedula(AjaxBehaviorEvent evento) {
 
-        String cedula = adolescenteInfractorCAICrear.getCedula();
+        String cedula = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
         if (validacion.cedulaValida(cedula)) {
             mensaje = "cédula correcta";
         } else {
@@ -229,7 +231,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     }
 
     public void limpiarMensajeFechaNacimiento(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorCAICrear.getFechaNacimiento();
+        Date fecha = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento();
         if (validacion.verificarFechaNacimiento(fecha)) {
             mensaje1 = "";
         } else {
@@ -238,16 +240,16 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     }
 
     public void validarFechaNacimiento(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorCAICrear.getFechaNacimiento();
+        Date fecha = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento();
         if (validacion.verificarFechaNacimiento(fecha)) {
             mensaje1 = "Fecha correcta";
         } else {
             mensaje1 = "Fecha incorrecta";
         }
     }
-
+/*
     public void limpiarMensajeNumeroContacto(AjaxBehaviorEvent evento) {
-        String numero = adolescenteInfractorCAICrear.getNumeroContacto();
+        String numero = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getNumeroContacto();
         if (validacion.numeroContactoValida(numero)) {
             mensaje2 = "";
         } else {
@@ -256,11 +258,11 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     }
 
     public void validarNumeroContacto(AjaxBehaviorEvent evento) {
-        String numero = adolescenteInfractorCAICrear.getNumeroContacto();
+        String numero = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getNumeroContacto();
         if (validacion.numeroContactoValida(numero)) {
             mensaje2 = "Número correcto";
         } else {
             mensaje2 = "Número incorrecto";
         }
-    }
+    }*/
 }

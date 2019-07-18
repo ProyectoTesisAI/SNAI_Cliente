@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -62,12 +57,12 @@ public class IdentificacionGeograficaControlador implements Serializable {
 
         if (adolescenteInfractorUDIAux != null) {
             adolescenteInfractorUDI = adolescenteInfractorUDIAux;
-            IdentificacionGeografica identificacionGeograficaAux = servicio.obtenerIdentificacionGeografica(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            IdentificacionGeografica identificacionGeograficaAux = servicio.obtenerIdentificacionGeografica(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if (identificacionGeograficaAux != null) {
                 identificacionGeografica = identificacionGeograficaAux;
                 guardado = true;
             }
-            nacionalidad = adolescenteInfractorUDIAux.getNacionalidad();
+            nacionalidad = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getNacionalidad();
             System.out.println("Nacionalidad init: " + nacionalidad);
             if (nacionalidad.equals("ECUATORIANA")) {
                 esEcuatoriana = true;
@@ -146,7 +141,7 @@ public class IdentificacionGeograficaControlador implements Serializable {
 
     public List<DatosProvinciaCanton> getCantones() {
         cantones = new ArrayList<>();
-        String provincia = identificacionGeografica.getProvinciaAdolescente();
+        String provincia = identificacionGeografica.getProvinciaResidencia();
         //System.out.println("Provincia del adoles: "+provincia);
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
@@ -158,7 +153,7 @@ public class IdentificacionGeograficaControlador implements Serializable {
 
     public List<DatosProvinciaCanton> getCantonesNacimiento() {
         cantonesNacimiento=new ArrayList<>();
-        String provinciaNacimiento = identificacionGeografica.getEstadoProvinciaNacimiento();
+        String provinciaNacimiento = identificacionGeografica.getEstadoOProvinciaNacimiento();
         if(provinciaNacimiento!=null){
             cantonesNacimiento = listarCantonesPorProvincia(provinciaNacimiento);
         }else{
@@ -175,7 +170,7 @@ public class IdentificacionGeograficaControlador implements Serializable {
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }
-        this.identificacionGeografica.setIdIdentificacionGeografica(adolescenteInfractorUDI);
+        this.identificacionGeografica.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {
