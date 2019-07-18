@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
-import epn.edu.ec.modelo.EjeEducativoUDI;
-import epn.edu.ec.servicios.EjeEducativoUDIServicio;
+import epn.edu.ec.modelo.EjeEducativo;
+import epn.edu.ec.servicios.EjeEducativoServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -15,17 +10,15 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author User
- */
-@Named(value = "ejeEducativoUDIControlador")
+@Named(value = "ejeEducativoControlador")
 @ViewScoped
-public class EjeEducativoUDIControlador implements Serializable{
+public class EjeEducativoControlador implements Serializable{
 
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
-    private EjeEducativoUDI ejeEducativoUDI;
-    private EjeEducativoUDIServicio servicio;
+    private EjeEducativo ejeEducativo;
+    
+    private EjeEducativoServicio servicio;
+    
     private boolean guardado;
     private boolean estudia;
     private EnlacesPrograma enlaces;
@@ -35,9 +28,9 @@ public class EjeEducativoUDIControlador implements Serializable{
     public void init(){
         
         enlaces= new EnlacesPrograma();
-        servicio= new EjeEducativoUDIServicio();
+        servicio= new EjeEducativoServicio();
         
-        ejeEducativoUDI=new EjeEducativoUDI();
+        ejeEducativo=new EjeEducativo();
         guardado=false;
         
         if(isEstudia()){
@@ -54,11 +47,11 @@ public class EjeEducativoUDIControlador implements Serializable{
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
             
-            EjeEducativoUDI ejeEducativoUDIAux= servicio.obtenerEjeEducativoUDI(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            EjeEducativo ejeEducativoUDIAux= servicio.obtenerEjeEducativo(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(ejeEducativoUDIAux!=null){
-                ejeEducativoUDI=ejeEducativoUDIAux;
+                ejeEducativo=ejeEducativoUDIAux;
                 guardado=true;
-                estudia=ejeEducativoUDI.getEstudia();
+                estudia=ejeEducativo.getEstudia();
             }            
         }
         
@@ -72,15 +65,15 @@ public class EjeEducativoUDIControlador implements Serializable{
         this.adolescenteInfractorUDI = adolescenteInfractorUDI;
     }
 
-    public EjeEducativoUDI getEjeEducativoUDI() {
-        return ejeEducativoUDI;
+    public EjeEducativo getEjeEducativo() {
+        return ejeEducativo;
     }
 
-    public void setEjeEducativoUDI(EjeEducativoUDI ejeEducativoUDI) {
-        this.ejeEducativoUDI = ejeEducativoUDI;
+    public void setEjeEducativo(EjeEducativo ejeEducativo) {
+        this.ejeEducativo = ejeEducativo;
     }
 
-    public EjeEducativoUDIServicio getServicio() {
+    public EjeEducativoServicio getServicio() {
         return servicio;
     }
     
@@ -99,10 +92,10 @@ public class EjeEducativoUDIControlador implements Serializable{
     public void setEstudia(boolean estudia) {
         this.estudia = estudia;
         if(estudia==true){
-            ejeEducativoUDI.setEstudia(true);
+            ejeEducativo.setEstudia(true);
         }
         else if(estudia==false){
-            ejeEducativoUDI.setEstudia(false);
+            ejeEducativo.setEstudia(false);
         }
         
     }
@@ -112,9 +105,9 @@ public class EjeEducativoUDIControlador implements Serializable{
     
     public String guardarEjeEducativoUDI(){
         
-        this.ejeEducativoUDI.setIdEjeEducativo(adolescenteInfractorUDI);
+        this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
         
-        EjeEducativoUDI ejeEducativoUDIAux = servicio.guardarEjeEducativoUDI(ejeEducativoUDI);
+        EjeEducativo ejeEducativoUDIAux = servicio.guardarEjeEducativo(ejeEducativo);
         if(ejeEducativoUDIAux!=null){
             return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
         }
