@@ -37,35 +37,35 @@ public class TallerServicio {
     
     public Taller guardarTaller(Taller taller){
         
-        Taller tallerPsicologiaAux=null;
+        Taller tallerAux=null;
         
         WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
         Response response =invocationBuilder.post(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
-            tallerPsicologiaAux =response.readEntity(Taller.class);
+            tallerAux =response.readEntity(Taller.class);
         }
         
-        return tallerPsicologiaAux;
+        return tallerAux;
 
     }
     
     public Taller editarTaller(Taller taller){
         
-        Taller tallerPsicologiaAux=null;
+        Taller tallerAux=null;
         
         WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
         Response response =invocationBuilder.put(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
-            tallerPsicologiaAux =response.readEntity(Taller.class);
+            tallerAux =response.readEntity(Taller.class);
         }
         
-        return tallerPsicologiaAux;
+        return tallerAux;
 
     }
         
-    public List<Taller> listaTalleresPsicologia(){
+    public List<Taller> listaTalleres(){
         
         List<Taller> listaActividadesAux=null;
         
@@ -78,7 +78,7 @@ public class TallerServicio {
         return listaActividadesAux;
     }
     
-    public List<Taller> listaTalleresPsicologiaConInforme(){
+    public List<Taller> listaTalleresConInforme(){
         
         List<Taller> listaActividadesAux=null;
         
@@ -93,14 +93,14 @@ public class TallerServicio {
     
     public Integer obtenerNumeroAdolescentePorUdi(UDI udi ){
         
-        String cantidadAdolescente=null;
         Integer cantidadAdolescentesAux=null;
+        
         WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorUzdi");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.post(Entity.entity(udi, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
            
-            cantidadAdolescente= response.readEntity(String.class);
+             String cantidadAdolescente= response.readEntity(String.class);
                     
             if(cantidadAdolescente!=null){
                 
@@ -116,7 +116,6 @@ public class TallerServicio {
     
     public Integer obtenerNumeroAdolescentePorCai(CAI cai ){
         
-        String cantidadAdolescente=null;
         Integer cantidadAdolescentesAux=null;
         
         WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorCai");        
@@ -124,7 +123,7 @@ public class TallerServicio {
         Response response =invocationBuilder.post(Entity.entity(cai, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
            
-            cantidadAdolescente= response.readEntity(String.class);
+            String cantidadAdolescente= response.readEntity(String.class);
                     
             if(cantidadAdolescente!=null){
                 
@@ -156,7 +155,7 @@ public class TallerServicio {
         return asistenciaAux;
     }
     
-    public List<ItemTaller> obtenerItemsPorTalleresPsicologia(Integer idTaller){
+    public List<ItemTaller> obtenerItemsPorTalleres(Integer idTaller){
         
         List<ItemTaller> listaItemsTaller=null;
         

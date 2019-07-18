@@ -56,7 +56,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     
     public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado){
         
-        int statusRespuesta=servicio.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteUdi());
+        int statusRespuesta=servicio.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
         
         if(statusRespuesta==200){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamente el Adolescente Infractor ","Aviso" ));

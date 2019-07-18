@@ -49,7 +49,7 @@ public class DetalleInfraccionControlador implements Serializable {
         adolescenteInfractorCAI = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
         if (adolescenteInfractorCAI != null) {
-            DetalleInfraccionCAI detalleInfraccionAux = servicio.obtenerDetalleInfraccionCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
+            DetalleInfraccionCAI detalleInfraccionAux = servicio.obtenerDetalleInfraccionCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if (detalleInfraccionAux != null) {
                 detalleInfraccion = detalleInfraccionAux;
                 guardado = true;
@@ -136,7 +136,7 @@ public class DetalleInfraccionControlador implements Serializable {
      * web*****************
      */
     public String guardarInformacionInfraccion() {
-        this.detalleInfraccion.setIdDetalleInfraccion(adolescenteInfractorCAI.getIdAdolescenteCai());
+        this.detalleInfraccion.setIdDetalleInfraccion(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
         if (detalleInfraccionAux != null) {

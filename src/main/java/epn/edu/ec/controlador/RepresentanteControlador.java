@@ -62,7 +62,7 @@ public class RepresentanteControlador implements Serializable{
         if(adolescenteInfractorUDIAux != null){
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            Representante representanteAux= servicio.obtenerRepresentante(adolescenteInfractorUDI.getIdAdolescenteUdi());
+            Representante representanteAux= servicio.obtenerRepresentante(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(representanteAux!=null){
                 representante=representanteAux;
                 guardado=true;
@@ -144,7 +144,7 @@ public class RepresentanteControlador implements Serializable{
     public String guardarRepresentante(){
         
         this.representante.setNacionalidad(tipoDocumento);
-        this.representante.setIdRepresentante(adolescenteInfractorUDI);
+        this.representante.setIdAdolescenteInfracto(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         Representante representanteAux = servicio.guardarRepresentante(representante);
         if(representanteAux!=null){

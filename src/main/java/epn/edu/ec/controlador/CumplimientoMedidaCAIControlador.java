@@ -33,7 +33,7 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
         adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         
         if(adolescenteInfractorCAI != null){
-            CumplimientoMedidaCAI cumplimientoCAIMedidaAux= servicio.obtenerCumplimientoMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
+            CumplimientoMedidaCAI cumplimientoCAIMedidaAux= servicio.obtenerCumplimientoMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(cumplimientoCAIMedidaAux!=null){
                 cumplimientoCAIMedida=cumplimientoCAIMedidaAux;
                 guardado=true;
@@ -74,7 +74,7 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
     
     public String guardarCumplimientoMedidaCAI(){
         
-        this.cumplimientoCAIMedida.setIdDetalleInfraccionCAI(detalleInfraccion);
+        this.cumplimientoCAIMedida.setIdDetallerInfraccionCAI(detalleInfraccion);
 
         CumplimientoMedidaCAI cumplimientoCAIMedidaAux = servicio.guardarCumplimientoMedidaCAI(cumplimientoCAIMedida);
         if(cumplimientoCAIMedidaAux!=null){

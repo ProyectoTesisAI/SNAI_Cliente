@@ -46,7 +46,7 @@ public class MotivoEgresoCAIControlador implements Serializable {
         adolescenteInfractorCAI = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
         if (adolescenteInfractorCAI != null) {
-            MotivoEgresoCAI motivoEgresoCAIAux = servicio.obtenerMotivoEgresoCAI(adolescenteInfractorCAI.getIdAdolescenteCai());
+            MotivoEgresoCAI motivoEgresoCAIAux = servicio.obtenerMotivoEgresoCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if (motivoEgresoCAIAux != null) {
                 motivoEgresoCAI = motivoEgresoCAIAux;
                 guardado = true;
@@ -136,7 +136,7 @@ public class MotivoEgresoCAIControlador implements Serializable {
      */
     public String guardarMotivoEgresoCAI() {
 
-        this.motivoEgresoCAI.setIdMotivoEgreso(adolescenteInfractorCAI);
+        this.motivoEgresoCAI.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI); 
 
         MotivoEgresoCAI motivoEgresoCAIAux = servicio.guardarMotivoEgresoCAI(motivoEgresoCAI);
         if (motivoEgresoCAIAux != null) {
