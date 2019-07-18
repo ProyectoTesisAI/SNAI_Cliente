@@ -26,6 +26,10 @@ public class AdolescenteInfractorUDI implements Serializable {
         this.conQuienVive = conQuienVive;
     }
 
+    @Override
+    public String toString() {
+        return "AdolescenteInfractorUDI{" + "idAdolescenteInfractor=" + idAdolescenteInfractor + ", conQuienVive=" + conQuienVive + '}';
+    }
     
-
+    
 }

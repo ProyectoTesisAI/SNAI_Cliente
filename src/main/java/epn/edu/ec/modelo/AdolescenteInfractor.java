@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.modelo;
 
+import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
-
-/**
- *
- * @author User
- */
 
 public class AdolescenteInfractor implements Serializable {
 
@@ -29,6 +20,12 @@ public class AdolescenteInfractor implements Serializable {
     private Integer numeroHijos;
     private String tipo;
     
+    //variable local
+    private Integer edad;
+    //Verificadores
+    private Validaciones validacion = new Validaciones();
+    private Boolean verificadorCedula;
+    private Boolean verificadorFechaNacimiento;
     
     public AdolescenteInfractor() {
     }
@@ -137,5 +134,55 @@ public class AdolescenteInfractor implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Integer getEdad() {
+        return edad=validacion.obtenerEdad(fechaNacimiento);
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+    
+    public Boolean getVerificadorCedula() {
+        if (cedula != null) {
+            verificadorCedula = false;
+            verificadorCedula = validacion.cedulaValida(cedula);
+            if (verificadorCedula == true) {
+                return verificadorCedula;
+            } else {
+                return verificadorCedula = false;
+            }
+        } else {
+            return verificadorCedula;
+        }
+    }
+
+    public void setVerificadorCedula(Boolean verificadorCedula) {
+        this.verificadorCedula = verificadorCedula;
+    }
+
+    public Boolean getVerificadorFechaNacimiento() {
+        if (fechaNacimiento != null) {
+            verificadorFechaNacimiento = false;
+            verificadorFechaNacimiento = validacion.verificarFechaNacimiento(fechaNacimiento);
+            if (verificadorFechaNacimiento == true) {
+                return verificadorCedula;
+            } else {
+                return verificadorCedula = false;
+            }
+        } else {
+            return verificadorFechaNacimiento;
+        }
+    }
+
+    public void setVerificadorFechaNacimiento(Boolean verificadorFechaNacimiento) {
+        this.verificadorFechaNacimiento = verificadorFechaNacimiento;
+    }
+
+    @Override
+    public String toString() {
+        return "AdolescenteInfractor{" + "idAdolescenteInfractor=" + idAdolescenteInfractor + ", nombres=" + nombres + ", apellidos=" + apellidos + ", nacionalidad=" + nacionalidad + ", cedula=" + cedula + ", documento=" + documento + ", genero=" + genero + ", etnia=" + etnia + ", registroSocial=" + registroSocial + ", estadoCivil=" + estadoCivil + ", fechaNacimiento=" + fechaNacimiento + ", numeroHijos=" + numeroHijos + ", tipo=" + tipo + ", edad=" + edad + ", validacion=" + validacion + ", verificadorCedula=" + verificadorCedula + ", verificadorFechaNacimiento=" + verificadorFechaNacimiento + '}';
+    }
+    
     
 }
