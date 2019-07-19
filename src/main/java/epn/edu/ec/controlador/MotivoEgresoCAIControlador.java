@@ -2,6 +2,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.CAI;
+import epn.edu.ec.modelo.EjecucionMedidaCAI;
 import epn.edu.ec.modelo.MotivoEgresoCAI;
 import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.MotivoEgresoCAIServicio;
@@ -17,7 +18,7 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class MotivoEgresoCAIControlador implements Serializable {
 
-    private AdolescenteInfractorCAI adolescenteInfractorCAI;
+    private EjecucionMedidaCAI ejecucionMedidaCAI;
     private MotivoEgresoCAI motivoEgresoCAI;
     private MotivoEgresoCAIServicio servicio;
     private boolean guardado;
@@ -42,11 +43,16 @@ public class MotivoEgresoCAIControlador implements Serializable {
         listaCAI = new ArrayList<>();
         listaCAI = servicioCAI.listaCai();
 
-        adolescenteInfractorCAI = new AdolescenteInfractorCAI();
-        adolescenteInfractorCAI = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        ejecucionMedidaCAI= new EjecucionMedidaCAI();
+        
+        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
-        if (adolescenteInfractorCAI != null) {
-            MotivoEgresoCAI motivoEgresoCAIAux = servicio.obtenerMotivoEgresoCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+        if (ejecucionMedidaCAIAux != null) {
+            
+            ejecucionMedidaCAI=ejecucionMedidaCAIAux;
+            
+            MotivoEgresoCAI motivoEgresoCAIAux = servicio.obtenerMotivoEgresoCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
+            
             if (motivoEgresoCAIAux != null) {
                 motivoEgresoCAI = motivoEgresoCAIAux;
                 guardado = true;
@@ -59,12 +65,12 @@ public class MotivoEgresoCAIControlador implements Serializable {
         }
     }
 
-    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
-        return adolescenteInfractorCAI;
+    public EjecucionMedidaCAI getEjecucionMedidaCAI() {
+        return ejecucionMedidaCAI;
     }
 
-    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorCAI) {
-        this.adolescenteInfractorCAI = adolescenteInfractorCAI;
+    public void setEjecucionMedidaCAI(EjecucionMedidaCAI ejecucionMedidaCAI) {
+        this.ejecucionMedidaCAI = ejecucionMedidaCAI;
     }
 
     public MotivoEgresoCAI getMotivoEgresoCAI() {
@@ -136,7 +142,7 @@ public class MotivoEgresoCAIControlador implements Serializable {
      */
     public String guardarMotivoEgresoCAI() {
 
-        this.motivoEgresoCAI.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI); 
+        this.motivoEgresoCAI.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
 
         MotivoEgresoCAI motivoEgresoCAIAux = servicio.guardarMotivoEgresoCAI(motivoEgresoCAI);
         if (motivoEgresoCAIAux != null) {

@@ -34,16 +34,16 @@ public class InformeServicio {
     
     public Informe guardarInforme(Informe informe){
         
-        Informe informePsicologiaAux=null;
+        Informe informeAux=null;
         
         WebTarget webTarget=cliente.target(URL_INFORME);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
         Response response =invocationBuilder.put(Entity.entity(informe, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
-            informePsicologiaAux =response.readEntity(Informe.class);
+            informeAux =response.readEntity(Informe.class);
         }
         
-        return informePsicologiaAux;
+        return informeAux;
 
     }
     

@@ -18,9 +18,8 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class EjecucionMedidaControlador implements Serializable{
 
-    private DetalleInfraccionCAI detalleInfraccion;
-    private AdolescenteInfractorCAI adolescenteInfractorCAI;
-    private EjecucionMedidaCAI ejecucionMedida;
+    private DetalleInfraccionCAI detalleInfraccionCAI;
+    private EjecucionMedidaCAI ejecucionMedidaCAI;
     private EjecucionMedidaServicio servicio;
     private boolean guardado;
     
@@ -36,40 +35,45 @@ public class EjecucionMedidaControlador implements Serializable{
         listaCAI=new ArrayList<>();
         listaCAI=servicioUDI.listaCai();
         
-        ejecucionMedida =new EjecucionMedidaCAI();
+        ejecucionMedidaCAI =new EjecucionMedidaCAI();
         guardado=false;
         
-        detalleInfraccion=new DetalleInfraccionCAI();
+        detalleInfraccionCAI=new DetalleInfraccionCAI();
         
-        adolescenteInfractorCAI= new AdolescenteInfractorCAI();
-        adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
-        
-        if(adolescenteInfractorCAI != null){
-            EjecucionMedidaCAI ejecucionMedidaAux= servicio.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+        DetalleInfraccionCAI detalleInfraccionCAIAux = (DetalleInfraccionCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+
+        if(detalleInfraccionCAIAux != null){
+            
+            detalleInfraccionCAI=detalleInfraccionCAIAux;
+            
+            EjecucionMedidaCAI ejecucionMedidaAux= servicio.obtenerEjecucionMedidaCAI(detalleInfraccionCAI.getIdDetalleInfraccion());
+            
             if(ejecucionMedidaAux!=null){
-                ejecucionMedida=ejecucionMedidaAux;
+            
+                ejecucionMedidaCAI=ejecucionMedidaAux;
                 guardado=true;
             }else{
-                ejecucionMedida.setFechaReporteCAI(adolescenteInfractorCAI.getFechaIngresoProceso());
+                
+                //ejecucionMedidaCAI. setFechaReporteCAI(adolescenteInfractorCAI.getFechaIngresoProceso());
             }
         }
         
+    } 
+
+    public DetalleInfraccionCAI getDetalleInfraccionCAI() {
+        return detalleInfraccionCAI;
     }
 
-    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
-        return adolescenteInfractorCAI;
+    public void setDetalleInfraccionCAI(DetalleInfraccionCAI detalleInfraccionCAI) {
+        this.detalleInfraccionCAI = detalleInfraccionCAI;
     }
 
-    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorCAI) {
-        this.adolescenteInfractorCAI = adolescenteInfractorCAI;
+    public EjecucionMedidaCAI getEjecucionMedidaCAI() {
+        return ejecucionMedidaCAI;
     }
 
-    public EjecucionMedidaCAI getEjecucionMedida() {
-        return ejecucionMedida;
-    }
-
-    public void setEjecucionMedida(EjecucionMedidaCAI ejecucionMedida) {
-        this.ejecucionMedida = ejecucionMedida;
+    public void setEjecucionMedidaCAI(EjecucionMedidaCAI ejecucionMedidaCAI) {
+        this.ejecucionMedidaCAI = ejecucionMedidaCAI;
     }
 
     public EjecucionMedidaServicio getServicio() {
@@ -112,9 +116,9 @@ public class EjecucionMedidaControlador implements Serializable{
     
     public String guardarEstadoCumplimientoMedida(){
         
-        this.ejecucionMedida.setIdDetalleInfraccion(detalleInfraccion);
+        this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
 
-        EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedida);
+        EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
         if(ejecucionMedidaAux!=null){
             return "/paginas/cai/cai.com?faces-redirect=true";     
         }

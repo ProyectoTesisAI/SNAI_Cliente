@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.CumplimientoMedidaCAI;
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
+import epn.edu.ec.modelo.EjecucionMedidaCAI;
 import epn.edu.ec.servicios.CumplimientoMedidaCAIServicio;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -14,9 +15,7 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class CumplimientoMedidaCAIControlador implements Serializable{
 
-    private DetalleInfraccionCAI detalleInfraccion;
-    
-    private AdolescenteInfractorCAI adolescenteInfractorCAI;
+    private EjecucionMedidaCAI ejecucionMedidaCAI;
     private CumplimientoMedidaCAI cumplimientoCAIMedida;
     private CumplimientoMedidaCAIServicio servicio;
     private boolean guardado;
@@ -28,12 +27,14 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
         cumplimientoCAIMedida =new CumplimientoMedidaCAI();
         guardado=false;
         
-        detalleInfraccion = new DetalleInfraccionCAI();
-        adolescenteInfractorCAI= new AdolescenteInfractorCAI();
-        adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
-        
-        if(adolescenteInfractorCAI != null){
-            CumplimientoMedidaCAI cumplimientoCAIMedidaAux= servicio.obtenerCumplimientoMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+        ejecucionMedidaCAI= new EjecucionMedidaCAI();
+        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+
+        if(ejecucionMedidaCAIAux != null){
+            
+            ejecucionMedidaCAI=ejecucionMedidaCAIAux;
+            
+            CumplimientoMedidaCAI cumplimientoCAIMedidaAux= servicio.obtenerCumplimientoMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
             if(cumplimientoCAIMedidaAux!=null){
                 cumplimientoCAIMedida=cumplimientoCAIMedidaAux;
                 guardado=true;
@@ -42,24 +43,28 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
         
     }
 
-    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
-        return adolescenteInfractorCAI;
+    public EjecucionMedidaCAI getEjecucionMedidaCAI() {
+        return ejecucionMedidaCAI;
     }
 
-    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorCAI) {
-        this.adolescenteInfractorCAI = adolescenteInfractorCAI;
+    public void setEjecucionMedidaCAI(EjecucionMedidaCAI ejecucionMedidaCAI) {
+        this.ejecucionMedidaCAI = ejecucionMedidaCAI;
     }
 
-    public CumplimientoMedidaCAI getCumplimientoMedidaCAI() {
+    public CumplimientoMedidaCAI getCumplimientoCAIMedida() {
         return cumplimientoCAIMedida;
     }
 
-    public void setCumplimientoMedidaCAI(CumplimientoMedidaCAI cumplimientoCAIMedida) {
+    public void setCumplimientoCAIMedida(CumplimientoMedidaCAI cumplimientoCAIMedida) {
         this.cumplimientoCAIMedida = cumplimientoCAIMedida;
     }
 
     public CumplimientoMedidaCAIServicio getServicio() {
         return servicio;
+    }
+
+    public void setServicio(CumplimientoMedidaCAIServicio servicio) {
+        this.servicio = servicio;
     }
 
     public boolean isGuardado() {
@@ -69,12 +74,14 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
     public void setGuardado(boolean guardado) {
         this.guardado = guardado;
     }
+
+    
    
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
     public String guardarCumplimientoMedidaCAI(){
         
-        this.cumplimientoCAIMedida.setIdDetallerInfraccionCAI(detalleInfraccion);
+        this.cumplimientoCAIMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI); 
 
         CumplimientoMedidaCAI cumplimientoCAIMedidaAux = servicio.guardarCumplimientoMedidaCAI(cumplimientoCAIMedida);
         if(cumplimientoCAIMedidaAux!=null){

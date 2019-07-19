@@ -27,18 +27,19 @@
                     <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center "> FICHA DE PLANIFICACIÓN DE TALLER DE PSICOLOGÍA</div>
                     <div class="panel-body">
                         
-                        <h:form id="formPsicologia" style="margin: 40px;">
-                            <b:tabView active-index="#{tallerPsicologiaEditarControlador.indiceTaller}" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">    
+                        
+                        <div style="margin: 40px;">    
+                            <b:tabView active-index="#{tallerEditarControlador.indiceTaller}" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">    
                                 
                                 <b:tab title="Taller Psicología">
-                                    <h:form id="formTallerPsicologia" >                                
+                                    <h:form id="formTaller" >                                
                                         <b:panel content-disabled="true" style="border: transparent;" >
 
                                             <div class="row"  style="margin-top: 50px;">
                                                 <div class="col-md-10 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtTema" value="Tema"/>
-                                                        <b:inputText  placeholder="Tema" id="txtTema" style="text-transform:uppercase" requiredMessage="Tema es requerido, ingrese un valor" required="true" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.tema}"/>
+                                                        <b:inputText  placeholder="Tema" id="txtTema" style="text-transform:uppercase" requiredMessage="Tema es requerido, ingrese un valor" required="true" value="#{tallerEditarControlador.tallerEditar.tema}"/>
                                                     </div>
                                                 </div>                        
                                             </div>    
@@ -47,7 +48,7 @@
                                                 <div class="col-md-2 col-md-offset-1 ">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtNumeroTaller" value="Taller Nro" />
-                                                        <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.numeroTaller}" />
+                                                        <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerEditarControlador.tallerEditar.numeroTaller}" />
                                                     </div>
 
                                                 </div>
@@ -56,36 +57,27 @@
                                                     <div class="form-group">
                                                         <b:panelGrid columns="1">
                                                             <h:outputLabel for="txtFechaRealizacion" value="Fecha" />
-                                                            <b:dateTimePicker id="txtFechaRealizacion"  required="true" required-message="Fecha es requerida, seleccione una fecha" placeholder="FECHA"  showTime="false" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.fecha}"/>  
+                                                            <b:dateTimePicker id="txtFechaRealizacion"  required="true" required-message="Fecha es requerida, seleccione una fecha" placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
                                                         </b:panelGrid>
                                                     </div>
                                                 </div>
-                                            </div>
                                             
-                                            <div class="row">
-                                                <div class="col-md-2 col-md-offset-1">
+                                                <div class="col-md-3 col-md-offset-1">
                                                     <div class="form-group">
                                                         <b:panelGrid columns="1">
                                                             <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
-                                                            <b:dateTimePicker id="dtpHoraInicio" rendered="true" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm"/>
+                                                            <b:dateTimePicker id="dtpHoraInicio" rendered="true" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm" value="#{tallerEditarControlador.tallerEditar.horaInicio}"/>
                                                         </b:panelGrid>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2 col-md-offset-1">
-                                                    <div class="form-group">
-                                                        <b:panelGrid columns="1">
-                                                            <h:outputLabel for="dtpHoraFin" value="Hora Fin"/>
-                                                            <b:dateTimePicker id="dtpHoraFin" rendered="true" disabled="true" placeholder="hh:mm" showDate="false" format="hh:mm"/>
-                                                        </b:panelGrid>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
-                                                        <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{tallerPsicologiaEditarControlador.tipoCentro}" >
+                                                        <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{tallerEditarControlador.tipoCentro}" >
                                                             <f:selectItem itemLabel="UZDI"  itemValue="UZDI"/>
                                                             <f:selectItem itemLabel="CAI"  itemValue="CAI"/>
                                                         </b:selectOneMenu>
@@ -96,35 +88,24 @@
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <div class="form-group">
                                                            
-                                                            <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerPsicologiaEditarControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerPsicologiaEditarControlador.esUzdi}" value="#{tallerPsicologiaEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerEditarControlador.esUzdi}"/>
+                                                            <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
-                                                                <f:selectItems value="#{tallerPsicologiaEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
+                                                                <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                             </b:selectOneMenu>
                                                             
-                                                            <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerPsicologiaEditarControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerPsicologiaEditarControlador.esUzdi}" value="#{tallerPsicologiaEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
+                                                            <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
-                                                                <f:selectItems value="#{tallerPsicologiaEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
+                                                                <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                             </b:selectOneMenu>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <div class="form-group">
                                                             <h:outputLabel for="txtNumeroTotalParticipantes" value="Adolescentes Infractores Esperados"/>
-                                                            <b:inputText mask="integer" disabled="true" placeholder="Adolescentes Infractores Esperados" id="txtNumeroTotalParticipantes" value="#{tallerPsicologiaEditarControlador.numeroParticipantes}"/>
+                                                            <b:inputText mask="integer" disabled="true" placeholder="Adolescentes Infractores Esperados" id="txtNumeroTotalParticipantes" value="#{tallerEditarControlador.numeroParticipantes}"/>
                                                         </div> 
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-5 col-lg-offset-1">
-                                                            <div class="form-group">
-                                                                <h:outputLabel for="txtLugarUDI" value="Lugar" rendered="#{tallerPsicologiaControlador.esUzdi}"/>
-                                                                <b:inputText placeholder="Lugar" id="txtLugarUDI" style="text-transform: uppercase" rendered="#{tallerPsicologiaControlador.esUzdi}"/>
-                                                                
-                                                                <h:outputLabel for="txtSeccionCAI" value="Sección" rendered="#{!tallerPsicologiaControlador.esUzdi}"/>
-                                                                <b:inputText placeholder="Sección" id="txtSeccionCAI" style="text-transform: uppercase" rendered="#{!tallerPsicologiaControlador.esUzdi}"/>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </h:panelGroup>
 
@@ -134,15 +115,15 @@
                                                 <div class="col-md-10 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtObjetivoTaller" value="Objetivo del Taller"/>
-                                                        <b:inputText  placeholder="Objetivo del Taller" id="txtObjetivoTaller" style="text-transform:uppercase" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.objetivo}" />
+                                                        <b:inputText  placeholder="Objetivo del Taller" id="txtObjetivoTaller" style="text-transform:uppercase" value="#{tallerEditarControlador.tallerEditar.objetivo}" />
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
-                                                <div class="col-md-12 col-md-offset-0">
+                                                <div class="col-md-10 col-md-offset-1">
                                                     <div class="form-group">
-                                                        <b:dataTable id="tablaTallerPsicologia" value="#{tallerPsicologiaEditarControlador.listaItemsTallerPsicologia}" 
+                                                        <b:dataTable id="tablaTaller" value="#{tallerEditarControlador.listaItemsTaller}" 
                                                                     widgetVar="tableWidgetVar"
                                                                     var="tp"
                                                                     fixed-header="true"
@@ -160,7 +141,7 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Duracion"/>
                                                                 </f:facet>
-                                                                <b:dateTimePicker style="color: #262626" id="txtDuracion" placeholder="hh:mm" format="mm"  show-date="false" value="#{tp.hora}"/>  
+                                                                <b:inputText style="color: #262626" id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
                                                             </b:dataTableColumn>
                                                             <b:dataTableColumn>
                                                                 <f:facet name="header">
@@ -196,7 +177,7 @@
                                                 <div class="col-md-10 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtRecomendaciones" value="Recomendaciones"/>
-                                                        <b:inputTextarea id="txtRecomendaciones" style="text-transform:uppercase" placeholder="Recomendaciones" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.recomendaciones}"/>
+                                                        <b:inputTextarea id="txtRecomendaciones" style="text-transform:uppercase" placeholder="Recomendaciones" value="#{tallerEditarControlador.tallerEditar.recomendaciones}"/>
                                                     </div>
                                                 </div>
 
@@ -206,7 +187,7 @@
                                                 <div class="col-md-5 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtElaborado" value="Elaborado por "/>
-                                                        <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.elaborado}"/>
+                                                        <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" />
                                                     </div>
                                                 </div>
 
@@ -217,7 +198,7 @@
 
                                 <b:tab title="Registro de Asistencia">
 
-                                    <h:form id="formRegistroAsistenciaPsicologia">
+                                    <h:form id="formRegistroAsistencia">
 
                                         <b:panel content-disabled="true" style="border: transparent">
 
@@ -225,7 +206,7 @@
                                                 <div class="col-md-10 col-md-offset-1 ">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txTematica" value="Temática"/>
-                                                        <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase" required="true" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.tema}" />
+                                                        <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase" required="true" value="#{tallerEditarControlador.tallerEditar.tema}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,13 +215,7 @@
                                                 <div class="col-md-3 col-md-offset-1">
                                                     <div class="form-group">
                                                         <h:outputLabel for="txtFechaAsistencia" value="Fecha"/>
-                                                        <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" required="true" placeholder="FECHA"  showTime="false" value="#{tallerPsicologiaEditarControlador.tallerPsicologiaEditar.fecha}"/>  
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-md-offset-1 ">
-                                                    <div class="form-group">
-                                                        <h:outputLabel for="txtSeccion" value="Sección"/>
-                                                        <b:inputText  placeholder="Sección" id="txtSeccion" style="text-transform:uppercase" required="true" value="#{tallerPsicologiaEditarControlador.registroAsistencia.seccion}" />
+                                                        <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" required="true" placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
                                                     </div>
                                                 </div>
 
@@ -254,64 +229,38 @@
 
                                             </div>
 
-                                            <h:panelGroup id="tablaRegistro">
-                                                <b:panel rendered="#{tallerPsicologiaEditarControlador.tabla}">
-                                                    <div class="row" style="margin-top: 35px;">
-                                                        <div class="col-md-12 col-md-offset-0">
-                                                            <h:outputText value="TABLA DE REGISTRO ASISTENCIA UDI"/>
-                                                            <b:dataTable id="dtRegistroAsistenciaUdi" value="#{tallerPsicologiaEditarControlador.listaAdolescentesUzdi}"
-                                                                         var="ai"
-                                                                         fixed-header="true"
-                                                                         scroll-x="true"
-                                                                         scroll-size="1000px"
-                                                                         responsive="true"
-                                                                         searching="false"
-                                                                         select="true"
-                                                                         selectionMode="multiple"
-                                                                         style="margin: auto; width: 100%;">
-                                                                <b:dataTableColumn value="#{ai.nombres}"/>
-                                                                <b:dataTableColumn value="#{ai.apellidos}"/>
-                                                                <b:dataTableColumn value="#{ai.cedula}"/>
-                                                            </b:dataTable>
-                                                        </div>
-                                                    </div>
-                                                </b:panel>
-
-                                                <b:panel rendered="#{!tallerPsicologiaEditarControlador.tabla}">
-                                                    <div class="row" style="margin-top: 35px;">
-                                                        <div class="col-md-12 col-md-offset-0">
-                                                            <h:outputText value="TABLA DE REGISTRO ASISTENCIA CAI"/>
-                                                            <b:dataTable id="dtRegistroAsistenciaCai" value="#{tallerPsicologiaEditarControlador.listaAdolescentesCai}"
-                                                                         var="ai"
-                                                                         fixed-header="true"
-                                                                         scroll-x="true"
-                                                                         scroll-size="1000px"
-                                                                         responsive="true"
-                                                                         searching="false"
-                                                                         select="true"
-                                                                         selectionMode="multiple"
-                                                                         style="margin: auto; width: 100%;">
-                                                                <b:dataTableColumn value="#{ai.nombres}"/>
-                                                                <b:dataTableColumn value="#{ai.apellidos}"/>
-                                                                <b:dataTableColumn value="#{ai.cedula}"/>
-                                                            </b:dataTable>
-                                                        </div>
-                                                    </div>
-                                                </b:panel>
-                                            </h:panelGroup>
-
-                                            <br/>
+                                            <div class="row" style="margin-top: 35px;">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <h4 class="text-center">REGISTRO ASISTENCIA</h4>
+                                                    <br/>
+                                                    <b:dataTable id="dtRegistroAsistenciaUdi" value="#{tallerEditarControlador.listadoAsistencia}"
+                                                                 var="ai"
+                                                                 fixed-header="true"
+                                                                 scroll-x="true"
+                                                                 scroll-size="1000px"
+                                                                 responsive="true"
+                                                                 searching="false"
+                                                                 select="true"
+                                                                 selectionMode="multiple"
+                                                                 style="margin: auto; width: 100%;">
+                                                        <b:dataTableColumn value="#{ai.nombres}"/>
+                                                        <b:dataTableColumn value="#{ai.apellidos}"/>
+                                                        <b:dataTableColumn value="#{ai.cedula}"/>
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                                
                                             <br/>
                                         </b:panel>
                                     </h:form>
                             
                                 </b:tab>
                             </b:tabView>
-                        </h:form>
+                        </div>
                         <h:form>
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-4">                                                  
-                                    <b:commandButton id="btnDescargarRegistroAsistencia" value="Registro de Asistencia" class="btn btn-block btn-danger"  action="#{tallerPsicologiaEditarControlador.guardarPDFAsistencia()}"/> 
+                                    <b:commandButton id="btnDescargarRegistroAsistencia" value="Registro de Asistencia" class="btn btn-block btn-danger"  action="#{tallerEditarControlador.guardarPDFAsistencia()}"/> 
                                 </div> 
                             </div>
                         </h:form>
