@@ -502,7 +502,7 @@ public class TallerControlador implements Serializable {
 
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("txtUDI", "REGISTRO DE ASISTENCIA " + tallerCrear.getIdUdi().getUdi());
-
+        parametros.put("txtTema","TALLER:  "+ tallerCrear.getTema());
         try {
 
             File jasper = new File(ruta);
