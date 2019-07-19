@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
@@ -15,10 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-/**
- *
- * @author User
- */
 @Named(value = "panelAdolescenteInfractorCAIControlador")
 @ViewScoped
 public class PanelAdolescenteInfractorCAIControlador implements Serializable{
@@ -43,9 +34,9 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
     }
     
     
-    public String agregarInformacion(AdolescenteInfractorCAI ai_udi) {
+    public String agregarInformacion(AdolescenteInfractorCAI ai_cai) {
 
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_udi);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
         return "/paginas/cai/matriz/panel_crear_cai.com?faces-redirect=true";
     }
 

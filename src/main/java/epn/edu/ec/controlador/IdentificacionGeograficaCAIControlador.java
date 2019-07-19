@@ -16,9 +16,9 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "identificacionGeograficaControlador")
+@Named(value = "identificacionGeograficaControladorCAI")
 @ViewScoped
-public class IdentificacionGeograficaControlador implements Serializable {
+public class IdentificacionGeograficaCAIControlador implements Serializable {
 
     //mensajes que controlan las validaciones
     private String mensaje = "";
@@ -166,7 +166,7 @@ public class IdentificacionGeograficaControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public String guardarIdentificacionGeograficaAux() {
+    public String guardarIdentificacionGeografica() {
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }

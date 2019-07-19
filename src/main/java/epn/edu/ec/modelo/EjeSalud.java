@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.modelo;
 
 import java.io.Serializable;
@@ -15,7 +10,7 @@ public class EjeSalud implements Serializable {
     private Boolean recibeTratamiento;
     private Boolean tomaMedicacion;
     private String numeroHistoriaClinica;
-    private String embarazo;
+    private Boolean embarazo;
     private String tiempoGestacionMes;
     private Boolean consumeSustancias;
     private String tipoSustancia;
@@ -76,11 +71,11 @@ public class EjeSalud implements Serializable {
         this.numeroHistoriaClinica = numeroHistoriaClinica;
     }
 
-    public String getEmbarazo() {
+    public Boolean getEmbarazo() {
         return embarazo;
     }
 
-    public void setEmbarazo(String embarazo) {
+    public void setEmbarazo(Boolean embarazo) {
         this.embarazo = embarazo;
     }
 
@@ -146,8 +141,6 @@ public class EjeSalud implements Serializable {
 
     public void setEnfermadadesCatastroficas(Boolean enfermadadesCatastroficas) {
         this.enfermadadesCatastroficas = enfermadadesCatastroficas;
-    }
-
-    
+    }    
     
 }

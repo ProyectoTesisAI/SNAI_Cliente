@@ -10,9 +10,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "ejeEducativoControlador")
+@Named(value = "ejeEducativoControladorUDI")
 @ViewScoped
-public class EjeEducativoControlador implements Serializable{
+public class EjeEducativoUDIControlador implements Serializable{
 
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
     private EjeEducativo ejeEducativo;
@@ -53,6 +53,8 @@ public class EjeEducativoControlador implements Serializable{
                 guardado=true;
                 estudia=ejeEducativo.getEstudia();
             }            
+        }else{
+            adolescenteInfractorUDI= new AdolescenteInfractorUDI();
         }
         
     }

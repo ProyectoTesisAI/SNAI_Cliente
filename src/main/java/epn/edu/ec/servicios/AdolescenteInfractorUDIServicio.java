@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class AdolescenteInfractorUDIServicio {
     
     private final Client cliente;
-    public String URL_ADOLESCENTE_INFRACTOR=Constantes.URL_ADOLESCENTE;
+    public String URL_ADOLESCENTE_INFRACTOR=Constantes.URL_ADOLESCENTE_UDI;
     
     public AdolescenteInfractorUDIServicio(){
         cliente= ClientBuilder.newClient();

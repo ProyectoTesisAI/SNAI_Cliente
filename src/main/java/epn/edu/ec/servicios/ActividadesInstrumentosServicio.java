@@ -2,14 +2,11 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.ActividadesInstrumentos;
 import epn.edu.ec.utilidades.Constantes;
-import java.util.List;
-import javax.faces.context.FacesContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,7 +25,7 @@ public class ActividadesInstrumentosServicio {
                        
         WebTarget webTarget=cliente.target(URL_ACTIVIDADES_INSTRUMENTOS);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response = invocationBuilder.post(Entity.entity(actividadesInstrumentos, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response = invocationBuilder.put(Entity.entity(actividadesInstrumentos, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         
         if(response.getStatus()==200){        
             actividadesInstrumentosAux=response.readEntity(ActividadesInstrumentos.class);       

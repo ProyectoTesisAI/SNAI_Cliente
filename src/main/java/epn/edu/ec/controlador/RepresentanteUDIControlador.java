@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
+import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.Representante;
 import epn.edu.ec.servicios.RepresentanteServicio;
@@ -17,19 +13,16 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author User
- */
-@Named(value = "representanteControlador")
+@Named(value = "representanteControladorUDI")
 @ViewScoped
-public class RepresentanteControlador implements Serializable{
+public class RepresentanteUDIControlador implements Serializable{
 
     //mensajes que controlan las validaciones
     private String mensaje = "";
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
     
+    private AdolescenteInfractor adolescenteInfractorCrear;
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
     private Representante representante;
     private RepresentanteServicio servicio;
@@ -56,6 +49,7 @@ public class RepresentanteControlador implements Serializable{
             tipoDocumento="EXTRANJERA";
         }
         
+        adolescenteInfractorCrear=new AdolescenteInfractor();
         adolescenteInfractorUDI= new AdolescenteInfractorUDI();
         AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
         
@@ -71,7 +65,9 @@ public class RepresentanteControlador implements Serializable{
                 }else if(representanteAux.getCedula()==null && representanteAux.getDocumento()!=null){
                     tipoDocumento="EXTRANJERA";
                 }
-            }            
+            }else{
+                representante=new Representante();
+            }
         }
         
     }

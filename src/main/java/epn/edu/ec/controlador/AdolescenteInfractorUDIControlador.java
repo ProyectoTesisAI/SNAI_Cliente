@@ -25,10 +25,14 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     private Validaciones validacion;
 
     private AdolescenteInfractor adolescenteInfractorCrear;
+    private AdolescenteInfractor adolescenteInfractorEditar;
     private AdolescenteInfractorServicio servicio;
 
     private AdolescenteInfractorUDI adolescenteInfractorUDICrear;
+    private AdolescenteInfractorUDI adolescenteInfractorUDIEditar;
     private AdolescenteInfractorUDIServicio servicioUDI;
+    
+    private boolean guardado;
 
     //Objetos para saber si es cedula o documento
     String tipoDocumento;
@@ -37,6 +41,7 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     @PostConstruct
     public void init() {
         servicioUDI = new AdolescenteInfractorUDIServicio();
+        guardado = false;
         validacion = new Validaciones();
 
         if (isEsCedula()) {
@@ -46,11 +51,25 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
         }
 
         adolescenteInfractorCrear = new AdolescenteInfractor();
+        adolescenteInfractorEditar = new AdolescenteInfractor();
         servicio = new AdolescenteInfractorServicio();
 
         adolescenteInfractorUDICrear = new AdolescenteInfractorUDI();
         this.adolescenteInfractorCrear.setTipo("UZDI");
         adolescenteInfractorUDICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
+        adolescenteInfractorUDIEditar = new AdolescenteInfractorUDI();
+        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        if (adolescenteInfractorUDIAux != null) {
+            adolescenteInfractorUDIEditar = adolescenteInfractorUDIAux;
+            guardado = true;
+            if(adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getCedula()!=null && adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getDocumento()==null){
+                tipoDocumento="ECUATORIANA";
+            }else if(adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getCedula()==null && adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getDocumento()!=null){
+                tipoDocumento="EXTRANJERA";
+            }
+            adolescenteInfractorEditar=adolescenteInfractorUDIEditar.getIdAdolescenteInfractor();
+        }
+        
     }
 
     public AdolescenteInfractorUDI getAdolescenteInfractorUDICrear() {
@@ -59,6 +78,38 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     public void setAdolescenteInfractorUDICrear(AdolescenteInfractorUDI adolescenteInfractorCrear) {
         this.adolescenteInfractorUDICrear = adolescenteInfractorCrear;
+    }
+
+    public AdolescenteInfractor getAdolescenteInfractorCrear() {
+        return adolescenteInfractorCrear;
+    }
+
+    public void setAdolescenteInfractorCrear(AdolescenteInfractor adolescenteInfractorCrear) {
+        this.adolescenteInfractorCrear = adolescenteInfractorCrear;
+    }
+
+    public AdolescenteInfractor getAdolescenteInfractorEditar() {
+        return adolescenteInfractorEditar;
+    }
+
+    public void setAdolescenteInfractorEditar(AdolescenteInfractor adolescenteInfractorEditar) {
+        this.adolescenteInfractorEditar = adolescenteInfractorEditar;
+    }
+
+    public AdolescenteInfractorServicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(AdolescenteInfractorServicio servicio) {
+        this.servicio = servicio;
+    }
+
+    public AdolescenteInfractorUDI getAdolescenteInfractorUDIEditar() {
+        return adolescenteInfractorUDIEditar;
+    }
+
+    public void setAdolescenteInfractorUDIEditar(AdolescenteInfractorUDI adolescenteInfractorUDIEditar) {
+        this.adolescenteInfractorUDIEditar = adolescenteInfractorUDIEditar;
     }
 
     public AdolescenteInfractorUDIServicio getServicioUDI() {
@@ -98,11 +149,24 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     }
 
     public boolean isEsCedula() {
+        if("ECUATORIANA".equals(tipoDocumento)){
+            esCedula=true;
+        }else if("EXTRANJERA".equals(tipoDocumento)){
+            esCedula=false;
+        }
         return esCedula;
     }
 
     public void setEsCedula(boolean esCedula) {
         this.esCedula = esCedula;
+    }
+    
+    public boolean isGuardado() {
+        return guardado;
+    }
+
+    public void setGuardado(boolean guardado) {
+        this.guardado = guardado;
     }
 
     /**

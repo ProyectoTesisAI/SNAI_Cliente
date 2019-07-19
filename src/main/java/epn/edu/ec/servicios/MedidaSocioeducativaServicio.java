@@ -44,7 +44,7 @@ public class MedidaSocioeducativaServicio {
         List<MedidaSocioeducativa> listaMedidasSocioeducativas=null;
         
         WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidasSocioeducativasPorAdolescenteUDI");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
+        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");
         Response response =invocationBuilder.post(Entity.entity(adolescenteInfractorUDI, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
             listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
@@ -54,13 +54,24 @@ public class MedidaSocioeducativaServicio {
 
     }
     
-    public MedidaSocioeducativa obtenerMedidaMasAlta(AdolescenteInfractorUDI adolescenteInfractorUDI){
+    public List<MedidaSocioeducativa> listaMedidasSocioeducativasPorAdolescente(Integer idAdolescenteUZDI){
+        List<MedidaSocioeducativa> listaMedidasSocioeducativas = null;
+        WebTarget webTarget = cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/Adolescente").path(idAdolescenteUZDI.toString());
+        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");
+        Response response =invocationBuilder.get();
+        if(response.getStatus()==200){
+            listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
+        }
+        return listaMedidasSocioeducativas;
+    }
+    
+    public MedidaSocioeducativa obtenerMedidaMasAlta(Integer idAdolescenteUZDI){
         
         MedidaSocioeducativa medidaMasAlta=null;
         
-        WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/ObtenerMedidaMasAlta");        
+        WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidaMasAlta/AdolescenteUDI").path(idAdolescenteUZDI.toString());
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(adolescenteInfractorUDI, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response =invocationBuilder.get();
         if(response.getStatus()==200){
             List<MedidaSocioeducativa> medidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
             if(medidasSocioeducativas!=null){

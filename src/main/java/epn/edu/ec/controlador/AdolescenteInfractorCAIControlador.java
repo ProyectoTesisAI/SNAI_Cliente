@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
+import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,53 +22,54 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     private String mensaje = "";
     private String mensaje1 = "";
     private String mensaje2 = "";
-
-    private AdolescenteInfractor adolescenteInfractor;
-    private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
-    private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
-    private AdolescenteInfractorCAIServicio servicio;
-    private boolean guardado;
-/*
-    private List<DatosProvinciaCanton> provincias;
-    private List<DatosProvinciaCanton> cantones;
-    private DatosProvinciaCantonServicio servicioCAIPC;
-*/
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
-    
+
+    private AdolescenteInfractor adolescenteInfractorCrear;
+    private AdolescenteInfractor adolescenteInfractorEditar;
+    private AdolescenteInfractorServicio servicio;
+
+    private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
+    private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
+    private AdolescenteInfractorCAIServicio servicioCAI;
+
+    private boolean guardado;
+
     //Objetos para saber si es cedula o documento
     String tipoDocumento;
     boolean esCedula;
 
     @PostConstruct
     public void init() {
-        servicio = new AdolescenteInfractorCAIServicio();
+        servicioCAI = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
-/*
-        provincias = new ArrayList<>();
-        servicioCAIPC = new DatosProvinciaCantonServicio();
-  */      
-        if(isEsCedula()){
-            tipoDocumento="ECUATORIANA";
-        }else{
-            tipoDocumento="EXTRANJERA";
-        }
-        
-        adolescenteInfractor = new AdolescenteInfractor();
-        adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
 
+        if (isEsCedula()) {
+            tipoDocumento = "ECUATORIANA";
+        } else {
+            tipoDocumento = "EXTRANJERA";
+        }
+
+        adolescenteInfractorCrear = new AdolescenteInfractor();
+        adolescenteInfractorEditar = new AdolescenteInfractor();
+        servicio = new AdolescenteInfractorServicio();
+        
+        adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
+        this.adolescenteInfractorCrear.setTipo("CAI");
+        adolescenteInfractorCAICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
         adolescenteInfractorCAIEditar = new AdolescenteInfractorCAI();
         AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         if (adolescenteInfractorCAIAux != null) {
             adolescenteInfractorCAIEditar = adolescenteInfractorCAIAux;
             guardado = true;
-        }else{
-            adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
-            adolescenteInfractorCAICrear.setIdAdolescenteInfractor(adolescenteInfractor);
+            if(adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getCedula()!=null && adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getDocumento()==null){
+                tipoDocumento="ECUATORIANA";
+            }else if(adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getCedula()==null && adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getDocumento()!=null){
+                tipoDocumento="EXTRANJERA";
+            }
+            adolescenteInfractorEditar=adolescenteInfractorCAIEditar.getIdAdolescenteInfractor();
         }
-
-//        provincias = servicioCAIPC.listarDatosProvinciaCanton();
     }
 
     public AdolescenteInfractorCAI getAdolescenteInfractorCAICrear() {
@@ -77,15 +79,23 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void setAdolescenteInfractorCAICrear(AdolescenteInfractorCAI adolescenteInfractorCAICrear) {
         this.adolescenteInfractorCAICrear = adolescenteInfractorCAICrear;
     }
-/*
-    public List<DatosProvinciaCanton> getProvincias() {
-        return provincias;
+
+    public AdolescenteInfractor getAdolescenteInfractorCrear() {
+        return adolescenteInfractorCrear;
     }
 
-    public void setProvincias(List<DatosProvinciaCanton> provincias) {
-        this.provincias = provincias;
+    public void setAdolescenteInfractorCrear(AdolescenteInfractor adolescenteInfractorCrear) {
+        this.adolescenteInfractorCrear = adolescenteInfractorCrear;
     }
-*/
+
+    public AdolescenteInfractor getAdolescenteInfractorEditar() {
+        return adolescenteInfractorEditar;
+    }
+
+    public void setAdolescenteInfractorEditar(AdolescenteInfractor adolescenteInfractorEditar) {
+        this.adolescenteInfractorEditar = adolescenteInfractorEditar;
+    }
+
     public AdolescenteInfractorCAI getAdolescenteInfractorCAIEditar() {
         return adolescenteInfractorCAIEditar;
     }
@@ -94,8 +104,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         this.adolescenteInfractorCAIEditar = adolescenteInfractorCAIEditar;
     }
 
-    public AdolescenteInfractorCAIServicio getServicio() {
-        return servicio;
+    public AdolescenteInfractorCAIServicio getServicioCAI() {
+        return servicioCAI;
     }
 
     public boolean isGuardado() {
@@ -105,38 +115,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void setGuardado(boolean guardado) {
         this.guardado = guardado;
     }
-/*
-    public List<DatosProvinciaCanton> listarCantonesPorProvincia(String provincia) {
-        List<DatosProvinciaCanton> cantonesAux = new ArrayList<>();
 
-        for (DatosProvinciaCanton c : provincias) {
-            if (provincia.equals(c.getProvincia())) {
-                cantonesAux.add(c);
-            }
-        }
-        return cantonesAux;
-    }
-
-    public List<DatosProvinciaCanton> getCantones() {
-        String provincia = null;
-        cantones = new ArrayList<>();
-        if (adolescenteInfractorCAICrear.getProvinciaAdolescente() != null) {
-            provincia = adolescenteInfractorCAICrear.getProvinciaAdolescente();
-            if (provincia != null) {
-                cantones = listarCantonesPorProvincia(provincia);
-            }
-            return cantones;
-        } else if (adolescenteInfractorCAIEditar.getProvinciaAdolescente() != null) {
-            provincia = adolescenteInfractorCAIEditar.getProvinciaAdolescente();
-            if (provincia != null) {
-                cantones = listarCantonesPorProvincia(provincia);
-            }
-            return cantones;
-        } else {
-            return null;
-        }
-    }
-*/
     public String getMensaje() {
         return mensaje;
     }
@@ -167,37 +146,33 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
-        if("ECUATORIANA".equals(tipoDocumento)){
-            esCedula=true;
-        }else if("EXTRANJERA".equals(tipoDocumento)){
-            esCedula=false;
+        this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+        if ("ECUATORIANA".equals(tipoDocumento)) {
+            esCedula = true;
+            this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setDocumento(null);
+        } else if ("EXTRANJERA".equals(tipoDocumento)) {
+            esCedula = false;
+            this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setCedula(null);
         }
     }
 
     public boolean isEsCedula() {
-        if("ECUATORIANA".equals(tipoDocumento)){
-            esCedula=true;
-        }else if("EXTRANJERA".equals(tipoDocumento)){
-            esCedula=false;
+        if ("ECUATORIANA".equals(tipoDocumento)) {
+            esCedula = true;
+        } else if ("EXTRANJERA".equals(tipoDocumento)) {
+            esCedula = false;
         }
         return esCedula;
     }
 
     public void setEsCedula(boolean esCedula) {
         this.esCedula = esCedula;
-    }   
+    }
 
     //Métodos para invocar a los diferentes servicios web************
     public String guardarAdolescenteInfractor() {
-        Boolean verificador1 = false;
-        Boolean verificador2 = false;
-        verificador1 = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getVerificadorCedula();
-        verificador2 = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getVerificadorFechaNacimiento();
-        if (verificador1 == false || verificador2 == false) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Adolescente Infractor", "Error"));
-            return null;
-        } else if (verificador1 == true || verificador2 == true) {
-            AdolescenteInfractorCAI ai_cai = servicio.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
+        if(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor()!=null){
+            AdolescenteInfractorCAI ai_cai = servicioCAI.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
             if (ai_cai != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Adolescente ", "Aviso"));
@@ -206,7 +181,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Adolescente Infractor", "Error"));
                 return null;
             }
-        } else {
+        }else{
+            System.out.println("Se tiene un adolescente en null");
             return null;
         }
     }
@@ -247,22 +223,5 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
             mensaje1 = "Fecha incorrecta";
         }
     }
-/*
-    public void limpiarMensajeNumeroContacto(AjaxBehaviorEvent evento) {
-        String numero = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getNumeroContacto();
-        if (validacion.numeroContactoValida(numero)) {
-            mensaje2 = "";
-        } else {
-            mensaje2 = "Número incorrecto";
-        }
-    }
 
-    public void validarNumeroContacto(AjaxBehaviorEvent evento) {
-        String numero = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getNumeroContacto();
-        if (validacion.numeroContactoValida(numero)) {
-            mensaje2 = "Número correcto";
-        } else {
-            mensaje2 = "Número incorrecto";
-        }
-    }*/
 }

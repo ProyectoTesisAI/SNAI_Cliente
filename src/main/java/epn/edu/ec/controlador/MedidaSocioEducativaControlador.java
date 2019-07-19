@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -19,10 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author User
- */
 @Named(value = "medidaSocioEducativaControlador")
 @ViewScoped
 public class MedidaSocioEducativaControlador implements Serializable{
@@ -109,7 +100,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
                    guardado=true;
                }
                
-               List<MedidaSocioeducativa> listaMedidasSocioeducativasAux= servicio.listaMedidaSocioeducativosPorAdolescentesUzdi(adolescenteInfractorUDI);
+               List<MedidaSocioeducativa> listaMedidasSocioeducativasAux= servicio.listaMedidasSocioeducativasPorAdolescente(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
                
                if(listaMedidasSocioeducativasAux!=null){
                    
@@ -303,8 +294,13 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarMedidaSocioeducativa(){
-        
+    public String guardarMedidaSocioeducativa1(){
+        /*AMONESTACION VERBAL
+        DONDE NO HAY MESES, DIAS, HORAS
+        */
+        this.medidaSocioeducativa.setTiempoDia(0);
+        this.medidaSocioeducativa.setTiempoHoras(0);
+        this.medidaSocioeducativa.setTiempoMeses(0);
         this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
@@ -317,7 +313,10 @@ public class MedidaSocioEducativaControlador implements Serializable{
     }
     
     public String guardarMedidaSocioeducativa2(){
-        
+        /*IMPOSICION REGLAS CONDUCTA
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa2.setTiempoHoras(0);
         this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
@@ -330,7 +329,10 @@ public class MedidaSocioEducativaControlador implements Serializable{
     }
     
     public String guardarMedidaSocioeducativa3(){
-        
+        /*APOYO PSICO SOCIO FAMILAR
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa3.setTiempoHoras(0);
         this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
@@ -343,7 +345,10 @@ public class MedidaSocioEducativaControlador implements Serializable{
     }
     
     public String guardarMedidaSocioeducativa4(){
-        
+        /*SERVICIO COMUNIDAD
+        DONDE NO HAY MESES, DIAS
+        */
+        this.medidaSocioeducativa4.setTiempoMeses(0);
         this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
@@ -356,7 +361,11 @@ public class MedidaSocioEducativaControlador implements Serializable{
     }
     
     public String guardarMedidaSocioeducativa5(){
-        
+        /*LIBERTAD ASISTIDA
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa5.setTiempoDia(0);
+        this.medidaSocioeducativa5.setTiempoMeses(0);
         this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
