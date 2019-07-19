@@ -5,20 +5,12 @@ import java.util.Date;
 
 public class MotivoEgresoCAI implements Serializable {
 
-    private AdolescenteInfractorCAI idAdolescenteInfractorCAI;
+    private EjecucionMedidaCAI idEjecucionMedidaCAI;
     private String motivoSalida;
     private Date fechaSalidaCentro;
     private CAI idCaiTraslado;
 
     public MotivoEgresoCAI() {
-    }
-
-    public AdolescenteInfractorCAI getIdAdolescenteInfractorCAI() {
-        return idAdolescenteInfractorCAI;
-    }
-
-    public void setIdAdolescenteInfractorCAI(AdolescenteInfractorCAI idAdolescenteInfractorCAI) {
-        this.idAdolescenteInfractorCAI = idAdolescenteInfractorCAI;
     }
 
     public String getMotivoSalida() {
@@ -43,11 +35,13 @@ public class MotivoEgresoCAI implements Serializable {
 
     public void setIdCaiTraslado(CAI idCaiTraslado) {
         this.idCaiTraslado = idCaiTraslado;
+    }   
+
+    public EjecucionMedidaCAI getIdEjecucionMedidaCAI() {
+        return idEjecucionMedidaCAI;
     }
 
-    @Override
-    public String toString() {
-        return "MotivoEgresoCAI{" + "idMotivoEgreso=" + idAdolescenteInfractorCAI + ", motivoSalida=" + motivoSalida + ", fechaSalidaCentro=" + fechaSalidaCentro + ", caiTrasladoFk=" + idCaiTraslado + '}';
-    }
-    
+    public void setIdEjecucionMedidaCAI(EjecucionMedidaCAI idEjecucionMedidaCAI) {
+        this.idEjecucionMedidaCAI = idEjecucionMedidaCAI;
+    }    
 }

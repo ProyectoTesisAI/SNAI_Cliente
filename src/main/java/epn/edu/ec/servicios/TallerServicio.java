@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 public class TallerServicio {
     
     private final Client cliente;
-    public String URL_TALLER_PSICOLOGIA=Constantes.URL_TALLER;
+    public String URL_TALLER=Constantes.URL_TALLER;
     
     public TallerServicio(){
         cliente= ClientBuilder.newClient();
@@ -39,7 +39,7 @@ public class TallerServicio {
         
         Taller tallerAux=null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA);        
+        WebTarget webTarget=cliente.target(URL_TALLER);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
         Response response =invocationBuilder.post(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
@@ -54,7 +54,7 @@ public class TallerServicio {
         
         Taller tallerAux=null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA);        
+        WebTarget webTarget=cliente.target(URL_TALLER);        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
         Response response =invocationBuilder.put(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
@@ -69,7 +69,7 @@ public class TallerServicio {
         
         List<Taller> listaActividadesAux=null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA+"/TalleresSinInforme");        
+        WebTarget webTarget=cliente.target(URL_TALLER+"/TalleresSinInforme");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
@@ -82,7 +82,7 @@ public class TallerServicio {
         
         List<Taller> listaActividadesAux=null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA+"/TalleresConInforme");        
+        WebTarget webTarget=cliente.target(URL_TALLER+"/TalleresConInforme");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
@@ -159,7 +159,7 @@ public class TallerServicio {
         
         List<ItemTaller> listaItemsTaller=null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA+"/ItemsTaller").path(idTaller.toString());        
+        WebTarget webTarget=cliente.target(URL_TALLER+"/ItemsTaller").path(idTaller.toString());        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
@@ -172,7 +172,7 @@ public class TallerServicio {
         
         RegistroAsistencia registroAsistenciaAux =null;
         
-        WebTarget webTarget=cliente.target(URL_TALLER_PSICOLOGIA+"/RegistroAsistencia").path(idTaller.toString());        
+        WebTarget webTarget=cliente.target(URL_TALLER+"/RegistroAsistencia").path(idTaller.toString());        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){

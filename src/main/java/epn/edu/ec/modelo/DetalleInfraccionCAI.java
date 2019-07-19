@@ -88,6 +88,4 @@ public class DetalleInfraccionCAI implements Serializable {
     public void setIdAdolescenteInfractorCAI(AdolescenteInfractorCAI idAdolescenteInfractorCAI) {
         this.idAdolescenteInfractorCAI = idAdolescenteInfractorCAI;
     }
-
-    
 }

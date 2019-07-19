@@ -27,9 +27,9 @@
 
                             <b:form id="form">
 
-                                <b:dataTable value="#{panelInformePsicologiaControlador.listaInformePsicologia}"
+                                <b:dataTable value="#{panelInformeControlador.listaInforme}"
                                              var="tp"
-                                             id="dtPanelPsicologia"
+                                             id="dtPanel"
                                              fixed-header="true"
                                              scroll-x="true"
                                              save-state="true"
@@ -39,23 +39,22 @@
                                              select="true"
                                              selectionMode="multiple"
                                              ajax="true">
-                                    <b:dataTableColumn value="#{tp.idTallerPsicologia.numeroTaller}"/>
-                                    <b:dataTableColumn value="#{tp.idTallerPsicologia.tema}"/>
-                                    <b:dataTableColumn value="#{tp.idTallerPsicologia.fecha}"/>
-                                    <b:dataTableColumn value="#{tp.idTallerPsicologia.elaborado}"/>
+                                    <b:dataTableColumn value="#{tp.idTaller.numeroTaller}"/>
+                                    <b:dataTableColumn value="#{tp.idTaller.tema}"/>
+                                    <b:dataTableColumn value="#{tp.idTaller.fecha}"/>
 
                                     <b:dataTableColumn label="Ver Taller">
-                                        <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelInformePsicologiaControlador.verTallerPsicologia(tp)}">
+                                        <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelInformeControlador.verTaller(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </b:dataTableColumn>
                                     <b:dataTableColumn label="Ver Informe">
-                                        <b:commandButton  value="Ver Informe"  class="btn btn-danger btn-block" action="#{panelInformePsicologiaControlador.verInformePsicologia(tp)}">
+                                        <b:commandButton  value="Ver Informe"  class="btn btn-danger btn-block" action="#{panelInformeControlador.verInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </b:dataTableColumn>
                                     <b:dataTableColumn label="Editar Informe">
-                                        <b:commandButton  value="Editar Informe"  class="btn btn-primary btn-block" action="#{panelInformePsicologiaControlador.editarInformePsicologia(tp)}">
+                                        <b:commandButton  value="Editar Informe"  class="btn btn-primary btn-block" action="#{panelInformeControlador.editarInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </b:dataTableColumn>

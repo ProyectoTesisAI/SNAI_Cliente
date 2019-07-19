@@ -5,19 +5,19 @@ import java.util.Date;
 
 public class CumplimientoMedidaCAI implements Serializable {
 
-    private DetalleInfraccionCAI idDetallerInfraccionCAI;
+    private EjecucionMedidaCAI idEjecucionMedidaCAI;
     private Date fechaCumplimiento100;
     private Date alertaCambioMedida;
 
     public CumplimientoMedidaCAI() {
     }
 
-    public DetalleInfraccionCAI getIdDetallerInfraccionCAI() {
-        return idDetallerInfraccionCAI;
+    public EjecucionMedidaCAI getIdEjecucionMedidaCAI() {
+        return idEjecucionMedidaCAI;
     }
 
-    public void setIdDetallerInfraccionCAI(DetalleInfraccionCAI idDetallerInfraccionCAI) {
-        this.idDetallerInfraccionCAI = idDetallerInfraccionCAI;
+    public void setIdEjecucionMedidaCAI(EjecucionMedidaCAI idEjecucionMedidaCAI) {
+        this.idEjecucionMedidaCAI = idEjecucionMedidaCAI;
     }
 
     public Date getFechaCumplimiento100() {
@@ -36,8 +36,4 @@ public class CumplimientoMedidaCAI implements Serializable {
         this.alertaCambioMedida = alertaCambioMedida;
     }
 
-    @Override
-    public String toString() {
-        return "CumplimientoMedidaCAI{" + "idCumplimientoMedida=" + idDetallerInfraccionCAI + ", fechaCumplimiento100=" + fechaCumplimiento100 + ", alertaCambioMedida=" + alertaCambioMedida + '}';
-    }
 }
