@@ -1,8 +1,8 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
-import epn.edu.ec.modelo.EjeLaboral;
-import epn.edu.ec.servicios.EjeLaboralServicio;
+import epn.edu.ec.modelo.EjeEducativo;
+import epn.edu.ec.servicios.EjeEducativoServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -10,31 +10,34 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "ejeLaboralControlador")
+@Named(value = "ejeEducativoControlador")
 @ViewScoped
-public class EjeLaboralControlador implements Serializable{
+public class EjeEducativoCAIControlador implements Serializable{
 
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
-    private EjeLaboral ejeLaboral;
-    private EjeLaboralServicio servicio;
+    private EjeEducativo ejeEducativo;
+    
+    private EjeEducativoServicio servicio;
     
     private boolean guardado;
-    private boolean trabaja;
+    private boolean estudia;
     private EnlacesPrograma enlaces;
     
-    @PostConstruct
+    
+     @PostConstruct
     public void init(){
         
         enlaces= new EnlacesPrograma();
-        servicio= new EjeLaboralServicio();
+        servicio= new EjeEducativoServicio();
         
-        ejeLaboral= new EjeLaboral();
+        ejeEducativo=new EjeEducativo();
         guardado=false;
         
-        if (isTrabaja()) {
-            trabaja = true;
-        } else {
-            trabaja = false;            
+        if(isEstudia()){
+            estudia=true;
+        }
+        else{
+            estudia=false;
         }
         
         adolescenteInfractorUDI= new AdolescenteInfractorUDI();
@@ -44,14 +47,12 @@ public class EjeLaboralControlador implements Serializable{
             
             adolescenteInfractorUDI=adolescenteInfractorUDIAux;
             
-            EjeLaboral ejeLaboralAux= servicio.obtenerEjeLaboral(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if(ejeLaboralAux!=null){
-                ejeLaboral=ejeLaboralAux;
+            EjeEducativo ejeEducativoUDIAux= servicio.obtenerEjeEducativo(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if(ejeEducativoUDIAux!=null){
+                ejeEducativo=ejeEducativoUDIAux;
                 guardado=true;
-                trabaja=ejeLaboral.getTrabaja();
+                estudia=ejeEducativo.getEstudia();
             }            
-        }else{
-            adolescenteInfractorUDI= new AdolescenteInfractorUDI();
         }
         
     }
@@ -64,18 +65,18 @@ public class EjeLaboralControlador implements Serializable{
         this.adolescenteInfractorUDI = adolescenteInfractorUDI;
     }
 
-    public EjeLaboral getEjeLaboral() {
-        return ejeLaboral;
+    public EjeEducativo getEjeEducativo() {
+        return ejeEducativo;
     }
 
-    public void setEjeLaboral(EjeLaboral ejeLaboral) {
-        this.ejeLaboral = ejeLaboral;
+    public void setEjeEducativo(EjeEducativo ejeEducativo) {
+        this.ejeEducativo = ejeEducativo;
     }
 
-    public EjeLaboralServicio getServicio() {
+    public EjeEducativoServicio getServicio() {
         return servicio;
     }
-
+    
     public boolean isGuardado() {
         return guardado;
     }
@@ -84,28 +85,30 @@ public class EjeLaboralControlador implements Serializable{
         this.guardado = guardado;
     }
 
-    public boolean isTrabaja() {
-        return trabaja;
+    public boolean isEstudia() {
+        return estudia;
     }
 
-    public void setTrabaja(boolean trabaja) {
-        this.trabaja = trabaja;
-        if (trabaja==true) {
-            ejeLaboral.setTrabaja(true);
-        }else if(trabaja==false){
-            ejeLaboral.setTrabaja(false);
+    public void setEstudia(boolean estudia) {
+        this.estudia = estudia;
+        if(estudia==true){
+            ejeEducativo.setEstudia(true);
         }
+        else if(estudia==false){
+            ejeEducativo.setEstudia(false);
+        }
+        
     }
-    
+
     
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarEjeLaboral(){
+    public String guardarEjeEducativoUDI(){
         
-        this.ejeLaboral.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
-
-        EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
-        if(ejeLaboralAux!=null){
+        this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        
+        EjeEducativo ejeEducativoUDIAux = servicio.guardarEjeEducativo(ejeEducativo);
+        if(ejeEducativoUDIAux!=null){
             return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
         }
         else{

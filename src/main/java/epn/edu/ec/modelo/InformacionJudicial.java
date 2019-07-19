@@ -62,6 +62,14 @@ public class InformacionJudicial implements Serializable {
         this.unidadJudicial = unidadJudicial;
     }
 
+    public String getNombreUnidadJudicial() {
+        return nombreUnidadJudicial;
+    }
+
+    public void setNombreUnidadJudicial(String nombreUnidadJudicial) {
+        this.nombreUnidadJudicial = nombreUnidadJudicial;
+    }    
+
     public String getNombreJuez() {
         return nombreJuez;
     }

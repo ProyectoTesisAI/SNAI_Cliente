@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -15,10 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author User
- */
 @Named(value = "medidaMasAltaControlador")
 @ViewScoped
 public class MedidaMasAltaControlador implements Serializable{
@@ -41,10 +32,10 @@ public class MedidaMasAltaControlador implements Serializable{
         adolescenteInfractorUDI= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
 
         if(adolescenteInfractorUDI!=null){
-            List<MedidaSocioeducativa> listaMedidasSocioeducativas= servicio.listaMedidaSocioeducativosPorAdolescentesUzdi(adolescenteInfractorUDI);
+            List<MedidaSocioeducativa> listaMedidasSocioeducativas= servicio.listaMedidasSocioeducativasPorAdolescente(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             
             if(listaMedidasSocioeducativas!=null){
-                medidaMasAlta=servicio.obtenerMedidaMasAlta(adolescenteInfractorUDI);
+                medidaMasAlta=servicio.obtenerMedidaMasAlta(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
                 guardado=true;
             }
         }

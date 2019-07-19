@@ -12,80 +12,93 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "ejeSaludControlador")
+@Named(value = "ejeSaludControladorUDI")
 @ViewScoped
-public class EjeSaludControlador implements Serializable{
+public class EjeSaludUDIControlador implements Serializable {
 
     //mensajes que controlan las validaciones
     private String mensaje = "";
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
-    
+
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
     private EjeSalud ejeSalud;
-    
+
     private EjeSaludServicio servicio;
-    
+
     private boolean guardado;
     private boolean saludable;
     private boolean consumeSustancias;
     private EnlacesPrograma enlaces;
-    
+
     private String genero;
     private boolean esMujer;
-    
-     @PostConstruct
-    public void init(){
-        
+
+    String tipoD;
+    boolean esDiscapacidad;
+
+    @PostConstruct
+    public void init() {
+
         validacion = new Validaciones();
-        enlaces= new EnlacesPrograma();
-        servicio= new EjeSaludServicio();
-        
-        ejeSalud= new EjeSalud();
-        guardado=false;
-        consumeSustancias=true;
-        
+        enlaces = new EnlacesPrograma();
+        servicio = new EjeSaludServicio();
+
+        ejeSalud = new EjeSalud();
+        guardado = false;
+        consumeSustancias = true;
+
         if (isSaludable()) {
             saludable = true;
         } else {
-            saludable = false;            
+            saludable = false;
         }
-        
-        adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
-        
-        if(adolescenteInfractorUDIAux != null){
-            
-            adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            EjeSalud ejeSaludUDIAux= servicio.obtenerEjeSalud(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if(ejeSaludUDIAux!=null){
-                ejeSalud=ejeSaludUDIAux;
-                guardado=true;
+
+        if (isEsDiscapacidad()) {
+            tipoD = "SI";
+        } else {
+            tipoD = "NO";
+        }
+
+        adolescenteInfractorUDI = new AdolescenteInfractorUDI();
+        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+
+        if (adolescenteInfractorUDIAux != null) {
+
+            adolescenteInfractorUDI = adolescenteInfractorUDIAux;
+            EjeSalud ejeSaludUDIAux = servicio.obtenerEjeSalud(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if (ejeSaludUDIAux != null) {
+                ejeSalud = ejeSaludUDIAux;
+                guardado = true;
                 String saludableAux = ejeSaludUDIAux.getSituacionSalud();
-                System.out.println("salud: "+saludableAux);
-                if(saludableAux.equals("SALUDABLE")){
-                    System.out.println("entro a saludable");
-                    saludable=true;                    
-                }else if(saludableAux.equals("NO SALUDABLE")){
-                    System.out.println("no entro a saludable");
-                    saludable=false;
-                    
-                    if(ejeSalud.getConsumeSustancias()==true){
-                        consumeSustancias=true;
-                    }
-                    else{
-                        consumeSustancias=false;
+                System.out.println("salud: " + saludableAux);
+                if (saludableAux.equals("SALUDABLE")) {
+                    saludable = true;
+                } else if (saludableAux.equals("NO SALUDABLE")) {
+                    saludable = false;
+
+                    if (ejeSalud.getConsumeSustancias() == true) {
+                        consumeSustancias = true;
+                    } else {
+                        consumeSustancias = false;
                     }
                 }
+                if (ejeSalud.getDiscapacidad() != null) {
+                    tipoD = "SI";
+                } else {
+                    tipoD = "NO";
+                }
             }
-            genero=adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
-            if(genero.equals("MASCULINO")){
-                esMujer=false;
-            }else if(genero.equals("FEMENINO")){
-                esMujer=true;
+            genero = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
+            if (genero.equals("MASCULINO")) {
+                esMujer = false;
+            } else if (genero.equals("FEMENINO")) {
+                esMujer = true;
             }
+        } else {
+            adolescenteInfractorUDI = new AdolescenteInfractorUDI();
         }
-        
+
     }
 
     public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
@@ -115,16 +128,16 @@ public class EjeSaludControlador implements Serializable{
     public void setGuardado(boolean guardado) {
         this.guardado = guardado;
     }
-    
+
     public boolean isSaludable() {
         return saludable;
     }
 
     public void setSaludable(boolean saludable) {
         this.saludable = saludable;
-        if(saludable==true){
+        if (saludable == true) {
             ejeSalud.setSituacionSalud("SALUDABLE");
-        }else if(saludable==false){
+        } else if (saludable == false) {
             ejeSalud.setSituacionSalud("NO SALUDABLE");
         }
     }
@@ -134,16 +147,41 @@ public class EjeSaludControlador implements Serializable{
     }
 
     public void setConsumeSustancias(boolean consumeSustancias) {
-        
+
         this.consumeSustancias = consumeSustancias;
-        if(consumeSustancias==true){
+        if (consumeSustancias == true) {
             ejeSalud.setConsumeSustancias(true);
-        }else{
+        } else {
             ejeSalud.setConsumeSustancias(false);
         }
-        
     }
     
+    public String getTipoD() {
+        return tipoD;
+    }
+
+    public void setTipoD(String tipoD) {
+        this.tipoD = tipoD;
+        if("SI".equals(tipoD)){
+            esDiscapacidad=true;
+        }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            esDiscapacidad=false;
+        }
+    }
+
+    public boolean isEsDiscapacidad() {
+        if("SI".equals(tipoD)){
+            esDiscapacidad=true;
+        }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            esDiscapacidad=false;
+        }
+        return esDiscapacidad;
+    }
+
+    public void setEsDiscapacidad(boolean esDiscapacidad) {
+        this.esDiscapacidad = esDiscapacidad;
+    }
+
     public String getMensaje() {
         return mensaje;
     }
@@ -167,18 +205,18 @@ public class EjeSaludControlador implements Serializable{
     public void setEsMujer(boolean esMujer) {
         this.esMujer = esMujer;
     }
-    
-        /*********************Métodos para invocar a los diferentes servicios web******************/
-    
-    public String guardarEjeSaludUDI(){
-        
+
+    /**
+     * *******************Métodos para invocar a los diferentes servicios web*****************
+     */
+    public String guardarEjeSaludUDI() {
+
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
-        if(ejeSaludUDIAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";       
-        }
-        else{
+        if (ejeSaludUDIAux != null) {
+            return enlaces.PATH_PANEL_UDI + "?faces-redirect=true";
+        } else {
             return null;
         }
     }
@@ -200,5 +238,5 @@ public class EjeSaludControlador implements Serializable{
             mensaje = "Número incorrecto";
         }
     }
-    
+
 }

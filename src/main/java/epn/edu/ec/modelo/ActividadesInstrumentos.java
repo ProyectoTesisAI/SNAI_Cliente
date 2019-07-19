@@ -8,7 +8,7 @@ public class ActividadesInstrumentos implements Serializable {
     private Boolean planEjecucionMedida;
     private Boolean planGlobalFamilia;
     private Boolean planVida;
-    private Boolean planIndividualAplicaconMedida;
+    private Boolean planIndividualAplicacionMedida;
     
 
     public ActividadesInstrumentos() {
@@ -20,9 +20,7 @@ public class ActividadesInstrumentos implements Serializable {
 
     public void setIdAdolescenteInfractorUDI(AdolescenteInfractorUDI idAdolescenteInfractorUDI) {
         this.idAdolescenteInfractorUDI = idAdolescenteInfractorUDI;
-    }
-
-    
+    } 
 
     public Boolean getPlanGlobalFamilia() {
         return planGlobalFamilia;
@@ -48,12 +46,12 @@ public class ActividadesInstrumentos implements Serializable {
         this.planEjecucionMedida = planEjecucionMedida;
     }
 
-    public Boolean getPlanIndividualAplicaconMedida() {
-        return planIndividualAplicaconMedida;
+    public Boolean getPlanIndividualAplicacionMedida() {
+        return planIndividualAplicacionMedida;
     }
 
-    public void setPlanIndividualAplicaconMedida(Boolean planIndividualAplicaconMedida) {
-        this.planIndividualAplicaconMedida = planIndividualAplicaconMedida;
+    public void setPlanIndividualAplicacionMedida(Boolean planIndividualAplicacionMedida) {
+        this.planIndividualAplicacionMedida = planIndividualAplicacionMedida;
     }
     
 }

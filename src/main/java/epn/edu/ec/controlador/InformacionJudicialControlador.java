@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -15,77 +10,58 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author User
- */
 @Named(value = "informacionJudicialControlador")
 @ViewScoped
-public class InformacionJudicialControlador implements Serializable{
+public class InformacionJudicialControlador implements Serializable {
 
-   private AdolescenteInfractorUDI adolescenteInfractorUDI;
-   
-   private InformacionJudicial informacionJudicial;
-   private InformacionJudicialServicio servicio;
-   private boolean guardado;
-   
-   private boolean amonestacionVerbal;
-   private boolean imposicionReglasConducta;
-   private boolean apoyoSocioFamiliar;
-   private boolean servicioComunidad;
-   private boolean libertadAsistida;
-   private int numeroMedidas=0;
-   private EnlacesPrograma enlaces;
-   
+    private AdolescenteInfractorUDI adolescenteInfractorUDI;
+
+    private InformacionJudicial informacionJudicial;
+    private InformacionJudicialServicio servicio;
+    private boolean guardado;
+
+    private boolean amonestacionVerbal;
+    private boolean imposicionReglasConducta;
+    private boolean apoyoSocioFamiliar;
+    private boolean servicioComunidad;
+    private boolean libertadAsistida;
+    private int numeroMedidas = 0;
+    private int numeroMedidasGuardar=0;
+    private EnlacesPrograma enlaces;
+
     @PostConstruct
-    public void init(){
-        
-        enlaces= new EnlacesPrograma();
-        servicio= new InformacionJudicialServicio();
-        guardado=false;
-        
-        informacionJudicial= new InformacionJudicial();
-               
-        adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
-        
-        if(adolescenteInfractorUDIAux != null){
-            
-            adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            
-            InformacionJudicial  informacionJudicialAux= servicio.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if(informacionJudicialAux != null){
-                informacionJudicial=informacionJudicialAux;
-                guardado=true;
-                amonestacionVerbal=informacionJudicial.getAmonestacionVerbal();
-                imposicionReglasConducta=informacionJudicial.getImposicionReglasConducta();
-                apoyoSocioFamiliar=informacionJudicial.getOrientacionApoyoSocioFamiliar();
-                servicioComunidad=informacionJudicial.getServicioComunidad();
-                libertadAsistida=informacionJudicial.getLibertadAsistida();
-                numeroMedidas=informacionJudicial.getNumeroMedidas();
-            }
-            else{
+    public void init() {
 
-                if(amonestacionVerbal){
-                    numeroMedidas++;
-                }
-                if(imposicionReglasConducta){
-                    numeroMedidas++;
-                }
-                if(apoyoSocioFamiliar){
-                    numeroMedidas++;
-                }
-                if(servicioComunidad){
-                    numeroMedidas++;
-                }
-                if(libertadAsistida){
-                    numeroMedidas++;
-                }
+        enlaces = new EnlacesPrograma();
+        servicio = new InformacionJudicialServicio();
+        guardado = false;
 
+        informacionJudicial = new InformacionJudicial();
+
+        adolescenteInfractorUDI = new AdolescenteInfractorUDI();
+        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+
+        if (adolescenteInfractorUDIAux != null) {
+
+            adolescenteInfractorUDI = adolescenteInfractorUDIAux;
+
+            InformacionJudicial informacionJudicialAux = servicio.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if (informacionJudicialAux != null) {
+                informacionJudicial = informacionJudicialAux;
+                guardado = true;
+                amonestacionVerbal = informacionJudicial.getAmonestacionVerbal();
+                imposicionReglasConducta = informacionJudicial.getImposicionReglasConducta();
+                apoyoSocioFamiliar = informacionJudicial.getOrientacionApoyoSocioFamiliar();
+                servicioComunidad = informacionJudicial.getServicioComunidad();
+                libertadAsistida = informacionJudicial.getLibertadAsistida();
+                numeroMedidas = informacionJudicial.getNumeroMedidas();
+            } else {
+                informacionJudicial=new InformacionJudicial();
             }
+        } else {
+            adolescenteInfractorUDI = new AdolescenteInfractorUDI();
         }
-        
-        
+
     }
 
     public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
@@ -117,20 +93,19 @@ public class InformacionJudicialControlador implements Serializable{
     }
 
     public boolean isAmonestacionVerbal() {
-        
+
         return amonestacionVerbal;
     }
 
     public void setAmonestacionVerbal(boolean amonestacionVerbal) {
         this.amonestacionVerbal = amonestacionVerbal;
-        if(amonestacionVerbal){
+        if (amonestacionVerbal) {
             numeroMedidas++;
-            this.informacionJudicial.setAmonestacionVerbal(true);
-            
-        }
-        else{
+            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
+
+        } else if(!amonestacionVerbal) {
             numeroMedidas--;
-            this.informacionJudicial.setAmonestacionVerbal(false);
+            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
         }
     }
 
@@ -140,13 +115,12 @@ public class InformacionJudicialControlador implements Serializable{
 
     public void setImposicionReglasConducta(boolean imposicionReglasConducta) {
         this.imposicionReglasConducta = imposicionReglasConducta;
-        if(imposicionReglasConducta){
+        if (imposicionReglasConducta) {
             numeroMedidas++;
-            this.informacionJudicial.setImposicionReglasConducta(true);
-        }
-        else{
+            this.informacionJudicial.setImposicionReglasConducta(apoyoSocioFamiliar);
+        } else if(!imposicionReglasConducta){
             numeroMedidas--;
-            this.informacionJudicial.setImposicionReglasConducta(false);
+            this.informacionJudicial.setImposicionReglasConducta(apoyoSocioFamiliar);
         }
     }
 
@@ -156,13 +130,12 @@ public class InformacionJudicialControlador implements Serializable{
 
     public void setApoyoSocioFamiliar(boolean apoyoSocioFamiliar) {
         this.apoyoSocioFamiliar = apoyoSocioFamiliar;
-        if(apoyoSocioFamiliar){
+        if (apoyoSocioFamiliar) {
             numeroMedidas++;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(true);
-        }
-        else{
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
+        } else if(!apoyoSocioFamiliar){
             numeroMedidas--;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(false);
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
         }
     }
 
@@ -172,13 +145,12 @@ public class InformacionJudicialControlador implements Serializable{
 
     public void setServicioComunidad(boolean servicioComunidad) {
         this.servicioComunidad = servicioComunidad;
-        if(servicioComunidad){
+        if (servicioComunidad) {
             numeroMedidas++;
-            this.informacionJudicial.setServicioComunidad(true);
-        }
-        else{
+            this.informacionJudicial.setServicioComunidad(servicioComunidad);
+        } else if(!servicioComunidad) {
             numeroMedidas--;
-            this.informacionJudicial.setServicioComunidad(false);
+            this.informacionJudicial.setServicioComunidad(servicioComunidad);
         }
     }
 
@@ -188,13 +160,12 @@ public class InformacionJudicialControlador implements Serializable{
 
     public void setLibertadAsistida(boolean libertadAsistida) {
         this.libertadAsistida = libertadAsistida;
-        if(libertadAsistida){
+        if (libertadAsistida) {
             numeroMedidas++;
-            this.informacionJudicial.setLibertadAsistida(true);
-        }
-        else{
+            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
+        } else if(!libertadAsistida){
             numeroMedidas--;
-            this.informacionJudicial.setLibertadAsistida(false);
+            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
         }
     }
 
@@ -206,18 +177,38 @@ public class InformacionJudicialControlador implements Serializable{
         this.numeroMedidas = numeroMedidas;
     }
 
-    /*********************Métodos para invocar a los diferentes servicios web******************/
-    
-    public String guardarInformacionJudicial(){
+    /**
+     * *******************Métodos para invocar a los diferentes servicios web*****************
+     */
+    public String guardarInformacionJudicial() {
         
-        this.informacionJudicial.setNumeroMedidas(numeroMedidas);
-        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI); 
+        if(amonestacionVerbal==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
+        }
+        if(apoyoSocioFamiliar==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
+        }
+        if(imposicionReglasConducta==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
+        }
+        if(libertadAsistida==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
+        }
+        if(servicioComunidad==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setServicioComunidad(servicioComunidad);
+        }
+        this.informacionJudicial.setNumeroMedidas(numeroMedidasGuardar);
+        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
-        if(informacionJudicialAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
-        }
-        else{
+        if (informacionJudicialAux != null) {
+            return enlaces.PATH_PANEL_UDI + "?faces-redirect=true";
+        } else {
             return null;
         }
     }

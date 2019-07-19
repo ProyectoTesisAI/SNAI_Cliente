@@ -27,14 +27,23 @@
                                  select="true"
                                  selection-mode="multiple"
                                  responsive="true">
-                        <b:dataTableColumn value="#{ai.apellidos} #{ai.nombres}" />
-                        <b:dataTableColumn value="#{ai.cedula}"/>
-                        <b:dataTableColumn value="#{ai.edad}"/>
+                        <b:dataTableColumn value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
+                        <b:dataTableColumn value="#{ai.idAdolescenteInfractor.cedula}"/>
+                        <b:dataTableColumn value="#{ai.idAdolescenteInfractor.edad}"/>
                         <b:dataTableColumn label="Añadir Información">
-                            <b:commandButton value="Añadir Información" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIControlador.agregarInformacion(ai)}"/>
+                            <b:commandButton value="Añadir Información" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIControlador.agregarInformacion(ai)}">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
                         </b:dataTableColumn>
-                        <b:dataTableColumn  label="Ver Información">
-                            <b:commandButton value="Ver Información" class="btn btn-default btn-block"/>
+                        <b:dataTableColumn  label="Editar Información">
+                            <b:commandButton value="Editar Información" class="btn btn-danger btn-block">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn  label="Eliminar">
+                            <b:commandButton value="Eliminar" class="btn btn-primary btn-block">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
                         </b:dataTableColumn>
                     </b:dataTable>
                 </h:form>
