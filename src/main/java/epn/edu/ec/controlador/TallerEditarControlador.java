@@ -555,6 +555,7 @@ public class TallerEditarControlador implements Serializable {
 
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("txtUDI", "REGISTRO DE ASISTENCIA " + tallerEditar.getIdUdi().getUdi());
+        parametros.put("txtTema","TALLER:  "+ tallerEditar.getTema());
 
         try {
 
