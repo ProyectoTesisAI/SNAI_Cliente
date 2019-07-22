@@ -62,7 +62,7 @@ public class PanelInformeControlador implements Serializable{
     public String verInforme(Informe informe){
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar", informe);
-            return "/paginas/psicologia/informe_psicologia_editar.com?faces-redirect=true";
+            return "/paginas/psicologia/informe_psicologia_ver.com?faces-redirect=true";
         } catch (Exception e) {
             return null;
         }

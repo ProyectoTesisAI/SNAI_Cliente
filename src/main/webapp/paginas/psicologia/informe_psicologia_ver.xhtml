@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:body>
+       <ui:composition template="./../../templates/psicologo.xhtml">
+            
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+                <script src="../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+            
+            <ui:define name="content">
+               <!-- Panel para la creación de la Ficha de Informe de Taller-->
+                <div class="panel panel-default">
+
+                    <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center "> EDITAR FICHA INFORME DE PSICOLOGÍA</div>
+                    <div class="panel-body" style="padding: 40px;">
+
+                        
+                            <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
+                                <b:tab title="Informe " >
+                                    <h:form id="formInforme">
+                                        <b:panel content-disabled="true" style="border: transparent;">
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtTema" value="Tema"/>
+                                                        <b:inputText  placeholder="Tema" id="txtTema" disabled="true" required="true" style="text-transform:uppercase"  value="#{informeEditarControlador.taller.tema}"/>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1 ">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtNumeroTaller" value="Taller Nro"/>
+                                                        <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" disabled="true" value="#{informeEditarControlador.taller.numeroTaller}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:panelGrid columns="1">
+                                                            <h:outputLabel for="txtFecha" value="Fecha" />
+                                                            <b:dateTimePicker id="txtFecha" placeholder="dd/mm/aa"  showTime="false" value="#{informeEditarControlador.taller.fecha}"/>  
+                                                        </b:panelGrid>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:panelGrid columns="1">
+                                                            <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
+                                                            <b:dateTimePicker id="dtpHoraInicio" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm" value="#{informeEditarControlador.taller.horaInicio}"/>
+                                                        </b:panelGrid>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtNumeroTotalParticipantes" value="Número Total Participantes"/>
+                                                    <b:inputText mask="integer" disabled="true" placeholder="Numero Total Participantes" id="txtNumeroTotalParticipantes" value="#{informeEditarControlador.informeEditar.numeroAdolescentes}"/>
+                                                </div> 
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObjetivoGeneral" value="Objetivo General"/>
+                                                        <b:inputText id="txtObjetivoGeneral" placeholder="Objetivo" style="text-transform:uppercase" value="#{informeEditarControlador.taller.objetivo}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtAntecedentesJustificacion" style="text-transform:uppercase" value="Antecedentes y Justificacion" />
+                                                        <b:inputTextarea id="txtAntecedentesJustificacion" placeholder="Antecedentes y Justificacion" value="#{informeEditarControlador.informeEditar.adolescentesJustificacion}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <b:dataTable contentDisabled="true" id="tablaTaller" value="#{informeEditarControlador.listaItemsTaller}" 
+                                                                     widgetVar="tableWidgetVar"
+                                                                     var="tp"
+                                                                     fixed-header="true"
+                                                                     scroll-x="true"
+                                                                     scroll-size="1000px"
+                                                                     responsive="false"
+                                                                     searching="false"
+                                                                     select="true"
+                                                                     paginated="false"
+                                                                     selectionMode="multiple"
+                                                                     style="margin: 0 auto; width: 100%;"
+
+                                                                     >
+                                                            <b:dataTableColumn style="min-width: 50px;">
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Duración"/>
+                                                                </f:facet>
+                                                                <b:inputText style="color: #262626" id="txtDuracion" required="true" placeholder="Duración"  value="#{tp.duracion}"/>
+
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Actividad"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Objetivo Específico"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Materiales"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Responsable"/>
+                                                                </f:facet>
+                                                                <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
+                                                            </b:dataTableColumn>
+
+                                                        </b:dataTable>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtDesarrollo" value="Desarrollo"/>
+                                                        <b:inputText id="txtDesarrollo" placeholder="Desarrollo" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionDesarrollo}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObjetivosEspecificos" value="Objetivos Especificos"/>
+                                                        <b:inputText id="txtObjetivosEspecificos" placeholder="Objetivos Especificos" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionObjetivos}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtCierreEvaluacion" value="Cierre y Evaluación"/>
+                                                        <b:inputTextarea id="txtCierreEvaluacion" placeholder="Cierre y Evaluación" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.cierreEvaluacion}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtConclusiones" value="Conclusiones"/>
+                                                        <b:inputTextarea id="txtConclusiones" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.conclusiones}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtRecomendaciones" value="Recomendaciones"/>
+                                                        <b:inputTextarea id="txtRecomendaciones" placeholder="Recomendaciones" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.recomendaciones}" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtObservaciones" value="Observaciones"/>
+                                                        <b:inputTextarea id="txtObservaciones" placeholder="Observaciones" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.observaciones}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtElaborado" value="Elaborado por "/>
+                                                        <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </b:panel>
+                                    </h:form>
+                                </b:tab>
+
+                                <b:tab title="Registro de Asistencia">
+                                    <b:panel content-disabled="true" style="border: transparent;">
+                                        <div class="row" style="margin-top: 35px;">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <b:dataTable  disabled="true" id="dtRegistroAsistencia" value="#{informeEditarControlador.listaParaChequeo}"
+                                                           var="ai"
+                                                            fixed-header="true"
+                                                            scroll-x="true"
+                                                            scroll-size="100px"
+                                                            responsive="false"
+                                                            searching="false"
+                                                            select="true"
+                                                            paginated="false"
+                                                            selectionMode="multiple"
+                                                            style="margin: 0 auto; width: 100%;">
+                                                <b:dataTableColumn value="#{ai.idAdolescenteInfractor.nombres}"/>
+                                                <b:dataTableColumn value="#{ai.idAdolescenteInfractor.apellidos}"/>
+                                                <b:dataTableColumn value="#{ai.idAdolescenteInfractor.cedula}"/>
+                                                <b:dataTableColumn label="¿Asistió?" >
+                                                    <b:selectBooleanCheckbox  value="#{ai.asistio}"/>
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+                                        </div>
+                                    </div>
+                                    </b:panel>
+                                    
+                                </b:tab>
+                                
+                                <b:tab title="Registro Fotográfico">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4">
+                                            <b:dataTable id="registroFoto" rendered="#{not empty informeEditarControlador.registroFotografico}" value="#{informeEditarControlador.registroFotografico}" 
+                                                         searching="false"
+                                                         paginated="false"
+                                                         info="false"
+                                                         var="image"
+                                                         style="text-align: center;margin-top: 25px !important; vertical-align: middle;"  >
+                                                <b:dataTableColumn label="Imagen" style="width: 60px;">
+                                                    <o:graphicImage  value="#{image.imagen}" dataURI="true" width="200" />
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+                                        </div>
+                                    </div>
+
+
+
+                                </b:tab>
+                            </b:tabView>
+                        
+                    </div>
+                </div>
+                <!-- Fin del Panel para la creación de Fichas de Planificación del Taller-->
+                    
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
