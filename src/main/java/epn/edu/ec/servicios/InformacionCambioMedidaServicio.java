@@ -44,7 +44,9 @@ public class InformacionCambioMedidaServicio {
         Response response =invocationBuilder.get();
         if(response.getStatus()==200){
             informacionCambioMedidaAux= response.readEntity(InformacionCambioMedidaCAI.class);
-        }           
+        }else if(response.getStatus()==204){
+            informacionCambioMedidaAux=null;
+        }
         return informacionCambioMedidaAux;
         
     }

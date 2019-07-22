@@ -1,6 +1,5 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
 import epn.edu.ec.modelo.MotivoEgresoCAI;
@@ -28,7 +27,8 @@ public class MotivoEgresoCAIControlador implements Serializable {
     private CaiServicio servicioCAI;
 
     //Variable para mostrar/ocultar panel TrasladoCAI
-    private boolean mostrarOcultarTrasladoCAI=false;
+    String tipoMotivoSalida;
+    boolean mostrarOcultarTrasladoCAI;
 
     @PostConstruct
     public void init() {
@@ -42,10 +42,14 @@ public class MotivoEgresoCAIControlador implements Serializable {
         cai = new CAI();
         listaCAI = new ArrayList<>();
         listaCAI = servicioCAI.listaCai();
+        
+        if(isMostrarOcultarTrasladoCAI()){
+            tipoMotivoSalida="TRASLADO A OTRO CAI";
+        }
 
         ejecucionMedidaCAI= new EjecucionMedidaCAI();
         
-        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
 
         if (ejecucionMedidaCAIAux != null) {
             
@@ -73,6 +77,14 @@ public class MotivoEgresoCAIControlador implements Serializable {
         this.ejecucionMedidaCAI = ejecucionMedidaCAI;
     }
 
+    public String getTipoMotivoSalida() {
+        return tipoMotivoSalida;
+    }
+
+    public void setTipoMotivoSalida(String tipoMotivoSalida) {
+        this.tipoMotivoSalida = tipoMotivoSalida;
+    }
+    
     public MotivoEgresoCAI getMotivoEgresoCAI() {
         if(motivoEgresoCAI.equals("TRASLADO A OTRO CAI")){
             mostrarOcultarTrasladoCAI=true;

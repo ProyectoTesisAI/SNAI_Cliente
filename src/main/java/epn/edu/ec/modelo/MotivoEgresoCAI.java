@@ -13,6 +13,14 @@ public class MotivoEgresoCAI implements Serializable {
     public MotivoEgresoCAI() {
     }
 
+    public EjecucionMedidaCAI getIdEjecucionMedidaCAI() {
+        return idEjecucionMedidaCAI;
+    }
+
+    public void setIdEjecucionMedidaCAI(EjecucionMedidaCAI idEjecucionMedidaCAI) {
+        this.idEjecucionMedidaCAI = idEjecucionMedidaCAI;
+    }
+
     public String getMotivoSalida() {
         return motivoSalida;
     }
@@ -35,13 +43,6 @@ public class MotivoEgresoCAI implements Serializable {
 
     public void setIdCaiTraslado(CAI idCaiTraslado) {
         this.idCaiTraslado = idCaiTraslado;
-    }   
-
-    public EjecucionMedidaCAI getIdEjecucionMedidaCAI() {
-        return idEjecucionMedidaCAI;
     }
-
-    public void setIdEjecucionMedidaCAI(EjecucionMedidaCAI idEjecucionMedidaCAI) {
-        this.idEjecucionMedidaCAI = idEjecucionMedidaCAI;
-    }    
+    
 }

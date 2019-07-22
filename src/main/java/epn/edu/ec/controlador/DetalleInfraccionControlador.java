@@ -22,6 +22,7 @@ public class DetalleInfraccionControlador implements Serializable {
     private AdolescenteInfractorCAI adolescenteInfractorCAI;
 
     private DetalleInfraccionCAI detalleInfraccion;
+    private List<DetalleInfraccionCAI> listaDetalleInfraccion;
     private DetalleInfraccionCAIServicio servicio;
     private boolean guardado;
 
@@ -37,6 +38,7 @@ public class DetalleInfraccionControlador implements Serializable {
         servicio = new DetalleInfraccionCAIServicio();
 
         detalleInfraccion = new DetalleInfraccionCAI();
+        listaDetalleInfraccion = new ArrayList<>();
         guardado = false;
 
         provincias = new ArrayList<>();
@@ -49,10 +51,11 @@ public class DetalleInfraccionControlador implements Serializable {
         adolescenteInfractorCAI = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
         if (adolescenteInfractorCAI != null) {
-            DetalleInfraccionCAI detalleInfraccionAux = servicio.obtenerDetalleInfraccionCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if (detalleInfraccionAux != null) {
-                detalleInfraccion = detalleInfraccionAux;
-                guardado = true;
+            List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
+            if (listaAux.isEmpty()!=true) {
+                listaDetalleInfraccion = listaAux;
+            } else if(listaAux.isEmpty()==true){
+                listaDetalleInfraccion=new ArrayList<>();
             }
         } else {
             adolescenteInfractorCAI = new AdolescenteInfractorCAI();
@@ -79,6 +82,14 @@ public class DetalleInfraccionControlador implements Serializable {
         this.detalleInfraccion = informacionInfraccion;
     }
 
+    public List<DetalleInfraccionCAI> getListaDetalleInfraccion() {
+        return listaDetalleInfraccion;
+    }
+
+    public void setListaDetalleInfraccion(List<DetalleInfraccionCAI> listaDetalleInfraccion) {
+        this.listaDetalleInfraccion = listaDetalleInfraccion;
+    }
+
     public DetalleInfraccionCAIServicio getServicio() {
         return servicio;
     }
@@ -94,7 +105,6 @@ public class DetalleInfraccionControlador implements Serializable {
     public List<DatosTipoPenalCAI> getTiposPenal() {
         return tiposPenal;
     }
-
 
     public DatosTipoPenalCAIServicio getServicioTP() {
         return servicioTP;
@@ -122,7 +132,6 @@ public class DetalleInfraccionControlador implements Serializable {
     public List<DatosProvinciaCanton> getCantones() {
         cantones = new ArrayList<>();
         String provincia = detalleInfraccion.getProvinciaInfraccion();
-        System.out.println("provincia del detalle. "+provincia);
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
@@ -136,7 +145,8 @@ public class DetalleInfraccionControlador implements Serializable {
      * web*****************
      */
     public String guardarInformacionInfraccion() {
-        this.detalleInfraccion.setIdDetalleInfraccion(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+        this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
+        //this.detalleInfraccion.setIdDetalleInfraccion(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
         if (detalleInfraccionAux != null) {
@@ -144,5 +154,10 @@ public class DetalleInfraccionControlador implements Serializable {
         } else {
             return null;
         }
+    }
+    
+    public String agregarMedida(DetalleInfraccionCAI detalle){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
+        return "/paginas/cai/matriz/panel_crear_medida_cai.com?faces-redirect=true";
     }
 }

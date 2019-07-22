@@ -71,7 +71,6 @@ public class EjeSaludUDIControlador implements Serializable {
                 ejeSalud = ejeSaludUDIAux;
                 guardado = true;
                 String saludableAux = ejeSaludUDIAux.getSituacionSalud();
-                System.out.println("salud: " + saludableAux);
                 if (saludableAux.equals("SALUDABLE")) {
                     saludable = true;
                 } else if (saludableAux.equals("NO SALUDABLE")) {

@@ -28,7 +28,7 @@ public class CumplimientoMedidaCAIControlador implements Serializable{
         guardado=false;
         
         ejecucionMedidaCAI= new EjecucionMedidaCAI();
-        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
 
         if(ejecucionMedidaCAIAux != null){
             

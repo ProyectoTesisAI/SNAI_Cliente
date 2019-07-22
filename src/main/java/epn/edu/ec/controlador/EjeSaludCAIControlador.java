@@ -1,6 +1,6 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.EjeSalud;
 import epn.edu.ec.servicios.EjeSaludServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -21,7 +21,7 @@ public class EjeSaludCAIControlador implements Serializable{
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
     
-    private AdolescenteInfractorUDI adolescenteInfractorUDI;
+    private AdolescenteInfractorCAI adolescenteInfractorCAI;
     private EjeSalud ejeSalud;
     
     private EjeSaludServicio servicio;
@@ -33,6 +33,9 @@ public class EjeSaludCAIControlador implements Serializable{
     
     private String genero;
     private boolean esMujer;
+    
+    String tipoD;
+    boolean esDiscapacidad;
     
      @PostConstruct
     public void init(){
@@ -51,23 +54,26 @@ public class EjeSaludCAIControlador implements Serializable{
             saludable = false;            
         }
         
-        adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        if (isEsDiscapacidad()) {
+            tipoD = "SI";
+        } else {
+            tipoD = "NO";
+        }
         
-        if(adolescenteInfractorUDIAux != null){
+        adolescenteInfractorCAI= new AdolescenteInfractorCAI();
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        
+        if(adolescenteInfractorCAIAux != null){
             
-            adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            EjeSalud ejeSaludUDIAux= servicio.obtenerEjeSalud(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if(ejeSaludUDIAux!=null){
-                ejeSalud=ejeSaludUDIAux;
+            adolescenteInfractorCAI=adolescenteInfractorCAIAux;
+            EjeSalud ejeSaludCAIAux= servicio.obtenerEjeSalud(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if(ejeSaludCAIAux!=null){
+                ejeSalud=ejeSaludCAIAux;
                 guardado=true;
-                String saludableAux = ejeSaludUDIAux.getSituacionSalud();
-                System.out.println("salud: "+saludableAux);
+                String saludableAux = ejeSaludCAIAux.getSituacionSalud();
                 if(saludableAux.equals("SALUDABLE")){
-                    System.out.println("entro a saludable");
                     saludable=true;                    
                 }else if(saludableAux.equals("NO SALUDABLE")){
-                    System.out.println("no entro a saludable");
                     saludable=false;
                     
                     if(ejeSalud.getConsumeSustancias()==true){
@@ -77,8 +83,13 @@ public class EjeSaludCAIControlador implements Serializable{
                         consumeSustancias=false;
                     }
                 }
+                if (ejeSalud.getDiscapacidad() != null) {
+                    tipoD = "SI";
+                } else {
+                    tipoD = "NO";
+                }
             }
-            genero=adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
+            genero=adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getGenero();
             if(genero.equals("MASCULINO")){
                 esMujer=false;
             }else if(genero.equals("FEMENINO")){
@@ -88,12 +99,12 @@ public class EjeSaludCAIControlador implements Serializable{
         
     }
 
-    public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
-        return adolescenteInfractorUDI;
+    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
+        return adolescenteInfractorCAI;
     }
 
-    public void setAdolescenteInfractorUDI(AdolescenteInfractorUDI adolescenteInfractorUDI) {
-        this.adolescenteInfractorUDI = adolescenteInfractorUDI;
+    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorUDI) {
+        this.adolescenteInfractorCAI = adolescenteInfractorUDI;
     }
 
     public EjeSalud getEjeSalud() {
@@ -144,6 +155,32 @@ public class EjeSaludCAIControlador implements Serializable{
         
     }
     
+    public String getTipoD() {
+        return tipoD;
+    }
+
+    public void setTipoD(String tipoD) {
+        this.tipoD = tipoD;
+        if("SI".equals(tipoD)){
+            esDiscapacidad=true;
+        }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            esDiscapacidad=false;
+        }
+    }
+
+    public boolean isEsDiscapacidad() {
+        if("SI".equals(tipoD)){
+            esDiscapacidad=true;
+        }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            esDiscapacidad=false;
+        }
+        return esDiscapacidad;
+    }
+
+    public void setEsDiscapacidad(boolean esDiscapacidad) {
+        this.esDiscapacidad = esDiscapacidad;
+    }
+    
     public String getMensaje() {
         return mensaje;
     }
@@ -170,13 +207,13 @@ public class EjeSaludCAIControlador implements Serializable{
     
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarEjeSaludUDI(){
+    public String guardarEjeSaludCAI(){
         
-        this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
-        EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
-        if(ejeSaludUDIAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";       
+        EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(ejeSalud);
+        if(ejeSaludCAIAux!=null){
+            return enlaces.PATH_PANEL_CAI+"?faces-redirect=true";       
         }
         else{
             return null;

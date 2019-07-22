@@ -1,6 +1,6 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.EjeEducativo;
 import epn.edu.ec.servicios.EjeEducativoServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -10,11 +10,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "ejeEducativoControlador")
+@Named(value = "ejeEducativoControladorCAI")
 @ViewScoped
 public class EjeEducativoCAIControlador implements Serializable{
 
-    private AdolescenteInfractorUDI adolescenteInfractorUDI;
+    private AdolescenteInfractorCAI adolescenteInfractorCAI;
     private EjeEducativo ejeEducativo;
     
     private EjeEducativoServicio servicio;
@@ -40,16 +40,16 @@ public class EjeEducativoCAIControlador implements Serializable{
             estudia=false;
         }
         
-        adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        adolescenteInfractorCAI= new AdolescenteInfractorCAI();
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         
-        if(adolescenteInfractorUDIAux != null){
+        if(adolescenteInfractorCAIAux != null){
             
-            adolescenteInfractorUDI=adolescenteInfractorUDIAux;
+            adolescenteInfractorCAI=adolescenteInfractorCAIAux;
             
-            EjeEducativo ejeEducativoUDIAux= servicio.obtenerEjeEducativo(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-            if(ejeEducativoUDIAux!=null){
-                ejeEducativo=ejeEducativoUDIAux;
+            EjeEducativo ejeEducativoCAIAux= servicio.obtenerEjeEducativo(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if(ejeEducativoCAIAux!=null){
+                ejeEducativo=ejeEducativoCAIAux;
                 guardado=true;
                 estudia=ejeEducativo.getEstudia();
             }            
@@ -57,12 +57,12 @@ public class EjeEducativoCAIControlador implements Serializable{
         
     }
 
-    public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
-        return adolescenteInfractorUDI;
+    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
+        return adolescenteInfractorCAI;
     }
 
-    public void setAdolescenteInfractorUDI(AdolescenteInfractorUDI adolescenteInfractorUDI) {
-        this.adolescenteInfractorUDI = adolescenteInfractorUDI;
+    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorUDI) {
+        this.adolescenteInfractorCAI = adolescenteInfractorUDI;
     }
 
     public EjeEducativo getEjeEducativo() {
@@ -103,12 +103,12 @@ public class EjeEducativoCAIControlador implements Serializable{
     
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarEjeEducativoUDI(){
+    public String guardarEjeEducativoCAI(){
         
-        this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
         
-        EjeEducativo ejeEducativoUDIAux = servicio.guardarEjeEducativo(ejeEducativo);
-        if(ejeEducativoUDIAux!=null){
+        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(ejeEducativo);
+        if(ejeEducativoCAIAux!=null){
             return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
         }
         else{

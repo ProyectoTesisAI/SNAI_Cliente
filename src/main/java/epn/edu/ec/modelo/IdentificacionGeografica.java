@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class IdentificacionGeografica implements Serializable {
 
-    private AdolescenteInfractor idAdolescenteInfractorUDI;
+    private AdolescenteInfractor idAdolescenteInfractor;
     private String paisNacimiento;
     private String estadoOProvinciaNacimiento;
     private String ciudadOCantonNacimiento;
@@ -19,12 +19,12 @@ public class IdentificacionGeografica implements Serializable {
     public IdentificacionGeografica() {
     }
 
-    public AdolescenteInfractor getIdAdolescenteInfractorUDI() {
-        return idAdolescenteInfractorUDI;
+    public AdolescenteInfractor getIdAdolescenteInfractor() {
+        return idAdolescenteInfractor;
     }
 
-    public void setIdAdolescenteInfractorUDI(AdolescenteInfractor idAdolescenteInfractorUDI) {
-        this.idAdolescenteInfractorUDI = idAdolescenteInfractorUDI;
+    public void setIdAdolescenteInfractor(AdolescenteInfractor idAdolescenteInfractor) {
+        this.idAdolescenteInfractor = idAdolescenteInfractor;
     }
 
     public String getPaisNacimiento() {

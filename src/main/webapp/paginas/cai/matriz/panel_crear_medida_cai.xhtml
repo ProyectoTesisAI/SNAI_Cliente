@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+
+        <ui:composition template="./../../../templates/psicologo.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
+                <script src="../../../resources/js/bootstrap.min.js"></script>
+                <script>
+                    function validarSiNumero(numero) {
+                        if (!/^([0-9])*$/.test(numero))
+                            alert("La cedula " + numero + " no es un valor aceptable");
+                    }
+                </script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div>
+                    <h1>INFORMACION COMPLETA CAI</h1>
+                    <div class="table-responsive" style="padding-top: 50px;"  >
+
+                        <!--<b:form id="panelCAI">-->
+                        <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+
+                            <b:tab title="DETALLE DE INFRACCIÓN" tooltip="DETALLE INFRACCIÓN">
+                                <!-- PANEL DETALLE INFRACCION -GUARDAR INFORMACION -->
+                                <b:form id="formDetalleInfraccion">
+                                    <b:panel look="primary" content-disabled="#{not empty ejecucionMedidaControlador.detalleInfraccionCAI}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
+                                        </f:facet>
+                                        <b:panel>
+                                            <b:row>
+                                                <b:column span="12" offset="0">
+                                                    <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
+                                                    <b:selectOneMenu id="txtTipoPenal" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.tipoPenal}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="6" offset="0">
+                                                    <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
+                                                    <b:selectOneMenu id="txtProvinciaDetencion" update="txtCantonDetencion" process="@this" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.provinciaInfraccion}">
+                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                                        <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                                        <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                                        <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                                        <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                                        <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                                        <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                                        <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                                        <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                                        <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                                        <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                                        <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                                        <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                                        <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                                        <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                                        <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                                        <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                                        <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                                        <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                                        <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                                        <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                                        <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                                        <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                                        <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="6" offset='0'>
+                                                    <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
+                                                    <b:selectOneMenu id="txtCantonDetencion" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.cantonInfraccion}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                        <f:selectItems value="#{ejecucionMedidaControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="6" offset="0">
+                                                    <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
+                                                    <b:selectOneMenu id="txtUnidadJudicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.unidadJudicial}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                                        <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
+                                                        <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="6" offset="0">
+                                                    <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
+                                                    <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreUnidadJudicial}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="6" offset="0">
+                                                    <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
+                                                    <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
+                                                </b:column>
+
+                                                <b:column span="6" offset="0">
+                                                    <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
+                                                    <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                    </b:panel>
+                                </b:form>
+                            </b:tab>
+                            <b:tab title="EJECUCIÓN DE LA MEDIDA" tooltip="EJECUCIÓN DE LA MEDIDA">
+                                <!-- PANEL EJECUCIÓN DE LA MEDIDA  GUARDAR INFORMACION-->
+                                <b:form id="formEjeccionMedida">
+                                    <b:panel look="primary" content-disabled="#{ejecucionMedidaControlador.guardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                                        </f:facet>
+                                        <b:button icon-awesome="plus" class="btn-block" look="info" onclick="$('.formEjeccionMedida').modal('show')" value="Agregar Medida"/>
+                                        <b:modal title="Agregar Medida" style-class="formEjeccionMedida"
+                                                 id="modalMedida"
+                                                 closable="false"
+                                                 closeOnEscape="true"
+                                                 >
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtCAI" value="Centro de adolescente infractor"/>
+                                                    <b:selectOneMenu rendered="#{ejecucionMedidaControlador.guardado}">
+                                                        <f:selectItem itemLabel="#{ejecucionMedidaControlador.ejecucionMedidaCAI.idCai.cai}"/>
+                                                    </b:selectOneMenu>
+                                                    <b:selectOneMenu rendered="#{!ejecucionMedidaControlador.guardado}" id="txtCAI" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.idCai}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:panel>
+                                                <b:row>
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
+                                                        <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
+                                                    </b:column>
+
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
+                                                        <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                                                    </b:column>
+
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtFechaIngreso" value="Fecha de Ingreso"/>
+                                                        <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
+                                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column span="6" offset="0">
+                                                        <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
+                                                        <b:selectOneMenu id="txtTipoMedida" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tipoMedida}">
+                                                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                            <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
+                                                            <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
+                                                        </b:selectOneMenu>
+                                                    </b:column>                   
+
+                                                    <b:column span="6" offset="0">
+                                                        <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
+                                                        <b:selectOneMenu id="txtMedidaCautelar" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                            <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                                            <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                                            <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                                            <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                                            <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                                            <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                                            <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                                                        </b:selectOneMenu>
+                                                    </b:column>
+                                                </b:row>
+                                            </b:panel>
+
+                                            <b:panel>
+                                                <b:row>
+                                                    <b:column span="6" offset="1">
+                                                        <h:outputLabel for="txtAlertaPreventiva" value="Alerta Preventiva Internamiento Preventivo"/>
+                                                        <b:dateTimePicker disabled="true" id="txtAlertaPreventiva" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.alertaSalidaIntermediaPreventiva}"/>
+                                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtTiempoAnios" value="Años"/>
+                                                        <b:inputText id="txtTiempoAnios" placeholder="Tiempo" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}"/>
+                                                    </b:column>
+                                                
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtTiempoMeses" value="Meses"/>
+                                                        <b:inputText id="txtTiempoMeses" placeholder="Meses" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}"/>
+                                                    </b:column>
+
+                                                    <b:column span="4" offset="0">
+                                                        <h:outputLabel for="txtTiempoDias" value="Días"/>
+                                                        <b:inputText id="txtTiempoDias" placeholder="Días" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}"/>
+                                                    </b:column>
+                                                </b:row>
+
+                                                <b:row>
+                                                    <b:column span="4" offset="1">
+                                                        <h:outputLabel for="txtTiempoSentenciaDias" value="Tiempo de Sentencia en Días"/>
+                                                        <b:inputText disabled="true" id="txtTiempoSentenciaDias" placeholder="Tiempo de Sentencia en Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoSentenDias}"/>
+                                                    </b:column>
+
+                                                    <b:column span="4" offset="2">
+                                                        <h:outputLabel for="txtTiempoPrivacionLibertadDias" value="Tiempo de Privacion de Libertad(Días)"/>
+                                                        <b:inputText disabled="true" id="txtTiempoPrivacionLibertadDias" placeholder="Tiempo de Privacion de Libertad(Días)" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoPrivacionLibertad}"/>
+                                                    </b:column>
+                                                </b:row>
+
+                                                <b:row>
+                                                    <b:column span="10" offset="1">
+                                                        <h:outputLabel for="txtObervacionesProceso" value="Observaciones de proceso judicial"/>
+                                                        <b:inputTextarea id="txtObervacionesProceso" placeholder="Observaciones de proceso judicial" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.observacionesProcesoJudicial}"/>
+                                                    </b:column>
+                                                </b:row>
+                                            </b:panel>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <b:button class="btn-block" value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejecucionMedidaControlador.guardarEstadoCumplimientoMedida()}">
+                                                        <f:ajax execute="modalMedida" render="modalMedida"/>
+                                                    </h:commandButton>
+                                                </b:column>
+                                            </b:row>
+
+                                        </b:modal>
+                                        <h:panelGroup class="col-md-12 col-md-offset-0">
+                                            <b:dataTable id="tablaEjecucion" value="#{ejecucionMedidaControlador.listaEjecucionMedida}"
+                                                         widgetVar="tableWidgetVar"
+                                                         var="te"
+                                                         fixed-header="true"
+                                                         scroll-x="true"
+                                                         scroll-size="1000px"
+                                                         responsive="false"
+                                                         searching="false"
+                                                         select="true"
+                                                         paginated="false"
+                                                         selectionMode="multiple"
+                                                         style="margin: 0 auto; width: 100%;"
+                                                         >
+                                                <b:dataTableColumn>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Infraccion"/>
+                                                    </f:facet>
+                                                    <b:inputTextarea rows="2" disabled="true" required="true" style="text-transform:uppercase" value="#{te.idDetalleInfraccionCAI.numeroCausa}"/>
+                                                </b:dataTableColumn>
+                                                <b:dataTableColumn>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="CAI"/>
+                                                    </f:facet>
+                                                    <b:inputTextarea rows="2" disabled="true" required="true" style="text-transform:uppercase" value="#{te.idCai.cai}"/>
+                                                </b:dataTableColumn>
+                                                <b:dataTableColumn>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Medida cautelar"/>
+                                                    </f:facet>
+                                                    <b:inputTextarea rows="2" disabled="true" required="true" style="text-transform:uppercase" value="#{te.medidaCautelar}"/>
+                                                </b:dataTableColumn>
+                                                <b:dataTableColumn>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Tiempo sentencia (días)"/>
+                                                    </f:facet>
+                                                    <b:inputTextarea rows="2" disabled="true" required="true" style="text-transform:uppercase" value="#{te.tiempoSentenDias}"/>
+                                                </b:dataTableColumn>
+                                                <b:dataTableColumn>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Acción"/>
+                                                    </f:facet>
+                                                    <b:commandButton value="Ver Ejecución Medida" class="btn btn-primary btn-block" action="#{ejecucionMedidaControlador.agregarInformacion(te)}">
+                                                        <f:ajax execute="@form" />
+                                                    </b:commandButton>
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+                                        </h:panelGroup>
+                                    </b:panel>
+                                </b:form>
+                            </b:tab>
+                        </b:tabView>
+                        <!--</b:form>-->
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
