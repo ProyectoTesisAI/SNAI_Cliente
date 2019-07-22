@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>paginas/psicologia/panel_taller_psicologia.com</welcome-file>
+        <welcome-file>paginas/inicio/login.com</welcome-file>
     </welcome-file-list>
 </web-app>

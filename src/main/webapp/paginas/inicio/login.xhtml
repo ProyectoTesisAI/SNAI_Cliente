@@ -48,16 +48,16 @@
 
                         <div class="form-group">
                             <h:outputLabel for="txtUsuario" value="Usuario"/>
-                            <b:inputText class="form-control" placeholder="Usuario" id="txtUsuario" required="true" value="#{personalControlador.personal.usuario}"/>
+                            <b:inputText class="form-control" placeholder="Usuario" id="txtUsuario" required="true" value="#{loginController.usuario.usuario}"/>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel for="txtContraseña" value="Contraseña"/>
-                            <b:inputText class="form-control" placeholder="Contraseña" id="txtContraseña" required="true" type="password" value="#{personalControlador.personal.password}"/>
+                            <b:inputText class="form-control" placeholder="Contraseña" id="txtContraseña" required="true" type="password" value="#{loginController.usuario.contraseña}"/>
                         </div>
 
                         <div class="form-group">
-                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{personalControlador.login(personalControlador.personal)}"/> 
+                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{loginController.loguerUsuario()}"/> 
                         </div>
                     </b:form>
                 </div>

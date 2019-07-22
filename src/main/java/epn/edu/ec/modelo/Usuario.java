@@ -17,6 +17,7 @@ public class Usuario implements Serializable {
     private String usuario;
     private String contraseña;
     private Boolean activo;
+    private String token;
     private Rol idRol;
 
     public Usuario() {
@@ -98,5 +99,12 @@ public class Usuario implements Serializable {
         this.idRol = idRol;
     }
 
-       
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+      
 }
