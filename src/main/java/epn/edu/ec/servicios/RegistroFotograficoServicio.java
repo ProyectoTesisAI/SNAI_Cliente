@@ -56,4 +56,14 @@ public class RegistroFotograficoServicio {
         }           
         return listaRegistroFotograficoAux;
     }
+    
+    public Integer eliminarRegistroFotografico(Integer registroFotografico){
+           
+        Integer resultado=0;
+        WebTarget webTarget=cliente.target(URL_REGISTRO_FOTOGRAFICO).path(registroFotografico.toString());        
+        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+ ";charset=UTF-8");        
+        Response response=invocationBuilder.delete();
+        resultado=response.getStatus();
+        return resultado;
+    }
 }

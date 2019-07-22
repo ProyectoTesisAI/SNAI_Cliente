@@ -32,17 +32,18 @@ import org.primefaces.event.FlowEvent;
  *
  * @author User
  */
-@Named(value = "informeControlador")
+@Named(value = "informeEditarControlador")
 @ViewScoped
-public class InformeControlador implements Serializable{
+public class InformeEditarControlador implements Serializable{
 
     private List<Part> imagenes;
     private List<RegistroFotografico> registroFotografico;
+    private List<RegistroFotografico> registroFotograficoRescatado;
     
     List<AsistenciaAdolescente> listaParaChequeo;
     List<ItemTaller> listaItemsTaller;
     
-    Informe informe;
+    Informe informeEditar;
     Taller taller;
     RegistroFotograficoServicio servicioRegistroFotografico;
     
@@ -61,8 +62,9 @@ public class InformeControlador implements Serializable{
         
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
+        registroFotograficoRescatado= new ArrayList<>();
         taller= new Taller();
-        informe= new Informe();
+        informeEditar= new Informe();
         listaParaChequeo= new ArrayList<>();
         listaItemsTaller= new ArrayList<>();
         
@@ -72,11 +74,13 @@ public class InformeControlador implements Serializable{
         servicioRegistroFotografico= new RegistroFotograficoServicio();
         servicioAsistencia= new AsistenciaAdolescentesServicio();
         
-        Taller tallerRescatado = (Taller) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("taller_psicologia");
-
-        if (tallerRescatado != null) {
+        Informe informeAux = (Informe) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("informe_psicologia_editar");
+        
+        if (informeAux != null) {
             
-            taller = tallerRescatado;
+            informeEditar=informeAux;
+            
+            taller=informeEditar.getIdTaller();     
             
             obtenerRegistroAsistencia();
             
@@ -86,20 +90,24 @@ public class InformeControlador implements Serializable{
                 
                 listaItemsTaller=itemsAux;
             }
+            
+            List<RegistroFotografico> registroFotograficoAux=servicioRegistroFotografico.listaRegistroFotografico(informeEditar.getIdInforme());
+            
+            if(registroFotograficoAux!=null){
+                registroFotografico=registroFotograficoAux;
+                registroFotograficoRescatado=registroFotograficoAux;
+            }
+        
         }
     }
         
-    
-    
-    public InformeControlador() {
+
+    public Informe getInformeEditar() {
+        return informeEditar;
     }
 
-    public Informe getInforme() {
-        return informe;
-    }
-
-    public void setInforme(Informe informe) {
-        this.informe = informe;
+    public void setInformeEditar(Informe informeEditar) {
+        this.informeEditar = informeEditar;
     }
 
     public int getCantidadAsistentes() {
@@ -190,6 +198,14 @@ public class InformeControlador implements Serializable{
     public void setListaParaChequeo(List<AsistenciaAdolescente> listaParaChequeo) {
         this.listaParaChequeo = listaParaChequeo;
     }
+
+    public List<RegistroFotografico> getRegistroFotograficoRescatado() {
+        return registroFotograficoRescatado;
+    }
+
+    public void setRegistroFotograficoRescatado(List<RegistroFotografico> registroFotograficoRescatado) {
+        this.registroFotograficoRescatado = registroFotograficoRescatado;
+    }
     
     
     
@@ -279,6 +295,7 @@ public class InformeControlador implements Serializable{
         }
     }
     
+    
     private int guardarRegistroAsistencia(){
         
         if(listaParaChequeo != null){
@@ -287,7 +304,7 @@ public class InformeControlador implements Serializable{
             for(AsistenciaAdolescente asistencia : listaParaChequeo){
             
                 if(asistencia.getAsistio()==true){
-                    
+                
                     AsistenciaAdolescente asistenciAux= servicioAsistencia.guardarRegistroAsistenciaAdolescente(asistencia);
                 
                     if(asistenciAux!=null){
@@ -312,11 +329,12 @@ public class InformeControlador implements Serializable{
     private Informe guardarInforme(){
         
         try{
-            informe.setHoraInicio(taller.getHoraInicio());
-            informe.setNumeroAdolescentes(cantidadAsistentes);
-            informe.setIdTaller(taller);
-            informe.setFecha(taller.getFecha());
-            Informe informeAux= servicioInforme.guardarInforme(this.informe);
+            
+            informeEditar.setHoraInicio(taller.getHoraInicio());
+            informeEditar.setNumeroAdolescentes(cantidadAsistentes);
+            informeEditar.setIdTaller(taller);
+            informeEditar.setFecha(taller.getFecha());
+            Informe informeAux= servicioInforme.guardarInforme(this.informeEditar);
 
             if(informeAux != null){
                 
@@ -337,10 +355,45 @@ public class InformeControlador implements Serializable{
     }
     
     private void guardarRegistroFotografico(Informe informe){
-    
-        if(registroFotografico.size()>0){
+        
+        List<RegistroFotografico> asistencia= new ArrayList<>();
+        List<RegistroFotografico> asistenciaBorrar= new ArrayList<>();
+        
+        for(RegistroFotografico rf1: registroFotografico){
+        
+            if(rf1.getIdRegistroFotografico()==null){
+                asistencia.add(rf1);
+            }
+            else{
+                
+                for(RegistroFotografico rf2: registroFotograficoRescatado){
             
-            for(RegistroFotografico registro : registroFotografico){
+                    // si las fotos no se han cambiado
+                    if(rf1==rf2){
+                        asistencia.add(rf2);
+                        break;
+                    }
+                    //si he borrado una foto
+                    else if(rf2.getIdRegistroFotografico()!=null){
+                        //si agrego una nuevo imagen
+                        asistenciaBorrar.add(rf2);
+                        break;
+                    }
+                    
+                }
+            }
+        
+                
+        }
+        
+        
+        for(RegistroFotografico r: asistenciaBorrar){
+            servicioRegistroFotografico.eliminarRegistroFotografico(r.getIdRegistroFotografico());
+        }
+        
+        if(asistencia.size()>0){
+            
+            for(RegistroFotografico registro : asistencia){
                 
                 if(registro.getImagen()!=null){
                    registro.setIdInforme(informe);
@@ -378,6 +431,5 @@ public class InformeControlador implements Serializable{
             return null;
         } 
     }
-
+    
 }
-

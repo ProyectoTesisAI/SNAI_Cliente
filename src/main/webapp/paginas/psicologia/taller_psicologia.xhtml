@@ -65,7 +65,7 @@
                                                     <div class="form-group">
                                                         <b:panelGrid columns="1">
                                                             <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
-                                                            <b:dateTimePicker id="dtpHoraInicio" rendered="true" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm"/>
+                                                            <b:dateTimePicker id="dtpHoraInicio" rendered="true" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm" value="#{tallerControlador.tallerCrear.horaInicio}"/>
                                                         </b:panelGrid>
                                                     </div>
                                                 </div>
@@ -89,13 +89,13 @@
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <div class="form-group">
                                                             <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <b:selectOneMenu id="txtUzdi" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                                 <f:selectItems value="#{tallerControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                             </b:selectOneMenu>
 
                                                             <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <b:selectOneMenu id="txtCai" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                                 <f:selectItems value="#{tallerControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                             </b:selectOneMenu>
@@ -284,13 +284,7 @@
                                                 
                                             </div>
 
-                                            <div class="row" style="margin-top: 20px;">
-
-                                                <div class="col-md-3 col-md-offset-1">
-                                                    <b:growl id="growlRegistro" globalOnly="false" severity="info,warn,error"/>
-                                                </div>                                          
-
-                                            </div>
+                                            
 
                                             <div class="row" style="margin-top: 35px;">
                                                 <div class="col-md-10 col-md-offset-1">

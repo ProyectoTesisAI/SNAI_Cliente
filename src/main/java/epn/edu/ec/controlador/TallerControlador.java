@@ -460,30 +460,38 @@ public class TallerControlador implements Serializable {
     public String guardarRegistroTaller() {
 
         try {
-            if (udi.getUdi() != null || cai.getCai() != null) {
+        if (udi.getUdi() != null || cai.getCai() != null) {
                 
-                Taller tallerAux = guardarTaller();
+                if (numeroParticipantes > 0) {
+                    Taller tallerAux = guardarTaller();
 
-                if (tallerAux != null) {
+                    if (tallerAux != null) {
 
-                    if (tallerAux.getIdTaller() > 0) {
+                        if (tallerAux.getIdTaller() > 0) {
 
-                        guardarItemsTaller(tallerAux);
-                        generarRegistroAsistencia(tallerAux);
-                        guardarRegistroAsistencia(tallerAux);
-                        return enlaces.PATH_PANEL_PSICOLOGIA+"?faces-redirect=true";
-                        
+                            guardarItemsTaller(tallerAux);
+                            generarRegistroAsistencia(tallerAux);
+                            guardarRegistroAsistencia(tallerAux);
+                            return enlaces.PATH_PANEL_PSICOLOGIA + "?faces-redirect=true";
+
+                        } else {
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                            return null;
+                        }
+
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
                         return null;
                     }
-
-                }else{
+                }
+                else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
                     return null;
                 }
-
+                
             }
             else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO HA SELECCIONADO UNA CAI O UDI PARA EL TALLER", "Aviso"));
                 return null;
             }
 

@@ -90,13 +90,13 @@
                                                         <div class="form-group">
                                                            
                                                             <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerEditarControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <b:selectOneMenu id="txtUzdi" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                                 <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                             </b:selectOneMenu>
                                                             
                                                             <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
-                                                            <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <b:selectOneMenu id="txtCai" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
                                                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                                 <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                             </b:selectOneMenu>
@@ -105,7 +105,7 @@
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <div class="form-group">
                                                             <h:outputLabel for="txtNumeroTotalParticipantes" value="Adolescentes Infractores Esperados"/>
-                                                            <b:inputText mask="integer" disabled="true" placeholder="Adolescentes Infractores Esperados" id="txtNumeroTotalParticipantes" value="#{tallerEditarControlador.numeroParticipantes}"/>
+                                                            <b:inputText mask="integer" disabled="true"  placeholder="Adolescentes Infractores Esperados" id="txtNumeroTotalParticipantes" value="#{tallerEditarControlador.numeroParticipantes}"/>
                                                         </div> 
                                                     </div>
                                                 </h:panelGroup>
@@ -197,7 +197,7 @@
                                             <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
                                                 <div class=" col-md-2 col-md-offset-9">
                                                     <div class="form-group">
-                                                        <b:commandButton id="btnTaller" value="Guardar" class="btn btn-primary btn-block" update="growlTallerPsicologia" action="#{tallerPsicologiaEditarControlador.editarTallerPsicologia()}">
+                                                        <b:commandButton id="btnTaller" value="Guardar" class="btn btn-primary btn-block" update="growlTallerPsicologia" action="#{tallerEditarControlador.editarRegistroTaller()}">
                                                         </b:commandButton>
                                                         <b:growl id="growlTallerPsicologia" globalOnly="false" severity="info,error"/>
                                                     </div>   

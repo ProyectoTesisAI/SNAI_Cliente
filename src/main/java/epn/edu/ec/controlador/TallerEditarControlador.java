@@ -159,10 +159,12 @@ public class TallerEditarControlador implements Serializable {
         if ("UZDI".equals(tipoCentro)) {
             esUzdi = true;
             udi= new UDI();
+            cai= new CAI();
             listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
         
         } else if ("CAI".equals(tipoCentro)) {
             esUzdi = false;
+            udi= new UDI();
             cai= new CAI();
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
@@ -515,28 +517,37 @@ public class TallerEditarControlador implements Serializable {
         try {
             if (udi.getUdi() != null || cai.getCai() != null) {
                 
-                Taller tallerAux = guardarTaller();
+                if (numeroParticipantes > 0) {
 
-                if (tallerAux != null) {
+                    Taller tallerAux = guardarTaller();
 
-                    if (tallerAux.getIdTaller() > 0) {
+                    if (tallerAux != null) {
 
-                        guardarItemsTaller(tallerAux);
-                        generarRegistroAsistencia(tallerAux);
-                        guardarRegistroAsistencia(tallerAux);
-                        return enlaces.PATH_PANEL_PSICOLOGIA+"?faces-redirect=true";
-                        
+                        if (tallerAux.getIdTaller() > 0) {
+
+                            guardarItemsTaller(tallerAux);
+                            generarRegistroAsistencia(tallerAux);
+                            guardarRegistroAsistencia(tallerAux);
+                            return enlaces.PATH_PANEL_PSICOLOGIA + "?faces-redirect=true";
+
+                        } else {
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                            return null;
+                        }
+
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
                         return null;
                     }
-
-                }else{
+                }
+                else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
                     return null;
                 }
-
+                
             }
             else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO HA SELECCIONADO UNA CAI O UDI PARA EL TALLER", "Aviso"));
                 return null;
             }
 
