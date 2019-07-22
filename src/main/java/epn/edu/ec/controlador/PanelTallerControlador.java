@@ -23,7 +23,7 @@ public class PanelTallerControlador implements Serializable {
         servicio = new TallerServicio();
 
         listaTalleres = new ArrayList<>();
-        listaTalleres = servicio.listaTalleres();
+        listaTalleres = servicio.listaTalleresSinInforme();
 
     }
 

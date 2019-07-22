@@ -65,9 +65,9 @@ public class TallerServicio {
 
     }
         
-    public List<Taller> listaTalleres(){
+    public List<Taller> listaTalleresSinInforme(){
         
-        List<Taller> listaActividadesAux=null;
+        /*List<Taller> listaActividadesAux=null;
         
         WebTarget webTarget=cliente.target(URL_TALLER+"/TalleresSinInforme");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
@@ -75,7 +75,16 @@ public class TallerServicio {
         if(response.getStatus()==200){
             listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
         }           
+        return listaActividadesAux;*/
+        List<Taller> listaActividadesAux=null;
+        ConexionServicio<Taller> conexion= new ConexionServicio<>();
+        Response response= conexion.conexion(URL_TALLER+"/TalleresSinInforme", "GET", true, null);
+        if(response.getStatus()==200){
+            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
+        }           
         return listaActividadesAux;
+    
+    
     }
     
     public List<Taller> listaTalleresConInforme(){
