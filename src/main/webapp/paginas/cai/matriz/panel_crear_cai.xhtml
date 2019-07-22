@@ -193,7 +193,7 @@
                                                         <f:ajax event="blur" listener="#{representanteControladorCAI.limpiarMensajeCedula}" render="txtCedulaR mensaje-cedulaRepresentante" />
                                                         <f:ajax event="keyup" listener="#{representanteControladorCAI.validarCedula}" render="mensaje-cedulaRepresentante" />
                                                     </b:inputText>
-                                                    <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControladorCAI.mensaje}"/>
+                                                    <h:outputText style="color: red; font-size: 14px;" rendered="#{representanteControladorCAI.esCedula}" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControladorCAI.mensaje}"/>
 
                                                     <h:outputLabel for="txtDocumentoR" value="Documento/Pasaporte" rendered="#{!representanteControladorCAI.esCedula}"/>
                                                     <b:inputText id="txtDocumentoR" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControladorCAI.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControladorCAI.representante.documento}"/>

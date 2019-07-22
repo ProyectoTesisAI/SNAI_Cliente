@@ -51,7 +51,7 @@
                                             <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
                                             <f:ajax event="keyup" listener="#{adolescenteInfractorUDIControlador.validarCedula}" render="mensaje-cedula" />
                                         </b:inputText>
-                                        <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje}"/>
+                                        <h:outputText style="color: red; font-size: 14px;" rendered="#{adolescenteInfractorUDIControlador.esCedula}" id="mensaje-cedula" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje}"/>
 
                                         <h:outputLabel for="txtDocumento" value="Documento/Pasaporte" rendered="#{!adolescenteInfractorUDIControlador.esCedula}"/>
                                         <b:inputText id="txtDocumento" placeholder="Documento/Pasaporte" rendered="#{!adolescenteInfractorUDIControlador.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" maxlength="20" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDICrear.idAdolescenteInfractor.documento}"/>
