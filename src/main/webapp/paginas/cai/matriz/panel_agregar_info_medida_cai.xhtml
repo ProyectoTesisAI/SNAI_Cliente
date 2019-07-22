@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+
+        <ui:composition template="./../../../templates/psicologo.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/menu.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
+                <script src="../../../resources/js/bootstrap.min.js"></script>
+                <script>
+                    function validarSiNumero(numero) {
+                        if (!/^([0-9])*$/.test(numero))
+                            alert("La cedula " + numero + " no es un valor aceptable");
+                    }
+                </script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div>
+                    <div class="table-responsive" style="padding-top: 50px;"  >
+                        <!--<b:form id="panelCAI">-->
+                        <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                            <b:tab title="EJECUCIÓN DE LA MEDIDA" tooltip="EJECUCIÓN DE LA MEDIDA">
+
+                                <!-- PANEL EJECUCIÓN DE LA MEDIDA  GUARDAR INFORMACION-->
+                                <b:form id="formEjeccionMedida">
+                                    <b:panel look="primary" content-disabled="#{not empty informacionCambioMedidaControlador.ejecucionMedidaCAI}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtCAI" value="Centro de adolescente infractor"/>
+                                                <b:selectOneMenu rendered="#{informacionCambioMedidaControlador.guardado}">
+                                                    <f:selectItem itemLabel="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.idCai.cai}"/>
+                                                </b:selectOneMenu>
+                                                <b:selectOneMenu rendered="#{!informacionCambioMedidaControlador.guardado}" id="txtCAI" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.idCai}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                    <f:selectItems value="#{informacionCambioMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                        </b:row>
+
+                                        <b:panel>
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
+                                                    <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
+                                                    <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtFechaIngreso" value="Fecha de Ingreso"/>
+                                                    <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
+                                                    <b:selectOneMenu id="txtTipoMedida" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.tipoMedida}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
+                                                        <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
+                                                    </b:selectOneMenu>
+                                                </b:column>                   
+
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
+                                                    <b:selectOneMenu id="txtMedidaCautelar" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                                        <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                                        <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                                        <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+
+                                        <b:panel>
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtAlertaPreventiva" value="Alerta Preventiva Internamiento Preventivo"/>
+                                                    <b:dateTimePicker disabled="true" id="txtAlertaPreventiva" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.alertaSalidaIntermediaPreventiva}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtTiempoAnios" value="Años"/>
+                                                    <b:inputText id="txtTiempoAnios" placeholder="Tiempo" update="txtTiempoSentenciaDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.anios}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtTiempoMeses" value="Meses"/>
+                                                    <b:inputText id="txtTiempoMeses" placeholder="Meses" update="txtTiempoSentenciaDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.meses}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtTiempoDias" value="Días"/>
+                                                    <b:inputText id="txtTiempoDias" placeholder="Días" update="txtTiempoSentenciaDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.dias}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtTiempoSentenciaDias" value="Tiempo de Sentencia en Días"/>
+                                                    <b:inputText disabled="true" id="txtTiempoSentenciaDias" placeholder="Tiempo de Sentencia en Días" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.tiempoSentenDias}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtTiempoPrivacionLibertadDias" value="Tiempo de Privacion de Libertad(Días)"/>
+                                                    <b:inputText disabled="true" id="txtTiempoPrivacionLibertadDias" placeholder="Tiempo de Privacion de Libertad(Días)" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.tiempoPrivacionLibertad}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="10" offset="1">
+                                                    <h:outputLabel for="txtObervacionesProceso" value="Observaciones de proceso judicial"/>
+                                                    <b:inputTextarea id="txtObervacionesProceso" placeholder="Observaciones de proceso judicial" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.observacionesProcesoJudicial}"/>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                    </b:panel>
+                                </b:form>
+                            </b:tab>
+
+                            <b:tab title="INFORMACIÓN DE CAMBIO DE MEDIDA" tooltip="INFORMACIÓN DE CAMBIO DE MEDIDA">
+                                <!-- PANEL INFORMACIÓN DE CAMBIO DE MEDIDA GUARDAR INFORMACION-->
+                                <b:panel look="primary" content-disabled="#{informacionCambioMedidaControlador.guardado}">
+                                    <f:facet name="heading">
+                                        <h:outputText value="INFORMACIÓN DE CAMBIO DE MEDIDA" style="color: white; font-weight: bold"  />
+                                    </f:facet>
+
+                                    <b:form id="formInfoCambioMedida">
+                                        <b:panel>
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtAceptacionCambioMedida" value="Aceptacion de cambio de medida"/>
+                                                    <b:selectOneMenu id="txtAceptacionCambioMedida" value="#{informacionCambioMedidaControlador.informacionCambioMedida.aceptacionJuezCambioMedida}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txObservaciones" value="Observaciones"/>
+                                                    <b:inputText id="txObservaciones" placeholder="Observaciones"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.observaciones}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtCambioMedida" value="Cambio de medida socioeducativa"/>
+                                                    <b:selectOneMenu id="txtCambioMedida" update="txtCumplimientoMedidad6080,txtFechaCumplimiento6080,txtAlertaCambio6080" process="@this" value="#{informacionCambioMedidaControlador.informacionCambioMedida.cambioMedidaSocioeducativa}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="60% DE CUMPLIMIENTO"  itemValue="60% DE CUMPLIMIENTO" />
+                                                        <f:selectItem itemLabel="80% DE CUMPLIMIENTO"  itemValue="80% DE CUMPLIMIENTO" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtCumplimientoMedidad6080" value="Cumplimiento de 60% o 80% de tiempo"/>
+                                                    <b:inputText id="txtCumplimientoMedidad6080" disabled="true" placeholder="Días"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.cumplimieno6080TiempoPrivacionLibertad}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">                
+                                                    <h:outputLabel for="txtFechaCumplimiento6080" value="Fecha de cumplimiento de 60% o 80%"/>
+                                                    <b:dateTimePicker id="txtFechaCumplimiento6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.fechaCumplimiento6080}"/>
+                                                </b:column>
+
+                                                <b:column span="4" offset="2">
+                                                    <h:outputLabel for="txtAlertaCambio6080" value="Alerta cambio de medida 60% o 80%"/>
+                                                    <b:dateTimePicker id="txtAlertaCambio6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.alertaCambioMedida}"/>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtEspecificacionNuevaMedida" value="Especificación de la Nueva Medida"/>
+                                                    <b:selectOneMenu id="txtEspecificacionNuevaMedida" value="#{informacionCambioMedidaControlador.informacionCambioMedida.especificacionNuevaMedida}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                                        <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                                        <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                                        <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                                        <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+
+                                            <b:row>
+                                                <b:column span="3" offset="8">
+                                                    <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionCambioMedidaControlador.guardarInformacionCambioMedida()}">
+                                                        <f:ajax execute="formInfoCambioMedida" render="formInfoCambioMedida"/>
+                                                    </h:commandButton>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panel>
+                                    </b:form>
+                                </b:panel>
+                            </b:tab>
+                            <b:tab title="CUMPLIMIENTO DE LA MEDIDA/MOTIVOS DE EGRESO" tooltip="CUMPLIMIENTO DE LA MEDIDA/MOTIVOS DE EGRESO">
+
+                                <!-- CUMPLIMIENTO DE LA MEDIDA GUARDAR INFORMACION -->
+                                <b:form id="formCumplimientoMedida">
+                                    <b:panel look="primary" content-disabled="#{not empty informacionCambioMedidaControlador.ejecucionMedidaCAI}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="CUMPLIMIENTO DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                                        </f:facet>
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtFechaCumplimiento100" value="Fecha de cumplimiento de 100%"/>
+                                                <b:dateTimePicker id="txtFechaCumplimiento100" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaCumplimiento100}"/>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtAlertaCambio100" value="Alerta cambio de medida 100%"/>
+                                                <b:dateTimePicker id="txtAlertaCambio100" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.alertaCumplimiento100}"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                                </b:form>
+                                <!-- PANEL MOTIVOS DE EGRESO GUARDAR INFORMACION-->
+                                <b:form id="formMotivosEgreso">
+                                    <b:panel look="primary" content-disabled="#{motivoEgresoCAIControlador.guardado}">
+                                        <f:facet name="heading">
+                                            <h:outputText value="MOTIVOS DE EGRESO" style="color: white; font-weight: bold"  />
+                                        </f:facet>
+
+                                        <b:row>
+                                            <b:column span="4" offset="1">
+                                                <h:outputLabel for="txtMotivoSalida" value="Motivo de salida"/>
+                                                <b:selectOneMenu id="txtMotivoSalida" update="mostrarOcultarTrasladoCAI" process="@this" value="#{motivoEgresoCAIControlador.tipoMotivoSalida}">
+                                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                                    <f:selectItem itemLabel="MEDIACIÓN - CONCILIACIÓN"  itemValue="MEDIACIÓN - CONCILIACIÓN" />
+                                                    <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
+                                                    <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
+                                                    <f:selectItem itemLabel="SOBRESEIMIENTO"  itemValue="SOBRESEIMIENTO" />
+                                                    <f:selectItem itemLabel="MODIFICACIÓN DE LA MEDIDA"  itemValue="MODIFICACIÓN DE LA MEDIDA" />
+                                                    <f:selectItem itemLabel="TRASLADO A OTRO CAI"  itemValue="TRASLADO A OTRO CAI" />
+                                                    <f:selectItem itemLabel="CUMPLIMIENTO DE LA MEDIDA"  itemValue="CUMPLIMIENTO DE LA MEDIDA" />
+                                                    <f:selectItem itemLabel="MUERTE NATURAL"  itemValue="MUERTE NATURAL" />
+                                                    <f:selectItem itemLabel="MUERTE INTRACENTRO"  itemValue="MUERTE INTRACENTRO" />
+                                                    <f:selectItem itemLabel="SUICIDIO"  itemValue="SUICIDIO" />
+                                                    <f:selectItem itemLabel="CUMPLIMIENTO POR 24 HORAS"  itemValue="CUMPLIMIENTO POR 24 HORAS" />
+                                                    <f:selectItem itemLabel="CUMPLIMIENTO DE 90 DÍAS"  itemValue="CUMPLIMIENTO DE 90 DÍAS" />
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column span="4" offset="2">
+                                                <h:outputLabel for="txtFechaSalida" value="Fecha Salida del Centro"/>
+                                                <b:dateTimePicker id="txtFechaSalida" placeholder="dd/mm/aa" showTime="false" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.fechaSalidaCentro}"/>
+                                            </b:column>
+                                        </b:row> 
+                                        <h:panelGroup id="mostrarOcultarTrasladoCAI">
+                                            <b:row>
+                                                <b:column span="4" offset="1">
+                                                    <h:outputLabel for="txtCAITraslado" value="CAI Traslado"/>
+                                                    <b:selectOneMenu rendered="#{motivoEgresoCAIControlador.guardado}">
+                                                        <f:selectItem itemLabel="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado.cai}"/>
+                                                    </b:selectOneMenu>
+                                                    <b:selectOneMenu rendered="#{!motivoEgresoCAIControlador.guardado}" id="txtCAITraslado" disabled="txtMotivoSalida!='TRASLADO A OTRO CAI'" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado}">
+                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                        <f:selectItems value="#{motivoEgresoCAIControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                            </b:row>
+                                        </h:panelGroup>
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{motivoEgresoCAIControlador.guardarMotivoEgresoCAI()}">
+                                                    <f:ajax execute="formMotivosEgreso" render="formMotivosEgreso"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+
+                                    </b:panel>
+                                </b:form>
+                            </b:tab>
+                        </b:tabView>
+                        <!--</b:form>-->
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

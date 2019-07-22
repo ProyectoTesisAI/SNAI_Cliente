@@ -1,7 +1,7 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractor;
-import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.Representante;
 import epn.edu.ec.servicios.RepresentanteServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -23,7 +23,7 @@ public class RepresentanteCAIControlador implements Serializable{
     private Validaciones validacion;
     
     private AdolescenteInfractor adolescenteInfractorCrear;
-    private AdolescenteInfractorUDI adolescenteInfractorUDI;
+    private AdolescenteInfractorCAI adolescenteInfractorCAI;
     private Representante representante;
     private RepresentanteServicio servicio;
     private boolean guardado;
@@ -50,13 +50,13 @@ public class RepresentanteCAIControlador implements Serializable{
         }
         
         adolescenteInfractorCrear=new AdolescenteInfractor();
-        adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        adolescenteInfractorCAI= new AdolescenteInfractorCAI();
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         
-        if(adolescenteInfractorUDIAux != null){
+        if(adolescenteInfractorCAIAux != null){
             
-            adolescenteInfractorUDI=adolescenteInfractorUDIAux;
-            Representante representanteAux= servicio.obtenerRepresentante(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            adolescenteInfractorCAI=adolescenteInfractorCAIAux;
+            Representante representanteAux= servicio.obtenerRepresentante(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(representanteAux!=null){
                 representante=representanteAux;
                 guardado=true;
@@ -72,12 +72,12 @@ public class RepresentanteCAIControlador implements Serializable{
         
     }
 
-    public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
-        return adolescenteInfractorUDI;
+    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
+        return adolescenteInfractorCAI;
     }
 
-    public void setAdolescenteInfractorUDI(AdolescenteInfractorUDI adolescenteInfractorUDI) {
-        this.adolescenteInfractorUDI = adolescenteInfractorUDI;
+    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorUDI) {
+        this.adolescenteInfractorCAI = adolescenteInfractorUDI;
     }
 
     public Representante getRepresentante() {
@@ -140,11 +140,11 @@ public class RepresentanteCAIControlador implements Serializable{
     public String guardarRepresentante(){
         
         this.representante.setNacionalidad(tipoDocumento);
-        this.representante.setIdAdolescenteInfracto(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        this.representante.setIdAdolescenteInfracto(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
         Representante representanteAux = servicio.guardarRepresentante(representante);
         if(representanteAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";    
+            return enlaces.PATH_PANEL_CAI+"?faces-redirect=true";    
         }
         else{
             return null;

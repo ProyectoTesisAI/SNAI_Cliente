@@ -2,9 +2,12 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.CAI;
+import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
 import epn.edu.ec.servicios.CaiServicio;
+import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
+import epn.edu.ec.servicios.DetalleInfraccionCAIServicio;
 import epn.edu.ec.servicios.EjecucionMedidaServicio;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,49 +19,55 @@ import javax.faces.view.ViewScoped;
 
 @Named(value = "ejecucionMedidaControlador")
 @ViewScoped
-public class EjecucionMedidaControlador implements Serializable{
+public class EjecucionMedidaControlador implements Serializable {
 
+    private AdolescenteInfractorCAI adolescenteInfractorCai;
     private DetalleInfraccionCAI detalleInfraccionCAI;
     private EjecucionMedidaCAI ejecucionMedidaCAI;
+    private List<EjecucionMedidaCAI> listaEjecucionMedida;
     private EjecucionMedidaServicio servicio;
+    private DetalleInfraccionCAIServicio servicioDI;
     private boolean guardado;
     
-    private CAI cai; 
-    private List<CAI> listaCAI;
-    private CaiServicio servicioUDI;
-    
-     @PostConstruct
-    public void init(){
-        servicio= new EjecucionMedidaServicio();
-        servicioUDI=new CaiServicio();
-        
-        listaCAI=new ArrayList<>();
-        listaCAI=servicioUDI.listaCai();
-        
-        ejecucionMedidaCAI =new EjecucionMedidaCAI();
-        guardado=false;
-        
-        detalleInfraccionCAI=new DetalleInfraccionCAI();
-        
-        DetalleInfraccionCAI detalleInfraccionCAIAux = (DetalleInfraccionCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+    private List<DatosProvinciaCanton> provincias;
+    private List<DatosProvinciaCanton> cantones;
+    private DatosProvinciaCantonServicio servicioCAIPC;
 
+    private CAI cai;
+    private List<CAI> listaCAI;
+    private CaiServicio servicioCAI;
+
+    @PostConstruct
+    public void init() {
+        servicio = new EjecucionMedidaServicio();
+        servicioCAI = new CaiServicio();
+        servicioDI = new DetalleInfraccionCAIServicio();
+
+        listaCAI = new ArrayList<>();
+        listaCAI = servicioCAI.listaCai();
+
+        adolescenteInfractorCai = new AdolescenteInfractorCAI();
+        ejecucionMedidaCAI = new EjecucionMedidaCAI();
+        listaEjecucionMedida = new ArrayList<>();
+        guardado = false;
+        
+        provincias = new ArrayList<>();
+        servicioCAIPC = new DatosProvinciaCantonServicio();
+
+        detalleInfraccionCAI = new DetalleInfraccionCAI();
+
+        DetalleInfraccionCAI detalleInfraccionCAIAux = (DetalleInfraccionCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("detalle_infraccion_cai");
         if(detalleInfraccionCAIAux != null){
             
-            detalleInfraccionCAI=detalleInfraccionCAIAux;
-            
-            EjecucionMedidaCAI ejecucionMedidaAux= servicio.obtenerEjecucionMedidaCAI(detalleInfraccionCAI.getIdDetalleInfraccion());
-            
-            if(ejecucionMedidaAux!=null){
-            
-                ejecucionMedidaCAI=ejecucionMedidaAux;
-                guardado=true;
-            }else{
-                
-                //ejecucionMedidaCAI. setFechaReporteCAI(adolescenteInfractorCAI.getFechaIngresoProceso());
+            detalleInfraccionCAI=detalleInfraccionCAIAux;            
+            ejecucionMedidaCAI.setFechaReporteCAI(detalleInfraccionCAI.getIdAdolescenteInfractorCAI().getFechaIngresoProceso());
+            List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
+            if(listaAux.isEmpty()!=true){            
+                listaEjecucionMedida=listaAux;
             }
         }
-        
-    } 
+        provincias = servicioCAIPC.listarDatosProvinciaCanton();
+    }
 
     public DetalleInfraccionCAI getDetalleInfraccionCAI() {
         return detalleInfraccionCAI;
@@ -76,8 +85,20 @@ public class EjecucionMedidaControlador implements Serializable{
         this.ejecucionMedidaCAI = ejecucionMedidaCAI;
     }
 
+    public List<EjecucionMedidaCAI> getListaEjecucionMedida() {
+        return listaEjecucionMedida;
+    }
+
+    public void setListaEjecucionMedida(List<EjecucionMedidaCAI> listaEjecucionMedida) {
+        this.listaEjecucionMedida = listaEjecucionMedida;
+    }
+
     public EjecucionMedidaServicio getServicio() {
         return servicio;
+    }
+
+    public DetalleInfraccionCAIServicio getServicioDI() {
+        return servicioDI;
     }
 
     public CAI getCai() {
@@ -96,12 +117,12 @@ public class EjecucionMedidaControlador implements Serializable{
         this.listaCAI = listaCAI;
     }
 
-    public CaiServicio getServicioUDI() {
-        return servicioUDI;
+    public CaiServicio getServicioCAI() {
+        return servicioCAI;
     }
 
-    public void setServicioUDI(CaiServicio servicioUDI) {
-        this.servicioUDI = servicioUDI;
+    public void setServicioCAI(CaiServicio servicioCAI) {
+        this.servicioCAI = servicioCAI;
     }
 
     public boolean isGuardado() {
@@ -112,20 +133,46 @@ public class EjecucionMedidaControlador implements Serializable{
         this.guardado = guardado;
     }
     
-        /*********************Métodos para invocar a los diferentes servicios web******************/
-    
-    public String guardarEstadoCumplimientoMedida(){
-        
+    public List<DatosProvinciaCanton> listarCantonesPorProvincia(String provincia) {
+        List<DatosProvinciaCanton> cantonesAux = new ArrayList<>();
+
+        for (DatosProvinciaCanton c : provincias) {
+            if (provincia.equals(c.getProvincia())) {
+                cantonesAux.add(c);
+            }
+        }
+        return cantonesAux;
+    }
+
+    public List<DatosProvinciaCanton> getCantones() {
+        cantones = new ArrayList<>();
+        String provincia = detalleInfraccionCAI.getProvinciaInfraccion();
+        if (provincia != null) {
+            cantones = listarCantonesPorProvincia(provincia);
+        } else {
+            System.out.println("No hay provincia seleccionada");
+        }
+        return cantones;
+    }
+
+    /**
+     * *******************Métodos para invocar a los diferentes servicios
+     * web*****************
+     */
+    public String guardarEstadoCumplimientoMedida() {
+
         this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
 
         EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
-        if(ejecucionMedidaAux!=null){
-            return "/paginas/cai/cai.com?faces-redirect=true";     
-        }
-        else{
+        if (ejecucionMedidaAux != null) {
+            return "/paginas/cai/cai.com?faces-redirect=true";
+        } else {
             return null;
         }
     }
 
-    
+    public String agregarInformacion(EjecucionMedidaCAI ejecucion){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ejecucion_medida_cai", ejecucion);
+        return "/paginas/cai/matriz/panel_agregar_info_medida_cai.com?faces-redirect=true";
+    }
 }

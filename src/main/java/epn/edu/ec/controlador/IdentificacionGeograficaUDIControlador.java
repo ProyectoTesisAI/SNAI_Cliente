@@ -170,7 +170,7 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }
-        this.identificacionGeografica.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        this.identificacionGeografica.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {

@@ -1,6 +1,6 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.IdentificacionGeografica;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
@@ -25,7 +25,7 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
 
-    private AdolescenteInfractorUDI adolescenteInfractorUDI;
+    private AdolescenteInfractorCAI adolescenteInfractorCAI;
     private IdentificacionGeografica identificacionGeografica;
     private IdentificacionGeograficaServicio servicio;
     private boolean guardado;
@@ -52,17 +52,17 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
         provincias = new ArrayList<>();
         servicioCAIPC = new DatosProvinciaCantonServicio();
 
-        adolescenteInfractorUDI = new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        adolescenteInfractorCAI = new AdolescenteInfractorCAI();
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
-        if (adolescenteInfractorUDIAux != null) {
-            adolescenteInfractorUDI = adolescenteInfractorUDIAux;
-            IdentificacionGeografica identificacionGeograficaAux = servicio.obtenerIdentificacionGeografica(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+        if (adolescenteInfractorCAIAux != null) {
+            adolescenteInfractorCAI = adolescenteInfractorCAIAux;
+            IdentificacionGeografica identificacionGeograficaAux = servicio.obtenerIdentificacionGeografica(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if (identificacionGeograficaAux != null) {
                 identificacionGeografica = identificacionGeograficaAux;
                 guardado = true;
             }
-            nacionalidad = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getNacionalidad();
+            nacionalidad = adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getNacionalidad();
             System.out.println("Nacionalidad init: " + nacionalidad);
             if (nacionalidad.equals("ECUATORIANA")) {
                 esEcuatoriana = true;
@@ -75,12 +75,12 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
 
     }
 
-    public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
-        return adolescenteInfractorUDI;
+    public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
+        return adolescenteInfractorCAI;
     }
 
-    public void setAdolescenteInfractorUDI(AdolescenteInfractorUDI adolescenteInfractorUDI) {
-        this.adolescenteInfractorUDI = adolescenteInfractorUDI;
+    public void setAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorUDI) {
+        this.adolescenteInfractorCAI = adolescenteInfractorUDI;
     }
 
     public IdentificacionGeografica getIdentificacionGeografica() {
@@ -170,11 +170,11 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }
-        this.identificacionGeografica.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+        this.identificacionGeografica.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {
-            return enlaces.PATH_PANEL_UDI + "?faces-redirect=true";
+            return enlaces.PATH_PANEL_CAI + "?faces-redirect=true";
         } else {
             return null;
         }
