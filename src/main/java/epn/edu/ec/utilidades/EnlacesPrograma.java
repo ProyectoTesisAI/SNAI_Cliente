@@ -7,7 +7,6 @@ package epn.edu.ec.utilidades;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 
 /**
  *
@@ -27,7 +26,7 @@ public class EnlacesPrograma {
     public String PATH_ADOLESCENTE_CAI_CREAR = "/paginas/cai/adolescentes_cai/ai_cai_crear.com";
     public String PATH_PANEL_CREAR_UDI = "/paginas/udi/matriz/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_CAI = "/paginas/cai/matriz/panel_crear_cai.com";
-
+    public String PATH_ERROR="/error/error.com";
     public String getURL_BASE() {
         return URL_BASE;
     }
@@ -59,4 +58,18 @@ public class EnlacesPrograma {
     public String getPATH_PANEL_INFORME_PSICOLOGIA() {
         return PATH_PANEL_INFORME_PSICOLOGIA;
     }
+
+    public String getPATH_PANEL_CREAR_UDI() {
+        return PATH_PANEL_CREAR_UDI;
+    }
+
+    public String getPATH_PANEL_CREAR_CAI() {
+        return PATH_PANEL_CREAR_CAI;
+    }
+
+    public String getPATH_ERROR() {
+        return PATH_ERROR;
+    }
+    
+    
 }
