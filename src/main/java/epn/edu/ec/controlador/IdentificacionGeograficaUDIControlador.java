@@ -167,11 +167,10 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
      * web*****************
      */
     public String guardarIdentificacionGeografica() {
+        this.identificacionGeografica.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }
-        this.identificacionGeografica.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
-
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {
             return enlaces.PATH_PANEL_UDI + "?faces-redirect=true";
