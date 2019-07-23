@@ -29,12 +29,14 @@ import javax.ws.rs.core.Response;
 public class TallerServicio {
     
     private final ConexionServicio<Taller> conexion;
-    private final Client cliente;
+    private final ConexionServicio<UDI> conexionUDI;
+    private final ConexionServicio<CAI> conexionCAI;
     private static final String URL_TALLER=Constantes.URL_TALLER;
     
     public TallerServicio(){
         conexion= new ConexionServicio<>();
-        cliente= ClientBuilder.newClient();
+        conexionUDI= new ConexionServicio<>();
+        conexionCAI= new ConexionServicio<>();
     }
     
     public Taller guardarTaller(Taller taller){
@@ -86,9 +88,7 @@ public class TallerServicio {
     public Integer obtenerNumeroAdolescentePorUdi(UDI udi ){
         
         Integer cantidadAdolescentesAux=0;
-        WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorUzdi");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.post(Entity.entity(udi, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionUDI.conexion(URL_TALLER+"/NumeroAdolescentesPorUzdi", "POST", true, udi);
         if(response.getStatus()==200){
            
             String cantidadAdolescente= response.readEntity(String.class);
@@ -104,10 +104,7 @@ public class TallerServicio {
     public Integer obtenerNumeroAdolescentePorCai(CAI cai ){
         
         Integer cantidadAdolescentesAux=0;
-        
-        WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorCai");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.post(Entity.entity(cai, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionCAI.conexion(URL_TALLER+"/NumeroAdolescentesPorCai", "POST", true, cai);
         if(response.getStatus()==200){
            
             String cantidadAdolescente= response.readEntity(String.class);
@@ -124,10 +121,7 @@ public class TallerServicio {
     public List<AdolescenteInfractorUDI> listaAdolescentesPorUzdi(UDI udi){
         
         List<AdolescenteInfractorUDI> asistenciaAux=null;
-                
-        WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/ListarAdolescentesPorUzdi");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.post(Entity.entity(udi, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionUDI.conexion(URL_TALLER+"/ListarAdolescentesPorUzdi", "POST", true, udi);
         if(response.getStatus()==200){
             
             List<AdolescenteInfractorUDI> listaAsistenciaUdi= response.readEntity(new GenericType<List<AdolescenteInfractorUDI>>(){});
@@ -142,10 +136,7 @@ public class TallerServicio {
     public List<ItemTaller> obtenerItemsPorTalleres(Integer idTaller){
         
         List<ItemTaller> listaItemsTaller=null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER+"/ItemsTaller").path(idTaller.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_TALLER+"/ItemsTaller/"+idTaller.toString(), "GET", true, null);
         if(response.getStatus()==200){
             listaItemsTaller= response.readEntity(new GenericType<List<ItemTaller>>(){});
         }           
@@ -155,10 +146,7 @@ public class TallerServicio {
     public RegistroAsistencia obtenerRegistroAsistenciaPorTaller(Integer idTaller){
         
         RegistroAsistencia registroAsistenciaAux =null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER+"/RegistroAsistencia").path(idTaller.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_TALLER+"/RegistroAsistencia/"+idTaller.toString(), "GET", true, null);
         if(response.getStatus()==200){
             registroAsistenciaAux= response.readEntity(RegistroAsistencia.class);
         }           
