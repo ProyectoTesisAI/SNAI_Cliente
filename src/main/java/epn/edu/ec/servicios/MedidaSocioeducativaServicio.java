@@ -4,24 +4,18 @@ import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.MedidaSocioeducativa;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class MedidaSocioeducativaServicio {
     
     private final ConexionServicio<MedidaSocioeducativa> conexion;    
-    private final Client cliente;
+    private final ConexionServicio<AdolescenteInfractorUDI> conexionAdolescenteUDI;    
     private static final String URL_MEDIDA_SOCIOEDUCATIVA=Constantes.URL_MEDIDA_SOCIOEDUCATIVA;  
     
     public MedidaSocioeducativaServicio(){
         conexion= new ConexionServicio<>();
-        cliente= ClientBuilder.newClient();
+        conexionAdolescenteUDI= new ConexionServicio<>();
     }   
 
     public MedidaSocioeducativa guardarMedidaSocioeducativa(MedidaSocioeducativa medidaSocioeducativa){
@@ -39,10 +33,7 @@ public class MedidaSocioeducativaServicio {
     public List<MedidaSocioeducativa> listaMedidaSocioeducativosPorAdolescentesUzdi(AdolescenteInfractorUDI adolescenteInfractorUDI){
         
         List<MedidaSocioeducativa> listaMedidasSocioeducativas=null;
-        
-        WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidasSocioeducativasPorAdolescenteUDI");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");
-        Response response =invocationBuilder.post(Entity.entity(adolescenteInfractorUDI, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionAdolescenteUDI.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidasSocioeducativasPorAdolescenteUDI", "POST", true, adolescenteInfractorUDI);
         if(response.getStatus()==200){
             listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
         }

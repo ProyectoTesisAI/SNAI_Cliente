@@ -8,35 +8,29 @@ import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class RegistroAsistenciaServicio {
     
-    private final ConexionServicio<RegistroAsistencia> conexion;    
-    
-    private final Client cliente;
+    private final ConexionServicio<RegistroAsistencia> conexion;
+    private final ConexionServicio<UDI> conexionUDI;
+    private final ConexionServicio<CAI> conexionCAI;
+    private final ConexionServicio<Taller> conexionTaller;
     private static final String URL_REGISTRO_ASISTENCIA=Constantes.URL_REGISTRO_ASISTENCIA; 
     
     public RegistroAsistenciaServicio(){
         conexion= new ConexionServicio<>();
-        cliente= ClientBuilder.newClient();
+        conexionUDI= new ConexionServicio<>();
+        conexionCAI= new ConexionServicio<>();
+        conexionTaller= new ConexionServicio<>();
     }   
     
     
     public List<AdolescenteInfractor> listaAdolescentesInfractoresPorUzdi(UDI udi){
         
         List<AdolescenteInfractor> registroAsistenciaUdi=null;
-        
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorUzdi");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(udi, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionUDI.conexion(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorUzdi", "POST", true, udi);
         if(response.getStatus()==200){
             registroAsistenciaUdi=response.readEntity(new GenericType<List<AdolescenteInfractor>>(){});
         }
@@ -48,10 +42,7 @@ public class RegistroAsistenciaServicio {
     public List<AdolescenteInfractor> listaAdolescentesInfractoresPorCai(CAI cai){
         
         List<AdolescenteInfractor> registroAsistenciaCai=null;
-        
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorCai");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(cai, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionCAI.conexion(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorCai", "POST", true, cai);
         if(response.getStatus()==200){
             registroAsistenciaCai=response.readEntity(new GenericType<List<AdolescenteInfractor>>(){});
         }
@@ -74,10 +65,7 @@ public class RegistroAsistenciaServicio {
     public List<AsistenciaAdolescente> listaAdolescentesInfractoresPorTaller(Taller taller){
         
         List<AsistenciaAdolescente> registroAsistenciaUdi=null;
-        
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorTaller");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexionTaller.conexion(URL_REGISTRO_ASISTENCIA+"/ListaAdolescentesPorTaller", "POST", true, taller);
         if(response.getStatus()==200){
             registroAsistenciaUdi=response.readEntity(new GenericType<List<AsistenciaAdolescente>>(){});
         }        
