@@ -1,8 +1,6 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AdolescenteInfractor;
-import epn.edu.ec.modelo.AdolescenteInfractorCAI;
-import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.RegistroAsistencia;
 import epn.edu.ec.modelo.AsistenciaAdolescente;
 import epn.edu.ec.modelo.CAI;
@@ -21,10 +19,13 @@ import javax.ws.rs.core.Response;
 
 public class RegistroAsistenciaServicio {
     
+    private final ConexionServicio<RegistroAsistencia> conexion;    
+    
     private final Client cliente;
-    public String URL_REGISTRO_ASISTENCIA=Constantes.URL_REGISTRO_ASISTENCIA; 
+    private static final String URL_REGISTRO_ASISTENCIA=Constantes.URL_REGISTRO_ASISTENCIA; 
     
     public RegistroAsistenciaServicio(){
+        conexion= new ConexionServicio<>();
         cliente= ClientBuilder.newClient();
     }   
     
@@ -62,10 +63,7 @@ public class RegistroAsistenciaServicio {
     public RegistroAsistencia guardarRegistroAsistencia(RegistroAsistencia registroAsistencia){
         
         RegistroAsistencia registroAsistenciaAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA);        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.put(Entity.entity(registroAsistencia, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexion.conexion(URL_REGISTRO_ASISTENCIA, "PUT", true, registroAsistencia);
         if(response.getStatus()==200){
             registroAsistenciaAux =response.readEntity(RegistroAsistencia.class);
         }        
@@ -88,10 +86,8 @@ public class RegistroAsistenciaServicio {
     }
     
     public int obtenerNumeroAdolescentesPorTaller(Integer idTaller){
-          
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA+"/Taller/NumeroAsistentes/"+idTaller.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.get();
+        
+        Response response= conexion.conexion(URL_REGISTRO_ASISTENCIA+"/Taller/NumeroAsistentes/"+idTaller.toString(), "GET", true, null);
         if(response.getStatus()==200){
             int numeroAsistentes=Integer.parseInt(response.readEntity(String.class)); 
             return numeroAsistentes;
@@ -103,11 +99,8 @@ public class RegistroAsistenciaServicio {
     
     public Integer eliminarRegistroAsistencia(Integer registroAsistenciaTaller){
            
-        Integer resultado=0;
-        WebTarget webTarget=cliente.target(URL_REGISTRO_ASISTENCIA).path(registroAsistenciaTaller.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+ ";charset=UTF-8");        
-        Response response=invocationBuilder.delete();
-        resultado=response.getStatus();
+        Response response= conexion.conexion(URL_REGISTRO_ASISTENCIA+"/"+registroAsistenciaTaller.toString(), "DELETE", true, null);
+        Integer resultado=response.getStatus();
         return resultado;
     }
 }

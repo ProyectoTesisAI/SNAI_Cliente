@@ -4,7 +4,6 @@ import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.MedidaSocioeducativa;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.List;
-import javax.faces.context.FacesContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -15,22 +14,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class MedidaSocioeducativaServicio {
-        
+    
+    private final ConexionServicio<MedidaSocioeducativa> conexion;    
     private final Client cliente;
-    public static final String URL_MEDIDA_SOCIOEDUCATIVA=Constantes.URL_MEDIDA_SOCIOEDUCATIVA;  
+    private static final String URL_MEDIDA_SOCIOEDUCATIVA=Constantes.URL_MEDIDA_SOCIOEDUCATIVA;  
     
     public MedidaSocioeducativaServicio(){
+        conexion= new ConexionServicio<>();
         cliente= ClientBuilder.newClient();
     }   
 
     public MedidaSocioeducativa guardarMedidaSocioeducativa(MedidaSocioeducativa medidaSocioeducativa){
         
         MedidaSocioeducativa medidaSocioeducativaAux=null;
-                       
-        WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA);        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response = invocationBuilder.put(Entity.entity(medidaSocioeducativa, MediaType.APPLICATION_JSON+";charset=UTF-8"));
-        
+        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA, "PUT", true, medidaSocioeducativa);
         if(response.getStatus()==200){        
             medidaSocioeducativaAux=response.readEntity(MedidaSocioeducativa.class);       
         } 
@@ -56,9 +53,7 @@ public class MedidaSocioeducativaServicio {
     
     public List<MedidaSocioeducativa> listaMedidasSocioeducativasPorAdolescente(Integer idAdolescenteUZDI){
         List<MedidaSocioeducativa> listaMedidasSocioeducativas = null;
-        WebTarget webTarget = cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/Adolescente").path(idAdolescenteUZDI.toString());
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/Adolescente/"+idAdolescenteUZDI.toString(), "GET", true, null);
         if(response.getStatus()==200){
             listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
         }
@@ -68,10 +63,7 @@ public class MedidaSocioeducativaServicio {
     public MedidaSocioeducativa obtenerMedidaMasAlta(Integer idAdolescenteUZDI){
         
         MedidaSocioeducativa medidaMasAlta=null;
-        
-        WebTarget webTarget=cliente.target(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidaMasAlta/AdolescenteUDI").path(idAdolescenteUZDI.toString());
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidaMasAlta/AdolescenteUDI/"+idAdolescenteUZDI.toString(), "GET", true, null);
         if(response.getStatus()==200){
             List<MedidaSocioeducativa> medidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
             if(medidasSocioeducativas!=null){

@@ -2,34 +2,21 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Representante;
 import epn.edu.ec.utilidades.Constantes;
-import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class RepresentanteServicio {
-        
-    private final Client cliente;
-    public static final String URL_REPRESENTANTE=Constantes.URL_REPRESENTANTE;  
+    
+    private final ConexionServicio<Representante> conexion;    
+    private static final String URL_REPRESENTANTE=Constantes.URL_REPRESENTANTE;  
     
     public RepresentanteServicio(){
-        cliente= ClientBuilder.newClient();
+        conexion= new ConexionServicio<>();
     }   
 
     public Representante guardarRepresentante(Representante representante){
         
         Representante representanteAux=null;
-                       
-        WebTarget webTarget=cliente.target(URL_REPRESENTANTE);        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response = invocationBuilder.put(Entity.entity(representante, MediaType.APPLICATION_JSON+";charset=UTF-8"));
-        
+        Response response= conexion.conexion(URL_REPRESENTANTE, "PUT", true, representante);
         if(response.getStatus()==200){        
             representanteAux=response.readEntity(Representante.class);       
         } 
@@ -41,10 +28,7 @@ public class RepresentanteServicio {
     public Representante obtenerRepresentante(Integer id){
         
         Representante representanteAux=null;
-                       
-        WebTarget webTarget=cliente.target(URL_REPRESENTANTE).path(id.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_REPRESENTANTE+"/"+id.toString(), "GET", true, null);
         if(response.getStatus()==200){
             representanteAux= response.readEntity(Representante.class);
         }           

@@ -8,13 +8,7 @@ package epn.edu.ec.servicios;
 import epn.edu.ec.modelo.RegistroFotografico;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -23,21 +17,17 @@ import javax.ws.rs.core.Response;
  */
 public class RegistroFotograficoServicio {
  
-    private final Client cliente;
-    public String URL_REGISTRO_FOTOGRAFICO=Constantes.URL_REGISTRO_FOTOGRAFICO;
+    private final ConexionServicio<RegistroFotografico> conexion;    
+    private static final String URL_REGISTRO_FOTOGRAFICO=Constantes.URL_REGISTRO_FOTOGRAFICO;
     
     public RegistroFotograficoServicio(){
-        cliente= ClientBuilder.newClient();
+        conexion= new ConexionServicio<>();
     }
     
     public void guardarRegistroFotografico(RegistroFotografico registroFotografico){
         
         try{
-            
-            WebTarget webTarget=cliente.target(URL_REGISTRO_FOTOGRAFICO);        
-            Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-            Response response =invocationBuilder.put(Entity.entity(registroFotografico, MediaType.APPLICATION_JSON+";charset=UTF-8"));
-            
+            Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO, "PUT", true, registroFotografico);
         }catch(Exception e){
             System.out.println("ERROR:---->"+e);
         }
@@ -47,10 +37,7 @@ public class RegistroFotograficoServicio {
     public List<RegistroFotografico> listaRegistroFotografico(Integer id){
         
         List<RegistroFotografico> listaRegistroFotograficoAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_REGISTRO_FOTOGRAFICO+"/Informe/"+id.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO+"/Informe/"+id.toString(), "GET", true, null);
         if(response.getStatus()==200){
             listaRegistroFotograficoAux= response.readEntity(new GenericType<List<RegistroFotografico>>(){});
         }           
@@ -59,11 +46,8 @@ public class RegistroFotograficoServicio {
     
     public Integer eliminarRegistroFotografico(Integer registroFotografico){
            
-        Integer resultado=0;
-        WebTarget webTarget=cliente.target(URL_REGISTRO_FOTOGRAFICO).path(registroFotografico.toString());        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+ ";charset=UTF-8");        
-        Response response=invocationBuilder.delete();
-        resultado=response.getStatus();
+        Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO+"/"+registroFotografico.toString(), "DELETE", true, null);
+        Integer resultado=response.getStatus();
         return resultado;
     }
 }

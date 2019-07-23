@@ -7,12 +7,6 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -21,20 +15,17 @@ import javax.ws.rs.core.Response;
  */
 public class LoginServicio {
     
-    private final Client cliente;
-    public String URL_USUARIO_LOGIN=Constantes.URL_USUARIO;
+    private final ConexionServicio<Usuario> conexion;    
+    private static final String URL_USUARIO_LOGIN=Constantes.URL_USUARIO;
     
     public LoginServicio(){
-        cliente= ClientBuilder.newClient();
+        conexion= new ConexionServicio<>();
     }
     
     public Usuario loguearUsuario(Usuario usuario){
         
         Usuario usuarioAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_USUARIO_LOGIN+"/login");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(usuario, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexion.conexion(URL_USUARIO_LOGIN+"/login", "POST", false, usuario);
         if(response.getStatus()==200){
             usuarioAux =response.readEntity(Usuario.class);
             

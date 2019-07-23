@@ -28,20 +28,19 @@ import javax.ws.rs.core.Response;
  */
 public class TallerServicio {
     
+    private final ConexionServicio<Taller> conexion;
     private final Client cliente;
-    public String URL_TALLER=Constantes.URL_TALLER;
+    private static final String URL_TALLER=Constantes.URL_TALLER;
     
     public TallerServicio(){
+        conexion= new ConexionServicio<>();
         cliente= ClientBuilder.newClient();
     }
     
     public Taller guardarTaller(Taller taller){
         
         Taller tallerAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER);        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.post(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexion.conexion(URL_TALLER, "POST", true, taller);
         if(response.getStatus()==200){
             tallerAux =response.readEntity(Taller.class);
         }
@@ -53,10 +52,7 @@ public class TallerServicio {
     public Taller editarTaller(Taller taller){
         
         Taller tallerAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER);        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");     
-        Response response =invocationBuilder.put(Entity.entity(taller, MediaType.APPLICATION_JSON+";charset=UTF-8"));
+        Response response= conexion.conexion(URL_TALLER, "PUT", true, taller);
         if(response.getStatus()==200){
             tallerAux =response.readEntity(Taller.class);
         }
@@ -67,17 +63,7 @@ public class TallerServicio {
         
     public List<Taller> listaTalleresSinInforme(){
         
-        /*List<Taller> listaActividadesAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER+"/TalleresSinInforme");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }           
-        return listaActividadesAux;*/
         List<Taller> listaActividadesAux=null;
-        ConexionServicio<Taller> conexion= new ConexionServicio<>();
         Response response= conexion.conexion(URL_TALLER+"/TalleresSinInforme", "GET", true, null);
         if(response.getStatus()==200){
             listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
@@ -90,10 +76,7 @@ public class TallerServicio {
     public List<Taller> listaTalleresConInforme(){
         
         List<Taller> listaActividadesAux=null;
-        
-        WebTarget webTarget=cliente.target(URL_TALLER+"/TalleresConInforme");        
-        Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
-        Response response =invocationBuilder.get();
+        Response response= conexion.conexion(URL_TALLER+"/TalleresConInforme", "GET", true, null);
         if(response.getStatus()==200){
             listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
         }           
@@ -102,30 +85,25 @@ public class TallerServicio {
     
     public Integer obtenerNumeroAdolescentePorUdi(UDI udi ){
         
-        Integer cantidadAdolescentesAux=null;
-        
+        Integer cantidadAdolescentesAux=0;
         WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorUzdi");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
         Response response =invocationBuilder.post(Entity.entity(udi, MediaType.APPLICATION_JSON+";charset=UTF-8"));
         if(response.getStatus()==200){
            
-             String cantidadAdolescente= response.readEntity(String.class);
+            String cantidadAdolescente= response.readEntity(String.class);
                     
             if(cantidadAdolescente!=null){
                 
                 cantidadAdolescentesAux= Integer.parseInt(cantidadAdolescente);
             }
         }
-        else if(response.getStatus()==204){
-            cantidadAdolescentesAux=0;
-        }
-        
         return cantidadAdolescentesAux;
     }
     
     public Integer obtenerNumeroAdolescentePorCai(CAI cai ){
         
-        Integer cantidadAdolescentesAux=null;
+        Integer cantidadAdolescentesAux=0;
         
         WebTarget webTarget=cliente.target(Constantes.URL_TALLER+"/NumeroAdolescentesPorCai");        
         Invocation.Builder invocationBuilder=webTarget.request(MediaType.APPLICATION_JSON+";charset=UTF-8");        
@@ -138,9 +116,6 @@ public class TallerServicio {
                 
                 cantidadAdolescentesAux= Integer.parseInt(cantidadAdolescente);
             }
-        }
-        else if(response.getStatus()==204){
-            cantidadAdolescentesAux=0;
         }
         
         return cantidadAdolescentesAux;

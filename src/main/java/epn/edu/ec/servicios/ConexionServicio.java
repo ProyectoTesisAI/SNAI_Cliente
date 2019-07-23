@@ -14,14 +14,15 @@ import javax.ws.rs.core.Response;
 public class ConexionServicio<T> {
     
     private final Client cliente;
-    private final String token;
+    private  String token=null;
     
     public ConexionServicio(){
         
         cliente= ClientBuilder.newClient();
         Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        token=usuarioAux.getToken();
-        
+        if(usuarioAux!=null){
+            token=usuarioAux.getToken();
+        }
     }
     
     public Response conexion(String URL, String tipoPeticion, boolean necesitaToken,  T informacionAEnviar){
