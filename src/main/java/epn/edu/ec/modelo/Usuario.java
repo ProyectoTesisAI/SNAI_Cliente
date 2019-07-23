@@ -23,10 +23,6 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuarioPk) {
-        this.idUsuario = idUsuarioPk;
-    }
-
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -91,20 +87,21 @@ public class Usuario implements Serializable {
         this.activo = activo;
     }
 
-    public Rol getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Rol idRol) {
-        this.idRol = idRol;
-    }
-
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    
+    public Rol getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Rol idRol) {
+        this.idRol = idRol;
     }
       
 }

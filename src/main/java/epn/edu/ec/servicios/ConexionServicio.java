@@ -45,6 +45,7 @@ public class ConexionServicio<T> {
             if (tipoPeticion.equals("GET")) {
                 
                 response = invocationBuilder.get();
+                String headers= response.getHeaderString(HttpHeaders.AUTHORIZATION);
             } 
             else if (tipoPeticion.equals("POST")) {
                 
