@@ -35,7 +35,7 @@ public class PlantillaControlador implements Serializable{
             
             if(usuarioAux !=null){
                 
-                if(!usuarioAux.getIdRol().getRol().equals("ADMINISTRADOR")){
+                if(!usuarioAux.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")){
                     graficar=true;
                     FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
                 }
