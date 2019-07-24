@@ -22,6 +22,7 @@ import javax.faces.view.ViewScoped;
 public class PlantillaControlador implements Serializable{
     
     private EnlacesPrograma enlaces;
+    private boolean graficar=false;
     
     public PlantillaControlador(){
         enlaces= new EnlacesPrograma();
@@ -32,13 +33,26 @@ public class PlantillaControlador implements Serializable{
         try{
             Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
             
-            if(usuarioAux==null){
-                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            if(usuarioAux !=null){
+                
+                if(!usuarioAux.getIdRol().getRol().equals("ADMINISTRADOR")){
+                    graficar=true;
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
             }
             
         }catch(Exception e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
         }
     }
+
+    public boolean isGraficar() {
+        return graficar;
+    }
+
+    public void setGraficar(boolean graficar) {
+        this.graficar = graficar;
+    }
+    
     
 }
