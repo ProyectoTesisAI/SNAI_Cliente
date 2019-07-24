@@ -72,17 +72,17 @@
                         </p:submenu>
                         <p:submenu label="Jurídico">
                             <p:menuitem value="Crear Registro"  action="#{tipoTallerControlador.validarTallerJuridico}"/>
-                            <p:menuitem value="Gestionar Talleres" outcome="#{enlacesPrograma.PATH_PANEL_TALLER}"  icon="pi pi-refresh" />
+                            <p:menuitem value="Gestionar Talleres" action="#{tipoTallerControlador.gestionarTaller}"  icon="pi pi-refresh" />
                             <p:menuitem value="Gestionar Informe" outcome="#{enlacesPrograma.PATH_PANEL_INFORME}"  icon="pi pi-refresh" />
                         </p:submenu>
                         <p:submenu label="Psicólogo">
                             <p:menuitem value="Crear Registro" action="#{tipoTallerControlador.validarTallerPsicologia }"/>
-                            <p:menuitem value="Gestionar Talleres" outcome="#{enlacesPrograma.PATH_PANEL_TALLER}"  icon="pi pi-refresh" />
+                            <p:menuitem value="Gestionar Talleres" action="#{tipoTallerControlador.gestionarTaller}"  icon="pi pi-refresh" />
                             <p:menuitem value="Gestionar Informe" outcome="#{enlacesPrograma.PATH_PANEL_INFORME}"  icon="pi pi-refresh" />
                         </p:submenu>
                         <p:submenu label="Inspector Educador">
                             <p:menuitem value="Crear Registro" action="#{tipoTallerControlador.validarTallerInspectorEducador}"/>
-                            <p:menuitem value="Gestionar Talleres" outcome="#{enlacesPrograma.PATH_PANEL_TALLER}"  icon="pi pi-refresh" />
+                            <p:menuitem value="Gestionar Talleres" action="#{tipoTallerControlador.gestionarTaller}"  icon="pi pi-refresh" />
                             <p:menuitem value="Gestionar Informe" outcome="#{enlacesPrograma.PATH_PANEL_INFORME}"  icon="pi pi-refresh" />
                         </p:submenu>
                         <p:separator />

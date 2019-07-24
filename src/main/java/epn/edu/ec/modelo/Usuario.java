@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
     private String contraseña;
     private Boolean activo;
     private String token;
-    private Rol idRol;
+    private RolCentroUsuario idRolUsuarioCentro;
 
     public Usuario() {
     }
@@ -95,13 +95,13 @@ public class Usuario implements Serializable {
         this.token = token;
     }
 
-    
-    public Rol getIdRol() {
-        return idRol;
+    public RolCentroUsuario getIdRolUsuarioCentro() {
+        return idRolUsuarioCentro;
     }
 
-    public void setIdRol(Rol idRol) {
-        this.idRol = idRol;
+    public void setIdRolUsuarioCentro(RolCentroUsuario idRolUsuarioCentro) {
+        this.idRolUsuarioCentro = idRolUsuarioCentro;
     }
+
       
 }
