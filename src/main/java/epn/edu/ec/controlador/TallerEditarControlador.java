@@ -12,6 +12,7 @@ import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.modelo.RegistroAsistencia;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.AsistenciaAdolescentesServicio;
 import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.ItemTallerServicio;
@@ -528,7 +529,7 @@ public class TallerEditarControlador implements Serializable {
                             guardarItemsTaller(tallerAux);
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
-                            return enlaces.PATH_PANEL_PSICOLOGIA + "?faces-redirect=true";
+                            return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
 
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
@@ -596,4 +597,5 @@ public class TallerEditarControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO SE HA GENERADO EL REGISTRO DE ASISTENCIA", "ERROR"));
         }
     }
+    
 }

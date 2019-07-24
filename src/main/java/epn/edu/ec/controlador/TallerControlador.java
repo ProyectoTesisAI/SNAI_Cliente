@@ -472,7 +472,7 @@ public class TallerControlador implements Serializable {
                             guardarItemsTaller(tallerAux);
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
-                            return enlaces.PATH_PANEL_PSICOLOGIA + "?faces-redirect=true";
+                            return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
 
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));

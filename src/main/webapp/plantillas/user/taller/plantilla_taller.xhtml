@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+
+            <!-- Panel para la creación de la Ficha de Planificación del Taller-->
+            <div class="panel panel-default">
+
+                <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center "> CREAR TALLER</div>
+                <div class="panel-body">
+
+                    <div style="margin: 40px;">
+                        <b:tabView active-index="#{tallerControlador.indiceTaller}" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;">    
+
+                            <b:tab title="Taller Psicología">
+                                <h:form id="formTaller" >                                
+                                    <b:panel content-disabled="#{tallerControlador.tallerGuardado}" style="border: transparent;" >
+
+                                        <div class="row"  style="margin-top: 50px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtTema" value="Tema"/>
+                                                    <b:inputText  placeholder="Tema" id="txtTema" style="text-transform:uppercase" requiredMessage="Tema es requerido, ingrese un valor" required="true" value="#{tallerControlador.tallerCrear.tema}"/>
+                                                </div>
+                                            </div>                        
+                                        </div>    
+
+                                        <div class="row">
+                                            <div class="col-md-2 col-md-offset-1 ">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtNumeroTaller" value="Taller Nro" />
+                                                    <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerControlador.tallerCrear.numeroTaller}" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:panelGrid columns="1">
+                                                        <h:outputLabel for="txtFechaRealizacion" value="Fecha" />
+                                                        <b:dateTimePicker id="txtFechaRealizacion"  required="true" required-message="Fecha es requerida, seleccione una fecha" placeholder="dd/mm/aa"  showTime="false" value="#{tallerControlador.tallerCrear.fecha}"/>  
+                                                    </b:panelGrid>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:panelGrid columns="1">
+                                                        <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
+                                                        <b:dateTimePicker id="dtpHoraInicio" rendered="true" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm" value="#{tallerControlador.tallerCrear.horaInicio}"/>
+                                                    </b:panelGrid>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
+                                                    <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{tallerControlador.tipoCentro}" >
+                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="UZDI"  itemValue="UZDI"/>
+                                                        <f:selectItem itemLabel="CAI"  itemValue="CAI"/>
+
+                                                    </b:selectOneMenu>
+                                                </div>
+                                            </div>
+
+                                            <h:panelGroup id="tipoCentro">
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerControlador.esUzdi}"/>
+                                                        <b:selectOneMenu id="txtUzdi" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                            <f:selectItems value="#{tallerControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
+                                                        </b:selectOneMenu>
+
+                                                        <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerControlador.esUzdi}"/>
+                                                        <b:selectOneMenu id="txtCai" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                            <f:selectItems value="#{tallerControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
+                                                        </b:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <div class="form-group">
+                                                        <h:outputLabel for="txtNumeroTotalParticipantes" value="Adolescentes Infractores Esperados"/>
+                                                        <b:inputText mask="integer" disabled="true" placeholder="Adolescentes Infractores Esperados" id="txtNumeroTotalParticipantes" value="#{tallerControlador.numeroParticipantes}"/>
+                                                    </div> 
+                                                </div>
+
+                                            </h:panelGroup>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtObjetivoTaller" value="Objetivo del Taller"/>
+                                                    <b:inputText  placeholder="Objetivo del Taller" id="txtObjetivoTaller" style="text-transform:uppercase" value="#{tallerControlador.tallerCrear.objetivo}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:button icon-awesome="plus" class="btn-block" look="info" onclick="$('.formItemTaller').modal('show')" value="Agregar Actividad"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <b:modal title="Agregar Actividad" styleClass="formItemTaller"
+                                                 id="modalActividades"
+                                                 closable="false"
+                                                 closeOnEscape="true">
+                                            <b:row>
+                                                <b:column span="10" offset="1">                                        
+                                                    <h:outputLabel for="txtItemActividad" value="Actividad"/>
+                                                    <b:inputText id="txtItemActividad" requiredMessage="Actividad es requerido, ingrese un valor" placeholder="Actividad" value="#{tallerControlador.actividad}"/>
+                                                </b:column>
+                                                <b:column span="10" offset="1">                                        
+                                                    <h:outputLabel for="txtItemObjetivo" value="Objetivo Específico"/>
+                                                    <b:inputText id="txtItemObjetivo" requiredMessage="Objetivo Específico es requerido, ingrese un valor" placeholder="Objetivo Específico" value="#{tallerControlador.objetivoEspecifico}"/>
+                                                </b:column>
+                                                <b:column span="10" offset="1">                                        
+                                                    <h:outputLabel for="txtItemMateriales" value="Materiales"/>
+                                                    <b:inputText id="txtItemMateriales" requiredMessage="Nombres es requerido, ingrese un valor" placeholder="Materiales" value="#{tallerControlador.materiales}"/>             
+                                                </b:column>
+                                                <b:column span="10" offset="1">                                        
+                                                    <h:outputLabel for="txtItemResponsable" value="Responsable"/>
+                                                    <b:inputText id="txtItemResponsable" requiredMessage="Apellidos es requerido, ingrese un valor" placeholder="Responsable" value="#{tallerControlador.responsable}"/>
+                                                </b:column>
+                                                <b:column span="6" offset="1">
+                                                    <h:outputLabel for="txtItemDuracion" value="Duración"/>
+                                                    <b:inputText style="color: #262626" id="txtItemDuracion" placeholder="Duración"  value="#{tallerControlador.duracion}"/>
+                                                </b:column>
+                                            </b:row>
+                                            <br></br>
+                                            <b:row>
+                                                <b:column offset="1" span="5">
+                                                    <b:button class="btn-block" value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                                </b:column>
+                                                <b:column span="5">
+                                                    <b:commandButton class="btn-success btn-block" value="Agregar"
+                                                                     onclick="$('.formItemTaller').modal('hide'); tableWidgetVar.DataTable({destroy: true, searching: false});tableWidgetVar.DataTable().responsive.recalc();" 
+                                                                     actionListener="#{tallerControlador.agregarActividad()}">
+                                                        <f:ajax execute="modalActividades" render="tablaTaller modalActividades"/>
+                                                    </b:commandButton>
+
+                                                </b:column>
+                                            </b:row>
+                                        </b:modal>
+
+                                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:dataTable id="tablaTaller" value="#{tallerControlador.listaItemsTaller}" 
+                                                                 widgetVar="tableWidgetVar"
+                                                                 var="tp"
+                                                                 fixed-header="true"
+                                                                 scroll-x="true"
+                                                                 scroll-size="1000px"
+                                                                 responsive="false"
+                                                                 searching="false"
+                                                                 select="true"
+                                                                 paginated="false"
+                                                                 selectionMode="multiple"
+                                                                 style="margin: 0 auto; width: 100%;"
+
+                                                                 >
+                                                        <b:dataTableColumn style="min-width: 60px;">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Duración"/>
+                                                            </f:facet>
+                                                            <b:inputText style="color: #262626" id="txtDuracion" placeholder="mm"  value="#{tp.duracion}"/>  
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Actividad"/>
+                                                            </f:facet>
+                                                            <b:inputTextarea rows="2" required="true" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Objetivo Específico"/>
+                                                            </f:facet>
+                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Materiales"/>
+                                                            </f:facet>
+                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Responsable"/>
+                                                            </f:facet>
+                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
+                                                        </b:dataTableColumn>
+
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtRecomendaciones" value="Recomendaciones"/>
+                                                    <b:inputTextarea id="txtRecomendaciones" style="text-transform:uppercase" placeholder="Recomendaciones" value="#{tallerControlador.tallerCrear.recomendaciones}"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtElaborado" value="Elaborado por "/>
+                                                    <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+                                            <div class=" col-md-2 col-md-offset-9">
+                                                <div class="form-group">
+                                                    <b:commandButton id="btnTaller" value="Guardar" class="btn btn-primary btn-block" action="#{tallerControlador.guardarRegistroTaller()}">
+                                                    </b:commandButton>
+                                                    <b:growl id="growlTaller" globalOnly="false" severity="info,error"/>
+                                                </div>   
+                                            </div>
+                                        </div>
+
+                                    </b:panel>
+                                </h:form>
+                            </b:tab>
+
+                            <b:tab title="Registro de Asistencia">
+
+                                <h:form id="formRegistroAsistencia">
+
+                                    <b:panel content-disabled="true" style="border: transparent">
+
+                                        <div class="row" style="margin-top: 50px;">
+                                            <div class="col-md-10 col-md-offset-1 ">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txTematica" value="Temática"/>
+                                                    <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase" required="true" value="#{tallerControlador.tallerCrear.tema}" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="txtFechaAsistencia" value="Fecha"/>
+                                                    <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" required="true" placeholder="FECHA"  showTime="false" value="#{tallerControlador.tallerCrear.fecha}"/>  
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="row" style="margin-top: 35px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <b:dataTable id="dtRegistroAsistenciaUdi" value="#{tallerControlador.listadoAsistencia}"
+                                                             var="ai"
+                                                             fixed-header="true"
+                                                             scroll-x="true"
+                                                             scroll-size="1000px"
+                                                             responsive="true"
+                                                             searching="false"
+                                                             select="true"
+                                                             selectionMode="multiple"
+                                                             style="margin: auto; width: 100%;">
+                                                    <b:dataTableColumn value="#{ai.nombres}"/>
+                                                    <b:dataTableColumn value="#{ai.apellidos}"/>
+                                                    <b:dataTableColumn value="#{ai.cedula}"/>
+                                                </b:dataTable>
+                                            </div>
+                                        </div>
+
+                                    </b:panel>
+                                </h:form>
+
+                            </b:tab>
+                        </b:tabView>
+                    </div>
+                    <h:form>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-4">                                                  
+                                <b:commandButton id="btnDescargarRegistroAsistencia" value="Registro de Asistencia" class="btn btn-block btn-danger"  action="#{tallerControlador.guardarPDFAsistencia()}"/> 
+                            </div> 
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <!-- Fin del Panel para la creación de Fichas de Planificación del Taller-->
+        </ui:composition>
+    </h:body>
+</html>

@@ -13,15 +13,18 @@ import javax.ws.rs.core.Response;
 
 public class ConexionServicio<T> {
     
-    private final Client cliente;
+    private Client cliente=null;
     private  String token=null;
     
     public ConexionServicio(){
+        try{
+            cliente= ClientBuilder.newClient();
+            Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+            if(usuarioAux!=null){
+                token=usuarioAux.getToken();
+            }
+        }catch(Exception e){
         
-        cliente= ClientBuilder.newClient();
-        Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        if(usuarioAux!=null){
-            token=usuarioAux.getToken();
         }
     }
     
