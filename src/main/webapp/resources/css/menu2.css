@@ -1,0 +1,92 @@
+
+#menu_superior{
+    box-shadow: 5px 0px 5px #d3d6da;
+    height: 50px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#menu_lateral {
+    
+    height: 100%;
+    width: 270px;
+    transition: all 0.6s;
+    background: #1f2535; /*#f5f5f5;*/
+    box-shadow: 5px 0px 5px #d3d6da;
+    position: fixed; 
+    color: #141018; /*color del texto del menu lateral*/
+    list-style: none;
+}
+
+/*Modifico los atributos del ITEM del Menú Lateral*/
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #d3d6da;
+    background: #1f2535;
+    font-size: 14px;
+    font-weight: lighter  !important;
+    line-height: 32px; /*altura de la fila*/
+    height: 45px;
+    text-shadow: 0 0 0 !important;
+
+}
+
+a:link, a:visited {
+    color: #d3d6da;
+}
+
+a:link:hover, a:visited:hover {
+
+    color: whitesmoke; /*color del texto cuando el cursor se encuentra sobre el item*/
+    text-decoration: none;
+
+}
+
+.ui-panelmenu .ui-panelmenu-panel {
+    padding: 0;
+    margin: -2px 0px -2px -2px;
+}
+
+.ui-panelmenu .ui-menuitem {
+
+    line-height: 38px; /*altura de la fila*/
+    height: 38px;
+    left: 15px;
+    color: #141018;
+    font-size: 13px;
+    width: 100%;
+    margin:0;
+    padding: 0;
+}
+
+
+.ui-panelmenu .ui-panelmenu-content {
+    padding: 0;
+    border-top: 0;
+    overflow: auto;
+}
+
+
+.ui-panelmenu .ui-menuitem-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    border-bottom: solid 1px #1f2535;
+    padding: 0 0 0 40px;
+    line-height: 33px;
+    cursor: pointer;
+}
+
+/*Modifico los atributos de los  SUBITEMS del Menú*/
+.ui-widget-content {
+    border: 0px;
+    background: #2e364b;
+    padding: 0 0 0 40px;
+
+}
+
+.ui-menuitem-link:hover{
+    
+    background: transparent;
+    color: whitesmoke; /*color del texto cuando el cursor se encuentra sobre el item*/
+    text-decoration: none;
+}
