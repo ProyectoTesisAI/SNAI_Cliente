@@ -2,6 +2,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,12 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
 
     private List<AdolescenteInfractorUDI> listadoAdolescentesInfractoresUDI;
     private AdolescenteInfractorUDIServicio servicio;
+    private EnlacesPrograma enlaces;
     
     @PostConstruct
     public void init(){
         servicio= new AdolescenteInfractorUDIServicio();
+        enlaces=new EnlacesPrograma();
         listadoAdolescentesInfractoresUDI= new ArrayList<>();
         listadoAdolescentesInfractoresUDI=servicio.listaAdolescentesInfractoresUDI();
     }
@@ -36,13 +39,15 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     public String agregarInformacion(AdolescenteInfractorUDI ai_udi){
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
-        return "/paginas/udi/matriz/panel_crear_udi.com?faces-redirect=true";
+        //return "/paginas/udi/matriz/panel_crear_udi.com?faces-redirect=true";
+        return enlaces.PATH_ADOLESCENTE_UDI_ANIADIR+"?faces-redirect=true";
     }
     
     public String editarInformacion(AdolescenteInfractorUDI ai_udi){
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
         return "/paginas/udi/matriz/panel_editar_udi.com?faces-redirect=true";
+        //return enlaces.PATH_ADOLESCENTE_UDI_CREAR+"?faces-redirect=true";
     }
     
     public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado){

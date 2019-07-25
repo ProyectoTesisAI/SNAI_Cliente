@@ -23,6 +23,9 @@ public class EnlacesPrograma {
 
     public String PATH_ADOLESCENTE_UDI_CREAR = "/paginas/udi/adolescentes_udi/ai_udi_crear.com";
     public String PATH_ADOLESCENTE_CAI_CREAR = "/paginas/cai/adolescentes_cai/ai_cai_crear.com";
+    
+    public String PATH_ADOLESCENTE_UDI_ANIADIR = "/paginas/udi/matriz/panel_crear_udi.com";
+    public String PATH_ADOLESCENTE_CAI_ANIADIR = "/paginas/cai/matriz/panel_crear_cai.com";
 
     public String PATH_PANEL_INFORME = "/paginas/user/informe/panel_informe.com";
     public String PATH_INFORME_VER = "/paginas/user/informe/informe_ver.com";
