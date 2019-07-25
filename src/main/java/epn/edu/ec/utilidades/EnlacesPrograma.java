@@ -16,30 +16,38 @@ import javax.inject.Named;
 @Dependent
 public class EnlacesPrograma {
 
-    public String URL_BASE="/SistemaSNAI_Cliente";
-    
-    public String PATH_TALLER_CREAR="/paginas/user/taller/taller.com";
-    
+    public String URL_BASE = "/SistemaSNAI_Cliente";
+
+    public String PATH_TALLER_CREAR = "/paginas/user/taller/taller.com";
+    public String PATH_INFORME_CREAR = "/paginas/user/informe/informe.com";
+
     public String PATH_ADOLESCENTE_UDI_CREAR = "/paginas/udi/adolescentes_udi/ai_udi_crear.com";
     public String PATH_ADOLESCENTE_CAI_CREAR = "/paginas/cai/adolescentes_cai/ai_cai_crear.com";
-    
+
     public String PATH_PANEL_INFORME = "/paginas/user/informe/panel_informe.com";
-    public String PATH_PANEL_TALLER = "/paginas/user/taller/panel_taller.com";
-    public String PATH_PANEL_INFORME_ADMINISTRADOR = "/paginas/admin/informe/panel_informe.com";
-    public String PATH_PANEL_TALLER_ADMINISTRADOR = "/paginas/admin/taller/panel_taller.com";
+    public String PATH_INFORME_VER = "/paginas/user/informe/informe_ver.com";
     
+    public String PATH_PANEL_TALLER = "/paginas/user/taller/panel_taller.com";
+    public String PATH_TALLER_VER = "/paginas/user/taller/taller_ver.com";
+
+    public String PATH_PANEL_INFORME_ADMINISTRADOR = "/paginas/admin/informe/panel_informe.com";
+    public String PATH_INFORME_EDITAR = "/paginas/admin/informe/informe_editar.com";
+    
+    public String PATH_PANEL_TALLER_ADMINISTRADOR = "/paginas/admin/taller/panel_taller.com";
+    public String PATH_TALLER_EDITAR = "/paginas/admin/taller/taller_editar.com";
+
     public String PATH_PANEL_UDI = "/paginas/udi/udi.com";
     public String PATH_PANEL_CAI = "/paginas/cai/cai.com";
-    
+
     public String PATH_PANEL_CREAR_UDI = "/paginas/udi/matriz/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_CAI = "/paginas/cai/matriz/panel_crear_cai.com";
-    
-    public String PATH_ERROR="/error/error.com";
-    
+
+    public String PATH_ERROR = "/error/error.com";
+
     public String getURL_BASE() {
         return URL_BASE;
     }
-    
+
     public String getPATH_TALLER_CREAR() {
         return PATH_TALLER_CREAR;
     }
@@ -87,6 +95,5 @@ public class EnlacesPrograma {
     public String getPATH_PANEL_TALLER_ADMINISTRADOR() {
         return PATH_PANEL_TALLER_ADMINISTRADOR;
     }
-    
-    
+
 }

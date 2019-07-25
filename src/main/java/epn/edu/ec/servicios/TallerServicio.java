@@ -11,6 +11,7 @@ import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.List;
 import javax.ws.rs.client.Client;
@@ -29,12 +30,14 @@ import javax.ws.rs.core.Response;
 public class TallerServicio {
     
     private final ConexionServicio<Taller> conexion;
+    private final ConexionServicio<Usuario> conexionUsuario;
     private final ConexionServicio<UDI> conexionUDI;
     private final ConexionServicio<CAI> conexionCAI;
     private static final String URL_TALLER=Constantes.URL_TALLER;
     
     public TallerServicio(){
         conexion= new ConexionServicio<>();
+        conexionUsuario= new ConexionServicio<>();
         conexionUDI= new ConexionServicio<>();
         conexionCAI= new ConexionServicio<>();
     }
@@ -71,8 +74,16 @@ public class TallerServicio {
             listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
         }           
         return listaActividadesAux;
+    }
     
-    
+    public List<Taller> listaTalleresSinInformePorUsuario(Usuario usuario){
+        
+        List<Taller> listaActividadesAux=null;
+        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformePorUsuario", "POST", true, usuario);
+        if(response.getStatus()==200){
+            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
+        }           
+        return listaActividadesAux;
     }
     
     public List<Taller> listaTalleresConInforme(){
