@@ -2,6 +2,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.servicios.TallerServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,14 @@ public class PanelTallerControlador implements Serializable {
 
     private List<Taller> listaTalleres;
     private TallerServicio servicio;
+    private EnlacesPrograma enlaces;
 
     @PostConstruct
     public void init() {
 
         servicio = new TallerServicio();
-
+        enlaces = new EnlacesPrograma();
+        
         listaTalleres = new ArrayList<>();
         listaTalleres = servicio.listaTalleresSinInforme();
 
@@ -43,7 +46,8 @@ public class PanelTallerControlador implements Serializable {
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            return "/paginas/psicologia/taller_psicologia_ver.com?faces-redirect=true";
+            //return "/paginas/psicologia/taller_psicologia_ver.com?faces-redirect=true";
+            return enlaces.PATH_TALLER_VER+"?faces-redirect=true";
 
         } catch (Exception ex) {
             return null;
@@ -54,7 +58,8 @@ public class PanelTallerControlador implements Serializable {
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            return "/paginas/psicologia/taller_psicologia_editar.com?faces-redirect=true";
+            //return "/paginas/psicologia/taller_psicologia_editar.com?faces-redirect=true";
+            return enlaces.PATH_TALLER_EDITAR+"?faces-redirect=true";
 
         } catch (Exception ex) {
             return null;
@@ -64,7 +69,8 @@ public class PanelTallerControlador implements Serializable {
     public String agregarInforme(Taller taller) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            return "/paginas/psicologia/informe_psicologia.com?faces-redirect=true";
+            //return "/paginas/psicologia/informe_psicologia.com?faces-redirect=true";
+            return enlaces.PATH_INFORME_CREAR+"?faces-redirect=true";
         } catch (Exception e) {
             return null;
         }

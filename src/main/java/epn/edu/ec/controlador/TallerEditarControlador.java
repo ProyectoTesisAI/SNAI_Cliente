@@ -48,6 +48,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ViewScoped
 public class TallerEditarControlador implements Serializable {
 
+    //Datos de sesion
+    private Usuario usuarioLogin;
+    private String tipoTaller;
+    
     private Integer duracion;
     private String actividad;
     private String objetivoEspecifico;
@@ -81,6 +85,12 @@ public class TallerEditarControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        
+        //inicializar datos de sesion
+        usuarioLogin=new Usuario();
+        tipoTaller="";
+        usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        tipoTaller =  (String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTaller");
 
         servicioTaller = new TallerServicio();
         servicioCai = new CaiServicio();

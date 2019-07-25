@@ -7,6 +7,7 @@ import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.modelo.RegistroAsistencia;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.AsistenciaAdolescentesServicio;
 import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.ItemTallerServicio;
@@ -40,31 +41,33 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ViewScoped
 public class TallerControlador implements Serializable {
 
+    //Datos de sesion
+    private Usuario usuarioLogin;
+    private String tipoTaller;
+
     private Integer duracion;
     private String actividad;
     private String objetivoEspecifico;
     private String materiales;
-    private String responsable;private 
-
-    EnlacesPrograma enlaces;
+    private String responsable;
+    private EnlacesPrograma enlaces;
     Taller tallerCrear;
     RegistroAsistencia registroAsistencia;
     UDI udi;
     CAI cai;
-    
 
     List<UDI> listaUdi;
     List<CAI> listaCai;
     List<ItemTaller> listaItemsTaller;
     List<AdolescenteInfractor> listadoAsistencia;
-    
+
     TallerServicio servicioTaller;
     CaiServicio servicioCai;
     UdiServicio servicioUdi;
     ItemTallerServicio servicioItemTaller;
     RegistroAsistenciaServicio servicioRegistro;
     AsistenciaAdolescentesServicio servicioAsistencia;
-            
+
     String tipoCentro;
     boolean esUzdi;
     Integer numeroParticipantes;
@@ -75,15 +78,21 @@ public class TallerControlador implements Serializable {
     @PostConstruct
     public void init() {
 
+        //inicializar datos de sesion
+        usuarioLogin = new Usuario();
+        tipoTaller = "";
+        usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTaller");
+
         servicioTaller = new TallerServicio();
         servicioCai = new CaiServicio();
         servicioUdi = new UdiServicio();
         servicioRegistro = new RegistroAsistenciaServicio();
         servicioItemTaller = new ItemTallerServicio();
-        servicioAsistencia= new AsistenciaAdolescentesServicio();
-        
+        servicioAsistencia = new AsistenciaAdolescentesServicio();
+
         tallerCrear = new Taller();
-        enlaces= new EnlacesPrograma();
+        enlaces = new EnlacesPrograma();
         registroAsistencia = new RegistroAsistencia();
         udi = new UDI();
         cai = new CAI();
@@ -91,12 +100,12 @@ public class TallerControlador implements Serializable {
         listaCai = new ArrayList<>();
 
         listaItemsTaller = new ArrayList<>();
-        listadoAsistencia= new ArrayList<>();
+        listadoAsistencia = new ArrayList<>();
 
         if (isEsUzdi()) {
             tipoCentro = "UZDI";
             listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de datos
-            
+
         } else {
             tipoCentro = "CAI";
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
@@ -122,17 +131,17 @@ public class TallerControlador implements Serializable {
 
     public void setTipoCentro(String tipoCentro) {
         this.tipoCentro = tipoCentro;
-        
+
         if ("UZDI".equals(tipoCentro)) {
             esUzdi = true;
-            udi= new UDI();
-            cai= new CAI();
+            udi = new UDI();
+            cai = new CAI();
             listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
-        
+
         } else if ("CAI".equals(tipoCentro)) {
             esUzdi = false;
-            udi= new UDI();
-            cai= new CAI();
+            udi = new UDI();
+            cai = new CAI();
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
     }
@@ -190,7 +199,7 @@ public class TallerControlador implements Serializable {
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
-        } 
+        }
         return numeroParticipantes;
     }
 
@@ -302,7 +311,10 @@ public class TallerControlador implements Serializable {
         this.listadoAsistencia = listadoAsistencia;
     }
 
-    
+    public Usuario getUsuarioLogin() {
+        return usuarioLogin;
+    }    
+
     /**
      * ***************************Eventos********************************************
      */
@@ -316,22 +328,22 @@ public class TallerControlador implements Serializable {
         itemAux.setResponsable(responsable);
 
         listaItemsTaller.add(itemAux);
-        
+
         limpiarActividad();
     }
 
-    private void limpiarActividad(){
-        duracion=null;
-        actividad=null;
-        materiales=null;
-        objetivoEspecifico=null;
-        responsable=null;
+    private void limpiarActividad() {
+        duracion = null;
+        actividad = null;
+        materiales = null;
+        objetivoEspecifico = null;
+        responsable = null;
     }
-    
+
     private void asignarUdiCai() {
-        
+
         for (UDI u : listaUdi) {
-        
+
             if (u.getUdi().equals(udi.getUdi())) {
                 udi = u;
                 break;
@@ -343,79 +355,80 @@ public class TallerControlador implements Serializable {
                 break;
             }
         }
-        
+
         if (udi.getIdUdi() != null) {
-            
+
             tallerCrear.setIdUdi(udi);
             tallerCrear.setIdCai(null);
-        
+
         } else if (cai.getIdCai() != null) {
             tallerCrear.setIdCai(cai);
             tallerCrear.setIdUdi(null);
         }
     }
 
-    private Taller guardarTaller(){
-    
-        try{
-            
-            asignarUdiCai();
-            tallerCrear.setNumeroTotalParticipantes(numeroParticipantes);
-            Taller taller = servicioTaller.guardarTaller(tallerCrear);
+    private Taller guardarTaller() {
 
-            if(taller!= null){
-                return taller;
-            }
-            else{
+        try {
+            if (usuarioLogin!=null) {
+                asignarUdiCai();
+                tallerCrear.setNumeroTotalParticipantes(numeroParticipantes);
+                tallerCrear.setIdUsuario(usuarioLogin);
+                tallerCrear.setTipo(tipoTaller);
+                Taller taller = servicioTaller.guardarTaller(tallerCrear);
+
+                if (taller != null) {
+                    return taller;
+                } else {
+                    return null;
+                }
+            }else{
                 return null;
             }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             return null;
         }
+
     }
-    
+
     private void guardarItemsTaller(Taller tallerGuardado) {
 
         int itemsGuardados = 0;
 
         for (ItemTaller i : listaItemsTaller) {
-            
+
             i.setIdTaller(tallerGuardado);
             servicioItemTaller.guardarItemTaller(i);
             itemsGuardados++;
         }
 
     }
-    
+
     private void generarRegistroAsistencia(Taller taller) {
 
         if (taller.getIdUdi() == null && taller.getIdCai() == null) {
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR, AL GENERAR EL REGISTRO DE ASISTENCIA ", "Aviso"));
-        } 
-        else if (taller.getIdUdi() != null) {
-        
+        } else if (taller.getIdUdi() != null) {
+
             List<AdolescenteInfractor> registroAux = servicioRegistro.listaAdolescentesInfractoresPorUzdi(taller.getIdUdi());
-            
+
             if (registroAux == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO HAY ADOLESCENTES INFRACTORES EN LA " + taller.getIdUdi().getUdi(), "Aviso"));
-            } 
-            else {         
-                listadoAsistencia=registroAux;
-                
+            } else {
+                listadoAsistencia = registroAux;
+
             }
-        } 
-        else if (taller.getIdCai() != null) {
-        
+        } else if (taller.getIdCai() != null) {
+
             List<AdolescenteInfractor> registroAux = servicioRegistro.listaAdolescentesInfractoresPorCai(taller.getIdCai());
-            
+
             if (registroAux == null) {
                 //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO HAY ADOLESCENTES INFRACTORES EN LA " + taller.getIdCai().getCai(), "Aviso"));
-            } 
-            else {
-                listadoAsistencia=registroAux;
-                
+            } else {
+                listadoAsistencia = registroAux;
+
             }
         }
     }
@@ -424,12 +437,12 @@ public class TallerControlador implements Serializable {
 
         try {
             if (taller != null && listadoAsistencia != null) {
-                
+
                 registroAsistencia.setIdTaller(taller);
                 RegistroAsistencia registroAsistenciaAux = servicioRegistro.guardarRegistroAsistencia(registroAsistencia);
 
                 if (registroAsistenciaAux != null) {
-                    
+
                     int asistenciaAdolescentes = 0;
 
                     if (listadoAsistencia.size() > 0) {
@@ -449,19 +462,18 @@ public class TallerControlador implements Serializable {
                     }
                 }
             }
-            
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA", "ERROR"));
         }
 
     }
-    
+
     public String guardarRegistroTaller() {
 
         try {
-        if (udi.getUdi() != null || cai.getCai() != null) {
-                
+            if (udi.getUdi() != null || cai.getCai() != null) {
+
                 if (numeroParticipantes > 0) {
                     Taller tallerAux = guardarTaller();
 
@@ -483,14 +495,12 @@ public class TallerControlador implements Serializable {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
                         return null;
                     }
-                }
-                else{
+                } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
                     return null;
                 }
-                
-            }
-            else{
+
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO HA SELECCIONADO UNA CAI O UDI PARA EL TALLER", "Aviso"));
                 return null;
             }
@@ -499,7 +509,7 @@ public class TallerControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
             return null;
         }
-        
+
     }
 
     public void guardarPDFAsistencia() {
@@ -510,7 +520,7 @@ public class TallerControlador implements Serializable {
 
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("txtUDI", "REGISTRO DE ASISTENCIA " + tallerCrear.getIdUdi().getUdi());
-        parametros.put("txtTema","TALLER:  "+ tallerCrear.getTema());
+        parametros.put("txtTema", "TALLER:  " + tallerCrear.getTema());
         try {
 
             File jasper = new File(ruta);
