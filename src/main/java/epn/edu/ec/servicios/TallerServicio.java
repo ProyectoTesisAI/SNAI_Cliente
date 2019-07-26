@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
@@ -13,20 +8,11 @@ import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
+import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- *
- * @author User
- */
 public class TallerServicio {
     
     private final ConexionServicio<Taller> conexion;
@@ -82,7 +68,33 @@ public class TallerServicio {
         Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformePorUsuario", "POST", true, usuario);
         if(response.getStatus()==200){
             listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }           
+        }else if(response.getStatus()==204){
+            listaActividadesAux=new ArrayList<>();
+        }
+        return listaActividadesAux;
+    }
+    
+    public List<Taller> listaTalleresSinInformeSoloUZDI(){
+        
+        List<Taller> listaActividadesAux=null;
+        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformeSoloUZDI", "GET", true, null);
+        if(response.getStatus()==200){
+            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
+        }else if(response.getStatus()==204){
+            listaActividadesAux=new ArrayList<>();
+        }
+        return listaActividadesAux;
+    }
+    
+    public List<Taller> listaTalleresSinInformeSoloCAI(){
+        
+        List<Taller> listaActividadesAux=null;
+        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformeSoloCAI", "GET", true, null);
+        if(response.getStatus()==200){
+            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
+        }else if(response.getStatus()==204){
+            listaActividadesAux=new ArrayList<>();
+        }
         return listaActividadesAux;
     }
     

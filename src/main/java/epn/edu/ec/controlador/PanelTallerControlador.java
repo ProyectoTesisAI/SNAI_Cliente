@@ -1,6 +1,7 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Taller;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
@@ -18,15 +19,30 @@ public class PanelTallerControlador implements Serializable {
     private List<Taller> listaTalleres;
     private TallerServicio servicio;
     private EnlacesPrograma enlaces;
+    private Usuario usuario;
 
     @PostConstruct
     public void init() {
 
         servicio = new TallerServicio();
         enlaces = new EnlacesPrograma();
+        usuario = new Usuario();
+        usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
         
         listaTalleres = new ArrayList<>();
-        listaTalleres = servicio.listaTalleresSinInforme();
+        if(usuario!=null){
+            if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
+                listaTalleres = servicio.listaTalleresSinInforme();
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR/LIDER UZDI")){
+                listaTalleres=servicio.listaTalleresSinInformeSoloUZDI();
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")){
+                listaTalleres=servicio.listaTalleresSinInformeSoloCAI();
+            }else {
+                listaTalleres = servicio.listaTalleresSinInformePorUsuario(usuario);
+            }
+        }else{
+            System.out.println("Hubo un problema");
+        }
 
     }
 

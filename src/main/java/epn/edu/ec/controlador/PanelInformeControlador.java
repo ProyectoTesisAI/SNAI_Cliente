@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Informe;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.InformeServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
@@ -16,10 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-/**
- *
- * @author User
- */
 @Named(value = "panelInformeControlador")
 @ViewScoped
 public class PanelInformeControlador implements Serializable{
@@ -27,16 +19,29 @@ public class PanelInformeControlador implements Serializable{
     private List<Informe> listaInforme;
     private InformeServicio servicio;
     private EnlacesPrograma enlaces;
+    private Usuario usuario;
 
     @PostConstruct
     public void init() {
 
         servicio = new InformeServicio();
         enlaces=new EnlacesPrograma();
+        usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
 
         listaInforme = new ArrayList<>();
-        listaInforme = servicio.listarInforme();
-
+        if(usuario!=null){
+            if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
+                listaInforme = servicio.listarInforme();
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR/LIDER UZDI")){
+                listaInforme=servicio.listarInformesSoloUZDI();
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")){
+                listaInforme=servicio.listarInformesSoloCAI();
+            }else {
+                listaInforme = servicio.listarInformesPorUsuario(usuario);
+            }
+        }else{
+            System.out.println("Hubo un problema");
+        }
     }
 
     public List<Informe> getListaInforme() {
