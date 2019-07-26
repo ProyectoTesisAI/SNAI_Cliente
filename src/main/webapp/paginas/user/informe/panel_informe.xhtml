@@ -37,18 +37,20 @@
                                              responsive="true"
                                              searching="false"
                                              select="true"
+                                             style="width: 100%; margin: auto;"
                                              selectionMode="multiple"
                                              ajax="true">
-                                    <b:dataTableColumn value="#{tp.idTaller.numeroTaller}"/>
-                                    <b:dataTableColumn value="#{tp.idTaller.tema}"/>
-                                    <b:dataTableColumn value="#{tp.idTaller.fecha}"/>
+                                    <b:dataTableColumn value="#{tp.tipo}"/>
+                                    <b:dataTableColumn label="Fecha" style="min-width: 85px;">
+                                        <b:dateTimePicker show-date="true" show-time="false" disabled="true" icon="false" value="#{tp.idTaller.fecha}"/>
+                                    </b:dataTableColumn>
 
-                                    <b:dataTableColumn label="Ver Taller">
+                                    <b:dataTableColumn label="Ver Taller" style="min-width: 85px;">
                                         <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelInformeControlador.verTaller(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </b:dataTableColumn>
-                                    <b:dataTableColumn label="Ver Informe">
+                                    <b:dataTableColumn label="Ver Informe" style="min-width: 85px;">
                                         <b:commandButton  value="Ver Informe"  class="btn btn-danger btn-block" action="#{panelInformeControlador.verInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>

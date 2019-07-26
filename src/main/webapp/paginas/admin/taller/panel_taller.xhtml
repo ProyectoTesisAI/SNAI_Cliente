@@ -42,9 +42,12 @@
                                              ajax="true"
                                              responsive="true"
                                              >
-                                    <b:dataTableColumn value="#{tp.numeroTaller}"/>
+                                    <b:dataTableColumn value="#{tp.tipo}"/>
                                     <b:dataTableColumn value="#{tp.tema}"/>
-                                    <b:dataTableColumn value="#{tp.fecha}"/>
+                                    <b:dataTableColumn label="Fecha" style="min-width: 85px;">
+                                        <b:dateTimePicker show-date="true" show-time="false" disabled="true" icon="false" value="#{tp.fecha}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="Elaborado por" value="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}"/>
 
                                     <b:dataTableColumn label="Ver Taller">
                                         <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelTallerControlador.verTaller(tp)}">

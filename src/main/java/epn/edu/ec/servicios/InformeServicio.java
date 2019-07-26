@@ -1,27 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Informe;
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-/**
- *
- * @author User
- */
 public class InformeServicio {
     
-    private final ConexionServicio<Informe> conexion;    
+    private final ConexionServicio<Informe> conexion;
+    private final ConexionServicio<Usuario> conexionU;
     private static final String URL_INFORME=Constantes.URL_INFORME;
     
     public InformeServicio(){
         conexion= new ConexionServicio<>();
+        conexionU= new ConexionServicio<>();
     }
     
     public Informe guardarInforme(Informe informe){
@@ -33,8 +28,7 @@ public class InformeServicio {
         }
         return informeAux;
 
-    }
-    
+    }    
     
     public List<Informe> listarInforme(){
         
@@ -44,6 +38,39 @@ public class InformeServicio {
             listaItemsInforme= response.readEntity(new GenericType<List<Informe>>(){});
         }           
         return listaItemsInforme;
+    }
+    
+    public List<Informe> listarInformesPorUsuario(Usuario usuario){
+        List<Informe> listaInformesAux = null;
+        Response response = conexionU.conexion(URL_INFORME+"/InformesPorUsuario", "POST", true, usuario);
+        if(response.getStatus()==200){
+            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
+        }else if(response.getStatus()==204){
+            listaInformesAux=new ArrayList<>();
+        }
+        return listaInformesAux;
+    }
+    
+    public List<Informe> listarInformesSoloUZDI(){
+        List<Informe> listaInformesAux = null;
+        Response response = conexionU.conexion(URL_INFORME+"/InformeSoloUZDI", "GET", true, null);
+        if(response.getStatus()==200){
+            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
+        }else if(response.getStatus()==204){
+            listaInformesAux=new ArrayList<>();
+        }
+        return listaInformesAux;
+    }
+    
+    public List<Informe> listarInformesSoloCAI(){
+        List<Informe> listaInformesAux = null;
+        Response response = conexionU.conexion(URL_INFORME+"/InformeSoloCAI", "GET", true, null);
+        if(response.getStatus()==200){
+            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
+        }else if(response.getStatus()==204){
+            listaInformesAux=new ArrayList<>();
+        }
+        return listaInformesAux;
     }
     
 }
