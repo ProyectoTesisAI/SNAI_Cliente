@@ -24,9 +24,6 @@ public class EnlacesPrograma {
     public String PATH_ADOLESCENTE_UDI_CREAR = "/paginas/udi/adolescentes_udi/ai_udi_crear.com";
     public String PATH_ADOLESCENTE_CAI_CREAR = "/paginas/cai/adolescentes_cai/ai_cai_crear.com";
     
-    public String PATH_ADOLESCENTE_UDI_ANIADIR = "/paginas/udi/matriz/panel_crear_udi.com";
-    public String PATH_ADOLESCENTE_CAI_ANIADIR = "/paginas/cai/matriz/panel_crear_cai.com";
-
     public String PATH_PANEL_INFORME = "/paginas/user/informe/panel_informe.com";
     public String PATH_INFORME_VER = "/paginas/user/informe/informe_ver.com";
     
@@ -39,12 +36,18 @@ public class EnlacesPrograma {
     public String PATH_PANEL_TALLER_ADMINISTRADOR = "/paginas/admin/taller/panel_taller.com";
     public String PATH_TALLER_EDITAR = "/paginas/admin/taller/taller_editar.com";
 
-    public String PATH_PANEL_UDI = "/paginas/udi/udi.com";
+    public String PATH_PANEL_UDI_USER = "/paginas/user/uzdi/udi.com";
+    public String PATH_PANEL_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/udi.com";
+    
     public String PATH_PANEL_CAI = "/paginas/cai/cai.com";
 
-    public String PATH_PANEL_CREAR_UDI = "/paginas/udi/matriz/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_CAI = "/paginas/cai/matriz/panel_crear_cai.com";
-
+    
+    public String PATH_PANEL_CREAR_UDI_LIDER_UZDI = "/paginas/user/uzdi/liderUzdi/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_PSICOLOGO = "/paginas/user/uzdi/psicologo/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_crear_udi.com";
+    
     public String PATH_ERROR = "/error/error.com";
 
     public String getURL_BASE() {
@@ -57,10 +60,6 @@ public class EnlacesPrograma {
 
     public String getPATH_PANEL_TALLER() {
         return PATH_PANEL_TALLER;
-    }
-
-    public String getPATH_PANEL_UDI() {
-        return PATH_PANEL_UDI;
     }
 
     public String getPATH_PANEL_CAI() {
@@ -77,10 +76,6 @@ public class EnlacesPrograma {
 
     public String getPATH_PANEL_INFORME() {
         return PATH_PANEL_INFORME;
-    }
-
-    public String getPATH_PANEL_CREAR_UDI() {
-        return PATH_PANEL_CREAR_UDI;
     }
 
     public String getPATH_PANEL_CREAR_CAI() {

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formActividadesInstrumentos">
+                <b:panel look="primary" content-disabled="#{actividadesInstrumentosControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="ACTIVIDADES E INSTRUMENTOS" style="color: white; font-weight: bold"  />
+                    </f:facet>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtPlanEjecucionMedida" value="Plan Ejecución de Medida"/>
+                            <b:selectOneMenu id="txtPlanEjecucionMedida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planEjecucionMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtPlanGlobalFamilia" value="Plan Global Familia"/>
+                            <b:selectOneMenu id="txtPlanGlobalFamilia" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planGlobalFamilia}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtPlanVida" value="Plan Vida"/>
+                            <b:selectOneMenu id="txtPlanVida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planVida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtPlanIndividualAplicacionMedida" value="Plan Individual Aplicación Medida"/>
+                            <b:selectOneMenu id="txtPlanIndividualAplicacionMedida" value="#{actividadesInstrumentosControlador.actividadesInstrumentos.planIndividualAplicacionMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{actividadesInstrumentosControlador.guardarActividadesInstrumentos()}">
+                                <f:ajax execute="formActividadesInstrumentos" render="formActividadesInstrumentos"/>
+                            </h:commandButton>
+                        </b:column>
+                    </b:row>
+
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

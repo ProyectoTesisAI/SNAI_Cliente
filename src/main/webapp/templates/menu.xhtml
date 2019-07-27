@@ -66,8 +66,8 @@
                     <h:form>
                     <p:panelMenu style="width:270px">
                         <p:submenu label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
-                            <p:menuitem value="Crear Registro" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
-                            <p:menuitem value="Gestionar Información" outcome="#{enlacesPrograma.PATH_PANEL_UDI}" icon="pi pi-refresh" />
+                            <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
+                            <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" icon="pi pi-refresh" />
                         </p:submenu>
                         <p:submenu label="Adolescente CAI" rendered="#{administracionMenuControlador.esCAI}">
                             <p:menuitem value="Crear Registro" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>

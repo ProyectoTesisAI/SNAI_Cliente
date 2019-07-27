@@ -2,6 +2,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -16,21 +17,24 @@ import javax.faces.view.ViewScoped;
 public class AdministracionMenuControlador implements Serializable {
 
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     private boolean esCAI;
     private boolean esUZDI;
     private boolean tipoRolJuridico;
     private boolean tipoRolPsicologo;
     private boolean tipoRolInspector;
+    private boolean permitidoCrearAdolescenteUDI;
     
     @PostConstruct
     public void init() {
        
         enlaces = new EnlacesPrograma();
+        permisosUsuario= new PermisosUsuario();
     }
-
+    
     public boolean isEsCAI() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if(rolUsuario!=null){
             if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
@@ -44,7 +48,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public boolean isEsUZDI() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if(rolUsuario!=null){
             if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)|| "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
@@ -57,7 +61,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public boolean isTipoRolJuridico() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
             if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
@@ -71,7 +75,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public boolean isTipoRolPsicologo() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
 
@@ -86,7 +90,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public boolean isTipoRolInspector() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
         
@@ -98,6 +102,21 @@ public class AdministracionMenuControlador implements Serializable {
         }
         return tipoRolInspector;
     }
+
+    public boolean isPermitidoCrearAdolescenteUDI() {
+        
+        String rolUsuario=permisosUsuario.RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR/LIDER UZDI".equals(rolUsuario)){
+                permitidoCrearAdolescenteUDI=true;
+            }
+        }
+        return permitidoCrearAdolescenteUDI;
+    }
+    
+    
     
     public String validarTallerPsicologia() {
         
@@ -122,7 +141,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public String gestionarTaller() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
 
@@ -139,7 +158,7 @@ public class AdministracionMenuControlador implements Serializable {
 
     public String gestionarInforme() {
         
-        String rolUsuario=RolUsuario();
+        String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
         
@@ -153,23 +172,47 @@ public class AdministracionMenuControlador implements Serializable {
             return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
-
-    private String RolUsuario(){
     
-        Usuario usuarioLoginAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-
-        if(usuarioLoginAux!=null){
-            String rolUsuario=usuarioLoginAux.getIdRolUsuarioCentro().getIdRol().getRol();
-            
-            if(rolUsuario!=null){
-                return rolUsuario;
+    public String validarGestionInformacionAdolescenteUZDI(){
+    
+        String rolUsuario=permisosUsuario.RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if ("ADMINISTRADOR".equals(rolUsuario)){
+                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
             }
             else{
-                return null;
+            
+                return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
             }
-        }   
+        }
         else{
-            return null;
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        }
+    }
+    
+    public String redireccionCrearRegistroAdolescenteUZDI(){
+        
+        String rolUsuario=permisosUsuario.RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if ("ADMINISTRADOR".equals(rolUsuario)){
+                return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR+"?faces-redirect=true";
+            }
+            else{
+            
+                if(rolUsuario.equals("COORDINADOR/LIDER UZDI")){
+                    return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_ERROR+"?faces-redirect=true";
+                }  
+            }
+        }
+        else{
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
 }

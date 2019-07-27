@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.EjeSalud;
 import epn.edu.ec.servicios.EjeSaludServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -30,6 +31,7 @@ public class EjeSaludUDIControlador implements Serializable {
     private boolean saludable;
     private boolean consumeSustancias;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
 
     private String genero;
     private boolean esMujer;
@@ -40,6 +42,7 @@ public class EjeSaludUDIControlador implements Serializable {
     @PostConstruct
     public void init() {
 
+        permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
         enlaces = new EnlacesPrograma();
         servicio = new EjeSaludServicio();
@@ -214,7 +217,22 @@ public class EjeSaludUDIControlador implements Serializable {
 
         EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
         if (ejeSaludUDIAux != null) {
-            return enlaces.PATH_PANEL_UDI + "?faces-redirect=true";
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         } else {
             return null;
         }

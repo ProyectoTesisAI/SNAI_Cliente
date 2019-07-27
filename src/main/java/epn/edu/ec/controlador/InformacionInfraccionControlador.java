@@ -13,6 +13,7 @@ import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
 import epn.edu.ec.servicios.InformacionInfraccionServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +40,12 @@ public class InformacionInfraccionControlador implements Serializable {
     private DatosTipoPenalCAIServicio servicioTP;
     
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init() {
         
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio = new InformacionInfraccionServicio();
 
@@ -142,7 +145,22 @@ public class InformacionInfraccionControlador implements Serializable {
 
         InformacionInfraccion informacionInfraccionAux = servicio.guardarInformacionInfraccion(informacionInfraccion);
         if (informacionInfraccionAux != null) {
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";    
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         } else {
             return null;
         }

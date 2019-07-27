@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formCumplimientoMedida">
+                <b:panel look="primary" content-disabled="#{estadoCumplimientoMedidaControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="ESTADO DE CUMPLIMIENTO MEDIDA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtSituacionActual" value="Situación Actual"/>
+                            <b:selectOneMenu id="txtSituacionActual" value="#{estadoCumplimientoMedidaControlador.estado}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="EN EJECUCIÓN"  itemValue="EN_EJECUCIÓN" />
+                                <f:selectItem itemLabel="CULMINADA"  itemValue="CULMINADA" />
+                                <f:selectItem itemLabel="DERIVADA"  itemValue="DERIVADA" />
+                                <f:selectItem itemLabel="INCUMPLIMIENTO"  itemValue="INCUMPLIMIENTO" />
+                                <f:ajax render="formCumplimientoMedida:estado"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <h:panelGroup id="estado">
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarEjecucion}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputText id="salida" value="#{estadoCumplimientoMedidaControlador.estado}"/>
+                                </b:column>
+                            </b:row>                          
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarCulminada}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtFechaReporteCulminacion" value="Fecha Reporte Culminación"/>
+                                    <b:dateTimePicker id="txtFechaReporteCulminacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteCulminacion}"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarDerivada}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
+                                    <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{estadoCumplimientoMedidaControlador.tipoCentro}" >
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="UZDI"  itemValue="UZDI"/>
+                                        <f:selectItem itemLabel="CAI"  itemValue="CAI"/>
+
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <h:panelGroup id="tipoCentro">
+                                    <b:column span="4" offset="2">
+                                        <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}"/>
+                                        <b:selectOneMenu id="txtUzdi" required="true" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.udi.udi}">
+                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                            <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
+                                        </b:selectOneMenu>
+
+                                        <h:outputLabel for="txtCai" value="CAI" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}"/>
+                                        <b:selectOneMenu id="txtCai" required="true" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.cai.cai}">
+                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                            <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
+                                        </b:selectOneMenu>
+                                    </b:column>
+                                </h:panelGroup>
+                            </b:row>
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtFechaReporteDerivacion" value="Fecha Reporte Derivación"/>
+                                    <b:dateTimePicker id="txtFechaReporteDerivacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteDerivacion}"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarIncumplimiento}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtFechaReporteIncumplimiento" value="Fecha Reporte Incumplimiento"/>
+                                    <b:dateTimePicker id="txtFechaReporteIncumplimiento" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteIncumplimiento}"/>
+                                </b:column>
+
+                                <b:column span="4" offset="2">                
+                                    <h:outputLabel for="txtEstadoIncumplimiento" value="Estado de incumplimiento"/>
+                                    <b:selectOneMenu id="txtEstadoIncumplimiento" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.estadoIncumplimiento}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="JUSTIFICADO"  itemValue="JUSTIFICADO" />
+                                        <f:selectItem itemLabel="NO JUSTIFICADO"  itemValue="NO JUSTIFICADO" />
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </b:row>
+
+                            <b:row>                                                
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtReanudacionMedida" value="Reanudación de medida"/>
+                                    <b:selectOneMenu id="txtReanudacionMedida" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.reanudacionMedida}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                    </b:selectOneMenu>
+                                </b:column>
+
+                                <b:column span="4" offset="2">
+                                    <h:outputLabel for="txtFechaReanudacion" value="Fecha Reanudación"/>
+                                    <b:datepicker id="txtFechaReanudacion" placeholder="dd/mm/aa" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReanudacion}"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGroup>
+
+                        <b:row>
+                            <b:column span="3" offset="8">
+                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" rendered="#{!estadoCumplimientoMedidaControlador.activarEjecucion}" action="#{estadoCumplimientoMedidaControlador.guardarEstadoCumplimientoMedida()}">
+                                    <f:ajax execute="formCumplimientoMedida" render="formCumplimientoMedida"/>
+                                </h:commandButton>
+                            </b:column>
+                        </b:row>
+                    </h:panelGroup>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+
