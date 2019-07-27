@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.EjeLaboral;
 import epn.edu.ec.servicios.EjeLaboralServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -21,10 +22,12 @@ public class EjeLaboralControlador implements Serializable{
     private boolean guardado;
     private boolean trabaja;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
         
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio= new EjeLaboralServicio();
         
@@ -106,7 +109,21 @@ public class EjeLaboralControlador implements Serializable{
 
         EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
         if(ejeLaboralAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
         }
         else{
             return null;

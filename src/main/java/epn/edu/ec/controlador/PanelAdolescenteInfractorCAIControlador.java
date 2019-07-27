@@ -41,7 +41,8 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
         //return "/paginas/cai/matriz/panel_crear_cai.com?faces-redirect=true";
-        return enlaces.PATH_ADOLESCENTE_CAI_ANIADIR+"?faces-redirect=true";
+        //return enlaces.PATH_ADOLESCENTE_CAI_ANIADIR+"?faces-redirect=true";
+        return null;
     }
 
 }

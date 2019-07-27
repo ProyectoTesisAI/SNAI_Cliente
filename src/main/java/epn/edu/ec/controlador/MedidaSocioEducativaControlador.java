@@ -6,6 +6,7 @@ import epn.edu.ec.modelo.MedidaSocioeducativa;
 import epn.edu.ec.servicios.InformacionJudicialServicio;
 import epn.edu.ec.servicios.MedidaSocioeducativaServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +45,12 @@ public class MedidaSocioEducativaControlador implements Serializable{
     private boolean libertadAsistidaGuardado;
     
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
         
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio= new MedidaSocioeducativaServicio();
         servicioJudicial= new InformacionJudicialServicio();
@@ -305,7 +308,22 @@ public class MedidaSocioEducativaControlador implements Serializable{
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
         if(medidaSocioeducativaAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";    
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         }
         else{
             return null;
@@ -321,7 +339,22 @@ public class MedidaSocioEducativaControlador implements Serializable{
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
         if(medidaSocioeducativaAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true"; 
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         }
         else{
             return null;
@@ -337,7 +370,22 @@ public class MedidaSocioEducativaControlador implements Serializable{
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
         if(medidaSocioeducativaAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";   
+            
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
         }
         else{
             return null;
@@ -353,7 +401,22 @@ public class MedidaSocioEducativaControlador implements Serializable{
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
         if(medidaSocioeducativaAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";     
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         }
         else{
             return null;
@@ -370,7 +433,22 @@ public class MedidaSocioEducativaControlador implements Serializable{
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
         if(medidaSocioeducativaAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";     
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
+            
         }
         else{
             return null;

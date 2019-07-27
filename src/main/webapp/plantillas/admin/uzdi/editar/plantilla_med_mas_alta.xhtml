@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <b:form>
+                <b:panel look="primary">
+                    <f:facet name="heading">
+                        <h:outputText value="MEDIDA MAS ALTA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row style="margin-top: 30px;margin-bottom: 30px;" rendered="#{!medidaMasAltaControlador.guardado}" >
+                        <b:column span="10" offset="1">
+                            <h:outputLabel style="color: #e8492b" value="NO DISPONIBLE, AÚN NO SE HAN REGISTRADO MEDIDAS SOCIOEDUCATIVAS"  />
+                        </b:column>                                           
+                    </b:row>
+
+                    <b:row rendered="#{medidaMasAltaControlador.guardado}" content-disabled="true">
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtMedidaMasAlta" value="Medida Más Alta"/>
+                            <b:inputText id="txtMedidaMasAlta" placeholder="Medida Más Alta" value="#{medidaMasAltaControlador.medidaMasAlta.medidaSocioeducativa}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtTiempoMeses1" value="Tiempo(Meses)"/>
+                            <b:inputText id="txtTiempoMeses1" placeholder="Tiempo(Meses)" value="#{medidaMasAltaControlador.medidaMasAlta.tiempoMeses}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtTiempoDia" value="Tiempo(Día)"/>
+                            <b:inputText id="txtTiempoDia" placeholder="Tiempo(Día)" value="#{medidaMasAltaControlador.medidaMasAlta.tiempoDia}"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

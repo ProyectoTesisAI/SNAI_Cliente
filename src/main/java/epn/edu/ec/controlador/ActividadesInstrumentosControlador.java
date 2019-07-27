@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.ActividadesInstrumentos;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.ActividadesInstrumentosServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -19,12 +20,12 @@ public class ActividadesInstrumentosControlador implements Serializable{
     private ActividadesInstrumentosServicio servicio;
     private boolean guardado;
     private EnlacesPrograma enlaces;
-    
+    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
         
-        
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio= new ActividadesInstrumentosServicio();
         
@@ -84,7 +85,21 @@ public class ActividadesInstrumentosControlador implements Serializable{
 
         ActividadesInstrumentos actividadesInstrumentosAux = servicio.guardarActividadesInstrumentos(actividadesInstrumentos);
         if(actividadesInstrumentosAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";      
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }              
         }
         else{
             return null;

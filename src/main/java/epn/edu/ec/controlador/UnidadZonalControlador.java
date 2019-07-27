@@ -6,6 +6,7 @@ import epn.edu.ec.modelo.UnidadZonal;
 import epn.edu.ec.servicios.UdiServicio;
 import epn.edu.ec.servicios.UnidadZonalServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,12 @@ public class UnidadZonalControlador implements Serializable{
     private List<UDI> listaUDI;
     private UdiServicio servicioUDI;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init(){
+        
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio = new UnidadZonalServicio();
         servicioUDI = new UdiServicio();
@@ -131,7 +135,21 @@ public class UnidadZonalControlador implements Serializable{
         this.unidadZonal.setIdUnidadZonal(adolescenteInfractorUDI);
         UnidadZonal uz= servicio.guardarUnidadZonal(unidadZonal);
         if(uz!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";    
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
         }
         else{
             return null;

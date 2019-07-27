@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.EjeEducativo;
 import epn.edu.ec.servicios.EjeEducativoServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -22,11 +23,12 @@ public class EjeEducativoCAIControlador implements Serializable{
     private boolean guardado;
     private boolean estudia;
     private EnlacesPrograma enlaces;
-    
+    private PermisosUsuario permisosUsuario;
     
      @PostConstruct
     public void init(){
         
+        permisosUsuario= new PermisosUsuario();
         enlaces= new EnlacesPrograma();
         servicio= new EjeEducativoServicio();
         
@@ -109,7 +111,21 @@ public class EjeEducativoCAIControlador implements Serializable{
         
         EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(ejeEducativo);
         if(ejeEducativoCAIAux!=null){
-            return enlaces.PATH_PANEL_UDI+"?faces-redirect=true";        
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }             
         }
         else{
             return null;

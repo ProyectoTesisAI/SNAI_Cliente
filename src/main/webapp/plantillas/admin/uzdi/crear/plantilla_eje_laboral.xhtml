@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <b:form id="formEjeLaboral">
+                <b:panel look="primary" content-disabled="#{ejeLaboralControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="EJE LABORAL" style="color: white; font-weight: bold"  />
+                    </f:facet>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtTrabaja" value="Trabaja"/>
+                            <b:selectOneMenu id="txtTrabaja" value="#{ejeLaboralControlador.trabaja}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                <f:ajax render="trabaja"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                        <b:column span="6" offset="1">
+                            <h:outputLabel for="txtInclinacionVocacional" value="Inclinación Vocacional"/>
+                            <b:inputText id="txtInclinacionVocacional" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
+                        </b:column>
+                    </b:row>
+
+                    <h:panelGroup id="trabaja" style="margin: 0px; padding: 0px;">
+                        <h:panelGroup  rendered="#{ejeLaboralControlador.trabaja}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtOcupacionAdolescente" value="Ocupación"/>
+                                    <b:inputText id="txtOcupacionAdolescente" maxlength="30" placeholder="Ocupación" value="#{ejeLaboralControlador.ejeLaboral.ocupacionAdolescente}"/>
+                                </b:column>
+                                <b:column span="4" offset="2">
+
+                                    <h:outputLabel for="txtRamaActividadEconomica" value="Rama Actividad Económica"/>
+                                    <b:selectOneMenu id="txtRamaActividadEconomica" value="#{ejeLaboralControlador.ejeLaboral.ramaActividadEconomica}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="COMERCIO"  itemValue="COMERCIO" />
+                                        <f:selectItem itemLabel="SERVICIOS"  itemValue="SERVICIOS" />
+                                        <f:selectItem itemLabel="INDUSTRIA"  itemValue="INDUSTRIA" />
+                                        <f:selectItem itemLabel="SERVICIO DOMÉSTICO"  itemValue="SERVICIO DOMÉSTICO" />
+                                        <f:selectItem itemLabel="CONSTRUCCIÓN"  itemValue="CONSTRUCCIÓN" />
+                                        <f:selectItem itemLabel="MANUFACTURAS"  itemValue="MANUFACTURAS" />
+                                        <f:selectItem itemLabel="MINAS Y CANTERAS"  itemValue="MINAS Y CANTERAS" />
+                                    </b:selectOneMenu>
+                                </b:column>
+
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtAfiliacionIess" value="Afiliación IESS"/>
+                                    <b:selectOneMenu id="txtAfiliacionIess"  value="#{ejeLaboralControlador.ejeLaboral.afiliacionIess}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="SI"  itemValue="true" />
+                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                    </b:selectOneMenu>                                              
+                                </b:column>
+
+                                <b:column span="4" offset="2">
+                                    <h:outputLabel for="txtIngresoMensual" value="Ingreso Mensual"/>
+                                    <b:selectOneMenu id="txtIngresoMensual" value="#{ejeLaboralControlador.ejeLaboral.ingresoMensual}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="$1,00 a $50,00"  itemValue="$1,00 a $50,00" />
+                                        <f:selectItem itemLabel="$51,00 a $100,00"  itemValue="$51,00 a $100,00" />
+                                        <f:selectItem itemLabel="$101,00 a $ 150,00"  itemValue="$101,00 a $ 150,00" />
+                                        <f:selectItem itemLabel="$151,00 a $ 200,00"  itemValue="$151,00 a $ 200,00" />
+                                        <f:selectItem itemLabel="$201,00 a $ 386,00"  itemValue="$201,00 a $ 386,00" />
+                                        <f:selectItem itemLabel="MÁS DE $387,00"  itemValue="MÁS DE $387,00" />
+                                    </b:selectOneMenu>
+                                </b:column>
+
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtNumeroHorasTrabajo" value="Número Horas Trabajo"/>
+                                    <b:inputText id="txtNumeroHorasTrabajo" mask="integer" placeholder="Número Horas Trabajo" value="#{ejeLaboralControlador.ejeLaboral.numeroHorasTrabajo}"/>
+                                </b:column>
+
+                                <b:column span="10" offset="1">
+                                    <h:outputLabel for="txtDescripcionActividad" value="Descripción Actividad"/>
+                                    <b:inputText id="txtDescripcionActividad" maxlength="100" placeholder="Descripción Actividad"  value="#{ejeLaboralControlador.ejeLaboral.descripcionActividad}"/>
+                                </b:column>
+
+                            </b:row>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!ejeLaboralControlador.trabaja}">
+                            <b:row>
+                                <b:column span="5" offset="1">
+                                    <h:outputLabel value="NO NECESITA LLENAR ESTA SECCION"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeLaboralControlador.guardarEjeLaboral()}">
+                                <f:ajax execute="formEjeLaboral" render="formEjeLaboral"/>
+                            </h:commandButton>
+                        </b:column>
+                    </b:row>                                   
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

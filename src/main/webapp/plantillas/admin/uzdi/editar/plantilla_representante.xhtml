@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <b:form id="formRepresentante">
+                <b:panel look="primary" content-disabled="#{!representanteControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="REPRESENTANTE" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNacionalidad" value="Nacionalidad"/>
+                            <b:selectOneMenu id="txtNacionalidad" update="tipoDocumentoRepresentante" process="@this" value="#{representanteControlador.tipoDocumento}">
+                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                                <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
+                                <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
+                            </b:selectOneMenu>
+                        </b:column>
+                        <h:panelGroup id="tipoDocumentoRepresentante">
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtCedula1" rendered="#{representanteControlador.esCedula}" value="Cédula"/>
+                                <b:inputText id="txtCedula1" placeholder="Cédula" maxlength="10" rendered="#{representanteControlador.esCedula}" value="#{representanteControlador.representante.cedula}">
+                                    <f:ajax event="blur" listener="#{representanteControlador.limpiarMensajeCedula}" render="txtCedula1 mensaje-cedulaRepresentante" />
+                                    <f:ajax event="keyup" listener="#{representanteControlador.validarCedula}" render="mensaje-cedulaRepresentante" />
+                                </b:inputText>
+                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControlador.mensaje}"/>
+
+                                <h:outputLabel for="txtDocumentoR" value="Documento/Pasaporte" rendered="#{!representanteControlador.esCedula}"/>
+                                <b:inputText id="txtDocumentoR" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControlador.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControlador.representante.documento}"/>
+                            </b:column>
+                        </h:panelGroup>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNombres1" value="Apellidos y Nombres"/>
+                            <b:inputText id="txtNombres1" placeholder="Nombres" maxlength="40" value="#{representanteControlador.representante.nombresApellidos}"/>
+                        </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtParentesco" value="Parentesco"/>
+                            <b:inputText id="txtParentesco" placeholder="Parentesco" maxlength="15" value="#{representanteControlador.representante.parentesco}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{representanteControlador.guardarRepresentante()}">
+                                <f:ajax execute="formRepresentante" render="formRepresentante"/>
+                            </h:commandButton>
+
+                        </b:column>
+                    </b:row>
+
+                </b:panel>
+            </b:form>
+        </ui:composition>
+    </h:body>
+</html>
+

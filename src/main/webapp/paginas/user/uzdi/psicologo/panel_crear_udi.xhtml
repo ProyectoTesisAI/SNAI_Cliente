@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+        <ui:composition template="./../../../../templates/menu.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/bootstrap.css"/>
+                <script src="../../../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h1>PSICOLOGÍA</h1>
+                <br/>
+                <ui:include src="../../../../plantillas/admin/uzdi/crear/plantilla_eje_salud.xhtml" />
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

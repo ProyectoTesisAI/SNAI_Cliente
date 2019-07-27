@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,12 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     private List<AdolescenteInfractorUDI> listadoAdolescentesInfractoresUDI;
     private AdolescenteInfractorUDIServicio servicio;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
+        
+        permisosUsuario= new PermisosUsuario();
         servicio= new AdolescenteInfractorUDIServicio();
         enlaces=new EnlacesPrograma();
         listadoAdolescentesInfractoresUDI= new ArrayList<>();
@@ -38,9 +42,15 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     
     public String agregarInformacion(AdolescenteInfractorUDI ai_udi){
         
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
-        //return "/paginas/udi/matriz/panel_crear_udi.com?faces-redirect=true";
-        return enlaces.PATH_ADOLESCENTE_UDI_ANIADIR+"?faces-redirect=true";
+        String gestionInformacionAdolescenteUzdi=permisosUsuario.redireccionGestionInformacionUZDI();
+        
+        if(gestionInformacionAdolescenteUzdi!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
+            return gestionInformacionAdolescenteUzdi;
+        }else{
+            return null;
+        }     
     }
     
     public String editarInformacion(AdolescenteInfractorUDI ai_udi){

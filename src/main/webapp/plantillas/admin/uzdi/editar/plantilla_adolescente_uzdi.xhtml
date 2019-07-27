@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <b:form>
+                <b:panel look="primary" content-disabled="#{!adolescenteInfractorUDIControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="ADOLESCENTE INFRACTOR" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row>
+                        <b:column span="4" offset="1">                                                    
+                            <h:outputLabel for="txtNombres" value="Nombres"/>
+                            <b:inputText id="txtNombres" placeholder="Nombres" maxlength="20" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.nombres}"/>
+                        </b:column>
+                        <b:column span="4" offset="2">                                                    
+                            <h:outputLabel for="txtApellidos" value="Apellidos"/>
+                            <b:inputText id="txtApellidos" placeholder="Apellidos" maxlength="30" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.apellidos}"/>
+                        </b:column>                                                
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">                                                   
+                            <h:outputLabel for="txtCedula" value="Cédula"/>
+                            <b:inputText id="txtCedula" placeholder="Cédula" maxlength="10" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.cedula}">
+                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.limpiarMensajeCedulaEditar}" render="txtCedula mensaje-cedula" />
+                                <f:ajax event="keyup" listener="#{adolescenteInfractorUDIControlador.validarCedulaEditar}" render="mensaje-cedula" />
+                            </b:inputText>
+                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje}"/>
+                        </b:column>
+                        <b:column span="4" offset="2">                               
+                            <h:outputLabel for="txtGenero" value="Género"/>
+                            <b:selectOneMenu id="txtGenero" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.genero}">
+                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                                <f:selectItem itemLabel="MASCULINO"  itemValue="MASCULINO" />
+                                <f:selectItem itemLabel="FEMENINO"  itemValue="FEMENINO" />
+                            </b:selectOneMenu>
+
+                        </b:column>
+                        <b:column span="4" offset="1">          
+                            <h:outputLabel for="txtEtnia" value="Etnia"/>
+                            <b:selectOneMenu id="txtEtnia" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.etnia}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="MESTIZOS"  itemValue="MESTIZOS" />
+                                <f:selectItem itemLabel="INDÍGENAS"  itemValue="INDÍGENAS" />
+                                <f:selectItem itemLabel="AFROECUATORIANOS"  itemValue="AFROECUATORIANOS" />
+                                <f:selectItem itemLabel="BLANCO"  itemValue="BLANCO" />
+                                <f:selectItem itemLabel="MONTUVIO"  itemValue="MONTUVIO" />
+                                <f:selectItem itemLabel="OTRO"  itemValue="OTRO" />
+                            </b:selectOneMenu>
+                        </b:column>
+                        <b:column span="4" offset="2">       
+                            <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
+                            <b:dateTimePicker id="txtFechaNacimiento" required="true" placeholder="Fecha"  showTime="false" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.fechaNacimiento}">
+                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.validarFechaNacimientoEditar}" render="mensaje-edad txtEdad" />
+                                <f:ajax event="blur" listener="#{adolescenteInfractorUDIControlador.limpiarMensajeFechaNacimientoEditar}" render="txtFechaNacimiento mensaje-edad" />
+                            </b:dateTimePicker>
+                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-edad" class="mensaje-error" value="#{adolescenteInfractorUDIControlador.mensaje1}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">   
+                            <h:outputLabel for="txtEdad" value="Edad "/>
+                            <b:inputText mask="integer" id="txtEdad" placeholder="Edad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.edad}"/>                     
+                        </b:column>
+                        <b:column span="4" offset="2">                     
+                            <h:outputLabel for="txtNumeroHijos" value="Número Hijos"/>
+                            <b:inputText id="txtNumeroHijos" mask="integer" placeholder="Número Hijos" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.numeroHijos}"/>                                    
+                        </b:column>
+
+                        <b:column span="4" offset="1">     
+                            <h:outputLabel for="txtEstadoCivil" value="Estado Civil"/>
+                            <b:selectOneMenu id="txtEstadoCivil" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.estadoCivil}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SOLTERO"  itemValue="SOLTERO" />
+                                <f:selectItem itemLabel="CASADO"  itemValue="CASADO" />
+                                <f:selectItem itemLabel="VIUDO"  itemValue="VIUDO" />
+                                <f:selectItem itemLabel="UNIÓN LIBRE"  itemValue="UNIÓN LIBRE" />
+                            </b:selectOneMenu>          
+                        </b:column>
+                        <b:column span="4" offset="2">           
+                            <h:outputLabel for="txtConQuienVive" value="Con quien Vive"/>
+                            <b:inputText id="txtConQuienVive" placeholder="Con quien Vive" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.conQuienVive}"/>                                                 
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
+                            <b:selectOneMenu id="txtDiscapacidad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.discapacidad}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="SI" />
+                                <f:selectItem itemLabel="NO"  itemValue="NO" />
+                                <f:selectItem itemLabel="EN PROCESO DE CERTIFICACION"  itemValue="EN PROCESO DE CERTIFICACION" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">                
+                            <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
+                            <b:selectOneMenu id="txtTipoDiscapacidad" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.tipoDiscapacidad}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
+                                <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
+                                <f:selectItem itemLabel="AUDITIVA"  itemValue="AUDITIVA" />
+                                <f:selectItem itemLabel="INTELECTUAL"  itemValue="INTELECTUAL" />
+                                <f:selectItem itemLabel="LENGUAJE"  itemValue="LENGUAJE" />
+                                <f:selectItem itemLabel="PSICO-SOCIAL"  itemValue="PSICO-SOCIAL" />
+                                <f:selectItem itemLabel="VISUAL"  itemValue="VISUAL" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
+                            <b:inputText id="txtPorcentajeDiscapacidad" mask="numeric" placeholder="Porcentaje Discapacidad"  value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.porcentajeDiscapacidad}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtEnfermedadesRaras" value="Enfermedades Catastróficas Raras"/>
+                            <b:selectOneMenu id="txtEnfermedadesRaras" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.enfermedadesCatastroficasRaras}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtRegistroSocial" value="Registro Social"/>
+                            <b:selectOneMenu id="txtRegistroSocial" value="#{adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar.registroSocial}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:form>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+
