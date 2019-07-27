@@ -2,7 +2,10 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -15,116 +18,158 @@ public class AdministracionMenuControlador implements Serializable {
     private EnlacesPrograma enlaces;
     private boolean esCAI;
     private boolean esUZDI;
-    private String rolUsuario;
     private boolean tipoRolJuridico;
     private boolean tipoRolPsicologo;
     private boolean tipoRolInspector;
-    private Usuario usuarioLogin;
-
+    
     @PostConstruct
     public void init() {
+       
         enlaces = new EnlacesPrograma();
-        usuarioLogin=new Usuario();
-        usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        rolUsuario=usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol();
     }
 
     public boolean isEsCAI() {
-        if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
-            esUZDI=false;
-            return esCAI=true;
+        
+        String rolUsuario=RolUsuario();
+        
+        if(rolUsuario!=null){
+            if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                esUZDI=false;
+                esCAI=true;
+            }
         }
+        
         return esCAI;
     }
 
     public boolean isEsUZDI() {
-        if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)|| "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
-            esCAI=false;
-            return esUZDI=true;
+        
+        String rolUsuario=RolUsuario();
+        
+        if(rolUsuario!=null){
+            if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)|| "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                esCAI=false;
+                esUZDI=true;
+            }           
         }
         return esUZDI;
     }
 
     public boolean isTipoRolJuridico() {
-        if(rolUsuario.contains("JURIDICO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
-            tipoRolInspector=false;
-            tipoRolPsicologo=false;
-            return tipoRolJuridico=true;
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
+            if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                tipoRolInspector = false;
+                tipoRolPsicologo = false;
+                tipoRolJuridico = true;
+            }
         }
         return tipoRolJuridico;
     }
 
     public boolean isTipoRolPsicologo() {
-        if(rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
-            tipoRolInspector=false;
-            tipoRolJuridico=false;
-            return tipoRolPsicologo=true;
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
+
+            if(rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
+                tipoRolInspector=false;
+                tipoRolJuridico=false;
+                tipoRolPsicologo=true;
+            }
         }
         return tipoRolPsicologo;
     }
 
     public boolean isTipoRolInspector() {
-        if("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
-            tipoRolPsicologo=false;
-            tipoRolJuridico=false;
-            return tipoRolInspector=true;
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
+                tipoRolPsicologo=false;
+                tipoRolJuridico=false;
+                tipoRolInspector=true;
+            }
         }
         return tipoRolInspector;
     }
-
-    public Usuario getUsuarioLogin() {
-        return usuarioLogin;
-    }
     
-    public String getRolUsuario() {
-        return rolUsuario;
-    }
-
-    public void setRolUsuario(String rolUsuario) {
-        this.rolUsuario = rolUsuario;
-    }
-
     public String validarTallerPsicologia() {
+        
         String tipoTaller = "PSICOLOGIA";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        //return "/paginas/psicologia/taller_psicologia.com?faces-redirect=true";
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String validarTallerJuridico() {
+        
         String tipoTaller = "JURÍDICO";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        //return "/paginas/psicologia/taller_psicologia.com?faces-redirect=true";
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String validarTallerInspectorEducador() {
+        
         String tipoTaller = "INSPECTOR EDUCADOR";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        //return "/paginas/psicologia/taller_psicologia.com?faces-redirect=true";
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String gestionarTaller() {
-        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        String rolUsuario = usuarioAux.getIdRolUsuarioCentro().getIdRol().getRol();
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
 
-        if ("ADMINISTRADOR".equals(rolUsuario)) {
-            return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
-        } else {
-            return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
+            }
+        }
+        else{
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
 
     public String gestionarInforme() {
-        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        String rolUsuario = usuarioAux.getIdRolUsuarioCentro().getIdRol().getRol();
-
-        if ("ADMINISTRADOR".equals(rolUsuario)) {
-            return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
-        } else {
-            return enlaces.PATH_PANEL_INFORME + "?faces-redirect=true";
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_INFORME + "?faces-redirect=true";
+            }
+        }
+        else{
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
 
+    private String RolUsuario(){
+    
+        Usuario usuarioLoginAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+
+        if(usuarioLoginAux!=null){
+            String rolUsuario=usuarioLoginAux.getIdRolUsuarioCentro().getIdRol().getRol();
+            
+            if(rolUsuario!=null){
+                return rolUsuario;
+            }
+            else{
+                return null;
+            }
+        }   
+        else{
+            return null;
+        }
+    }
 }

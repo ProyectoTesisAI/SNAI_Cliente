@@ -27,7 +27,7 @@ public class PlantillaControlador implements Serializable{
         enlaces= new EnlacesPrograma();
     }
 
-    public void verificarSesion() throws IOException{
+    public void verificarSesionAdministrador() throws IOException{
     
         try{
             Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
@@ -40,11 +40,39 @@ public class PlantillaControlador implements Serializable{
                     
                     FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
                 }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
         }catch(Exception e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
         }
     }
+
+
+    public void verificarSesionUsuario() throws IOException{
     
+        try{
+            Usuario usuarioAux= (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+            
+            if(usuarioAux !=null){
+                
+                String rolUsuario=usuarioAux.getIdRolUsuarioCentro().getIdRol().getRol();
+                
+                if(rolUsuario!=null){
+                    
+                }
+                else{
+                    
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
+        }
+    }
+   
 }
