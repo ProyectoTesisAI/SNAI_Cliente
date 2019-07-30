@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formInfoCambioMedida">
+                <b:panel>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtAceptacionCambioMedida" value="Aceptacion de cambio de medida"/>
+                            <b:selectOneMenu id="txtAceptacionCambioMedida" value="#{informacionCambioMedidaControlador.informacionCambioMedida.aceptacionJuezCambioMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txObservaciones" value="Observaciones"/>
+                            <b:inputText id="txObservaciones" placeholder="Observaciones"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.observaciones}"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtCambioMedida" value="Cambio de medida socioeducativa"/>
+                            <b:selectOneMenu id="txtCambioMedida" update="txtCumplimientoMedidad6080,txtFechaCumplimiento6080,txtAlertaCambio6080" process="@this" value="#{informacionCambioMedidaControlador.informacionCambioMedida.cambioMedidaSocioeducativa}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="60% DE CUMPLIMIENTO"  itemValue="60% DE CUMPLIMIENTO" />
+                                <f:selectItem itemLabel="80% DE CUMPLIMIENTO"  itemValue="80% DE CUMPLIMIENTO" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtCumplimientoMedidad6080" value="Cumplimiento de 60% o 80% de tiempo"/>
+                            <b:inputText id="txtCumplimientoMedidad6080" disabled="true" placeholder="Días"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.cumplimieno6080TiempoPrivacionLibertad}"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">                
+                            <h:outputLabel for="txtFechaCumplimiento6080" value="Fecha de cumplimiento de 60% o 80%"/>
+                            <b:dateTimePicker id="txtFechaCumplimiento6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.fechaCumplimiento6080}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtAlertaCambio6080" value="Alerta cambio de medida 60% o 80%"/>
+                            <b:dateTimePicker id="txtAlertaCambio6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.alertaCambioMedida}"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtEspecificacionNuevaMedida" value="Especificación de la Nueva Medida"/>
+                            <b:selectOneMenu id="txtEspecificacionNuevaMedida" value="#{informacionCambioMedidaControlador.informacionCambioMedida.especificacionNuevaMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionCambioMedidaControlador.guardarInformacionCambioMedida()}">
+                                <f:ajax execute="formInfoCambioMedida" render="formInfoCambioMedida"/>
+                            </h:commandButton>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

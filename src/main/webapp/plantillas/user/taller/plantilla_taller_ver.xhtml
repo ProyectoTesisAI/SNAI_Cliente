@@ -110,54 +110,30 @@
 
                                         <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                             <div class="col-md-10 col-md-offset-1">
-                                                <div class="form-group">
-                                                    <b:dataTable id="tablaTaller" value="#{tallerEditarControlador.listaItemsTaller}" 
-                                                                 widgetVar="tableWidgetVar"
-                                                                 var="tp"
-                                                                 fixed-header="true"
-                                                                 scroll-x="true"
-                                                                 scroll-size="1000px"
-                                                                 responsive="false"
-                                                                 searching="false"
-                                                                 select="true"
-                                                                 paginated="false"
-                                                                 selectionMode="multiple"
-                                                                 style="margin: 0 auto; width: 100%;"
+                                                
+                                                <p:dataTable var="tp" value="#{tallerEditarControlador.listaItemsTaller}"  reflow="true"  rows="10"
+                                                             paginator="false" widgetVar="tableWidgetVar" >
+                                                    <p:column headerText="Duración">
+                                                        <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                    </p:column>
 
-                                                                 >
-                                                        <b:dataTableColumn style="min-width: 60px;">
-                                                            <f:facet name="header">
-                                                                <h:outputText value="Duracion"/>
-                                                            </f:facet>
-                                                            <b:inputText style="color: #262626" id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
-                                                        </b:dataTableColumn>
-                                                        <b:dataTableColumn>
-                                                            <f:facet name="header">
-                                                                <h:outputText value="Actividad"/>
-                                                            </f:facet>
-                                                            <b:inputTextarea rows="2" required="true" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
-                                                        </b:dataTableColumn>
-                                                        <b:dataTableColumn>
-                                                            <f:facet name="header">
-                                                                <h:outputText value="Objetivo Específico"/>
-                                                            </f:facet>
-                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
-                                                        </b:dataTableColumn>
-                                                        <b:dataTableColumn >
-                                                            <f:facet name="header">
-                                                                <h:outputText value="Materiales"/>
-                                                            </f:facet>
-                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
-                                                        </b:dataTableColumn>
-                                                        <b:dataTableColumn>
-                                                            <f:facet name="header">
-                                                                <h:outputText value="Responsable"/>
-                                                            </f:facet>
-                                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
-                                                        </b:dataTableColumn>
+                                                    <p:column headerText="Actividad">
+                                                        <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                    </p:column>
 
-                                                    </b:dataTable>
-                                                </div>
+                                                    <p:column headerText="Objetivo Específico">
+                                                        <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                    </p:column>
+
+                                                    <p:column headerText="Materiales">
+                                                        <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                    </p:column>
+
+                                                    <p:column headerText="Responsable">
+                                                        <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                    </p:column>
+
+                                                </p:dataTable>
                                             </div>
                                         </div>
 
@@ -221,20 +197,21 @@
                                             <div class="col-md-10 col-md-offset-1">
                                                 <h4 class="text-center">REGISTRO ASISTENCIA</h4>
                                                 <br/>
-                                                <b:dataTable id="dtRegistroAsistenciaUdi" value="#{tallerEditarControlador.listadoAsistencia}"
-                                                             var="ai"
-                                                             fixed-header="true"
-                                                             scroll-x="true"
-                                                             scroll-size="1000px"
-                                                             responsive="true"
-                                                             searching="false"
-                                                             select="true"
-                                                             selectionMode="multiple"
-                                                             style="margin: auto; width: 100%;">
-                                                    <b:dataTableColumn value="#{ai.nombres}"/>
-                                                    <b:dataTableColumn value="#{ai.apellidos}"/>
-                                                    <b:dataTableColumn value="#{ai.cedula}"/>
-                                                </b:dataTable>
+                                                <p:dataTable var="ai"  value="#{tallerEditarControlador.listadoAsistencia}"  reflow="true"  rows="5"
+                                                             paginator="false"  >
+
+                                                    <p:column  filterMatchMode="contains" filterBy="#{ai.nombres}" headerText="Nombres">
+                                                        <h:outputText value="#{ai.nombres}" />
+                                                    </p:column>
+
+                                                    <p:column filterMatchMode="contains" filterBy="#{ai.apellidos}" headerText="Apellidos">
+                                                        <h:outputText value="#{ai.apellidos}" />
+                                                    </p:column>
+
+                                                    <p:column filterMatchMode="contains" filterBy="#{ai.cedula}" headerText="Cédula">
+                                                        <h:outputText value="#{ai.cedula}" />
+                                                    </p:column>
+                                                </p:dataTable>
                                             </div>
                                         </div>
 

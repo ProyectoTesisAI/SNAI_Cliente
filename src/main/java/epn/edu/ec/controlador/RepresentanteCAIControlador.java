@@ -5,6 +5,7 @@ import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.Representante;
 import epn.edu.ec.servicios.RepresentanteServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ public class RepresentanteCAIControlador implements Serializable{
     private RepresentanteServicio servicio;
     private boolean guardado;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     
     //Objetos para saber si es cedula o documento
     String tipoDocumento;
@@ -36,6 +38,7 @@ public class RepresentanteCAIControlador implements Serializable{
     @PostConstruct
     public void init(){
         
+        permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
         enlaces= new EnlacesPrograma();
         servicio= new RepresentanteServicio();
@@ -144,7 +147,21 @@ public class RepresentanteCAIControlador implements Serializable{
 
         Representante representanteAux = servicio.guardarRepresentante(representante);
         if(representanteAux!=null){
-            return enlaces.PATH_PANEL_CAI+"?faces-redirect=true";    
+            
+            String rolUsuario=permisosUsuario.RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR")){
+                    return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                return null;
+            }     
         }
         else{
             return null;

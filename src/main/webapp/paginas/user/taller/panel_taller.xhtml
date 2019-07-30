@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
@@ -29,38 +30,37 @@
 
                             <b:form id="form">
 
-                                <b:dataTable value="#{panelTallerControlador.listaTalleres}"
-                                             var="tp"
-                                             id="dtPanel"
-                                             fixed-header="true"
-                                             scroll-x="true"
-                                             save-state="true"
-                                             scroll-size="500px"
-                                             searching="true"
-                                             select="true"
-                                             selectionMode="multiple"
-                                             style="width: 100%; margin: auto;"
-                                             ajax="true"
-                                             responsive="true"
-                                             >
-                                    <b:dataTableColumn value="#{tp.tipo}"/>
-                                    <b:dataTableColumn value="#{tp.tema}"/>
-                                    <b:dataTableColumn label="Fecha" style="min-width: 85px;">
-                                        <b:dateTimePicker show-date="true" show-time="false" disabled="true" icon="false" value="#{tp.fecha}"/>
-                                    </b:dataTableColumn>
+                                <p:dataTable var="tp" value="#{panelTallerControlador.listaTalleres}" reflow="true"  rows="5"
+                                             paginator="false"  >
 
-                                    <b:dataTableColumn label="Ver Taller" style="min-width: 85px;">
+                                    <p:column  filterMatchMode="contains" filterBy="#{tp.tipo}" headerText="Tipo">
+                                        <h:outputText value="#{tp.tipo}" />
+                                    </p:column>
+
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.tema}" headerText="Tema">
+                                        <h:outputText value="#{tp.tema}" />
+                                    </p:column>
+
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.fecha}" headerText="Fecha">
+                                        <b:dateTimePicker show-date="true" show-icon="false" show-time="false" disabled="true" icon="false" value="#{tp.fecha}"/>
+                                    </p:column>
+                                    
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" headerText="Elaborado">
+                                        <h:outputText value="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" />
+                                    </p:column>
+
+                                    <p:column headerText="Ver Taller">
                                         <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelTallerControlador.verTaller(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn label="Agregar Informe" style="min-width: 125px;">
+                                    </p:column>
+                                    <p:column headerText="Agregar Informe">
                                         <b:commandButton  value="Agregar Informe" class="btn btn-primary btn-block" action="#{panelTallerControlador.agregarInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
-                                    </b:dataTableColumn>
-
-                                </b:dataTable>  
+                                    </p:column>
+                                </p:dataTable> 
+ 
                             </b:form>
                         </div>
                     </div>

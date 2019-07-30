@@ -7,6 +7,8 @@ import epn.edu.ec.modelo.DetalleInfraccionCAI;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
 import epn.edu.ec.servicios.DetalleInfraccionCAIServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +34,15 @@ public class DetalleInfraccionControlador implements Serializable {
 
     private List<DatosTipoPenalCAI> tiposPenal;
     private DatosTipoPenalCAIServicio servicioTP;
+    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init() {
+
+        permisosUsuario= new PermisosUsuario();
         servicio = new DetalleInfraccionCAIServicio();
 
         detalleInfraccion = new DetalleInfraccionCAI();
-        listaDetalleInfraccion = new ArrayList<>();
         guardado = false;
 
         provincias = new ArrayList<>();
@@ -157,7 +161,15 @@ public class DetalleInfraccionControlador implements Serializable {
     }
     
     public String agregarMedida(DetalleInfraccionCAI detalle){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
-        return "/paginas/cai/matriz/panel_crear_medida_cai.com?faces-redirect=true";
+        
+        String redireccionEjecucionMedida=permisosUsuario.redireccionEjecucionMedida();
+        
+        if(redireccionEjecucionMedida!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
+            return redireccionEjecucionMedida;
+        }else{
+            return null;
+        }    
     }
 }

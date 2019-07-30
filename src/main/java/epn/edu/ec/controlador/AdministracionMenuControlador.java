@@ -24,6 +24,7 @@ public class AdministracionMenuControlador implements Serializable {
     private boolean tipoRolPsicologo;
     private boolean tipoRolInspector;
     private boolean permitidoCrearAdolescenteUDI;
+    private boolean permitidoCrearAdolescenteCAI;
     
     @PostConstruct
     public void init() {
@@ -115,6 +116,19 @@ public class AdministracionMenuControlador implements Serializable {
         }
         return permitidoCrearAdolescenteUDI;
     }
+
+    public boolean isPermitidoCrearAdolescenteCAI() {
+        
+        String rolUsuario=permisosUsuario.RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")){
+                permitidoCrearAdolescenteCAI=true;
+            }
+        }
+        return permitidoCrearAdolescenteCAI;
+    }
     
     
     
@@ -192,23 +206,18 @@ public class AdministracionMenuControlador implements Serializable {
         }
     }
     
-    public String redireccionCrearRegistroAdolescenteUZDI(){
-        
+    public String validarGestionInformacionAdolescenteCAI(){
+    
         String rolUsuario=permisosUsuario.RolUsuario();
         
         if (rolUsuario != null) {
         
             if ("ADMINISTRADOR".equals(rolUsuario)){
-                return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
             }
             else{
             
-                if(rolUsuario.equals("COORDINADOR/LIDER UZDI")){
-                    return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_ERROR+"?faces-redirect=true";
-                }  
+                return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
             }
         }
         else{

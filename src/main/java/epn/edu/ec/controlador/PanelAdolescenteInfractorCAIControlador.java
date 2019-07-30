@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,11 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
     private List<AdolescenteInfractorCAI> listadoAdolescentesInfractoresCAI;
     private AdolescenteInfractorCAIServicio servicio;
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init() {
-        
+        permisosUsuario= new PermisosUsuario();
         servicio= new AdolescenteInfractorCAIServicio();
         enlaces=new EnlacesPrograma();
         listadoAdolescentesInfractoresCAI= new ArrayList<>();
@@ -39,10 +41,15 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
     
     public String agregarInformacion(AdolescenteInfractorCAI ai_cai) {
 
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
-        //return "/paginas/cai/matriz/panel_crear_cai.com?faces-redirect=true";
-        //return enlaces.PATH_ADOLESCENTE_CAI_ANIADIR+"?faces-redirect=true";
-        return null;
+        String gestionInformacionAdolescenteCai=permisosUsuario.redireccionGestionInformacionCai();
+        
+        if(gestionInformacionAdolescenteCai!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
+            return gestionInformacionAdolescenteCai;
+        }else{
+            return null;
+        }     
     }
 
 }

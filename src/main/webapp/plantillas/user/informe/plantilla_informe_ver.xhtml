@@ -5,7 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:o="http://omnifaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     
     <h:body>
         <ui:composition >
@@ -79,55 +80,30 @@
 
                                     <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                         <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                                <b:dataTable contentDisabled="true" id="tablaTaller" value="#{informeEditarControlador.listaItemsTaller}" 
-                                                             widgetVar="tableWidgetVar"
-                                                             var="tp"
-                                                             fixed-header="true"
-                                                             scroll-x="true"
-                                                             scroll-size="1000px"
-                                                             responsive="false"
-                                                             searching="false"
-                                                             select="true"
-                                                             paginated="false"
-                                                             selectionMode="multiple"
-                                                             style="margin: 0 auto; width: 100%;"
+                                            
+                                            <p:dataTable var="tp" value="#{informeEditarControlador.listaItemsTaller}"  reflow="true"  rows="10"
+                                                         paginator="false"  >
+                                                <p:column headerText="Duración">
+                                                    <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                </p:column>
 
-                                                             >
-                                                    <b:dataTableColumn style="min-width: 50px;">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Duración"/>
-                                                        </f:facet>
-                                                        <b:inputText style="color: #262626" id="txtDuracion" required="true" placeholder="Duración"  value="#{tp.duracion}"/>
+                                                <p:column headerText="Actividad">
+                                                    <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                </p:column>
 
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Actividad"/>
-                                                        </f:facet>
-                                                        <b:inputTextarea rows="2" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Objetivo Específico"/>
-                                                        </f:facet>
-                                                        <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Materiales"/>
-                                                        </f:facet>
-                                                        <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Responsable"/>
-                                                        </f:facet>
-                                                        <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
-                                                    </b:dataTableColumn>
+                                                <p:column headerText="Objetivo Específico">
+                                                    <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                </p:column>
 
-                                                </b:dataTable>
-                                            </div>
+                                                <p:column headerText="Materiales">
+                                                    <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Responsable">
+                                                    <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                </p:column>
+
+                                            </p:dataTable>
                                         </div>
                                     </div>
 
@@ -199,24 +175,28 @@
                             <b:panel content-disabled="true" style="border: transparent;">
                                 <div class="row" style="margin-top: 35px;">
                                     <div class="col-md-10 col-md-offset-1">
-                                        <b:dataTable  disabled="true" id="dtRegistroAsistencia" value="#{informeEditarControlador.listaParaChequeo}"
-                                                      var="ai"
-                                                      fixed-header="true"
-                                                      scroll-x="true"
-                                                      scroll-size="100px"
-                                                      responsive="false"
-                                                      searching="false"
-                                                      select="true"
-                                                      paginated="false"
-                                                      selectionMode="multiple"
-                                                      style="margin: 0 auto; width: 100%;">
-                                            <b:dataTableColumn value="#{ai.idAdolescenteInfractor.nombres}"/>
-                                            <b:dataTableColumn value="#{ai.idAdolescenteInfractor.apellidos}"/>
-                                            <b:dataTableColumn value="#{ai.idAdolescenteInfractor.cedula}"/>
-                                            <b:dataTableColumn label="¿Asistió?" >
+                                        
+                                        <p:dataTable var="ai" value="#{informeEditarControlador.listaParaChequeo}"  reflow="true"  rows="5"
+                                                     paginator="false"  >
+
+                                            <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.nombres}" />
+                                            </p:column>
+
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos}" headerText="Apellidos">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.apellidos}" />
+                                            </p:column>
+
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
+                                            </p:column>
+
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.asistio}" headerText="¿Asistió?">
                                                 <b:selectBooleanCheckbox  value="#{ai.asistio}"/>
-                                            </b:dataTableColumn>
-                                        </b:dataTable>
+                                            </p:column>
+
+                                        </p:dataTable>
+
                                     </div>
                                 </div>
                             </b:panel>

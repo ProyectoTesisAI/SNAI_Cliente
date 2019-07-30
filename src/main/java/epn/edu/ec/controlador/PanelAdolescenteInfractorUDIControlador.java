@@ -42,7 +42,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     
     public String agregarInformacion(AdolescenteInfractorUDI ai_udi){
         
-        String gestionInformacionAdolescenteUzdi=permisosUsuario.redireccionGestionInformacionUZDI();
+        String gestionInformacionAdolescenteUzdi=permisosUsuario.redireccionGestionInformacionUzdi();
         
         if(gestionInformacionAdolescenteUzdi!=null){
 

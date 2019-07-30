@@ -154,16 +154,14 @@
                                                                      onclick="$('.formItemTaller').modal('hide'); tableWidgetVar.DataTable({destroy: true, searching: false});tableWidgetVar.DataTable().responsive.recalc();" 
                                                                      actionListener="#{tallerControlador.agregarActividad()}">
                                                         <f:ajax execute="modalActividades" render="tablaTaller modalActividades"/>
-                                                    </b:commandButton>
-
+                                                    </b:commandButton>        
                                                 </b:column>
                                             </b:row>
                                         </b:modal>
-
+                     
                                         <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                                             <div class="col-md-10 col-md-offset-1">
-                                                <div class="form-group">
-                                                    <b:dataTable id="tablaTaller" value="#{tallerControlador.listaItemsTaller}" 
+                                                 <b:dataTable id="tablaTaller" value="#{tallerControlador.listaItemsTaller}" 
                                                                  widgetVar="tableWidgetVar"
                                                                  var="tp"
                                                                  fixed-header="true"
@@ -209,11 +207,32 @@
                                                         </b:dataTableColumn>
 
                                                     </b:dataTable>
-                                                </div>
+<!--                                                <p:dataTable id="tableWidgetVar"
+                                                             widgetVar="tableWidgetVar" var="tp" value="{tallerControlador.listaItemsTaller}"  reflow="true"  rows="10"
+                                                             paginator="false"  >
+                                                    <p:column headerText="Duración">
+                                                        <b:inputText id="txtDuracion" placeholder="hh:mm"  value="{tp.duracion}"/>  
+                                                    </p:column>
+
+                                                    <p:column headerText="Actividad">
+                                                        <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="{tp.actividad}"/>
+                                                    </p:column>
+
+                                                    <p:column headerText="Objetivo Específico">
+                                                        <b:inputTextarea rows="2" value="{tp.objetivoEspecifico}"/>
+                                                    </p:column>
+
+                                                    <p:column headerText="Materiales">
+                                                        <b:inputTextarea rows="2" value="{tp.materiales}"/>
+                                                    </p:column>
+
+                                                    <p:column headerText="Responsable">
+                                                        <b:inputTextarea rows="2" value="{tp.responsable}"/>
+                                                    </p:column>
+
+                                                </p:dataTable>-->
                                             </div>
                                         </div>
-
-
                                         <div class="row">
                                             <div class="col-md-10 col-md-offset-1">
                                                 <div class="form-group">
@@ -277,20 +296,23 @@
 
                                         <div class="row" style="margin-top: 35px;">
                                             <div class="col-md-10 col-md-offset-1">
-                                                <b:dataTable id="dtRegistroAsistenciaUdi" value="#{tallerControlador.listadoAsistencia}"
-                                                             var="ai"
-                                                             fixed-header="true"
-                                                             scroll-x="true"
-                                                             scroll-size="1000px"
-                                                             responsive="true"
-                                                             searching="false"
-                                                             select="true"
-                                                             selectionMode="multiple"
-                                                             style="margin: auto; width: 100%;">
-                                                    <b:dataTableColumn value="#{ai.nombres}"/>
-                                                    <b:dataTableColumn value="#{ai.apellidos}"/>
-                                                    <b:dataTableColumn value="#{ai.cedula}"/>
-                                                </b:dataTable>
+                                                
+                                                <p:dataTable var="ai" value="#{tallerControlador.listadoAsistencia}"  reflow="true"  rows="5"
+                                                             paginator="false"  >
+
+                                                    <p:column  headerText="Nombres">
+                                                        <h:outputText value="#{ai.nombres}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Apellidos">
+                                                        <h:outputText value="#{ai.apellidos}" />
+                                                    </p:column>
+
+                                                    <p:column  headerText="Cédula">
+                                                        <h:outputText value="#{ai.cedula}" />
+                                                    </p:column>
+                                                </p:dataTable>
+
                                             </div>
                                         </div>
 

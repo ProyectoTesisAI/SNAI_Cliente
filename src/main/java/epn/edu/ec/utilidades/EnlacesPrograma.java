@@ -39,59 +39,45 @@ public class EnlacesPrograma {
     public String PATH_PANEL_UDI_USER = "/paginas/user/uzdi/udi.com";
     public String PATH_PANEL_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/udi.com";
     
-    public String PATH_PANEL_CAI = "/paginas/cai/cai.com";
-
-    public String PATH_PANEL_CREAR_CAI = "/paginas/cai/matriz/panel_crear_cai.com";
+    public String PATH_PANEL_CAI_USER = "/paginas/user/cai/cai.com";
+    public String PATH_PANEL_CAI_ADMIN = "/paginas/admin/cai/cai.com";
     
     public String PATH_PANEL_CREAR_UDI_LIDER_UZDI = "/paginas/user/uzdi/liderUzdi/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_UDI_PSICOLOGO = "/paginas/user/uzdi/psicologo/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_crear_udi.com";
     
+    public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/user/cai/coordinadorCai/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/user/cai/psicologo/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/user/cai/trabajadorSocial/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR = "/paginas/user/cai/inspectorEducador/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_JURIDICO = "/paginas/user/cai/juridico/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/admin/cai/panel_crear_cai.com";
+    
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR = "/paginas/user/cai/panel_crear_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_VER = "/paginas/user/cai/panel_ver_medida_cai.com";
+    
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI = "/paginas/user/cai/panel_crear_info_medida_cai.com";
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_INSPECTOR_EDUCADOR = "/paginas/user/cai/inspectorEducador/panel_crear_info_medida_cai.com";
+    
     public String PATH_ERROR = "/error/error.com";
-
-    public String getURL_BASE() {
-        return URL_BASE;
-    }
-
-    public String getPATH_TALLER_CREAR() {
-        return PATH_TALLER_CREAR;
-    }
-
-    public String getPATH_PANEL_TALLER() {
-        return PATH_PANEL_TALLER;
-    }
-
-    public String getPATH_PANEL_CAI() {
-        return PATH_PANEL_CAI;
-    }
 
     public String getPATH_ADOLESCENTE_UDI_CREAR() {
         return PATH_ADOLESCENTE_UDI_CREAR;
+    }
+
+    public void setPATH_ADOLESCENTE_UDI_CREAR(String PATH_ADOLESCENTE_UDI_CREAR) {
+        this.PATH_ADOLESCENTE_UDI_CREAR = PATH_ADOLESCENTE_UDI_CREAR;
     }
 
     public String getPATH_ADOLESCENTE_CAI_CREAR() {
         return PATH_ADOLESCENTE_CAI_CREAR;
     }
 
-    public String getPATH_PANEL_INFORME() {
-        return PATH_PANEL_INFORME;
+    public void setPATH_ADOLESCENTE_CAI_CREAR(String PATH_ADOLESCENTE_CAI_CREAR) {
+        this.PATH_ADOLESCENTE_CAI_CREAR = PATH_ADOLESCENTE_CAI_CREAR;
     }
-
-    public String getPATH_PANEL_CREAR_CAI() {
-        return PATH_PANEL_CREAR_CAI;
-    }
-
-    public String getPATH_ERROR() {
-        return PATH_ERROR;
-    }
-
-    public String getPATH_PANEL_INFORME_ADMINISTRADOR() {
-        return PATH_PANEL_INFORME_ADMINISTRADOR;
-    }
-
-    public String getPATH_PANEL_TALLER_ADMINISTRADOR() {
-        return PATH_PANEL_TALLER_ADMINISTRADOR;
-    }
+    
+    
 
 }

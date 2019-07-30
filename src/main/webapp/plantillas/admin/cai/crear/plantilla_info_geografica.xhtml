@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formInfoGeografica">
+                <b:panel look="primary" content-disabled="#{identificacionGeograficaControladorCAI.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+                    <b:panel rendered="#{identificacionGeograficaControladorCAI.esEcuatoriana}"> <!-->esto es para ecuatorianos<-->
+                        <f:facet name="heading">
+                            <h:outputText value="LUGAR DE NACIMIENTO" style="color: #036fab; font-weight: bold"  />
+                        </f:facet>
+                        <b:row>
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtPaisNacimiento1" value="País de nacimiento"/>
+                                <b:inputText id="txtPaisNacimiento1" maxlength="50" disabled="#{identificacionGeograficaControladorCAI.esEcuatoriana}" placeholder="País de nacimiento" value="ECUADOR"/>
+                            </b:column>
+
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtEstadoProvincia1" value="Estado/Provincia"/>
+                                <b:selectOneMenu id="txtEstadoProvincia1" update="txtCiudadNacimiento1" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                    <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                    <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                    <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                    <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                    <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                    <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                    <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                    <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                    <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                    <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                    <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                    <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                    <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                    <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                    <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                    <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                    <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                    <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                    <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                    <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                    <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                    <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                    <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                                </b:selectOneMenu>
+                            </b:column>
+
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtCiudadNacimiento1" value="Cantón de nacimiento"/>
+                                <b:selectOneMenu id="txtCiudadNacimiento1" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItems value="#{identificacionGeograficaControladorCAI.cantonesNacimiento}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                    <b:panel rendered="#{!identificacionGeograficaControladorCAI.esEcuatoriana}">
+                        <f:facet name="heading">
+                            <h:outputText value="LUGAR DE NACIMIENTO" style="color: #036fab; font-weight: bold"  />
+                        </f:facet>
+                        <b:row>
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
+                                <b:inputText id="txtPaisNacimiento" maxlength="50" placeholder="País de nacimiento" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtEstadoProvincia" value="Estado/Provincia"/>
+                                <b:inputText id="txtEstadoProvincia" maxlength="50" placeholder="Estado/Provincia" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="0">
+                                <h:outputLabel for="txtCiudadNacimiento" value="Ciudad de nacimiento"/>
+                                <b:inputText id="txtCiudadNacimiento" maxlength="50" placeholder="Ciudad de nacimiento" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}"/>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                    <b:panel rendered="#{identificacionGeograficaControladorCAI.esEcuatoriana}">
+                        <f:facet name="heading">
+                            <h:outputText value="LUGAR DE RESIDENCIA" style="color: #036fab; font-weight: bold"  />
+                        </f:facet>
+                        <b:row>
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtProvincia" value="Provincia"/>
+                                <b:selectOneMenu id="txtProvincia" update="txtCanton" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.provinciaResidencia}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                    <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                    <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                    <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                    <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                    <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                    <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                    <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                    <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                    <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                    <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                    <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                    <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                    <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                    <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                    <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                    <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                    <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                    <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                    <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                    <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                    <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                    <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                    <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                                </b:selectOneMenu>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtCanton" value="Cantón"/>
+                                <b:selectOneMenu id="txtCanton" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.cantonResidencia}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItems value="#{identificacionGeograficaControladorCAI.cantones}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>    
+                        <b:row>
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtParroquia" value="Parroquia"/>
+                                <b:inputText id="txtParroquia" maxlength="50" placeholder="Parroquia" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.parroquiaResidencia}"/>
+                            </b:column>
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtTelefono" value="Teléfono"/>
+                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.telefono}">
+                                    <f:ajax event="blur" listener="#{identificacionGeograficaControladorCAI.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
+                                    <f:ajax event="keyup" listener="#{identificacionGeograficaControladorCAI.validarNumeroContacto}" render="mensaje-telefono" />
+                                </b:inputText>
+                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-telefono" class="mensaje-error" value="#{identificacionGeograficaControladorCAI.mensaje}"/>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column span="10" offset="1">
+                                <h:outputLabel for="txtDireccionDomicilio" value="Dirección del domicilio"/>
+                                <b:inputText id="txtDireccionDomicilio" maxlength="125" placeholder="Dirección del domicilio" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.direccionDomicilio}"/>
+                            </b:column>
+                        </b:row>
+                        <b:row>                                                    
+                            <b:column span="10" offset="1">                
+                                <h:outputLabel for="txtRefenciaDomicilio" value="Referencia del domicilio"/>
+                                <b:inputText id="txtRefenciaDomicilio" maxlength="125" placeholder="Referencia del domicilio" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.referenciaDomicilio}"/>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{identificacionGeograficaControladorCAI.guardarIdentificacionGeografica()}">
+                                <f:ajax execute="formInfoGeografica" render="formInfoGeografica"/>
+                            </h:commandButton>
+                        </b:column>
+                    </b:row>
+                </b:panel>    
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

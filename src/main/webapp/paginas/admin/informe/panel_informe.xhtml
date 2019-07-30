@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
@@ -27,42 +28,43 @@
                         <div class="panel-body" style="padding: 40px;">
 
                             <b:form id="form">
+                                
+                                <p:dataTable var="tp" value="#{panelInformeControlador.listaInforme}"  reflow="true"  rows="5"
+                                             paginator="false"  >
 
-                                <b:dataTable value="#{panelInformeControlador.listaInforme}"
-                                             var="tp"
-                                             id="dtPanel"
-                                             fixed-header="true"
-                                             scroll-x="true"
-                                             save-state="true"
-                                             scroll-size="1000px"
-                                             responsive="true"
-                                             searching="false"
-                                             select="true"
-                                             selectionMode="multiple"
-                                             ajax="true">
-                                    <b:dataTableColumn value="#{tp.idTaller.tipo}"/>
-                                    <b:dataTableColumn value="#{tp.idTaller.tema}"/>
-                                    <b:dataTableColumn label="Fecha" style="min-width: 85px;">
-                                        <b:dateTimePicker show-date="true" show-time="false" disabled="true" icon="false" value="#{tp.idTaller.fecha}"/>
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn label="Elaborado por" value="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}"/>
+                                    <p:column  filterMatchMode="contains" filterBy="#{tp.idTaller.tipo}" headerText="Tipo">
+                                        <h:outputText value="#{tp.idTaller.tipo}" />
+                                    </p:column>
 
-                                    <b:dataTableColumn label="Ver Taller">
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.tema}" headerText="Tema">
+                                        <h:outputText value="#{tp.idTaller.tema}" />
+                                    </p:column>
+
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.fecha}" headerText="Fecha">
+                                        <b:dateTimePicker show-date="true" show-icon="false" show-time="false" disabled="true" icon="false" value="#{tp.idTaller.fecha}"/>
+                                    </p:column>
+                                    
+                                    <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" headerText="Elaborado">
+                                        <h:outputText value="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" />
+                                    </p:column>
+
+                                    <p:column headerText="Ver Taller">
                                         <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelInformeControlador.verTaller(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn label="Ver Informe">
+                                    </p:column>
+                                    <p:column headerText="Ver Informe">
                                         <b:commandButton  value="Ver Informe"  class="btn btn-danger btn-block" action="#{panelInformeControlador.verInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn label="Editar Informe">
+                                    </p:column>
+                                    <p:column headerText="Editar Informe">
                                         <b:commandButton  value="Editar Informe"  class="btn btn-primary btn-block" action="#{panelInformeControlador.editarInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
-                                    </b:dataTableColumn>
-                                </b:dataTable>  
+                                    </p:column>
+
+                                </p:dataTable> 
                             </b:form>
                         </div>
                     </div>

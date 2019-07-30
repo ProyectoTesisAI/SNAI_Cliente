@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formDetalleInfraccion">
+                <b:panel look="primary" content-disabled="false">
+                    <f:facet name="heading">
+                        <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <p:dataTable var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="5"
+                                 paginator="false"  widgetVar="infraccionesTable">
+                        <p:column filterMatchMode="contains" filterBy="#{td.tipoPenal}" headerText="Tipo Penal">
+                            <h:outputText value="#{td.tipoPenal}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{td.unidadJudicial}" headerText="Unidad Judicial">
+                            <h:outputText value="#{td.unidadJudicial}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{td.numeroCausa}" headerText="Número Causa">
+                            <h:outputText value="#{td.numeroCausa}" />
+                        </p:column>
+
+                        <p:column headerText="Añadir Medida">
+                            <b:commandButton value="Añadir Medida" class="btn btn-success btn-block" action="#{detalleInfraccionControlador.agregarMedida(td)}">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

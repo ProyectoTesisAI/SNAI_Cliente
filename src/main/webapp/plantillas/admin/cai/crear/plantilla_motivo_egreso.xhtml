@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formMotivosEgreso">
+                <b:panel look="primary" content-disabled="#{motivoEgresoCAIControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="MOTIVOS DE EGRESO" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtMotivoSalida" value="Motivo de salida"/>
+                            <b:selectOneMenu id="txtMotivoSalida" update="mostrarOcultarTrasladoCAI" process="@this" value="#{motivoEgresoCAIControlador.tipoMotivoSalida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="MEDIACIÓN - CONCILIACIÓN"  itemValue="MEDIACIÓN - CONCILIACIÓN" />
+                                <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
+                                <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
+                                <f:selectItem itemLabel="SOBRESEIMIENTO"  itemValue="SOBRESEIMIENTO" />
+                                <f:selectItem itemLabel="MODIFICACIÓN DE LA MEDIDA"  itemValue="MODIFICACIÓN DE LA MEDIDA" />
+                                <f:selectItem itemLabel="TRASLADO A OTRO CAI"  itemValue="TRASLADO A OTRO CAI" />
+                                <f:selectItem itemLabel="CUMPLIMIENTO DE LA MEDIDA"  itemValue="CUMPLIMIENTO DE LA MEDIDA" />
+                                <f:selectItem itemLabel="MUERTE NATURAL"  itemValue="MUERTE NATURAL" />
+                                <f:selectItem itemLabel="MUERTE INTRACENTRO"  itemValue="MUERTE INTRACENTRO" />
+                                <f:selectItem itemLabel="SUICIDIO"  itemValue="SUICIDIO" />
+                                <f:selectItem itemLabel="CUMPLIMIENTO POR 24 HORAS"  itemValue="CUMPLIMIENTO POR 24 HORAS" />
+                                <f:selectItem itemLabel="CUMPLIMIENTO DE 90 DÍAS"  itemValue="CUMPLIMIENTO DE 90 DÍAS" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtFechaSalida" value="Fecha Salida del Centro"/>
+                            <b:dateTimePicker id="txtFechaSalida" placeholder="dd/mm/aa" showTime="false" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.fechaSalidaCentro}"/>
+                        </b:column>
+                    </b:row> 
+                    <h:panelGroup id="mostrarOcultarTrasladoCAI">
+                        <b:row>
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtCAITraslado" value="CAI Traslado"/>
+                                <b:selectOneMenu rendered="#{motivoEgresoCAIControlador.guardado}">
+                                    <f:selectItem itemLabel="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado.cai}"/>
+                                </b:selectOneMenu>
+                                <b:selectOneMenu rendered="#{!motivoEgresoCAIControlador.guardado}" id="txtCAITraslado" disabled="txtMotivoSalida!='TRASLADO A OTRO CAI'" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItems value="#{motivoEgresoCAIControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                    </h:panelGroup>
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{motivoEgresoCAIControlador.guardarMotivoEgresoCAI()}">
+                                <f:ajax execute="formMotivosEgreso" render="formMotivosEgreso"/>
+                            </h:commandButton>
+                        </b:column>
+                    </b:row>
+
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

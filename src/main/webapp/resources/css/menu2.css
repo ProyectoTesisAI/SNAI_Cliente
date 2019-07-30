@@ -19,7 +19,7 @@
 }
 
 /*Modifico los atributos del ITEM del Menú Lateral*/
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+.ui-state-default a, .ui-state-default a:link {
     color: #d3d6da;
     background: #1f2535;
     font-size: 14px;
@@ -30,7 +30,7 @@
 
 }
 
-a:link, a:visited {
+a:link{
     color: #d3d6da;
 }
 
@@ -44,12 +44,15 @@ a:link:hover, a:visited:hover {
 .ui-panelmenu .ui-panelmenu-panel {
     padding: 0;
     margin: -2px 0px -2px -2px;
+    background: #2e364b;
 }
 
+.ui-menu-list{
+    background: #2e364b;   
+}
 .ui-panelmenu .ui-menuitem {
 
     line-height: 38px; /*altura de la fila*/
-    height: 38px;
     left: 15px;
     color: #141018;
     font-size: 13px;
@@ -70,23 +73,46 @@ a:link:hover, a:visited:hover {
     display: block;
     width: 100%;
     text-decoration: none;
-    border-bottom: solid 1px #1f2535;
+    border-bottom: solid 1px #1f2535 !important;
     padding: 0 0 0 40px;
     line-height: 33px;
     cursor: pointer;
-}
-
-/*Modifico los atributos de los  SUBITEMS del Menú*/
-.ui-widget-content {
     border: 0px;
     background: #2e364b;
-    padding: 0 0 0 40px;
-
 }
 
 .ui-menuitem-link:hover{
     
-    background: transparent;
     color: whitesmoke; /*color del texto cuando el cursor se encuentra sobre el item*/
     text-decoration: none;
+}
+
+.ui-panelmenu .ui-icon{
+    visibility: hidden;
+}
+
+.ui-datatable thead td, .ui-datatable tbody td {
+    color: #555 !important;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.ui-datatable-header {
+
+    text-align: right !important;
+    background: white;
+    border: transparent;
+    padding-bottom: 10px !important;
+}
+
+.ui-widget-header {
+
+    color: #333333;
+    font-weight: normal !important;
+
+}
+
+/*defino el tamaño de letra de los inputText*/
+.ui-widget .ui-widget {
+    font-size: 14px;
 }
