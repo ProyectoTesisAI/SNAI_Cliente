@@ -2,7 +2,7 @@ body {
     background-color: #ffffff;
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-    color: #000000;  
+    color: #555;  
     margin: 10px;
 }
 
@@ -13,6 +13,16 @@ h1 {
     font-weight: bold;
     margin: 0px;
     padding: 0px;
+    color: #D20005;
+}
+
+h3 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  17px !important;
+    font-weight: bold !important;
+    margin: 0px;
+    padding: 0;
     color: #D20005;
 }
 

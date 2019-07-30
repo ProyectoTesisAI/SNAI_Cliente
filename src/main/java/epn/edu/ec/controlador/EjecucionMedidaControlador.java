@@ -9,6 +9,7 @@ import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DetalleInfraccionCAIServicio;
 import epn.edu.ec.servicios.EjecucionMedidaServicio;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +37,12 @@ public class EjecucionMedidaControlador implements Serializable {
     private CAI cai;
     private List<CAI> listaCAI;
     private CaiServicio servicioCAI;
+    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init() {
+        
+        permisosUsuario= new PermisosUsuario();
         servicio = new EjecucionMedidaServicio();
         servicioCAI = new CaiServicio();
         servicioDI = new DetalleInfraccionCAIServicio();
@@ -172,7 +176,15 @@ public class EjecucionMedidaControlador implements Serializable {
     }
 
     public String agregarInformacion(EjecucionMedidaCAI ejecucion){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ejecucion_medida_cai", ejecucion);
-        return "/paginas/cai/matriz/panel_agregar_info_medida_cai.com?faces-redirect=true";
+        
+        String redireccionInformacionAdicionalMedida=permisosUsuario.redireccionInformacionAdicionalMedida();
+        
+        if(redireccionInformacionAdicionalMedida!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ejecucion_medida_cai", ejecucion);
+            return redireccionInformacionAdicionalMedida;
+        }else{
+            return null;
+        } 
     }
 }

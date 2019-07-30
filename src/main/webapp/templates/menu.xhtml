@@ -70,8 +70,8 @@
                             <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" icon="pi pi-refresh" />
                         </p:submenu>
                         <p:submenu label="Adolescente CAI" rendered="#{administracionMenuControlador.esCAI}">
-                            <p:menuitem value="Crear Registro" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>
-                            <p:menuitem value="Gestionar Información" outcome="#{enlacesPrograma.PATH_PANEL_CAI}" icon="pi pi-refresh" />
+                            <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteCAI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>
+                            <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteCAI()}" icon="pi pi-refresh" />
                         </p:submenu>
                         <p:submenu label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
                             <p:menuitem value="Crear Registro"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
