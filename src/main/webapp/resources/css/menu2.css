@@ -47,6 +47,7 @@ a:link{
     font-weight: lighter  !important;
     text-shadow: 0 0 0 !important;
     color: #d3d6da;
+    font-family: Arial, "Arial CE" !important;
 }
 
 a:link:hover {
