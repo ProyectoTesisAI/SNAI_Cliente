@@ -7,7 +7,9 @@ import epn.edu.ec.modelo.Reporte2;
 import epn.edu.ec.modelo.Reporte3;
 import epn.edu.ec.modelo.Reporte4;
 import epn.edu.ec.modelo.Reporte5;
+import epn.edu.ec.modelo.Reporte6N;
 import epn.edu.ec.modelo.Reporte6S;
+import epn.edu.ec.modelo.Reporte7;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.Date;
@@ -263,6 +265,46 @@ public class AdolescenteInfractorServicio {
         return reporteAux;
     }
     
+    public List<Reporte6S> reporteNivelEducacionSiCAI(String nivelEducacion) {
+        List<Reporte6S> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionSCAI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6N> reporteNivelEducacionNoCAI(String nivelEducacion) {
+        List<Reporte6N> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionNCAI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
     public List<Reporte6S> reporteNivelEducacionSiUDI(String nivelEducacion) {
         List<Reporte6S> reporteAux = null;
         String token = null;
@@ -276,6 +318,146 @@ public class AdolescenteInfractorServicio {
         Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
         if (response.getStatus() == 200) {
             reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6N> reporteNivelEducacionNoUDI(String nivelEducacion) {
+        List<Reporte6N> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionNUDI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6S> reporteEdadNivelEducacionSiCAI(String edad) {
+        List<Reporte6S> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoSiCAI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6N> reporteEdadNivelEducacionNoCAI(String edad) {
+        List<Reporte6N> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoNoCAI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6S> reporteEdadNivelEducacionSiUDI(String edad) {
+        List<Reporte6S> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoSiUDI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte6N> reporteEdadNivelEducacionNoUDI(String edad) {
+        List<Reporte6N> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoNoUDI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte7> reporteLugarResidenciaCAI() {
+        List<Reporte7> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteLugarResidenciaCAI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.get();
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
+            });
+        } else if (response.getStatus() == 204) {
+            reporteAux = null;
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte7> reporteLugarResidenciaUDI() {
+        List<Reporte7> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteLugarResidenciaUDI");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.get();
+        if (response.getStatus() == 200) {
+            reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
             });
         } else if (response.getStatus() == 204) {
             reporteAux = null;

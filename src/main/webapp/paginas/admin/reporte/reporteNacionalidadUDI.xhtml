@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
             <ui:define name="head">
@@ -27,14 +28,39 @@
                                     <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
                                 </b:selectOneMenu>
                             </b:column>
-                            <b:column span="3" offset="8">
+                            <b:column span="3" offset="2">
+                                <br/>
                                 <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarNacionalidadUDI()}">
-                                    <f:ajax execute="form" render="tablaReporteUDI form"/>
+                                    <f:ajax execute="form" render="tablaReporteUDI"/>
                                 </h:commandButton>
                             </b:column>
                         </b:row>
-
-                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                        <br/>
+                        <br/>
+                        <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes3UDI}" reflow="true" rows="7" paginator="false">
+                            <p:column headerText="Número">
+                                <h:outputText value="#{tp.numero}"/>
+                            </p:column>
+                            <p:column headerText="UZDI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                            </p:column>
+                            <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                            </p:column>
+                            <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                            </p:column>
+                            <p:column headerText="Nacionalidad" filterMatchMode="contains" filterBy="#{tp.nacionalidad}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.nacionalidad}"/>
+                            </p:column>
+                            <p:column headerText="País de origen" filterMatchMode="contains" filterBy="#{tp.paisOrigen}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.paisOrigen}"/>
+                            </p:column>
+                            <p:column headerText="Tipo de delito" filterMatchMode="contains" filterBy="#{tp.tipoDelito}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelito}"/>
+                            </p:column>
+                        </p:dataTable>
+<!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="form-group">
                                     <b:dataTable id="tablaReporteUDI" value="#{panelReportesControlador.listaReportes3UDI}" 
@@ -49,55 +75,55 @@
                                                  paginated="false"
                                                  selectionMode="multiple"
                                                  style="margin: 0 auto; width: 100%;"
-
+                                                 excel="true"
                                                  >
-                                        <b:dataTableColumn style="min-width: 60px;">
+                                        <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Número"/>
                                             </f:facet>
-                                            <b:inputText style="color: #262626" id="txtDuracion" placeholder="mm"  value="#{tp.numero}"/>  
+                                            <h:outputText value="#{tp.numero}"/>  
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
-                                                <h:outputText value="CAI/UZDI"/>
+                                                <h:outputText value="UZDI"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Nombres"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Apellidos"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Nacionalidad"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.nacionalidad}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.nacionalidad}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Pais de origen"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.paisOrigen}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.paisOrigen}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn >
                                             <f:facet name="header">
                                                 <h:outputText value="Tipo de Delito"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.tipoDelito}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelito}"/>
                                         </b:dataTableColumn>
 
                                     </b:dataTable>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </b:form>
                 </div>
             </ui:define>

@@ -48,12 +48,14 @@ public class PanelReporteControlador implements Serializable {
     private String medida;
     private EjecucionMedidaCAI medidaCAI;
     private String nivelEducativo;
+    private String edad;
 
     private List<DatosTipoPenalCAI> tiposPenal;
     private DatosTipoPenalCAIServicio servicioTP;
     
     String tipoMedida;
     boolean esSocioeducativa;
+    private boolean estudia;
 
     @PostConstruct
     public void init() {
@@ -77,6 +79,7 @@ public class PanelReporteControlador implements Serializable {
         reporte1 = new Reporte1();
         reporte2 = new Reporte2();
         nacionalidad = null;
+        edad=null;
 
         tiposPenal = new ArrayList<>();
         servicioTP = new DatosTipoPenalCAIServicio();
@@ -86,6 +89,13 @@ public class PanelReporteControlador implements Serializable {
         nivelEducativo=null;
 
         tiposPenal = servicioTP.listarDatosTipoPenalCAI();
+        
+        if(isEstudia()){
+            estudia=true;
+        }
+        else{
+            estudia=false;
+        }
     }
 
     public List<Reporte1> getListaReportes1CAI() {
@@ -309,6 +319,22 @@ public class PanelReporteControlador implements Serializable {
     public void setNivelEducativo(String nivelEducativo) {
         this.nivelEducativo = nivelEducativo;
     }
+    
+    public boolean isEstudia() {
+        return estudia;
+    }
+
+    public void setEstudia(boolean estudia) {
+        this.estudia = estudia;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
 
     public List<Reporte1> buscarTipoDelitoUDI() {
         List<Reporte1> reporteRespuestaUDI = servicio.reporteTipoDelitoUDI(reporte1);
@@ -412,9 +438,90 @@ public class PanelReporteControlador implements Serializable {
     public List<Reporte6S> buscarNivelEducativoSiUDI() {
         List<Reporte6S> reporteRespuestaUDI = servicio.reporteNivelEducacionSiUDI(nivelEducativo);
         if (reporteRespuestaUDI != null) {
-            return listaReportes6SCAI = reporteRespuestaUDI;
+            return listaReportes6SUDI = reporteRespuestaUDI;
+        } else {
+            return listaReportes6SUDI = null;
+        }
+    }
+    
+    public List<Reporte6N> buscarNivelEducativoNoUDI() {
+        List<Reporte6N> reporteRespuestaUDI = servicio.reporteNivelEducacionNoUDI(nivelEducativo);
+        if (reporteRespuestaUDI != null) {
+            return listaReportes6NUDI = reporteRespuestaUDI;
+        } else {
+            return listaReportes6NUDI = null;
+        }
+    }
+    
+    public List<Reporte6S> buscarNivelEducativoSiCAI() {
+        List<Reporte6S> reporteRespuestaCAI = servicio.reporteNivelEducacionSiCAI(nivelEducativo);
+        if (reporteRespuestaCAI != null) {
+            return listaReportes6SCAI = reporteRespuestaCAI;
         } else {
             return listaReportes6SCAI = null;
+        }
+    }
+    
+    public List<Reporte6N> buscarNivelEducativoNoCAI() {
+        List<Reporte6N> reporteRespuestaCAI = servicio.reporteNivelEducacionNoCAI(nivelEducativo);
+        if (reporteRespuestaCAI != null) {
+            return listaReportes6NCAI = reporteRespuestaCAI;
+        } else {
+            return listaReportes6NCAI = null;
+        }
+    }
+    
+    public List<Reporte6S> buscarEdadNivelEducativoSiUDI() {
+        List<Reporte6S> reporteRespuestaUDI = servicio.reporteEdadNivelEducacionSiUDI(edad);
+        if (reporteRespuestaUDI != null) {
+            return listaReportes6SUDI = reporteRespuestaUDI;
+        } else {
+            return listaReportes6SUDI = null;
+        }
+    }
+    
+    public List<Reporte6N> buscarEdadNivelEducativoNoUDI() {
+        List<Reporte6N> reporteRespuestaUDI = servicio.reporteEdadNivelEducacionNoUDI(edad);
+        if (reporteRespuestaUDI != null) {
+            return listaReportes6NUDI = reporteRespuestaUDI;
+        } else {
+            return listaReportes6NUDI = null;
+        }
+    }
+    
+    public List<Reporte6S> buscarEdadNivelEducativoSiCAI() {
+        List<Reporte6S> reporteRespuestaCAI = servicio.reporteEdadNivelEducacionSiCAI(edad);
+        if (reporteRespuestaCAI != null) {
+            return listaReportes6SCAI = reporteRespuestaCAI;
+        } else {
+            return listaReportes6SCAI = null;
+        }
+    }
+    
+    public List<Reporte6N> buscarEdadNivelEducativoNoCAI() {
+        List<Reporte6N> reporteRespuestaCAI = servicio.reporteEdadNivelEducacionNoCAI(edad);
+        if (reporteRespuestaCAI != null) {
+            return listaReportes6NCAI = reporteRespuestaCAI;
+        } else {
+            return listaReportes6NCAI = null;
+        }
+    }
+    
+    public List<Reporte7> buscarLugarResidenciaUDI() {
+        List<Reporte7> reporteRespuestaUDI = servicio.reporteLugarResidenciaUDI();
+        if (reporteRespuestaUDI != null) {
+            return listaReportes7UDI = reporteRespuestaUDI;
+        } else {
+            return listaReportes7UDI = null;
+        }
+    }
+    
+    public List<Reporte7> buscarLugarResidenciaCAI() {
+        List<Reporte7> reporteRespuestaCAI = servicio.reporteLugarResidenciaCAI();
+        if (reporteRespuestaCAI != null) {
+            return listaReportes7CAI = reporteRespuestaCAI;
+        } else {
+            return listaReportes7CAI = null;
         }
     }
 }

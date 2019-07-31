@@ -6,7 +6,9 @@ public class Reporte7 {
     private String nombres;
     private String apellidos;
     private String tipoDelto;
-    private String lugarResidencia;
+    private String provinciaResidencia;
+    private String cantonResidencia;
+    private String direccionResidencia;
 
     public Reporte7() {
     }
@@ -51,18 +53,28 @@ public class Reporte7 {
         this.tipoDelto = tipoDelto;
     }
 
-    public String getLugarResidencia() {
-        return lugarResidencia;
+    public String getProvinciaResidencia() {
+        return provinciaResidencia;
     }
 
-    public void setLugarResidencia(String lugarResidencia) {
-        this.lugarResidencia = lugarResidencia;
+    public void setProvinciaResidencia(String provinciaResidencia) {
+        this.provinciaResidencia = provinciaResidencia;
     }
 
-    @Override
-    public String toString() {
-        return "Reporte7{" + "numero=" + numero + ", cai_uzdi=" + cai_uzdi + ", nombres=" + nombres + ", apellidos=" + apellidos + ", tipoDelto=" + tipoDelto + ", lugarResidencia=" + lugarResidencia + '}';
+    public String getCantonResidencia() {
+        return cantonResidencia;
     }
-    
-    
+
+    public void setCantonResidencia(String cantonResidencia) {
+        this.cantonResidencia = cantonResidencia;
+    }
+
+    public String getDireccionResidencia() {
+        return direccionResidencia;
+    }
+
+    public void setDireccionResidencia(String direccionResidencia) {
+        this.direccionResidencia = direccionResidencia;
+    }
+
 }
