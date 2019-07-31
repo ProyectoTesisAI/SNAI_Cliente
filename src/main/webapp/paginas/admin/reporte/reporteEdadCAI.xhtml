@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
             <ui:define name="head">
@@ -24,16 +25,38 @@
                                 <b:inputText mask="integer" id="txtEdad" placeholder="Edad" value="#{panelReportesControlador.reporte2.edad}"/>                                    
                             </b:column>
                             <b:column span="3" offset="2">
+                                <br/>
                                 <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadCAI()}">
-                                    <f:ajax execute="form" render="tablaTallerCAI form"/>
+                                    <f:ajax execute="form" render="tablaReporteCAI"/>
                                 </h:commandButton>
                             </b:column>
                         </b:row>
-
-                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                        <br/>
+                        <br/>
+                        <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes2CAI}" reflow="true" rows="6" paginator="false">
+                            <p:column headerText="Número">
+                                <h:outputText value="#{tp.numero}"/>
+                            </p:column>
+                            <p:column headerText="CAI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                            </p:column>
+                            <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                            </p:column>
+                            <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                            </p:column>
+                            <p:column headerText="Género" filterMatchMode="contains" filterBy="#{tp.genero}">
+                                <h:outputText style="text-transform:uppercase" value="#{tp.genero}"/>
+                            </p:column>
+                            <p:column headerText="Edad" filterMatchMode="contains" filterBy="#{tp.edad}">
+                                <h:outputText value="#{tp.edad}"/>
+                            </p:column>
+                        </p:dataTable>
+<!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="form-group">
-                                    <b:dataTable id="tablaTallerCAI" value="#{panelReportesControlador.listaReportes2CAI}" 
+                                    <b:dataTable id="tablaReporteCAI" value="#{panelReportesControlador.listaReportes2CAI}" 
                                                  widgetVar="tableWidgetVar"
                                                  var="tp"
                                                  fixed-header="true"
@@ -45,47 +68,48 @@
                                                  paginated="false"
                                                  selectionMode="multiple"
                                                  style="margin: 0 auto; width: 100%;"
+                                                 excel="true"
                                                  >
-                                        <b:dataTableColumn style="min-width: 60px;">
+                                        <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Número"/>
                                             </f:facet>
-                                            <b:inputText id="txtDuracion" placeholder="mm"  value="#{tp.numero}"/>  
+                                            <h:outputText value="#{tp.numero}"/>  
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
-                                                <h:outputText value="CAI/UZDI"/>
+                                                <h:outputText value="CAI"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Nombres"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn>
                                             <f:facet name="header">
                                                 <h:outputText value="Apellidos"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn >
                                             <f:facet name="header">
                                                 <h:outputText value="Género"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.genero}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.genero}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn >
                                             <f:facet name="header">
                                                 <h:outputText value="Edad"/>
                                             </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.edad}"/>
+                                            <h:outputText style="text-transform:uppercase" value="#{tp.edad}"/>
                                         </b:dataTableColumn>
                                     </b:dataTable>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </b:form>
                 </div>
             </ui:define>

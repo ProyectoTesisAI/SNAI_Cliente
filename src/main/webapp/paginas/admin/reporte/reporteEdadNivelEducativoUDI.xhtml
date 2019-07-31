@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
             <ui:define name="head">
@@ -18,73 +19,224 @@
             <ui:define name="content">
                 <div class="panel panel-default">
                     <b:form id="form">
-                        <b:row>
-                            <b:column span="8" offset="1">
-                                <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
-                                <b:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte.tipoDelto}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
-                                    <f:selectItems value="#{panelReportesControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
-                                </b:selectOneMenu>
-                            </b:column>
-                            <b:column span="3" offset="8">
-                                <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarTipoDelitoCAI()}">
-                                    <f:ajax execute="form" render="tablaTallerCAI form"/>
-                                </h:commandButton>
-                            </b:column>
-                        </b:row>
-                        
-                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="form-group">
-                                    <b:dataTable id="tablaTallerCAI" value="#{panelReportesControlador.listaReportes1CAI}" 
-                                                 widgetVar="tableWidgetVar"
-                                                 var="tp"
-                                                 fixed-header="true"
-                                                 scroll-x="true"
-                                                 scroll-size="1000px"
-                                                 responsive="false"
-                                                 searching="false"
-                                                 select="true"
-                                                 paginated="false"
-                                                 selectionMode="multiple"
-                                                 style="margin: 0 auto; width: 100%;"
-
-                                                 >
-                                        <b:dataTableColumn style="min-width: 60px;">
-                                            <f:facet name="header">
-                                                <h:outputText value="Número"/>
-                                            </f:facet>
-                                            <b:inputText style="color: #262626" id="txtDuracion" placeholder="mm"  value="#{tp.numero}"/>  
-                                        </b:dataTableColumn>
-                                        <b:dataTableColumn>
-                                            <f:facet name="header">
-                                                <h:outputText value="CAI/UZDI"/>
-                                            </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
-                                        </b:dataTableColumn>
-                                        <b:dataTableColumn>
-                                            <f:facet name="header">
-                                                <h:outputText value="Nombres"/>
-                                            </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.nombres}"/>
-                                        </b:dataTableColumn>
-                                        <b:dataTableColumn>
-                                            <f:facet name="header">
-                                                <h:outputText value="Apellidos"/>
-                                            </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.apellidos}"/>
-                                        </b:dataTableColumn>
-                                        <b:dataTableColumn >
-                                            <f:facet name="header">
-                                                <h:outputText value="Tipo de Delito"/>
-                                            </f:facet>
-                                            <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.tipoDelto}"/>
-                                        </b:dataTableColumn>
-
-                                    </b:dataTable>
-                                </div>
-                            </div>
-                        </div>
+                        <b:panel>
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtEstudia" value="Estudia"/>
+                                    <b:selectOneMenu id="txtEstudia" update="estudia, tabla" process="@this" value="#{panelReportesControlador.estudia}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="SI"  itemValue="true"/>
+                                        <f:selectItem itemLabel="NO"  itemValue="false" />
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <b:column span="4" offset="2">                                    
+                                    <h:outputLabel for="txtEdad" value="Edad "/>
+                                    <b:inputText mask="integer" id="txtEdad" placeholder="Edad" value="#{panelReportesControlador.edad}"/>
+                                </b:column>
+                                <h:panelGroup id="estudia">
+                                    <b:panel rendered="#{!panelReportesControlador.estudia}">
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoNoUDI()}">
+                                                    <f:ajax execute="form" render="tablaReporteNoUDI"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel rendered="#{panelReportesControlador.estudia}">
+                                        <b:row>
+                                            <b:column span="3" offset="8">
+                                                <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoSiUDI()}">
+                                                    <f:ajax execute="form" render="tablaReporteSiUDI"/>
+                                                </h:commandButton>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                                </h:panelGroup>
+                                <h:panelGroup id="tabla">
+                                    <b:panel rendered="#{!panelReportesControlador.estudia}">
+                                        <br/>
+                                        <br/>
+                                        <p:dataTable id="tablaReporteNoUDI" var="tp" value="#{panelReportesControlador.listaReportes6NUDI}" reflow="true" rows="7" paginator="false">
+                                            <p:column headerText="Número">
+                                                <h:outputText value="#{tp.numero}"/>
+                                            </p:column>
+                                            <p:column headerText="UZDI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                                                <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                            </p:column>
+                                            <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                                                <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                            </p:column>
+                                            <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                                                <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                                            </p:column>
+                                            <p:column headerText="Edad" filterMatchMode="contains" filterBy="#{tp.edad}">
+                                                <h:outputText value="#{tp.edad}"/>
+                                            </p:column>
+                                            <p:column headerText="¿Estudia?" filterMatchMode="contains" filterBy="#{tp.estudia}">
+                                                <h:outputText style="text-transform:uppercase" value="#{tp.estudia}"/>
+                                            </p:column>
+                                            <p:column headerText="Razón por la que no estudia" filterMatchMode="contains" filterBy="#{tp.razonNoEstudia}">
+                                                <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
+                                            </p:column>
+                                        </p:dataTable>
+<!--                                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:dataTable id="tablaReporteNoUDI" value="#{panelReportesControlador.listaReportes6NUDI}" 
+                                                                 widgetVar="tableWidgetVar"
+                                                                 var="tp"
+                                                                 fixed-header="true"
+                                                                 scroll-x="true"
+                                                                 scroll-size="1000px"
+                                                                 responsive="false"
+                                                                 searching="false"
+                                                                 select="true"
+                                                                 paginated="false"
+                                                                 selectionMode="multiple"
+                                                                 style="margin: 0 auto; width: 100%;"
+                                                                 excel="true"
+                                                                 >
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Número"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{tp.numero}"/>  
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="UZDI"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Nombres"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Apellidos"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Edad"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{tp.edad}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Estudia"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.estudia}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText  value="Razon por la que no estudia"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
+                                                        </b:dataTableColumn>
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </b:panel>
+                                    <b:panel rendered="#{panelReportesControlador.estudia}">
+                                        <br/>
+                                        <br/>
+                                        <p:dataTable id="tablaReporteSiUDI" var="ts" value="#{panelReportesControlador.listaReportes6SUDI}" reflow="true" rows="7" paginator="false">
+                                            <p:column headerText="Número">
+                                                <h:outputText value="#{ts.numero}"/>
+                                            </p:column>
+                                            <p:column headerText="UZDI" filterMatchMode="contains" filterBy="#{ts.cai_uzdi}">
+                                                <h:outputText style="text-transform:uppercase" value="#{ts.cai_uzdi}"/>
+                                            </p:column>
+                                            <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{ts.nombres}">
+                                                <h:outputText style="text-transform:uppercase" value="#{ts.nombres}"/>
+                                            </p:column>
+                                            <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{ts.apellidos}">
+                                                <h:outputText style="text-transform:uppercase" value="#{ts.apellidos}"/>
+                                            </p:column>
+                                            <p:column headerText="Edad" filterMatchMode="contains" filterBy="#{ts.edad}">
+                                                <h:outputText value="#{ts.edad}"/>
+                                            </p:column>
+                                            <p:column headerText="¿Estudia?" filterMatchMode="contains" filterBy="#{ts.estudia}">
+                                                <h:outputText style="text-transform:uppercase" value="#{ts.estudia}"/>
+                                            </p:column>
+                                            <p:column headerText="Nivel educativo" filterMatchMode="contains" filterBy="#{ts.nivelEducativo}">
+                                                <h:outputText style="text-transform:uppercase" value="#{ts.nivelEducativo}"/>
+                                            </p:column>
+                                        </p:dataTable>
+<!--                                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:dataTable id="tablaReporteSiUDI" value="#{panelReportesControlador.listaReportes6SUDI}" 
+                                                                 widgetVar="tableWidgetVar"
+                                                                 var="ts"
+                                                                 fixed-header="true"
+                                                                 scroll-x="true"
+                                                                 scroll-size="1000px"
+                                                                 responsive="false"
+                                                                 searching="false"
+                                                                 select="true"
+                                                                 paginated="false"
+                                                                 selectionMode="multiple"
+                                                                 style="margin: 0 auto; width: 100%;"
+                                                                 excel="true"
+                                                                 >
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Número"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{ts.numero}"/>  
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="UZDI"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{ts.cai_uzdi}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Nombres"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{ts.nombres}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Apellidos"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{ts.apellidos}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText  value="Edad"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{ts.edad}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Estudia"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{ts.estudia}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Nivel educativo"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{ts.nivelEducativo}"/>
+                                                        </b:dataTableColumn>
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </b:panel>
+                                </h:panelGroup>
+                            </b:row>
+                        </b:panel>
                     </b:form>
                 </div>
             </ui:define>

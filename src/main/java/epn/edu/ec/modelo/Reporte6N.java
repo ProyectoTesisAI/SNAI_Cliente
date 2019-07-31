@@ -5,6 +5,7 @@ public class Reporte6N {
     private String cai_uzdi;
     private String nombres;
     private String apellidos;
+    private Integer edad;
     private Boolean estudia;
     private String razonNoEstudia;
 
@@ -41,6 +42,14 @@ public class Reporte6N {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
     }
 
     public Boolean getEstudia() {
