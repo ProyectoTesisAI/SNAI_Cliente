@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition>
+            <b:form id="form">
+                <b:row>
+                    <b:column span="4" offset="1">                                        
+                        <h:outputLabel for="txtFechaIngreso" value="Fecha ingreso"/>
+                        <b:dateTimePicker id="txtFechaIngreso" placeholder="Fecha" showTime="false" value="#{panelReportesControlador.fechaBuscar}"/>
+                    </b:column>
+                    <b:column span="3" offset="8">
+                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarFechaIngresoCAI()}">
+                            <f:ajax execute="form" render="tablaReporteCAI"/>
+                        </h:commandButton>
+                    </b:column>
+                </b:row>
+                <br/>
+                <br/>
+                <p:dataTable id="tablaReporteCAI" disabledSelection="true" var="tp" value="#{panelReportesControlador.listaReportes5CAI}" reflow="true" rows="9" paginator="false">
+                    <p:column headerText="Número">
+                        <h:outputText style="min-width: 20px;" value="#{tp.numero}"/>
+                    </p:column>
+                    <p:column headerText="CAI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                    </p:column>
+                    <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Fecha de aprehensión" filterMatchMode="contains" filterBy="#{tp.fechaAprehension}">
+<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaAprehension}"/>-->
+                        <p:datePicker showTime="false" view="date" value="#{tp.fechaAprehension}"/>
+                    </p:column>
+                    <p:column headerText="Tiempo de sentencia" filterMatchMode="contains" filterBy="#{tp.tiempoSetenciaMedida}">
+                        <h:outputText value="#{tp.tiempoSetenciaMedida}"/>
+                    </p:column>
+                    <p:column headerText="Fecha de cumplimiento 60%" filterMatchMode="contains" filterBy="#{tp.fechaCumplimiento60}">
+<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento60}"/>-->
+                        <p:datePicker showTime="false" view="date" value="#{tp.fechaCumplimiento60}"/>
+                    </p:column>
+                    <p:column headerText="Fecha de cumplimiento 80%" filterMatchMode="contains" filterBy="#{tp.fechaCumplimiento80}">
+<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento80}"/>-->
+                        <p:datePicker showTime="false" view="date" value="#{tp.fechaCumplimiento80}"/>
+                    </p:column>
+                    <p:column headerText="Porcentaje de cumplimiento" filterMatchMode="contains" filterBy="#{tp.porcentajeCumplimiento}">
+                        <p:inputNumber decimalPlaces="2" value="#{tp.porcentajeCumplimiento}" symbol="%" symbolPosition="s"/>
+                    </p:column>
+                </p:dataTable>
+                <!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                            <div class="col-md-12 col-md-offset-0">
+                                                <div class="form-group">
+                                                    <b:panel content-disabled="true">
+                                                        <b:dataTable id="tablaReporteCAI" value="#{panelReportesControlador.listaReportes5CAI}" 
+                                                                     widgetVar="tableWidgetVar"
+                                                                     var="tp"
+                                                                     fixed-header="true"
+                                                                     scroll-x="true"
+                                                                     scroll-size="1000px"
+                                                                     responsive="false"
+                                                                     searching="false"
+                                                                     select="true"
+                                                                     paginated="false"
+                                                                     selectionMode="multiple"
+                                                                     style="margin: 0 auto; width: 100%;"
+                                                                     excel="true"
+                                                                     >
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Número"/>
+                                                                </f:facet>
+                                                                <h:outputText value="#{tp.numero}"/>  
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="CAI"/>
+                                                                </f:facet>
+                                                                <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Nombres"/>
+                                                                </f:facet>
+                                                                <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn>
+                                                                <f:facet name="header">
+                                                                    <h:outputText style="text-transform:uppercase" value="Apellidos"/>
+                                                                </f:facet>
+                                                                <h:outputText value="#{tp.apellidos}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Fecha de aprehensión"/>
+                                                                </f:facet>
+                                                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaAprehension}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Tiempo de sentencia"/>
+                                                                </f:facet>
+                                                                <h:outputText value="#{tp.tiempoSetenciaMedida}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Fecha de cumplimiento al 60%"/>
+                                                                </f:facet>
+                                                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento60}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Fecha de cumplimiento al 80%"/>
+                                                                </f:facet>
+                                                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento80}"/>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn >
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Porcentaje de cumplimiento"/>
+                                                                </f:facet>
+                                                                <p:inputNumber decimalPlaces="2" value="#{tp.porcentajeCumplimiento}" symbol="%" symbolPosition="s"/>
+                                                            </b:dataTableColumn>                                    
+                                                        </b:dataTable>
+                                                    </b:panel>
+                                                </div>
+                                            </div>
+                                        </div>-->
+            </b:form>
+        </ui:composition>
+    </h:body>
+</html>

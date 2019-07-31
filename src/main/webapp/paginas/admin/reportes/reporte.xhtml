@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"          
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:body>
+       <ui:composition template="./../../../templates/menu.xhtml">
+            
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
+                <script src="../../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+            
+            <ui:define name="content">
+                <h:form>
+                    <p:dataTable var="dr" value="#{panelReportesControlador.listaDescripcionReportes}"  reflow="true"  rows="9"
+                                 paginator="false" >
+                        <p:column headerText="REPORTE" width="12%">
+                            <h:outputText style="text-transform: uppercase" value="#{dr.nombre}"/>
+                        </p:column>
+                        <p:column headerText="DESCRIPCIÓN DEL REPORTE" width="70%">
+                            <h:outputText style="text-transform: uppercase" value="#{dr.descripcion}"/>
+                        </p:column>
+                        <p:column headerText=" " width="18%">
+                            <b:commandButton value="Generar #{dr.nombre}" action="#{panelReportesControlador.generarReportes(dr)}" >
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+            </ui:define>
+       </ui:composition>
+    </h:body>
+</html>
+
