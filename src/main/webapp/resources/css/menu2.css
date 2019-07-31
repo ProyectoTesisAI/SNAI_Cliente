@@ -16,6 +16,7 @@
     position: fixed; 
     color: #141018; /*color del texto del menu lateral*/
     list-style: none;
+    left:0px;
 }
 
 .ui-panelmenu .ui-menuitem-text {
@@ -33,6 +34,7 @@
     line-height: 35px;
     background: #3f4a59;
     border-bottom: solid 1px #3b4553 !important;
+    box-shadow: 0px 0px 0px #d3d6da;
 }
 
 .ui-widget-content {
