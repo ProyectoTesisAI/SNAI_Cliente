@@ -61,6 +61,16 @@ public class EnlacesPrograma {
     public String PATH_PANEL_INFORMACION_MEDIDA_CAI_INSPECTOR_EDUCADOR = "/paginas/user/cai/inspectorEducador/panel_crear_info_medida_cai.com";
     
     public String PATH_ERROR = "/error/error.com";
+    
+    public String PATH_PANEL_REPORTE_1 = "/paginas/admin/reportes/panel_generar_reporte_1.com";
+    public String PATH_PANEL_REPORTE_2 = "/paginas/admin/reportes/panel_generar_reporte_2.com";
+    public String PATH_PANEL_REPORTE_3 = "/paginas/admin/reportes/panel_generar_reporte_3.com";
+    public String PATH_PANEL_REPORTE_4 = "/paginas/admin/reportes/panel_generar_reporte_4.com";
+    public String PATH_PANEL_REPORTE_5 = "/paginas/admin/reportes/panel_generar_reporte_5.com";
+    public String PATH_PANEL_REPORTE_6 = "/paginas/admin/reportes/panel_generar_reporte_6.com";
+    public String PATH_PANEL_REPORTE_7 = "/paginas/admin/reportes/panel_generar_reporte_7.com";
+    public String PATH_PANEL_REPORTE_8 = "/paginas/admin/reportes/panel_generar_reporte_8.com";
+    public String PATH_PANEL_REPORTE_9 = "/paginas/admin/reportes/panel_generar_reporte_9.com";
 
     public String getPATH_ADOLESCENTE_UDI_CREAR() {
         return PATH_ADOLESCENTE_UDI_CREAR;

@@ -2,6 +2,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.DatosTipoPenalCAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
+import epn.edu.ec.modelo.Reporte;
 import epn.edu.ec.modelo.Reporte1;
 import epn.edu.ec.modelo.Reporte2;
 import epn.edu.ec.modelo.Reporte3;
@@ -12,11 +13,13 @@ import epn.edu.ec.modelo.Reporte6S;
 import epn.edu.ec.modelo.Reporte7;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -24,6 +27,7 @@ import javax.inject.Named;
 @ViewScoped
 public class PanelReporteControlador implements Serializable {
 
+    private EnlacesPrograma enlaces;
     private Reporte1 reporte1;
     private Reporte2 reporte2;
     private List<Reporte1> listaReportes1CAI;
@@ -35,7 +39,6 @@ public class PanelReporteControlador implements Serializable {
     private List<Reporte4> listaReportes4CAI;
     private List<Reporte4> listaReportes4UDI;
     private List<Reporte5> listaReportes5CAI;
-    private List<Reporte5> listaReportes5UDI;
     private List<Reporte6S> listaReportes6SCAI;
     private List<Reporte6S> listaReportes6SUDI;
     private List<Reporte6N> listaReportes6NCAI;
@@ -53,6 +56,9 @@ public class PanelReporteControlador implements Serializable {
     private List<DatosTipoPenalCAI> tiposPenal;
     private DatosTipoPenalCAIServicio servicioTP;
     
+    private Reporte reporte;
+    private List<Reporte> listaDescripcionReportes;
+    
     String tipoMedida;
     boolean esSocioeducativa;
     private boolean estudia;
@@ -69,7 +75,6 @@ public class PanelReporteControlador implements Serializable {
         listaReportes4CAI = new ArrayList<>();
         listaReportes4UDI = new ArrayList<>();
         listaReportes5CAI = new ArrayList<>();
-        listaReportes5UDI = new ArrayList<>();
         listaReportes6SCAI = new ArrayList<>();
         listaReportes6SUDI = new ArrayList<>();
         listaReportes6NCAI = new ArrayList<>();
@@ -80,6 +85,7 @@ public class PanelReporteControlador implements Serializable {
         reporte2 = new Reporte2();
         nacionalidad = null;
         edad=null;
+        enlaces = new EnlacesPrograma();
 
         tiposPenal = new ArrayList<>();
         servicioTP = new DatosTipoPenalCAIServicio();
@@ -96,6 +102,17 @@ public class PanelReporteControlador implements Serializable {
         else{
             estudia=false;
         }
+        
+        listaDescripcionReportes = new ArrayList<>();
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 1", "Reporte para obetener los adolescetes por Tipo de delito"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 2", "Reporte para obetener los adolescetes por la edad del adolescente"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 3", "Reporte para obetener la edad del adolescente en una determinada fecha"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 4", "Reporte para obetener los adolescetes por la nacionalidad del adolescente"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 5", "Reporte para obetener los adolescetes por el tipo de medida"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 6", "Reporte para obetener los adolescetes por fecha de ingreso al CAI"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 7", "Reporte para obetener los adolescetes por su nivel de educación"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 8", "Reporte para obetener los adolescetes por su edad y nivel de educación"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 9", "Reporte para obetener los adolescetes por su lugar de residencia"));
     }
 
     public List<Reporte1> getListaReportes1CAI() {
@@ -168,14 +185,6 @@ public class PanelReporteControlador implements Serializable {
 
     public void setListaReportes5CAI(List<Reporte5> listaReportes5CAI) {
         this.listaReportes5CAI = listaReportes5CAI;
-    }
-
-    public List<Reporte5> getListaReportes5UDI() {
-        return listaReportes5UDI;
-    }
-
-    public void setListaReportes5UDI(List<Reporte5> listaReportes5UDI) {
-        this.listaReportes5UDI = listaReportes5UDI;
     }
 
     public List<Reporte6S> getListaReportes6SCAI() {
@@ -334,6 +343,22 @@ public class PanelReporteControlador implements Serializable {
 
     public void setEdad(String edad) {
         this.edad = edad;
+    }
+
+    public Reporte getReporte() {
+        return reporte;
+    }
+
+    public void setReporte(Reporte reporte) {
+        this.reporte = reporte;
+    }
+
+    public List<Reporte> getListaDescripcionReportes() {
+        return listaDescripcionReportes;
+    }
+
+    public void setListaDescripcionReportes(List<Reporte> listaDescripcionReportes) {
+        this.listaDescripcionReportes = listaDescripcionReportes;
     }
 
     public List<Reporte1> buscarTipoDelitoUDI() {
@@ -522,6 +547,36 @@ public class PanelReporteControlador implements Serializable {
             return listaReportes7CAI = reporteRespuestaCAI;
         } else {
             return listaReportes7CAI = null;
+        }
+    }
+    
+    public String generarReportes(Reporte reporte) {
+
+        try {
+            if("Reporte 1".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_1+"?faces-redirect=true";
+            }else if("Reporte 2".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_2+"?faces-redirect=true";
+            }else if("Reporte 3".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_3+"?faces-redirect=true";
+            }else if("Reporte 4".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_4+"?faces-redirect=true";
+            }else if("Reporte 5".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_5+"?faces-redirect=true";
+            }else if("Reporte 6".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_6+"?faces-redirect=true";
+            }else if("Reporte 7".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_7+"?faces-redirect=true";
+            }else if("Reporte 8".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_8+"?faces-redirect=true";
+            }else if("Reporte 9".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_9+"?faces-redirect=true";
+            }else{
+                return enlaces.PATH_ERROR+"?faces-redirect=true";
+            }            
+
+        } catch (Exception ex) {
+            return null;
         }
     }
 }

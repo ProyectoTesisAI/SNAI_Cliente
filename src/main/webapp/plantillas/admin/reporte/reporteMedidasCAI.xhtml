@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition>
+            <b:form id="form">
+                <b:row>
+                    <b:column span="6" offset="0">
+                        <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
+                        <b:selectOneMenu id="txtTipoMedida" required="true" update="tipoMedida" process="@this" value="#{panelReportesControlador.tipoMedida}">
+                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                            <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
+                            <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
+                        </b:selectOneMenu>
+                    </b:column>                   
+                    <h:panelGroup id="tipoMedida">
+                        <b:column span="6" offset="0">
+                            <h:outputLabel for="txtMedidaSocioeducativa" rendered="#{panelReportesControlador.esSocioeducativa}" value="Medida Socioeducativa Privativa de Libertidad"/>
+                            <b:selectOneMenu id="txtMedidaSocioeducativa" rendered="#{panelReportesControlador.esSocioeducativa}" value="#{panelReportesControlador.medidaCAI.medidaCautelar}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="6" offset="0">
+                            <h:outputLabel for="txtMedidaCautelar" rendered="#{!panelReportesControlador.esSocioeducativa}" value="Medida Cautelar"/>
+                            <b:selectOneMenu id="txtMedidaCautelar" rendered="#{!panelReportesControlador.esSocioeducativa}" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
+                                <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
+                                <f:selectItem itemLabel="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"  itemValue="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"/>
+                                <f:selectItem itemLabel="4. La prohibición de ausentarse del país o de la localidad que señale el Juez"  itemValue="4. La prohibición de ausentarse del país o de la localidad que señale el Juez"/>
+                                <f:selectItem itemLabel="5. La prohibición de concurrir a los lugares o reuniones que determine el Juez"  itemValue="5. La prohibición de concurrir a los lugares o reuniones que determine el Juez"/>
+                                <f:selectItem itemLabel="6. La prohibición de comunicarse con determinadas personas que el Juez señale, siempre que ello no afecte su derecho al medio familiar y a una adecuada defensa"  itemValue="6. La prohibición de comunicarse con determinadas personas que el Juez señale, siempre que ello no afecte su derecho al medio familiar y a una adecuada defensa"/>
+                                <f:selectItem itemLabel="7. La privación de libertad, en los casos excepcionales que se señala la ley"  itemValue="7. La privación de libertad, en los casos excepcionales que se señala la ley"/>
+                                <f:selectItem itemLabel="Art. 326 (a) Infracción Flagrante" itemValue="Art. 326 (a) Infracción Flagrante"/>
+                                <f:selectItem itemLabel="Art. 326 (b) Cuando se ha fugado de un CAI" itemValue="Art. 326 (b) Cuando se ha fugado de un CAI"/>
+                                <f:selectItem itemLabel="Art. 328.- Detención para investigación" itemValue="Art. 328.- Detención para investigación"/>
+                                <f:selectItem itemLabel="Art. 329.- Detención para asegurar la comparecencia" itemValue="Art. 329.- Detención para asegurar la comparecencia"/>
+                                <f:selectItem itemLabel="Art. 330.- Internamiento Preventivo" itemValue="Art. 330.- Internamiento Preventivo"/>
+                                <f:selectItem itemLabel="8. Internamiento Institucional" itemValue="8. Internamiento Institucional"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </h:panelGroup>
+                </b:row>
+                <b:row>
+                    <b:column span="3" offset="8">
+                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarMedidasSocioeducativasCAI()}">
+                            <f:ajax execute="form" render="tablaReporteCAI"/>
+                        </h:commandButton>
+                    </b:column>
+                </b:row>
+                <br/>
+                <br/>
+                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes4CAI}" reflow="true" rows="6" paginator="false">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{tp.numero}"/>
+                    </p:column>
+                    <p:column headerText="CAI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                    </p:column>
+                    <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Tipo de delito" filterMatchMode="contains" filterBy="#{tp.tipoDelito}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelito}"/>
+                    </p:column>
+                    <p:column headerText="Medida Socioeducativa" filterMatchMode="contains" filterBy="#{tp.medidaSocioeducativa}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.medidaSocioeducativa}"/>
+                    </p:column>
+                </p:dataTable>
+                <!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group">
+                                                    <b:dataTable id="tablaReporteCAI" value="#{panelReportesControlador.listaReportes4CAI}" 
+                                                                 widgetVar="tableWidgetVar"
+                                                                 var="tp"
+                                                                 fixed-header="true"
+                                                                 scroll-x="true"
+                                                                 scroll-size="1000px"
+                                                                 responsive="false"
+                                                                 searching="false"
+                                                                 select="true"
+                                                                 paginated="false"
+                                                                 selectionMode="multiple"
+                                                                 style="margin: 0 auto; width: 100%;"
+                                                                 excel="true"
+                                                                 >
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Número"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{tp.numero}"/>  
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="CAI"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Nombres"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Apellidos"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Tipo de Delito"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelito}"/>
+                                                        </b:dataTableColumn>
+                                                        <b:dataTableColumn >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Medida SocioEducativa"/>
+                                                            </f:facet>
+                                                            <h:outputText style="text-transform:uppercase" value="#{tp.medidaSocioeducativa}"/>
+                                                        </b:dataTableColumn>
+                
+                                                    </b:dataTable>
+                                                </div>
+                                            </div>
+                                        </div>-->
+            </b:form>
+        </ui:composition>
+    </h:body>
+</html>
