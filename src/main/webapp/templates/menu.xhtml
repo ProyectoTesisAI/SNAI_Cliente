@@ -21,18 +21,18 @@
         
     </h:head>
 
-    <h:body>
-        <div id="form">
+    <h:body style="background: whitesmoke;">
+        <div id="form" >
             
             <div id="top">
                 
                 <ui:insert name="top">
-                    <nav style="background: #4a84ca;" id="menu_superior" class="navbar navbar-default navbar-fixed-top">
+                    <nav style="background: white;" id="menu_superior" class="navbar navbar-default navbar-fixed-top">
                         <div class="container-fluid">
                             <div class="navbar-header">
-                                <a class="navbar-brand" href="menu.com" id="menu-toggle" ><img src="imagenes/icono_menu.png" height="15" style="padding-top: 3px;"/></a>                  
-                                <a style="height: 50px; line-height: 50px; text-decoration: none; color: white; font-size: 18px; font-weight: bold;">
-                                    Sistema de Reeducación
+                                <a class="navbar-brand" href="menu.com" id="menu-toggle" ><img src="imagenes/icono_menu.png"  height="15" style="padding-top: 3px;"/></a>                  
+                                <a style="height: 50px; color: #3f4a59; line-height: 50px; text-decoration: none; font-size: 18px; font-weight: bold;">
+                                    SNAI
                                     
                                 </a>
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_navbar" aria-expanded="false" aria-controls="menu_navbar">
@@ -65,20 +65,20 @@
                     <div id="menu_lateral">
                     <h:form>
                     <p:panelMenu style="width:270px">
-                        <p:submenu label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
+                        <p:submenu expanded="false" label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
                             <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
                             <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" icon="pi pi-refresh" />
                         </p:submenu>
-                        <p:submenu label="Adolescente CAI" rendered="#{administracionMenuControlador.esCAI}">
+                        <p:submenu expanded="false" label="Adolescente CAI" rendered="#{administracionMenuControlador.esCAI}">
                             <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteCAI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>
                             <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteCAI()}" icon="pi pi-refresh" />
                         </p:submenu>
-                        <p:submenu label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
+                        <p:submenu expanded="false" label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
                             <p:menuitem value="Crear Registro"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
                             <p:menuitem value="Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" icon="pi pi-refresh" />
                             <p:menuitem value="Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" icon="pi pi-refresh" />
                         </p:submenu>
-                        <p:submenu label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
+                        <p:submenu  label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
                             <p:menuitem value="Crear Registro" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
                             <p:menuitem value="Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" icon="pi pi-refresh" />
                             <p:menuitem value="Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" icon="pi pi-refresh" />
