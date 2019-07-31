@@ -54,3 +54,20 @@
     background: white !important;
 }
 
+.nav-pills > li > a {
+
+    border-radius: 4px;
+    color: gray !important;
+
+}
+
+.nav-pills > li.active > a{
+
+    color: #fff !important;
+    background-color: #337ab7;
+
+}
+
+.nav-tabs > li > a {
+    color: gray !important;
+}
