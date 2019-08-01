@@ -62,6 +62,7 @@ public class EnlacesPrograma {
     
     public String PATH_ERROR = "/error/error.com";
     
+    public String PATH_PANEL_REPORTE="/paginas/admin/reportes/reporte.com";
     public String PATH_PANEL_REPORTE_1 = "/paginas/admin/reportes/panel_generar_reporte_1.com";
     public String PATH_PANEL_REPORTE_2 = "/paginas/admin/reportes/panel_generar_reporte_2.com";
     public String PATH_PANEL_REPORTE_3 = "/paginas/admin/reportes/panel_generar_reporte_3.com";
@@ -89,6 +90,14 @@ public class EnlacesPrograma {
 
     public void setPATH_ADOLESCENTE_CAI_CREAR(String PATH_ADOLESCENTE_CAI_CREAR) {
         this.PATH_ADOLESCENTE_CAI_CREAR = PATH_ADOLESCENTE_CAI_CREAR;
+    }
+
+    public String getPATH_PANEL_REPORTE() {
+        return PATH_PANEL_REPORTE;
+    }
+
+    public void setPATH_PANEL_REPORTE(String PATH_PANEL_REPORTE) {
+        this.PATH_PANEL_REPORTE = PATH_PANEL_REPORTE;
     }
     
     
