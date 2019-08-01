@@ -34,6 +34,7 @@ public class Constantes {
     public static final String URL_CAI = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Cai";
     public static final String URL_MEDIDA_SOCIOEDUCATIVA = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Medida_Socioeducativa";
     public static final String URL_ROL = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Rol";
+    public static final String URL_ROL_CENTRO_USUARIO = "http://localhost:34446/SistemaSNAI_Servidor/webresources/RolCentroUsuario";
     public static final String URL_DATOS_PROVINCIA_CANTON = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Datos_Provincia_Canton";
     public static final String URL_ADOLESCENTE_UDI = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Adolescente_Udi";
     public static final String URL_REPRESENTANTE = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Representante";
