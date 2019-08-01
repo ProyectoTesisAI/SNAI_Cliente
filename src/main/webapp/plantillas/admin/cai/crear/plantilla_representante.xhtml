@@ -4,7 +4,8 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -13,7 +14,7 @@
 
             <b:form id="formRepresentante">
                 
-                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                <p:growl id="growlMsg" globalOnly="false" showDetail="false" showSummary="true" life="5000" escape="true" /> 
                 
                 <b:panel look="primary" content-disabled="#{representanteControladorCAI.guardado}">
                     <f:facet name="heading">
@@ -61,7 +62,7 @@
                     </b:row>    
                     <b:row>
                         <b:column span="3" offset="8">
-                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{representanteControladorCAI.guardarRepresentante()}" update="@form"/>
+                            <b:commandButton id="btnRepresentanteCAI" value="Guardar" class="btn btn-primary btn-block" actionListener="#{representanteControladorCAI.guardarRepresentante()}" update="@form"/>
                         </b:column>
                     </b:row>
                 </b:panel>

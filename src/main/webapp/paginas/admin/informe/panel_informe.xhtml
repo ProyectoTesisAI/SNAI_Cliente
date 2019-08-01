@@ -29,8 +29,8 @@
 
                             <b:form id="form">
                                 
-                                <p:dataTable var="tp" value="#{panelInformeControlador.listaInforme}"  reflow="true"  rows="5"
-                                             paginator="false"  >
+                                <p:dataTable var="tp" value="#{panelInformeControlador.listaInforme}"  reflow="true"  rows="10"
+                                             paginator="true"  >
 
                                     <p:column  filterMatchMode="contains" filterBy="#{tp.idTaller.tipo}" headerText="Tipo">
                                         <h:outputText value="#{tp.idTaller.tipo}" />

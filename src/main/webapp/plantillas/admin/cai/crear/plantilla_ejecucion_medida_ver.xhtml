@@ -18,8 +18,8 @@
                         <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="5"
-                                 paginator="false" >
+                    <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
+                                 paginator="true" >
                         <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción">
                             <h:outputText value="#{te.idDetalleInfraccionCAI.numeroCausa}" />
                         </p:column>

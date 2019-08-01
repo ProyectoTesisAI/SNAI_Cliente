@@ -21,8 +21,8 @@
             
             <ui:define name="content">
                 <h:form>
-                    <p:dataTable var="ai" value="#{panelAdolescenteInfractorCAIControlador.listadoAdolescentesInfractoresCAI}"  reflow="true"  rows="5"
-                                 paginator="false"  >
+                    <p:dataTable var="ai" value="#{panelAdolescenteInfractorCAIControlador.listadoAdolescentesInfractoresCAI}"  reflow="true"  rows="20"
+                                 paginator="true"  >
 
                         <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
                             <h:outputText value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />

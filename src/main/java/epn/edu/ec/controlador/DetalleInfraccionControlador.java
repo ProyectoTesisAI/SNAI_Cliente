@@ -161,8 +161,15 @@ public class DetalleInfraccionControlador implements Serializable {
         
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
         if (detalleInfraccionAux != null) {
-            guardado=true;
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
+            
+            List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
+            
+            if (listaAux.isEmpty()!=true) {
+                listaDetalleInfraccion = listaAux;
+            } 
+            
             
         } else {
             guardado=false;
