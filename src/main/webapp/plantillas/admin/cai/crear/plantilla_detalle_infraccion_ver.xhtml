@@ -18,8 +18,8 @@
                         <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <p:dataTable var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="5"
-                                 paginator="false"  widgetVar="infraccionesTable">
+                    <p:dataTable var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="10"
+                                 paginator="true"  widgetVar="infraccionesTable">
                         <p:column filterMatchMode="contains" filterBy="#{td.tipoPenal}" headerText="Tipo Penal">
                             <h:outputText value="#{td.tipoPenal}" />
                         </p:column>
