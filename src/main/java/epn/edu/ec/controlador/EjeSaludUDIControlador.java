@@ -8,6 +8,7 @@ import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
@@ -211,30 +212,18 @@ public class EjeSaludUDIControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public String guardarEjeSaludUDI() {
+    public void guardarEjeSaludUDI() {
 
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
         if (ejeSaludUDIAux != null) {
-            
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));
             
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
         }
     }
 

@@ -12,6 +12,9 @@
         <ui:composition>
 
             <b:form>
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{not empty adolescenteInfractorUDIControlador.adolescenteInfractorEditar}">
                     <f:facet name="heading">
                         <h:outputText value="ADOLESCENTE INFRACTOR" style="color: white; font-weight: bold"  />

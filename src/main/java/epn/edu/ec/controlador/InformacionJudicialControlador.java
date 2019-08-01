@@ -7,6 +7,7 @@ import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -183,7 +184,7 @@ public class InformacionJudicialControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public String guardarInformacionJudicial() {
+    public void guardarInformacionJudicial() {
         
         if(amonestacionVerbal==true){
             numeroMedidasGuardar++;
@@ -209,25 +210,13 @@ public class InformacionJudicialControlador implements Serializable {
         this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
-        if (informacionJudicialAux != null) {
-            
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
+        if (informacionJudicialAux!= null) {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
             
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
         }
     }
 }

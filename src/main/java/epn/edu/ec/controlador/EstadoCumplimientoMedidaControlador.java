@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -355,7 +356,7 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public String guardarEstadoCumplimientoMedida() {
+    public void guardarEstadoCumplimientoMedida() {
 
         for (UDI u : listaUdi) {
             if (u.getUdi().equals(udi.getUdi())) {
@@ -384,24 +385,12 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
 
         EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.guardarEstadoCumplimientoMedida(estadoCumplimientoMedida);
         if (estadoCumplimientoMedidaAux != null) {
-            
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Información"));
             
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Error"));
         }
     }
 

@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -61,16 +62,22 @@ public class EjecucionMedidaControlador implements Serializable {
         detalleInfraccionCAI = new DetalleInfraccionCAI();
 
         DetalleInfraccionCAI detalleInfraccionCAIAux = (DetalleInfraccionCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("detalle_infraccion_cai");
+        
         if(detalleInfraccionCAIAux != null){
             
             detalleInfraccionCAI=detalleInfraccionCAIAux;            
             ejecucionMedidaCAI.setFechaReporteCAI(detalleInfraccionCAI.getIdAdolescenteInfractorCAI().getFechaIngresoProceso());
+            
             List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
+            
             if(listaAux.isEmpty()!=true){            
                 listaEjecucionMedida=listaAux;
             }
         }
-        provincias = servicioCAIPC.listarDatosProvinciaCanton();
+        List<DatosProvinciaCanton> provinciasAux = servicioCAIPC.listarDatosProvinciaCanton();
+        if(provinciasAux!=null){
+            provincias=provinciasAux;
+        }
     }
 
     public DetalleInfraccionCAI getDetalleInfraccionCAI() {
@@ -163,15 +170,18 @@ public class EjecucionMedidaControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public String guardarEstadoCumplimientoMedida() {
+    public void guardarEjecucionMedida() {
 
         this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
 
         EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
         if (ejecucionMedidaAux != null) {
-            return "/paginas/cai/cai.com?faces-redirect=true";
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
+            
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJECUCIÓN MEDIDA", "Error"));
         }
     }
 

@@ -13,6 +13,9 @@
         <ui:composition>
 
             <b:form id="formEjeccionMedida">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{ejecucionMedidaControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
@@ -152,9 +155,7 @@
                             </b:column>
 
                             <b:column span="4" offset="2">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejecucionMedidaControlador.guardarEstadoCumplimientoMedida()}">
-                                    <f:ajax execute="modalMedida" render="modalMedida"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejecucionMedidaControlador.guardarEjecucionMedida()}" update="@form"/>
                             </b:column>
                         </b:row>
 

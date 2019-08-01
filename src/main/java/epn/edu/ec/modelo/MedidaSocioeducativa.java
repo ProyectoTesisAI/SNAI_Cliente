@@ -17,6 +17,9 @@ public class MedidaSocioeducativa implements Serializable {
     private AdolescenteInfractorUDI idAdolescenteInfractorUDI;
 
     public MedidaSocioeducativa() {
+        tiempoMeses=0;
+        tiempoDia=0;
+        tiempoHoras=0;
     }
 
     public Integer getIdMedidaSocioeducativa() {

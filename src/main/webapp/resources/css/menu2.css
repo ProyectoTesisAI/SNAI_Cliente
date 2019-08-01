@@ -46,7 +46,6 @@ a:link{
     font-size: 14px;
     font-weight: lighter  !important;
     text-shadow: 0 0 0 !important;
-    color: #d3d6da;
     font-family: Arial, "Arial CE" !important;
 }
 
@@ -63,11 +62,14 @@ a:link:hover {
     margin: -2px 0px -2px -2px;
 }
 
+.ui-panelmenu .ui-panelmenu-header a {
+    color: white !important;
+}
+/*subitem de la lita del item principal*/
 .ui-menu-list{
     background: #455160;  
     margin: -1px 0 -1px 0;
 }
-
 
 .ui-panelmenu .ui-panelmenu-content {
     padding: 0;
@@ -75,29 +77,34 @@ a:link:hover {
     overflow: auto;
 }
 
-
+/*Atributos del submenu*/
 .ui-panelmenu .ui-menuitem-link {
     display: block;
     width: 100%;
     text-decoration: none;
     border-bottom: solid 1px #3b4553 !important;
-    padding: 0 0 0 40px;
+    padding: 0 0 0 30px;
     line-height: 37px;
     cursor: pointer;
     border: 0px;
-    background: #455160;
 }
+
+
 
 /*Agrego un color en los subitems cuando el cursor pasa sobre dichos items*/
-.ui-menuitem *:hover{
-    background: #3b4553;
+.ui-menu-list :hover{
+   background: #455160 !important;
+   border-left: solid #33cabb 3px;
+    
 }
 
-.ui-menuitem-link:hover{
-    
-    color: whitesmoke; /*color del texto cuando el cursor se encuentra sobre el item*/
-    text-decoration: none;
+.ui-menu-list .ui-menuitem:hover, .ui-menu-list .ui-menuitem-link :hover, .ui-menu-list .ui-menuitem-text :hover{
+   color: #33cabb !important;
+   border-left:3px;
+   margin-left: 3px;
+
 }
+
 
 .ui-panelmenu .ui-icon{
    
@@ -129,4 +136,8 @@ a:link:hover {
 /*defino el tamaño de letra de los inputText*/
 .ui-widget .ui-widget {
     font-size: 14px;
+}
+
+.flecha{
+    background-image: url("https://cdn.icon-icons.com/icons2/81/PNG/128/star_favourite_15499.png") !important;
 }

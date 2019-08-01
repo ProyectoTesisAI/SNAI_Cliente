@@ -12,6 +12,9 @@
         <ui:composition>
             
             <b:form id="formInfoJuducial">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{informacionJudicialControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="INFORMACIÓN JUDICIAL" style="color: white; font-weight: bold"  />
@@ -180,9 +183,7 @@
                     </b:panel>
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionJudicialControlador.guardarInformacionJudicial()}">
-                                <f:ajax execute="formInfoJuducial" render="formInfoJuducial"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{informacionJudicialControlador.guardarInformacionJudicial()}" update="@form" />
                         </b:column>
                     </b:row>
                 </b:panel>

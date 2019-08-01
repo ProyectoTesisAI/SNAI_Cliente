@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
@@ -59,17 +60,20 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
         AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
         if (adolescenteInfractorCAIAux != null) {
+
             adolescenteInfractorCAI = adolescenteInfractorCAIAux;
             IdentificacionGeografica identificacionGeograficaAux = servicio.obtenerIdentificacionGeografica(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+
             if (identificacionGeograficaAux != null) {
                 identificacionGeografica = identificacionGeograficaAux;
                 guardado = true;
             }
             nacionalidad = adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getNacionalidad();
-            System.out.println("Nacionalidad init: " + nacionalidad);
+            
             if (nacionalidad.equals("ECUATORIANA")) {
                 esEcuatoriana = true;
-            } else if (nacionalidad.equals("EXTRANJERO")) {
+            } 
+            else if (nacionalidad.equals("EXTRANJERO")) {
                 esEcuatoriana = false;
             }
         }
@@ -169,7 +173,7 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public String guardarIdentificacionGeografica() {
+    public void guardarIdentificacionGeografica() {
         if(nacionalidad.equals("ECUATORIANA")){
             this.identificacionGeografica.setPaisNacimiento("ECUADOR");
         }
@@ -177,24 +181,12 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
 
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {
-            
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Información"));
             
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Error"));
         }
     }
 

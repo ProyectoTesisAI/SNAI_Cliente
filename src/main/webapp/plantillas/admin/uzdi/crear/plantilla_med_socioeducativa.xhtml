@@ -23,6 +23,9 @@
                 </b:row>
 
                 <b:form id="formMedidaSocioeducativa1">
+                    
+                    <b:growl id="growlMsg1" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                    
                     <!--PANEL DE AMONESTACIÓN VERBAL -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarAmonestacionVerbal}" content-disabled="#{medidaSocioEducativaControlador.amonestacionVerbalGuardado}">
                         <f:facet name="heading">
@@ -78,9 +81,7 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa1()}">
-                                    <f:ajax execute="formMedidaSocioeducativa1" render="formMedidaSocioeducativa1"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa1()}" update="@form"/>
                             </b:column>
                         </b:row>
 
@@ -89,6 +90,9 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa2">
+                    
+                    <b:growl id="growlMsg2" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                    
                     <!--PANEL DE IMPOSICIÓN REGLAS CONDUCTA -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarImposicionReglasConducta}" content-disabled="#{medidaSocioEducativaControlador.imposicionReglasConductaGuardado}">
                         <f:facet name="heading">
@@ -143,9 +147,7 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa2()}">
-                                    <f:ajax execute="formMedidaSocioeducativa2" render="formMedidaSocioeducativa2"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa2()}" update="@form"/>
                             </b:column>
                         </b:row>
 
@@ -153,6 +155,8 @@
                 </b:form>    
 
                 <b:form id="formMedidaSocioeducativa3">
+                    
+                    <b:growl id="growlMsg3" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE APOYO SOCIO FAMILIAR -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarApoyoSocioFamiliar}" content-disabled="#{medidaSocioEducativaControlador.apoyoSocioFamiliarGuardado}">
                         <f:facet name="heading">
@@ -208,9 +212,7 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa3()}">
-                                    <f:ajax execute="formMedidaSocioeducativa3" render="formMedidaSocioeducativa3"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa3()}" update="@form"/>
                             </b:column>
                         </b:row>
 
@@ -218,6 +220,8 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa4">
+                    
+                    <b:growl id="growlMsg4" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE SERVICIO COMUNIDAD -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarServicioComunidad}" content-disabled="#{medidaSocioEducativaControlador.servicioComunidadGuardado}">
                         <f:facet name="heading">
@@ -272,9 +276,7 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa4()}">
-                                    <f:ajax execute="formMedidaSocioeducativa4" render="formMedidaSocioeducativa4"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa4()}" update="@form"/>
                             </b:column>
                         </b:row>
 
@@ -282,6 +284,8 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa5">
+                    
+                    <b:growl id="growlMsg5" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE LIBERTAD ASISTIDA -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarLibertadAsistida}" content-disabled="#{medidaSocioEducativaControlador.libertadAsistidaGuardado}">
                         <f:facet name="heading">
@@ -334,9 +338,7 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa5()}">
-                                    <f:ajax execute="formMedidaSocioeducativa5" render="formMedidaSocioeducativa5"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa5()}" update="@form"/>
                             </b:column>
                         </b:row>
 

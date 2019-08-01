@@ -12,9 +12,12 @@
         <ui:composition>
 
             <b:form id="formInfoGeografica">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{identificacionGeograficaControladorCAI.guardado}">
                     <f:facet name="heading">
-                        <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
+                        <h:outputText value="INFORMACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
                     </f:facet>
                     <b:panel rendered="#{identificacionGeograficaControladorCAI.esEcuatoriana}"> <!-->esto es para ecuatorianos<-->
                         <f:facet name="heading">
@@ -161,9 +164,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{identificacionGeograficaControladorCAI.guardarIdentificacionGeografica()}">
-                                <f:ajax execute="formInfoGeografica" render="formInfoGeografica"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{identificacionGeograficaControladorCAI.guardarIdentificacionGeografica()}" update="@form"/>
                         </b:column>
                     </b:row>
                 </b:panel>    
