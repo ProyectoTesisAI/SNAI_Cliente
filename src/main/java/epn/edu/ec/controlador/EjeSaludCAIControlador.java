@@ -8,6 +8,7 @@ import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
@@ -69,14 +70,20 @@ public class EjeSaludCAIControlador implements Serializable{
         if(adolescenteInfractorCAIAux != null){
             
             adolescenteInfractorCAI=adolescenteInfractorCAIAux;
+            
             EjeSalud ejeSaludCAIAux= servicio.obtenerEjeSalud(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
             if(ejeSaludCAIAux!=null){
+            
                 ejeSalud=ejeSaludCAIAux;
                 guardado=true;
+                
                 String saludableAux = ejeSaludCAIAux.getSituacionSalud();
+                
                 if(saludableAux.equals("SALUDABLE")){
                     saludable=true;                    
-                }else if(saludableAux.equals("NO SALUDABLE")){
+                }
+                else if(saludableAux.equals("NO SALUDABLE")){
                     saludable=false;
                     
                     if(ejeSalud.getConsumeSustancias()==true){
@@ -88,14 +95,17 @@ public class EjeSaludCAIControlador implements Serializable{
                 }
                 if (ejeSalud.getDiscapacidad() != null) {
                     tipoD = "SI";
-                } else {
+                } 
+                else {
                     tipoD = "NO";
                 }
             }
             genero=adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getGenero();
+            
             if(genero.equals("MASCULINO")){
                 esMujer=false;
-            }else if(genero.equals("FEMENINO")){
+            }
+            else if(genero.equals("FEMENINO")){
                 esMujer=true;
             }
         }
@@ -210,30 +220,18 @@ public class EjeSaludCAIControlador implements Serializable{
     
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarEjeSaludCAI(){
+    public void guardarEjeSaludCAI(){
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
         EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(ejeSalud);
-        if(ejeSaludCAIAux!=null){
+        if (ejeSaludCAIAux != null) {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }           
-        }
-        else{
-            return null;
+        } else {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
         }
     }
 

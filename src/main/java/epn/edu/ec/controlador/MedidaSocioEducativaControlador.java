@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -297,7 +298,7 @@ public class MedidaSocioEducativaControlador implements Serializable{
     
     /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarMedidaSocioeducativa1(){
+    public void guardarMedidaSocioeducativa1(){
         /*AMONESTACION VERBAL
         DONDE NO HAY MESES, DIAS, HORAS
         */
@@ -307,30 +308,17 @@ public class MedidaSocioEducativaControlador implements Serializable{
         this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
-        if(medidaSocioeducativaAux!=null){
+        if (medidaSocioeducativaAux!= null) {
+            amonestacionVerbalGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO AMONESTACIÓN VERBAL", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-            
-        }
-        else{
-            return null;
+        } else {
+            amonestacionVerbalGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO AMONESTACIÓN VERBAL", "Error"));
         }
     }
     
-    public String guardarMedidaSocioeducativa2(){
+    public void guardarMedidaSocioeducativa2(){
         /*IMPOSICION REGLAS CONDUCTA
         DONDE NO HAY HORAS
         */
@@ -338,30 +326,17 @@ public class MedidaSocioEducativaControlador implements Serializable{
         this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
-        if(medidaSocioeducativaAux!=null){
+        if (medidaSocioeducativaAux!= null) {
+            imposicionReglasConductaGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO IMPOSICIÓN DE REGLAS DE CONDUCTA", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-            
-        }
-        else{
-            return null;
+        } else {
+            imposicionReglasConductaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO IMPOSICIÓN DE REGLAS DE CONDUCTA", "Error"));
         }
     }
     
-    public String guardarMedidaSocioeducativa3(){
+    public void guardarMedidaSocioeducativa3(){
         /*APOYO PSICO SOCIO FAMILAR
         DONDE NO HAY HORAS
         */
@@ -369,30 +344,17 @@ public class MedidaSocioEducativaControlador implements Serializable{
         this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
-        if(medidaSocioeducativaAux!=null){
+        if (medidaSocioeducativaAux!= null) {
+            apoyoSocioFamiliarGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO APOYO PSICO-SOCIO FAMILIAR", "Información"));
             
-            
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-        }
-        else{
-            return null;
+        } else {
+            apoyoSocioFamiliarGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO APOYO PSICO-SOCIO FAMILIAR", "Error"));
         }
     }
     
-    public String guardarMedidaSocioeducativa4(){
+    public void guardarMedidaSocioeducativa4(){
         /*SERVICIO COMUNIDAD
         DONDE NO HAY MESES, DIAS
         */
@@ -400,30 +362,17 @@ public class MedidaSocioEducativaControlador implements Serializable{
         this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
-        if(medidaSocioeducativaAux!=null){
+        if (medidaSocioeducativaAux!= null) {
+            servicioComunidadGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO SERVICIO A LA COMUNIDAD", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-            
-        }
-        else{
-            return null;
+        } else {
+            servicioComunidadGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO SERVICIO A LA COMUNIDAD", "Error"));
         }
     }
     
-    public String guardarMedidaSocioeducativa5(){
+    public void guardarMedidaSocioeducativa5(){
         /*LIBERTAD ASISTIDA
         DONDE NO HAY HORAS
         */
@@ -432,26 +381,13 @@ public class MedidaSocioEducativaControlador implements Serializable{
         this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
-        if(medidaSocioeducativaAux!=null){
+        if (medidaSocioeducativaAux!= null) {
+            libertadAsistidaGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO LIBERTAD ASISTIDA", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-            
-        }
-        else{
-            return null;
+        } else {
+            libertadAsistidaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO LIBERTAD ASISTIDA", "Error"));
         }
     }
 

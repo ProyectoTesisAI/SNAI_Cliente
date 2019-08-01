@@ -11,6 +11,9 @@
     <h:body>
         <ui:composition>
             <b:form id="formEjeEducativo">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{ejeEducativoControladorUDI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJE EDUCATIVO" style="color: white; font-weight: bold"  />
@@ -205,9 +208,7 @@
                         </b:panel>
                         <b:row>
                             <b:column span="3" offset="8">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeEducativoControladorUDI.guardarEjeEducativoUDI()}">
-                                    <f:ajax execute="formEjeEducativo" render="formEjeEducativo"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejeEducativoControladorUDI.guardarEjeEducativoUDI()}" update="@form"/>
                             </b:column>
                         </b:row>
                     </h:panelGroup>

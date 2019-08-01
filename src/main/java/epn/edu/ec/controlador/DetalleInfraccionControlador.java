@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -52,22 +53,29 @@ public class DetalleInfraccionControlador implements Serializable {
         servicioTP = new DatosTipoPenalCAIServicio();
 
         adolescenteInfractorCAI = new AdolescenteInfractorCAI();
-        adolescenteInfractorCAI = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        listaDetalleInfraccion= new ArrayList<>();
+        
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
-        if (adolescenteInfractorCAI != null) {
+        if (adolescenteInfractorCAIAux != null) {
+            
+            adolescenteInfractorCAI=adolescenteInfractorCAIAux;
+            
             List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
+            
             if (listaAux.isEmpty()!=true) {
                 listaDetalleInfraccion = listaAux;
-            } else if(listaAux.isEmpty()==true){
-                listaDetalleInfraccion=new ArrayList<>();
-            }
-        } else {
-            adolescenteInfractorCAI = new AdolescenteInfractorCAI();
+            } 
+        } 
+        List<DatosProvinciaCanton> provinciasAux = servicioCAIPC.listarDatosProvinciaCanton();
+        if(provinciasAux!=null){
+            provincias=provinciasAux;
         }
-
-        provincias = servicioCAIPC.listarDatosProvinciaCanton();
         
-        tiposPenal=servicioTP.listarDatosTipoPenalCAI();
+        List<DatosTipoPenalCAI> tiposPenalAux=servicioTP.listarDatosTipoPenalCAI();
+        if(tiposPenalAux!=null){
+            tiposPenal=tiposPenalAux;
+        }
     }
 
     public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
@@ -148,15 +156,17 @@ public class DetalleInfraccionControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public String guardarInformacionInfraccion() {
+    public void guardarInformacionInfraccion() {
         this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
-        //this.detalleInfraccion.setIdDetalleInfraccion(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-
+        
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
         if (detalleInfraccionAux != null) {
-            return "/paginas/cai/cai.com?faces-redirect=true";
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
+            
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
         }
     }
     

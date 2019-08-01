@@ -7,6 +7,7 @@ import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -103,30 +104,18 @@ public class EjeLaboralControlador implements Serializable{
     
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarEjeLaboral(){
+    public void guardarEjeLaboral(){
         
         this.ejeLaboral.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
-        if(ejeLaboralAux!=null){
+        if (ejeLaboralAux != null) {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE LABORAL", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-        }
-        else{
-            return null;
+        } else {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE LABORAL", "Error"));
         }
     }
 

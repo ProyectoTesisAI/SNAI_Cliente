@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -43,22 +44,22 @@ public class InformacionCambioMedidaControlador implements Serializable {
         informacionCambioMedida = new InformacionCambioMedidaCAI();
         guardado = false;
 
-//        detalleInfraccion=new DetalleInfraccionCAI();
-        //adolescenteInfractorCAI= new AdolescenteInfractorCAI();
-        //adolescenteInfractorCAI= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
-        ejecucionMedidaCAI = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
+        EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
 
-        if (ejecucionMedidaCAI != null) {
+        if (ejecucionMedidaCAIAux != null) {
+            
+            ejecucionMedidaCAI=ejecucionMedidaCAIAux;
+            
             InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
-            //ejecucionMedida=servicioEM.obtenerEjecucionMedidaCAI(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
             if (informacionCambioMedidaAux != null) {
                 informacionCambioMedida = informacionCambioMedidaAux;
-                //estadoCumplimientoMedida.setEjecucionAux(ejecucionMedidaCAI);
                 guardado = true;
-            } else if (informacionCambioMedidaAux == null) {
+            } 
+            else if (informacionCambioMedidaAux == null) {
                 informacionCambioMedida = new InformacionCambioMedidaCAI();
                 informacionCambioMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
-                //estadoCumplimientoMedida.setEjecucionAux(ejecucionMedidaCAI);
+
             }
         }
 
@@ -118,14 +119,17 @@ public class InformacionCambioMedidaControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public String guardarInformacionCambioMedida() {
+    public void guardarInformacionCambioMedida() {
 
-        //this.estadoCumplimientoMedida.set setIdInformacionCambioMedida(detalleInfraccion);
+
         InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
         if (informacionCambioMedidaAux != null) {
-            return "/paginas/cai/cai.com?faces-redirect=true";
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
+            
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
         }
     }
 

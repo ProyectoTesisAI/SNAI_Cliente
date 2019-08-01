@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -124,7 +125,7 @@ public class UnidadZonalControlador implements Serializable{
     
     /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarUnidadZonal(){
+    public void guardarUnidadZonal(){
         
         for(UDI u: listaUDI){
             if(u.getUdi().equals(udi.getUdi())){
@@ -134,25 +135,13 @@ public class UnidadZonalControlador implements Serializable{
         this.unidadZonal.setIdUdi(udi);
         this.unidadZonal.setIdUnidadZonal(adolescenteInfractorUDI);
         UnidadZonal uz= servicio.guardarUnidadZonal(unidadZonal);
-        if(uz!=null){
+        if (uz != null) {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO UNIDAD ZONAL", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-        }
-        else{
-            return null;
+        } else {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO UNIDAD ZONAL", "Error"));
         }
     }
     

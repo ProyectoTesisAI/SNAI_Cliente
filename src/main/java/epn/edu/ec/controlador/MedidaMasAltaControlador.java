@@ -29,9 +29,12 @@ public class MedidaMasAltaControlador implements Serializable{
         medidaMasAlta= new MedidaSocioeducativa();
                
         adolescenteInfractorUDI= new AdolescenteInfractorUDI();
-        adolescenteInfractorUDI= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
+        
+        AdolescenteInfractorUDI adolescenteInfractorUDIAux=(AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
 
-        if(adolescenteInfractorUDI!=null){
+        if(adolescenteInfractorUDIAux!=null){
+            
+            adolescenteInfractorUDI= adolescenteInfractorUDIAux;
             List<MedidaSocioeducativa> listaMedidasSocioeducativas= servicio.listaMedidasSocioeducativasPorAdolescente(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             
             if(listaMedidasSocioeducativas!=null){

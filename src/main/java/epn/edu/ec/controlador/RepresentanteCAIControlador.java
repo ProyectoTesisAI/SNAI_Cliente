@@ -9,6 +9,7 @@ import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
@@ -59,17 +60,18 @@ public class RepresentanteCAIControlador implements Serializable{
         if(adolescenteInfractorCAIAux != null){
             
             adolescenteInfractorCAI=adolescenteInfractorCAIAux;
+            
             Representante representanteAux= servicio.obtenerRepresentante(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             if(representanteAux!=null){
+            
                 representante=representanteAux;
                 guardado=true;
+                
                 if(representanteAux.getCedula()!=null && representanteAux.getDocumento()==null){
                     tipoDocumento="ECUATORIANA";
                 }else if(representanteAux.getCedula()==null && representanteAux.getDocumento()!=null){
                     tipoDocumento="EXTRANJERA";
                 }
-            }else{
-                representante=new Representante();
             }
         }
         
@@ -140,31 +142,19 @@ public class RepresentanteCAIControlador implements Serializable{
     
     /*********************Métodos para invocar a los diferentes servicios web******************/
     
-    public String guardarRepresentante(){
+    public void guardarRepresentante(){
         
         this.representante.setNacionalidad(tipoDocumento);
         this.representante.setIdAdolescenteInfracto(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
         Representante representanteAux = servicio.guardarRepresentante(representante);
-        if(representanteAux!=null){
+        if (representanteAux != null) {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO REPRESENTANTE", "Información"));
             
-            String rolUsuario=permisosUsuario.RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR")){
-                    return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
-                }
-                else{
-                    return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
-                }
-            }
-            else{
-                return null;
-            }     
-        }
-        else{
-            return null;
+        } else {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO REPRESENTANTE", "Error"));
         }
     }
 

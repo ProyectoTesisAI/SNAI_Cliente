@@ -11,6 +11,9 @@
     <h:body>
         <ui:composition>
             <b:form id="formEjeLaboral">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{ejeLaboralControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJE LABORAL" style="color: white; font-weight: bold"  />
@@ -98,9 +101,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{ejeLaboralControlador.guardarEjeLaboral()}">
-                                <f:ajax execute="formEjeLaboral" render="formEjeLaboral"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejeLaboralControlador.guardarEjeLaboral()}" update="@form"/>
                         </b:column>
                     </b:row>                                   
                 </b:panel>

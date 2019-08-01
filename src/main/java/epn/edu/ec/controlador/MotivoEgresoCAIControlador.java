@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -58,8 +59,10 @@ public class MotivoEgresoCAIControlador implements Serializable {
             MotivoEgresoCAI motivoEgresoCAIAux = servicio.obtenerMotivoEgresoCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
             
             if (motivoEgresoCAIAux != null) {
+                
                 motivoEgresoCAI = motivoEgresoCAIAux;
                 guardado = true;
+                
                 if (motivoEgresoCAI.getMotivoSalida().equals("TRASLADO A OTRO CAI")) {
                     mostrarOcultarTrasladoCAI=true;
                 }else{
@@ -152,15 +155,18 @@ public class MotivoEgresoCAIControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public String guardarMotivoEgresoCAI() {
+    public void guardarMotivoEgresoCAI() {
 
         this.motivoEgresoCAI.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
 
         MotivoEgresoCAI motivoEgresoCAIAux = servicio.guardarMotivoEgresoCAI(motivoEgresoCAI);
         if (motivoEgresoCAIAux != null) {
-            return "/paginas/cai/cai.com?faces-redirect=true";
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO MOTIVO DE EGRESO", "Información"));
+            
         } else {
-            return null;
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO MOTIVO DE EGRESO", "Error"));
         }
     }
 }

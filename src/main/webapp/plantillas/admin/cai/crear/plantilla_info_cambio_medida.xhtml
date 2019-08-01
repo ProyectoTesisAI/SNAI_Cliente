@@ -12,7 +12,14 @@
         <ui:composition>
 
             <b:form id="formInfoCambioMedida">
-                <b:panel>
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
+                <b:panel look="primary" content-disabled="#{informacionCambioMedidaControlador.guardado}">
+                    <f:facet name="heading">
+                        <h:outputText value="INFORMACIÓN CAMBIO MEDIDA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+                    
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtAceptacionCambioMedida" value="Aceptacion de cambio de medida"/>
@@ -75,9 +82,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionCambioMedidaControlador.guardarInformacionCambioMedida()}">
-                                <f:ajax execute="formInfoCambioMedida" render="formInfoCambioMedida"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{informacionCambioMedidaControlador.guardarInformacionCambioMedida()}" update="@form"/>
                         </b:column>
                     </b:row>
                 </b:panel>

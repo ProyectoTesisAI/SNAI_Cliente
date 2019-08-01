@@ -13,7 +13,10 @@
         <ui:composition>
 
             <b:form id="formDetalleInfraccion">
-                <b:panel look="primary" content-disabled="#{false}">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
+                <b:panel look="primary" content-disabled="#{detalleInfraccionControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
                     </f:facet>
@@ -115,9 +118,7 @@
                             </b:column>
 
                             <b:column span="4" offset="2">
-                                <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{detalleInfraccionControlador.guardarInformacionInfraccion()}">
-                                    <f:ajax execute="modalInfraccion" render="modalInfraccion tablaDetalle"/>
-                                </h:commandButton>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{detalleInfraccionControlador.guardarInformacionInfraccion()}" update="@form"/>
                             </b:column>
                         </b:row>
                     </b:modal>
@@ -126,17 +127,6 @@
 
                     <p:dataTable var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="5"
                                  paginator="false"  widgetVar="infraccionesTable">
-                        <!--                            <f:facet name="header">
-                                                        <b:row>
-                                                            <b:column span="1" offset="8" style="vertical-align: middle;">
-                                                                <h:outputText value="Buscar: "/>
-                                                            </b:column>
-                                                            <b:column  span="3">
-                                                                <b:inputText id="globalFilter" onkeyup="PF('infraccionesTable').filter()"/>
-                                                            </b:column>
-                                                            
-                                                        </b:row>
-                                                    </f:facet>-->
                         <p:column filterMatchMode="contains" filterBy="#{td.tipoPenal}" headerText="Tipo Penal">
                             <h:outputText value="#{td.tipoPenal}" />
                         </p:column>

@@ -19,7 +19,7 @@
         
     </h:head>
 
-      <h:body style="background: whitesmoke;">
+      <h:body style="background: white;">
         <div id="form" >
             
             <div id="top">
@@ -67,27 +67,27 @@
                     <h:form>
                     <p:panelMenu style="width:270px">
                         <p:submenu expanded="false" label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
-                            <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
-                            <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" icon="pi pi-refresh" />
+                            <p:menuitem value="• &nbsp; Crear Registro"  rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
+                            <p:menuitem value="• &nbsp; Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" />
                         </p:submenu>
                         <p:submenu expanded="false" label="Adolescente CAI" rendered="#{administracionMenuControlador.esCAI}">
-                            <p:menuitem value="Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteCAI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>
-                            <p:menuitem value="Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteCAI()}" icon="pi pi-refresh" />
+                            <p:menuitem value="• &nbsp; Crear Registro" rendered="#{administracionMenuControlador.permitidoCrearAdolescenteCAI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_CAI_CREAR}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteCAI()}"/>
                         </p:submenu>
                         <p:submenu expanded="false" label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
-                            <p:menuitem value="Crear Registro"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
-                            <p:menuitem value="Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" icon="pi pi-refresh" />
-                            <p:menuitem value="Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" icon="pi pi-refresh" />
+                            <p:menuitem value="• &nbsp; Crear Registro"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"  />
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu  label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
-                            <p:menuitem value="Crear Registro" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
-                            <p:menuitem value="Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" icon="pi pi-refresh" />
-                            <p:menuitem value="Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" icon="pi pi-refresh" />
+                            <p:menuitem value="• &nbsp; Crear Registro" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" />
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu label="Inspector Educador" rendered="#{administracionMenuControlador.tipoRolInspector}">
-                            <p:menuitem value="Crear Registro" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
-                            <p:menuitem value="Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" icon="pi pi-refresh" />
-                            <p:menuitem value="Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" icon="pi pi-refresh" />
+                            <p:menuitem value="• &nbsp; Crear Registro" icon="pi pi-star" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" />
                         </p:submenu>
                         <p:separator />
                         
