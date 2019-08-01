@@ -71,6 +71,9 @@ public class EnlacesPrograma {
     public String PATH_PANEL_REPORTE_7 = "/paginas/admin/reportes/panel_generar_reporte_7.com";
     public String PATH_PANEL_REPORTE_8 = "/paginas/admin/reportes/panel_generar_reporte_8.com";
     public String PATH_PANEL_REPORTE_9 = "/paginas/admin/reportes/panel_generar_reporte_9.com";
+    
+    public String PATH_PANEL_USUARIO_NUEVO = "/paginas/admin/administracion_crear_usuario.com";
+    public String PATH_PANEL_ASGINAR_ROL_CENTRO_A_USUARIO = "/paginas/admin/administracion_asignar_rol_centro.com";
 
     public String getPATH_ADOLESCENTE_UDI_CREAR() {
         return PATH_ADOLESCENTE_UDI_CREAR;

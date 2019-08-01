@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"          
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body>
+        <ui:composition template="./../../templates/menu.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+                <script src="../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+
+            <ui:define name="content">
+                <b:form>
+                    <b:panel look="primary">
+                        <f:facet name="heading">
+                            <h:outputText value="NUEVO USUARIO" style="color: white; font-weight: bold"  />
+                        </f:facet>
+                        <b:row>
+                            <b:column span="4" offset="1">                                        
+                                <h:outputLabel for="txtNombres" value="Nombres"/>
+                                <b:inputText id="txtNombres" required="true" requiredMessage="Nombres es requerido, ingrese un valor" placeholder="Nombres" value="#{usuarioControlador.usuario.nombres}"/>
+                            </b:column>
+                            <b:column span="4" offset="2">                                        
+                                <h:outputLabel for="txtApellidos" value="Apellidos"/>
+                                <b:inputText id="txtApellidos" required="true" requiredMessage="Apellidos es requerido, ingrese un valor" placeholder="Apellidos" value="#{usuarioControlador.usuario.apellidos}"/>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column span="4" offset="1">                                        
+                                <h:outputLabel for="txtCedula" value="Cédula"/>
+                                <b:inputText id="txtCedula" placeholder="Cédula" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{usuarioControlador.usuario.cedula}">
+                                    <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
+                                    <f:ajax event="keyup" listener="#{usuarioControlador.validarCedula}" render="mensaje-cedula" />
+                                </b:inputText>
+                            </b:column>
+                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{usuarioControlador.mensajeCedula}"/>
+                            <b:column span="4" offset="2">                                        
+                                <h:outputLabel for="txtTelefono" value="Teléfono"/>
+                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{usuarioControlador.usuario.telefono}">
+                                    <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
+                                    <f:ajax event="keyup" listener="#{usuarioControlador.validarNumeroContacto}" render="mensaje-telefono" />
+                                </b:inputText>
+                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-telefono" class="mensaje-error" value="#{usuarioControlador.mensajeTelefono}"/>
+                            </b:column>
+                        </b:row>
+
+                        <b:row>
+                            <b:column span="4" offset="1">                                        
+                                <h:outputLabel  for="txtUsuario" value="Usuario"/>
+                                <b:inputText id="txtUsuario" required="true" value="#{usuarioControlador.usuario.usuario}"/>
+                            </b:column>
+                            <b:column span="4" offset="2">                                        
+                                <h:outputLabel for="txtPassword" value="Constraseña"/>
+                                <b:inputText id="txtPassword" required="true" placeholder="*********" value="#{usuarioControlador.usuario.contraseña}"/>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                    <b:panel look="primary">
+                        <f:facet name="heading">
+                            <h:outputText value="ASIGNAR ROL-CENTRO" style="color: white; font-weight: bold"  />
+                        </f:facet>
+                        <b:row>
+                            <b:column span="4" offset="1">                                        
+                                <h:outputLabel for="txtRol" value="ROL"/>
+                                <b:selectOneMenu id="txtRol" update="rol" process="@this" value="#{usuarioControlador.tipoRol}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="ADMINISTRADOR"  itemValue="ADMINISTRADOR" />
+                                    <f:selectItem itemLabel="SUBDIRECTOR"  itemValue="SUBDIRECTOR" />
+                                    <f:selectItem itemLabel="COORDINADOR/LIDER UZDI"  itemValue="COORDINADOR/LIDER UZDI" />
+                                    <f:selectItem itemLabel="COORDINADOR CAI"  itemValue="COORDINADOR CAI" />
+                                    <f:selectItem itemLabel="EQUIPO TECNICO PSICOLOGO UZDI"  itemValue="EQUIPO TECNICO PSICOLOGO UZDI" />
+                                    <f:selectItem itemLabel="EQUIPO TECNICO JURIDICO UZDI"  itemValue="EQUIPO TECNICO JURIDICO UZDI" />
+                                    <f:selectItem itemLabel="EQUIPO TECNICO PSICOLOGO CAI"  itemValue="EQUIPO TECNICO PSICOLOGO CAI" />
+                                    <f:selectItem itemLabel="EQUIPO TECNICO JURIDICO CAI"  itemValue="EQUIPO TECNICO JURIDICO CAI" />
+                                    <f:selectItem itemLabel="INSPECTOR EDUCADOR"  itemValue="INSPECTOR EDUCADOR" />
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                        <h:panelGroup id="rol">
+                            <b:panel title="ROLES ADMINISTRATIVOS" rendered="#{usuarioControlador.estadoAdmin}">
+                                <b:row>
+                                    <b:column span="3" offset="8">
+                                        <h:commandButton value="Guardar con rol administrador" class="btn btn-primary btn-block" action="#{usuarioControlador.guardarUsuario()}"/>
+                                    </b:column>
+                                </b:row>
+                            </b:panel>
+                            <b:panel title="ROLES NO ADMINISTRATIVOS" rendered="#{!usuarioControlador.estadoAdmin}">
+                                <b:panel id="rolesTecnicos">
+
+                                </b:panel>
+                            </b:panel>
+                        </h:panelGroup>
+                    </b:panel>
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{usuarioControlador.guardarUsuario()}"/>
+                        </b:column>
+                    </b:row>
+                </b:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+
