@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>CREACIÓN DE UN NUEVO USUARIO</title>
-    </h:head>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"          
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <h:body>
         <ui:composition>
             <b:form>
@@ -47,7 +45,7 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel  for="txtUsuario" value="Usuario"/>
-                            <b:inputText id="txtUsuario" required="true" value="#{usuarioControlador.usuario.usuario}"/>
+                            <b:inputText id="txtUsuario" required="true" placeholder="Usuario" value="#{usuarioControlador.usuario.usuario}"/>
                         </b:column>
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel for="txtPassword" value="Constraseña"/>
@@ -62,7 +60,7 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtRol" value="ROL"/>
-                            <b:selectOneMenu id="txtRol" update="rol" process="@this" value="#{usuarioControlador.tipoRol}">
+                            <b:selectOneMenu id="txtRol" update="rol,rolesTecnicos" process="@this" value="#{usuarioControlador.tipoRol}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                 <f:selectItem itemLabel="ADMINISTRADOR"  itemValue="ADMINISTRADOR" />
                                 <f:selectItem itemLabel="SUBDIRECTOR"  itemValue="SUBDIRECTOR" />
@@ -75,54 +73,33 @@
                                 <f:selectItem itemLabel="INSPECTOR EDUCADOR"  itemValue="INSPECTOR EDUCADOR" />
                             </b:selectOneMenu>
                         </b:column>
-                        <h:panelGroup id="rol">
-                            <b:panel title="ROLES ADMINISTRATIVOS" rendered="#{usuarioControlador.estadoAdmin}">
-                                <b:row>
-                                    <b:column span="3" offset="8">
-                                        <h:commandButton value="Guardar con rol administrador" class="btn btn-primary btn-block" action="#{usuarioControlador.guardarUsuario()}"/>
-                                    </b:column>
-                                </b:row>
-                            </b:panel>
-                            <b:panel title="ROLES NO ADMINISTRATIVOS" rendered="#{!usuarioControlador.estadoAdmin}">
-                                <b:panel id="rolesTecnicos">
-                                    
+                    </b:row>
+                    <h:panelGroup id="rol">
+                        <b:panel rendered="#{usuarioControlador.estadoAdmin}">
+                        </b:panel>
+                        <b:panel rendered="#{!usuarioControlador.estadoAdmin}">
+                            <h:panelGroup id="rolesTecnicos">
+                                <b:panel title="UDI" rendered="#{usuarioControlador.esUZDI}">
+                                    <b:row>
+                                        <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{usuarioControlador.esUZDI}"/>
+                                        <b:selectOneMenu id="txtUzdi" rendered="#{usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idUdi}">
+                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                            <f:selectItems value="#{usuarioControlador.listaUdi}" var="u" itemValue="#{u}" itemLabel="#{u.udi}" />
+                                        </b:selectOneMenu>
+                                    </b:row>
                                 </b:panel>
-                            </b:panel>
-                        </h:panelGroup>
-                        <b:column span="4" offset="2">                                        
-                            <h:outputLabel for="txtApellidos" value="Apellidos"/>
-                            <b:inputText id="txtApellidos" required="true" requiredMessage="Apellidos es requerido, ingrese un valor" placeholder="Apellidos" value="#{usuarioControlador.usuario.apellidos}"/>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column span="4" offset="1">                                        
-                            <h:outputLabel for="txtCedula" value="Cédula"/>
-                            <b:inputText id="txtCedula" placeholder="Cédula" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{usuarioControlador.usuario.cedula}">
-                                <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
-                                <f:ajax event="keyup" listener="#{usuarioControlador.validarCedula}" render="mensaje-cedula" />
-                            </b:inputText>
-                        </b:column>
-                        <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{usuarioControlador.mensajeCedula}"/>
-                        <b:column span="4" offset="2">                                        
-                            <h:outputLabel for="txtTelefono" value="Teléfono"/>
-                            <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{usuarioControlador.usuario.telefono}">
-                                <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
-                                <f:ajax event="keyup" listener="#{usuarioControlador.validarNumeroContacto}" render="mensaje-telefono" />
-                            </b:inputText>
-                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-telefono" class="mensaje-error" value="#{usuarioControlador.mensajeTelefono}"/>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column span="4" offset="1">                                        
-                            <h:outputLabel  for="txtUsuario" value="Usuario"/>
-                            <b:inputText id="txtUsuario" required="true" value="#{usuarioControlador.usuario.usuario}"/>
-                        </b:column>
-                        <b:column span="4" offset="2">                                        
-                            <h:outputLabel for="txtPassword" value="Constraseña"/>
-                            <b:inputText id="txtPassword" required="true" placeholder="*********" value="#{usuarioControlador.usuario.contraseña}"/>
-                        </b:column>
-                    </b:row>
+                                <b:panel title="CAI" rendered="#{!usuarioControlador.esUZDI}">
+                                    <b:row>
+                                        <h:outputLabel for="txtCai" value="CAI" rendered="#{!usuarioControlador.esUZDI}"/>
+                                        <b:selectOneMenu id="txtCai" rendered="#{!usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idCai}">
+                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                            <f:selectItems value="#{usuarioControlador.listaCai}" var="c" itemValue="#{c}" itemLabel="#{c.cai}" />
+                                        </b:selectOneMenu>
+                                    </b:row>
+                                </b:panel>
+                            </h:panelGroup>
+                        </b:panel>
+                    </h:panelGroup>
                 </b:panel>
                 <b:row>
                     <b:column span="3" offset="8">
@@ -131,7 +108,5 @@
                 </b:row>
             </b:form>
         </ui:composition>
-
     </h:body>
 </html>
-
