@@ -11,7 +11,7 @@
             <b:form id="form">
                 <b:panel>
                     <b:row>
-                        <b:column span="4" offset="1">
+                        <b:column span="3" offset="0">
                             <h:outputLabel for="txtEstudia" value="Estudia"/>
                             <b:selectOneMenu id="txtEstudia" update="estudia, tabla" process="@this" value="#{panelReportesControlador.estudia}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -19,35 +19,34 @@
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
                         </b:column>
-                        <b:column span="4" offset="2">                                    
+                        <b:column span="3" offset="1">                                    
                             <h:outputLabel for="txtEdad" value="Edad "/>
                             <b:inputText mask="integer" id="txtEdad" placeholder="Edad" value="#{panelReportesControlador.edad}"/>
                         </b:column>
                         <h:panelGroup id="estudia">
-                            <b:panel rendered="#{!panelReportesControlador.estudia}">
-                                <b:row>
-                                    <b:column span="3" offset="8">
-                                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoNoCAI()}">
-                                            <f:ajax execute="form" render="tablaReporteNoCAI"/>
-                                        </h:commandButton>
-                                    </b:column>
-                                </b:row>
-                            </b:panel>
-                            <b:panel rendered="#{panelReportesControlador.estudia}">
-                                <b:row>
-                                    <b:column span="3" offset="8">
-                                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoSiCAI()}">
-                                            <f:ajax execute="form" render="tablaReporteSiCAI"/>
-                                        </h:commandButton>
-                                    </b:column>
-                                </b:row>
-                            </b:panel>
+                            <br/>
+                            <b:row>
+                                <b:column span="3" offset="1">
+                                    <h:commandButton rendered="#{!panelReportesControlador.estudia}" value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoNoCAI()}">
+                                        <f:ajax execute="form" render="tablaReporteNoCAI"/>
+                                    </h:commandButton>
+                                </b:column>
+                                <b:column span="3" offset="1">
+                                    <h:commandButton rendered="#{panelReportesControlador.estudia}" value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadNivelEducativoSiCAI()}">
+                                        <f:ajax execute="form" render="tablaReporteSiCAI"/>
+                                    </h:commandButton>
+                                </b:column>
+                            </b:row>
                         </h:panelGroup>
                         <h:panelGroup id="tabla">
                             <b:panel rendered="#{!panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteNoCAI" fileName="Edad_No_Estudia_CAI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteNoCAI" var="tp" value="#{panelReportesControlador.listaReportes6NCAI}" reflow="true" rows="7" paginator="false">
+                                <p:dataTable id="tablaReporteNoCAI" var="tp" value="#{panelReportesControlador.listaReportes6NCAI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{tp.numero}"/>
                                     </p:column>
@@ -136,8 +135,12 @@
                             </b:panel>
                             <b:panel rendered="#{panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteSiCAI" fileName="Edad_Nivel_Educativo_CAI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteSiCAI" var="ts" value="#{panelReportesControlador.listaReportes6SCAI}" reflow="true" rows="7" paginator="false">
+                                <p:dataTable id="tablaReporteSiCAI" var="ts" value="#{panelReportesControlador.listaReportes6SCAI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{ts.numero}"/>
                                     </p:column>

@@ -12,11 +12,7 @@
                 <b:row>
                     <b:column span="12" offset="0">
                         <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
-<!--                                <b:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte1.tipoDelto}">
-                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
-                            <f:selectItems value="#{panelReportesControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
-                        </b:selectOneMenu>-->
-                        <p:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte1.tipoDelto}" style="width: 50%;" filterMatchMode="contains" filter="true" autoWidth="false">
+                        <p:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte1.tipoDelto}" style="width: 45%;" filterMatchMode="contains" filter="true" autoWidth="false">
                             <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
                             <f:selectItems value="#{panelReportesControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                         </p:selectOneMenu>
@@ -31,8 +27,12 @@
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteCAI" fileName="Tipo_Delito_UDI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes1CAI}" reflow="true" rows="5" paginator="false">
+                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes1CAI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText value="#{tp.numero}"/>
                     </p:column>
@@ -49,7 +49,6 @@
                         <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelto}"/>
                     </p:column>
                 </p:dataTable>
-
                 <!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                                             <div class="col-md-10 col-md-offset-1">
                                                 <div class="form-group">

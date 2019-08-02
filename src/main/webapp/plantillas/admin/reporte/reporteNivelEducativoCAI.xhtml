@@ -70,8 +70,12 @@
                         <h:panelGroup class="panel" id="tabla">
                             <b:panel class="panel" rendered="#{!panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteNoCAI" fileName="Edad_No_estudia_CAI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteNoCAI" var="tp" value="#{panelReportesControlador.listaReportes6NCAI}" reflow="true" rows="6" paginator="false">
+                                <p:dataTable id="tablaReporteNoCAI" var="tp" value="#{panelReportesControlador.listaReportes6NCAI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{tp.numero}"/>
                                     </p:column>
@@ -151,8 +155,12 @@
                             </b:panel>
                             <b:panel rendered="#{panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteSiCAI" fileName="Edad_Nivel_Educativo_CAI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteSiCAI" var="ts" value="#{panelReportesControlador.listaReportes6SCAI}" reflow="true" rows="6" paginator="false">
+                                <p:dataTable id="tablaReporteSiCAI" var="ts" value="#{panelReportesControlador.listaReportes6SCAI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{ts.numero}"/>
                                     </p:column>

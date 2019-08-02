@@ -12,7 +12,7 @@
                 <b:row>
                     <b:column span="12" offset="0">
                         <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
-                        <p:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte1.tipoDelto}" style="width: 50%;" filterMatchMode="contains" filter="true" autoWidth="false">
+                        <p:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.reporte1.tipoDelto}" style="width: 45%;" filterMatchMode="contains" filter="true" autoWidth="false">
                             <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
                             <f:selectItems value="#{panelReportesControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                         </p:selectOneMenu>
@@ -27,8 +27,12 @@
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteUDI" fileName="Tipo_Delito_UDI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes1UDI}" reflow="true" rows="5" paginator="false">
+                <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes1UDI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText value="#{tp.numero}"/>
                     </p:column>

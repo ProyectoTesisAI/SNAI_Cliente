@@ -12,13 +12,17 @@
                 <b:row>                            
                     <b:column span="3" offset="8">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarLugarResidenciaUDI()}">
-                            <f:ajax execute="form" render="tablaReporteUDI"/>
+                            <f:ajax execute="form" render="tablaReporteUDI9"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteUDI9" fileName="Edad_Lugar_Residencia_UDI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes7UDI}" reflow="true" rows="8" paginator="false">
+                <p:dataTable id="tablaReporteUDI9" var="tp" value="#{panelReportesControlador.listaReportes7UDI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText value="#{tp.numero}"/>
                     </p:column>
