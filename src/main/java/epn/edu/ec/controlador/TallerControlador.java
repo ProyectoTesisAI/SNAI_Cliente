@@ -71,6 +71,7 @@ public class TallerControlador implements Serializable {
     String tipoCentro;
     boolean esUzdi;
     Integer numeroParticipantes;
+    boolean esTecnico;
 
     boolean tallerGuardado = false;
     int indiceTaller = 0;
@@ -110,7 +111,20 @@ public class TallerControlador implements Serializable {
             tipoCentro = "CAI";
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
-
+        if ("ADMINISTRADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "SUBDIRECTOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
+            esTecnico=false;
+        } else {
+            esTecnico=true;
+            if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
+                tipoCentro = "UZDI";
+                listaUdi = servicioUdi.listaUdi();
+                udi=usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
+            } else if("EQUIPO TECNICO PSICOLOGO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"INSPECTOR EDUCADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())){
+                tipoCentro = "CAI";
+                listaCai = servicioCai.listaCai();
+                cai=usuarioLogin.getIdRolUsuarioCentro().getIdCai();
+            }
+        }
     }
 
     public Taller getTallerCrear() {
@@ -313,7 +327,15 @@ public class TallerControlador implements Serializable {
 
     public Usuario getUsuarioLogin() {
         return usuarioLogin;
-    }    
+    }
+
+    public boolean isEsTecnico() {
+        return esTecnico;
+    }
+
+    public void setEsTecnico(boolean esTecnico) {
+        this.esTecnico = esTecnico;
+    }
 
     /**
      * ***************************Eventos********************************************
@@ -370,7 +392,7 @@ public class TallerControlador implements Serializable {
     private Taller guardarTaller() {
 
         try {
-            if (usuarioLogin!=null) {
+            if (usuarioLogin != null) {
                 asignarUdiCai();
                 tallerCrear.setNumeroTotalParticipantes(numeroParticipantes);
                 tallerCrear.setIdUsuario(usuarioLogin);
@@ -382,7 +404,7 @@ public class TallerControlador implements Serializable {
                 } else {
                     return null;
                 }
-            }else{
+            } else {
                 return null;
             }
 
