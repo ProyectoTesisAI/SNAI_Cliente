@@ -214,6 +214,22 @@ public class EjeSaludUDIControlador implements Serializable {
      */
     public void guardarEjeSaludUDI() {
 
+        if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            this.ejeSalud.setTipoDiscapacidad("NINGUNA");
+            this.ejeSalud.setPorcentajeDiscapacidad(0);
+        }
+        
+        if(!consumeSustancias){
+            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setRecibeTratamiento(false);
+        }
+        
+        if(!esMujer){
+            this.ejeSalud.setTiempoGestacionMes(null);
+            this.ejeSalud.setEmbarazo(false);
+        }
+        
+        
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
