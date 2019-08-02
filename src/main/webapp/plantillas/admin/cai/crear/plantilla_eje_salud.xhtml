@@ -13,7 +13,7 @@
 
             <b:form id="formEjeSalud">
                 
-                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                <b:growl for='btnEjeSaludCAI' id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                 
                 <b:panel look="primary" content-disabled="#{ejeSaludControladorCAI.guardado}">
                     <f:facet name="heading">
@@ -164,7 +164,7 @@
                     </h:panelGroup>                                    
                     <b:row>
                         <b:column span="3" offset="8">
-                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejeSaludControladorCAI.guardarEjeSaludCAI()}" update="@form"/>
+                            <b:commandButton id='btnEjeSaludCAI' value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejeSaludControladorCAI.guardarEjeSaludCAI()}" update="@form"/>
                         </b:column>
                     </b:row>
                 </b:panel>
