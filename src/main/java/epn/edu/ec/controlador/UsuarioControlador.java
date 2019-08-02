@@ -26,6 +26,8 @@ import javax.inject.Named;
 public class UsuarioControlador implements Serializable {
 
     private Usuario usuario;
+    private List<Usuario> listaUsuariosActivos;
+    private List<Usuario> listaUsuariosDesactivos;
     private UsuarioServicio servicioUsuario;
 
     private RolCentroUsuario rolCentroUsuario;
@@ -66,6 +68,10 @@ public class UsuarioControlador implements Serializable {
         listaCai = new ArrayList<>();
         listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de datos
         listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
+        listaUsuariosActivos = new ArrayList<>();
+        listaUsuariosDesactivos = new ArrayList<>();
+        listaUsuariosActivos = servicioUsuario.listaUsuariosActivos();
+        listaUsuariosDesactivos = servicioUsuario.listaUsuariosDesactivados();
     }
 
     public Usuario getUsuario() {
@@ -147,6 +153,14 @@ public class UsuarioControlador implements Serializable {
         return listaCai;
     }
 
+    public List<Usuario> getListaUsuariosActivos() {
+        return listaUsuariosActivos;
+    }
+
+    public List<Usuario> getListaUsuariosDesactivos() {
+        return listaUsuariosDesactivos;
+    }
+
     //Métodos para invocar a los diferentes servicios web************
     public String guardarUsuario() {
         if (this.usuario != null && this.rolCentroUsuario != null) {
@@ -166,7 +180,7 @@ public class UsuarioControlador implements Serializable {
                 if (usuarioAux != null) {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioNuevo", usuarioAux);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
-                    return enlaces.PATH_PANEL_ASGINAR_ROL_CENTRO_A_USUARIO + "?faces-redirect=true";
+                    return enlaces.PATH_PANEL_USUARIO_NUEVO + "?faces-redirect=true";
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
                     return null;
@@ -177,6 +191,40 @@ public class UsuarioControlador implements Serializable {
             }
         } else {
             System.out.println("Se tiene un usuario en null");
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+
+    public String DesactivarUsuario(Usuario usuario) {
+        if (usuario != null && usuario.getActivo()==true) {
+            usuario.setActivo(false);
+            Usuario usuarioAux = servicioUsuario.desactivarUsuario(usuario);
+            if (usuarioAux != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioDesactivado", usuario);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
+                return enlaces.PATH_PANEL_USUARIO_NUEVO + "?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
+                return null;
+            }
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+    
+    public String ActivarUsuario(Usuario usuario) {
+        if (usuario != null && usuario.getActivo()==false) {
+            usuario.setActivo(true);
+            Usuario usuarioAux = servicioUsuario.activarUsuario(usuario);
+            if (usuarioAux != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioDesactivado", usuario);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
+                return enlaces.PATH_PANEL_USUARIO_NUEVO + "?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
+                return null;
+            }
+        } else {
             return enlaces.PATH_ERROR + "?faces-redirect=true";
         }
     }

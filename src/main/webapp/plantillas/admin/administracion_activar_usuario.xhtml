@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"          
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+            <b:form>
+                <p:dataTable var="dr" value="#{usuarioControlador.listaUsuariosDesactivos}"  reflow="true"  rows="10"
+                             paginator="true" >
+                    <p:column filterMatchMode="contains" filterBy="#{dr.nombres} #{dr.apellidos}" headerText="Nombres y Apellidos">
+                        <h:outputText style="text-transform: uppercase" value="#{dr.nombres} #{dr.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Usuario">
+                        <h:outputText style="text-transform: uppercase" value="#{dr.usuario}"/>
+                    </p:column>
+                    <p:column headerText="Rol">
+                        <h:outputText style="text-transform: uppercase" value="#{dr.idRolUsuarioCentro.idRol.rol}"/>
+                    </p:column>
+                    <p:column headerText=" " width="18%">
+                        <b:commandButton value="DESACTIVAR" action="#{usuarioControlador.ActivarUsuario(dr)}" >
+                            <f:ajax execute="@form" />
+                        </b:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </b:form>
+        </ui:composition>
+    </h:body>
+</html>

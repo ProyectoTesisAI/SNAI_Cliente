@@ -24,6 +24,26 @@ public class UsuarioServicio {
         }
         return usuarioAux;
     }
+    
+    public Usuario desactivarUsuario(Usuario usuario) {
+
+        Usuario usuarioAux = null;
+        Response response = conexion.conexion(URL_USUARIO, "PUT", true, usuario);
+        if (response.getStatus() == 200) {
+            usuarioAux = response.readEntity(Usuario.class);
+        }
+        return usuarioAux;
+    }
+    
+    public Usuario activarUsuario(Usuario usuario) {
+
+        Usuario usuarioAux = null;
+        Response response = conexion.conexion(URL_USUARIO, "PUT", true, usuario);
+        if (response.getStatus() == 200) {
+            usuarioAux = response.readEntity(Usuario.class);
+        }
+        return usuarioAux;
+    }
 
     public Usuario obtenerUsuario(Integer id) {
 
@@ -35,13 +55,39 @@ public class UsuarioServicio {
         return rcuAux;
     }
 
-    public List<Usuario> listaAdolescentesInfractoresCAI() {
+    public List<Usuario> listaUsuarios() {
 
         List<Usuario> listaUsuarioAux = null;
         Response response = conexion.conexion(URL_USUARIO, "GET", true, null);
         if (response.getStatus() == 200) {
             listaUsuarioAux = response.readEntity(new GenericType<List<Usuario>>() {
             });
+        }
+        return listaUsuarioAux;
+    }
+    
+    public List<Usuario> listaUsuariosActivos() {
+
+        List<Usuario> listaUsuarioAux = null;
+        Response response = conexion.conexion(URL_USUARIO+"/UsuariosActivos", "GET", true, null);
+        if (response.getStatus() == 200) {
+            listaUsuarioAux = response.readEntity(new GenericType<List<Usuario>>() {
+            });
+        }else if(response.getStatus()==204){
+            listaUsuarioAux = null;
+        }
+        return listaUsuarioAux;
+    }
+    
+    public List<Usuario> listaUsuariosDesactivados() {
+
+        List<Usuario> listaUsuarioAux = null;
+        Response response = conexion.conexion(URL_USUARIO+"/UsuariosDesactivados", "GET", true, null);
+        if (response.getStatus() == 200) {
+            listaUsuarioAux = response.readEntity(new GenericType<List<Usuario>>() {
+            });
+        }else if(response.getStatus()==204){
+            listaUsuarioAux = null;
         }
         return listaUsuarioAux;
     }
