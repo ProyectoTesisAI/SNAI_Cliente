@@ -10,177 +10,209 @@
     </h:head>
     <h:body>
         <ui:composition>
-            
+
             <b:form id="formInfoJuducial">
-                
+
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                
+
                 <b:panel look="primary" content-disabled="#{informacionJudicialControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="INFORMACIÓN JUDICIAL" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <b:panel>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtReincidencia" value="Reincidencia"/>
-                                <b:selectOneMenu id="txtReincidencia" value="#{informacionJudicialControlador.informacionJudicial.reincidencia}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtNombreFiscal" value="Nombre Fiscal"/>
-                                <b:inputText id="txtNombreFiscal" maxlength="40" placeholder="Nombre Fiscal" value="#{informacionJudicialControlador.informacionJudicial.nombreFiscal}"/>
-                            </b:column>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtReincidencia" value="Reincidencia"/>
+                            <b:selectOneMenu id="txtReincidencia" value="#{informacionJudicialControlador.informacionJudicial.reincidencia}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNombreFiscal" value="Nombre Fiscal"/>
+                            <b:inputText id="txtNombreFiscal" maxlength="40" placeholder="Nombre Fiscal" value="#{informacionJudicialControlador.informacionJudicial.nombreFiscal}"/>
+                        </b:column>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
-                                <b:inputText id="txtNombreJuez" maxlength="40" placeholder="Nombre Juez" value="#{informacionJudicialControlador.informacionJudicial.nombreJuez}"/>
-                            </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
+                            <b:inputText id="txtNombreJuez" maxlength="40" placeholder="Nombre Juez" value="#{informacionJudicialControlador.informacionJudicial.nombreJuez}"/>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <br/>
 
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
-                                <b:selectOneMenu id="txtUnidadJudicial" value="#{informacionJudicialControlador.informacionJudicial.unidadJudicial}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
-                                    <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
-                                    <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
-                                    <f:selectItem itemLabel="UNIDAD JUDICIAL PENAL"  itemValue="UNIDAD JUDICIAL PENAL" />
-                                </b:selectOneMenu>
-                            </b:column>
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtNombreUnidadJudicial" value="Nombre Unidad Judicial"/>
-                                <b:inputText id="txtNombreUnidadJudicial" maxlength="100" placeholder="Nombre Unidad Judicial" value="#{informacionJudicialControlador.informacionJudicial.nombreUnidadJudicial}"/>
-                            </b:column>                   
 
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtDefensor" value="Defensor"/>
-                                <b:selectOneMenu id="txtDefensor" value="#{informacionJudicialControlador.informacionJudicial.defensor}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="PÚBLICO"  itemValue="PÚBLICO" />
-                                    <f:selectItem itemLabel="PRIVADO"  itemValue="PRIVADO" />
-                                </b:selectOneMenu>
-                            </b:column>
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>UNIDAD JUDICIAL</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
+                            <b:selectOneMenu id="txtUnidadJudicial" value="#{informacionJudicialControlador.informacionJudicial.unidadJudicial}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
+                                <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
+                                <f:selectItem itemLabel="UNIDAD JUDICIAL PENAL"  itemValue="UNIDAD JUDICIAL PENAL" />
+                            </b:selectOneMenu>
+                        </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreUnidadJudicial" value="Nombre Unidad Judicial"/>
+                            <b:inputText id="txtNombreUnidadJudicial" maxlength="100" placeholder="Nombre Unidad Judicial" value="#{informacionJudicialControlador.informacionJudicial.nombreUnidadJudicial}"/>
+                        </b:column>                   
+                    </b:row>
+                    <br/>
+                    <br/>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtNombreDefensor" value="Nombre Defensor"/>
-                                <b:inputText id="txtNombreDefensor" maxlength="40" placeholder="Nombre Defensor" value="#{informacionJudicialControlador.informacionJudicial.nombreDefensor}"/>
-                            </b:column>
-                        </b:row>
-                    </b:panel>
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>DEFENSOR</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtDefensor" value="Defensor"/>
+                            <b:selectOneMenu id="txtDefensor" value="#{informacionJudicialControlador.informacionJudicial.defensor}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="PÚBLICO"  itemValue="PÚBLICO" />
+                                <f:selectItem itemLabel="PRIVADO"  itemValue="PRIVADO" />
+                            </b:selectOneMenu>
+                        </b:column>
 
-                    <b:panel>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
-                                <b:inputText id="txtNumeroCausa" maxlength="10" placeholder="N° Causa" value="#{informacionJudicialControlador.informacionJudicial.numeroCausa}"/>
-                            </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreDefensor" value="Nombre Defensor"/>
+                            <b:inputText id="txtNombreDefensor" maxlength="40" placeholder="Nombre Defensor" value="#{informacionJudicialControlador.informacionJudicial.nombreDefensor}"/>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <br/>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtFechaImposicionMedida" value="Fecha Imposición Medida"/>
-                                <b:dateTimePicker id="txtFechaImposicionMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaImposicionMedida}"/>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtFechaRepecionZonalResolucion" value="Fecha Recepción Zonal Resolución"/>
-                                <b:dateTimePicker id="txtFechaRepecionZonalResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaRecepcionZonalResolucion}"/>
-                            </b:column>
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>IMPOSICIÓN MEDIDA</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
+                            <b:inputText id="txtNumeroCausa" maxlength="10" placeholder="N° Causa" value="#{informacionJudicialControlador.informacionJudicial.numeroCausa}"/>
+                        </b:column>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtFormaImposicionMedida" value="Forma Imposición Medida"/>
-                                <b:selectOneMenu id="txtFormaImposicionMedida" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SENTENCIA"  itemValue="SENTENCIA" />
-                                    <f:selectItem itemLabel="TERMINACIÓN ANTICIPADA DEL PROCESO"  itemValue="TERMINACIÓN ANTICIPADA DEL PROCESO" />
-                                    <f:selectItem itemLabel="RESOLUCIÓN"  itemValue="RESOLUCIÓN" />
-                                    <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtFechaImposicionMedida" value="Fecha Imposición Medida"/>
+                            <b:dateTimePicker id="txtFechaImposicionMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaImposicionMedida}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtFechaRepecionZonalResolucion" value="Fecha Recepción Zonal Resolución"/>
+                            <b:dateTimePicker id="txtFechaRepecionZonalResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaRecepcionZonalResolucion}"/>
+                        </b:column>
 
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtFechaInicioCumplimientoMedida" value="Fecha Inicio Cumplimiento Medida"/>
-                                <b:dateTimePicker id="txtFechaInicioCumplimientoMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaInicioCumplimientoMedida}"/>
-                            </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtFormaImposicionMedida" value="Forma Imposición Medida"/>
+                            <b:selectOneMenu id="txtFormaImposicionMedida" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SENTENCIA"  itemValue="SENTENCIA" />
+                                <f:selectItem itemLabel="TERMINACIÓN ANTICIPADA DEL PROCESO"  itemValue="TERMINACIÓN ANTICIPADA DEL PROCESO" />
+                                <f:selectItem itemLabel="RESOLUCIÓN"  itemValue="RESOLUCIÓN" />
+                                <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtTipoTerminacionAnticipadaMedida" value="Tipo Terminación Anticipada Medida"/>
-                                <b:selectOneMenu id="txtTipoTerminacionAnticipadaMedida" value="#{informacionJudicialControlador.informacionJudicial.tipoTerminacionAnticipadaMedida}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="CONCILIACIÓN FISCAL"  itemValue="CONCILIACIÓN FISCAL" />
-                                    <f:selectItem itemLabel="CONCILIACIÓN JUDICIAL"  itemValue="CONCILIACIÓN JUDICIAL" />
-                                    <f:selectItem itemLabel="MEDIACIÓN PENAL"  itemValue="MEDIACIÓN PENAL" />
-                                    <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
-                                    <f:selectItem itemLabel="REMISIÓN CON AUTORIZACIÓN JUDICIAL"  itemValue="REMISIÓN CON AUTORIZACIÓN JUDICIAL" />
-                                    <f:selectItem itemLabel="REMISIÓN FISCAL"  itemValue="REMISIÓN FISCAL" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                    </b:panel>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtFechaInicioCumplimientoMedida" value="Fecha Inicio Cumplimiento Medida"/>
+                            <b:dateTimePicker id="txtFechaInicioCumplimientoMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaInicioCumplimientoMedida}"/>
+                        </b:column>
 
-                    <b:panel>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtAmonestacionVerbal" value="Amonestación Verbal"/>
-                                <b:selectOneMenu id="txtAmonestacionVerbal" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.amonestacionVerbal}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtTipoTerminacionAnticipadaMedida" value="Tipo Terminación Anticipada Medida"/>
+                            <b:selectOneMenu id="txtTipoTerminacionAnticipadaMedida" value="#{informacionJudicialControlador.informacionJudicial.tipoTerminacionAnticipadaMedida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="CONCILIACIÓN FISCAL"  itemValue="CONCILIACIÓN FISCAL" />
+                                <f:selectItem itemLabel="CONCILIACIÓN JUDICIAL"  itemValue="CONCILIACIÓN JUDICIAL" />
+                                <f:selectItem itemLabel="MEDIACIÓN PENAL"  itemValue="MEDIACIÓN PENAL" />
+                                <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
+                                <f:selectItem itemLabel="REMISIÓN CON AUTORIZACIÓN JUDICIAL"  itemValue="REMISIÓN CON AUTORIZACIÓN JUDICIAL" />
+                                <f:selectItem itemLabel="REMISIÓN FISCAL"  itemValue="REMISIÓN FISCAL" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <br/>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtImposicionReglasConducta" value="Imposición reglas Conducta"/>
-                                <b:selectOneMenu id="txtImposicionReglasConducta" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.imposicionReglasConducta}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtOrientacionApoyoSocioFamiliar" value="Orientación Apoyo Psico Socio Familiar"/>
-                                <b:selectOneMenu id="txtOrientacionApoyoSocioFamiliar" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.apoyoSocioFamiliar}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>MEDIDAS SOCIOEDUCATIVAS</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtAmonestacionVerbal" value="Amonestación Verbal"/>
+                            <b:selectOneMenu id="txtAmonestacionVerbal" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.amonestacionVerbal}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtServicioComunidad" value="Servicio Comunidad"/>
-                                <b:selectOneMenu id="txtServicioComunidad"  update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.servicioComunidad}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtLibertadAsistida" value="Libertad Asistida"/>
-                                <b:selectOneMenu id="txtLibertadAsistida" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.libertadAsistida}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                    <!--<f:ajax render=":panelUDI:numeroMedidas"/>-->
-                                </b:selectOneMenu>
-                            </b:column>
-                            <!--<h:panelGroup id="numeroMedidas">-->
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtNumeroMedidas" value="N° de medidas"/>
-                                <b:inputText id="txtNumeroMedidas" disabled="true" placeholder="N° de medidas" value="#{informacionJudicialControlador.numeroMedidas}"/>
-                            </b:column>
-                            <!--</h:panelGroup>    -->
-                        </b:row>
-                    </b:panel>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtImposicionReglasConducta" value="Imposición reglas Conducta"/>
+                            <b:selectOneMenu id="txtImposicionReglasConducta" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.imposicionReglasConducta}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtOrientacionApoyoSocioFamiliar" value="Orientación Apoyo Psico Socio Familiar"/>
+                            <b:selectOneMenu id="txtOrientacionApoyoSocioFamiliar" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.apoyoSocioFamiliar}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtServicioComunidad" value="Servicio Comunidad"/>
+                            <b:selectOneMenu id="txtServicioComunidad"  update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.servicioComunidad}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtLibertadAsistida" value="Libertad Asistida"/>
+                            <b:selectOneMenu id="txtLibertadAsistida" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.libertadAsistida}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                <!--<f:ajax render=":panelUDI:numeroMedidas"/>-->
+                            </b:selectOneMenu>
+                        </b:column>
+                        <!--<h:panelGroup id="numeroMedidas">-->
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNumeroMedidas" value="N° de medidas"/>
+                            <b:inputText id="txtNumeroMedidas" disabled="true" placeholder="N° de medidas" value="#{informacionJudicialControlador.numeroMedidas}"/>
+                        </b:column>
+                        <!--</h:panelGroup>    -->
+                    </b:row>
+
                     <b:row>
                         <b:column span="3" offset="8">
                             <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{informacionJudicialControlador.guardarInformacionJudicial()}" update="@form" />

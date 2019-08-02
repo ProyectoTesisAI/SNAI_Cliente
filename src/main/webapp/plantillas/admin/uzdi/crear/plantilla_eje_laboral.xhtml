@@ -18,6 +18,7 @@
                     <f:facet name="heading">
                         <h:outputText value="EJE LABORAL" style="color: white; font-weight: bold"  />
                     </f:facet>
+                    
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtTrabaja" value="Trabaja"/>
@@ -28,14 +29,19 @@
                                 <f:ajax render="trabaja"/>
                             </b:selectOneMenu>
                         </b:column>
-                        <b:column span="6" offset="1">
-                            <h:outputLabel for="txtInclinacionVocacional" value="Inclinación Vocacional"/>
-                            <b:inputText id="txtInclinacionVocacional" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
-                        </b:column>
+                        
                     </b:row>
-
+                    <br/>
+                    
                     <h:panelGroup id="trabaja" style="margin: 0px; padding: 0px;">
                         <h:panelGroup  rendered="#{ejeLaboralControlador.trabaja}">
+                            
+                            <b:row>
+                                <b:column span="10" offset="1">
+                                    <h3>INFORMACIÓN LABORAL</h3>
+                                </b:column>
+                            </b:row>
+                            <br/>
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtOcupacionAdolescente" value="Ocupación"/>
@@ -89,16 +95,22 @@
                                 </b:column>
 
                             </b:row>
+                            <br/>
                         </h:panelGroup>
-                        <h:panelGroup rendered="#{!ejeLaboralControlador.trabaja}">
-                            <b:row>
-                                <b:column span="5" offset="1">
-                                    <h:outputLabel value="NO NECESITA LLENAR ESTA SECCION"/>
-                                </b:column>
-                            </b:row>
-                        </h:panelGroup>
+                        
                     </h:panelGroup>
 
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>VOCACIÓN</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:column span="10" offset="1">
+                        <h:outputLabel for="txtInclinacionVocacional" value="Inclinación Vocacional"/>
+                        <b:inputText id="txtInclinacionVocacional" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
+                    </b:column>
+                    
                     <b:row>
                         <b:column span="3" offset="8">
                             <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejeLaboralControlador.guardarEjeLaboral()}" update="@form"/>

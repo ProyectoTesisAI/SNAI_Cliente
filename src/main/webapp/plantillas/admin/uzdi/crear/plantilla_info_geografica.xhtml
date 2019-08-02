@@ -20,17 +20,22 @@
                     <f:facet name="heading">
                         <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
                     </f:facet>
-                    <b:panel rendered="#{identificacionGeograficaControladorUDI.esEcuatoriana}"> <!-->esto es para ecuatorianos<-->
-                        <f:facet name="heading">
-                            <h:outputText value="LUGAR DE NACIMIENTO" style="color: #036fab; font-weight: bold"  />
-                        </f:facet>
+                    
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>LUGAR DE NACIMIENTO</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <h:panelGroup  rendered="#{identificacionGeograficaControladorUDI.esEcuatoriana}">
+
                         <b:row>
-                            <b:column span="4" offset="0">
+                            <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento1" value="País de nacimiento"/>
                                 <b:inputText id="txtPaisNacimiento1" maxlength="50" disabled="#{identificacionGeograficaControladorUDI.esEcuatoriana}" placeholder="País de nacimiento" value="ECUADOR"/>
                             </b:column>
 
-                            <b:column span="4" offset="0">
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtEstadoProvincia1" value="Estado/Provincia"/>
                                 <b:selectOneMenu id="txtEstadoProvincia1" update="txtCiudadNacimiento1" process="@this" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.estadoOProvinciaNacimiento}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
@@ -60,8 +65,9 @@
                                     <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
                                 </b:selectOneMenu>
                             </b:column>
-
-                            <b:column span="4" offset="0">
+                        </b:row>
+                        <b:row>
+                            <b:column span="4" offset="1">
                                 <h:outputLabel for="txtCiudadNacimiento1" value="Cantón de nacimiento"/>
                                 <b:selectOneMenu id="txtCiudadNacimiento1" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.ciudadOCantonNacimiento}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
@@ -69,32 +75,38 @@
                                 </b:selectOneMenu>
                             </b:column>
                         </b:row>
-                    </b:panel>
-                    <b:panel rendered="#{!identificacionGeograficaControladorUDI.esEcuatoriana}">
-                        <f:facet name="heading">
-                            <h:outputText value="LUGAR DE NACIMIENTO" style="color: #036fab; font-weight: bold"  />
-                        </f:facet>
+                    </h:panelGroup>
+                    
+                    <h:panelGroup  rendered="#{!identificacionGeograficaControladorUDI.esEcuatoriana}">
+
                         <b:row>
-                            <b:column span="4" offset="0">
+                            <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
                                 <b:inputText id="txtPaisNacimiento" maxlength="50" placeholder="País de nacimiento" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.paisNacimiento}"/>
                             </b:column>
 
-                            <b:column span="4" offset="0">
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtEstadoProvincia" value="Estado/Provincia"/>
                                 <b:inputText id="txtEstadoProvincia" maxlength="50" placeholder="Estado/Provincia" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.estadoOProvinciaNacimiento}"/>
                             </b:column>
-
-                            <b:column span="4" offset="0">
+                        </b:row>
+                        <b:row>
+                            <b:column span="4" offset="1">
                                 <h:outputLabel for="txtCiudadNacimiento" value="Ciudad de nacimiento"/>
                                 <b:inputText id="txtCiudadNacimiento" maxlength="50" placeholder="Ciudad de nacimiento" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.ciudadOCantonNacimiento}"/>
                             </b:column>
                         </b:row>
-                    </b:panel>
-                    <b:panel rendered="#{identificacionGeograficaControladorUDI.esEcuatoriana}">
-                        <f:facet name="heading">
-                            <h:outputText value="LUGAR DE RESIDENCIA" style="color: #036fab; font-weight: bold"  />
-                        </f:facet>
+                    </h:panelGroup>
+                    <br/>
+                    <br/>
+                    
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>LUGAR DE RESIDENCIA EN ECUADOR</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <h:panelGroup>
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtProvincia" value="Provincia"/>
@@ -161,8 +173,10 @@
                                 <b:inputText id="txtRefenciaDomicilio" maxlength="125" placeholder="Referencia del domicilio" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.referenciaDomicilio}"/>
                             </b:column>
                         </b:row>
-                    </b:panel>
-
+                    </h:panelGroup>
+                    <br/>
+                    
+                    
                     <b:row>
                         <b:column span="3" offset="8">
                             <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{identificacionGeograficaControladorUDI.guardarIdentificacionGeografica()}" update="@form"/>
