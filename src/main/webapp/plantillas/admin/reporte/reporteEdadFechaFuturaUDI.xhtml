@@ -14,15 +14,20 @@
                         <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
                         <b:dateTimePicker id="txtFechaNacimiento" placeholder="Fecha" showTime="false" value="#{panelReportesControlador.fechaBuscar}"/>
                     </b:column>
-                    <b:column span="3" offset="1">
+                    <br/>
+                    <b:column span="3" offset="2">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadFechaFuturaUDI()}">
                             <f:ajax execute="form" render="tablaReporteUDI"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteUDI" fileName="Edad_Fecha_UDI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes2UDI}" reflow="true" rows="6" paginator="false">
+                <p:dataTable id="tablaReporteUDI" var="tp" value="#{panelReportesControlador.listaReportes2UDI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText value="#{tp.numero}"/>
                     </p:column>

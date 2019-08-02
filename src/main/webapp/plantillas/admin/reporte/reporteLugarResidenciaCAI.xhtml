@@ -17,8 +17,12 @@
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteCAI" fileName="Edad_Lugar_Residencia_CAI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes7CAI}" reflow="true" rows="8" paginator="false">
+                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes7CAI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText value="#{tp.numero}"/>
                     </p:column>

@@ -14,15 +14,20 @@
                         <h:outputLabel for="txtFechaIngreso" value="Fecha ingreso"/>
                         <b:dateTimePicker id="txtFechaIngreso" placeholder="Fecha" showTime="false" value="#{panelReportesControlador.fechaBuscar}"/>
                     </b:column>
-                    <b:column span="3" offset="8">
+                    <br/>
+                    <b:column span="3" offset="2">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarFechaIngresoCAI()}">
                             <f:ajax execute="form" render="tablaReporteCAI"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteCAI" fileName="Fecha_Ingreso_CAI" pageOnly="true"/>
+                </h:commandLink>
                 <br/>
-                <p:dataTable id="tablaReporteCAI" disabledSelection="true" var="tp" value="#{panelReportesControlador.listaReportes5CAI}" reflow="true" rows="9" paginator="false">
+                <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes5CAI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText style="min-width: 20px;" value="#{tp.numero}"/>
                     </p:column>
@@ -36,22 +41,27 @@
                         <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
                     </p:column>
                     <p:column headerText="Fecha de aprehensión" filterMatchMode="contains" filterBy="#{tp.fechaAprehension}">
-<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaAprehension}"/>-->
-                        <p:datePicker showTime="false" view="date" value="#{tp.fechaAprehension}"/>
+                        <h:outputText value="#{tp.fechaAprehension}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="Tiempo de sentencia" filterMatchMode="contains" filterBy="#{tp.tiempoSetenciaMedida}">
                         <h:outputText value="#{tp.tiempoSetenciaMedida}"/>
                     </p:column>
                     <p:column headerText="Fecha de cumplimiento 60%" filterMatchMode="contains" filterBy="#{tp.fechaCumplimiento60}">
-<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento60}"/>-->
-                        <p:datePicker showTime="false" view="date" value="#{tp.fechaCumplimiento60}"/>
+                        <h:outputText value="#{tp.fechaCumplimiento60}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="Fecha de cumplimiento 80%" filterMatchMode="contains" filterBy="#{tp.fechaCumplimiento80}">
-<!--                                <b:dateTimePicker show-time="false" icon="false" value="#{tp.fechaCumplimiento80}"/>-->
-                        <p:datePicker showTime="false" view="date" value="#{tp.fechaCumplimiento80}"/>
+                        <h:outputText value="#{tp.fechaCumplimiento80}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="Porcentaje de cumplimiento" filterMatchMode="contains" filterBy="#{tp.porcentajeCumplimiento}">
-                        <p:inputNumber decimalPlaces="2" value="#{tp.porcentajeCumplimiento}" symbol="%" symbolPosition="s"/>
+                        <h:outputText value="#{tp.porcentajeCumplimiento}">
+                            <f:convertNumber type="percent"/>
+                        </h:outputText>
                     </p:column>
                 </p:dataTable>
                 <!--                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">

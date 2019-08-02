@@ -59,7 +59,8 @@
                                         <f:selectItem itemLabel="Tercer Nivel o Superior"  itemValue="Tercer Nivel o Superior" />
                                     </b:selectOneMenu>
                                 </b:column>
-                                <b:column span="3" offset="8">
+                                <b:column span="3" offset="2">
+                                    <br/>
                                     <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarNivelEducativoSiUDI()}">
                                         <f:ajax execute="form" render="tablaReporteSiUDI"/>
                                     </h:commandButton>
@@ -69,8 +70,12 @@
                         <h:panelGroup class="panel" id="tabla">
                             <b:panel class="panel" rendered="#{!panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteNoUDI" fileName="Edad_No_Estudia_UDI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteNoUDI" var="tp" value="#{panelReportesControlador.listaReportes6NUDI}" reflow="true" rows="6" paginator="false">
+                                <p:dataTable id="tablaReporteNoUDI" var="tp" value="#{panelReportesControlador.listaReportes6NUDI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{tp.numero}"/>
                                     </p:column>
@@ -150,8 +155,12 @@
                             </b:panel>
                             <b:panel class="panel" rendered="#{panelReportesControlador.estudia}">
                                 <br/>
+                                <h:commandLink>
+                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:dataExporter type="xls" target="tablaReporteSiUDI" fileName="Edad_Nivel_Educativo_CAI" pageOnly="true"/>
+                                </h:commandLink>
                                 <br/>
-                                <p:dataTable id="tablaReporteSiUDI" var="ts" value="#{panelReportesControlador.listaReportes6SUDI}" reflow="true" rows="6" paginator="false">
+                                <p:dataTable id="tablaReporteSiUDI" var="ts" value="#{panelReportesControlador.listaReportes6SUDI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{ts.numero}"/>
                                     </p:column>
