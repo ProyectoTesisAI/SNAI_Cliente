@@ -155,9 +155,12 @@
                             </b:column>
 
                             <b:column span="4" offset="2">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{ejecucionMedidaControlador.guardarEjecucionMedida()}" update="@form"
-                                                 onclick="$('.formEjeccionMedida').modal('hide');" 
-                                                 />
+                                <b:button class="btn btn-primary btn-block" value="Guardar" dismiss="modal" 
+                                          onclick="setBtnEjecucionMedida()"/>
+                                
+                                <b:remoteCommand name="setBtnEjecucionMedida" id="remoteCommand2"
+                                                 actionListener="#{ejecucionMedidaControlador.guardarEjecucionMedida()}"
+                                                 update="@form" />
                             </b:column>
                         </b:row>
 

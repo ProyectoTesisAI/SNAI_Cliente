@@ -176,7 +176,12 @@ public class EjecucionMedidaControlador implements Serializable {
 
         EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
         if (ejecucionMedidaAux != null) {
-            guardado=true;
+            
+            List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
+            
+            if(listaAux.isEmpty()!=true){            
+                listaEjecucionMedida=listaAux;
+            }
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
             
         } else {

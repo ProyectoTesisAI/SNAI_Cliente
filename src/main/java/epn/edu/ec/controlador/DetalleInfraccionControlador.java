@@ -37,6 +37,7 @@ public class DetalleInfraccionControlador implements Serializable {
     private DatosTipoPenalCAIServicio servicioTP;
     private PermisosUsuario permisosUsuario;
 
+    private String provincia;
     @PostConstruct
     public void init() {
 
@@ -152,11 +153,23 @@ public class DetalleInfraccionControlador implements Serializable {
         return cantones;
     }
 
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+    
+    
+
     /**
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
-    public void guardarInformacionInfraccion() {
+    public void guardarDetalleInfraccion() {
+        
+        System.out.println("provincia:" +provincia);
         this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
         
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
