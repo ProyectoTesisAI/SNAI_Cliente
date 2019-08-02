@@ -19,8 +19,18 @@
             </ui:define>
 
             <ui:define name="content">
-                <h1>CREACIÓN DE UN NUEVO USUARIO</h1>
-                <ui:include src="../../plantillas/admin/administracion_crear_usuario.xhtml" />
+                <h1>ADMINISTRACIÓN DE USUARIOS</h1>
+                <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                    <b:tab title="NUEVO USUARIO" tooltip="CREAR UN NUEVO USUARIO">
+                        <ui:include src="../../plantillas/admin/administracion_crear_usuario.xhtml" />
+                    </b:tab>
+                    <b:tab title="DESACTIVAR USUARIOS" tooltip="CREAR UN NUEVO USUARIO">
+                        <ui:include src="../../plantillas/admin/administracion_desactivar_usuario.xhtml" />
+                    </b:tab>
+                    <b:tab title="ACTIVAR USUARIOS" tooltip="CREAR UN NUEVO USUARIO">
+                        <ui:include src="../../plantillas/admin/administracion_activar_usuario.xhtml" />
+                    </b:tab>
+                </b:tabView>
             </ui:define>
         </ui:composition>
     </h:body>
