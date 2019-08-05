@@ -118,6 +118,21 @@ public class EjeLaboralControlador implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE LABORAL", "Error"));
         }
     }
+    
+    public void guardarEdicionEjeLaboral(){
+        
+        this.ejeLaboral.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
+        if (ejeLaboralAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE LABORAL", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE LABORAL", "Error"));
+        }
+    }
 
     
 }

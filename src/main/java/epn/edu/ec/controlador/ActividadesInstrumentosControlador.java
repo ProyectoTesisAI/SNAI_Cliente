@@ -94,5 +94,20 @@ public class ActividadesInstrumentosControlador implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ACTIVIDADES E INSTRUMENTOS", "Error"));
         }
     }
+    
+    public void guardarEdicionActividadesInstrumentos(){
+        
+        this.actividadesInstrumentos.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        ActividadesInstrumentos actividadesInstrumentosAux = servicio.guardarActividadesInstrumentos(actividadesInstrumentos);
+        if (actividadesInstrumentosAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO ACTIVIDADES E INSTRUMENTOS", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ACTIVIDADES E INSTRUMENTOS", "Error"));
+        }
+    }
 
 }

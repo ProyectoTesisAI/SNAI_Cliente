@@ -18,6 +18,8 @@ import epn.edu.ec.servicios.TallerServicio;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -54,7 +56,8 @@ public class InformeControlador implements Serializable{
     TallerServicio servicioTaller;
     InformeServicio servicioInforme;
     
-    
+    Integer duracionActividades=0;
+    private Date horaFin;
 
     @PostConstruct
     public void init(){
@@ -65,6 +68,8 @@ public class InformeControlador implements Serializable{
         informe= new Informe();
         listaParaChequeo= new ArrayList<>();
         listaItemsTaller= new ArrayList<>();
+        
+        horaFin=null;
         
         servicioRegistro= new RegistroAsistenciaServicio();
         servicioTaller= new TallerServicio();
@@ -82,10 +87,10 @@ public class InformeControlador implements Serializable{
             
             List<ItemTaller> itemsAux= servicioTaller.obtenerItemsPorTalleres(taller.getIdTaller());
             
-            if(itemsAux != null){
-                
+            if(itemsAux != null){                
                 listaItemsTaller=itemsAux;
             }
+            obtenerDuracionTaller();
         }
     }
         
@@ -190,8 +195,14 @@ public class InformeControlador implements Serializable{
     public void setListaParaChequeo(List<AsistenciaAdolescente> listaParaChequeo) {
         this.listaParaChequeo = listaParaChequeo;
     }
-    
-    
+
+    public Date getHoraFin() {
+        return horaFin=obtenerHoraFin();
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }    
     
     /*************************************************************/
     
@@ -222,6 +233,33 @@ public class InformeControlador implements Serializable{
             }
         }
         
+    }
+    
+    public void obtenerDuracionTaller() {
+        
+        duracionActividades=0;
+        
+        if(listaItemsTaller != null){
+            
+            for(ItemTaller i: listaItemsTaller){
+                if(i.getDuracion()!=null){
+                    duracionActividades=duracionActividades+i.getDuracion();
+                }
+            }
+        }
+        
+    }
+    
+    public Date obtenerHoraFin() {
+        
+        horaFin=null;
+        if(taller.getHoraInicio()!=null){
+            Calendar horaAux = Calendar.getInstance();
+            horaAux.setTime(taller.getHoraInicio());
+            horaAux.add(Calendar.MINUTE, duracionActividades);
+            horaFin=horaAux.getTime();
+        }
+        return horaFin;
     }
 
     public void obtenerRegistroAsistencia() {
@@ -315,7 +353,9 @@ public class InformeControlador implements Serializable{
             informe.setHoraInicio(taller.getHoraInicio());
             informe.setNumeroAdolescentes(cantidadAsistentes);
             informe.setIdTaller(taller);
+            informe.setObjetivoGeneral(taller.getObjetivo());
             informe.setFecha(taller.getFecha());
+            informe.setHoraFin(horaFin);
             Informe informeAux= servicioInforme.guardarInforme(this.informe);
 
             if(informeAux != null){

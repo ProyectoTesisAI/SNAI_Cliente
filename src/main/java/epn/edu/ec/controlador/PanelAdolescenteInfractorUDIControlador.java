@@ -15,21 +15,21 @@ import javax.faces.view.ViewScoped;
 
 @Named(value = "panelAdolescenteInfractorUDIControlador")
 @ViewScoped
-public class PanelAdolescenteInfractorUDIControlador implements Serializable{
+public class PanelAdolescenteInfractorUDIControlador implements Serializable {
 
     private List<AdolescenteInfractorUDI> listadoAdolescentesInfractoresUDI;
     private AdolescenteInfractorUDIServicio servicio;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
-    
+
     @PostConstruct
-    public void init(){
-        
-        permisosUsuario= new PermisosUsuario();
-        servicio= new AdolescenteInfractorUDIServicio();
-        enlaces=new EnlacesPrograma();
-        listadoAdolescentesInfractoresUDI= new ArrayList<>();
-        listadoAdolescentesInfractoresUDI=servicio.listaAdolescentesInfractoresUDI();
+    public void init() {
+
+        permisosUsuario = new PermisosUsuario();
+        servicio = new AdolescenteInfractorUDIServicio();
+        enlaces = new EnlacesPrograma();
+        listadoAdolescentesInfractoresUDI = new ArrayList<>();
+        listadoAdolescentesInfractoresUDI = servicio.listaAdolescentesInfractoresUDI();
     }
 
     public List<AdolescenteInfractorUDI> getListadoAdolescentesInfractoresUDI() {
@@ -39,36 +39,39 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable{
     public void setListadoAdolescentesInfractoresUDI(List<AdolescenteInfractorUDI> listadoAdolescentesInfractoresUDI) {
         this.listadoAdolescentesInfractoresUDI = listadoAdolescentesInfractoresUDI;
     }
-    
-    public String agregarInformacion(AdolescenteInfractorUDI ai_udi){
-        
-        String gestionInformacionAdolescenteUzdi=permisosUsuario.redireccionGestionInformacionUzdi();
-        
-        if(gestionInformacionAdolescenteUzdi!=null){
+
+    public String agregarInformacion(AdolescenteInfractorUDI ai_udi) {
+
+        String gestionInformacionAdolescenteUzdi = permisosUsuario.redireccionGestionInformacionUzdi();
+
+        if (gestionInformacionAdolescenteUzdi != null) {
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
             return gestionInformacionAdolescenteUzdi;
-        }else{
+        } else {
             return null;
-        }     
+        }
     }
-    
-    public String editarInformacion(AdolescenteInfractorUDI ai_udi){
-        
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
-        return "/paginas/udi/matriz/panel_editar_udi.com?faces-redirect=true";
+
+    public String editarInformacion(AdolescenteInfractorUDI ai_udi) {
+        String gestionEdicionInformacionAdolescenteUzdi = permisosUsuario.redireccionGestionEdicionInformacionUzdi();
+        if (gestionEdicionInformacionAdolescenteUzdi != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
+            return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
         //return enlaces.PATH_ADOLESCENTE_UDI_CREAR+"?faces-redirect=true";
     }
-    
-    public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado){
-        
-        int statusRespuesta=servicio.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-        
-        if(statusRespuesta==200){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamente el Adolescente Infractor ","Aviso" ));
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error guardadando el Adolescente Infrctor","Error" ));
+
+    public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado) {
+
+        int statusRespuesta = servicio.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+
+        if (statusRespuesta == 200) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamente el Adolescente Infractor ", "Aviso"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error guardadando el Adolescente Infrctor", "Error"));
         }
         return "/paginas/udi/udi.com?faces-redirect=true";
     }

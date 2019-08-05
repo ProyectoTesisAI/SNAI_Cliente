@@ -40,8 +40,9 @@
                                     </p:column>
 
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.fecha}" headerText="Fecha">
-                                        <h:outputText value="#{tp.idTaller.fecha}"/>
-                                        <b:dateTimePicker show-date="true" show-time="false" disabled="true" icon="false" value="#{tp.idTaller.fecha}"/>
+                                        <h:outputText value="#{tp.idTaller.fecha}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
                                     </p:column>
                                     
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" headerText="Elaborado">

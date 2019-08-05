@@ -47,6 +47,11 @@ public class EnlacesPrograma {
     public String PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_crear_udi.com";
     public String PATH_PANEL_CREAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_crear_udi.com";
     
+    public String PATH_PANEL_EDITAR_UDI_LIDER_UZDI = "/paginas/user/uzdi/liderUzdi/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_PSICOLOGO = "/paginas/user/uzdi/psicologo/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_editar_udi.com";
+    
     public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/user/cai/coordinadorCai/panel_crear_cai.com";
     public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/user/cai/psicologo/panel_crear_cai.com";
     public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/user/cai/trabajadorSocial/panel_crear_cai.com";

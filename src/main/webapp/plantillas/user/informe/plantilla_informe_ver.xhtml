@@ -7,7 +7,7 @@
       xmlns:o="http://omnifaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <h:body>
         <ui:composition >
             <!-- Panel para la creación de la Ficha de Informe de Taller-->
@@ -53,14 +53,20 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3 col-md-offset-1">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-1">
+                                            <div class="form-group">
+                                                <h:outputLabel for="txtNumeroTotalParticipantes" value="Número Total Participantes"/>
+                                                <b:inputText mask="integer" disabled="true" placeholder="Numero Total Participantes" id="txtNumeroTotalParticipantes" value="#{informeEditarControlador.informeEditar.numeroAdolescentes}"/>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-3 col-md-offset-4">
                                         <div class="form-group">
-                                            <h:outputLabel for="txtNumeroTotalParticipantes" value="Número Total Participantes"/>
-                                            <b:inputText mask="integer" disabled="true" placeholder="Numero Total Participantes" id="txtNumeroTotalParticipantes" value="#{informeEditarControlador.informeEditar.numeroAdolescentes}"/>
+                                            <h:outputLabel for="txtHoraFin" value="Hora Fin"/>
+                                            <b:dateTimePicker placeholder="hh:mm:ss" disabled="true" show-date="false" id="txtHoraFin" value="#{informeEditarControlador.informeEditar.horaFin}"/>
                                         </div> 
                                     </div>
-
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
                                             <div class="form-group">
@@ -80,27 +86,27 @@
 
                                     <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                         <div class="col-md-10 col-md-offset-1">
-                                            
+
                                             <p:dataTable var="tp" value="#{informeEditarControlador.listaItemsTaller}"  reflow="true"  rows="10"
                                                          paginator="false"  >
                                                 <p:column headerText="Duración">
-                                                    <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                    <h:outputText value="#{tp.duracion}"/>  
                                                 </p:column>
 
                                                 <p:column headerText="Actividad">
-                                                    <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                    <h:outputText value="#{tp.actividad}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Objetivo Específico">
-                                                    <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                    <h:outputText value="#{tp.objetivoEspecifico}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Materiales">
-                                                    <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                    <h:outputText value="#{tp.materiales}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Responsable">
-                                                    <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                    <h:outputText value="#{tp.responsable}"/>
                                                 </p:column>
 
                                             </p:dataTable>
@@ -163,7 +169,7 @@
                                         <div class="col-md-5 col-md-offset-1">
                                             <div class="form-group">
                                                 <h:outputLabel for="txtElaborado" value="Elaborado por "/>
-                                                <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" />
+                                                <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" value="#{informeControlador.taller.idUsuario.nombres} #{informeControlador.taller.idUsuario.apellidos}" />
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +181,7 @@
                             <b:panel content-disabled="true" style="border: transparent;">
                                 <div class="row" style="margin-top: 35px;">
                                     <div class="col-md-10 col-md-offset-1">
-                                        
+
                                         <p:dataTable var="ai" value="#{informeEditarControlador.listaParaChequeo}"  reflow="true"  rows="5"
                                                      paginator="false"  >
 
