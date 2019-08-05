@@ -44,18 +44,20 @@ public class InformacionCambioMedidaCAI implements Serializable {
     }
 
     public Integer getCumplimieno6080TiempoPrivacionLibertad() {
-        //if (cambioMedidaSocioeducativa!=null && ejecucionAux.getTiempoSentenDias()!=null) {
-        if (cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI.getTiempoSentenDias()!=null) {
-            if (cambioMedidaSocioeducativa.equals("60% DE CUMPLIMIENTO")) {
-                int tiempo60=(idEjecucionMedidaCAI.getTiempoSentenDias()*60)/100;
-                cumplimieno6080TiempoPrivacionLibertad=tiempo60;
-                return cumplimieno6080TiempoPrivacionLibertad;
-            } else if (cambioMedidaSocioeducativa.equals("80% DE CUMPLIMIENTO")) {
-                int tiempo80=(idEjecucionMedidaCAI.getTiempoSentenDias()*80)/100;
-                cumplimieno6080TiempoPrivacionLibertad=tiempo80;
-                return cumplimieno6080TiempoPrivacionLibertad;
+        if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI!=null){
+            if (idEjecucionMedidaCAI.getTiempoSentenDias()!=null) {
+                if (cambioMedidaSocioeducativa.equals("60% DE CUMPLIMIENTO")) {
+                    int tiempo60=(idEjecucionMedidaCAI.getTiempoSentenDias()*60)/100;
+                    cumplimieno6080TiempoPrivacionLibertad=tiempo60;
+                    return cumplimieno6080TiempoPrivacionLibertad;
+                } else if (cambioMedidaSocioeducativa.equals("80% DE CUMPLIMIENTO")) {
+                    int tiempo80=(idEjecucionMedidaCAI.getTiempoSentenDias()*80)/100;
+                    cumplimieno6080TiempoPrivacionLibertad=tiempo80;
+                    return cumplimieno6080TiempoPrivacionLibertad;
+                }
             }
         }
+        
         return cumplimieno6080TiempoPrivacionLibertad;
     }
 
@@ -64,12 +66,15 @@ public class InformacionCambioMedidaCAI implements Serializable {
     }
 
     public Date getFechaCumplimiento6080() {
-        if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI.getFechaAprehension()!=null){
-            Calendar fechaAux = Calendar.getInstance();
-            fechaAux.setTime(idEjecucionMedidaCAI.getFechaAprehension());
-            fechaAux.add(Calendar.DATE, cumplimieno6080TiempoPrivacionLibertad);
-            fechaCumplimiento6080=fechaAux.getTime();
+        if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI!=null){
+            if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI.getFechaAprehension()!=null){
+                Calendar fechaAux = Calendar.getInstance();
+                fechaAux.setTime(idEjecucionMedidaCAI.getFechaAprehension());
+                fechaAux.add(Calendar.DATE, cumplimieno6080TiempoPrivacionLibertad);
+                fechaCumplimiento6080=fechaAux.getTime();
+            }
         }
+        
         return fechaCumplimiento6080;
     }
 

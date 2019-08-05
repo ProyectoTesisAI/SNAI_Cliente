@@ -15,7 +15,7 @@
                 
                 <b:growl id="growlMsg" show-detail="false" show-summary="false" allowDismiss="true" delay="5000" escape="true" /> 
                 
-                <b:panel look="primary" content-disabled="#{identificacionGeograficaControladorCAI.guardado}">
+                <b:panel look="primary" content-disabled="#{!identificacionGeograficaControladorCAI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
                     </f:facet>
