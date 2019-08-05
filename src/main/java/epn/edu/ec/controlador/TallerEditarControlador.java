@@ -141,7 +141,7 @@ public class TallerEditarControlador implements Serializable {
             if (itemsAux != null) {
 
                 listaItemsTaller = itemsAux;
-                indiceTaller = 1;
+                indiceTaller = 0;
             }
             
             obtenerRegistroAsistencia();

@@ -6,12 +6,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
 
             <b:form id="formUnidadZonal">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+  
                 <b:panel look="primary"  content-disabled="#{!unidadZonalControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="UNIDAD ZONAL" style="color: white; font-weight: bold"  />
@@ -20,7 +23,7 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtUnidadZonal" value="Unidad Zonal"/>
-                            <b:selectOneMenu id="txtUnidadZonal" value="#{unidadZonalControlador.unidadZonal.idUdi.udi}">
+                            <b:selectOneMenu id="txtUnidadZonal" value="#{unidadZonalControlador.udi.udi}">
                                 <f:selectItems value="#{unidadZonalControlador.listaUDI}"  var="u"  itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                             </b:selectOneMenu>
                         </b:column>                                                
@@ -32,14 +35,12 @@
                     </b:row>
                     <b:row>
                         <b:column span="3" offset="8">                                                
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{unidadZonalControlador.guardarUnidadZonal()}">
-                                <f:ajax execute="formUnidadZonal" render="formUnidadZonal"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{unidadZonalControlador.guardarEdicionUnidadZonal()}" update="@form" />
                         </b:column>
                     </b:row>                                   
                 </b:panel>
 
-            </b:form>  
+            </b:form>
 
         </ui:composition>
 

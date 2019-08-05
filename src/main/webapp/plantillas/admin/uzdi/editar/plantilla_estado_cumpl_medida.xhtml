@@ -6,19 +6,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
 
             <b:form id="formCumplimientoMedida">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{!estadoCumplimientoMedidaControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="ESTADO DE CUMPLIMIENTO MEDIDA" style="color: white; font-weight: bold"  />
                     </f:facet>
 
                     <b:row>
-                        <b:column span="2" offset="1">
+                        <b:column span="4" offset="1">
                             <h:outputLabel for="txtSituacionActual" value="Situación Actual"/>
                             <b:selectOneMenu id="txtSituacionActual" value="#{estadoCumplimientoMedidaControlador.estado}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -31,18 +34,22 @@
                         </b:column>
                     </b:row>
                     <h:panelGroup id="estado">
-                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarEjecucion}">
-                            <h:outputText id="salida" value="#{estadoCumplimientoMedidaControlador.estado}"/>
-                        </b:panel>
-                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarCulminada}">
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarEjecucion}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputText id="salida" value="#{estadoCumplimientoMedidaControlador.estado}"/>
+                                </b:column>
+                            </b:row>                          
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarCulminada}">
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtFechaReporteCulminacion" value="Fecha Reporte Culminación"/>
                                     <b:dateTimePicker id="txtFechaReporteCulminacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteCulminacion}"/>
                                 </b:column>
                             </b:row>
-                        </b:panel>
-                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarDerivada}">
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarDerivada}">
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
@@ -75,8 +82,8 @@
                                     <b:dateTimePicker id="txtFechaReporteDerivacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteDerivacion}"/>
                                 </b:column>
                             </b:row>
-                        </b:panel>
-                        <b:panel rendered="#{estadoCumplimientoMedidaControlador.activarIncumplimiento}">
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{estadoCumplimientoMedidaControlador.activarIncumplimiento}">
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtFechaReporteIncumplimiento" value="Fecha Reporte Incumplimiento"/>
@@ -108,17 +115,14 @@
                                     <b:datepicker id="txtFechaReanudacion" placeholder="dd/mm/aa" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReanudacion}"/>
                                 </b:column>
                             </b:row>
-                        </b:panel>
+                        </h:panelGroup>
+
+                        <b:row>
+                            <b:column span="3" offset="8">
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" rendered="#{!estadoCumplimientoMedidaControlador.activarEjecucion}" actionListener="#{estadoCumplimientoMedidaControlador.guardarEdicionEstadoCumplimientoMedida()}" update="@form" />
+                            </b:column>
+                        </b:row>
                     </h:panelGroup>
-
-                    <b:row>
-                        <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{estadoCumplimientoMedidaControlador.guardarEstadoCumplimientoMedida()}">
-                                <f:ajax execute="formCumplimientoMedida" render="formCumplimientoMedida"/>
-                            </h:commandButton>
-                        </b:column>
-                    </b:row>
-
                 </b:panel>
             </b:form>
         </ui:composition>

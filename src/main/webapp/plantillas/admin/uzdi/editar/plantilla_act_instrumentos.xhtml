@@ -6,12 +6,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
 
             <b:form id="formActividadesInstrumentos">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" content-disabled="#{!actividadesInstrumentosControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="ACTIVIDADES E INSTRUMENTOS" style="color: white; font-weight: bold"  />
@@ -56,9 +59,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{actividadesInstrumentosControlador.guardarActividadesInstrumentos()}">
-                                <f:ajax execute="formActividadesInstrumentos" render="formActividadesInstrumentos"/>
-                            </h:commandButton>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{actividadesInstrumentosControlador.guardarEdicionActividadesInstrumentos()}" update="@form" />
                         </b:column>
                     </b:row>
 
