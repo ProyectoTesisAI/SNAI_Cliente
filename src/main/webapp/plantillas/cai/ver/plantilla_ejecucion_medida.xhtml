@@ -30,12 +30,9 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtCAI" value="Centro de Adolescentes Infractores"/>
-                            <b:selectOneMenu rendered="#{!informacionCambioMedidaControlador.guardado}">
-                                <f:selectItem itemLabel="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.idCai.cai}"/>
-                            </b:selectOneMenu>
-                            <b:selectOneMenu rendered="#{informacionCambioMedidaControlador.guardado}" id="txtCAI" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.idCai}">
+                            <b:selectOneMenu id="txtCAI" value="#{informacionCambioMedidaControlador.cai.cai}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                <f:selectItems value="#{informacionCambioMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
+                                <f:selectItems value="#{informacionCambioMedidaControlador.listaCAI}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}"/>
                             </b:selectOneMenu>
                         </b:column>
                     </b:row>
@@ -79,9 +76,9 @@
                             <h3>MEDIDA SOCIOEDUCATIVA O CAUTELAR</h3>
                         </b:column>
                     </b:row>
+                    <br/>
                     <b:row>
-                        <br/>
-                        <b:column span="4" offset="1">
+                        <b:column span="8" offset="1">
                             <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
                             <b:selectOneMenu id="txtTipoMedida" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.tipoMedida}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -89,8 +86,9 @@
                                 <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
                             </b:selectOneMenu>
                         </b:column>                   
-
-                        <b:column span="4" offset="2">
+                    </b:row>
+                    <b:row>
+                        <b:column span="8" offset="1">
                             <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
                             <b:selectOneMenu id="txtMedidaCautelar" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />

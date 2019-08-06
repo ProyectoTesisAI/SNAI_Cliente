@@ -234,6 +234,21 @@ public class EjeSaludCAIControlador implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
         }
     }
+    
+    public void editarEjeSaludCAI(){
+        
+        this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
+
+        EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(ejeSalud);
+        if (ejeSaludCAIAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
+        }
+    }
 
     public void limpiarMensaje(AjaxBehaviorEvent evento) {
         String numero = ejeSalud.getNumeroHistoriaClinica();
