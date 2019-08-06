@@ -13,7 +13,7 @@
         <ui:composition>
 
             <b:form id="formEjeccionMedida">
-                <b:panel look="primary" content-disabled="#{ejecucionMedidaControlador.guardado}">
+                <b:panel look="primary" content-disabled="#{!ejecucionMedidaControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
                     </f:facet>

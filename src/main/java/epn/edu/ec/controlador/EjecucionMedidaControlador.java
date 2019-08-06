@@ -39,7 +39,9 @@ public class EjecucionMedidaControlador implements Serializable {
     private List<CAI> listaCAI;
     private CaiServicio servicioCAI;
     private PermisosUsuario permisosUsuario;
-
+    String tipoMedida;
+    boolean esSocioeducativa=true;
+    
     @PostConstruct
     public void init() {
         
@@ -78,6 +80,29 @@ public class EjecucionMedidaControlador implements Serializable {
         if(provinciasAux!=null){
             provincias=provinciasAux;
         }
+    }
+    
+    public String getTipoMedida() {
+        return tipoMedida;
+    }
+
+    public void setTipoMedida(String tipoMedida) {
+        this.tipoMedida = tipoMedida;
+        if("MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD".equals(tipoMedida)){
+            esSocioeducativa=true;
+            this.ejecucionMedidaCAI.setTipoMedida("MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD");
+        }else if("MEDIDA CAUTELAR".equals(tipoMedida)){
+            esSocioeducativa=false;
+            this.ejecucionMedidaCAI.setTipoMedida("MEDIDA CAUTELAR");
+        }
+    }
+
+    public boolean isEsSocioeducativa() {
+        return esSocioeducativa;
+    }
+
+    public void setEsSocioeducativa(boolean esSocioeducativa) {
+        this.esSocioeducativa = esSocioeducativa;
     }
 
     public DetalleInfraccionCAI getDetalleInfraccionCAI() {

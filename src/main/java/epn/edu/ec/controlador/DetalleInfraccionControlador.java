@@ -43,7 +43,6 @@ public class DetalleInfraccionControlador implements Serializable {
 
         permisosUsuario= new PermisosUsuario();
         servicio = new DetalleInfraccionCAIServicio();
-
         detalleInfraccion = new DetalleInfraccionCAI();
         guardado = false;
 
@@ -188,6 +187,10 @@ public class DetalleInfraccionControlador implements Serializable {
             guardado=false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
         }
+    }
+    
+    public void obtenerDetalleInfraccionSeleccionada(DetalleInfraccionCAI infraccionSeleccionada){
+        detalleInfraccion=infraccionSeleccionada;
     }
     
     public String agregarMedida(DetalleInfraccionCAI detalle){

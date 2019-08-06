@@ -24,7 +24,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
     private boolean guardado;
 
     private EjecucionMedidaCAI ejecucionMedidaCAI;
-    private EjecucionMedidaServicio servicioEM;
+    private boolean aceptaCambioMedida;
 
     private CAI cai;
     private List<CAI> listaCAI;
@@ -33,7 +33,6 @@ public class InformacionCambioMedidaControlador implements Serializable {
     @PostConstruct
     public void init() {
         servicio = new InformacionCambioMedidaServicio();
-        servicioEM = new EjecucionMedidaServicio();
         servicioCAI = new CaiServicio();
 
         ejecucionMedidaCAI = new EjecucionMedidaCAI();
@@ -43,6 +42,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
 
         informacionCambioMedida = new InformacionCambioMedidaCAI();
         guardado = false;
+        aceptaCambioMedida=false;
 
         EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
 
@@ -52,19 +52,34 @@ public class InformacionCambioMedidaControlador implements Serializable {
             
             InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
             
+            
             if (informacionCambioMedidaAux != null) {
                 informacionCambioMedida = informacionCambioMedidaAux;
                 guardado = true;
             } 
             else if (informacionCambioMedidaAux == null) {
                 informacionCambioMedida = new InformacionCambioMedidaCAI();
-                informacionCambioMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
-
+                informacionCambioMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);         
+                informacionCambioMedida.setCambioMedidaSocioeducativa("60% DE CUMPLIMIENTO");
             }
         }
 
     }
 
+    public boolean isAceptaCambioMedida() {
+        return aceptaCambioMedida;
+    }
+
+    public void setAceptaCambioMedida(boolean aceptaCambioMedida) {
+        this.aceptaCambioMedida = aceptaCambioMedida;
+        if(this.aceptaCambioMedida==true){
+            informacionCambioMedida.setAceptacionJuezCambioMedida(true);
+        }
+        else{
+            informacionCambioMedida.setAceptacionJuezCambioMedida(false);
+        }
+    }
+    
     public InformacionCambioMedidaCAI getInformacionCambioMedida() {
         return informacionCambioMedida;
     }

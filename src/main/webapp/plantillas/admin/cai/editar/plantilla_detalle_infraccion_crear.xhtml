@@ -21,13 +21,34 @@
                         <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <b:row>
-                        <b:column span="3">
-                            <b:button icon-awesome="plus" class="btn-block" look="info" onclick="$('.formDetaInfraccion').modal('show')" value="Agregar Infracción"/>
-                        </b:column>
-                    </b:row>
+
+                    <p:dataTable id="dtDetalleInfraccion" var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="10" 
+                                paginator="true"  widgetVar="infraccionesTable">
+                        
+                        
+                        <p:column filterMatchMode="contains" filterBy="#{td.tipoPenal}" headerText="Tipo Penal">
+                            <h:outputText value="#{td.tipoPenal}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{td.unidadJudicial}" headerText="Unidad Judicial">
+                            <h:outputText value="#{td.unidadJudicial}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{td.numeroCausa}" headerText="Número Causa" width="150">
+                            <h:outputText value="#{td.numeroCausa}" />
+                        </p:column>
+
+                        <p:column headerText="Editar Infracción"  width="150"> 
+                            <b:commandButton value="Editar Infracción" class="btn btn-primary" update="@form:modalInfraccion" actionListener="#{detalleInfraccionControlador.obtenerDetalleInfraccionSeleccionada(td)}" oncomplete="$('.formDetaInfraccion').modal('show')" />
+                        </p:column>
+                        <p:column headerText="Editar Medida" width="150">
+                            <b:commandButton value="Editar Medida" class="btn btn-success" action="#{detalleInfraccionControlador.agregarMedida(td)}">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </p:column>
+                    </p:dataTable>
                     
-                    <b:modal title="Agregar Infracción" style-class="formDetaInfraccion"
+                    <b:modal title="Editar Infracción" style-class="formDetaInfraccion"
                              id="modalInfraccion"
                              closable="false"
                              closeOnEscape="true"
@@ -130,29 +151,6 @@
                     </b:modal>
                     <br/>
                     <br/>
-
-                    
-
-                    <p:dataTable id="dtDetalleInfraccion" var="td" value="#{detalleInfraccionControlador.listaDetalleInfraccion}" reflow="true"  rows="10" 
-                                 paginator="true"  widgetVar="infraccionesTable">
-                        <p:column filterMatchMode="contains" filterBy="#{td.tipoPenal}" headerText="Tipo Penal">
-                            <h:outputText value="#{td.tipoPenal}" />
-                        </p:column>
-
-                        <p:column filterMatchMode="contains" filterBy="#{td.unidadJudicial}" headerText="Unidad Judicial">
-                            <h:outputText value="#{td.unidadJudicial}" />
-                        </p:column>
-
-                        <p:column filterMatchMode="contains" filterBy="#{td.numeroCausa}" headerText="Número Causa" width="150">
-                            <h:outputText value="#{td.numeroCausa}" />
-                        </p:column>
-
-                        <p:column headerText="Añadir Medida" width="150">
-                            <b:commandButton value="Añadir Medida" class="btn btn-success" action="#{detalleInfraccionControlador.agregarMedida(td)}">
-                                <f:ajax execute="@form" />
-                            </b:commandButton>
-                        </p:column>
-                    </p:dataTable>
 
                 </b:panel>
             </b:form>

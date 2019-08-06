@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formCumplimientoMedida">
+                <b:panel look="primary" content-disabled="true">
+                    <f:facet name="heading">
+                        <h:outputText value="CUMPLIMIENTO DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtFechaCumplimiento100" value="Fecha de cumplimiento de 100%"/>
+                            <b:dateTimePicker id="txtFechaCumplimiento100" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaCumplimiento100}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtAlertaCambio100" value="Alerta cambio de medida 100%"/>
+                            <b:dateTimePicker id="txtAlertaCambio100" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.alertaCumplimiento100}"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+
