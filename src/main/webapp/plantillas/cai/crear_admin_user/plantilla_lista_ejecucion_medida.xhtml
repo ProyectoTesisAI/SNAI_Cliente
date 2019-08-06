@@ -41,7 +41,7 @@
                                 <b:selectOneMenu rendered="#{ejecucionMedidaControlador.guardado}">
                                     <f:selectItem itemLabel="#{ejecucionMedidaControlador.ejecucionMedidaCAI.idCai.cai}"/>
                                 </b:selectOneMenu>
-                                <b:selectOneMenu rendered="#{!ejecucionMedidaControlador.guardado}" id="txtCAI" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.idCai}">
+                                <b:selectOneMenu rendered="#{!ejecucionMedidaControlador.guardado}" id="txtCAI" value="#{ejecucionMedidaControlador.cai}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
                                 </b:selectOneMenu>

@@ -4,7 +4,6 @@ import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
 import epn.edu.ec.modelo.InformacionCambioMedidaCAI;
 import epn.edu.ec.servicios.CaiServicio;
-import epn.edu.ec.servicios.EjecucionMedidaServicio;
 import epn.edu.ec.servicios.InformacionCambioMedidaServicio;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,13 +28,16 @@ public class InformacionCambioMedidaControlador implements Serializable {
     private CAI cai;
     private List<CAI> listaCAI;
     private CaiServicio servicioCAI;
+    
+    private String tipoCumplimiento;
+    private boolean es60;
 
     @PostConstruct
     public void init() {
         servicio = new InformacionCambioMedidaServicio();
         servicioCAI = new CaiServicio();
 
-        cai= new CAI();
+        cai = new CAI();
         ejecucionMedidaCAI = new EjecucionMedidaCAI();
 
         listaCAI = new ArrayList<>();
@@ -43,26 +45,27 @@ public class InformacionCambioMedidaControlador implements Serializable {
 
         informacionCambioMedida = new InformacionCambioMedidaCAI();
         guardado = false;
-        aceptaCambioMedida=false;
+        aceptaCambioMedida = false;
+        
+        tipoCumplimiento=null;
+        es60=false;
 
         EjecucionMedidaCAI ejecucionMedidaCAIAux = (EjecucionMedidaCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ejecucion_medida_cai");
 
         if (ejecucionMedidaCAIAux != null) {
-            
-            ejecucionMedidaCAI=ejecucionMedidaCAIAux;
-            cai=ejecucionMedidaCAI.getIdCai();
+
+            ejecucionMedidaCAI = ejecucionMedidaCAIAux;
+            cai = ejecucionMedidaCAI.getIdCai();
             InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
-            
-            
+
             if (informacionCambioMedidaAux != null) {
-                
                 informacionCambioMedida = informacionCambioMedidaAux;
-                aceptaCambioMedida=informacionCambioMedida.getAceptacionJuezCambioMedida();
+                aceptaCambioMedida = informacionCambioMedida.getAceptacionJuezCambioMedida();
                 guardado = true;
-            } 
-            else if (informacionCambioMedidaAux == null) {
+                
+            } else if (informacionCambioMedidaAux == null) {
                 informacionCambioMedida = new InformacionCambioMedidaCAI();
-                informacionCambioMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);         
+                informacionCambioMedida.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
                 informacionCambioMedida.setCambioMedidaSocioeducativa("60% DE CUMPLIMIENTO");
             }
         }
@@ -75,14 +78,13 @@ public class InformacionCambioMedidaControlador implements Serializable {
 
     public void setAceptaCambioMedida(boolean aceptaCambioMedida) {
         this.aceptaCambioMedida = aceptaCambioMedida;
-        if(this.aceptaCambioMedida==true){
+        if (this.aceptaCambioMedida == true) {
             informacionCambioMedida.setAceptacionJuezCambioMedida(true);
-        }
-        else{
+        } else {
             informacionCambioMedida.setAceptacionJuezCambioMedida(false);
         }
     }
-    
+
     public InformacionCambioMedidaCAI getInformacionCambioMedida() {
         return informacionCambioMedida;
     }
@@ -126,6 +128,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
     public void setServicioCAI(CaiServicio servicioCAI) {
         this.servicioCAI = servicioCAI;
     }
+
     public boolean isGuardado() {
         return guardado;
     }
@@ -134,34 +137,80 @@ public class InformacionCambioMedidaControlador implements Serializable {
         this.guardado = guardado;
     }
 
+    public String getTipoCumplimiento() {
+        return tipoCumplimiento;
+    }
+
+    public void setTipoCumplimiento(String tipoCumplimiento) {
+        this.tipoCumplimiento = tipoCumplimiento;
+        this.informacionCambioMedida.setCambioMedidaSocioeducativa(tipoCumplimiento);
+        if("60% DE CUMPLIMIENTO".equals(tipoCumplimiento)){
+            es60=true;
+        }else if ("80% DE CUMPLIMIENTO".equals(tipoCumplimiento)){
+            es60=false;
+        }
+    }
+
+    public boolean isEs60() {
+        if("60% DE CUMPLIMIENTO".equals(tipoCumplimiento)){
+            es60=true;
+        }else if ("80% DE CUMPLIMIENTO".equals(tipoCumplimiento)){
+            es60=false;
+        }
+        return es60;
+    }
+
+    public void setEs60(boolean es60) {
+        this.es60 = es60;
+    }
+
     /**
-     * *******************Métodos para invocar a los diferentes servicios web*****************
+     * *******************Métodos para invocar a los diferentes servicios
+     * web*****************
      */
     public void guardarInformacionCambioMedida() {
 
+        if (this.informacionCambioMedida != null) {
+            if(this.informacionCambioMedida.getAceptacionJuezCambioMedida()==false){
+                this.informacionCambioMedida.setAlertaCambioMedida(null);
+                this.informacionCambioMedida.setCambioMedidaSocioeducativa(null);
+                this.informacionCambioMedida.setCumplimieno6080TiempoPrivacionLibertad(null);
+                this.informacionCambioMedida.setEspecificacionNuevaMedida(null);
+            }
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
+            if (informacionCambioMedidaAux != null) {
+                guardado = true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
 
-        InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
-        if (informacionCambioMedidaAux != null) {
-            guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
-            
+            } else {
+                guardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
+            }
         } else {
-            guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "EL REGISTRO INFORMACIÓN CAMBIO MEDIDA ESTA VACIO", "Error"));
         }
     }
-    
+
     public void editarInformacionCambioMedida() {
 
+        if (this.informacionCambioMedida != null) {
+            if(this.informacionCambioMedida.getAceptacionJuezCambioMedida()==false){
+                this.informacionCambioMedida.setAlertaCambioMedida(null);
+                this.informacionCambioMedida.setCambioMedidaSocioeducativa(null);
+                this.informacionCambioMedida.setCumplimieno6080TiempoPrivacionLibertad(null);
+                this.informacionCambioMedida.setEspecificacionNuevaMedida(null);
+            }
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
+            if (informacionCambioMedidaAux != null) {
+                guardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
 
-        InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
-        if (informacionCambioMedidaAux != null) {
-            guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
-            
+            } else {
+                guardado = true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
+            }
         } else {
-            guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "EL REGISTRO INFORMACIÓN CAMBIO MEDIDA ESTA VACIO", "Error"));
         }
     }
 

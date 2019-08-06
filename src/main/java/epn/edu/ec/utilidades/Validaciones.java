@@ -96,7 +96,8 @@ public class Validaciones {
     public Boolean numeroContactoValida(String numero) {
         int total = 0;
         int tamanoMinimo = 9;
-        if (numero.matches("[0-9]*") && numero.length() >= tamanoMinimo) {
+        int tamanoMaximo =10;
+        if (numero.matches("[0-9]*") && numero.length() >= tamanoMinimo && numero.length()<=tamanoMaximo) {
             return true;
         } else {
             return false;
