@@ -51,5 +51,18 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
             return null;
         }     
     }
+    
+    public String editarInformacion(AdolescenteInfractorCAI ai_cai) {
+
+        String gestionInformacionAdolescenteCai=permisosUsuario.redireccionEditarInformacionCai();
+        
+        if(gestionInformacionAdolescenteCai!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
+            return gestionInformacionAdolescenteCai;
+        }else{
+            return null;
+        }     
+    }
 
 }

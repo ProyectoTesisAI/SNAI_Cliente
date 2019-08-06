@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+
+        <ui:composition template="./../../../../templates/menu.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../resources/css/bootstrap.css"/>
+                <script src="../../../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div>
+                    <div class="table-responsive" style="padding-top: 50px;"  >
+                        <!--<b:form id="panelCAI">-->
+                        <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                            <b:tab title="EJECUCIÓN DE LA MEDIDA" tooltip="EJECUCIÓN DE LA MEDIDA">
+                                <ui:include src="../../../../plantillas/cai/ver/plantilla_ejecucion_medida.xhtml" />
+                            </b:tab>
+
+                            <b:tab title="CAMBIO DE MEDIDA" tooltip="CAMBIO DE MEDIDA">
+                                <ui:include src="../../../../plantillas/cai/editar/plantilla_info_cambio_medida.xhtml" />
+                            </b:tab>
+                            <b:tab title="CUMPLIMIENTO DE LA MEDIDA" tooltip="CUMPLIMIENTO DE LA MEDIDA">
+                                <ui:include src="../../../../plantillas/cai/editar/plantilla_cumplimiento_medida.xhtml" />
+                            </b:tab>
+                            
+                            <b:tab title="MOTIVOS DE EGRESO" tooltip="MOTIVOS DE EGRESO">
+                                <ui:include src="../../../../plantillas/cai/editar/plantilla_motivo_egreso.xhtml" />
+                            </b:tab>
+                        </b:tabView>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

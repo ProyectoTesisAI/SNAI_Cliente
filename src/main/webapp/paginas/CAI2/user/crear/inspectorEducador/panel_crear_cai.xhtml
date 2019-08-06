@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
+
+    <h:body>
+         <ui:composition template="./../../../../../templates/menu.xhtml">
+
+            <ui:define name="head">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/bootstrap.css"/>
+                <script src="../../../../../resources/js/bootstrap.min.js"></script>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h1>INFORMACIÓN COMPLETA</h1>
+
+                <!--<b:form id="panelUDI" style="margin-top: 50px;">-->
+                <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+
+                    <b:tab title="1" tooltip="ADOLESCENTE INFRACTOR">
+                        <ui:include src="../../../../../plantillas/cai/crear_admin_user/plantilla_adolescente_cai.xhtml" />
+                    </b:tab>
+                    
+                    <b:tab title="2" tooltip="REPRESENTANTE">
+                        <ui:include src="../../../../../plantillas/cai/crear_admin_user/plantilla_representante.xhtml" />
+                    </b:tab>
+                    
+                    <b:tab title="3" tooltip="INFORMACIÓN GEOGRÁFICA">
+                        <ui:include src="../../../../../plantillas/cai/crear_admin_user/plantilla_info_geografica.xhtml" />
+                    </b:tab>
+                    
+                    <b:tab title="4" tooltip="DETALLE INFORMACIÓN">
+                        <ui:include src="../../../../../plantillas/cai/ver/plantilla_lista_detalle_infraccion.xhtml" />
+                    </b:tab>
+
+                </b:tabView>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

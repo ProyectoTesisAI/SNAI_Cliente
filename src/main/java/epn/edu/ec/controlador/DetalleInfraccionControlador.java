@@ -205,4 +205,17 @@ public class DetalleInfraccionControlador implements Serializable {
             return null;
         }    
     }
+    
+    public String editarMedida(DetalleInfraccionCAI detalle){
+        
+        String redireccionEjecucionMedida=permisosUsuario.redireccionEditarEjecucionMedida();
+        
+        if(redireccionEjecucionMedida!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
+            return redireccionEjecucionMedida;
+        }else{
+            return null;
+        }    
+    }
 }
