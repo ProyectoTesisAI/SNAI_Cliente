@@ -235,7 +235,6 @@ public class EjecucionMedidaControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
             
         } else {
-            guardado=false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJECUCIÓN MEDIDA", "Error"));
         }
     }

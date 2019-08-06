@@ -169,4 +169,19 @@ public class MotivoEgresoCAIControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO MOTIVO DE EGRESO", "Error"));
         }
     }
+    
+    public void editarMotivoEgresoCAI() {
+
+        this.motivoEgresoCAI.setIdEjecucionMedidaCAI(ejecucionMedidaCAI);
+
+        MotivoEgresoCAI motivoEgresoCAIAux = servicio.guardarMotivoEgresoCAI(motivoEgresoCAI);
+        if (motivoEgresoCAIAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO MOTIVO DE EGRESO", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO MOTIVO DE EGRESO", "Error"));
+        }
+    }
 }

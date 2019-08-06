@@ -168,7 +168,6 @@ public class DetalleInfraccionControlador implements Serializable {
      */
     public void guardarDetalleInfraccion() {
         
-        System.out.println("provincia:" +provincia);
         this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
         
         DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
@@ -184,10 +183,10 @@ public class DetalleInfraccionControlador implements Serializable {
             
             
         } else {
-            guardado=false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
         }
     }
+    
     
     public void obtenerDetalleInfraccionSeleccionada(DetalleInfraccionCAI infraccionSeleccionada){
         detalleInfraccion=infraccionSeleccionada;

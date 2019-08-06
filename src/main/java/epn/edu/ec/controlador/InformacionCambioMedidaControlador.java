@@ -35,6 +35,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
         servicio = new InformacionCambioMedidaServicio();
         servicioCAI = new CaiServicio();
 
+        cai= new CAI();
         ejecucionMedidaCAI = new EjecucionMedidaCAI();
 
         listaCAI = new ArrayList<>();
@@ -49,12 +50,14 @@ public class InformacionCambioMedidaControlador implements Serializable {
         if (ejecucionMedidaCAIAux != null) {
             
             ejecucionMedidaCAI=ejecucionMedidaCAIAux;
-            
+            cai=ejecucionMedidaCAI.getIdCai();
             InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
             
             
             if (informacionCambioMedidaAux != null) {
+                
                 informacionCambioMedida = informacionCambioMedidaAux;
+                aceptaCambioMedida=informacionCambioMedida.getAceptacionJuezCambioMedida();
                 guardado = true;
             } 
             else if (informacionCambioMedidaAux == null) {
@@ -144,6 +147,20 @@ public class InformacionCambioMedidaControlador implements Serializable {
             
         } else {
             guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
+        }
+    }
+    
+    public void editarInformacionCambioMedida() {
+
+
+        InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
+        if (informacionCambioMedidaAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
+            
+        } else {
+            guardado=true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Error"));
         }
     }

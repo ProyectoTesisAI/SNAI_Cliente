@@ -120,6 +120,21 @@ public class EjeEducativoCAIControlador implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE EDUCATIVO", "Error"));
         }
     }
+    
+    public void editarEjeEducativoCAI(){
+        
+        this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
+        
+        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(ejeEducativo);
+        if (ejeEducativoCAIAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE EDUCATIVO", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE EDUCATIVO", "Error"));
+        }
+    }
 
     
 }

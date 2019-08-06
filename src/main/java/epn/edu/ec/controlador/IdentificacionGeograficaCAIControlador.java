@@ -189,6 +189,23 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Error"));
         }
     }
+    
+    public void editarIdentificacionGeografica() {
+        if(nacionalidad.equals("ECUATORIANA")){
+            this.identificacionGeografica.setPaisNacimiento("ECUADOR");
+        }
+        this.identificacionGeografica.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
+
+        IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
+        if (identificacionGeograficaAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Error"));
+        }
+    }
 
     public void limpiarMensajeNumeroContacto(AjaxBehaviorEvent evento) {
         String numero = identificacionGeografica.getTelefono();
