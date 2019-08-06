@@ -79,8 +79,8 @@
                                     <div class="col-md-3 col-md-offset-1">
                                         <div class="form-group">
                                             <b:panelGrid columns="1">
-                                                <h:outputLabel for="txtHora" value="Hora" />
-                                                <b:dateTimePicker id="txtHora" placeholder="hh:mm:ss" disabled="true" requiredMessage="Hora es requerida, ingrese un valor" show-date="false" value="#{informeControlador.informe.horaInicio}"/>  
+                                                <h:outputLabel for="txtHoraInicio" value="Hora Inicio" />
+                                                <b:dateTimePicker id="txtHoraInicio" placeholder="hh:mm:ss" disabled="true" requiredMessage="Hora es requerida, ingrese un valor" show-date="false" value="#{informeControlador.taller.horaInicio}"/>  
                                             </b:panelGrid>
                                         </div>
                                     </div>
@@ -90,6 +90,12 @@
                                         <div class="form-group">
                                             <h:outputLabel for="txtNumeroTotalParticipantes" value="Número Total Participantes"/>
                                             <b:inputText mask="integer" placeholder="Numero Total Participantes" disabled="true" id="txtNumeroTotalParticipantes" value="#{informeControlador.cantidadAsistentes}"/>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-4">
+                                        <div class="form-group">
+                                            <h:outputLabel for="txtHoraFin" value="Hora Fin"/>
+                                            <b:dateTimePicker placeholder="hh:mm:ss" disabled="true" show-date="false" id="txtHoraFin" value="#{informeControlador.horaFin}"/>
                                         </div> 
                                     </div>
                                 </div>
@@ -116,23 +122,23 @@
                                         <p:dataTable var="tp" value="#{informeControlador.listaItemsTaller}" reflow="true"  rows="10"
                                                      paginator="false"  >
                                             <p:column headerText="Duración">
-                                                <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                <h:outputText value="#{tp.duracion}"/>  
                                             </p:column>
 
                                             <p:column headerText="Actividad">
-                                                <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                <h:outputText value="#{tp.actividad}"/>
                                             </p:column>
 
                                             <p:column headerText="Objetivo Específico">
-                                                <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                <h:outputText value="#{tp.objetivoEspecifico}"/>
                                             </p:column>
 
                                             <p:column headerText="Materiales">
-                                                <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                <h:outputText value="#{tp.materiales}"/>
                                             </p:column>
 
                                             <p:column headerText="Responsable">
-                                                <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                <h:outputText value="#{tp.responsable}"/>
                                             </p:column>
 
                                         </p:dataTable>
@@ -195,7 +201,7 @@
                                     <div class="col-md-5 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtElaborado" value="Elaborado por "/>
-                                            <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true"/>
+                                            <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" value="#{informeControlador.taller.idUsuario.nombres} #{informeControlador.taller.idUsuario.apellidos}"/>
                                         </div>
                                     </div>
                                 </div>

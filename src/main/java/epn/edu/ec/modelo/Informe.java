@@ -6,6 +6,7 @@
 package epn.edu.ec.modelo;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Informe implements Serializable {
@@ -51,7 +52,7 @@ public class Informe implements Serializable {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFin() {
+    public Date getHoraFin() {        
         return horaFin;
     }
 

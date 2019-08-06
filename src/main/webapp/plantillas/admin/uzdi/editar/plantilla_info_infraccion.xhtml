@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
@@ -67,7 +67,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionInfraccionControlador.guardarInformacionInfraccion()}">
+                            <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{informacionInfraccionControlador.guardarEdicionInformacionInfraccion()}">
                                 <f:ajax execute="formInfoInfraccion" render="formInfoInfraccion"/>
                             </h:commandButton>
                         </b:column>

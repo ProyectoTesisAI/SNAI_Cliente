@@ -145,6 +145,26 @@ public class UnidadZonalControlador implements Serializable{
         }
     }
     
+    public void guardarEdicionUnidadZonal(){
+        
+        for(UDI u: listaUDI){
+            if(u.getUdi().equals(udi.getUdi())){
+                udi=u;
+            }
+        }
+        this.unidadZonal.setIdUdi(udi);
+        this.unidadZonal.setIdUnidadZonal(adolescenteInfractorUDI);
+        UnidadZonal uz= servicio.guardarUnidadZonal(unidadZonal);
+        if (uz != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO UNIDAD ZONAL", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO UNIDAD ZONAL", "Error"));
+        }
+    }
+    
     public UnidadZonal obtenerUnidadZonal(Integer id){
         UnidadZonal unidadZonalAux= servicio.obtenerUnidadZonal(id);
         return unidadZonalAux;

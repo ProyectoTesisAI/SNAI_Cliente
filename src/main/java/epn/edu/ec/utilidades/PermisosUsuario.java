@@ -69,6 +69,36 @@ public class PermisosUsuario {
         }
     }
     
+    public String redireccionGestionEdicionInformacionUzdi(){
+        
+        String rolUsuario=RolUsuario();
+        
+        if (rolUsuario != null) {
+        
+            if ("ADMINISTRADOR".equals(rolUsuario)){
+                return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR+"?faces-redirect=true";
+            }
+            else{
+            
+                if(rolUsuario.equals("COORDINADOR/LIDER UZDI")){
+                    return enlaces.PATH_PANEL_EDITAR_UDI_LIDER_UZDI+"?faces-redirect=true";
+                }
+                else if(rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI")){
+                    return enlaces.PATH_PANEL_EDITAR_UDI_PSICOLOGO+"?faces-redirect=true";
+                }
+                else if(rolUsuario.equals("TRABAJADOR SOCIAL UZDI")){
+                    return enlaces.PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL+"?faces-redirect=true";
+                }              
+                else{
+                    return null;
+                }  
+            }
+        }
+        else{
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        }
+    }
+    
     public String redireccionGestionInformacionCai(){
         
         String rolUsuario=RolUsuario();
