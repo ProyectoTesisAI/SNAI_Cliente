@@ -118,23 +118,14 @@ public class RepresentanteUDIControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
-        if (this.representante.getIdAdolescenteInfracto() != null) {
-            this.representante.setNacionalidad(tipoDocumento);
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                esCedula = true;
-                this.representante.setDocumento(null);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                esCedula = false;
-                this.representante.setCedula(null);
-            }
-        } else {
-            this.representante.setNacionalidad(tipoDocumento);
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                esCedula = true;
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                esCedula = false;
-            }
+        if ("ECUATORIANA".equals(tipoDocumento)) {
+            esCedula = true;
+            this.representante.setDocumento(null);
+        } else if ("EXTRANJERA".equals(tipoDocumento)) {
+            esCedula = false;
+            this.representante.setCedula(null);
         }
+        
     }
 
     public boolean isEsCedula() {

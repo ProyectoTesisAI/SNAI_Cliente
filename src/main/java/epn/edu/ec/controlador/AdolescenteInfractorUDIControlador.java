@@ -56,6 +56,7 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
         adolescenteInfractorUDICrear = new AdolescenteInfractorUDI();
         this.adolescenteInfractorCrear.setTipo("UZDI");
+        
         adolescenteInfractorUDICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
         adolescenteInfractorUDIEditar = new AdolescenteInfractorUDI();
         AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
@@ -138,33 +139,16 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
-        if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null && this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getIdAdolescenteInfractor() == null) {
-            this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                esCedula = true;
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                esCedula = false;
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
-            }
-        } else {
-            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                esCedula = true;
-                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setDocumento(null);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                esCedula = false;
-                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setCedula(null);
-            }
+        if ("ECUATORIANA".equals(tipoDocumento)) {
+            esCedula = true;
+            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad("ECUATORIANA");
+        } else if ("EXTRANJERA".equals(tipoDocumento)) {
+            esCedula = false;
+            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad("EXTRANJERA");
         }
     }
 
     public boolean isEsCedula() {
-        if ("ECUATORIANA".equals(tipoDocumento)) {
-            esCedula = true;
-        } else if ("EXTRANJERA".equals(tipoDocumento)) {
-            esCedula = false;
-        }
         return esCedula;
     }
 
@@ -185,7 +169,14 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
      */
     public String guardarAdolescenteInfractor() {
 
+        
         if (this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor() != null) {
+            
+            if ("ECUATORIANA".equals(tipoDocumento)) {
+                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setDocumento(null);
+            } else if ("EXTRANJERA".equals(tipoDocumento)) {
+                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setCedula(null);
+            }
 
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarAdolescenteInfractorUDI(this.adolescenteInfractorUDICrear);
             if (ai_udi != null) {
@@ -204,8 +195,15 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     public void guardarEdicionAdolescenteInfractor() {
 
+                
         if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null) {
 
+            if ("ECUATORIANA".equals(tipoDocumento)) {
+                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
+            } else if ("EXTRANJERA".equals(tipoDocumento)) {
+                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
+            }
+            
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);
             if (ai_udi != null) {
                 guardado = false;

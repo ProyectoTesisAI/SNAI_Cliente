@@ -26,6 +26,7 @@
                                 <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
                                 <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
                                 <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
+                                <f:ajax render="tipoDocumentoRepresentante"/>
                             </b:selectOneMenu> 
                         </b:column>
                         <h:panelGroup id="tipoDocumentoRepresentante">
@@ -35,7 +36,7 @@
                                     <f:ajax event="blur" listener="#{representanteControladorUDI.limpiarMensajeCedula}" render="txtCedulaR mensaje-cedulaRepresentante" />
                                     <f:ajax event="keyup" listener="#{representanteControladorUDI.validarCedula}" render="mensaje-cedulaRepresentante" />
                                 </b:inputText>
-                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControladorUDI.mensaje}"/>
+                                <h:outputText style="color: red; font-size: 14px;" rendered="#{representanteControladorUDI.esCedula}" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControladorUDI.mensaje}"/>
 
                                 <h:outputLabel for="txtDocumentoR" value="Documento/Pasaporte" rendered="#{!representanteControladorUDI.esCedula}"/>
                                 <b:inputText id="txtDocumentoR" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControladorUDI.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControladorUDI.representante.documento}"/>

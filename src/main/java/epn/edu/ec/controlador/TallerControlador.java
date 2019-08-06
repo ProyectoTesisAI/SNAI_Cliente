@@ -148,14 +148,10 @@ public class TallerControlador implements Serializable {
 
         if ("UZDI".equals(tipoCentro)) {
             esUzdi = true;
-            udi = new UDI();
-            cai = new CAI();
             listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
 
         } else if ("CAI".equals(tipoCentro)) {
             esUzdi = false;
-            udi = new UDI();
-            cai = new CAI();
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
     }
@@ -196,6 +192,13 @@ public class TallerControlador implements Serializable {
 
     public Integer getNumeroParticipantes() {
 
+        if(tipoCentro.equals("UZDI")){
+            cai=new CAI();
+        }
+        else if(tipoCentro.equals("CAI")){
+            udi=new UDI();
+        }
+        
         if (udi.getUdi() != null) {
 
             for (UDI u : listaUdi) {
@@ -205,6 +208,8 @@ public class TallerControlador implements Serializable {
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(udi);
+            udi=new UDI();
+            
         } else if (cai.getCai() != null) {
             for (CAI c : listaCai) {
                 if (c.getCai().equals(cai.getCai())) {
@@ -213,6 +218,10 @@ public class TallerControlador implements Serializable {
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
+            cai=new CAI();
+        }
+        else{
+            numeroParticipantes=0;
         }
         return numeroParticipantes;
     }
