@@ -219,4 +219,40 @@ public class InformacionJudicialControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
         }
     }
+    
+    public void guardarEdicionInformacionJudicial() {
+        
+        if(amonestacionVerbal==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
+        }
+        if(apoyoSocioFamiliar==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
+        }
+        if(imposicionReglasConducta==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
+        }
+        if(libertadAsistida==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
+        }
+        if(servicioComunidad==true){
+            numeroMedidasGuardar++;
+            this.informacionJudicial.setServicioComunidad(servicioComunidad);
+        }
+        this.informacionJudicial.setNumeroMedidas(numeroMedidasGuardar);
+        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
+        if (informacionJudicialAux!= null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+        }
+    }
 }

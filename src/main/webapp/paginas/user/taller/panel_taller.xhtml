@@ -42,7 +42,9 @@
                                     </p:column>
 
                                     <p:column filterMatchMode="contains" filterBy="#{tp.fecha}" headerText="Fecha">
-                                        <b:dateTimePicker show-date="true" show-icon="false" show-time="false" disabled="true" icon="false" value="#{tp.fecha}"/>
+                                        <h:outputText value="#{tp.fecha}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
                                     </p:column>
                                     
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" headerText="Elaborado">

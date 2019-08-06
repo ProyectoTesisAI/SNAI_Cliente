@@ -318,6 +318,26 @@ public class MedidaSocioEducativaControlador implements Serializable{
         }
     }
     
+    public void guardarEdicionMedidaSocioeducativa1(){
+        /*AMONESTACION VERBAL
+        DONDE NO HAY MESES, DIAS, HORAS
+        */
+        this.medidaSocioeducativa.setTiempoDia(0);
+        this.medidaSocioeducativa.setTiempoHoras(0);
+        this.medidaSocioeducativa.setTiempoMeses(0);
+        this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
+        if (medidaSocioeducativaAux!= null) {
+            amonestacionVerbalGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO AMONESTACIÓN VERBAL", "Información"));
+            
+        } else {
+            amonestacionVerbalGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO AMONESTACIÓN VERBAL", "Error"));
+        }
+    }
+    
     public void guardarMedidaSocioeducativa2(){
         /*IMPOSICION REGLAS CONDUCTA
         DONDE NO HAY HORAS
@@ -332,6 +352,24 @@ public class MedidaSocioEducativaControlador implements Serializable{
             
         } else {
             imposicionReglasConductaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO IMPOSICIÓN DE REGLAS DE CONDUCTA", "Error"));
+        }
+    }
+    
+    public void guardarEdicionMedidaSocioeducativa2(){
+        /*IMPOSICION REGLAS CONDUCTA
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa2.setTiempoHoras(0);
+        this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
+        if (medidaSocioeducativaAux!= null) {
+            imposicionReglasConductaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO IMPOSICIÓN DE REGLAS DE CONDUCTA", "Información"));
+            
+        } else {
+            imposicionReglasConductaGuardado=true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO IMPOSICIÓN DE REGLAS DE CONDUCTA", "Error"));
         }
     }
@@ -354,6 +392,24 @@ public class MedidaSocioEducativaControlador implements Serializable{
         }
     }
     
+    public void guardarEdicionMedidaSocioeducativa3(){
+        /*APOYO PSICO SOCIO FAMILAR
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa3.setTiempoHoras(0);
+        this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
+        if (medidaSocioeducativaAux!= null) {
+            apoyoSocioFamiliarGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO APOYO PSICO-SOCIO FAMILIAR", "Información"));
+            
+        } else {
+            apoyoSocioFamiliarGuardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO APOYO PSICO-SOCIO FAMILIAR", "Error"));
+        }
+    }
+    
     public void guardarMedidaSocioeducativa4(){
         /*SERVICIO COMUNIDAD
         DONDE NO HAY MESES, DIAS
@@ -368,6 +424,24 @@ public class MedidaSocioEducativaControlador implements Serializable{
             
         } else {
             servicioComunidadGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO SERVICIO A LA COMUNIDAD", "Error"));
+        }
+    }
+    
+    public void guardarEdicionMedidaSocioeducativa4(){
+        /*SERVICIO COMUNIDAD
+        DONDE NO HAY MESES, DIAS
+        */
+        this.medidaSocioeducativa4.setTiempoMeses(0);
+        this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
+        if (medidaSocioeducativaAux!= null) {
+            servicioComunidadGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO SERVICIO A LA COMUNIDAD", "Información"));
+            
+        } else {
+            servicioComunidadGuardado=true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO SERVICIO A LA COMUNIDAD", "Error"));
         }
     }
@@ -387,6 +461,25 @@ public class MedidaSocioEducativaControlador implements Serializable{
             
         } else {
             libertadAsistidaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO LIBERTAD ASISTIDA", "Error"));
+        }
+    }
+    
+    public void guardarEdicionMedidaSocioeducativa5(){
+        /*LIBERTAD ASISTIDA
+        DONDE NO HAY HORAS
+        */
+        this.medidaSocioeducativa5.setTiempoDia(0);
+        this.medidaSocioeducativa5.setTiempoMeses(0);
+        this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
+        if (medidaSocioeducativaAux!= null) {
+            libertadAsistidaGuardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO LIBERTAD ASISTIDA", "Información"));
+            
+        } else {
+            libertadAsistidaGuardado=true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO LIBERTAD ASISTIDA", "Error"));
         }
     }

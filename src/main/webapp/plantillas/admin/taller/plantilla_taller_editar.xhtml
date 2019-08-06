@@ -117,23 +117,31 @@
                                                 <p:dataTable var="tp" value="#{tallerEditarControlador.listaItemsTaller}"  reflow="true"  rows="5"
                                                              paginator="false"  >
                                                     <p:column headerText="Duración">
-                                                        <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                        <h:outputText id="txtDuracion" value="#{tp.duracion}"/>  
                                                     </p:column>
 
                                                     <p:column headerText="Actividad">
-                                                        <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                        <h:outputText value="#{tp.actividad}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Objetivo Específico">
-                                                        <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                        <h:outputText value="#{tp.objetivoEspecifico}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Materiales">
-                                                        <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                        <h:outputText value="#{tp.materiales}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Responsable">
-                                                        <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                        <h:outputText value="#{tp.responsable}"/>
+                                                    </p:column>
+                                                    
+                                                    <p:column>
+                                                        <b:commandButton value="Editar"/>
+                                                    </p:column>
+                                                    
+                                                    <p:column>
+                                                        <b:commandButton value="Quitar"/>
                                                     </p:column>
 
                                                 </p:dataTable>

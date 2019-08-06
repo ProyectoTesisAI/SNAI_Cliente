@@ -154,4 +154,19 @@ public class InformacionInfraccionControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN INFRACCIÓN", "Error"));
         }
     }
+    
+    public void guardarEdicionInformacionInfraccion() {
+
+        this.informacionInfraccion.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+
+        InformacionInfraccion informacionInfraccionAux = servicio.guardarInformacionInfraccion(informacionInfraccion);
+        if (informacionInfraccionAux!= null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN INFRACCIÓN", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN INFRACCIÓN", "Error"));
+        }
+    }
 }

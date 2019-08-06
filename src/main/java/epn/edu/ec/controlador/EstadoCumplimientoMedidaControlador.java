@@ -394,4 +394,41 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
         }
     }
 
+    public void guardarEdicionEstadoCumplimientoMedida() {
+
+        for (UDI u : listaUdi) {
+            if (u.getUdi().equals(udi.getUdi())) {
+                udi = u;
+                break;
+            }
+        }
+        for (CAI c : listaCai) {
+            if (c.getCai().equals(cai.getCai())) {
+                cai = c;
+                break;
+            }
+        }
+        if (udi.getIdUdi() != null) {
+            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(udi);
+        } else {
+            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+        }
+        if (cai.getIdCai() != null) {
+            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(cai);
+        } else {
+            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
+        }
+        this.estadoCumplimientoMedida.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+        this.estadoCumplimientoMedida.setSituacionActual(estado);
+
+        EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.guardarEstadoCumplimientoMedida(estadoCumplimientoMedida);
+        if (estadoCumplimientoMedidaAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Error"));
+        }
+    }
 }

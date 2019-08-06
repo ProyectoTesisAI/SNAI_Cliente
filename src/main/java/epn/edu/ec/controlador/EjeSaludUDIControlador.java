@@ -242,6 +242,37 @@ public class EjeSaludUDIControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
         }
     }
+    
+    public void guardarEdicionEjeSaludUDI() {
+
+        if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            this.ejeSalud.setTipoDiscapacidad("NINGUNA");
+            this.ejeSalud.setPorcentajeDiscapacidad(0);
+        }
+        
+        if(!consumeSustancias){
+            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setRecibeTratamiento(false);
+        }
+        
+        if(!esMujer){
+            this.ejeSalud.setTiempoGestacionMes(null);
+            this.ejeSalud.setEmbarazo(false);
+        }
+        
+        
+        this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
+
+        EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
+        if (ejeSaludUDIAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
+        }
+    }
 
     public void limpiarMensaje(AjaxBehaviorEvent evento) {
         String numero = ejeSalud.getNumeroHistoriaClinica();
