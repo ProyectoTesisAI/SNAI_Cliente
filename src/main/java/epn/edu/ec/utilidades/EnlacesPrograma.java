@@ -59,15 +59,15 @@ public class EnlacesPrograma {
     public String PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_editar_udi.com";
     public String PATH_PANEL_EDITAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_editar_udi.com";
     
-    public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/user/cai/coordinadorCai/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/user/cai/psicologo/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/user/cai/trabajadorSocial/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR = "/paginas/user/cai/inspectorEducador/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_JURIDICO = "/paginas/user/cai/juridico/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/user/cai/coordinadorCai/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/user/cai/psicologo/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/user/cai/trabajadorSocial/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR = "/paginas/user/cai/inspectorEducador/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_JURIDICO = "/paginas/user/cai/juridico/panel_crear_cai.com";
     public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/admin/cai/panel_crear_cai.com";
 
     
-    public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/crear/panel_crear_cai.com";
+//    public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/crear/panel_crear_cai.com";
     public String PATH_PANEL_EDITAR_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/editar/panel_crear_cai.com";
     
     
