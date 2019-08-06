@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formEjeccionMedida">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
+                <b:panel look="primary">
+                    <f:facet name="heading">
+                        <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
+                                 paginator="true" widgetVar="ejecucionMedidaTable">
+                        <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción" width="110">
+                            <h:outputText value="#{te.idDetalleInfraccionCAI.numeroCausa}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.idCai.cai}" headerText="CAI">
+                            <h:outputText value="#{te.idCai.cai}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.medidaCautelar}" headerText="Medida Inpuesta">
+                            <h:outputText value="#{te.medidaCautelar}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.tiempoSentenDias}" headerText="Tiempo sentencia (días)" >
+                            <h:outputText value="#{te.tiempoSentenDias}" />
+                        </p:column>
+
+                        <p:column headerText="Editar Infracción"  width="150"> 
+                            <b:commandButton value="Editar Infracción" class="btn btn-success" update="@form:modalMedida" actionListener="#{ejecucionMedidaControlador.obtenerEjecucionMedidaSeleccionada(te)}" oncomplete="$('.formEjeccionMedida').modal('show')" />
+                        </p:column>
+                        <p:column headerText="Acción" width="190">
+                            <b:commandButton value="Editar Medida" class="btn btn-primary" action="#{ejecucionMedidaControlador.editarInformacion(te)}">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    
+                    <b:modal title="Agregar Medida" style-class="formEjeccionMedida"
+                             id="modalMedida"
+                             closable="false"
+                             closeOnEscape="true"
+                             >
+                        <b:row>
+                            <b:column span="10" offset="1" >
+                                <h3>Centro de Adolescentes Infractores</h3>
+                            </b:column>
+                            <b:column span="9" offset="1">
+                                <h:outputLabel for="txtCAI" value="CAI"/>
+                                <b:selectOneMenu  id="txtCAI" value="#{ejecucionMedidaControlador.cai.cai}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                        <br/>
+
+                        <b:row>
+
+                            <b:column span="10" offset="1" >
+                                <h3>Fechas correspondientes a la Medida</h3>
+                            </b:column>
+
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtFechaIngreso" value="Fecha de Ingreso"/>
+                                <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
+                                <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                            </b:column>
+                        </b:row>    
+                        <b:row style="padding-top: 13px;">    
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
+                                <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtAlertaPreventiva" value="Alerta Internamiento Preventivo"/>
+                                <b:dateTimePicker disabled="true" id="txtAlertaPreventiva" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.alertaSalidaIntermediaPreventiva}"/>
+                            </b:column>
+                        </b:row>
+                        <br/>
+
+                        <b:row>
+                            <b:column span="10" offset="1">
+                                <h3>Medida Socioeducativa o Cautelar</h3>
+                            </b:column>
+
+                            <b:column span="9" offset="1">
+                                <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
+                                <b:selectOneMenu id="txtTipoMedida" process="@this" update="tipoMedida" value="#{ejecucionMedidaControlador.tipoMedida}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
+                                    <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
+                                </b:selectOneMenu>
+                            </b:column>                   
+
+                        </b:row>
+
+                        <h:panelGroup id="tipoMedida">
+                            <b:row rendered="#{ejecucionMedidaControlador.esSocioeducativa}" >
+                                <b:column span="9" offset="1">
+                                    <h:outputLabel for="txtMedidaSocioeducativa"  value="Medida Socioeducativa Privativa de Libertidad"/>
+                                    <b:selectOneMenu id="txtMedidaSocioeducativa" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
+                                        <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
+                                        <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
+                                        <f:selectItem itemLabel="Régimen cerrado (Art.381 CNA)"  itemValue="Régimen cerrado (Art.381 CNA)" />
+                                        <f:selectItem itemLabel="Régimen semiabierto (Art.382 CNA)"  itemValue="Régimen semiabierto (Art.382 CNA)" />
+                                        <f:selectItem itemLabel="Régimen  abierto (Art.383 CNA)"  itemValue="Régimen  abierto (Art.383 CNA)" />
+                                        <f:selectItem itemLabel="Otros"  itemValue="Otros" />
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </b:row>
+                            <b:row  rendered="#{!ejecucionMedidaControlador.esSocioeducativa}">
+                                <b:column span="9" offset="1">
+                                    <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
+                                    <b:selectOneMenu id="txtMedidaCautelar" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
+                                        <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
+                                        <f:selectItem itemLabel="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"  itemValue="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"/>
+                                        <f:selectItem itemLabel="4. La prohibición de ausentarse del país o de la localidad que señale el Juez"  itemValue="4. La prohibición de ausentarse del país o de la localidad que señale el Juez"/>
+                                        <f:selectItem itemLabel="5. La prohibición de concurrir a los lugares o reuniones que determine el Juez"  itemValue="5. La prohibición de concurrir a los lugares o reuniones que determine el Juez"/>
+                                        <f:selectItem itemLabel="6. La prohibición de comunicarse con determinadas personas que el Juez señale, siempre que ello no afecte su derecho al medio familiar y a una adecuada defensa"  itemValue="6. La prohibición de comunicarse con determinadas personas que el Juez señale, siempre que ello no afecte su derecho al medio familiar y a una adecuada defensa"/>
+                                        <f:selectItem itemLabel="7. La privación de libertad, en los casos excepcionales que se señala la ley"  itemValue="7. La privación de libertad, en los casos excepcionales que se señala la ley"/>
+                                        <f:selectItem itemLabel="Art. 326 (a) Infracción Flagrante" itemValue="Art. 326 (a) Infracción Flagrante"/>
+                                        <f:selectItem itemLabel="Art. 326 (b) Cuando se ha fugado de un CAI" itemValue="Art. 326 (b) Cuando se ha fugado de un CAI"/>
+                                        <f:selectItem itemLabel="Art. 328.- Detención para investigación" itemValue="Art. 328.- Detención para investigación"/>
+                                        <f:selectItem itemLabel="Art. 329.- Detención para asegurar la comparecencia" itemValue="Art. 329.- Detención para asegurar la comparecencia"/>
+                                        <f:selectItem itemLabel="Art. 330.- Internamiento Preventivo" itemValue="Art. 330.- Internamiento Preventivo"/>
+                                        <f:selectItem itemLabel="8. Internamiento Institucional" itemValue="8. Internamiento Institucional"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </b:row>
+                        </h:panelGroup>
+
+                        <br/>
+
+                        <b:row>
+                            <b:column span="10" offset="1">
+                                <h3>Sentencia</h3>
+                            </b:column>
+
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoAnios" value="Años"/>
+                                <b:inputText id="txtTiempoAnios" placeholder="Tiempo" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtTiempoMeses" value="Meses"/>
+                                <b:inputText id="txtTiempoMeses" placeholder="Meses" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoDias" value="Días"/>
+                                <b:inputText id="txtTiempoDias" placeholder="Días" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}"/>
+                            </b:column>
+                        </b:row>
+
+                        <b:row>
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoSentenciaDias" value="Tiempo de Sentencia en Días"/>
+                                <b:inputText disabled="true" id="txtTiempoSentenciaDias" placeholder="Tiempo de Sentencia en Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoSentenDias}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtTiempoPrivacionLibertadDias" value="Tiempo de Privacion de Libertad(Días)"/>
+                                <b:inputText disabled="true" id="txtTiempoPrivacionLibertadDias" placeholder="Tiempo de Privacion de Libertad(Días)" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoPrivacionLibertad}"/>
+                            </b:column>
+                        </b:row>
+
+                        <b:row>
+                            <b:column span="10" offset="1">
+                                <h:outputLabel for="txtObervacionesProceso" value="Observaciones de proceso judicial"/>
+                                <b:inputTextarea id="txtObervacionesProceso" placeholder="Observaciones de proceso judicial" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.observacionesProcesoJudicial}"/>
+                            </b:column>
+                        </b:row>
+
+
+                        <b:row>
+                            <b:column span="4" offset="1">
+                                <b:button class="btn-block" value="Cancelar" dismiss="modal" onclick="return false;"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <b:button class="btn btn-primary btn-block" value="Guardar" dismiss="modal" 
+                                          onclick="setBtnEjecucionMedida()"/>
+
+                                <b:remoteCommand name="setBtnEjecucionMedida" id="remoteCommand2"
+                                                 actionListener="#{ejecucionMedidaControlador.guardarEjecucionMedida()}"
+                                                 update="@form" />
+                            </b:column>
+                        </b:row>
+
+                    </b:modal>
+                    <br/>
+                    <br/>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

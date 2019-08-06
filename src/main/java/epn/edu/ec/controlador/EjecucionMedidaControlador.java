@@ -49,7 +49,8 @@ public class EjecucionMedidaControlador implements Serializable {
         servicio = new EjecucionMedidaServicio();
         servicioCAI = new CaiServicio();
         servicioDI = new DetalleInfraccionCAIServicio();
-
+        cai= new CAI();
+        
         listaCAI = new ArrayList<>();
         listaCAI = servicioCAI.listaCai();
 
@@ -195,8 +196,32 @@ public class EjecucionMedidaControlador implements Serializable {
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************
      */
+    
+    public void obtenerEjecucionMedidaSeleccionada(EjecucionMedidaCAI medidaSeleccionada){
+         cai=medidaSeleccionada.getIdCai();
+         
+        if("MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD".equals(medidaSeleccionada.getTipoMedida())){
+            esSocioeducativa=true;
+            tipoMedida= "MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD";
+            
+            
+        }else if("MEDIDA CAUTELAR".equals(medidaSeleccionada.getTipoMedida())){
+            esSocioeducativa=false;
+            tipoMedida="MEDIDA CAUTELAR";
+        }
+        
+        ejecucionMedidaCAI=medidaSeleccionada;
+    }
+    
     public void guardarEjecucionMedida() {
 
+        for(CAI c: listaCAI){
+            if(c.getCai().equals(cai.getCai())){
+                cai=c;
+            }
+        }
+        this.ejecucionMedidaCAI.setIdCai(cai);
+        
         this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
 
         EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
@@ -218,6 +243,19 @@ public class EjecucionMedidaControlador implements Serializable {
     public String agregarInformacion(EjecucionMedidaCAI ejecucion){
         
         String redireccionInformacionAdicionalMedida=permisosUsuario.redireccionInformacionAdicionalMedida();
+        
+        if(redireccionInformacionAdicionalMedida!=null){
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ejecucion_medida_cai", ejecucion);
+            return redireccionInformacionAdicionalMedida;
+        }else{
+            return null;
+        } 
+    }
+    
+    public String editarInformacion(EjecucionMedidaCAI ejecucion){
+        
+        String redireccionInformacionAdicionalMedida=permisosUsuario.redireccionEditarInformacionAdicionalMedida();
         
         if(redireccionInformacionAdicionalMedida!=null){
 

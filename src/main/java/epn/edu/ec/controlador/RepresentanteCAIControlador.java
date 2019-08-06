@@ -157,6 +157,22 @@ public class RepresentanteCAIControlador implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO REPRESENTANTE", "Error"));
         }
     }
+    
+    public void editarRepresentante(){
+        
+        this.representante.setNacionalidad(tipoDocumento);
+        this.representante.setIdAdolescenteInfracto(adolescenteInfractorCAI.getIdAdolescenteInfractor());
+
+        Representante representanteAux = servicio.guardarRepresentante(representante);
+        if (representanteAux != null) {
+            guardado=false;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO REPRESENTANTE", "Información"));
+            
+        } else {
+            guardado=true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO REPRESENTANTE", "Error"));
+        }
+    }
 
     public void limpiarMensajeCedula(AjaxBehaviorEvent evento) {
         String cedula = representante.getCedula();

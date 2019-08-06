@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formDetalleInfraccion">
+                <b:panel look="primary" content-disabled="#{not empty ejecucionMedidaControlador.detalleInfraccionCAI}">
+                    <f:facet name="heading">
+                        <h:outputText value="DETALLE DE LA INFRACCIÓN" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
+                            <b:selectOneMenu id="txtTipoPenal" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.tipoPenal}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
+                            <b:selectOneMenu id="txtProvinciaDetencion" update="txtCantonDetencion" process="@this" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.provinciaInfraccion}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
+                                <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
+                                <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
+                                <f:selectItem itemLabel="CARCHI"  itemValue="CARCHI" />
+                                <f:selectItem itemLabel="CHIMBORAZO"  itemValue="CHIMBORAZO" />
+                                <f:selectItem itemLabel="COTOPAXI"  itemValue="COTOPAXI" />
+                                <f:selectItem itemLabel="EL_ORO"  itemValue="EL_ORO" />
+                                <f:selectItem itemLabel="ESMERALDAS"  itemValue="ESMERALDAS" />
+                                <f:selectItem itemLabel="GALAPAGOS"  itemValue="GALAPAGOS" />
+                                <f:selectItem itemLabel="GUAYAS"  itemValue="GUAYAS" />
+                                <f:selectItem itemLabel="IMBABURA"  itemValue="IMBABURA" />
+                                <f:selectItem itemLabel="LOJA"  itemValue="LOJA" />
+                                <f:selectItem itemLabel="LOS_RIOS"  itemValue="LOS_RIOS" />
+                                <f:selectItem itemLabel="MANABI"  itemValue="MANABI" />
+                                <f:selectItem itemLabel="MORONA_SANTIAGO"  itemValue="MORONA_SANTIAGO" />
+                                <f:selectItem itemLabel="NAPO"  itemValue="NAPO" />
+                                <f:selectItem itemLabel="ORELLANA"  itemValue="ORELLANA" />
+                                <f:selectItem itemLabel="PASTAZA"  itemValue="PASTAZA" />
+                                <f:selectItem itemLabel="PICHINCHA"  itemValue="PICHINCHA" />
+                                <f:selectItem itemLabel="SANTA_ELENA"  itemValue="SANTA_ELENA" />
+                                <f:selectItem itemLabel="SANTO_DOMINGO_DE_LOS_TSÁCHILAS"  itemValue="SANTO_DOMINGO_DE_LOS_TSÁCHILAS" />
+                                <f:selectItem itemLabel="SUCUMBIOS"  itemValue="SUCUMBIOS" />
+                                <f:selectItem itemLabel="TUNGURAHUA"  itemValue="TUNGURAHUA" />
+                                <f:selectItem itemLabel="ZAMORA_CHINCHIPE"  itemValue="ZAMORA_CHINCHIPE" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset='2'>
+                            <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
+                            <b:selectOneMenu id="txtCantonDetencion" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.cantonInfraccion}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItems value="#{ejecucionMedidaControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
+                            <b:selectOneMenu id="txtUnidadJudicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.unidadJudicial}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
+                                <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
+                            </b:selectOneMenu>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
+                            <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreUnidadJudicial}"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
+                            <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
+                            <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+

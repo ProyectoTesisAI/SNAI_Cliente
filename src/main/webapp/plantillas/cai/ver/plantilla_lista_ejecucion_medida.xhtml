@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+
+            <b:form id="formEjeccionMedida">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
+                <b:panel look="primary">
+                    <f:facet name="heading">
+                        <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
+                    </f:facet>
+
+                    <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
+                                 paginator="true" widgetVar="ejecucionMedidaTable">
+                        <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción" width="110">
+                            <h:outputText value="#{te.idDetalleInfraccionCAI.numeroCausa}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.idCai.cai}" headerText="CAI">
+                            <h:outputText value="#{te.idCai.cai}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.medidaCautelar}" headerText="Medida Inpuesta">
+                            <h:outputText value="#{te.medidaCautelar}" />
+                        </p:column>
+
+                        <p:column filterMatchMode="contains" filterBy="#{te.tiempoSentenDias}" headerText="Tiempo sentencia (días)" >
+                            <h:outputText value="#{te.tiempoSentenDias}" />
+                        </p:column>
+
+                        <p:column headerText="Acción" width="190">
+                            <b:commandButton value="Ver Ejecución Medida" class="btn btn-primary" action="#{ejecucionMedidaControlador.agregarInformacion(te)}">
+                                <f:ajax execute="@form" />
+                            </b:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </b:panel>
+            </b:form>
+        </ui:composition>
+
+    </h:body>
+</html>
+
