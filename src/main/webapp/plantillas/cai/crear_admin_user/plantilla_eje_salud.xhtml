@@ -15,7 +15,7 @@
                 
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                 
-                <b:panel look="primary" content-disabled="#{ejeSaludControladorCAICAI.guardado}">
+                <b:panel look="primary" content-disabled="#{ejeSaludControladorCAI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJE SALUD" style="color: white; font-weight: bold"  />
                     </f:facet>
@@ -49,10 +49,7 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtNumeroHistoriaClinica" value="N° Historia Clínica"/>
-                                <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorCAI.ejeSalud.numeroHistoriaClinica}">
-                                    <!--<f:ajax event="blur" listener="{ejeSaludControladorCAI.limpiarMensaje}" render="txtNumeroHistoriaClinica mensaje-historia" />-->
-                                    <!--<f:ajax event="keyup" listener="{ejeSaludControladorCAI.validarSoloNumero}" render="mensaje-historia" />-->
-                                </b:inputText>
+                                <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorCAI.ejeSalud.numeroHistoriaClinica}"/>
                                 <h:outputText style="color: red; font-size: 14px;" id="mensaje-historia" class="mensaje-error" value="#{ejeSaludControladorCAI.mensaje}"/>
                             </b:column>
                             <b:column span="4" offset="2">

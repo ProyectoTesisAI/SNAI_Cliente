@@ -7,7 +7,6 @@ import epn.edu.ec.modelo.DetalleInfraccionCAI;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
 import epn.edu.ec.servicios.DetalleInfraccionCAIServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;

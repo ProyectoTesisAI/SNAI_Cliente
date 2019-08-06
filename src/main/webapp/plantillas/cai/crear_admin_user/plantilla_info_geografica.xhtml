@@ -12,14 +12,14 @@
         <ui:composition>
 
             <b:form id="formInfoGeografica">
-                
+
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                
+
                 <b:panel look="primary" content-disabled="#{identificacionGeograficaControladorCAI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="IDENTIFICACIÓN GEOGRÁFICA" style="color: white; font-weight: bold"  />
                     </f:facet>
-                    
+
                     <b:row>
                         <b:column span="10" offset="1">
                             <h3>LUGAR DE NACIMIENTO</h3>
@@ -75,7 +75,7 @@
                             </b:column>
                         </b:row>
                     </h:panelGroup>
-                    
+
                     <h:panelGroup  rendered="#{!identificacionGeograficaControladorCAI.esEcuatoriana}">
 
                         <b:row>
@@ -98,7 +98,7 @@
                     </h:panelGroup>
                     <br/>
                     <br/>
-                    
+
                     <b:row>
                         <b:column span="10" offset="1">
                             <h3>LUGAR DE RESIDENCIA EN ECUADOR</h3>
@@ -153,8 +153,8 @@
                             </b:column>
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTelefono" value="Teléfono"/>
-                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.telefono}">
-                                    <f:ajax event="blur" listener="#{identificacionGeograficaControladorCAI.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
+                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" mask="{regex:'[0-9\u0600-\u06FF]*'}" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.telefono}">
+                                    <f:ajax event="blur" listener="#{identificacionGeograficaControladorCAI.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" /> 
                                     <f:ajax event="keyup" listener="#{identificacionGeograficaControladorCAI.validarNumeroContacto}" render="mensaje-telefono" />
                                 </b:inputText>
                                 <h:outputText style="color: red; font-size: 14px;" id="mensaje-telefono" class="mensaje-error" value="#{identificacionGeograficaControladorCAI.mensaje}"/>
@@ -174,8 +174,8 @@
                         </b:row>
                     </h:panelGroup>
                     <br/>
-                    
-                    
+
+
                     <b:row>
                         <b:column span="3" offset="8">
                             <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{identificacionGeograficaControladorCAI.guardarIdentificacionGeografica()}" update="@form"/>
