@@ -55,6 +55,8 @@ public class TallerControlador implements Serializable {
     RegistroAsistencia registroAsistencia;
     UDI udi;
     CAI cai;
+    UDI udiAux;
+    CAI caiAux;
 
     List<UDI> listaUdi;
     List<CAI> listaCai;
@@ -97,6 +99,8 @@ public class TallerControlador implements Serializable {
         registroAsistencia = new RegistroAsistencia();
         udi = new UDI();
         cai = new CAI();
+        udiAux = new UDI();
+        caiAux = new CAI();
         listaUdi = new ArrayList<>();
         listaCai = new ArrayList<>();
 
@@ -111,18 +115,23 @@ public class TallerControlador implements Serializable {
             tipoCentro = "CAI";
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
+        
         if ("ADMINISTRADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "SUBDIRECTOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
             esTecnico=false;
         } else {
             esTecnico=true;
+        
             if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
                 tipoCentro = "UZDI";
                 listaUdi = servicioUdi.listaUdi();
                 udi=usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
+                udiAux=udi;
+            
             } else if("EQUIPO TECNICO PSICOLOGO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"INSPECTOR EDUCADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())){
                 tipoCentro = "CAI";
                 listaCai = servicioCai.listaCai();
                 cai=usuarioLogin.getIdRolUsuarioCentro().getIdCai();
+                caiAux=cai;
             }
         }
     }
@@ -204,6 +213,7 @@ public class TallerControlador implements Serializable {
             for (UDI u : listaUdi) {
                 if (u.getUdi().equals(udi.getUdi())) {
                     udi = u;
+                    udiAux=u;
                     break;
                 }
             }
@@ -214,6 +224,7 @@ public class TallerControlador implements Serializable {
             for (CAI c : listaCai) {
                 if (c.getCai().equals(cai.getCai())) {
                     cai = c;
+                    caiAux=c;
                     break;
                 }
             }
@@ -373,27 +384,27 @@ public class TallerControlador implements Serializable {
 
     private void asignarUdiCai() {
 
-        for (UDI u : listaUdi) {
+//        for (UDI u : listaUdi) {
+//
+//            if (u.getUdi().equals(udiAux.getUdi())) {
+//                udiAux = u;
+//                break;
+//            }
+//        }
+//        for (CAI c : listaCai) {
+//            if (c.getCai().equals(caiAux.getCai())) {
+//                caiAux = c;
+//                break;
+//            }
+//        }
 
-            if (u.getUdi().equals(udi.getUdi())) {
-                udi = u;
-                break;
-            }
-        }
-        for (CAI c : listaCai) {
-            if (c.getCai().equals(cai.getCai())) {
-                cai = c;
-                break;
-            }
-        }
+        if (udiAux.getIdUdi() != null) {
 
-        if (udi.getIdUdi() != null) {
-
-            tallerCrear.setIdUdi(udi);
+            tallerCrear.setIdUdi(udiAux);
             tallerCrear.setIdCai(null);
 
-        } else if (cai.getIdCai() != null) {
-            tallerCrear.setIdCai(cai);
+        } else if (caiAux.getIdCai() != null) {
+            tallerCrear.setIdCai(caiAux);
             tallerCrear.setIdUdi(null);
         }
     }
@@ -503,7 +514,8 @@ public class TallerControlador implements Serializable {
     public String guardarRegistroTaller() {
 
         try {
-            if (udi.getUdi() != null || cai.getCai() != null) {
+           
+            if (udiAux.getUdi() != null || caiAux.getCai() != null) {
 
                 if (numeroParticipantes > 0) {
                     Taller tallerAux = guardarTaller();
