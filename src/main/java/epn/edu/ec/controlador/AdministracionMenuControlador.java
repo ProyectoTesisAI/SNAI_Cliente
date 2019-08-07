@@ -1,12 +1,8 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -223,5 +219,10 @@ public class AdministracionMenuControlador implements Serializable {
         else{
             return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
+    }
+    
+    public String cerrarSesion(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return enlaces.PATH_LOGIN+"?faces-redirect=true";
     }
 }

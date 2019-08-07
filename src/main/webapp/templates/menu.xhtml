@@ -20,8 +20,10 @@
     </h:head>
 
       <h:body style="background: white;">
+        
+        
         <div id="form" >
-            
+            <h:form>  
             <div id="top">
 
                 <ui:insert name="top">
@@ -49,7 +51,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Cerrar Sesión</a></li>
+                                            <li><b:commandLink style-class="some-class"  value="Cerrar Sesión" action="#{administracionMenuControlador.cerrarSesion()}"/></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#">Cambiar Contraseña</a></li>
                                         </ul>
@@ -64,7 +66,7 @@
             <div id="left">
                 <ui:insert name="left">
                     <div id="menu_lateral">
-                    <h:form>
+                   
                     <p:panelMenu style="width:270px">
                         <p:submenu expanded="false" label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
                             <p:menuitem value="• &nbsp; Crear Registro"  rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
@@ -96,11 +98,11 @@
                         <p:separator />
                         
                     </p:panelMenu>
-                    </h:form>
+                   
                     </div>
                 </ui:insert>
             </div>
-            
+            </h:form>
             <div id="content">
                 <ui:insert name="content" >
 

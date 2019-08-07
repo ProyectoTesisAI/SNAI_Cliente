@@ -17,9 +17,14 @@ body{
 
 /* Global */
 .container{
-  width:80%;
-  margin:auto;
-  overflow:hidden;
+    width:80%;
+    margin:auto;
+    overflow:hidden;
+}
+
+.container .centrado{
+    display: flex;
+    justify-content: center;
 }
 
 ul{
@@ -109,7 +114,7 @@ header a:hover{
 #boxes .box{
   float:left;
   text-align: center;
-  width:45%;
+  width:50%;
   padding:10px;
 }
 

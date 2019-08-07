@@ -18,6 +18,8 @@ public class EnlacesPrograma {
 
     public String URL_BASE = "/SistemaSNAI_Cliente";
 
+    public String PATH_LOGIN="/login.com";
+    
     public String PATH_TALLER_CREAR = "/paginas/user/taller/taller.com";
     public String PATH_INFORME_CREAR = "/paginas/user/informe/informe.com";
 
