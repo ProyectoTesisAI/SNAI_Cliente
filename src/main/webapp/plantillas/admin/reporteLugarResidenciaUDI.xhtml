@@ -9,6 +9,47 @@
     <h:body>
         <ui:composition>
             <b:form id="form">
+                <b:row>                            
+                    <b:column span="3" offset="8">
+                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarLugarResidenciaUDI()}">
+                            <f:ajax execute="form" render="tablaReporteUDI9"/>
+                        </h:commandButton>
+                    </b:column>
+                </b:row>
+                <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:dataExporter type="xls" target="tablaReporteUDI9" fileName="Edad_Lugar_Residencia_UDI" pageOnly="true"/>
+                </h:commandLink>
+                <br/>
+                <p:dataTable id="tablaReporteUDI9" var="tp" value="#{panelReportesControlador.listaReportes7UDI}" reflow="true" rows="20" paginator="true">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{tp.numero}"/>
+                    </p:column>
+                    <p:column headerText="UZDI" filterMatchMode="contains" filterBy="#{tp.cai_uzdi}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
+                    </p:column>
+                    <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Tipo de delito" filterMatchMode="contains" filterBy="#{tp.tipoDelto}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.tipoDelto}"/>
+                    </p:column>
+                    <p:column headerText="Provincia de residencia" filterMatchMode="contains" filterBy="#{tp.provinciaResidencia}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.provinciaResidencia}"/>
+                    </p:column>
+                    <p:column headerText="Cantón de residencia" filterMatchMode="contains" filterBy="#{tp.cantonResidencia}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.cantonResidencia}"/>
+                    </p:column>
+                    <p:column headerText="Dirección de residencia" filterMatchMode="contains" filterBy="#{tp.direccionResidencia}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.direccionResidencia}"/>
+                    </p:column>
+                </p:dataTable>
+                
+                
                 <b:row>
                     <b:column span="4" offset="1">                                        
                         <h:outputLabel for="txtFechaIngreso" value="Fecha ingreso"/>
