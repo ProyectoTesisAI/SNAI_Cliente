@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
 
     <h:body>
@@ -20,10 +18,15 @@
 
             <ui:define name="content">
 
-                <h1>REPORTE 6 - FECHA DE INGRESO</h1>                    
+                <h1>REPORTE 6- FECHA INGRESO AL CAI</h1>
 
-                <ui:include src="../../../plantillas/admin/reporte/reporteFechaIngresoCAI.xhtml" />
+                <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
 
+                    <b:tab title="CAI">
+                        <ui:include src="../../../plantillas/admin/reporte/reporteFechaIngresoCAI.xhtml" />
+                    </b:tab>
+
+                </b:tabView>
             </ui:define>
         </ui:composition>
     </h:body>

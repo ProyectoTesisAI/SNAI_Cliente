@@ -95,63 +95,6 @@
                                         <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
                                     </p:column>
                                 </p:dataTable>
-                                <!--                                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
-                                                                            <div class="col-md-10 col-md-offset-1">
-                                                                                <div class="form-group">
-                                                                                    <b:dataTable id="tablaReporteNoCAI" value="#{panelReportesControlador.listaReportes6NCAI}" 
-                                                                                                 widgetVar="tableWidgetVar"
-                                                                                                 var="tp"
-                                                                                                 fixed-header="true"
-                                                                                                 scroll-x="true"
-                                                                                                 scroll-size="1000px"
-                                                                                                 responsive="false"
-                                                                                                 searching="false"
-                                                                                                 select="true"
-                                                                                                 paginated="false"
-                                                                                                 selectionMode="multiple"
-                                                                                                 style="margin: 0 auto; width: 100%;"
-                                                                                                 excel="true"
-                                                                                                 >
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Número"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText value="#{tp.numero}"/>  
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="CAI"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Nombres"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Apellidos"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn >
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Estudia"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.estudia}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn >
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Razon por la que no estudia"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                    </b:dataTable>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
                             </b:panel>
                             <b:panel rendered="#{panelReportesControlador.estudia}">
                                 <br/>
@@ -180,63 +123,7 @@
                                         <h:outputText style="text-transform:uppercase" value="#{ts.nivelEducativo}"/>
                                     </p:column>
                                 </p:dataTable>
-                                <!--                                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
-                                                                            <div class="col-md-10 col-md-offset-1">
-                                                                                <div class="form-group">
-                                                                                    <b:dataTable id="tablaReporteSiCAI" value="#{panelReportesControlador.listaReportes6SCAI}" 
-                                                                                                 widgetVar="tableWidgetVar"
-                                                                                                 var="tp"
-                                                                                                 fixed-header="true"
-                                                                                                 scroll-x="true"
-                                                                                                 scroll-size="1000px"
-                                                                                                 responsive="false"
-                                                                                                 searching="false"
-                                                                                                 select="true"
-                                                                                                 paginated="false"
-                                                                                                 selectionMode="multiple"
-                                                                                                 style="margin: 0 auto; width: 100%;"
-                                                                                                 excel="true"
-                                                                                                 >
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Número"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText value="#{tp.numero}"/>  
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="CAI"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.cai_uzdi}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Nombres"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Apellidos"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn >
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Estudia"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.estudia}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                        <b:dataTableColumn >
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Nivel educativo"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText style="text-transform:uppercase" value="#{tp.nivelEducativo}"/>
-                                                                                        </b:dataTableColumn>
-                                                                                    </b:dataTable>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
+
                             </b:panel>
                         </h:panelGroup>
                     </b:row>
