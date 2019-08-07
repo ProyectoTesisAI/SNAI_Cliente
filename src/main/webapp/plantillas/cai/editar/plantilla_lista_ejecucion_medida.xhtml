@@ -40,10 +40,10 @@
                         </p:column>
 
                         <p:column headerText="Editar Infracción"  width="150"> 
-                            <b:commandButton value="Editar Infracción" class="btn btn-success" update="@form:modalMedida" actionListener="#{ejecucionMedidaControlador.obtenerEjecucionMedidaSeleccionada(te)}" oncomplete="$('.formEjeccionMedida').modal('show')" />
+                            <b:commandButton value="Editar Medida" class="btn btn-success" update="@form:modalMedida" actionListener="#{ejecucionMedidaControlador.obtenerEjecucionMedidaSeleccionada(te)}" oncomplete="$('.formEjeccionMedida').modal('show')" />
                         </p:column>
                         <p:column headerText="Acción" width="190">
-                            <b:commandButton value="Editar Medida" class="btn btn-primary" action="#{ejecucionMedidaControlador.editarInformacion(te)}">
+                            <b:commandButton value="Editar Ejecución" class="btn btn-primary" action="#{ejecucionMedidaControlador.editarInformacion(te)}">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>

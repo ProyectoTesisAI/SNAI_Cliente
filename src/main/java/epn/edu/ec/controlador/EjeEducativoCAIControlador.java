@@ -96,9 +96,21 @@ public class EjeEducativoCAIControlador implements Serializable{
         this.estudia = estudia;
         if(estudia==true){
             ejeEducativo.setEstudia(true);
+            this.ejeEducativo.setRazonNoEstudia(null);
+            this.ejeEducativo.setUltimoNivelEducativoAprobado(null);
+            this.ejeEducativo.setNombreUnidadEducativaUltimaAprobado(null);
+            this.ejeEducativo.setSostenimientoUltimoNivelAprobado(null);
+            this.ejeEducativo.setAniosRezagoEscolar(null);
         }
         else if(estudia==false){
             ejeEducativo.setEstudia(false);
+            this.ejeEducativo.setCoordinacionZonalEducacionDomicilioEstudiante(null);
+            this.ejeEducativo.setDistritoEducativoDomicilioEstudiante(null);
+            this.ejeEducativo.setSostenimiento(null);
+            this.ejeEducativo.setRegimenEducativo(null);
+            this.ejeEducativo.setNivelEducativoActual(null);
+            this.ejeEducativo.setTipoOferta(null);
+            this.ejeEducativo.setNombreUnidadEducativa(null);
         }
         
     }
@@ -110,7 +122,7 @@ public class EjeEducativoCAIControlador implements Serializable{
         
         this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
         
-        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(ejeEducativo);
+        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(this.ejeEducativo);
         if (ejeEducativoCAIAux != null) {
             guardado=true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE EDUCATIVO", "Información"));
@@ -125,7 +137,7 @@ public class EjeEducativoCAIControlador implements Serializable{
         
         this.ejeEducativo.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
         
-        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(ejeEducativo);
+        EjeEducativo ejeEducativoCAIAux = servicio.guardarEjeEducativo(this.ejeEducativo);
         if (ejeEducativoCAIAux != null) {
             guardado=false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE EDUCATIVO", "Información"));

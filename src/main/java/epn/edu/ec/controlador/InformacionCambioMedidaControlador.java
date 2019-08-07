@@ -172,12 +172,12 @@ public class InformacionCambioMedidaControlador implements Serializable {
 
         if (this.informacionCambioMedida != null) {
             if(this.informacionCambioMedida.getAceptacionJuezCambioMedida()==false){
-                this.informacionCambioMedida.setAlertaCambioMedida(null);
+                this.informacionCambioMedida.setAlertaCambioMedida(null);/*A pesar de esar en null, se guarda por estar en su clase entidad*/
                 this.informacionCambioMedida.setCambioMedidaSocioeducativa(null);
-                this.informacionCambioMedida.setCumplimieno6080TiempoPrivacionLibertad(null);
+                this.informacionCambioMedida.setCumplimieno6080TiempoPrivacionLibertad(null);/*A pesar de esar en null, se guarda por estar en su clase entidad*/
                 this.informacionCambioMedida.setEspecificacionNuevaMedida(null);
             }
-            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(this.informacionCambioMedida);
             if (informacionCambioMedidaAux != null) {
                 guardado = true;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));
@@ -200,7 +200,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
                 this.informacionCambioMedida.setCumplimieno6080TiempoPrivacionLibertad(null);
                 this.informacionCambioMedida.setEspecificacionNuevaMedida(null);
             }
-            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(informacionCambioMedida);
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.guardarInformacionCambioMedidaCAI(this.informacionCambioMedida);
             if (informacionCambioMedidaAux != null) {
                 guardado = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN CAMBIO MEDIDA", "Información"));

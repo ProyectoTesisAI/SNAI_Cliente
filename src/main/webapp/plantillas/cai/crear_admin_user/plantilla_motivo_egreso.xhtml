@@ -12,9 +12,9 @@
         <ui:composition>
 
             <b:form id="formMotivosEgreso">
-                
+
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                
+
                 <b:panel look="primary" content-disabled="#{motivoEgresoCAIControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="MOTIVOS DE EGRESO" style="color: white; font-weight: bold"  />
@@ -46,18 +46,17 @@
                         </b:column>
                     </b:row> 
                     <h:panelGroup id="mostrarOcultarTrasladoCAI">
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtCAITraslado" value="CAI Traslado"/>
-                                <b:selectOneMenu rendered="#{motivoEgresoCAIControlador.guardado}">
-                                    <f:selectItem itemLabel="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado.cai}"/>
-                                </b:selectOneMenu>
-                                <b:selectOneMenu rendered="#{!motivoEgresoCAIControlador.guardado}" id="txtCAITraslado" disabled="txtMotivoSalida!='TRASLADO A OTRO CAI'" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.idCaiTraslado}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItems value="#{motivoEgresoCAIControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
+                        <b:panel rendered="#{motivoEgresoCAIControlador.esTrasladoCAI}">
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtCAITraslado" value="CAI Traslado"/>
+                                    <b:selectOneMenu id="txtCAITraslado" value="#{motivoEgresoCAIControlador.cai.cai}">
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItems value="#{motivoEgresoCAIControlador.listaCAI}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </b:row>
+                        </b:panel>
                     </h:panelGroup>
                     <b:row>
                         <b:column span="3" offset="8">

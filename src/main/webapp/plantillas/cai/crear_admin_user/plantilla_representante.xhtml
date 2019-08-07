@@ -33,7 +33,7 @@
                         <h:panelGroup id="tipoDocumentoRepresentante">
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCedulaR" rendered="#{representanteControladorCAI.esCedula}" value="Cédula"/>
-                                <b:inputText id="txtCedulaR" placeholder="Cédula" maxlength="10" rendered="#{representanteControladorCAI.esCedula}" value="#{representanteControladorCAI.representante.cedula}">
+                                <b:inputText id="txtCedulaR" placeholder="Cédula" maxlength="10" mask="{regex:'[0-9\u0600-\u06FF]*'}" rendered="#{representanteControladorCAI.esCedula}" value="#{representanteControladorCAI.representante.cedula}">
                                     <f:ajax event="blur" listener="#{representanteControladorCAI.limpiarMensajeCedula}" render="txtCedulaR mensaje-cedulaRepresentante" />
                                     <f:ajax event="keyup" listener="#{representanteControladorCAI.validarCedula}" render="mensaje-cedulaRepresentante" />
                                 </b:inputText>
