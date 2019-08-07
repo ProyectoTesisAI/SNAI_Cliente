@@ -136,8 +136,16 @@ a:link:hover {
 /*defino el tamaño de letra de los inputText*/
 .ui-widget .ui-widget {
     font-size: 14px;
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif, Verdana, "Verdana CE";
 }
 
-.flecha{
-    background-image: url("https://cdn.icon-icons.com/icons2/81/PNG/128/star_favourite_15499.png") !important;
+/*Estilo de los items del selectOneMenu*/
+.ui-selectonemenu-panel .ui-selectonemenu-list-item {
+    width: 750px !important;
+    left: 0px !important;
+}
+
+/*Estilo del label del selectOneMenu*/
+.ui-selectonemenu .ui-selectonemenu-label {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif, Verdana, "Verdana CE";
 }
