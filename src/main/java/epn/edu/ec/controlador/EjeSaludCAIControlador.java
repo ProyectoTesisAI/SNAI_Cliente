@@ -148,6 +148,17 @@ public class EjeSaludCAIControlador implements Serializable{
         this.saludable = saludable;
         if(saludable==true){
             ejeSalud.setSituacionSalud("SALUDABLE");
+            this.ejeSalud.setDiagnosticoEnfermedad(null);
+            this.ejeSalud.setNumeroHistoriaClinica(null);
+            this.ejeSalud.setRecibeTratamiento(null);
+            this.ejeSalud.setTomaMedicacion(null);
+            this.ejeSalud.setConsumeSustancias(null);
+            this.ejeSalud.setTipoSustancia(null);
+            this.ejeSalud.setRecibeTratamientoDrogas(null);
+            this.ejeSalud.setDiscapacidad(null);
+            this.ejeSalud.setTipoDiscapacidad(null);
+            this.ejeSalud.setPorcentajeDiscapacidad(null);
+            this.ejeSalud.setEnfermadadesCatastroficas(null);
         }else if(saludable==false){
             ejeSalud.setSituacionSalud("NO SALUDABLE");
         }
@@ -239,7 +250,7 @@ public class EjeSaludCAIControlador implements Serializable{
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
-        EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(ejeSalud);
+        EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(this.ejeSalud);
         if (ejeSaludCAIAux != null) {
             guardado=false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));

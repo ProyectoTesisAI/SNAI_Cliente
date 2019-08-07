@@ -6,13 +6,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
 
             <b:form>
-                <b:panel look="primary" content-disabled="#{not empty adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar}">
+                <b:panel look="primary" content-disabled="#{!adolescenteInfractorCAIControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="ADOLESCENTE INFRACTOR" style="color: white; font-weight: bold"  />
                     </f:facet>
@@ -45,7 +45,7 @@
                         <h:panelGroup id="tipoDocumento">
                             <b:column span="4" offset="2">                                        
                                 <h:outputLabel for="txtCedula" value="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}"/>
-                                <b:inputText id="txtCedula" placeholder="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.cedula}">
+                                <b:inputText id="txtCedula" placeholder="Cédula" mask="{regex:'[0-9\u0600-\u06FF]*'}" rendered="#{adolescenteInfractorCAIControlador.esCedula}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.cedula}">
                                     <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
                                     <f:ajax event="keyup" listener="#{adolescenteInfractorCAIControlador.validarCedula}" render="mensaje-cedula" />
                                 </b:inputText>

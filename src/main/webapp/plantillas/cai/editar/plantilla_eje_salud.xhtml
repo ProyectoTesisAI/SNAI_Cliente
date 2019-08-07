@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Editar Información</title>
     </h:head>
     <h:body>
         <ui:composition>
@@ -15,7 +15,7 @@
                 
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                 
-                <b:panel look="primary" content-disabled="#{!ejeSaludControladorCAICAI.guardado}">
+                <b:panel look="primary" content-disabled="#{!ejeSaludControladorCAI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJE SALUD" style="color: white; font-weight: bold"  />
                     </f:facet>
