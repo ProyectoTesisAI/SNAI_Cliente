@@ -137,7 +137,204 @@ public class PlantillaControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("TRABAJADOR SOCIAL") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL UZDI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    
+    public void validarCoordinadorCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    public void validarInspectorEducador() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("INSPECTOR EDUCADOR") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    public void validarPsicologoCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    
+    public void validarJuridicoCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    public void validarTrabjadorSocialCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    
+    public void validarAccesoInformacionMedidaCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ||rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
+                        || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    public void validarAccesoCrearEjecucionMedidaCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+    
+    public void validarAccesoVerEjecucionMedidaCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
+                        || rolUsuario.equals("INSPECTOR EDUCADOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI")){
                     
                 }
                 else{
