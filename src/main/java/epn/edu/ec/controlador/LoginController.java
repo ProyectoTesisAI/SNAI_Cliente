@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -41,7 +42,28 @@ public class LoginController implements Serializable{
         this.usuario = usuario;
     }
     
+    
+    public void cifrarUsuario(){
+        String user=usuario.getUsuario();
+        user = DigestUtils.md5Hex(user);
+        System.out.println("USUARIO:"+ user);
+        
+        usuario.setUsuario(user.toUpperCase());
+    }
+    
+    public void cifrarContraseña(){
+        String password=usuario.getContraseña();
+        password=DigestUtils.md5Hex(password);
+        System.out.println("PASSWORD:"+ password);
+
+        usuario.setContraseña(password.toUpperCase());
+    }
+    
     public String loguerUsuario(){
+        
+        //cifrarUsuario();
+        //cifrarContraseña();
+        
         Usuario usuarioLogueado= servicio.loguearUsuario(usuario);
         
         if(usuarioLogueado!=null){
