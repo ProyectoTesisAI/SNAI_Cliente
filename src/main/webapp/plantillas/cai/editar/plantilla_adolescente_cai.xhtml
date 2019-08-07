@@ -46,8 +46,8 @@
                             <b:column span="4" offset="2">                                        
                                 <h:outputLabel for="txtCedula" value="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}"/>
                                 <b:inputText id="txtCedula" placeholder="Cédula" mask="{regex:'[0-9\u0600-\u06FF]*'}" rendered="#{adolescenteInfractorCAIControlador.esCedula}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.cedula}">
-                                    <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
-                                    <f:ajax event="keyup" listener="#{adolescenteInfractorCAIControlador.validarCedula}" render="mensaje-cedula" />
+                                    <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeCedulaEditar}" render="txtCedula mensaje-cedula" />
+                                    <f:ajax event="keyup" listener="#{adolescenteInfractorCAIControlador.validarCedulaEditar}" render="mensaje-cedula" />
                                 </b:inputText>
                                 <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{adolescenteInfractorCAIControlador.mensaje}"/>
 
@@ -84,8 +84,8 @@
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
                             <b:dateTimePicker id="txtFechaNacimiento" placeholder="Fecha" showTime="false" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.fechaNacimiento}">
-                                <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.validarFechaNacimiento}" render="mensaje-edad txtEdad" />
-                                <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeFechaNacimiento}" render="txtFechaNacimiento mensaje-edad" />
+                                <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.validarFechaNacimientoEditar}" render="mensaje-edad txtEdad" />
+                                <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeFechaNacimientoEditar}" render="txtFechaNacimiento mensaje-edad" />
                             </b:dateTimePicker>
                             <h:outputText style="color: red; font-size: 14px;" id="mensaje-edad" class="mensaje-error" value="#{adolescenteInfractorCAIControlador.mensaje1}"/>
                         </b:column>
@@ -135,7 +135,7 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <h:commandButton value="Guardar" class="btn btn-primary btn-block"/>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{adolescenteInfractorCAIControlador.guardarEdicionAdolescenteInfractor()}" update="@form"/>
                         </b:column>
                     </b:row>
 

@@ -139,16 +139,22 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+        this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
         if ("ECUATORIANA".equals(tipoDocumento)) {
             esCedula = true;
-            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad("ECUATORIANA");
+            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setDocumento(null);
         } else if ("EXTRANJERA".equals(tipoDocumento)) {
             esCedula = false;
-            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad("EXTRANJERA");
+            this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setCedula(null);
         }
     }
 
     public boolean isEsCedula() {
+        if ("ECUATORIANA".equals(tipoDocumento)) {
+            esCedula = true;
+        } else if ("EXTRANJERA".equals(tipoDocumento)) {
+            esCedula = false;
+        }
         return esCedula;
     }
 
@@ -174,8 +180,10 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
             
             if ("ECUATORIANA".equals(tipoDocumento)) {
                 this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setDocumento(null);
+                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
             } else if ("EXTRANJERA".equals(tipoDocumento)) {
                 this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setCedula(null);
+                this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
             }
 
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarAdolescenteInfractorUDI(this.adolescenteInfractorUDICrear);
@@ -200,8 +208,10 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
             if ("ECUATORIANA".equals(tipoDocumento)) {
                 this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
+                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
             } else if ("EXTRANJERA".equals(tipoDocumento)) {
                 this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
+                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
             }
             
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);

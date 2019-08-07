@@ -121,10 +121,10 @@ public class InformacionJudicialControlador implements Serializable {
         this.imposicionReglasConducta = imposicionReglasConducta;
         if (imposicionReglasConducta) {
             numeroMedidas++;
-            this.informacionJudicial.setImposicionReglasConducta(apoyoSocioFamiliar);
+            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
         } else if(!imposicionReglasConducta){
             numeroMedidas--;
-            this.informacionJudicial.setImposicionReglasConducta(apoyoSocioFamiliar);
+            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
         }
     }
 
