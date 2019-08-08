@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -85,6 +86,21 @@ public class PanelInformeControlador implements Serializable{
             return enlaces.PATH_INFORME_EDITAR+"?faces-redirect=true";
         } catch (Exception e) {
             return null;
+        }
+    }
+    
+    public void eliminarTaller(Informe informeSeleccionado) {
+        String rolActual = usuario.getIdRolUsuarioCentro().getIdRol().getRol();
+        if ("ADMINISTRADOR".equals(rolActual)) {
+            int statusRespuesta = servicio.eliminarInforme(informeSeleccionado.getIdInforme());
+
+            if (statusRespuesta == 200) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
         }
     }
 }

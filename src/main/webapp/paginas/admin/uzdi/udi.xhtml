@@ -50,7 +50,7 @@
                             </b:commandButton>
                         </p:column>
                         <p:column headerText="Eliminar">
-                            <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorUDIControlador.eliminarAdolescenteInfractor(ai)}">
+                            <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorUDIControlador.eliminarAdolescenteInfractor(ai)}" update="@form">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>

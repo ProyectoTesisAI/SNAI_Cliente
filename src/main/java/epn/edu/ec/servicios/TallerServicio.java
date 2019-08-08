@@ -51,7 +51,17 @@ public class TallerServicio {
         return tallerAux;
 
     }
-        
+    
+    public int eliminarTaller(Integer id) {
+
+        int statusRespuesta = 0;
+        Response response = conexion.conexion(URL_TALLER+"/"+id.toString(), "DELETE", true, null);
+        if (response.getStatus() == 200) {
+            statusRespuesta = 200;
+        }
+        return statusRespuesta;
+    }
+    
     public List<Taller> listaTalleresSinInforme(){
         
         List<Taller> listaActividadesAux=null;
