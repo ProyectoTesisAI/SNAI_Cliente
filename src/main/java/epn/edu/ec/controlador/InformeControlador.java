@@ -15,6 +15,7 @@ import epn.edu.ec.servicios.InformeServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,10 +59,12 @@ public class InformeControlador implements Serializable{
     
     Integer duracionActividades=0;
     private Date horaFin;
+    
+    private EnlacesPrograma enlaces;
 
     @PostConstruct
     public void init(){
-        
+        enlaces= new EnlacesPrograma();
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
         taller= new Taller();
@@ -403,7 +406,9 @@ public class InformeControlador implements Serializable{
                     
                     guardarRegistroFotografico(informeAux);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME DE PSICOLOGÍA","Aviso" ));
-                    return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar",informeAux);
+                    return enlaces.PATH_INFORME_VER+"?faces-redirect=true";
+                    //return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
                 }
                 else{
                     return null;

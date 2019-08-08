@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AsistenciaAdolescente;
@@ -15,6 +10,7 @@ import epn.edu.ec.servicios.InformeServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,10 +24,6 @@ import javax.servlet.http.Part;
 import org.omnifaces.util.Utils;
 import org.primefaces.event.FlowEvent;
 
-/**
- *
- * @author User
- */
 @Named(value = "informeEditarControlador")
 @ViewScoped
 public class InformeEditarControlador implements Serializable{
@@ -55,11 +47,12 @@ public class InformeEditarControlador implements Serializable{
     TallerServicio servicioTaller;
     InformeServicio servicioInforme;
     
-    
+    private EnlacesPrograma enlaces;
 
     @PostConstruct
     public void init(){
         
+        enlaces=new EnlacesPrograma();
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
         registroFotograficoRescatado= new ArrayList<>();
@@ -415,8 +408,10 @@ public class InformeEditarControlador implements Serializable{
                 if(informeAux != null){
                     
                     guardarRegistroFotografico(informeAux);
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar",informeAux);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME DE PSICOLOGÍA","Aviso" ));
-                    return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
+                    //return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
+                    return enlaces.PATH_INFORME_VER+"?faces-redirect=true";
                 }
                 else{
                     return null;

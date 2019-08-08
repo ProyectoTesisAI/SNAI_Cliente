@@ -48,7 +48,7 @@
                                             <div class="form-group">
                                                 <b:panelGrid columns="1">
                                                     <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
-                                                    <b:dateTimePicker id="dtpHoraInicio" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="hh:mm" value="#{informeEditarControlador.taller.horaInicio}"/>
+                                                    <b:dateTimePicker id="dtpHoraInicio" required-message="La hora de inicio es requerida, ingrese una" placeholder="hh:mm" showDate="false" format="HH:mm" value="#{informeEditarControlador.taller.horaInicio}"/>
                                                 </b:panelGrid>
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@
                                         <div class="col-md-10 col-md-offset-1">
                                             <div class="form-group">
                                                 <h:outputLabel for="txtAntecedentesJustificacion" style="text-transform:uppercase" value="Antecedentes y Justificacion" />
-                                                <b:inputTextarea id="txtAntecedentesJustificacion" placeholder="Antecedentes y Justificacion" value="#{informeEditarControlador.informeEditar.adolescentesJustificacion}"/>
+                                                <b:inputTextarea id="txtAntecedentesJustificacion" style="text-transform:uppercase" placeholder="Antecedentes y Justificacion" value="#{informeEditarControlador.informeEditar.adolescentesJustificacion}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -90,23 +90,23 @@
                                             <p:dataTable var="tp" value="#{informeEditarControlador.listaItemsTaller}"  reflow="true"  rows="10"
                                                          paginator="false"  >
                                                 <p:column headerText="Duración">
-                                                    <h:outputText value="#{tp.duracion}"/>  
+                                                    <h:outputText style="text-transform: uppercase" value="#{tp.duracion}"/>  
                                                 </p:column>
 
                                                 <p:column headerText="Actividad">
-                                                    <h:outputText value="#{tp.actividad}"/>
+                                                    <h:outputText style="text-transform: uppercase" value="#{tp.actividad}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Objetivo Específico">
-                                                    <h:outputText value="#{tp.objetivoEspecifico}"/>
+                                                    <h:outputText style="text-transform: uppercase" value="#{tp.objetivoEspecifico}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Materiales">
-                                                    <h:outputText value="#{tp.materiales}"/>
+                                                    <h:outputText style="text-transform: uppercase" value="#{tp.materiales}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Responsable">
-                                                    <h:outputText value="#{tp.responsable}"/>
+                                                    <h:outputText style="text-transform: uppercase" value="#{tp.responsable}"/>
                                                 </p:column>
 
                                             </p:dataTable>
