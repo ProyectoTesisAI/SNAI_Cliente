@@ -116,23 +116,23 @@
                                         <p:dataTable var="tp" value="#{informeEditarControlador.listaItemsTaller}"  reflow="true"  rows="5"
                                                              paginator="false"  >
                                                     <p:column headerText="Duración">
-                                                        <b:inputText id="txtDuracion" placeholder="hh:mm"  value="#{tp.duracion}"/>  
+                                                        <h:outputText value="#{tp.duracion}"/>  
                                                     </p:column>
 
                                                     <p:column headerText="Actividad">
-                                                        <b:inputTextarea rows="2" required="true" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
+                                                        <h:outputText style="text-transform: uppercase" value="#{tp.actividad}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Objetivo Específico">
-                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                        <h:outputText style="text-transform: uppercase" value="#{tp.objetivoEspecifico}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Materiales">
-                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.materiales}"/>
+                                                        <h:outputText style="text-transform: uppercase" value="#{tp.materiales}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Responsable">
-                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.responsable}"/>
+                                                        <h:outputText style="text-transform: uppercase" value="#{tp.responsable}"/>
                                                     </p:column>
 
                                                 </p:dataTable>
@@ -195,7 +195,7 @@
                                     <div class="col-md-5 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtElaborado" value="Elaborado por "/>
-                                            <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true"/>
+                                            <b:inputText  placeholder="Elaborado por" id="txtElaborado" style="text-transform:uppercase" disabled="true" value="#{informeEditarControlador.taller.idUsuario.nombres} #{informeEditarControlador.taller.idUsuario.apellidos}"/>
                                         </div>
                                     </div>
                                 </div>
