@@ -67,18 +67,21 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         //return enlaces.PATH_ADOLESCENTE_UDI_CREAR+"?faces-redirect=true";
     }
 
-    public void eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado) {
+    public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado) {
         String rolActual = permisosUsuario.RolUsuario();
         if ("ADMINISTRADOR".equals(rolActual)) {
             int statusRespuesta = servicioAI.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
             if (statusRespuesta == 200) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
+                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
+                return null;
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
 }

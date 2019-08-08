@@ -29,11 +29,11 @@
                                     <p:dataTable var="ai" value="#{informeEditarControlador.listaParaChequeo}" reflow="true"  rows="30"
                                                  paginator="false"  >
                                         <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
-                                            <h:outputText value="#{ai.idAdolescenteInfractor.nombres}" />
+                                            <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.nombres}" />
                                         </p:column>
 
                                         <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos}" headerText="Apellidos">
-                                            <h:outputText value="#{ai.idAdolescenteInfractor.apellidos}" />
+                                            <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos}" />
                                         </p:column>
 
                                         <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
@@ -124,15 +124,15 @@
                                                     </p:column>
 
                                                     <p:column headerText="Objetivo Específico">
-                                                        <b:inputTextarea rows="2" value="#{tp.objetivoEspecifico}"/>
+                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.objetivoEspecifico}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Materiales">
-                                                        <b:inputTextarea rows="2" value="#{tp.materiales}"/>
+                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.materiales}"/>
                                                     </p:column>
 
                                                     <p:column headerText="Responsable">
-                                                        <b:inputTextarea rows="2" value="#{tp.responsable}"/>
+                                                        <b:inputTextarea style="text-transform: uppercase" rows="2" value="#{tp.responsable}"/>
                                                     </p:column>
 
                                                 </p:dataTable>

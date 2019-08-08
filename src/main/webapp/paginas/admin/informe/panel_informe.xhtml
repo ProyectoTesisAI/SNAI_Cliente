@@ -33,11 +33,11 @@
                                              paginator="true"  >
 
                                     <p:column  filterMatchMode="contains" filterBy="#{tp.idTaller.tipo}" headerText="Tipo">
-                                        <h:outputText value="#{tp.idTaller.tipo}" />
+                                        <h:outputText style="text-transform: uppercase" value="#{tp.idTaller.tipo}" />
                                     </p:column>
 
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.tema}" headerText="Tema">
-                                        <h:outputText value="#{tp.idTaller.tema}" />
+                                        <h:outputText style="text-transform: uppercase" value="#{tp.idTaller.tema}" />
                                     </p:column>
 
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.fecha}" headerText="Fecha">
@@ -47,7 +47,7 @@
                                     </p:column>
                                     
                                     <p:column filterMatchMode="contains" filterBy="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" headerText="Elaborado">
-                                        <h:outputText value="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" />
+                                        <h:outputText style="text-transform: uppercase" value="#{tp.idTaller.idUsuario.apellidos} #{tp.idTaller.idUsuario.nombres}" />
                                     </p:column>
 
                                     <p:column headerText="Ver Taller">

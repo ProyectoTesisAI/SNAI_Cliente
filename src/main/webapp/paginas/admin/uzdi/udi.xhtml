@@ -24,11 +24,11 @@
                 
                 <h:form>
                     
-                    <p:dataTable var="ai" value="#{panelAdolescenteInfractorUDIControlador.listadoAdolescentesInfractoresUDI}"  reflow="true"  rows="20"
+                    <p:dataTable id="tabla" var="ai" value="#{panelAdolescenteInfractorUDIControlador.listadoAdolescentesInfractoresUDI}"  reflow="true"  rows="20"
                                  paginator="true" >
 
                         <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
-                            <h:outputText value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
+                            <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
                         </p:column>
 
                         <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
@@ -51,7 +51,7 @@
                         </p:column>
                         <p:column headerText="Eliminar">
                             <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorUDIControlador.eliminarAdolescenteInfractor(ai)}" update="@form">
-                                <f:ajax execute="@form" />
+                                <f:ajax execute="@form" render="tabla"/>
                             </b:commandButton>
                         </p:column>
 
