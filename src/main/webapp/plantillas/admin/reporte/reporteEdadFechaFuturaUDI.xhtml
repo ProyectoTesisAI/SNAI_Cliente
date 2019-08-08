@@ -10,20 +10,25 @@
         <ui:composition>
             <b:form id="form">
                 <b:row>
-                    <b:column span="4" offset="1">                                        
+                    <b:column span="3" offset="0">                                        
                         <h:outputLabel for="txtFechaNacimiento" value="Fecha Futura"/>
                         <b:dateTimePicker id="txtFechaNacimiento" placeholder="Fecha" showTime="false" value="#{panelReportesControlador.fechaBuscar}"/>
                     </b:column>
+                </b:row>
+                
+                <b:row>
                     <br/>
-                    <b:column span="3" offset="2">
+                    <b:column span="3" offset="0">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarEdadFechaFuturaUDI()}">
                             <f:ajax execute="form" render="tablaReporteUDI"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <br/>
+                <br/>
                 <h:commandLink>
-                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                     <p:dataExporter type="xls" target="tablaReporteUDI" fileName="Edad_Fecha_UDI" pageOnly="true"/>
                 </h:commandLink>
                 <br/>

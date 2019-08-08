@@ -10,15 +10,17 @@
         <ui:composition>
             <b:form id="form">
                 <b:row>                            
-                    <b:column span="3" offset="8">
+                    <b:column span="3" offset="0">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarLugarResidenciaUDI()}">
                             <f:ajax execute="form" render="tablaReporteUDI9"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <br/>
+                <br/>
                 <h:commandLink>
-                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                     <p:dataExporter type="xls" target="tablaReporteUDI9" fileName="Edad_Lugar_Residencia_UDI" pageOnly="true"/>
                 </h:commandLink>
                 <br/>

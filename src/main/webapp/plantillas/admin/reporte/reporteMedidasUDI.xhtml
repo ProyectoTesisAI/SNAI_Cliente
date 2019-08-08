@@ -10,7 +10,7 @@
         <ui:composition>
             <b:form id="form">
                 <b:row>
-                    <b:column span="5" offset="1">
+                    <b:column span="5" offset="0">
                         <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
                         <b:selectOneMenu id="txtTipoInfraccion" value="#{panelReportesControlador.medida}">
                             <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
@@ -21,16 +21,19 @@
                             <f:selectItem itemLabel="LIBERTAD ASISTIDA" itemValue="LIBERTAD ASISTIDA"/>
                         </b:selectOneMenu>
                     </b:column>
-                    <b:column span="3" offset="2">
-                        <br/>
+                </b:row>
+                <b:row>
+                    <b:column span="3" offset="0">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarMedidasSocioeducativasUDI()}">
                             <f:ajax execute="form" render="tablaReporteUDI"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
+                <br/>
+                <br/>
                 <h:commandLink>
-                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                     <p:dataExporter type="xls" target="tablaReporteUDI" fileName="Edad_Medidas_UDI" pageOnly="true"/>
                 </h:commandLink>
                 <br/>

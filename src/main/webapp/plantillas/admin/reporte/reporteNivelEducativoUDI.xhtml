@@ -9,9 +9,8 @@
     <h:body>
         <ui:composition>
             <b:form id="form">
-                <b:panel>
                     <b:row>
-                        <b:column span="4" offset="1">
+                        <b:column span="3" offset="0">
                             <h:outputLabel for="txtEstudia" value="Estudia"/>
                             <b:selectOneMenu id="txtEstudia" update="estudia, tabla" process="@this" value="#{panelReportesControlador.estudia}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -20,17 +19,22 @@
                             </b:selectOneMenu>
                         </b:column>
                     </b:row>
-                    <b:row>
-                        <h:panelGroup class="panel" id="estudia">
-                            <b:panel class="panel" rendered="#{!panelReportesControlador.estudia}">
-                                <b:column span="3" offset="8">
+
+                        <h:panelGroup id="estudia">
+                            <b:row>
+                            <h:panelGroup rendered="#{!panelReportesControlador.estudia}">
+                                <b:column span="3" offset="0">
                                     <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarNivelEducativoNoUDI()}">
                                         <f:ajax execute="form" render="tablaReporteNoUDI"/>
                                     </h:commandButton>
                                 </b:column>
-                            </b:panel>
-                            <b:panel class="panel" rendered="#{panelReportesControlador.estudia}">
-                                <b:column span="5" offset="1">
+                                
+                            </h:panelGroup>
+                            
+                            </b:row>
+                            <b:row>
+                            <h:panelGroup rendered="#{panelReportesControlador.estudia}">
+                                <b:column span="5" offset="0">
                                     <h:outputLabel for="txtNivelEducativoActual" value="Nivel Educativo Actual"/>
                                     <b:selectOneMenu id="txtNivelEducativoActual" value="#{panelReportesControlador.nivelEducativo}">
                                         <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -65,13 +69,18 @@
                                         <f:ajax execute="form" render="tablaReporteSiUDI"/>
                                     </h:commandButton>
                                 </b:column>
-                            </b:panel>
+                                
+                            </h:panelGroup>
+                            </b:row>
                         </h:panelGroup>
-                        <h:panelGroup class="panel" id="tabla">
-                            <b:panel class="panel" rendered="#{!panelReportesControlador.estudia}">
+                    <br/>
+                    <br/>
+                    <br/>
+                        <h:panelGroup  id="tabla">
+                            <h:panelGroup rendered="#{!panelReportesControlador.estudia}">
                                 <br/>
                                 <h:commandLink>
-                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                                     <p:dataExporter type="xls" target="tablaReporteNoUDI" fileName="Edad_No_Estudia_UDI" pageOnly="true"/>
                                 </h:commandLink>
                                 <br/>
@@ -95,11 +104,11 @@
                                         <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
                                     </p:column>
                                 </p:dataTable>
-                            </b:panel>
-                            <b:panel class="panel" rendered="#{panelReportesControlador.estudia}">
+                            </h:panelGroup>
+                             <h:panelGroup class="panel" rendered="#{panelReportesControlador.estudia}">
                                 <br/>
                                 <h:commandLink>
-                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                                     <p:dataExporter type="xls" target="tablaReporteSiUDI" fileName="Edad_Nivel_Educativo_CAI" pageOnly="true"/>
                                 </h:commandLink>
                                 <br/>
@@ -124,10 +133,8 @@
                                     </p:column>
                                 </p:dataTable>
 
-                            </b:panel>
+                             </h:panelGroup>
                         </h:panelGroup>
-                    </b:row>
-                </b:panel>
             </b:form>
         </ui:composition>
     </h:body>
