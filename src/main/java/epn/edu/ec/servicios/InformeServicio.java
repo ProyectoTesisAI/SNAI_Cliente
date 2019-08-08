@@ -30,6 +30,16 @@ public class InformeServicio {
 
     }    
     
+    public int eliminarInforme(Integer id) {
+
+        int statusRespuesta = 0;
+        Response response = conexion.conexion(URL_INFORME+"/"+id.toString(), "DELETE", true, null);
+        if (response.getStatus() == 200) {
+            statusRespuesta = 200;
+        }
+        return statusRespuesta;
+    }
+    
     public List<Informe> listarInforme(){
         
         List<Informe> listaItemsInforme=null;
