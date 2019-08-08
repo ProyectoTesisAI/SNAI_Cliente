@@ -4,6 +4,8 @@ import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -31,7 +33,8 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     private AdolescenteInfractorUDI adolescenteInfractorUDICrear;
     private AdolescenteInfractorUDI adolescenteInfractorUDIEditar;
     private AdolescenteInfractorUDIServicio servicioUDI;
-
+    private EnlacesPrograma enlaces;
+    private PermisosUsuario permisos;
     private boolean guardado;
 
     //Objetos para saber si es cedula o documento
@@ -40,6 +43,9 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        
+        permisos= new PermisosUsuario();
+        enlaces=  new EnlacesPrograma();
         servicioUDI = new AdolescenteInfractorUDIServicio();
         guardado = false;
         validacion = new Validaciones();
@@ -188,15 +194,30 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarAdolescenteInfractorUDI(this.adolescenteInfractorUDICrear);
             if (ai_udi != null) {
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO", "Información"));
-                return "/paginas/udi/matriz/panel_crear_udi.com?faces-redirect=true";
+                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
+                guardado=true;
+                
+                String rol= permisos.RolUsuario();
+                if(rol!=null){
+                    if(rol.equals("ADMINISTRADOR")){
+                        return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+                    }
+                    else{
+                        return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                    }
+                }
+                else{
+                    return null;
+                }
+
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN", "Error"));
+                guardado=false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR UZDI", "Error"));
                 return null;
             }
         } else {
-            System.out.println("Se tiene un adolescente en null");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
             return null;
         }
     }
@@ -215,15 +236,16 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
             }
             
             AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);
-            if (ai_udi != null) {
+            if (ai_udi != null) {             
                 guardado = false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO", "Información"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
+                
             } else {
                 guardado = true;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
         }
     }
 
