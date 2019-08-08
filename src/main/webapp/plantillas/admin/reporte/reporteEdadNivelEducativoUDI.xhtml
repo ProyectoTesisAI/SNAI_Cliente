@@ -9,7 +9,7 @@
     <h:body>
         <ui:composition>
             <b:form id="form">
-                <b:panel>
+                
                     <b:row>
                         <b:column span="3" offset="0">
                             <h:outputLabel for="txtEstudia" value="Estudia"/>
@@ -38,14 +38,16 @@
                                 </b:column>
                             </b:row>
                         </h:panelGroup>
+                        
                         <h:panelGroup id="tabla">
-                            <b:panel rendered="#{!panelReportesControlador.estudia}">
+                            <h:panelGroup rendered="#{!panelReportesControlador.estudia}">
+                                <br/>
+                                <br/>
                                 <br/>
                                 <h:commandLink>
-                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                                     <p:dataExporter type="xls" target="tablaReporteNoUDI" fileName="Edad_No_Estudia_UDI" pageOnly="true"/>
                                 </h:commandLink>
-                                <br/>
                                 <p:dataTable id="tablaReporteNoUDI" var="tp" value="#{panelReportesControlador.listaReportes6NUDI}" reflow="true" rows="20" paginator="true">
                                     <p:column headerText="Número">
                                         <h:outputText value="#{tp.numero}"/>
@@ -69,11 +71,14 @@
                                         <h:outputText style="text-transform:uppercase" value="#{tp.razonNoEstudia}"/>
                                     </p:column>
                                 </p:dataTable>
-                            </b:panel>
-                            <b:panel rendered="#{panelReportesControlador.estudia}">
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{panelReportesControlador.estudia}">
+                                <br/>
+                                <br/>
                                 <br/>
                                 <h:commandLink>
-                                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
+                                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
                                     <p:dataExporter type="xls" target="tablaReporteSiUDI" fileName="Edad_Nivel_Educativo_UDI" pageOnly="true"/>
                                 </h:commandLink>
                                 <br/>
@@ -100,10 +105,9 @@
                                         <h:outputText style="text-transform:uppercase" value="#{ts.nivelEducativo}"/>
                                     </p:column>
                                 </p:dataTable>
-                            </b:panel>
+                            </h:panelGroup>
                         </h:panelGroup>
                     </b:row>
-                </b:panel>
             </b:form>
         </ui:composition>
     </h:body>

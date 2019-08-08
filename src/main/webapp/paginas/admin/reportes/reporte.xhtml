@@ -30,7 +30,7 @@
                             <h:outputText style="text-transform: uppercase" value="#{dr.descripcion}"/>
                         </p:column>
                         <p:column headerText=" " width="18%">
-                            <b:commandButton value="Generar #{dr.nombre}" action="#{panelReportesControlador.generarReportes(dr)}" >
+                            <b:commandButton class="btn btn-primary"  value="Generar #{dr.nombre}" action="#{panelReportesControlador.generarReportes(dr)}" >
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>

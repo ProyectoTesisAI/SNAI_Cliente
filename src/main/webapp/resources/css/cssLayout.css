@@ -25,7 +25,7 @@
 
 #content {
     margin-left: 270px;
-    padding: 110px 60px 60px 60px;    
+    padding: 65px 60px 60px 60px;    
 }
 
 #top a:link, #top a:visited {
@@ -48,7 +48,7 @@
 #form.toggled #content {
     
     margin: 0;
-    padding: 110px 60px 0px 60px;
+    padding: 75px 60px 0px 60px;
     transition: all 0.6s;
 }
 

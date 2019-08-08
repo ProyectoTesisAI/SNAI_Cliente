@@ -10,23 +10,29 @@
         <ui:composition>
             <b:form id="form">
                 <b:row>
-                    <b:column span="4" offset="1">                                        
+                    <b:column span="3" offset="0">                                        
                         <h:outputLabel for="txtFechaIngreso" value="Fecha ingreso"/>
                         <b:dateTimePicker id="txtFechaIngreso" placeholder="Fecha" showTime="false" value="#{panelReportesControlador.fechaBuscar}"/>
                     </b:column>
-                    <br/>
-                    <b:column span="3" offset="2">
+                </b:row>
+                <br/>
+                <b:row>
+                    
+                    <b:column span="3" offset="0">
                         <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarFechaIngresoCAI()}">
                             <f:ajax execute="form" render="tablaReporteCAI"/>
                         </h:commandButton>
                     </b:column>
                 </b:row>
                 <br/>
-                <h:commandLink>
-                    <p:graphicImage value="./../../../resources/imagenes/excel-icon.jpg" title="EXPORTAR A EXCEL" width="50"/>
-                    <p:dataExporter type="xls" target="tablaReporteCAI" fileName="Fecha" pageOnly="true"/>
-                </h:commandLink>
                 <br/>
+                <br/>
+                
+                <h:commandLink>
+                    <p:graphicImage value="./../../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
+                    <p:dataExporter type="xls" target="tablaReporteCAI" fileName="Fecha_Ingreso_CAI" pageOnly="true"/>
+                </h:commandLink>
+
                 <p:dataTable id="tablaReporteCAI" var="tp" value="#{panelReportesControlador.listaReportes5CAI}" reflow="true" rows="20" paginator="true">
                     <p:column headerText="Número">
                         <h:outputText style="min-width: 20px;" value="#{tp.numero}"/>

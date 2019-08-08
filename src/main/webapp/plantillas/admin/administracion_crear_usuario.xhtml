@@ -58,7 +58,7 @@
                         <h:outputText value="ASIGNAR ROL-CENTRO" style="color: white; font-weight: bold"  />
                     </f:facet>
                     <b:row>
-                        <b:column span="4" offset="1">                                        
+                        <b:column span="6" offset="1">                                        
                             <h:outputLabel for="txtRol" value="ROL"/>
                             <b:selectOneMenu id="txtRol" update="rol,rolesTecnicos" process="@this" value="#{usuarioControlador.tipoRol}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
@@ -75,30 +75,31 @@
                         </b:column>
                     </b:row>
                     <h:panelGroup id="rol">
-                        <b:panel rendered="#{usuarioControlador.estadoAdmin}">
-                        </b:panel>
-                        <b:panel rendered="#{!usuarioControlador.estadoAdmin}">
+
+                        <h:panelGroup rendered="#{!usuarioControlador.estadoAdmin}">
                             <h:panelGroup id="rolesTecnicos">
-                                <b:panel title="UDI" rendered="#{usuarioControlador.esUZDI}">
-                                    <b:row>
-                                        <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{usuarioControlador.esUZDI}"/>
-                                        <b:selectOneMenu id="txtUzdi" rendered="#{usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idUdi}">
-                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
-                                            <f:selectItems value="#{usuarioControlador.listaUdi}" var="u" itemValue="#{u}" itemLabel="#{u.udi}" />
-                                        </b:selectOneMenu>
-                                    </b:row>
-                                </b:panel>
-                                <b:panel title="CAI" rendered="#{!usuarioControlador.esUZDI}">
-                                    <b:row>
-                                        <h:outputLabel for="txtCai" value="CAI" rendered="#{!usuarioControlador.esUZDI}"/>
-                                        <b:selectOneMenu id="txtCai" rendered="#{!usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idCai}">
-                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
-                                            <f:selectItems value="#{usuarioControlador.listaCai}" var="c" itemValue="#{c}" itemLabel="#{c.cai}" />
-                                        </b:selectOneMenu>
-                                    </b:row>
-                                </b:panel>
+                                <b:column span="6" offset="1">
+                                    <h:panelGroup rendered="#{usuarioControlador.esUZDI}">
+                                        <b:row>
+                                            <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{usuarioControlador.esUZDI}"/>
+                                            <b:selectOneMenu id="txtUzdi" rendered="#{usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idUdi}">
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItems value="#{usuarioControlador.listaUdi}" var="u" itemValue="#{u}" itemLabel="#{u.udi}" />
+                                            </b:selectOneMenu>
+                                        </b:row>
+                                    </h:panelGroup>
+                                    <h:panelGroup  rendered="#{!usuarioControlador.esUZDI}">
+                                        <b:row>
+                                            <h:outputLabel for="txtCai" value="CAI" rendered="#{!usuarioControlador.esUZDI}"/>
+                                            <b:selectOneMenu id="txtCai" rendered="#{!usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idCai}">
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItems value="#{usuarioControlador.listaCai}" var="c" itemValue="#{c}" itemLabel="#{c.cai}" />
+                                            </b:selectOneMenu>
+                                        </b:row>
+                                    </h:panelGroup>
+                                </b:column>
                             </h:panelGroup>
-                        </b:panel>
+                        </h:panelGroup>
                     </h:panelGroup>
                 </b:panel>
                 <b:row>
