@@ -56,7 +56,7 @@ public class TallerServicio {
 
         int statusRespuesta = 0;
         Response response = conexion.conexion(URL_TALLER+"/"+id.toString(), "DELETE", true, null);
-        if (response.getStatus() == 200) {
+        if (response.getStatus() == 200 || response.getStatus() == 204) {
             statusRespuesta = 200;
         }
         return statusRespuesta;

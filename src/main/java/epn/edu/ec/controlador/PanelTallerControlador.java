@@ -82,18 +82,21 @@ public class PanelTallerControlador implements Serializable {
         }
     }
     
-    public void eliminarTaller(Taller tallerSeleccionado) {
+    public String eliminarTaller(Taller tallerSeleccionado) {
         String rolActual = usuario.getIdRolUsuarioCentro().getIdRol().getRol();
         if ("ADMINISTRADOR".equals(rolActual)) {
             int statusRespuesta = servicio.eliminarTaller(tallerSeleccionado.getIdTaller());
 
             if (statusRespuesta == 200) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
+                return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR+"?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
+                return null;
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
 
