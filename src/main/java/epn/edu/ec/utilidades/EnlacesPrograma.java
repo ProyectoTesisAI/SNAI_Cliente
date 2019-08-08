@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package epn.edu.ec.utilidades;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
-/**
- *
- * @author User
- */
 @Named(value = "enlacesPrograma")
 @Dependent
 public class EnlacesPrograma {
@@ -94,7 +85,6 @@ public class EnlacesPrograma {
     public String PATH_PANEL_REPORTE_9 = "/paginas/admin/reportes/panel_generar_reporte_9.com";
     
     public String PATH_PANEL_USUARIO_NUEVO = "/paginas/admin/panel_administracion_usuario.com";
-    public String PATH_PANEL_ASGINAR_ROL_CENTRO_A_USUARIO = "/paginas/admin/administracion_asignar_rol_centro.com";
 
     public String getPATH_ADOLESCENTE_UDI_CREAR() {
         return PATH_ADOLESCENTE_UDI_CREAR;
@@ -119,7 +109,9 @@ public class EnlacesPrograma {
     public void setPATH_PANEL_REPORTE(String PATH_PANEL_REPORTE) {
         this.PATH_PANEL_REPORTE = PATH_PANEL_REPORTE;
     }
-    
-    
+
+    public String getPATH_PANEL_USUARIO_NUEVO() {
+        return PATH_PANEL_USUARIO_NUEVO;
+    }
 
 }

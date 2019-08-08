@@ -94,7 +94,9 @@
                         <p:submenu label="Reportes">
                             <p:menuitem value="• &nbsp; Reportes Varios" outcome="#{enlacesPrograma.PATH_PANEL_REPORTE}"/>
                         </p:submenu>
-                        
+                        <p:submenu label="Administración Usuarios" rendered="#{administracionMenuControlador.tipoRolAdministrador}">
+                            <p:menuitem value="• &nbsp; Gestionar Usuario" rendered="#{administracionMenuControlador.permitidoCrearUsuario}" outcome="#{enlacesPrograma.PATH_PANEL_USUARIO_NUEVO}"/>
+                        </p:submenu>
                         <p:separator />
                         
                     </p:panelMenu>

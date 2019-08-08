@@ -22,7 +22,7 @@
                         <h:outputText style="text-transform: uppercase" value="#{dr.idRolUsuarioCentro.idRol.rol}"/>
                     </p:column>
                     <p:column headerText=" " width="18%">
-                        <b:commandButton value="DESACTIVAR" action="#{usuarioControlador.ActivarUsuario(dr)}" >
+                        <b:commandButton value="ACTIVAR" class="btn-success" action="#{usuarioControlador.ActivarUsuario(dr)}" >
                             <f:ajax execute="@form" />
                         </b:commandButton>
                     </p:column>

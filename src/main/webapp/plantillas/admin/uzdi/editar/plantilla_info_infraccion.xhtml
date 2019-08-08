@@ -59,10 +59,10 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
-                            <p:selectOneMenu id="txtTipoInfraccion" value="#{informacionInfraccionControlador.informacionInfraccion.tipoInfraccion}" style="width: 45%;" filterMatchMode="contains" filter="true" autoWidth="false">
+                            <b:selectOneMenu id="txtTipoInfraccion" disabled="#{!informacionInfraccionControlador.guardado}" select2="true" value="#{informacionInfraccionControlador.informacionInfraccion.tipoInfraccion}" style="width:100%">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
                                 <f:selectItems value="#{informacionInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
-                            </p:selectOneMenu>
+                            </b:selectOneMenu>
                         </b:column>
                     </b:row>
 
