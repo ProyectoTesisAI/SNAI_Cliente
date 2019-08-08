@@ -17,13 +17,13 @@ import javax.faces.view.ViewScoped;
  *
  * @author User
  */
-@Named(value = "plantillaControlador")
+@Named(value = "validarAccesoControlador")
 @ViewScoped
-public class PlantillaControlador implements Serializable{
+public class ValidarAccesoControlador implements Serializable{
     
-    private EnlacesPrograma enlaces;
+    private final EnlacesPrograma enlaces;
     
-    public PlantillaControlador(){
+    public ValidarAccesoControlador(){
         enlaces= new EnlacesPrograma();
     }
     
@@ -61,11 +61,10 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
         }
     }
-
 
     public void verificarSesionUsuario() throws IOException{
     
@@ -79,12 +78,15 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
         }
     }
     
-    public void validarLiderUzdi() throws IOException{
+    
+//    MÉTODOS PARA VALIDAR EL ACCESO AL PANEL CREAR UZDI DE ACUERDO AL TIPO DE ROL
+    
+    public void validarAccesoPanelLiderUzdi() throws IOException{
         
         try{
             
@@ -101,12 +103,12 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
     }
    
-    public void validarPsicologo() throws IOException{
+    public void validarAccesoPanelPsicologoUZDI() throws IOException{
         
         try{
             
@@ -124,12 +126,12 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
     }
    
-    public void validarTrabajadorSocial() throws IOException{
+    public void validarAccesoPanelTrabajadorSocialUZDI() throws IOException{
         
         try{
             
@@ -147,14 +149,17 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
     
+
     
-    public void validarCoordinadorCAI() throws IOException{
+//    MÉTODOS PARA VALIDAR EL ACCESO AL PANEL CREAR CAI DE ACUERDO AL TIPO DE ROL
+    
+    public void validarAccesoPanelCoordinadorCAI() throws IOException{
         
         try{
             
@@ -172,13 +177,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
     
-    public void validarInspectorEducador() throws IOException{
+    public void validarAccesoPanelInspectorEducador() throws IOException{
         
         try{
             
@@ -196,13 +201,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
     
-    public void validarPsicologoCAI() throws IOException{
+    public void validarAccesoPanelPsicologoCAI() throws IOException{
         
         try{
             
@@ -220,14 +225,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
-    
-    
-    public void validarJuridicoCAI() throws IOException{
+
+    public void validarAccesoPanelJuridicoCAI() throws IOException{
         
         try{
             
@@ -245,13 +249,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
     
-    public void validarTrabjadorSocialCAI() throws IOException{
+    public void validarAccesoPanelTrabjadorSocialCAI() throws IOException{
         
         try{
             
@@ -269,39 +273,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
-    
-    
-    public void validarAccesoInformacionMedidaCAI() throws IOException{
-        
-        try{
-            
-            String rolUsuario=RolUsuario();
-        
-            if(rolUsuario!=null){
-                
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ||rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
-                        || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
-                    
-                }
-                else{
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
-                }
-            }else{
-                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
-            }
-            
-        }catch(Exception e){
-            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
-        }
-        
-    }
-    
-    public void validarAccesoCrearEjecucionMedidaCAI() throws IOException{
+
+    public void validarAccesoPanelCrearEjecucionMedidaCAI() throws IOException{
         
         try{
             
@@ -319,13 +297,13 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
     }
     
-    public void validarAccesoVerEjecucionMedidaCAI() throws IOException{
+    public void validarAccesoPanelVerEjecucionMedidaCAI() throws IOException{
         
         try{
             
@@ -344,7 +322,32 @@ public class PlantillaControlador implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
             }
             
-        }catch(Exception e){
+        }catch(IOException e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+        
+    }
+
+    public void validarAccesoPanelInformacionMedidaCAI() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ||rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
+                        || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
         
