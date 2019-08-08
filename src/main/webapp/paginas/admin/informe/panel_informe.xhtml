@@ -51,22 +51,22 @@
                                     </p:column>
 
                                     <p:column headerText="Ver Taller">
-                                        <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelInformeControlador.verTaller(tp)}">
+                                        <b:commandButton value="Ver" class="btn btn-default btn-block" action="#{panelInformeControlador.verTaller(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </p:column>
                                     <p:column headerText="Ver Informe">
-                                        <b:commandButton  value="Ver Informe"  class="btn btn-info btn-block" action="#{panelInformeControlador.verInforme(tp)}">
+                                        <b:commandButton  value="Ver"  class="btn btn-success btn-block" action="#{panelInformeControlador.verInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </p:column>
                                     <p:column headerText="Editar Informe">
-                                        <b:commandButton  value="Editar Informe"  class="btn btn-warning btn-block" action="#{panelInformeControlador.editarInforme(tp)}">
+                                        <b:commandButton  value="Editar"  class="btn btn-primary btn-block" action="#{panelInformeControlador.editarInforme(tp)}">
                                             <f:ajax execute="@form" />
                                         </b:commandButton>
                                     </p:column>
                                     <p:column headerText="Eliminar Informe">
-                                    <b:commandButton value="Eliminar Informe" class="btn btn-danger btn-block" action="#{panelInformeControlador.eliminarTaller(tp)}" update="@form">
+                                    <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelInformeControlador.eliminarTaller(tp)}" update="@form">
                                         <f:ajax execute="@form" />
                                     </b:commandButton>
                                 </p:column>
