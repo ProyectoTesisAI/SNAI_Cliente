@@ -11,11 +11,11 @@
     </h:head>
     <h:body>
         <ui:composition>
-            
+
             <b:form id="formInfoInfraccion">
-                
+
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                
+
                 <b:panel look="primary" content-disabled="#{informacionInfraccionControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="INFORMACIÓN INFRACCIÓN" style="color: white; font-weight: bold"  />
@@ -63,10 +63,10 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
-                            <p:selectOneMenu id="txtTipoInfraccion" styleClass="left:0px;" value="#{informacionInfraccionControlador.informacionInfraccion.tipoInfraccion}" filterMatchMode="contains" filter="true" autoWidth="false" style="width: 100%" >
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
-                                <f:selectItems  value="#{informacionInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"  />
-                            </p:selectOneMenu>
+                            <b:selectOneMenu disabled="#{informacionInfraccionControlador.guardado}" id="txtTipoInfraccion" select2="true" value="#{informacionInfraccionControlador.informacionInfraccion.tipoInfraccion}" style="width:100%">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="" />
+                                <f:selectItems  value="#{informacionInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}" />
+                            </b:selectOneMenu>
                         </b:column>
                     </b:row>
                     <b:row>

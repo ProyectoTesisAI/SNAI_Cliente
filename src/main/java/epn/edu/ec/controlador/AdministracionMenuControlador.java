@@ -19,47 +19,63 @@ public class AdministracionMenuControlador implements Serializable {
     private boolean tipoRolJuridico;
     private boolean tipoRolPsicologo;
     private boolean tipoRolInspector;
+    private boolean tipoRolAdministrador;
     private boolean permitidoCrearAdolescenteUDI;
     private boolean permitidoCrearAdolescenteCAI;
-    
+    private boolean permitidoCrearUsuario;
+
     @PostConstruct
     public void init() {
-       
+
         enlaces = new EnlacesPrograma();
-        permisosUsuario= new PermisosUsuario();
+        permisosUsuario = new PermisosUsuario();
     }
-    
-    public boolean isEsCAI() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
-        if(rolUsuario!=null){
-            if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
-                esUZDI=false;
-                esCAI=true;
+
+    public boolean isTipoRolAdministrador() {
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                tipoRolInspector = false;
+                tipoRolPsicologo = false;
+                tipoRolJuridico = false;
+                tipoRolAdministrador = true;
             }
         }
-        
+        return tipoRolAdministrador;
+    }
+
+    public boolean isEsCAI() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+            if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                esUZDI = false;
+                esCAI = true;
+            }
+        }
+
         return esCAI;
     }
 
     public boolean isEsUZDI() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
-        if(rolUsuario!=null){
-            if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)|| "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
-                esCAI=false;
-                esUZDI=true;
-            }           
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+            if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                esCAI = false;
+                esUZDI = true;
+            }
         }
         return esUZDI;
     }
 
     public boolean isTipoRolJuridico() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
             if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 tipoRolInspector = false;
@@ -71,88 +87,98 @@ public class AdministracionMenuControlador implements Serializable {
     }
 
     public boolean isTipoRolPsicologo() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
 
-            if(rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
-                tipoRolInspector=false;
-                tipoRolJuridico=false;
-                tipoRolPsicologo=true;
+            if (rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                tipoRolInspector = false;
+                tipoRolJuridico = false;
+                tipoRolPsicologo = true;
             }
         }
         return tipoRolPsicologo;
     }
 
     public boolean isTipoRolInspector() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
-            if("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)){
-                tipoRolPsicologo=false;
-                tipoRolJuridico=false;
-                tipoRolInspector=true;
+
+            if ("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+                tipoRolPsicologo = false;
+                tipoRolJuridico = false;
+                tipoRolInspector = true;
             }
         }
         return tipoRolInspector;
     }
 
-    public boolean isPermitidoCrearAdolescenteUDI() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+    public boolean isPermitidoCrearUsuario() {
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
-            if("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR/LIDER UZDI".equals(rolUsuario)){
-                permitidoCrearAdolescenteUDI=true;
+
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                permitidoCrearUsuario = true;
+            }
+        }
+        return permitidoCrearUsuario;
+    }
+    
+    public boolean isPermitidoCrearAdolescenteUDI() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+
+            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR/LIDER UZDI".equals(rolUsuario)) {
+                permitidoCrearAdolescenteUDI = true;
             }
         }
         return permitidoCrearAdolescenteUDI;
     }
 
     public boolean isPermitidoCrearAdolescenteCAI() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
-            if("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")){
-                permitidoCrearAdolescenteCAI=true;
+
+            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")) {
+                permitidoCrearAdolescenteCAI = true;
             }
         }
         return permitidoCrearAdolescenteCAI;
     }
-    
-    
-    
+
     public String validarTallerPsicologia() {
-        
+
         String tipoTaller = "PSICOLOGIA";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String validarTallerJuridico() {
-        
+
         String tipoTaller = "JURÍDICO";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String validarTallerInspectorEducador() {
-        
+
         String tipoTaller = "INSPECTOR EDUCADOR";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
         return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
     }
 
     public String gestionarTaller() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
 
             if ("ADMINISTRADOR".equals(rolUsuario)) {
@@ -160,69 +186,63 @@ public class AdministracionMenuControlador implements Serializable {
             } else {
                 return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
             }
-        }
-        else{
-            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
         }
     }
 
     public String gestionarInforme() {
-        
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
+
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_INFORME + "?faces-redirect=true";
             }
-        }
-        else{
-            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
         }
     }
-    
-    public String validarGestionInformacionAdolescenteUZDI(){
-    
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+    public String validarGestionInformacionAdolescenteUZDI() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
-            if ("ADMINISTRADOR".equals(rolUsuario)){
-                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR+"?faces-redirect=true";
+
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+
+                return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
             }
-            else{
-            
-                return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
-            }
-        }
-        else{
-            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
         }
     }
-    
-    public String validarGestionInformacionAdolescenteCAI(){
-    
-        String rolUsuario=permisosUsuario.RolUsuario();
-        
+
+    public String validarGestionInformacionAdolescenteCAI() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
         if (rolUsuario != null) {
-        
-            if ("ADMINISTRADOR".equals(rolUsuario)){
-                return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
+
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_CAI_ADMIN + "?faces-redirect=true";
+            } else {
+
+                return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
             }
-            else{
-            
-                return enlaces.PATH_PANEL_CAI_USER+"?faces-redirect=true";
-            }
-        }
-        else{
-            return enlaces.PATH_ERROR+"?faces-redirect=true";
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
         }
     }
-    
-    public String cerrarSesion(){
+
+    public String cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return enlaces.PATH_LOGIN+"?faces-redirect=true";
+        return enlaces.PATH_LOGIN + "?faces-redirect=true";
     }
 }

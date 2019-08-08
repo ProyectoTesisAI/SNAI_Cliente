@@ -35,7 +35,7 @@
                         <b:row>
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
-                                <b:selectOneMenu id="txtTipoPenal" value="#{detalleInfraccionControlador.detalleInfraccion.tipoPenal}">
+                                <b:selectOneMenu id="txtTipoPenal" disabled="#{detalleInfraccionControlador.guardado}" select2="true" style="width:100%" value="#{detalleInfraccionControlador.detalleInfraccion.tipoPenal}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                                 </b:selectOneMenu>
