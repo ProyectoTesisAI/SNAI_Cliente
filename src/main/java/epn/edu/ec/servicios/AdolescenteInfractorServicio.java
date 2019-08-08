@@ -464,4 +464,14 @@ public class AdolescenteInfractorServicio {
         }
         return reporteAux;
     }
+    
+    public int eliminarAdolescenteInfractor(Integer id) {
+
+        int statusRespuesta = 0;
+        Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR+"/"+id.toString(), "DELETE", true, null);
+        if (response.getStatus() == 200) {
+            statusRespuesta = 200;
+        }
+        return statusRespuesta;
+    }
 }

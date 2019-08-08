@@ -1,6 +1,7 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
@@ -19,6 +20,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
 
     private List<AdolescenteInfractorUDI> listadoAdolescentesInfractoresUDI;
     private AdolescenteInfractorUDIServicio servicio;
+    private AdolescenteInfractorServicio servicioAI;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
 
@@ -27,6 +29,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
 
         permisosUsuario = new PermisosUsuario();
         servicio = new AdolescenteInfractorUDIServicio();
+        servicioAI = new AdolescenteInfractorServicio();
         enlaces = new EnlacesPrograma();
         listadoAdolescentesInfractoresUDI = new ArrayList<>();
         listadoAdolescentesInfractoresUDI = servicio.listaAdolescentesInfractoresUDI();
@@ -64,15 +67,18 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         //return enlaces.PATH_ADOLESCENTE_UDI_CREAR+"?faces-redirect=true";
     }
 
-    public String eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado) {
+    public void eliminarAdolescenteInfractor(AdolescenteInfractorUDI adolescenteSeleccionado) {
+        String rolActual = permisosUsuario.RolUsuario();
+        if ("ADMINISTRADOR".equals(rolActual)) {
+            int statusRespuesta = servicioAI.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
-        int statusRespuesta = servicio.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
-
-        if (statusRespuesta == 200) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha eliminado correctamente el Adolescente Infractor ", "Aviso"));
+            if (statusRespuesta == 200) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
+            }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error guardadando el Adolescente Infrctor", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
         }
-        return "/paginas/udi/udi.com?faces-redirect=true";
     }
 }
