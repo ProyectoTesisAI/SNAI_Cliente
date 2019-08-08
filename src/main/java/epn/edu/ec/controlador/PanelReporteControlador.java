@@ -425,7 +425,7 @@ public class PanelReporteControlador implements Serializable {
     }
 
     public List<Reporte3> buscarNacionalidadUDI() {
-        List<Reporte3> reporteRespuestaUDI = servicio.reporteNacionalidadCAI(nacionalidad);
+        List<Reporte3> reporteRespuestaUDI = servicio.reporteNacionalidadUDI(nacionalidad);
         if (reporteRespuestaUDI != null) {
             return listaReportes3UDI = reporteRespuestaUDI;
         } else {
