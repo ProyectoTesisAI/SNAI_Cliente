@@ -10,11 +10,11 @@
     </h:head>
     <h:body>
         <ui:composition>
-            
+
             <b:form id="formEjeSalud">
-                
+
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                
+
                 <b:panel look="primary" content-disabled="#{ejeSaludControladorUDI.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="EJE SALUD" style="color: white; font-weight: bold"  />
@@ -31,8 +31,8 @@
                         </b:column>
                     </b:row>
                     <br/>
-        
-                    
+
+
                     <h:panelGroup rendered="#{!ejeSaludControladorUDI.saludable}">
                         <b:row>
                             <b:column span="10" offset="1">
@@ -75,88 +75,88 @@
                         </b:row>
                         <br/>
                         <br/>
-                        
-                        <b:row>
-                            <b:column span="10" offset="1">
-                                <h3>CONSUMO DE SUSTANCIAS</h3>
-                            </b:column>
-                        </b:row>
-                        <br/>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtConsumeSustancias" value="Consume sustancias"/>
-                                <b:selectOneMenu id="txtConsumeSustancias"  process="@this" update="consumeSustancias" value="#{ejeSaludControladorUDI.consumeSustancias}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                    
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <h:panelGroup id="consumeSustancias" style="margin: 0px; padding: 0px;">
 
-                            <b:row rendered="#{ejeSaludControladorUDI.consumeSustancias}" >
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
-                                    <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
-                                </b:column>
-
-                                <b:column span="4" offset="2">
-                                    <h:outputLabel for="txtRecibeTratamientoDrogas" value="Recibe Tratamiento Drogas"/>
-                                    <b:selectOneMenu id="txtRecibeTratamientoDrogas" value="#{ejeSaludControladorUDI.ejeSalud.recibeTratamientoDrogas}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                        <f:selectItem itemLabel="SI"  itemValue="true" />
-                                        <f:selectItem itemLabel="NO"  itemValue="false" />
-                                    </b:selectOneMenu>
-                                </b:column>
-                            </b:row>
-
-                        </h:panelGroup>
-                        <br/>
-                        <br/>
+                        <!--                        <b:row>
+                                                    <b:column span="10" offset="1">
+                                                        <h3>CONSUMO DE SUSTANCIAS</h3>
+                                                    </b:column>
+                                                </b:row>
+                                                <br/>
+                                                <b:row>
+                                                    <b:column span="4" offset="1">
+                                                        <h:outputLabel for="txtConsumeSustancias" value="Consume sustancias"/>
+                                                        <b:selectOneMenu id="txtConsumeSustancias"  process="@this" update="consumeSustancias" value="#{ejeSaludControladorUDI.consumeSustancias}">
+                                                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                            <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                            <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                            
+                                                        </b:selectOneMenu>
+                                                    </b:column>
+                                                </b:row>
+                                                <h:panelGroup id="consumeSustancias" style="margin: 0px; padding: 0px;">
                         
+                                                    <b:row rendered="#{ejeSaludControladorUDI.consumeSustancias}" >
+                                                        <b:column span="4" offset="1">
+                                                            <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
+                                                            <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
+                                                        </b:column>
                         
-                        <b:row>
-                            <b:column span="10" offset="1">
-                                <h3>DISCAPACIDAD</h3>
-                            </b:column>
-                        </b:row>
-                        <br/>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
-                                <b:selectOneMenu id="txtDiscapacidad" update="txtModuloDiscapacidad" process="@this" value="#{ejeSaludControladorUDI.tipoD}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="SI" />
-                                    <f:selectItem itemLabel="NO"  itemValue="NO" />
-                                    <f:selectItem itemLabel="EN PROCESO DE CERTIFICACIÓN"  itemValue="EN PROCESO DE CERTIFICACIÓN" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                         <h:panelGroup id="txtModuloDiscapacidad" style="margin: 0px; padding: 0px;">
-                            <b:row rendered="#{ejeSaludControladorUDI.esDiscapacidad}" >
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
-                                    <b:selectOneMenu id="txtTipoDiscapacidad" value="#{ejeSaludControladorUDI.ejeSalud.tipoDiscapacidad}">
-                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                        <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
-                                        <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
-                                        <f:selectItem itemLabel="INTELECTUAL O SENSORIAL"  itemValue="INTELECTUAL O SENSORIAL" />
-                                        <f:selectItem itemLabel="MENTAL"  itemValue="MENTAL" />
-                                    </b:selectOneMenu>
-                                </b:column>
+                                                        <b:column span="4" offset="2">
+                                                            <h:outputLabel for="txtRecibeTratamientoDrogas" value="Recibe Tratamiento Drogas"/>
+                                                            <b:selectOneMenu id="txtRecibeTratamientoDrogas" value="#{ejeSaludControladorUDI.ejeSalud.recibeTratamientoDrogas}">
+                                                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                                                <f:selectItem itemLabel="NO"  itemValue="false" />
+                                                            </b:selectOneMenu>
+                                                        </b:column>
+                                                    </b:row>
+                        
+                                                </h:panelGroup>
+                                                <br/>
+                                                <br/>
+                                                
+                                                
+                                                <b:row>
+                                                    <b:column span="10" offset="1">
+                                                        <h3>DISCAPACIDAD</h3>
+                                                    </b:column>
+                                                </b:row>
+                                                <br/>
+                                                <b:row>
+                                                    <b:column span="4" offset="1">
+                                                        <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
+                                                        <b:selectOneMenu id="txtDiscapacidad" update="txtModuloDiscapacidad" process="@this" value="#{ejeSaludControladorUDI.tipoD}">
+                                                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                            <f:selectItem itemLabel="SI"  itemValue="SI" />
+                                                            <f:selectItem itemLabel="NO"  itemValue="NO" />
+                                                            <f:selectItem itemLabel="EN PROCESO DE CERTIFICACIÓN"  itemValue="EN PROCESO DE CERTIFICACIÓN" />
+                                                        </b:selectOneMenu>
+                                                    </b:column>
+                                                </b:row>
+                                                 <h:panelGroup id="txtModuloDiscapacidad" style="margin: 0px; padding: 0px;">
+                                                    <b:row rendered="#{ejeSaludControladorUDI.esDiscapacidad}" >
+                                                        <b:column span="4" offset="1">
+                                                            <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
+                                                            <b:selectOneMenu id="txtTipoDiscapacidad" value="#{ejeSaludControladorUDI.ejeSalud.tipoDiscapacidad}">
+                                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                                <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
+                                                                <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
+                                                                <f:selectItem itemLabel="INTELECTUAL O SENSORIAL"  itemValue="INTELECTUAL O SENSORIAL" />
+                                                                <f:selectItem itemLabel="MENTAL"  itemValue="MENTAL" />
+                                                            </b:selectOneMenu>
+                                                        </b:column>
+                        
+                                                        <b:column span="4" offset="2">
+                                                            <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
+                                                            <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
+                                                        </b:column>
+                        
+                                                    </b:row>
+                                                </h:panelGroup> 
+                                                <br/>
+                                                <br/>-->
 
-                                <b:column span="4" offset="2">
-                                    <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
-                                    <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
-                                </b:column>
 
-                            </b:row>
-                        </h:panelGroup> 
-                        <br/>
-                        <br/>
-                        
-                        
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h3>ENFERMEDADES RARAS</h3>
@@ -174,10 +174,89 @@
                             </b:column>
                         </b:row>    
                     </h:panelGroup>
-    
-                    
+
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>CONSUMO DE SUSTANCIAS</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtConsumeSustancias" value="Consume sustancias"/>
+                            <b:selectOneMenu id="txtConsumeSustancias"  process="@this" update="consumeSustancias" value="#{ejeSaludControladorUDI.consumeSustancias}">
+                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="true" />
+                                <f:selectItem itemLabel="NO"  itemValue="false" />
+
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <h:panelGroup id="consumeSustancias" style="margin: 0px; padding: 0px;">
+
+                        <b:row rendered="#{ejeSaludControladorUDI.consumeSustancias}" >
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
+                                <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtRecibeTratamientoDrogas" value="Recibe Tratamiento Drogas"/>
+                                <b:selectOneMenu id="txtRecibeTratamientoDrogas" value="#{ejeSaludControladorUDI.ejeSalud.recibeTratamientoDrogas}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                    <f:selectItem itemLabel="NO"  itemValue="false" />
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+
+                    </h:panelGroup>
+                    <br/>
+                    <br/>
+
+
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>DISCAPACIDAD</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="4" offset="1">
+                            <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
+                            <b:selectOneMenu id="txtDiscapacidad" update="txtModuloDiscapacidad" process="@this" value="#{ejeSaludControladorUDI.tipoD}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <f:selectItem itemLabel="SI"  itemValue="SI" />
+                                <f:selectItem itemLabel="NO"  itemValue="NO" />
+                                <f:selectItem itemLabel="EN PROCESO DE CERTIFICACIÓN"  itemValue="EN PROCESO DE CERTIFICACIÓN" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <h:panelGroup id="txtModuloDiscapacidad" style="margin: 0px; padding: 0px;">
+                        <b:row rendered="#{ejeSaludControladorUDI.esDiscapacidad}" >
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
+                                <b:selectOneMenu id="txtTipoDiscapacidad" value="#{ejeSaludControladorUDI.ejeSalud.tipoDiscapacidad}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
+                                    <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
+                                    <f:selectItem itemLabel="INTELECTUAL O SENSORIAL"  itemValue="INTELECTUAL O SENSORIAL" />
+                                    <f:selectItem itemLabel="MENTAL"  itemValue="MENTAL" />
+                                </b:selectOneMenu>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
+                                <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
+                            </b:column>
+
+                        </b:row>
+                    </h:panelGroup> 
+                    <br/>
+                    <br/>
+
                     <h:panelGroup rendered="#{ejeSaludControladorUDI.esMujer}">
-                        
+
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h3>EMBARAZO</h3>

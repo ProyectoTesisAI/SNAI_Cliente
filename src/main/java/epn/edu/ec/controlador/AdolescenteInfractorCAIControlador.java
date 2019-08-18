@@ -4,6 +4,8 @@ import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
+import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,7 +34,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
     private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
     private AdolescenteInfractorCAIServicio servicioCAI;
-
+    private EnlacesPrograma enlaces;
+    private PermisosUsuario permisos;
     private boolean guardado;
 
     //Objetos para saber si es cedula o documento
@@ -41,6 +44,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        permisos = new PermisosUsuario();
+        enlaces = new EnlacesPrograma();
         servicioCAI = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
@@ -171,49 +176,67 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     //Métodos para invocar a los diferentes servicios web************
     public String guardarAdolescenteInfractor() {
-        if (this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor() != null) {
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setDocumento(null);
-                this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setCedula(null);
-                this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            }
-            AdolescenteInfractorCAI ai_cai = servicioCAI.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
-            if (ai_cai != null) {
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Adolescente ", "Aviso"));
-                return "/paginas/cai/matriz/panel_crear_cai.com?faces-redirect=true";
+        if (validacion.cedulaValida(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula()) && validacion.verificarFechaNacimiento(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento())) {
+            if (this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor() != null) {
+                if ("ECUATORIANA".equals(tipoDocumento)) {
+                    this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setDocumento(null);
+                    this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+                } else if ("EXTRANJERA".equals(tipoDocumento)) {
+                    this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setCedula(null);
+                    this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+                }
+                AdolescenteInfractorCAI ai_cai = servicioCAI.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
+                if (ai_cai != null) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
+                    guardado = true;
+
+                    String rol = permisos.RolUsuario();
+                    if (rol != null) {
+                        if (rol.equals("ADMINISTRADOR")) {
+                            return enlaces.PATH_PANEL_CAI_ADMIN + "?faces-redirect=true";
+                        } else {
+                            return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
+                        }
+                    } else {
+                        return null;
+                    }
+                } else {
+                    guardado = false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR CAI", "Error"));
+                    return null;
+                }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Adolescente Infractor", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR CAI", "Error"));
                 return null;
             }
         } else {
-            System.out.println("Se tiene un adolescente en null");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA FECHA DE NACIMIENTO/CEDULA ES INCORRECTA", "Error"));
             return null;
         }
     }
-    
+
     public void guardarEdicionAdolescenteInfractor() {
 
-                
         if (this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor() != null) {
+            if (validacion.cedulaValida(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula()) && validacion.verificarFechaNacimiento(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento())) {
+                if ("ECUATORIANA".equals(tipoDocumento)) {
+                    this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setDocumento(null);
+                    this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+                } else if ("EXTRANJERA".equals(tipoDocumento)) {
+                    this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setCedula(null);
+                    this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+                }
 
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setDocumento(null);
-                this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setCedula(null);
-                this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            }
-            
-            AdolescenteInfractorCAI ai_udi = servicioCAI.guardarEdicionAdolescenteInfractorCAI(this.adolescenteInfractorCAIEditar);
-            if (ai_udi != null) {
-                guardado = false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
+                AdolescenteInfractorCAI ai_udi = servicioCAI.guardarEdicionAdolescenteInfractorCAI(this.adolescenteInfractorCAIEditar);
+                if (ai_udi != null) {
+                    guardado = false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
+                } else {
+                    guardado = true;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR CAI", "Error"));
+                }
             } else {
-                guardado = true;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR CAI", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA FECHA DE NACIMIENTO O CEDULA SON ERRONEOS", "Error"));
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR CAI", "Error"));

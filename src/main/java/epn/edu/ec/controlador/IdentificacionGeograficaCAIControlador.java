@@ -1,8 +1,10 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
+import epn.edu.ec.modelo.DatosPais;
 import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.IdentificacionGeografica;
+import epn.edu.ec.servicios.DatosPaisServicio;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.IdentificacionGeograficaServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -38,6 +40,9 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
     private DatosProvinciaCantonServicio servicioCAIPC;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
+    
+    private List<DatosPais> paises;
+    private DatosPaisServicio servicioP;
 
     private String nacionalidad;
     private boolean esEcuatoriana;
@@ -55,6 +60,9 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
 
         provincias = new ArrayList<>();
         servicioCAIPC = new DatosProvinciaCantonServicio();
+        
+        paises = new ArrayList<>();
+        servicioP = new DatosPaisServicio();
 
         adolescenteInfractorCAI = new AdolescenteInfractorCAI();
         AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
@@ -77,9 +85,8 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
                 esEcuatoriana = false;
             }
         }
-
         provincias = servicioCAIPC.listarDatosProvinciaCanton();
-
+        paises = servicioP.listarDatosPais();
     }
 
     public AdolescenteInfractorCAI getAdolescenteInfractorCAI() {
@@ -115,7 +122,6 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
     }
 
     public String getNacionalidad() {
-        System.out.println("Nacionalidad :" + nacionalidad);
         return nacionalidad;
     }
 
@@ -167,6 +173,10 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
             System.out.println("No hay provincia de nacimiento ecuatoriana escogida");
         }
         return cantonesNacimiento;
+    }
+
+    public List<DatosPais> getPaises() {
+        return paises;
     }
 
     /**
