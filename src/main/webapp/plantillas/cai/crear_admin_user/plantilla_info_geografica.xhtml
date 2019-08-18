@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Crear Información</title>
     </h:head>
     <h:body>
         <ui:composition>
@@ -76,12 +76,15 @@
                         </b:row>
                     </h:panelGroup>
 
-                    <h:panelGroup  rendered="#{!identificacionGeograficaControladorCAI.esEcuatoriana}">
+                    <h:panelGroup  rendered="#{!identificacionGeograficaControladorCAI.esEcuatoriana}"><!-->para cuando es extranjero<-->
 
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
-                                <b:inputText id="txtPaisNacimiento" maxlength="50" placeholder="País de nacimiento" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}"/>
+                                <b:selectOneMenu id="txtPaisNacimiento" select2="true" disabled="#{identificacionGeograficaControladorCAI.guardado}" style="width:100%" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItems value="#{identificacionGeograficaControladorCAI.paises}" var="pais" itemValue="#{pais.pais}" itemLabel="#{pais.pais}"/>
+                                </b:selectOneMenu>
                             </b:column>
 
                             <b:column span="4" offset="2">

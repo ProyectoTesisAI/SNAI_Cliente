@@ -24,7 +24,8 @@
 
                     <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     
-                    <b:panel look="primary" content-disabled="#{adolescenteInfractorUDIControlador.guardado}"> 
+                    <!--<b:panel look="primary" content-disabled="#{not empty adolescenteInfractorUDIControlador.adolescenteInfractorUDIEditar}">--> 
+                    <b:panel look="primary" content-disabled="false"> 
                         <f:facet name="heading">
                             <h:outputText value="ADOLESCENTE INFRACTOR UZDI" style="color: white; font-weight: bold"  />
                         </f:facet>

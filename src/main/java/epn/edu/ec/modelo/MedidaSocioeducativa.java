@@ -1,6 +1,7 @@
 package epn.edu.ec.modelo;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -15,6 +16,8 @@ public class MedidaSocioeducativa implements Serializable {
     private Date fechaFinMedida;
     private String institucionEjecutoraMedida;
     private AdolescenteInfractorUDI idAdolescenteInfractorUDI;
+    
+    private Date fechaInicioMedida;
 
     public MedidaSocioeducativa() {
         tiempoMeses=0;
@@ -71,6 +74,17 @@ public class MedidaSocioeducativa implements Serializable {
     }
 
     public Date getFechaFinMedida() {
+        if(fechaInicioMedida!=null){
+            int meses = tiempoMeses*30;
+            int dias = tiempoDia;
+            int horas = tiempoHoras/24;
+            int total = meses+dias+horas;
+            Calendar fechaAux = Calendar.getInstance();
+            fechaAux.setTime(fechaInicioMedida);
+            fechaAux.add(Calendar.DATE, total);
+            fechaFinMedida = fechaAux.getTime();
+            return fechaFinMedida;
+        }
         return fechaFinMedida;
     }
 
@@ -92,6 +106,14 @@ public class MedidaSocioeducativa implements Serializable {
 
     public void setIdAdolescenteInfractorUDI(AdolescenteInfractorUDI idAdolescenteInfractorUDI) {
         this.idAdolescenteInfractorUDI = idAdolescenteInfractorUDI;
+    }
+
+    public Date getFechaInicioMedida() {
+        return fechaInicioMedida;
+    }
+
+    public void setFechaInicioMedida(Date fechaInicioMedida) {
+        this.fechaInicioMedida = fechaInicioMedida;
     }
 
     @Override

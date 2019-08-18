@@ -98,7 +98,11 @@ public class MedidaSocioEducativaControlador implements Serializable{
                ActivarApoyoSocioFamiliar=informacionJudicialAux.getOrientacionApoyoSocioFamiliar();
                ActivarServicioComunidad=informacionJudicialAux.getServicioComunidad();
                ActivarLibertadAsistida=informacionJudicialAux.getLibertadAsistida();
-               
+               medidaSocioeducativa.setFechaInicioMedida(informacionJudicialAux.getFechaInicioCumplimientoMedida());
+               medidaSocioeducativa2.setFechaInicioMedida(informacionJudicialAux.getFechaInicioCumplimientoMedida());
+               medidaSocioeducativa3.setFechaInicioMedida(informacionJudicialAux.getFechaInicioCumplimientoMedida());
+               medidaSocioeducativa4.setFechaInicioMedida(informacionJudicialAux.getFechaInicioCumplimientoMedida());
+               medidaSocioeducativa5.setFechaInicioMedida(informacionJudicialAux.getFechaInicioCumplimientoMedida());
                if(ActivarAmonestacionVerbal==true || ActivarImposicionReglasConducta==true || ActivarApoyoSocioFamiliar==true
                        || ActivarServicioComunidad==true || ActivarLibertadAsistida==true){
                    guardado=true;
@@ -133,7 +137,6 @@ public class MedidaSocioEducativaControlador implements Serializable{
                        }
                    } 
                 }
-            
             }  
         }
 

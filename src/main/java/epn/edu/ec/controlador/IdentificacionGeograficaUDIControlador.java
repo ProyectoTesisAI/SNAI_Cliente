@@ -1,8 +1,10 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
+import epn.edu.ec.modelo.DatosPais;
 import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.IdentificacionGeografica;
+import epn.edu.ec.servicios.DatosPaisServicio;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.IdentificacionGeograficaServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -38,6 +40,9 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
     private DatosProvinciaCantonServicio servicioCAIPC;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
+    
+    private List<DatosPais> paises;
+    private DatosPaisServicio servicioP;
 
     private String nacionalidad;
     private boolean esEcuatoriana;
@@ -55,6 +60,9 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
 
         provincias = new ArrayList<>();
         servicioCAIPC = new DatosProvinciaCantonServicio();
+        
+        paises = new ArrayList<>();
+        servicioP = new DatosPaisServicio();
 
         adolescenteInfractorUDI = new AdolescenteInfractorUDI();
         AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
@@ -67,16 +75,14 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
                 guardado = true;
             }
             nacionalidad = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getNacionalidad();
-            System.out.println("Nacionalidad init: " + nacionalidad);
             if (nacionalidad.equals("ECUATORIANA")) {
                 esEcuatoriana = true;
             } else if (nacionalidad.equals("EXTRANJERO")) {
                 esEcuatoriana = false;
             }
         }
-
         provincias = servicioCAIPC.listarDatosProvinciaCanton();
-
+        paises = servicioP.listarDatosPais();
     }
 
     public AdolescenteInfractorUDI getAdolescenteInfractorUDI() {
@@ -112,7 +118,6 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
     }
 
     public String getNacionalidad() {
-        System.out.println("Nacionalidad :" + nacionalidad);
         return nacionalidad;
     }
 
@@ -146,7 +151,6 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
     public List<DatosProvinciaCanton> getCantones() {
         cantones = new ArrayList<>();
         String provincia = identificacionGeografica.getProvinciaResidencia();
-        //System.out.println("Provincia del adoles: "+provincia);
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
@@ -166,6 +170,10 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
         return cantonesNacimiento;
     }
 
+    public List<DatosPais> getPaises() {
+        return paises;
+    }
+    
     /**
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************

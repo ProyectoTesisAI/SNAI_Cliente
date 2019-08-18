@@ -43,5 +43,5 @@ public class Constantes {
     public static final String URL_REGISTRO_ASISTENCIA_ADOLESCENTE = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Registro_Asistencia_Adolescente";
     public static final String URL_DATOS_TIPO_PENAL_CAI = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Datos_Tipo_Penal_Cai";
     public static final String URL_UNIDAD_ZONAL = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Unidad_Zonal";
-    
+    public static final String URL_DATOS_PAIS = "http://localhost:34446/SistemaSNAI_Servidor/webresources/Datos_Pais";
 }

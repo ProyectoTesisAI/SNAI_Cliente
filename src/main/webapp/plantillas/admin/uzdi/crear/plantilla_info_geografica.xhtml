@@ -82,7 +82,10 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
-                                <b:inputText id="txtPaisNacimiento" maxlength="50" placeholder="País de nacimiento" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.paisNacimiento}"/>
+                                <b:selectOneMenu id="txtPaisNacimiento" select2="true" disabled="#{identificacionGeograficaControladorUDI.guardado}" style="width:100%" value="#{identificacionGeograficaControladorUDI.identificacionGeografica.paisNacimiento}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItems value="#{identificacionGeograficaControladorUDI.paises}" var="pais" itemValue="#{pais.pais}" itemLabel="#{pais.pais}"/>
+                                </b:selectOneMenu>
                             </b:column>
 
                             <b:column span="4" offset="2">
