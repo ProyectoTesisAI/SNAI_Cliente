@@ -41,6 +41,7 @@
             <div class="container">
                 <div id="login-form">
                     <b:form>
+                        <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                         <h2 class="text-center">
                             Login
                         </h2>
@@ -59,7 +60,7 @@
                         </div>
 
                         <div class="form-group">
-                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{loginController.loguerUsuario()}"/> 
+                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{loginController.loguerUsuario()}" update="@form"/> 
                         </div>
                     </b:form>
                 </div>

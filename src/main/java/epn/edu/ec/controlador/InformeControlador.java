@@ -16,12 +16,18 @@ import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.Deflater;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -386,8 +392,8 @@ public class InformeControlador implements Serializable{
             for(RegistroFotografico registro : registroFotografico){
                 
                 if(registro.getImagen()!=null){
-                   registro.setIdInforme(informe);
-                   servicioRegistroFotografico.guardarRegistroFotografico(registro);
+                    registro.setIdInforme(informe);
+                    servicioRegistroFotografico.guardarRegistroFotografico(registro);
                 }
             }
         }
@@ -408,7 +414,6 @@ public class InformeControlador implements Serializable{
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME DE PSICOLOGÍA","Aviso" ));
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar",informeAux);
                     return enlaces.PATH_INFORME_VER+"?faces-redirect=true";
-                    //return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
                 }
                 else{
                     return null;
@@ -423,6 +428,5 @@ public class InformeControlador implements Serializable{
             return null;
         } 
     }
-
 }
 
