@@ -14,7 +14,7 @@ public class EnlacesPrograma {
     public String PATH_TALLER_CREAR = "/paginas/user/taller/taller.com";
     public String PATH_INFORME_CREAR = "/paginas/user/informe/informe.com";
 
-    public String PATH_ADOLESCENTE_UDI_CREAR = "/paginas/udi/adolescentes_udi/ai_udi_crear.com";
+    public String PATH_ADOLESCENTE_UDI_CREAR = "/paginas/uzdi/adolescentes_udi/ai_udi_crear.com";
     public String PATH_ADOLESCENTE_CAI_CREAR = "/paginas/cai/adolescentes_cai/ai_cai_crear.com";
     
     public String PATH_PANEL_INFORME = "/paginas/user/informe/panel_informe.com";
@@ -29,46 +29,46 @@ public class EnlacesPrograma {
     public String PATH_PANEL_TALLER_ADMINISTRADOR = "/paginas/admin/taller/panel_taller.com";
     public String PATH_TALLER_EDITAR = "/paginas/admin/taller/taller_editar.com";
 
-    public String PATH_PANEL_UDI_USER = "/paginas/user/uzdi/udi.com";
-    public String PATH_PANEL_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/udi.com";
+    public String PATH_PANEL_UDI_USER = "/paginas/uzdi/user/udi.com";
+    public String PATH_PANEL_UDI_ADMINISTRADOR = "/paginas/uzdi/admin/udi.com";
     
-    public String PATH_PANEL_CAI_USER = "/paginas/CAI2/user/cai.com";
-    public String PATH_PANEL_CAI_ADMIN = "/paginas/CAI2/admin/cai.com";
+    public String PATH_PANEL_CAI_USER = "/paginas/cai/user/cai.com";
+    public String PATH_PANEL_CAI_ADMIN = "/paginas/cai/admin/cai.com";
     
-    public String PATH_PANEL_CREAR_UDI_LIDER_UZDI = "/paginas/user/uzdi/liderUzdi/panel_crear_udi.com";
-    public String PATH_PANEL_CREAR_UDI_PSICOLOGO = "/paginas/user/uzdi/psicologo/panel_crear_udi.com";
-    public String PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_crear_udi.com";
-    public String PATH_PANEL_CREAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_LIDER_UZDI = "/paginas/uzdi/user/liderUzdi/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_PSICOLOGO = "/paginas/uzdi/user/psicologo/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL = "/paginas/uzdi/user/trabajadorSocial/panel_crear_udi.com";
+    public String PATH_PANEL_CREAR_UDI_ADMINISTRADOR = "/paginas/uzdi/admin/panel_crear_udi.com";
     
 
-    public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/CAI2/user/crear/coordinadorCai/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/CAI2/user/crear/psicologo/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/CAI2/user/crear/trabajadorSocial/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR = "/paginas/CAI2/user/crear/inspectorEducador/panel_crear_cai.com";
-    public String PATH_PANEL_CREAR_CAI_JURIDICO = "/paginas/CAI2/user/crear/juridico/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_COORDINADOR = "/paginas/cai/user/crear/coordinadorCai/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_PSICOLOGO = "/paginas/cai/user/crear/psicologo/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL = "/paginas/cai/user/crear/trabajadorSocial/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR = "/paginas/cai/user/crear/inspectorEducador/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_JURIDICO = "/paginas/cai/user/crear/juridico/panel_crear_cai.com";
 
-    public String PATH_PANEL_EDITAR_UDI_LIDER_UZDI = "/paginas/user/uzdi/liderUzdi/panel_editar_udi.com";
-    public String PATH_PANEL_EDITAR_UDI_PSICOLOGO = "/paginas/user/uzdi/psicologo/panel_editar_udi.com";
-    public String PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL = "/paginas/user/uzdi/trabajadorSocial/panel_editar_udi.com";
-    public String PATH_PANEL_EDITAR_UDI_ADMINISTRADOR = "/paginas/admin/uzdi/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_LIDER_UZDI = "/paginas/uzdi/user/liderUzdi/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_PSICOLOGO = "/paginas/uzdi/user/psicologo/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL = "/paginas/uzdi/user/trabajadorSocial/panel_editar_udi.com";
+    public String PATH_PANEL_EDITAR_UDI_ADMINISTRADOR = "/paginas/uzdi/admin/panel_editar_udi.com";
     
     
-    public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/crear/panel_crear_cai.com";
-    public String PATH_PANEL_EDITAR_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/editar/panel_crear_cai.com";
+    public String PATH_PANEL_CREAR_CAI_ADMINISTRADOR = "/paginas/cai/admin/crear/panel_crear_cai.com";
+    public String PATH_PANEL_EDITAR_CAI_ADMINISTRADOR = "/paginas/cai/admin/editar/panel_crear_cai.com";
     
     
     
-    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_ADMININSTRADOR = "/paginas/CAI2/admin/crear/panel_crear_medida_cai.com";
-    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_USUARIO= "/paginas/CAI2/user/crear/panel_crear_medida_cai.com";
-    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO = "/paginas/CAI2/user/crear/panel_ver_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_ADMININSTRADOR = "/paginas/cai/admin/crear/panel_crear_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_USUARIO= "/paginas/cai/user/crear/panel_crear_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO = "/paginas/cai/user/crear/panel_ver_medida_cai.com";
     
     
-    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_ADMINISTRADOR = "/paginas/CAI2/admin/crear/panel_crear_info_medida_cai.com";
-    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO = "/paginas/CAI2/user/crear/panel_crear_info_medida_cai.com";
-    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_INSPECTOR_EDUCADOR = "/paginas/CAI2/user/crear/inspectorEducador/panel_crear_info_medida_cai.com";
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_ADMINISTRADOR = "/paginas/cai/admin/crear/panel_crear_info_medida_cai.com";
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO = "/paginas/cai/user/crear/panel_crear_info_medida_cai.com";
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_INSPECTOR_EDUCADOR = "/paginas/cai/user/crear/inspectorEducador/panel_crear_info_medida_cai.com";
     
-    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMININSTRADOR = "/paginas/CAI2/admin/editar/panel_crear_medida_cai.com";
-    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_EDITAR_ADMINISTRADOR = "/paginas/CAI2/admin/editar/panel_crear_info_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMININSTRADOR = "/paginas/cai/admin/editar/panel_crear_medida_cai.com";
+    public String PATH_PANEL_INFORMACION_MEDIDA_CAI_EDITAR_ADMINISTRADOR = "/paginas/cai/admin/editar/panel_crear_info_medida_cai.com";
     
     
     public String PATH_ERROR = "/error/error.com";

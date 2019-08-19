@@ -10,6 +10,7 @@ import epn.edu.ec.servicios.LoginServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -78,6 +79,7 @@ public class LoginController implements Serializable{
             }           
         }
         else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "USUARIO O CONTRASEÑA INCORRECTA", "Error"));
             return null;
         }
         
