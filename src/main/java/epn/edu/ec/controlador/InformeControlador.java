@@ -16,18 +16,12 @@ import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.zip.Deflater;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -67,6 +61,7 @@ public class InformeControlador implements Serializable{
     private Date horaFin;
     
     private EnlacesPrograma enlaces;
+    private boolean informeGuardado;
 
     @PostConstruct
     public void init(){
@@ -212,7 +207,11 @@ public class InformeControlador implements Serializable{
     public void setHoraFin(Date horaFin) {
         this.horaFin = horaFin;
     }    
-    
+
+    public boolean isInformeGuardado() {
+        return informeGuardado;
+    }
+
     /*************************************************************/
     
     public String onFlowProcess(FlowEvent event) {
@@ -399,7 +398,7 @@ public class InformeControlador implements Serializable{
         }
     }
     
-    public String guardarInformeResultados(){
+    public void guardarInformeResultados(){
         
         try{
 
@@ -411,21 +410,21 @@ public class InformeControlador implements Serializable{
                 if(informeAux != null){
                     
                     guardarRegistroFotografico(informeAux);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME DE PSICOLOGÍA","Aviso" ));
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar",informeAux);
-                    return enlaces.PATH_INFORME_VER+"?faces-redirect=true";
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME","Aviso" ));
+                    informeGuardado=true;
                 }
                 else{
-                    return null;
+                    informeGuardado=false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
                 }
             }
             else{
-                return null;
+                informeGuardado=false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA","Aviso" ));
             }
         }catch(Exception e){
             
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA","Aviso" ));
-            return null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
         } 
     }
 }

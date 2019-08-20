@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,12 @@ public class PanelTallerControlador implements Serializable {
     private TallerServicio servicio;
     private EnlacesPrograma enlaces;
     private Usuario usuario;
+    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init() {
 
+        permisosUsuario= new PermisosUsuario();
         servicio = new TallerServicio();
         enlaces = new EnlacesPrograma();
         usuario = new Usuario();
@@ -62,49 +65,102 @@ public class PanelTallerControlador implements Serializable {
     public String verTaller(Taller taller) {
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            //return "/paginas/psicologia/taller_psicologia_ver.com?faces-redirect=true";
-            return enlaces.PATH_TALLER_VER+"?faces-redirect=true";
+            String rolActual = permisosUsuario.RolUsuario();
+
+            if(rolActual!=null){
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+
+                if ("ADMINISTRADOR".equals(rolActual)){
+                    return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_TALLER_VER_USER+"?faces-redirect=true";
+                }
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
+                return enlaces.PATH_ERROR+"?faces-redirect=true";
+            }
 
         } catch (Exception ex) {
-            return null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
     
     public String editarTaller(Taller taller) {
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            return enlaces.PATH_TALLER_EDITAR+"?faces-redirect=true";
+            
+            String rolActual = permisosUsuario.RolUsuario();
+            
+            if(rolActual!=null){
+                
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+            
+                if ("ADMINISTRADOR".equals(rolActual)){
+                    return enlaces.PATH_TALLER_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
+                }
+                else{
+                    return enlaces.PATH_ERROR+"?faces-redirect=true";
+                }
+            }
+            else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
+                return enlaces.PATH_ERROR+"?faces-redirect=true";
+            }
+            
 
         } catch (Exception ex) {
-            return null;
+            return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
     }
     
     public String eliminarTaller(Taller tallerSeleccionado) {
-        String rolActual = usuario.getIdRolUsuarioCentro().getIdRol().getRol();
-        if ("ADMINISTRADOR".equals(rolActual)) {
-            int statusRespuesta = servicio.eliminarTaller(tallerSeleccionado.getIdTaller());
+        
+        String rolActual = permisosUsuario.RolUsuario();
+        
+        if(rolActual!=null){
+            
+            if ("ADMINISTRADOR".equals(rolActual)) {
+                int statusRespuesta = servicio.eliminarTaller(tallerSeleccionado.getIdTaller());
 
-            if (statusRespuesta == 200) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
-                return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR+"?faces-redirect=true";
+                if (statusRespuesta == 200 || statusRespuesta==204) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
+                    return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR+"?faces-redirect=true";
+                } else {
+                    return enlaces.PATH_ERROR+"?faces-redirect=true";
+                }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
-                return null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
+                return enlaces.PATH_ERROR+"?faces-redirect=true";
             }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO TIENE ACCESO DE ADMINISTRADOR PARA REALIZAR ESTA ACCION", "ERROR"));
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
             return enlaces.PATH_ERROR+"?faces-redirect=true";
         }
+        
     }
 
     public String agregarInforme(Taller taller) {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
-            //return "/paginas/psicologia/informe_psicologia.com?faces-redirect=true";
-            return enlaces.PATH_INFORME_CREAR+"?faces-redirect=true";
+            
+            String rolActual = permisosUsuario.RolUsuario();
+            if(rolActual!=null){
+                
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+
+                if(rolActual.equals("ADMINISTRADOR")){
+                
+                    return enlaces.PATH_INFORME_CREAR_ADMINISTRADOR+"?faces-redirect=true";
+                }else{
+                    return enlaces.PATH_INFORME_CREAR_USER+"?faces-redirect=true";
+                }
+            }else{
+                return enlaces.PATH_ERROR+"?faces-redirect=true";
+            }
+            
         } catch (Exception e) {
             return null;
         }

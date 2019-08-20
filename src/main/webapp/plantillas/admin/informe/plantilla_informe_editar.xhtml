@@ -12,16 +12,17 @@
 
             <h:form enctype="multipart/form-data"> 
 
+                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" collapsible="false" >
                     <f:facet name="heading">
                         <h:outputText value="EDITAR INFORME DE RESULTADOS" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <p:growl id="growl" sticky="true" showDetail="true"/>
-
                     <p:wizard  style="margin: 35px;" backLabel="Atrás" nextLabel="Siguiente"  flowListener="#{informeEditarControlador.onFlowProcess}">
 
                         <p:tab id="registroAsistencia" title="Registro Asistencia">
+                            <b:panel style="border: transparent;" content-disabled="#{informeEditarControlador.informeGuardado}">
 
                             <div class="row" style="margin-top: 35px;">
                                 <div class="col-md-10 col-md-offset-1">
@@ -47,11 +48,12 @@
                                     </p:dataTable>
                                 </div>
                             </div>
+                            </b:panel>
                         </p:tab>
 
                         <p:tab id="informe" title="Informe Psicología">
 
-                            <b:panel style="border: transparent;">
+                            <b:panel style="border: transparent;" content-disabled="#{informeEditarControlador.informeGuardado}">
 
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
@@ -105,7 +107,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtAntecedentesJustificacion" value="Antecedentes y Justificacion" />
-                                            <b:inputTextarea id="txtAntecedentesJustificacion" required="true" placeholder="Antecedentes y Justificacion" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.adolescentesJustificacion}"/>
+                                            <b:inputTextarea id="txtAntecedentesJustificacion" required="true" placeholder="Antecedentes y Justificacion" requiredMessage="Antecedentes y Justificación es requerido, ingrese un valor" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.adolescentesJustificacion}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -206,6 +208,7 @@
 
                         <p:tab id="registroFotografico" title="Registro Fotográfico">
 
+                            <b:panel style="border: transparent;" content-disabled="#{informeEditarControlador.informeGuardado}">
                             <div class="row" style="margin-top: 35px;">
                                 <div class="col-md-5 col-md-offset-1">
                                     <h:outputLabel for="file" value="+ Seleccionar imagen" styleClass="upload" class="btn btn-success " />
@@ -237,10 +240,10 @@
                             </div>
                             <div class="row">
                                 <div class=" col-md-3 col-md-offset-8">
-                                    <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" action="#{informeEditarControlador.guardarInformeResultados()}"/>
+                                    <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" actionListener="#{informeEditarControlador.guardarInformeResultados()}" update="@form"/>
                                 </div>
                             </div>
-
+                            </b:panel>
                         </p:tab>
 
                     </p:wizard>

@@ -12,46 +12,50 @@
 
             <h:form enctype="multipart/form-data"> 
 
+                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+
                 <b:panel look="primary" collapsible="false" >
                     <f:facet name="heading">
                         <h:outputText value="CREAR INFORME DE RESULTADOS" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <p:growl id="growl" sticky="true" showDetail="true"/>
-
                     <p:wizard  style="margin: 35px;" backLabel="Atrás" nextLabel="Siguiente"  flowListener="#{informeControlador.onFlowProcess}">
 
                         <p:tab id="registroAsistencia" title="Registro Asistencia">
 
-                            <div class="row" style="margin-top: 35px;">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <p:dataTable var="ai" value="#{informeControlador.listaParaChequeo}"  reflow="true"  rows="5"
-                                                 paginator="false"  >
+                            <b:panel style="border: transparent;" content-disabled="#{informeControlador.informeGuardado}">
+
+                                <div class="row" style="margin-top: 35px;">
+                                    <div class="col-md-10 col-md-offset-1">
                                         
-                                        <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
-                                            <h:outputText value="#{ai.idAdolescenteInfractor.nombres}" />
-                                        </p:column>
+                                        <p:dataTable var="ai" value="#{informeControlador.listaParaChequeo}"  reflow="true" 
+                                                     paginator="true"  >
 
-                                        <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos}" headerText="Apellidos">
-                                            <h:outputText value="#{ai.idAdolescenteInfractor.apellidos}" />
-                                        </p:column>
+                                            <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.nombres}" />
+                                            </p:column>
 
-                                        <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
-                                            <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
-                                        </p:column>
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos}" headerText="Apellidos">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.apellidos}" />
+                                            </p:column>
 
-                                        <p:column filterMatchMode="contains" filterBy="#{ai.asistio}" headerText="¿Asistió?">
-                                           <b:selectBooleanCheckbox  value="#{ai.asistio}"/>
-                                        </p:column>
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
+                                            </p:column>
 
-                                    </p:dataTable>
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.asistio}" headerText="¿Asistió?">
+                                                <b:selectBooleanCheckbox  value="#{ai.asistio}"/>
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </div>
                                 </div>
-                            </div>
+                            </b:panel>
                         </p:tab>
 
-                        <p:tab id="informe" title="Informe Psicología">
+                        <p:tab id="informe" title="Informe">
 
-                            <b:panel style="border: transparent;">
+                            <b:panel style="border: transparent;" content-disabled="#{informeControlador.informeGuardado}">
 
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
@@ -118,7 +122,7 @@
 
                                 <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                     <div class="col-md-10 col-md-offset-1">
-                                        
+
                                         <p:dataTable var="tp" value="#{informeControlador.listaItemsTaller}" reflow="true"  rows="10"
                                                      paginator="false"  >
                                             <p:column headerText="Duración">
@@ -212,41 +216,41 @@
 
                         <p:tab id="registroFotografico" title="Registro Fotográfico">
 
-                            <div class="row" style="margin-top: 35px;">
-                                <div class="col-md-5 col-md-offset-1">
-                                    <h:outputLabel for="file" value="+ Seleccionar imagen" styleClass="upload" class="btn btn-success " />
-                                    <o:inputFile id="file" styleClass="upload" value="#{informeControlador.imagenes}" title="true" label="Seleccione imagen"
-                                                 accept="image/*" acceptMessage="Wrong file type! Should match {2}" multiple="true"
-                                                 maxsize="#{100024 * 100024}" maxsizeMessage="File too large! Should be no more than {2}">
-                                        <f:ajax listener="#{informeControlador.asignarImagen()}" render="@form" />
-                                    </o:inputFile>
-                                    <b:growl id="file_m" for="file"/>
+                            <b:panel style="border: transparent;" content-disabled="#{informeControlador.informeGuardado}" >
+                                <div class="row" style="margin-top: 35px;">
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <h:outputLabel for="file" value="+ Seleccionar imagen" styleClass="upload" class="btn btn-success " />
+                                        <o:inputFile id="file" styleClass="upload" value="#{informeControlador.imagenes}" title="true" label="Seleccione imagen"
+                                                     accept="image/*" acceptMessage="Wrong file type! Should match {2}" multiple="true"
+                                                     maxsize="#{100024 * 100024}" maxsizeMessage="File too large! Should be no more than {2}">
+                                            <f:ajax listener="#{informeControlador.asignarImagen()}" render="@form" />
+                                        </o:inputFile>
+                                        <b:growl id="file_m" for="file"/>
 
+                                        <b:dataTable id="registroFoto" rendered="#{not empty informeControlador.registroFotografico}" value="#{informeControlador.registroFotografico}" 
+                                                     searching="false"
+                                                     paginated="false"
+                                                     info="false"
+                                                     var="image"
+                                                     style="text-align: center;margin-top: 25px !important; vertical-align: middle;"  >
+                                            <b:dataTableColumn label="Imagen" style="width: 60px;">
+                                                <o:graphicImage value="#{image.imagen}" dataURI="true" width="200" />
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn label="Eliminar" style="width: 80px; vertical-align: middle;">
+                                                <b:commandButton  value="Eliminar" class="btn btn-danger" >
+                                                    <f:ajax render="@form" listener="#{informeControlador.eliminarImagen(image)}" />
+                                                </b:commandButton>
+                                            </b:dataTableColumn>
 
-                                    <b:dataTable id="registroFoto" rendered="#{not empty informeControlador.registroFotografico}" value="#{informeControlador.registroFotografico}" 
-                                                 searching="false"
-                                                 paginated="false"
-                                                 info="false"
-                                                 var="image"
-                                                 style="text-align: center;margin-top: 25px !important; vertical-align: middle;"  >
-                                        <b:dataTableColumn label="Imagen" style="width: 60px;">
-                                            <o:graphicImage value="#{image.imagen}" dataURI="true" width="200" />
-                                        </b:dataTableColumn>
-                                        <b:dataTableColumn label="Eliminar" style="width: 80px; vertical-align: middle;">
-                                            <b:commandButton  value="Eliminar" class="btn btn-danger" >
-                                                <f:ajax render="@form" listener="#{informeControlador.eliminarImagen(image)}" />
-                                            </b:commandButton>
-                                        </b:dataTableColumn>
-
-                                    </b:dataTable>
+                                        </b:dataTable>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class=" col-md-3 col-md-offset-8">
-                                    <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" action="#{informeControlador.guardarInformeResultados()}"/>
+                                <div class="row">
+                                    <div class=" col-md-3 col-md-offset-8">
+                                        <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" actionListener="#{informeControlador.guardarInformeResultados()}" update="@form"/>
+                                    </div>
                                 </div>
-                            </div>
-
+                            </b:panel>
                         </p:tab>
 
                     </p:wizard>

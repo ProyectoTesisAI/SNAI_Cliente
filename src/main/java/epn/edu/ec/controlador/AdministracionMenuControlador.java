@@ -156,23 +156,64 @@ public class AdministracionMenuControlador implements Serializable {
 
     public String validarTallerPsicologia() {
 
-        String tipoTaller = "PSICOLOGIA";
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+            
+            String tipoTaller = "PSICOLOGIA";
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
+            
+            if(rolUsuario.equals("ADMINISTRADOR")){    
+                return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
+            }else{
+                return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
+            }
+        
+            
+        }else{
+            return enlaces.PATH_ERROR;
+        }
+        
     }
 
     public String validarTallerJuridico() {
+        
+        String rolUsuario = permisosUsuario.RolUsuario();
 
-        String tipoTaller = "JURÍDICO";
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
+        if (rolUsuario != null) {
+            
+            String tipoTaller = "JURÍDICO";
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
+                       
+            if(rolUsuario.equals("ADMINISTRADOR")){    
+                return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
+            }else{
+                return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
+            }        
+            
+        }else{
+            return enlaces.PATH_ERROR;
+        }
+        
     }
 
     public String validarTallerInspectorEducador() {
 
-        String tipoTaller = "INSPECTOR EDUCADOR";
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
-        return enlaces.PATH_TALLER_CREAR + "?faces-redirect=true";
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+            String tipoTaller = "INSPECTOR EDUCADOR";
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
+               
+            if(rolUsuario.equals("ADMINISTRADOR")){    
+                return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
+            }else{
+                return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
+            }        
+            
+        }else{
+            return enlaces.PATH_ERROR;
+        }
     }
 
     public String gestionarTaller() {
@@ -184,7 +225,7 @@ public class AdministracionMenuControlador implements Serializable {
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
-                return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
+                return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
             }
         } else {
             return enlaces.PATH_ERROR + "?faces-redirect=true";
@@ -200,7 +241,7 @@ public class AdministracionMenuControlador implements Serializable {
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
-                return enlaces.PATH_PANEL_INFORME + "?faces-redirect=true";
+                return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
             }
         } else {
             return enlaces.PATH_ERROR + "?faces-redirect=true";
@@ -231,7 +272,7 @@ public class AdministracionMenuControlador implements Serializable {
         if (rolUsuario != null) {
 
             if ("ADMINISTRADOR".equals(rolUsuario)) {
-                return enlaces.PATH_PANEL_CAI_ADMIN + "?faces-redirect=true";
+                return enlaces.PATH_PANEL_CAI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 
                 return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";

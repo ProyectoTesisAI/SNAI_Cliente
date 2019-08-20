@@ -80,8 +80,7 @@ public class TallerEditarControlador implements Serializable {
         usuarioLogin = new Usuario();
         tipoTaller = "";
         usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTaller");
-
+        
         servicioTaller = new TallerServicio();
         servicioCai = new CaiServicio();
         servicioUdi = new UdiServicio();
@@ -115,6 +114,8 @@ public class TallerEditarControlador implements Serializable {
         Taller tallerAux = (Taller) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("taller_psicologia");
 
         if (tallerAux != null) {
+            
+            tipoTaller=tallerAux.getTipo();
             tallerEditar = tallerAux;
 
             if (tallerAux.getIdCai() != null) {
@@ -334,6 +335,11 @@ public class TallerEditarControlador implements Serializable {
         return guardado;
     }
 
+    public String getTipoTaller() {
+        return tipoTaller;
+    }
+
+    
     /**
      * ***************************Eventos********************************************
      */
@@ -432,13 +438,10 @@ public class TallerEditarControlador implements Serializable {
 
     private void guardarItemsTaller(Taller tallerGuardado) {
 
-        int itemsGuardados = 0;
-
         for (ItemTaller i : listaItemsTaller) {
             i.setIdItemTaller(i.getIdItemTaller());
             i.setIdTaller(tallerGuardado);
             servicioItemTaller.guardarItemTaller(i);
-            itemsGuardados++;
         }
 
     }
@@ -477,7 +480,7 @@ public class TallerEditarControlador implements Serializable {
             if (taller != null && listadoAsistencia != null) {
 
                 servicioRegistro.eliminarRegistroAsistencia(taller.getIdTaller());
-
+                
                 registroAsistencia.setIdTaller(taller);
                 RegistroAsistencia registroAsistenciaAux = servicioRegistro.guardarRegistroAsistencia(registroAsistencia);
 
@@ -495,9 +498,6 @@ public class TallerEditarControlador implements Serializable {
                             asistencia.setAsistio(false);
                             servicioAsistencia.guardarRegistroAsistenciaAdolescente(asistencia);
                             asistenciaAdolescentes++;
-                        }
-                        if (asistenciaAdolescentes > 0 && asistenciaAdolescentes == listadoAsistencia.size()) {
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DE ASISTENCIA", "Aviso"));
                         }
                     }
                 }
@@ -523,13 +523,13 @@ public class TallerEditarControlador implements Serializable {
                         if (tallerAux.getIdTaller() > 0) {
 
                             guardarItemsTaller(tallerAux);//TAMBIEN SE DEBE CAMBIAR POR UN EDITAR
-                            //generarRegistroAsistencia(tallerAux);
-                            //guardarRegistroAsistencia(tallerAux);
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "SE HA ACTUALIZADO EL TALLER", "Aviso"));
+                            generarRegistroAsistencia(tallerAux);
+                            guardarRegistroAsistencia(tallerAux);
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ACTUALIZADO CORRECTAMENTE EL TALLER", "Aviso"));
                             guardado = true;
 
                         } else {
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER", "Aviso"));
                             guardado = false;
                         }
 

@@ -87,6 +87,7 @@ public class TallerControlador implements Serializable {
         usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
         tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTaller");
 
+        
         servicioTaller = new TallerServicio();
         servicioCai = new CaiServicio();
         servicioUdi = new UdiServicio();
@@ -357,6 +358,9 @@ public class TallerControlador implements Serializable {
         this.esTecnico = esTecnico;
     }
 
+    public String getTipoTaller() {
+        return tipoTaller;
+    }
     /**
      * ***************************Eventos********************************************
      */
@@ -383,20 +387,6 @@ public class TallerControlador implements Serializable {
     }
 
     private void asignarUdiCai() {
-
-//        for (UDI u : listaUdi) {
-//
-//            if (u.getUdi().equals(udiAux.getUdi())) {
-//                udiAux = u;
-//                break;
-//            }
-//        }
-//        for (CAI c : listaCai) {
-//            if (c.getCai().equals(caiAux.getCai())) {
-//                caiAux = c;
-//                break;
-//            }
-//        }
 
         if (udiAux.getIdUdi() != null) {
 
@@ -498,9 +488,6 @@ public class TallerControlador implements Serializable {
                             servicioAsistencia.guardarRegistroAsistenciaAdolescente(asistencia);
                             asistenciaAdolescentes++;
                         }
-                        if (asistenciaAdolescentes > 0 && asistenciaAdolescentes == listadoAsistencia.size()) {
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DE ASISTENCIA", "Aviso"));
-                        }
                     }
                 }
             }
@@ -511,7 +498,7 @@ public class TallerControlador implements Serializable {
 
     }
 
-    public String guardarRegistroTaller() {
+    public void guardarRegistroTaller() {
 
         try {
            
@@ -527,30 +514,26 @@ public class TallerControlador implements Serializable {
                             guardarItemsTaller(tallerAux);
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
-                            return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
+                            tallerGuardado=true;
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
 
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
-                            return null;
                         }
 
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
-                        return null;
                     }
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
-                    return null;
                 }
 
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO HA SELECCIONADO UNA CAI O UDI PARA EL TALLER", "Aviso"));
-                return null;
             }
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
-            return null;
         }
 
     }

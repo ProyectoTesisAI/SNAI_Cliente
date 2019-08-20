@@ -76,7 +76,7 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
 
             if (statusRespuesta == 200) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE EL REGISTRO", "INFORMACION"));
-                return enlaces.PATH_PANEL_CAI_ADMIN+"?faces-redirect=true";
+                return enlaces.PATH_PANEL_CAI_ADMINISTRADOR+"?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR EN EL SERVICIO", "ERROR"));
                 return null;

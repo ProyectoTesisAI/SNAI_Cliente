@@ -5,15 +5,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
 
     <h:body>
-        <ui:composition template="./../../../templates/menu.xhtml">
+        <ui:composition template="./../../templates/menu.xhtml">
 
             <ui:define name="head">
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../resources/css/cssLayout.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../resources/css/menu2.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
-                <script src="../../../resources/js/bootstrap.min.js"></script>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"/>
+                <script src="../../resources/js/bootstrap.min.js"></script>
             </ui:define>
 
             <ui:define name="content">
@@ -24,7 +24,7 @@
                 <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
 
                     <b:tab title="CAI">
-                        <ui:include src="../../../plantillas/admin/reporte/reporteFechaIngresoCAI.xhtml" />
+                        <ui:include src="../../plantillas/admin/reporte/reporteFechaIngresoCAI.xhtml" />
                     </b:tab>
 
                 </b:tabView>

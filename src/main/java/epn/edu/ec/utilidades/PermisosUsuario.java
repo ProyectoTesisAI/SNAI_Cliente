@@ -79,20 +79,8 @@ public class PermisosUsuario {
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR+"?faces-redirect=true";
             }
             else{
-            
-                if(rolUsuario.equals("COORDINADOR/LIDER UZDI")){
-                    return enlaces.PATH_PANEL_EDITAR_UDI_LIDER_UZDI+"?faces-redirect=true";
-                }
-                else if(rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI")){
-                    return enlaces.PATH_PANEL_EDITAR_UDI_PSICOLOGO+"?faces-redirect=true";
-                }
-                else if(rolUsuario.equals("TRABAJADOR SOCIAL UZDI")){
-                    return enlaces.PATH_PANEL_EDITAR_UDI_TRABAJADOR_SOCIAL+"?faces-redirect=true";
-                }              
-                else{
-                    return null;
-                }  
-            }
+               return null;
+            }  
         }
         else{
             return enlaces.PATH_ERROR+"?faces-redirect=true";
@@ -214,7 +202,7 @@ public class PermisosUsuario {
         if (rolUsuario != null) {
         
             if ("ADMINISTRADOR".equals(rolUsuario)){
-                return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMININSTRADOR+"?faces-redirect=true";
+                return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
             }
             else{
                 return null;
