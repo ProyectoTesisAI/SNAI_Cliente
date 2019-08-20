@@ -75,7 +75,7 @@ public class LoginController implements Serializable{
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
-                return enlaces.PATH_PANEL_TALLER + "?faces-redirect=true";
+                return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
             }           
         }
         else{

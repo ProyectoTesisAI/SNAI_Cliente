@@ -193,7 +193,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
                     String rol = permisos.RolUsuario();
                     if (rol != null) {
                         if (rol.equals("ADMINISTRADOR")) {
-                            return enlaces.PATH_PANEL_CAI_ADMIN + "?faces-redirect=true";
+                            return enlaces.PATH_PANEL_CAI_ADMINISTRADOR + "?faces-redirect=true";
                         } else {
                             return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
                         }

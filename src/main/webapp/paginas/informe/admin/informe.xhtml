@@ -3,13 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-    </h:head>z
+    </h:head>
     <h:body>
         <ui:composition template="./../../../templates/menu.xhtml">
 
@@ -26,9 +23,9 @@
 
 
             <ui:define name="content" >
-                <ui:include src="../../../plantillas/admin/informe/plantilla_informe_editar.xhtml" />
+                <ui:include src="../../../plantillas/user/informe/plantilla_informe.xhtml" />
             </ui:define>
-        </ui:composition>   
+        </ui:composition> 
     </h:body>
 </html>
 

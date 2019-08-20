@@ -46,6 +46,7 @@ public class InformeEditarControlador implements Serializable{
     AsistenciaAdolescentesServicio servicioAsistencia;
     TallerServicio servicioTaller;
     InformeServicio servicioInforme;
+    private boolean informeGuardado;
     
     private EnlacesPrograma enlaces;
 
@@ -199,8 +200,11 @@ public class InformeEditarControlador implements Serializable{
     public void setRegistroFotograficoRescatado(List<RegistroFotografico> registroFotograficoRescatado) {
         this.registroFotograficoRescatado = registroFotograficoRescatado;
     }
-    
-    
+
+    public boolean isInformeGuardado() {
+        return informeGuardado;
+    }
+
     
     /*************************************************************/
     
@@ -396,7 +400,7 @@ public class InformeEditarControlador implements Serializable{
         }
     }
     
-    public String guardarInformeResultados(){
+    public void guardarInformeResultados(){
         
         try{
 
@@ -408,22 +412,22 @@ public class InformeEditarControlador implements Serializable{
                 if(informeAux != null){
                     
                     guardarRegistroFotografico(informeAux);
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar",informeAux);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME DE PSICOLOGÍA","Aviso" ));
-                    //return "/paginas/psicologia/panel_taller_psicologia.com?faces-redirect=true";
-                    return enlaces.PATH_INFORME_VER+"?faces-redirect=true";
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME","Aviso" ));
+                    informeGuardado=true;
                 }
                 else{
-                    return null;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Error" ));
+                    informeGuardado=false;
                 }
             }
             else{
-                return null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA","Error" ));
+                informeGuardado=false;
             }
         }catch(Exception e){
             
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA","Aviso" ));
-            return null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
+            informeGuardado=false;
         } 
     }
     
