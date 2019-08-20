@@ -177,7 +177,9 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     //Métodos para invocar a los diferentes servicios web************
     public String guardarAdolescenteInfractor() {
         if (validacion.cedulaValida(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula()) && validacion.verificarFechaNacimiento(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento())) {
+            
             if (this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor() != null) {
+            
                 if ("ECUATORIANA".equals(tipoDocumento)) {
                     this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setDocumento(null);
                     this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
@@ -185,7 +187,9 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
                     this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setCedula(null);
                     this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
                 }
+                
                 AdolescenteInfractorCAI ai_cai = servicioCAI.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
+                
                 if (ai_cai != null) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
                     guardado = true;
@@ -218,6 +222,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     public void guardarEdicionAdolescenteInfractor() {
 
         if (this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor() != null) {
+            
             if (validacion.cedulaValida(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula()) && validacion.verificarFechaNacimiento(this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento())) {
                 if ("ECUATORIANA".equals(tipoDocumento)) {
                     this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setDocumento(null);
