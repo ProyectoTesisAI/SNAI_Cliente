@@ -248,7 +248,7 @@ public class InformeControlador implements Serializable{
         
     }
     
-    public void obtenerDuracionTaller() {
+    private void obtenerDuracionTaller() {
         
         duracionActividades=0;
         
@@ -275,7 +275,7 @@ public class InformeControlador implements Serializable{
         return horaFin;
     }
 
-    public void obtenerRegistroAsistencia() {
+    private void obtenerRegistroAsistencia() {
 
         if (taller == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO SE HA PODIDO CARGAR EL TALLER", "Aviso"));

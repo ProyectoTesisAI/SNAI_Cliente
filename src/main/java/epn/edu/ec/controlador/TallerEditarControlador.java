@@ -142,6 +142,7 @@ public class TallerEditarControlador implements Serializable {
             }
 
             obtenerRegistroAsistencia();
+            asignarListadoRegistroAsistencia();
         }
     }
 
@@ -347,7 +348,7 @@ public class TallerEditarControlador implements Serializable {
     /**
      * ***************************Eventos********************************************
      */
-    public void obtenerRegistroAsistencia() {
+    private void obtenerRegistroAsistencia() {
 
         if (tallerEditar == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO SE HA PODIDO CARGAR EL TALLER", "Aviso"));
@@ -367,6 +368,16 @@ public class TallerEditarControlador implements Serializable {
 
                     }
                 }
+            }
+        }
+    }
+    
+    private void asignarListadoRegistroAsistencia(){
+     
+        for(AdolescenteInfractor a: listadoAsistencia){
+            
+            if(a.getDocumento()!=null){
+                a.setCedula(a.getDocumento());
             }
         }
     }
@@ -529,6 +540,7 @@ public class TallerEditarControlador implements Serializable {
                             guardarItemsTaller(tallerAux);//TAMBIEN SE DEBE CAMBIAR POR UN EDITAR
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
+                            asignarListadoRegistroAsistencia();
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ACTUALIZADO CORRECTAMENTE EL TALLER", "Aviso"));
                             guardado = true;
 

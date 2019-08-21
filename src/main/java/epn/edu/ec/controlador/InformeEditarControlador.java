@@ -241,7 +241,7 @@ public class InformeEditarControlador implements Serializable{
         
     }
 
-    public void obtenerRegistroAsistencia() {
+    private void obtenerRegistroAsistencia() {
 
         if (taller == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO SE HA PODIDO CARGAR EL TALLER", "Aviso"));
@@ -417,6 +417,7 @@ public class InformeEditarControlador implements Serializable{
                 if(informeAux != null){
                     
                     guardarRegistroFotografico(informeAux);
+                    
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME","Aviso" ));
                     informeGuardado=true;
                 }

@@ -23,7 +23,7 @@
 
                     <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
                                  paginator="true" widgetVar="ejecucionMedidaTable">
-                        <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción" width="110">
+                        <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción">
                             <h:outputText value="#{te.idDetalleInfraccionCAI.numeroCausa}" />
                         </p:column>
 

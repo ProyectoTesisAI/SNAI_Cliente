@@ -502,6 +502,16 @@ public class TallerControlador implements Serializable {
 
     }
 
+    private void asignarListadoRegistroAsistencia(){
+     
+        for(AdolescenteInfractor a: listadoAsistencia){
+            
+            if(a.getDocumento()!=null){
+                a.setCedula(a.getDocumento());
+            }
+        }
+    }
+    
     public void guardarRegistroTaller() {
 
         try {
@@ -518,8 +528,9 @@ public class TallerControlador implements Serializable {
                             guardarItemsTaller(tallerAux);
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
+                            asignarListadoRegistroAsistencia();
                             tallerGuardado=true;
-                            tallerCrear=tallerAux;
+                            //tallerCrear=tallerAux;
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
 
                         } else {
