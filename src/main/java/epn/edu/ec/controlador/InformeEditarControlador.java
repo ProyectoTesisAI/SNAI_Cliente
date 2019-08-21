@@ -11,7 +11,9 @@ import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.RecursosEspeciales;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +51,12 @@ public class InformeEditarControlador implements Serializable{
     private boolean informeGuardado;
     
     private EnlacesPrograma enlaces;
+    private RecursosEspeciales recursosEspeciales;
 
     @PostConstruct
     public void init(){
         
+        recursosEspeciales= new RecursosEspeciales();
         enlaces=new EnlacesPrograma();
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
@@ -266,7 +270,8 @@ public class InformeEditarControlador implements Serializable{
                 if(registroFotografico.size()<=4){
                     if(imagenes.get(i) != null ){
                         RegistroFotografico registro= new RegistroFotografico();
-                        byte[] array= Utils.toByteArray(imagenes.get(i).getInputStream());
+                        InputStream imagen= recursosEspeciales.resizeImage(imagenes.get(i).getInputStream(), 400, 400);
+                        byte[] array= Utils.toByteArray(imagen);
                         registro.setImagen(array);
                         registroFotografico.add(registro);
                     }

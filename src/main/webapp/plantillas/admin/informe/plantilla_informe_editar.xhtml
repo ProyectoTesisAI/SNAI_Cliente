@@ -213,8 +213,8 @@
                                 <div class="col-md-5 col-md-offset-1">
                                     <h:outputLabel for="file" value="+ Seleccionar imagen" styleClass="upload" class="btn btn-success " />
                                     <o:inputFile id="file" styleClass="upload" value="#{informeEditarControlador.imagenes}" title="true" label="Seleccione imagen"
-                                                 accept="image/*" acceptMessage="Wrong file type! Should match {2}" multiple="true"
-                                                 maxsize="#{1024 * 1024}" maxsizeMessage="File too large! Should be no more than {2}">
+                                                 accept="image/*" acceptMessage="Tipo de archivo incorrecto! Debería ser de {2}" multiple="true"
+                                                     maxsize="#{1024 * 1024}" maxsizeMessage="Imagen demasiado grande! No debe ser mayor que {2}">
                                         <f:ajax listener="#{informeEditarControlador.asignarImagen()}" render="@form" />
                                     </o:inputFile>
                                     <b:growl id="file_m" for="file"/>

@@ -18,9 +18,13 @@ import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 
@@ -515,6 +519,7 @@ public class TallerControlador implements Serializable {
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
                             tallerGuardado=true;
+                            tallerCrear=tallerAux;
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
 
                         } else {
@@ -539,19 +544,46 @@ public class TallerControlador implements Serializable {
     }
 
     public void guardarPDFAsistencia() {
+    
         //retorna el path del archivo-->Retorna: "file:D:/User/Documents/NetBeansProjects/SistemaReeducacionAI/SistemaReeducacionAI/src/main/java/epn/edu/ec/reportes/RegistroAsistencia.jasper"
         String ruta = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/RegistroAsistencia.jasper").toString();
         //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
         ruta = ruta.substring(6);
 
+
         Map<String, Object> parametros = new HashMap<>();
-        parametros.put("txtUDI", "REGISTRO DE ASISTENCIA " + tallerCrear.getIdUdi().getUdi());
+        
+        String udiRescatado=tallerCrear.getIdUdi().getUdi();
+        String caiRescatado=tallerCrear.getIdCai().getCai();
+        if(udiRescatado !=null && caiRescatado==null){
+            parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + udiRescatado);
+        }
+        else if(udiRescatado==null && caiRescatado!=null){
+            parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + caiRescatado);
+        }
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
+        ZonedDateTime zdt = ZonedDateTime.parse(tallerCrear.getFecha().toString(), dtf);
+        LocalDate ld = zdt.toLocalDate();
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fecha = ld.format(fmt);
+        
         parametros.put("txtTema", "TALLER:  " + tallerCrear.getTema());
+        parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  "+fecha);
+        
         try {
+            
+            List<AdolescenteInfractor> asistencia= new ArrayList<>();
+            for(AdolescenteInfractor a : listadoAsistencia){
+                if(a.getDocumento()!=null){
+                    a.setCedula(a.getDocumento());
+                }
+                asistencia.add(a);
+            }
 
             File jasper = new File(ruta);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(listadoAsistencia));
-
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(asistencia));
             FacesContext context = FacesContext.getCurrentInstance();
             Object response = context.getExternalContext().getResponse();
             if (response instanceof HttpServletResponse) {
@@ -568,8 +600,6 @@ public class TallerControlador implements Serializable {
                 context.responseComplete();
             }
 
-            /*JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\User\\Desktop\\Registro Asistencia "+taller.getIdUdi().getUdi()+".pdf"); // 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GENERADO CORRECTAMENTE EL REGISTRO DE ASISTENCIA ","Aviso" ));*/
         } catch (JRException e) {
             System.out.println("Error:  " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO SE HA GENERADO EL REGISTRO DE ASISTENCIA", "ERROR"));
