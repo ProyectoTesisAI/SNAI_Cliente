@@ -3,10 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="txtUDI" class="java.lang.String"/>
+	<parameter name="txtCentro" class="java.lang.String"/>
 	<parameter name="txtTema" class="java.lang.String"/>
-	<parameter name="txtNumeroTaller" class="java.lang.String"/>
-	<parameter name="txtFechaTaller" class="java.util.Date"/>
+	<parameter name="txtFecha" class="java.lang.String"/>
 	<field name="nombres" class="java.lang.String"/>
 	<field name="apellidos" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -22,13 +21,13 @@
 		<band height="73" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="100" splitType="Stretch">
+		<band height="130" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="5" width="595" height="59" uuid="ebcc5f6b-f129-4f9e-a57c-b8b1057f8766"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{txtUDI}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{txtCentro}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="22" y="67" width="548" height="20" uuid="81b1bcc2-fada-4a54-9364-dcc3680ea4b2"/>
@@ -36,6 +35,13 @@
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txtTema}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="24" y="93" width="250" height="20" uuid="fe36ece0-bbca-4f1b-bd83-c34edb3d6d24"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtFecha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -53,7 +59,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cédula]]></text>
+				<text><![CDATA[Documento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="418" y="2" width="113" height="27" uuid="483baf6a-c660-4d9b-b003-ae00859ad253"/>

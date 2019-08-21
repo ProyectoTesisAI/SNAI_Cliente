@@ -33,6 +33,12 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         enlaces = new EnlacesPrograma();
         listadoAdolescentesInfractoresUDI = new ArrayList<>();
         listadoAdolescentesInfractoresUDI = servicio.listaAdolescentesInfractoresUDI();
+        
+        for(AdolescenteInfractorUDI a : listadoAdolescentesInfractoresUDI){
+            if(a.getIdAdolescenteInfractor().getDocumento()!=null){
+                a.getIdAdolescenteInfractor().setCedula(a.getIdAdolescenteInfractor().getDocumento());
+            }
+        }
     }
 
     public List<AdolescenteInfractorUDI> getListadoAdolescentesInfractoresUDI() {

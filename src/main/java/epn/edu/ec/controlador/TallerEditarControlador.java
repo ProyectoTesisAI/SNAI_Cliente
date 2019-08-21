@@ -18,9 +18,13 @@ import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -561,13 +565,48 @@ public class TallerEditarControlador implements Serializable {
         ruta = ruta.substring(6);
 
         Map<String, Object> parametros = new HashMap<String, Object>();
-        parametros.put("txtUDI", "REGISTRO DE ASISTENCIA " + tallerEditar.getIdUdi().getUdi());
+        
+        String udiRescatado=null;
+        String caiRescatado=null;
+        
+        if(tallerEditar.getIdUdi()!=null){
+            udiRescatado=tallerEditar.getIdUdi().getUdi();
+        }
+        
+        if(tallerEditar.getIdCai()!=null){
+            caiRescatado=tallerEditar.getIdCai().getCai();
+        }
+        
+        
+        if(udiRescatado !=null && caiRescatado==null){
+            parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + udiRescatado);
+        }
+        else if(udiRescatado==null && caiRescatado!=null){
+            parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + caiRescatado);
+        }
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
+        ZonedDateTime zdt = ZonedDateTime.parse(tallerEditar.getFecha().toString(), dtf);
+        LocalDate ld = zdt.toLocalDate();
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fecha = ld.format(fmt);
+        
+        parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " +fecha);
         parametros.put("txtTema", "TALLER:  " + tallerEditar.getTema());
 
         try {
+            
+            List<AdolescenteInfractor> asistencia= new ArrayList<>();
+            for(AdolescenteInfractor a : listadoAsistencia){
+                if(a.getDocumento()!=null){
+                    a.setCedula(a.getDocumento());
+                }
+                asistencia.add(a);
+            }
 
             File jasper = new File(ruta);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(listadoAsistencia));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(asistencia));
 
             FacesContext context = FacesContext.getCurrentInstance();
             Object response = context.getExternalContext().getResponse();

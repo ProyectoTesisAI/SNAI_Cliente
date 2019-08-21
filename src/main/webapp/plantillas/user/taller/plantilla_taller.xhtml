@@ -14,7 +14,7 @@
 
                 <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
 
-                <b:panel look="primary" content-disabled="#{tallerControlador.tallerGuardado}">
+                <b:panel look="primary">
                     <f:facet name="heading">
                         <h:outputText value="CREAR TALLER #{tallerControlador.tipoTaller}" style="color: white; font-weight: bold"  />
                     </f:facet>
@@ -23,7 +23,7 @@
                         <b:tabView active-index="#{tallerControlador.indiceTaller}" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;">    
 
                             <b:tab title="Taller">                
-                                <b:panel  style="border: transparent;" >
+                                <b:panel  style="border: transparent;" content-disabled="#{tallerControlador.tallerGuardado}">
 
                                     <div class="row"  style="margin-top: 50px;">
                                         <div class="col-md-10 col-md-offset-1">
