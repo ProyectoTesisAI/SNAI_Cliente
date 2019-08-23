@@ -5,8 +5,8 @@
         <param-value>Development</param-value>
     </context-param>
     <context-param>
-	<param-name>primefaces.THEME</param-name>
-	<param-value>bootstrap</param-value>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -25,4 +25,14 @@
     <welcome-file-list>
         <welcome-file>login.com</welcome-file>
     </welcome-file-list>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Viewpoint Secure URLs</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>
