@@ -217,7 +217,7 @@
 
                             <b:tab title="Registro Fotográfico">
                                 <div class="row">
-                                    <div class="col-md-4 col-md-offset-4">
+                                    <div class="col-md-4 col-md-offset-2">
                                         <b:dataTable id="registroFoto" rendered="#{not empty informeEditarControlador.registroFotografico}" value="#{informeEditarControlador.registroFotografico}" 
                                                      searching="false"
                                                      paginated="false"
@@ -225,7 +225,7 @@
                                                      var="image"
                                                      style="text-align: center;margin-top: 25px !important; vertical-align: middle;"  >
                                             <b:dataTableColumn label="Imagen" style="width: 60px;">
-                                                <o:graphicImage  value="#{image.imagen}" dataURI="true" width="200" />
+                                                <o:graphicImage  value="#{image.imagen}" dataURI="true" width="500" />
                                             </b:dataTableColumn>
                                         </b:dataTable>
                                     </div>

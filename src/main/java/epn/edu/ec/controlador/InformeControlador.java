@@ -248,7 +248,7 @@ public class InformeControlador implements Serializable{
         
     }
     
-    public void obtenerDuracionTaller() {
+    private void obtenerDuracionTaller() {
         
         duracionActividades=0;
         
@@ -275,7 +275,7 @@ public class InformeControlador implements Serializable{
         return horaFin;
     }
 
-    public void obtenerRegistroAsistencia() {
+    private void obtenerRegistroAsistencia() {
 
         if (taller == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "NO SE HA PODIDO CARGAR EL TALLER", "Aviso"));
@@ -305,7 +305,7 @@ public class InformeControlador implements Serializable{
                     if(imagenes.get(i) != null ){
                         RegistroFotografico registro= new RegistroFotografico();
                         
-                        InputStream imagen= recursosEspeciales.resizeImage(imagenes.get(i).getInputStream(), 400, 400);
+                        InputStream imagen= recursosEspeciales.resizeImage(imagenes.get(i).getInputStream(), 800, 600);
                         byte[] array= Utils.toByteArray(imagen);
                         registro.setImagen(array);
                         registroFotografico.add(registro);
