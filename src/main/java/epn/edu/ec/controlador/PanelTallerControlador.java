@@ -37,9 +37,9 @@ public class PanelTallerControlador implements Serializable {
         if(usuario!=null){
             if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
                 listaTalleres = servicio.listaTalleresSinInforme();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR/LIDER UZDI")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("LIDER UZDI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
                 listaTalleres=servicio.listaTalleresSinInformeSoloUZDI();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
                 listaTalleres=servicio.listaTalleresSinInformeSoloCAI();
             }else {
                 listaTalleres = servicio.listaTalleresSinInformePorUsuario(usuario);

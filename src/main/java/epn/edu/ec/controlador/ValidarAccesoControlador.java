@@ -94,7 +94,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR/LIDER UZDI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("LIDER UZDI") ){
                 }
                 else{
                     FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
@@ -167,7 +167,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ){
                     
                 }
                 else{
@@ -287,7 +287,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
                     
                 }
                 else{
@@ -336,7 +336,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") ||rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ||rolUsuario.equals("EQUIPO TECNICO TRABAJADOR SOCIAL CAI") 
                         || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
                     
                 }
