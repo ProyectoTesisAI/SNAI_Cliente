@@ -15,24 +15,37 @@ public class IdentificacionGeograficaServicio {
 
     public IdentificacionGeografica guardarIdentificacionGeografica(IdentificacionGeografica identificacionGeografica){
         
-        IdentificacionGeografica identificacionGeograficaAux=null;
-        Response response= conexion.conexion(URL_IDENTIFICACION_GEOGRAFICA, "PUT", true, identificacionGeografica);
-        if(response.getStatus()==200){        
-            identificacionGeograficaAux=response.readEntity(IdentificacionGeografica.class);       
-        } 
-       
-        return identificacionGeograficaAux;
-        
+        try {
+            IdentificacionGeografica identificacionGeograficaAux = null;
+            Response response = conexion.conexion(URL_IDENTIFICACION_GEOGRAFICA, "PUT", true, identificacionGeografica);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    identificacionGeograficaAux = response.readEntity(IdentificacionGeografica.class);
+                }
+            }
+
+            return identificacionGeograficaAux;
+        } catch (Exception e) {
+            return null;
+        }
+      
     }
 
     public IdentificacionGeografica obtenerIdentificacionGeografica(Integer id){
         
-        IdentificacionGeografica identificacionGeograficaAux=null;
-        Response response= conexion.conexion(URL_IDENTIFICACION_GEOGRAFICA+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            identificacionGeograficaAux= response.readEntity(IdentificacionGeografica.class);
-        }           
-        return identificacionGeograficaAux;
-        
+        try {
+
+            IdentificacionGeografica identificacionGeograficaAux = null;
+            Response response = conexion.conexion(URL_IDENTIFICACION_GEOGRAFICA + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    identificacionGeograficaAux = response.readEntity(IdentificacionGeografica.class);
+                }
+            }
+
+            return identificacionGeograficaAux;
+        } catch (Exception e) {
+            return null;
+        }      
     }
 }

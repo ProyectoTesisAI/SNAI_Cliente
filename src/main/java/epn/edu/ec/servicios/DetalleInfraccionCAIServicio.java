@@ -21,37 +21,59 @@ public class DetalleInfraccionCAIServicio {
 
     public DetalleInfraccionCAI guardarDetalleInfraccionCAI(DetalleInfraccionCAI detalleInfraccion) {
 
-        DetalleInfraccionCAI informacionInfraccionAux = null;
-        Response response = conexionDetalle.conexion(URL_DETALLE_INFRACCION, "PUT", true, detalleInfraccion);
-        if (response.getStatus() == 200) {
-            informacionInfraccionAux = response.readEntity(DetalleInfraccionCAI.class);
+        try {
+            DetalleInfraccionCAI informacionInfraccionAux = null;
+            Response response = conexionDetalle.conexion(URL_DETALLE_INFRACCION, "PUT", true, detalleInfraccion);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionInfraccionAux = response.readEntity(DetalleInfraccionCAI.class);
+                }
+            }
+
+            return informacionInfraccionAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return informacionInfraccionAux;
-
+        
     }
 
     public DetalleInfraccionCAI obtenerDetalleInfraccionCAI(Integer id) {
 
-        DetalleInfraccionCAI informacionInfraccionAux = null;
-        Response response = conexionDetalle.conexion(URL_DETALLE_INFRACCION + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            informacionInfraccionAux = response.readEntity(DetalleInfraccionCAI.class);
+        try {
+
+            DetalleInfraccionCAI informacionInfraccionAux = null;
+            Response response = conexionDetalle.conexion(URL_DETALLE_INFRACCION + "/" + id.toString(), "GET", true, null);
+            if(response != null){
+                if (response.getStatus() == 200) {
+                    informacionInfraccionAux = response.readEntity(DetalleInfraccionCAI.class);
+                }
+            }            
+            return informacionInfraccionAux;
+        } catch (Exception e) {
+            return null;
         }
-        return informacionInfraccionAux;
+        
     }
 
     public List<DetalleInfraccionCAI> obtenerDetallesInfraccionCAI(AdolescenteInfractorCAI adolescente) {
 
-        List<DetalleInfraccionCAI> listaDetallesInfraccionAux = null;
-        Response response = conexionAdolescente.conexion(URL_DETALLE_INFRACCION+ "/ListaInfraccionesPorAdolescente", "POST", true, adolescente);
-        if (response.getStatus() == 200) {
-            listaDetallesInfraccionAux = response.readEntity(new GenericType<List<DetalleInfraccionCAI>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            listaDetallesInfraccionAux = new ArrayList<>();
-        }
-        return listaDetallesInfraccionAux;
+        try {
+
+            List<DetalleInfraccionCAI> listaDetallesInfraccionAux = null;
+            Response response = conexionAdolescente.conexion(URL_DETALLE_INFRACCION + "/ListaInfraccionesPorAdolescente", "POST", true, adolescente);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaDetallesInfraccionAux = response.readEntity(new GenericType<List<DetalleInfraccionCAI>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaDetallesInfraccionAux = new ArrayList<>();
+                }
+            }
+           
+            return listaDetallesInfraccionAux;
+        } catch (Exception e) {
+            return null;
+        }       
 
     }
 }

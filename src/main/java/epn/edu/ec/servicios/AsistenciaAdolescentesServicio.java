@@ -15,14 +15,18 @@ public class AsistenciaAdolescentesServicio {
 
     public AsistenciaAdolescente guardarRegistroAsistenciaAdolescente(AsistenciaAdolescente asistenciaAdolescente) {
 
-        AsistenciaAdolescente asistenciaAdolescenteAux = null;
-        Response response = conexion.conexion(URL_REGISTRO_ASISTENCIA_ADOLESCENTE, "PUT", true, asistenciaAdolescente);
-        if (response.getStatus() == 200) {
-            asistenciaAdolescenteAux = response.readEntity(AsistenciaAdolescente.class);
+        try {
+            AsistenciaAdolescente asistenciaAdolescenteAux = null;
+            Response response = conexion.conexion(URL_REGISTRO_ASISTENCIA_ADOLESCENTE, "PUT", true, asistenciaAdolescente);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    asistenciaAdolescenteAux = response.readEntity(AsistenciaAdolescente.class);
+                }
+            }
+            return asistenciaAdolescenteAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return asistenciaAdolescenteAux;
-
     }
 
 }

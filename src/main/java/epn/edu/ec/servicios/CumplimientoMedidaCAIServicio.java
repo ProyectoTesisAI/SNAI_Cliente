@@ -15,24 +15,34 @@ public class CumplimientoMedidaCAIServicio {
 
     public CumplimientoMedidaCAI guardarCumplimientoMedidaCAI(CumplimientoMedidaCAI cumplimientoMedidaCAI) {
 
-        CumplimientoMedidaCAI cumplimientoMedidaCAIAux = null;
-        Response response = conexion.conexion(URL_CUMPLIMIENTO_MEDIDA_CAI, "POST", true, cumplimientoMedidaCAI);
-        if (response.getStatus() == 200) {
-            cumplimientoMedidaCAIAux = response.readEntity(CumplimientoMedidaCAI.class);
+        try {
+            CumplimientoMedidaCAI cumplimientoMedidaCAIAux = null;
+            Response response = conexion.conexion(URL_CUMPLIMIENTO_MEDIDA_CAI, "POST", true, cumplimientoMedidaCAI);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    cumplimientoMedidaCAIAux = response.readEntity(CumplimientoMedidaCAI.class);
+                }
+            }
+            return cumplimientoMedidaCAIAux;
+
+        } catch (Exception e) {
+            return null;
         }
-
-        return cumplimientoMedidaCAIAux;
-
     }
 
     public CumplimientoMedidaCAI obtenerCumplimientoMedidaCAI(Integer id) {
 
-        CumplimientoMedidaCAI cumplimientoMedidaCAIAux = null;
-        Response response = conexion.conexion(URL_CUMPLIMIENTO_MEDIDA_CAI + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            cumplimientoMedidaCAIAux = response.readEntity(CumplimientoMedidaCAI.class);
+        try {
+            CumplimientoMedidaCAI cumplimientoMedidaCAIAux = null;
+            Response response = conexion.conexion(URL_CUMPLIMIENTO_MEDIDA_CAI + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    cumplimientoMedidaCAIAux = response.readEntity(CumplimientoMedidaCAI.class);
+                }
+            }
+            return cumplimientoMedidaCAIAux;
+        } catch (Exception e) {
+            return null;
         }
-        return cumplimientoMedidaCAIAux;
-
     }
 }

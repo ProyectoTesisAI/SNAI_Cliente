@@ -20,14 +20,12 @@ public class ActividadesInstrumentosControlador implements Serializable{
     private ActividadesInstrumentos actividadesInstrumentos;
     private ActividadesInstrumentosServicio servicio;
     private boolean guardado;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
         
         permisosUsuario= new PermisosUsuario();
-        enlaces= new EnlacesPrograma();
         servicio= new ActividadesInstrumentosServicio();
         
         actividadesInstrumentos= new ActividadesInstrumentos();

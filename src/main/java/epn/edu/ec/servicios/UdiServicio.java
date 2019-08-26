@@ -26,13 +26,18 @@ public class UdiServicio {
     
     public List<UDI> listaUdi(){
         
-        List<UDI> listaUDIAux=null;
-        Response response= conexion.conexion(URL_UDI, "GET", true, null);
-        if(response.getStatus()==200){
-            listaUDIAux=response.readEntity(new GenericType<List<UDI>>(){});
+        try {
+            List<UDI> listaUDIAux = null;
+            Response response = conexion.conexion(URL_UDI, "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaUDIAux = response.readEntity(new GenericType<List<UDI>>() {
+                    });
+                }
+            }
+            return listaUDIAux;
+        } catch (Exception e) {
+            return null;
         }
-        
-        return listaUDIAux;
-
     }
 }

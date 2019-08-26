@@ -15,24 +15,36 @@ public class InformacionInfraccionServicio {
 
     public InformacionInfraccion guardarInformacionInfraccion(InformacionInfraccion informacionInfraccion){
         
-        InformacionInfraccion informacionInfraccionAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_INFRACCION, "PUT", true, informacionInfraccion);
-        if(response.getStatus()==200){        
-            informacionInfraccionAux=response.readEntity(InformacionInfraccion.class);       
-        } 
-       
-        return informacionInfraccionAux;
-        
+        try {
+            InformacionInfraccion informacionInfraccionAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_INFRACCION, "PUT", true, informacionInfraccion);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionInfraccionAux = response.readEntity(InformacionInfraccion.class);
+                }
+            }
+
+            return informacionInfraccionAux;
+        } catch (Exception e) {
+            return null;
+        }
+  
     }
 
     public InformacionInfraccion obtenerInformacionInfraccion(Integer id){
         
-        InformacionInfraccion informacionInfraccionAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_INFRACCION+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            informacionInfraccionAux= response.readEntity(InformacionInfraccion.class);
-        }           
-        return informacionInfraccionAux;
-        
+        try {
+            InformacionInfraccion informacionInfraccionAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_INFRACCION + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionInfraccionAux = response.readEntity(InformacionInfraccion.class);
+                }
+            }
+
+            return informacionInfraccionAux;
+        } catch (Exception e) {
+            return null;
+        }   
     }
 }

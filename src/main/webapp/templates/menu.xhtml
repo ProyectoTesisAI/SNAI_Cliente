@@ -68,7 +68,7 @@
                     <div id="menu_lateral">
                    
                     <p:panelMenu style="width:270px">
-                        <p:submenu expanded="false" label="Adolescente UDI" rendered="#{administracionMenuControlador.esUZDI}">
+                        <p:submenu expanded="false" label="Adolescente UZDI" rendered="#{administracionMenuControlador.esUZDI}">
                             <p:menuitem value="• &nbsp; Crear Registro"  rendered="#{administracionMenuControlador.permitidoCrearAdolescenteUDI}" outcome="#{enlacesPrograma.PATH_ADOLESCENTE_UDI_CREAR }"/>
                             <p:menuitem value="• &nbsp; Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteUZDI()}" />
                         </p:submenu>
@@ -77,17 +77,17 @@
                             <p:menuitem value="• &nbsp; Gestionar Información" action="#{administracionMenuControlador.validarGestionInformacionAdolescenteCAI()}"/>
                         </p:submenu>
                         <p:submenu expanded="false" label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
-                            <p:menuitem value="• &nbsp; Crear Registro"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
+                            <p:menuitem value="• &nbsp; Crear Taller"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"  />
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu  label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
-                            <p:menuitem value="• &nbsp; Crear Registro" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
+                            <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" />
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu label="Inspector Educador" rendered="#{administracionMenuControlador.tipoRolInspector}">
-                            <p:menuitem value="• &nbsp; Crear Registro" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
+                            <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"/>
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" />
                         </p:submenu>

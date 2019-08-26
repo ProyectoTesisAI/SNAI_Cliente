@@ -104,15 +104,15 @@ public class PanelReporteControlador implements Serializable {
         }
         
         listaDescripcionReportes = new ArrayList<>();
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 1", "Reporte para obetener los adolescetes por Tipo de delito"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 2", "Reporte para obetener los adolescetes por la edad del adolescente"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 3", "Reporte para obetener la edad del adolescente en una determinada fecha"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 4", "Reporte para obetener los adolescetes por la nacionalidad del adolescente"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 5", "Reporte para obetener los adolescetes por el tipo de medida"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 6", "Reporte para obetener los adolescetes por fecha de ingreso al CAI"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 7", "Reporte para obetener los adolescetes por su nivel de educación"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 8", "Reporte para obetener los adolescetes por su edad y nivel de educación"));
-        listaDescripcionReportes.add(reporte=new Reporte("Reporte 9", "Reporte para obetener los adolescetes por su lugar de residencia"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 1", "Reporte para obtener los adolescetes por Tipo de delito"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 2", "Reporte para obtener los adolescetes por la edad del adolescente"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 3", "Reporte para obtener la edad del adolescente en una determinada fecha"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 4", "Reporte para obtener los adolescetes por la nacionalidad del adolescente"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 5", "Reporte para obtener los adolescetes por el tipo de medida"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 6", "Reporte para obtener los adolescetes por fecha de ingreso al CAI"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 7", "Reporte para obtener los adolescetes por su nivel de educación"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 8", "Reporte para obtener los adolescetes por su edad y nivel de educación"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 9", "Reporte para obtener los adolescetes por su lugar de residencia"));
     }
 
     public List<Reporte1> getListaReportes1CAI() {

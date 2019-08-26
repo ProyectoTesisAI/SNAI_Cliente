@@ -17,52 +17,84 @@ public class DatosProvinciaCantonServicio {
 
     public String guardarDatosProvinciaCanton(DatosProvinciaCanton datosProviciaCanton) {
 
-        DatosProvinciaCanton datosProviciaCantonAux = null;
-        String url = null;
-        Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "POST", true, datosProviciaCanton);
-        datosProviciaCantonAux = response.readEntity(DatosProvinciaCanton.class);
+        try {
+            DatosProvinciaCanton datosProviciaCantonAux = null;
+            String url = null;
+            Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "POST", true, datosProviciaCanton);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    datosProviciaCantonAux = response.readEntity(DatosProvinciaCanton.class);
 
-        if (datosProviciaCantonAux != null) {
-            url = "/menu.com?faces-redirect=true";
+                    if (datosProviciaCantonAux != null) {
+                        url = "/menu.com?faces-redirect=true";
+                    }
+                }             
+            }
+            return url;
+        } catch (Exception e) {
+            return null;
         }
-        return url;
-
+       
     }
 
     
     public String actualizarDatosProvinciaCanton(DatosProvinciaCanton datosProviciaCanton) {
 
-        String url = null;
-        Integer id = datosProviciaCanton.getIdDatosProvinciaCanton();
-        DatosProvinciaCanton datosProviciaCantonAux = null;
-        Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "PUT", true, datosProviciaCanton);
-        datosProviciaCantonAux = response.readEntity(DatosProvinciaCanton.class);
+        try {
 
-        if (datosProviciaCantonAux != null) {
-            url = "/menu.com?faces-redirect=true";
+            String url = null;
+            Integer id = datosProviciaCanton.getIdDatosProvinciaCanton();
+            DatosProvinciaCanton datosProviciaCantonAux = null;
+            Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "PUT", true, datosProviciaCanton);
+            if (response != null) {
+
+                if (response.getStatus() == 200) {
+                    datosProviciaCantonAux = response.readEntity(DatosProvinciaCanton.class);
+                    if (datosProviciaCantonAux != null) {
+                        url = "/menu.com?faces-redirect=true";
+                    }
+                }
+            }
+            return url;
+        } catch (Exception e) {
+            return null;
         }
-        return url;
+        
 
     }
 
     public List<DatosProvinciaCanton> listarDatosProvinciaCanton() {
 
-        List<DatosProvinciaCanton> listaActividadesAux = null;
-        Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "GET", true, null);
-        if (response.getStatus() == 200) {
-            listaActividadesAux = response.readEntity(new GenericType<List<DatosProvinciaCanton>>() {
-            });
+        try {
+            List<DatosProvinciaCanton> listaActividadesAux = null;
+            Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "GET", true, null);
+            if (response != null) {
+
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<DatosProvinciaCanton>>() {
+                    });
+                }
+            }
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
         }
-        return listaActividadesAux;
+        
     }
 
     public String eliminarDatosProvinciaCanton(Integer id) {
 
-        String url = null;
-        Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "DELETE", true, null);
-        if (response != null) {
-            url = "/menu.com?faces-redirect=true";
-        }
-        return url;
+        try {
+            String url = null;
+            Response response = conexion.conexion(URL_DATOS_PROVINCIA_CANTON, "DELETE", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200 || response.getStatus() == 204) {
+                    url = "/menu.com?faces-redirect=true";
+                }
+            }
+            return url;
+        } catch (Exception e) {
+            return null;
+        }       
     }
 }

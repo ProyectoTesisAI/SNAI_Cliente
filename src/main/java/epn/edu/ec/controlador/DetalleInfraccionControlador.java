@@ -145,8 +145,6 @@ public class DetalleInfraccionControlador implements Serializable {
         String provincia = detalleInfraccion.getProvinciaInfraccion();
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
-        } else {
-            System.out.println("No hay provincia seleccionada");
         }
         return cantones;
     }
@@ -162,8 +160,7 @@ public class DetalleInfraccionControlador implements Serializable {
     
 
     /**
-     * *******************Métodos para invocar a los diferentes servicios
-     * web*****************
+     * *******************Métodos para invocar a los diferentes servicios web*****************
      */
     public void guardarDetalleInfraccion() {
         

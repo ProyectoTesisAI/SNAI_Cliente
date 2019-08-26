@@ -37,15 +37,23 @@ public class AdolescenteInfractorServicio {
     }
 
     public AdolescenteInfractor guardarAdolescenteInfractorUDI(AdolescenteInfractor adolescenteInfractor) {
-        AdolescenteInfractor adolescenteInfractorAux = null;
-        Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR, "POST", true, adolescenteInfractor);
-        if (response.getStatus() == 200) {
-            adolescenteInfractorAux = response.readEntity(AdolescenteInfractor.class);
-        }
-        return adolescenteInfractorAux;
+        
+        try {
+            AdolescenteInfractor adolescenteInfractorAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR, "POST", true, adolescenteInfractor);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    adolescenteInfractorAux = response.readEntity(AdolescenteInfractor.class);
+                }
+            }
+            return adolescenteInfractorAux;
+        } catch (Exception e) {
+            return null;
+        }       
     }
 
     public List<Reporte1> reporteTipoDelitoUDI(Reporte1 tipoDelito) {
+        
         List<Reporte1> reporteAux = null;
         String token = null;
         Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
@@ -56,11 +64,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteTipoDelitoUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(tipoDelito, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte1>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte1>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -76,11 +86,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteTipoDelitoCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(tipoDelito, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte1>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte1>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -96,11 +108,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -116,11 +130,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -136,11 +152,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadFechaUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -156,11 +174,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadFechaCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte2>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -176,11 +196,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNacionalidadCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nacionalidad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte3>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte3>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -196,11 +218,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNacionalidadUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nacionalidad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte3>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte3>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -216,11 +240,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteMedidaSocioeducativaUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(medidaSocioeducativa, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte4>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte4>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -236,11 +262,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteMedidaSocioeducativaCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(medidaSocioeducativa, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte4>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte4>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -256,11 +284,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteFechaIngesoCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(fechaIngreso, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte5>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte5>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -276,11 +306,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionSCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -296,11 +328,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionNCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -316,12 +350,14 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionSUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
-        }
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
+        }     
         return reporteAux;
     }
     
@@ -336,12 +372,14 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteNivelEducacionNUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(nivelEducacion, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
-        }
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
+        }   
         return reporteAux;
     }
     
@@ -356,12 +394,14 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoSiCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
-        }
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
+        }   
         return reporteAux;
     }
     
@@ -376,11 +416,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoNoCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -396,11 +438,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoSiUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6S>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -416,11 +460,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteEdadNivelEducativoNoUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.post(Entity.entity(edad, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte6N>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -436,11 +482,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteLugarResidenciaCAI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.get();
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -456,11 +504,13 @@ public class AdolescenteInfractorServicio {
         WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteLugarResidenciaUDI");
         Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
         Response response = invocationBuilder.get();
-        if (response.getStatus() == 200) {
-            reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
-            });
-        } else if (response.getStatus() == 204) {
-            reporteAux = null;
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
         }
         return reporteAux;
     }
@@ -469,9 +519,11 @@ public class AdolescenteInfractorServicio {
 
         int statusRespuesta = 0;
         Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR+"/"+id.toString(), "DELETE", true, null);
-        if (response.getStatus() == 200 || response.getStatus() == 204) {
-            statusRespuesta = 200;
-        }
+        if (response != null) {
+            if (response.getStatus() == 200 || response.getStatus() == 204) {
+                statusRespuesta = 200;
+            }
+        }    
         return statusRespuesta;
     }
 }

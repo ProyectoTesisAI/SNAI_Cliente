@@ -15,13 +15,19 @@ public class LoginServicio {
     
     public Usuario loguearUsuario(Usuario usuario){
         
-        Usuario usuarioAux=null;
-        Response response= conexion.conexion(URL_USUARIO_LOGIN+"/login", "POST", false, usuario);
-        if(response.getStatus()==200){
-            usuarioAux =response.readEntity(Usuario.class);
+        try {
+            Usuario usuarioAux = null;
+            Response response = conexion.conexion(URL_USUARIO_LOGIN + "/login", "POST", false, usuario);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    usuarioAux = response.readEntity(Usuario.class);
+                }
+            }
+
+            return usuarioAux;
+        } catch (Exception e) {
+            return null;
         }
-        
-        return usuarioAux;
 
     }
 }

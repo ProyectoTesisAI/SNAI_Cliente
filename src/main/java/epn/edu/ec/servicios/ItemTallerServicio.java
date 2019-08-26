@@ -8,8 +8,6 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.utilidades.Constantes;
-import java.util.List;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -27,13 +25,18 @@ public class ItemTallerServicio {
 
     public ItemTaller guardarItemTaller(ItemTaller itemTaller){
         
-        ItemTaller itemTallerPsicologiaAux=null;
-        Response response= conexion.conexion(URL_ITEM_TALLER_PSICOLOGIA, "PUT", true, itemTaller);
-        if(response.getStatus()==200){
-            itemTallerPsicologiaAux =response.readEntity(ItemTaller.class);
-        }
-        
-        return itemTallerPsicologiaAux;
+        try {
+            ItemTaller itemTallerPsicologiaAux = null;
+            Response response = conexion.conexion(URL_ITEM_TALLER_PSICOLOGIA, "PUT", true, itemTaller);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    itemTallerPsicologiaAux = response.readEntity(ItemTaller.class);
+                }
+            }
 
+            return itemTallerPsicologiaAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

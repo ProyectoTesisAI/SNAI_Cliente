@@ -15,24 +15,35 @@ public class EjeEducativoServicio {
 
     public EjeEducativo guardarEjeEducativo(EjeEducativo ejeEducativo) {
 
-        EjeEducativo ejeEducativoAux = null;
-        Response response = conexion.conexion(URL_EJE_EDUCATIVO, "PUT", true, ejeEducativo);
-        if (response.getStatus() == 200) {
-            ejeEducativoAux = response.readEntity(EjeEducativo.class);
+        try {
+            EjeEducativo ejeEducativoAux = null;
+            Response response = conexion.conexion(URL_EJE_EDUCATIVO, "PUT", true, ejeEducativo);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeEducativoAux = response.readEntity(EjeEducativo.class);
+                }
+            }
+            return ejeEducativoAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return ejeEducativoAux;
-
     }
 
     public EjeEducativo obtenerEjeEducativo(Integer id) {
 
-        EjeEducativo ejeEducativoCAIAux = null;
-        Response response = conexion.conexion(URL_EJE_EDUCATIVO + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            ejeEducativoCAIAux = response.readEntity(EjeEducativo.class);
-        }
-        return ejeEducativoCAIAux;
+        try {
+            EjeEducativo ejeEducativoCAIAux = null;
+            Response response = conexion.conexion(URL_EJE_EDUCATIVO + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeEducativoCAIAux = response.readEntity(EjeEducativo.class);
+                }
+            }
+
+            return ejeEducativoCAIAux;
+        } catch (Exception e) {
+            return null;
+        }       
 
     }
 }

@@ -17,13 +17,20 @@ public class DatosTipoPenalCAIServicio {
     
     public List<DatosTipoPenalCAI> listarDatosTipoPenalCAI(){
         
-        List<DatosTipoPenalCAI> listaActividadesAux=null;
-        Response response = conexion.conexion(URL_DATOS_TIPO_PENAL_CAI, "GET", true, null);
-        if (response.getStatus() == 200) {
-            listaActividadesAux = response.readEntity(new GenericType<List<DatosTipoPenalCAI>>() {
-            });
-        }
-        return listaActividadesAux;
+        try {
+            List<DatosTipoPenalCAI> listaActividadesAux = null;
+            Response response = conexion.conexion(URL_DATOS_TIPO_PENAL_CAI, "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<DatosTipoPenalCAI>>() {
+                    });
+                }
+            }
 
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
 }

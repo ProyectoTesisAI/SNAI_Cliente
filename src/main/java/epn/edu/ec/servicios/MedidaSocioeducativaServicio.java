@@ -20,49 +20,75 @@ public class MedidaSocioeducativaServicio {
 
     public MedidaSocioeducativa guardarMedidaSocioeducativa(MedidaSocioeducativa medidaSocioeducativa){
         
-        MedidaSocioeducativa medidaSocioeducativaAux=null;
-        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA, "PUT", true, medidaSocioeducativa);
-        if(response.getStatus()==200){        
-            medidaSocioeducativaAux=response.readEntity(MedidaSocioeducativa.class);       
-        } 
-       
-        return medidaSocioeducativaAux;
-        
+        try {
+
+            MedidaSocioeducativa medidaSocioeducativaAux = null;
+            Response response = conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA, "PUT", true, medidaSocioeducativa);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    medidaSocioeducativaAux = response.readEntity(MedidaSocioeducativa.class);
+                }
+            }
+            return medidaSocioeducativaAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<MedidaSocioeducativa> listaMedidaSocioeducativosPorAdolescentesUzdi(AdolescenteInfractorUDI adolescenteInfractorUDI){
         
-        List<MedidaSocioeducativa> listaMedidasSocioeducativas=null;
-        Response response= conexionAdolescenteUDI.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidasSocioeducativasPorAdolescenteUDI", "POST", true, adolescenteInfractorUDI);
-        if(response.getStatus()==200){
-            listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
+        try {
+            List<MedidaSocioeducativa> listaMedidasSocioeducativas = null;
+            Response response = conexionAdolescenteUDI.conexion(URL_MEDIDA_SOCIOEDUCATIVA + "/MedidasSocioeducativasPorAdolescenteUDI", "POST", true, adolescenteInfractorUDI);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaMedidasSocioeducativas = response.readEntity(new GenericType<List<MedidaSocioeducativa>>() {
+                    });
+                }
+            }
+            return listaMedidasSocioeducativas;
+        } catch (Exception e) {
+            return null;
         }
-        
-        return listaMedidasSocioeducativas;
 
     }
     
     public List<MedidaSocioeducativa> listaMedidasSocioeducativasPorAdolescente(Integer idAdolescenteUZDI){
-        List<MedidaSocioeducativa> listaMedidasSocioeducativas = null;
-        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/Adolescente/"+idAdolescenteUZDI.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            listaMedidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
-        }
-        return listaMedidasSocioeducativas;
+        
+        try {
+            List<MedidaSocioeducativa> listaMedidasSocioeducativas = null;
+            Response response = conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA + "/Adolescente/" + idAdolescenteUZDI.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaMedidasSocioeducativas = response.readEntity(new GenericType<List<MedidaSocioeducativa>>() {
+                    });
+                }
+            }
+
+            return listaMedidasSocioeducativas;
+        } catch (Exception e) {
+            return null;
+        }        
     }
     
     public MedidaSocioeducativa obtenerMedidaMasAlta(Integer idAdolescenteUZDI){
         
-        MedidaSocioeducativa medidaMasAlta=null;
-        Response response= conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/MedidaMasAlta/AdolescenteUDI/"+idAdolescenteUZDI.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            List<MedidaSocioeducativa> medidasSocioeducativas=response.readEntity(new GenericType<List<MedidaSocioeducativa>>(){});
-            if(medidasSocioeducativas!=null){
-                medidaMasAlta=medidasSocioeducativas.get(0);
+        try {
+            MedidaSocioeducativa medidaMasAlta = null;
+            Response response = conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA + "/MedidaMasAlta/AdolescenteUDI/" + idAdolescenteUZDI.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    List<MedidaSocioeducativa> medidasSocioeducativas = response.readEntity(new GenericType<List<MedidaSocioeducativa>>() {
+                    });
+                    if (medidasSocioeducativas != null) {
+                        medidaMasAlta = medidasSocioeducativas.get(0);
+                    }
+                }
             }
+            return medidaMasAlta;
+            
+        } catch (Exception e) {
+            return null;
         }
-        
-        return medidaMasAlta;
-
     }
 }

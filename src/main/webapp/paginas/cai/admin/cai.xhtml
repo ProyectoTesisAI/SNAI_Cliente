@@ -41,12 +41,12 @@
                             <h:outputText value="#{ai.idAdolescenteInfractor.edad}" />
                         </p:column>
 
-                        <p:column headerText="Añadir">
-                            <b:commandButton value="Añadir" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIControlador.agregarInformacion(ai)}">
+                        <p:column headerText="Ver / Agregar Información">
+                            <b:commandButton value="Ver / Agregar" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIControlador.agregarInformacion(ai)}">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>
-                        <p:column headerText="Editar">
+                        <p:column headerText="Editar Información">
                             <b:commandButton value="Editar" class="btn btn-primary btn-block" action="#{panelAdolescenteInfractorCAIControlador.editarInformacion(ai)}">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
