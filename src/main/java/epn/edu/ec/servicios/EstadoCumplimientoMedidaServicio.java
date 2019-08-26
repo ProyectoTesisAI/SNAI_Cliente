@@ -15,24 +15,36 @@ public class EstadoCumplimientoMedidaServicio {
 
     public EstadoCumplimientoMedida guardarEstadoCumplimientoMedida(EstadoCumplimientoMedida estadoCumplimientoMedida) {
 
-        EstadoCumplimientoMedida estadoCumplimientoMedidaAux = null;
-        Response response = conexion.conexion(URL_ESTADO_CUMPLIMIENTO_MEDIDA, "PUT", true, estadoCumplimientoMedida);
-        if (response.getStatus() == 200) {
-            estadoCumplimientoMedidaAux = response.readEntity(EstadoCumplimientoMedida.class);
+        try {
+            EstadoCumplimientoMedida estadoCumplimientoMedidaAux = null;
+            Response response = conexion.conexion(URL_ESTADO_CUMPLIMIENTO_MEDIDA, "PUT", true, estadoCumplimientoMedida);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    estadoCumplimientoMedidaAux = response.readEntity(EstadoCumplimientoMedida.class);
+                }
+
+            }
+            return estadoCumplimientoMedidaAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return estadoCumplimientoMedidaAux;
-
     }
 
     public EstadoCumplimientoMedida obtenerEstadoCumplimientoMedida(Integer id) {
 
-        EstadoCumplimientoMedida estadoCumplimientoMedidaAux = null;
-        Response response = conexion.conexion(URL_ESTADO_CUMPLIMIENTO_MEDIDA + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            estadoCumplimientoMedidaAux = response.readEntity(EstadoCumplimientoMedida.class);
-        }
-        return estadoCumplimientoMedidaAux;
+        try {
+            EstadoCumplimientoMedida estadoCumplimientoMedidaAux = null;
+            Response response = conexion.conexion(URL_ESTADO_CUMPLIMIENTO_MEDIDA + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    estadoCumplimientoMedidaAux = response.readEntity(EstadoCumplimientoMedida.class);
+                }
+            }
 
+            return estadoCumplimientoMedidaAux;
+        } catch (Exception e) {
+            return null;
+        }
+       
     }
 }

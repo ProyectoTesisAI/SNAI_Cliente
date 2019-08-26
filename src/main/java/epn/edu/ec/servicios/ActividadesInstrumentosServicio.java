@@ -15,24 +15,35 @@ public class ActividadesInstrumentosServicio {
 
     public ActividadesInstrumentos guardarActividadesInstrumentos(ActividadesInstrumentos actividadesInstrumentos) {
 
-        ActividadesInstrumentos actividadesInstrumentosAux = null;
-        Response response = conexion.conexion(URL_ACTIVIDADES_INSTRUMENTOS, "PUT", true, actividadesInstrumentos);
-        if (response.getStatus() == 200) {
-            actividadesInstrumentosAux = response.readEntity(ActividadesInstrumentos.class);
+        try {
+            
+            ActividadesInstrumentos actividadesInstrumentosAux = null;
+            Response response = conexion.conexion(URL_ACTIVIDADES_INSTRUMENTOS, "PUT", true, actividadesInstrumentos);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    actividadesInstrumentosAux = response.readEntity(ActividadesInstrumentos.class);
+                }
+            }
+            return actividadesInstrumentosAux;
+        }catch(Exception e){
+            return null;
         }
-
-        return actividadesInstrumentosAux;
-
     }
 
     public ActividadesInstrumentos obtenerActividadesInstrumentos(Integer id) {
 
-        ActividadesInstrumentos actividadesInstrumentosAux = null;
-        Response response = conexion.conexion(URL_ACTIVIDADES_INSTRUMENTOS+"/"+id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            actividadesInstrumentosAux = response.readEntity(ActividadesInstrumentos.class);
-        }
-        return actividadesInstrumentosAux;
+        try {
+            ActividadesInstrumentos actividadesInstrumentosAux = null;
+            Response response = conexion.conexion(URL_ACTIVIDADES_INSTRUMENTOS + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    actividadesInstrumentosAux = response.readEntity(ActividadesInstrumentos.class);
+                }
+            }
+            return actividadesInstrumentosAux;
 
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

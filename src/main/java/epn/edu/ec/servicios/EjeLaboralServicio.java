@@ -15,24 +15,37 @@ public class EjeLaboralServicio {
 
     public EjeLaboral guardarEjeLaboral(EjeLaboral ejeLaboral) {
 
-        EjeLaboral ejeLaboralAux = null;
-        Response response = conexion.conexion(URL_EJE_LABORAL, "PUT", true, ejeLaboral);
-        if (response.getStatus() == 200) {
-            ejeLaboralAux = response.readEntity(EjeLaboral.class);
-        }
+        try {
+            EjeLaboral ejeLaboralAux = null;
+            Response response = conexion.conexion(URL_EJE_LABORAL, "PUT", true, ejeLaboral);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeLaboralAux = response.readEntity(EjeLaboral.class);
+                }
+            }
 
-        return ejeLaboralAux;
+            return ejeLaboralAux;
+        } catch (Exception e) {
+            return null;
+        }     
 
     }
 
     public EjeLaboral obtenerEjeLaboral(Integer id) {
 
-        EjeLaboral ejeLaboralAux = null;
-        Response response = conexion.conexion(URL_EJE_LABORAL + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            ejeLaboralAux = response.readEntity(EjeLaboral.class);
-        }
-        return ejeLaboralAux;
+        try {
+            EjeLaboral ejeLaboralAux = null;
+            Response response = conexion.conexion(URL_EJE_LABORAL + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeLaboralAux = response.readEntity(EjeLaboral.class);
+                }
+            }
+
+            return ejeLaboralAux;
+        } catch (Exception e) {
+            return null;
+        }       
 
     }
 }

@@ -30,159 +30,259 @@ public class TallerServicio {
     
     public Taller guardarTaller(Taller taller){
         
-        Taller tallerAux=null;
-        Response response= conexion.conexion(URL_TALLER, "POST", true, taller);
-        if(response.getStatus()==200){
-            tallerAux =response.readEntity(Taller.class);
-        }
-        
-        return tallerAux;
+        try {
+            Taller tallerAux = null;
+            Response response = conexion.conexion(URL_TALLER, "POST", true, taller);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    tallerAux = response.readEntity(Taller.class);
+                }
+            }
 
+            return tallerAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     public Taller editarTaller(Taller taller){
         
-        Taller tallerAux=null;
-        Response response= conexion.conexion(URL_TALLER, "PUT", true, taller);
-        if(response.getStatus()==200){
-            tallerAux =response.readEntity(Taller.class);
-        }
-        
-        return tallerAux;
+        try {
+            Taller tallerAux = null;
+            Response response = conexion.conexion(URL_TALLER, "PUT", true, taller);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    tallerAux = response.readEntity(Taller.class);
+                }
+            }
 
+            return tallerAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     public int eliminarTaller(Integer id) {
 
-        int statusRespuesta = 0;
-        Response response = conexion.conexion(URL_TALLER+"/"+id.toString(), "DELETE", true, null);
-        if (response.getStatus() == 200 || response.getStatus() == 204) {
-            statusRespuesta = 200;
+        try {
+            int statusRespuesta = 0;
+            Response response = conexion.conexion(URL_TALLER + "/" + id.toString(), "DELETE", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200 || response.getStatus() == 204) {
+                    statusRespuesta = 200;
+                }
+            }
+
+            return statusRespuesta;
+        } catch (Exception e) {
+            return 0;
         }
-        return statusRespuesta;
+        
     }
     
     public List<Taller> listaTalleresSinInforme(){
         
-        List<Taller> listaActividadesAux=null;
-        Response response= conexion.conexion(URL_TALLER+"/TalleresSinInforme", "GET", true, null);
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }           
-        return listaActividadesAux;
+        try {
+            List<Taller> listaActividadesAux = null;
+            Response response = conexion.conexion(URL_TALLER + "/TalleresSinInforme", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<Taller>>() {
+                    });
+                }
+            }
+
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
+        }      
     }
     
     public List<Taller> listaTalleresSinInformePorUsuario(Usuario usuario){
         
-        List<Taller> listaActividadesAux=null;
-        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformePorUsuario", "POST", true, usuario);
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }else if(response.getStatus()==204){
-            listaActividadesAux=new ArrayList<>();
+        try {
+            List<Taller> listaActividadesAux = null;
+            Response response = conexionUsuario.conexion(URL_TALLER + "/TalleresSinInformePorUsuario", "POST", true, usuario);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<Taller>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaActividadesAux = new ArrayList<>();
+                }
+            }
+
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
         }
-        return listaActividadesAux;
+        
     }
     
     public List<Taller> listaTalleresSinInformeSoloUZDI(){
         
-        List<Taller> listaActividadesAux=null;
-        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformeSoloUZDI", "GET", true, null);
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }else if(response.getStatus()==204){
-            listaActividadesAux=new ArrayList<>();
-        }
-        return listaActividadesAux;
+        try {
+            List<Taller> listaActividadesAux = null;
+            Response response = conexionUsuario.conexion(URL_TALLER + "/TalleresSinInformeSoloUZDI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<Taller>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaActividadesAux = new ArrayList<>();
+                }
+            }
+
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
+        }       
     }
     
     public List<Taller> listaTalleresSinInformeSoloCAI(){
         
-        List<Taller> listaActividadesAux=null;
-        Response response= conexionUsuario.conexion(URL_TALLER+"/TalleresSinInformeSoloCAI", "GET", true, null);
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }else if(response.getStatus()==204){
-            listaActividadesAux=new ArrayList<>();
-        }
-        return listaActividadesAux;
+        try {
+            List<Taller> listaActividadesAux = null;
+            Response response = conexionUsuario.conexion(URL_TALLER + "/TalleresSinInformeSoloCAI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<Taller>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaActividadesAux = new ArrayList<>();
+                }
+            }
+
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
+        }       
     }
     
     public List<Taller> listaTalleresConInforme(){
         
-        List<Taller> listaActividadesAux=null;
-        Response response= conexion.conexion(URL_TALLER+"/TalleresConInforme", "GET", true, null);
-        if(response.getStatus()==200){
-            listaActividadesAux= response.readEntity(new GenericType<List<Taller>>(){});
-        }           
-        return listaActividadesAux;
+        try {
+            List<Taller> listaActividadesAux = null;
+            Response response = conexion.conexion(URL_TALLER + "/TalleresConInforme", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaActividadesAux = response.readEntity(new GenericType<List<Taller>>() {
+                    });
+                }
+            }
+
+            return listaActividadesAux;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
     
     public Integer obtenerNumeroAdolescentePorUdi(UDI udi ){
         
-        Integer cantidadAdolescentesAux=0;
-        Response response= conexionUDI.conexion(URL_TALLER+"/NumeroAdolescentesPorUzdi", "POST", true, udi);
-        if(response.getStatus()==200){
-           
-            String cantidadAdolescente= response.readEntity(String.class);
-                    
-            if(cantidadAdolescente!=null){
-                
-                cantidadAdolescentesAux= Integer.parseInt(cantidadAdolescente);
+        try {
+            Integer cantidadAdolescentesAux = 0;
+            Response response = conexionUDI.conexion(URL_TALLER + "/NumeroAdolescentesPorUzdi", "POST", true, udi);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+
+                    String cantidadAdolescente = response.readEntity(String.class);
+
+                    if (cantidadAdolescente != null) {
+                        cantidadAdolescentesAux = Integer.parseInt(cantidadAdolescente);
+                    }
+                }
             }
+
+            return cantidadAdolescentesAux;
+        } catch (NumberFormatException e) {
+            return 0;
         }
-        return cantidadAdolescentesAux;
+        
     }
     
     public Integer obtenerNumeroAdolescentePorCai(CAI cai ){
         
-        Integer cantidadAdolescentesAux=0;
-        Response response= conexionCAI.conexion(URL_TALLER+"/NumeroAdolescentesPorCai", "POST", true, cai);
-        if(response.getStatus()==200){
-           
-            String cantidadAdolescente= response.readEntity(String.class);
-                    
-            if(cantidadAdolescente!=null){
-                
-                cantidadAdolescentesAux= Integer.parseInt(cantidadAdolescente);
+        try {
+            Integer cantidadAdolescentesAux = 0;
+            Response response = conexionCAI.conexion(URL_TALLER + "/NumeroAdolescentesPorCai", "POST", true, cai);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+
+                    String cantidadAdolescente = response.readEntity(String.class);
+
+                    if (cantidadAdolescente != null) {
+
+                        cantidadAdolescentesAux = Integer.parseInt(cantidadAdolescente);
+                    }
+                }
             }
+
+            return cantidadAdolescentesAux;
+        } catch (NumberFormatException e) {
+            return 0;
         }
         
-        return cantidadAdolescentesAux;
     }
     
     public List<AdolescenteInfractorUDI> listaAdolescentesPorUzdi(UDI udi){
         
-        List<AdolescenteInfractorUDI> asistenciaAux=null;
-        Response response= conexionUDI.conexion(URL_TALLER+"/ListarAdolescentesPorUzdi", "POST", true, udi);
-        if(response.getStatus()==200){
-            
-            List<AdolescenteInfractorUDI> listaAsistenciaUdi= response.readEntity(new GenericType<List<AdolescenteInfractorUDI>>(){});
-            if(listaAsistenciaUdi != null && listaAsistenciaUdi.size() >0){               
-                
-                asistenciaAux=listaAsistenciaUdi;
+        try {
+            List<AdolescenteInfractorUDI> asistenciaAux = null;
+            Response response = conexionUDI.conexion(URL_TALLER + "/ListarAdolescentesPorUzdi", "POST", true, udi);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+
+                    List<AdolescenteInfractorUDI> listaAsistenciaUdi = response.readEntity(new GenericType<List<AdolescenteInfractorUDI>>() {
+                    });
+                    if (listaAsistenciaUdi != null && listaAsistenciaUdi.size() > 0) {
+
+                        asistenciaAux = listaAsistenciaUdi;
+                    }
+                }
             }
+
+            return asistenciaAux;
+        } catch (Exception e) {
+            return null;
         }
-        return asistenciaAux;
+        
     }
     
     public List<ItemTaller> obtenerItemsPorTalleres(Integer idTaller){
         
-        List<ItemTaller> listaItemsTaller=null;
-        Response response= conexion.conexion(URL_TALLER+"/ItemsTaller/"+idTaller.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            listaItemsTaller= response.readEntity(new GenericType<List<ItemTaller>>(){});
-        }           
-        return listaItemsTaller;
+        try {
+            List<ItemTaller> listaItemsTaller = null;
+            Response response = conexion.conexion(URL_TALLER + "/ItemsTaller/" + idTaller.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaItemsTaller = response.readEntity(new GenericType<List<ItemTaller>>() {
+                    });
+                }
+            }
+
+            return listaItemsTaller;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
     
     public RegistroAsistencia obtenerRegistroAsistenciaPorTaller(Integer idTaller){
         
-        RegistroAsistencia registroAsistenciaAux =null;
-        Response response= conexion.conexion(URL_TALLER+"/RegistroAsistencia/"+idTaller.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            registroAsistenciaAux= response.readEntity(RegistroAsistencia.class);
-        }           
-        return registroAsistenciaAux;
+        try {
+            RegistroAsistencia registroAsistenciaAux = null;
+            Response response = conexion.conexion(URL_TALLER + "/RegistroAsistencia/" + idTaller.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    registroAsistenciaAux = response.readEntity(RegistroAsistencia.class);
+                }
+            }
+
+            return registroAsistenciaAux;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
 }

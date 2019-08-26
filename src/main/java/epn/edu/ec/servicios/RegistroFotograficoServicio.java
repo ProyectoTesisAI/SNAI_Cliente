@@ -29,25 +29,41 @@ public class RegistroFotograficoServicio {
         try{
             Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO, "PUT", true, registroFotografico);
         }catch(Exception e){
-            System.out.println("ERROR:---->"+e);
         }
 
     }
     
     public List<RegistroFotografico> listaRegistroFotografico(Integer id){
         
-        List<RegistroFotografico> listaRegistroFotograficoAux=null;
-        Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO+"/Informe/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            listaRegistroFotograficoAux= response.readEntity(new GenericType<List<RegistroFotografico>>(){});
-        }           
-        return listaRegistroFotograficoAux;
+        try {
+            List<RegistroFotografico> listaRegistroFotograficoAux = null;
+            Response response = conexion.conexion(URL_REGISTRO_FOTOGRAFICO + "/Informe/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaRegistroFotograficoAux = response.readEntity(new GenericType<List<RegistroFotografico>>() {
+                    });
+                }
+            }
+
+            return listaRegistroFotograficoAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     public Integer eliminarRegistroFotografico(Integer registroFotografico){
            
-        Response response= conexion.conexion(URL_REGISTRO_FOTOGRAFICO+"/"+registroFotografico.toString(), "DELETE", true, null);
-        Integer resultado=response.getStatus();
-        return resultado;
+        try {
+
+            Response response = conexion.conexion(URL_REGISTRO_FOTOGRAFICO + "/" + registroFotografico.toString(), "DELETE", true, null);
+            if (response != null) {
+                Integer resultado = response.getStatus();
+                return resultado;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

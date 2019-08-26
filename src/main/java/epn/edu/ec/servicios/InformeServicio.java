@@ -21,66 +21,118 @@ public class InformeServicio {
     
     public Informe guardarInforme(Informe informe){
         
-        Informe informeAux=null;
-        Response response= conexion.conexion(URL_INFORME, "PUT", true, informe);
-        if(response.getStatus()==200){
-            informeAux =response.readEntity(Informe.class);
-        }
-        return informeAux;
+        try {
+            Informe informeAux = null;
+            Response response = conexion.conexion(URL_INFORME, "PUT", true, informe);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informeAux = response.readEntity(Informe.class);
+                }
+            }
 
+            return informeAux;
+        } catch (Exception e) {
+            return null;
+        }
     }    
     
     public int eliminarInforme(Integer id) {
 
-        int statusRespuesta = 0;
-        Response response = conexion.conexion(URL_INFORME+"/"+id.toString(), "DELETE", true, null);
-        if (response.getStatus() == 200 || response.getStatus() == 204) {
-            statusRespuesta = 200;
+        try {
+            int statusRespuesta = 0;
+            Response response = conexion.conexion(URL_INFORME + "/" + id.toString(), "DELETE", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200 || response.getStatus() == 204) {
+                    statusRespuesta = 200;
+                }
+            }
+
+            return statusRespuesta;
+        } catch (Exception e) {
+            return 0;
         }
-        return statusRespuesta;
     }
     
     public List<Informe> listarInforme(){
         
-        List<Informe> listaItemsInforme=null;
-        Response response= conexion.conexion(URL_INFORME, "GET", true, null);
-        if(response.getStatus()==200){
-            listaItemsInforme= response.readEntity(new GenericType<List<Informe>>(){});
-        }           
-        return listaItemsInforme;
+        try {
+
+            List<Informe> listaItemsInforme = null;
+            Response response = conexion.conexion(URL_INFORME, "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaItemsInforme = response.readEntity(new GenericType<List<Informe>>() {
+                    });
+                }
+            }
+
+            return listaItemsInforme;
+        } catch (Exception e) {
+            return null;
+        }    
     }
     
     public List<Informe> listarInformesPorUsuario(Usuario usuario){
+        
+        try{
+        
+        }catch(Exception e){
+            return null;
+        }
         List<Informe> listaInformesAux = null;
         Response response = conexionU.conexion(URL_INFORME+"/InformesPorUsuario", "POST", true, usuario);
-        if(response.getStatus()==200){
-            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
-        }else if(response.getStatus()==204){
-            listaInformesAux=new ArrayList<>();
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                listaInformesAux = response.readEntity(new GenericType<List<Informe>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                listaInformesAux = new ArrayList<>();
+            }
         }
+       
         return listaInformesAux;
     }
     
     public List<Informe> listarInformesSoloUZDI(){
-        List<Informe> listaInformesAux = null;
-        Response response = conexionU.conexion(URL_INFORME+"/InformeSoloUZDI", "GET", true, null);
-        if(response.getStatus()==200){
-            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
-        }else if(response.getStatus()==204){
-            listaInformesAux=new ArrayList<>();
+        
+        try {
+            List<Informe> listaInformesAux = null;
+            Response response = conexionU.conexion(URL_INFORME + "/InformeSoloUZDI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaInformesAux = response.readEntity(new GenericType<List<Informe>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaInformesAux = new ArrayList<>();
+                }
+            }
+
+            return listaInformesAux;
+        } catch (Exception e) {
+            return null;
         }
-        return listaInformesAux;
+        
     }
     
     public List<Informe> listarInformesSoloCAI(){
-        List<Informe> listaInformesAux = null;
-        Response response = conexionU.conexion(URL_INFORME+"/InformeSoloCAI", "GET", true, null);
-        if(response.getStatus()==200){
-            listaInformesAux=response.readEntity(new GenericType<List<Informe>>(){});
-        }else if(response.getStatus()==204){
-            listaInformesAux=new ArrayList<>();
+        
+        try {
+            List<Informe> listaInformesAux = null;
+            Response response = conexionU.conexion(URL_INFORME + "/InformeSoloCAI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaInformesAux = response.readEntity(new GenericType<List<Informe>>() {
+                    });
+                } else if (response.getStatus() == 204) {
+                    listaInformesAux = new ArrayList<>();
+                }
+            }
+
+            return listaInformesAux;
+        } catch (Exception e) {
+            return null;
         }
-        return listaInformesAux;
+        
     }
     
 }

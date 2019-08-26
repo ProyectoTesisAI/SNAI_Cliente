@@ -23,25 +23,16 @@ public class EjeEducativoCAIControlador implements Serializable{
     
     private boolean guardado;
     private boolean estudia;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
     
      @PostConstruct
     public void init(){
         
         permisosUsuario= new PermisosUsuario();
-        enlaces= new EnlacesPrograma();
         servicio= new EjeEducativoServicio();
         
         ejeEducativo=new EjeEducativo();
         guardado=false;
-        
-        if(isEstudia()){
-            estudia=true;
-        }
-        else{
-            estudia=false;
-        }
         
         adolescenteInfractorCAI= new AdolescenteInfractorCAI();
         AdolescenteInfractorCAI adolescenteInfractorCAIAux= (AdolescenteInfractorCAI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
@@ -51,6 +42,7 @@ public class EjeEducativoCAIControlador implements Serializable{
             adolescenteInfractorCAI=adolescenteInfractorCAIAux;
             
             EjeEducativo ejeEducativoCAIAux= servicio.obtenerEjeEducativo(adolescenteInfractorCAI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
             if(ejeEducativoCAIAux!=null){
                 ejeEducativo=ejeEducativoCAIAux;
                 guardado=true;

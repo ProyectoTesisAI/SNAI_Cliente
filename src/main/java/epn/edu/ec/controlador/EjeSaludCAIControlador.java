@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.EjeSalud;
 import epn.edu.ec.servicios.EjeSaludServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
@@ -31,7 +30,6 @@ public class EjeSaludCAIControlador implements Serializable{
     private boolean guardado;
     private boolean saludable;
     private boolean consumeSustancias;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
     
     private String genero;
@@ -45,18 +43,11 @@ public class EjeSaludCAIControlador implements Serializable{
         
         permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
-        enlaces= new EnlacesPrograma();
         servicio= new EjeSaludServicio();
         
         ejeSalud= new EjeSalud();
         guardado=false;
         consumeSustancias=true;
-        
-        if (isSaludable()) {
-            saludable = true;
-        } else {
-            saludable = false;            
-        }
         
         if (isEsDiscapacidad()) {
             tipoD = "SI";

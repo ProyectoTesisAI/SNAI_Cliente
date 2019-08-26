@@ -15,24 +15,38 @@ public class InformacionJudicialServicio {
 
     public InformacionJudicial guardarInformacionJudicial(InformacionJudicial informacionJudicial){
         
-        InformacionJudicial informacionJudicialAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_JUDICIAL, "PUT", true, informacionJudicial);
-        if(response.getStatus()==200){        
-            informacionJudicialAux=response.readEntity(InformacionJudicial.class);       
-        } 
-       
-        return informacionJudicialAux;
-        
+        try {
+
+            InformacionJudicial informacionJudicialAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_JUDICIAL, "PUT", true, informacionJudicial);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionJudicialAux = response.readEntity(InformacionJudicial.class);
+                }
+            }
+
+            return informacionJudicialAux;
+        } catch (Exception e) {
+            return null;
+        }
+     
     }
 
     public InformacionJudicial obtenerInformacionJudicial(Integer id){
         
-        InformacionJudicial informacionJudicialAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_JUDICIAL+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            informacionJudicialAux= response.readEntity(InformacionJudicial.class);
-        }           
-        return informacionJudicialAux;
-        
+        try {
+
+            InformacionJudicial informacionJudicialAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_JUDICIAL + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionJudicialAux = response.readEntity(InformacionJudicial.class);
+                }
+            }
+
+            return informacionJudicialAux;
+        } catch (Exception e) {
+            return null;
+        }    
     }
 }

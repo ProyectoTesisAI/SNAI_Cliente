@@ -31,7 +31,6 @@ public class EjeSaludUDIControlador implements Serializable {
     private boolean guardado;
     private boolean saludable;
     private boolean consumeSustancias;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
 
     private String genero;
@@ -45,7 +44,6 @@ public class EjeSaludUDIControlador implements Serializable {
 
         permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
-        enlaces = new EnlacesPrograma();
         servicio = new EjeSaludServicio();
 
         ejeSalud = new EjeSalud();
@@ -70,11 +68,15 @@ public class EjeSaludUDIControlador implements Serializable {
         if (adolescenteInfractorUDIAux != null) {
 
             adolescenteInfractorUDI = adolescenteInfractorUDIAux;
+            
             EjeSalud ejeSaludUDIAux = servicio.obtenerEjeSalud(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
             if (ejeSaludUDIAux != null) {
+            
                 ejeSalud = ejeSaludUDIAux;
                 guardado = true;
                 String saludableAux = ejeSaludUDIAux.getSituacionSalud();
+                
                 if (saludableAux.equals("SALUDABLE")) {
                     saludable = true;
                 } else if (saludableAux.equals("NO SALUDABLE")) {
@@ -93,6 +95,7 @@ public class EjeSaludUDIControlador implements Serializable {
                 }
             }
             genero = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
+            
             if (genero.equals("MASCULINO")) {
                 esMujer = false;
             } else if (genero.equals("FEMENINO")) {

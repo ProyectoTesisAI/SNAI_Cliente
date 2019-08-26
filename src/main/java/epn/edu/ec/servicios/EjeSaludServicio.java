@@ -15,24 +15,36 @@ public class EjeSaludServicio {
 
     public EjeSalud guardarEjeSalud(EjeSalud ejeSalud) {
 
-        EjeSalud ejeSaludCAIAux = null;
-        Response response = conexion.conexion(URL_EJE_SALUD, "PUT", true, ejeSalud);
-        if (response.getStatus() == 200) {
-            ejeSaludCAIAux = response.readEntity(EjeSalud.class);
-        }
+        try {
+            EjeSalud ejeSaludCAIAux = null;
+            Response response = conexion.conexion(URL_EJE_SALUD, "PUT", true, ejeSalud);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeSaludCAIAux = response.readEntity(EjeSalud.class);
+                }
+            }
+            return ejeSaludCAIAux;
 
-        return ejeSaludCAIAux;
+        } catch (Exception e) {
+            return null;
+        }
 
     }
 
     public EjeSalud obtenerEjeSalud(Integer id) {
 
-        EjeSalud ejeSaludCAIAux = null;
-        Response response = conexion.conexion(URL_EJE_SALUD + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            ejeSaludCAIAux = response.readEntity(EjeSalud.class);
-        }
-        return ejeSaludCAIAux;
+        try {
+            EjeSalud ejeSaludCAIAux = null;
+            Response response = conexion.conexion(URL_EJE_SALUD + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    ejeSaludCAIAux = response.readEntity(EjeSalud.class);
+                }
+            }
+            return ejeSaludCAIAux;
+        } catch (Exception e) {
+            return null;
+        }       
 
     }
 }

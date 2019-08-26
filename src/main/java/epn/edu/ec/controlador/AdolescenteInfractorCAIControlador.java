@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
-import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
@@ -29,8 +28,7 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     private AdolescenteInfractor adolescenteInfractorCrear;
     private AdolescenteInfractor adolescenteInfractorEditar;
-    private AdolescenteInfractorServicio servicio;
-
+   
     private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
     private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
     private AdolescenteInfractorCAIServicio servicioCAI;
@@ -58,14 +56,15 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
         adolescenteInfractorCrear = new AdolescenteInfractor();
         adolescenteInfractorEditar = new AdolescenteInfractor();
-        servicio = new AdolescenteInfractorServicio();
 
         adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
         this.adolescenteInfractorCrear.setTipo("CAI");
         adolescenteInfractorCAICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
         adolescenteInfractorCAIEditar = new AdolescenteInfractorCAI();
+        
         AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
         if (adolescenteInfractorCAIAux != null) {
+        
             adolescenteInfractorCAIEditar = adolescenteInfractorCAIAux;
             guardado = true;
             if (adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getCedula() != null && adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getDocumento() == null) {

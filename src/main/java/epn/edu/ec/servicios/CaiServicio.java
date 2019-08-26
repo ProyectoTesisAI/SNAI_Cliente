@@ -17,15 +17,18 @@ public class CaiServicio {
 
     public List<CAI> listaCai() {
 
-        List<CAI> listaCAIAux = null;
-        Response response = conexion.conexion(URL_CAI, "GET", true, null);
-        if (response.getStatus() == 200) {
-            listaCAIAux = response.readEntity(new GenericType<List<CAI>>() {
-            });
+        try {
+            List<CAI> listaCAIAux = null;
+            Response response = conexion.conexion(URL_CAI, "GET", true, null);
+            if (response.getStatus() == 200) {
+                listaCAIAux = response.readEntity(new GenericType<List<CAI>>() {
+                });
+            }
+
+            return listaCAIAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return listaCAIAux;
-
     }
 
 }

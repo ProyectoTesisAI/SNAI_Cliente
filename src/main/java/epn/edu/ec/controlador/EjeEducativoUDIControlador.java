@@ -23,25 +23,16 @@ public class EjeEducativoUDIControlador implements Serializable{
     
     private boolean guardado;
     private boolean estudia;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisosUsuario;
     
      @PostConstruct
     public void init(){
         
         permisosUsuario= new PermisosUsuario();
-        enlaces= new EnlacesPrograma();
         servicio= new EjeEducativoServicio();
         
         ejeEducativo=new EjeEducativo();
         guardado=false;
-        
-        if(isEstudia()){
-            estudia=true;
-        }
-        else{
-            estudia=false;
-        }
         
         adolescenteInfractorUDI= new AdolescenteInfractorUDI();
         AdolescenteInfractorUDI adolescenteInfractorUDIAux= (AdolescenteInfractorUDI)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");

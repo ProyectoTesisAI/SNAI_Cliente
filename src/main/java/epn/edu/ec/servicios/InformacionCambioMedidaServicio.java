@@ -15,24 +15,36 @@ public class InformacionCambioMedidaServicio {
 
     public InformacionCambioMedidaCAI guardarInformacionCambioMedidaCAI(InformacionCambioMedidaCAI informacionCambioMedida){
         
-        InformacionCambioMedidaCAI informacionCambioMedidaAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_CAMBIO_MEDIDA, "PUT", true, informacionCambioMedida);
-        if(response.getStatus()==200){        
-            informacionCambioMedidaAux=response.readEntity(InformacionCambioMedidaCAI.class);       
-        } 
-       
-        return informacionCambioMedidaAux;
-        
+        try {
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_CAMBIO_MEDIDA, "PUT", true, informacionCambioMedida);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionCambioMedidaAux = response.readEntity(InformacionCambioMedidaCAI.class);
+                }
+            }
+
+            return informacionCambioMedidaAux;
+        } catch (Exception e) {
+            return null;
+        }      
     }
 
     public InformacionCambioMedidaCAI obtenerInformacionCambioMedidaCAI(Integer id){
         
-        InformacionCambioMedidaCAI informacionCambioMedidaAux=null;
-        Response response= conexion.conexion(URL_INFORMACION_CAMBIO_MEDIDA+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            informacionCambioMedidaAux= response.readEntity(InformacionCambioMedidaCAI.class);
+        try {
+            InformacionCambioMedidaCAI informacionCambioMedidaAux = null;
+            Response response = conexion.conexion(URL_INFORMACION_CAMBIO_MEDIDA + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    informacionCambioMedidaAux = response.readEntity(InformacionCambioMedidaCAI.class);
+                }
+            }
+
+            return informacionCambioMedidaAux;
+        } catch (Exception e) {
+            return null;
         }
-        return informacionCambioMedidaAux;
-        
+          
     }
 }

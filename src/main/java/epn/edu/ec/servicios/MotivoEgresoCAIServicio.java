@@ -15,24 +15,33 @@ public class MotivoEgresoCAIServicio {
 
     public MotivoEgresoCAI guardarMotivoEgresoCAI(MotivoEgresoCAI motivoEgresoCAI){
         
-        MotivoEgresoCAI motivoEgresoCAIAux=null;
-        Response response= conexion.conexion(URL_MOTIVO_EGRESO, "PUT", true, motivoEgresoCAI);
-        if(response.getStatus()==200){        
-            motivoEgresoCAIAux=response.readEntity(MotivoEgresoCAI.class);       
-        } 
-       
-        return motivoEgresoCAIAux;
-        
+        try {
+            MotivoEgresoCAI motivoEgresoCAIAux = null;
+            Response response = conexion.conexion(URL_MOTIVO_EGRESO, "PUT", true, motivoEgresoCAI);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    motivoEgresoCAIAux = response.readEntity(MotivoEgresoCAI.class);
+                }
+            }
+            return motivoEgresoCAIAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public MotivoEgresoCAI obtenerMotivoEgresoCAI(Integer id){
         
-        MotivoEgresoCAI motivoEgresoCAIAux=null;
-        Response response= conexion.conexion(URL_MOTIVO_EGRESO+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            motivoEgresoCAIAux= response.readEntity(MotivoEgresoCAI.class);
-        }           
-        return motivoEgresoCAIAux;
-        
+        try {
+            MotivoEgresoCAI motivoEgresoCAIAux = null;
+            Response response = conexion.conexion(URL_MOTIVO_EGRESO + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    motivoEgresoCAIAux = response.readEntity(MotivoEgresoCAI.class);
+                }
+            }
+            return motivoEgresoCAIAux;
+        } catch (Exception e) {
+            return null;
+        }  
     }
 }

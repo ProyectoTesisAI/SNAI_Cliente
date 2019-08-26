@@ -15,24 +15,35 @@ public class RepresentanteServicio {
 
     public Representante guardarRepresentante(Representante representante){
         
-        Representante representanteAux=null;
-        Response response= conexion.conexion(URL_REPRESENTANTE, "PUT", true, representante);
-        if(response.getStatus()==200){        
-            representanteAux=response.readEntity(Representante.class);       
-        } 
-       
-        return representanteAux;
-        
+        try {
+            Representante representanteAux = null;
+            Response response = conexion.conexion(URL_REPRESENTANTE, "PUT", true, representante);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    representanteAux = response.readEntity(Representante.class);
+                }
+            }
+
+            return representanteAux;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Representante obtenerRepresentante(Integer id){
         
-        Representante representanteAux=null;
-        Response response= conexion.conexion(URL_REPRESENTANTE+"/"+id.toString(), "GET", true, null);
-        if(response.getStatus()==200){
-            representanteAux= response.readEntity(Representante.class);
-        }           
-        return representanteAux;
+        try {
+            Representante representanteAux = null;
+            Response response = conexion.conexion(URL_REPRESENTANTE + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    representanteAux = response.readEntity(Representante.class);
+                }
+            }
+            return representanteAux;
         
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -21,50 +21,77 @@ public class AdolescenteInfractorCAIServicio {
 
     public AdolescenteInfractorCAI guardarAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorCAI) {
 
-        AdolescenteInfractorCAI adolescenteInfractorCAIAux = null;
-        Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "POST", true, adolescenteInfractorCAI);
-        if (response.getStatus() == 200) {
-            adolescenteInfractorCAIAux = response.readEntity(AdolescenteInfractorCAI.class);
+        try {
+            AdolescenteInfractorCAI adolescenteInfractorCAIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "POST", true, adolescenteInfractorCAI);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    adolescenteInfractorCAIAux = response.readEntity(AdolescenteInfractorCAI.class);
+                }
+
+            }
+            return adolescenteInfractorCAIAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return adolescenteInfractorCAIAux;
-
     }
     
     public AdolescenteInfractorCAI guardarEdicionAdolescenteInfractorCAI(AdolescenteInfractorCAI adolescenteInfractorCAI) {
 
-        AdolescenteInfractorCAI adolescenteInfractorUDIAux = null;
-        Response responseAI = conexionAI.conexion(URL_ADOLESCENTE_INFRACTOR, "PUT", true, adolescenteInfractorCAI.getIdAdolescenteInfractor());
-        if (responseAI.getStatus() == 200) {
-            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "PUT", true, adolescenteInfractorCAI);
-            if (response.getStatus() == 200) {
-                adolescenteInfractorUDIAux = response.readEntity(AdolescenteInfractorCAI.class);
+        try {
+            AdolescenteInfractorCAI adolescenteInfractorUDIAux = null;
+            Response responseAI = conexionAI.conexion(URL_ADOLESCENTE_INFRACTOR, "PUT", true, adolescenteInfractorCAI.getIdAdolescenteInfractor());
+            if (responseAI != null) {
+                if (responseAI.getStatus() == 200) {
+                    Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "PUT", true, adolescenteInfractorCAI);
+                    if (response.getStatus() == 200) {
+                        adolescenteInfractorUDIAux = response.readEntity(AdolescenteInfractorCAI.class);
+                    }
+                }
+
             }
+            return adolescenteInfractorUDIAux;
+        } catch (Exception e) {
+            return null;
         }
-
-        return adolescenteInfractorUDIAux;
-
+        
     }
 
     public AdolescenteInfractorCAI obtenerAdolescenteInfractorCAI(Integer id) {
 
-        AdolescenteInfractorCAI adolescenteInfractorCAIAux = null;
-        Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI + "/" + id.toString(), "GET", true, null);
-        if (response.getStatus() == 200) {
-            adolescenteInfractorCAIAux = response.readEntity(AdolescenteInfractorCAI.class);
+        try {
+            AdolescenteInfractorCAI adolescenteInfractorCAIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI + "/" + id.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    adolescenteInfractorCAIAux = response.readEntity(AdolescenteInfractorCAI.class);
+                }
+            }
+
+            return adolescenteInfractorCAIAux;
+
+        } catch (Exception e) {
+            return null;
         }
-        return adolescenteInfractorCAIAux;
 
     }
 
     public List<AdolescenteInfractorCAI> listaAdolescentesInfractoresCAI() {
 
-        List<AdolescenteInfractorCAI> listaAdolescentesCAIAux = null;
-        Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "GET", true, null);
-        if (response.getStatus() == 200) {
-            listaAdolescentesCAIAux = response.readEntity(new GenericType<List<AdolescenteInfractorCAI>>() {
-            });
+        try {
+
+            List<AdolescenteInfractorCAI> listaAdolescentesCAIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI, "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaAdolescentesCAIAux = response.readEntity(new GenericType<List<AdolescenteInfractorCAI>>() {
+                    });
+                }
+            }
+            return listaAdolescentesCAIAux;
+        } catch (Exception e) {
+            return null;
         }
-        return listaAdolescentesCAIAux;
+        
     }
 }
