@@ -54,9 +54,6 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
                     fc.setViewRoot(fc.getApplication().getViewHandler().createView(fc, errorPageLocation));
                     fc.getPartialViewContext().setRenderAll(true);
                     fc.renderResponse();
-                } else {
-                    //redirect error page
-                    nav.handleNavigation(fc, null, "/error/error_sesion.com");
                 }
 
                 fc.renderResponse();
