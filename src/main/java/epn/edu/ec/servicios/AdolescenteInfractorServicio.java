@@ -10,6 +10,7 @@ import epn.edu.ec.modelo.Reporte5;
 import epn.edu.ec.modelo.Reporte6N;
 import epn.edu.ec.modelo.Reporte6S;
 import epn.edu.ec.modelo.Reporte7;
+import epn.edu.ec.modelo.Reporte8;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.Constantes;
 import java.util.Date;
@@ -507,6 +508,28 @@ public class AdolescenteInfractorServicio {
         if (response != null) {
             if (response.getStatus() == 200) {
                 reporteAux = response.readEntity(new GenericType<List<Reporte7>>() {
+                });
+            } else if (response.getStatus() == 204) {
+                reporteAux = null;
+            }
+        }
+        return reporteAux;
+    }
+    
+    public List<Reporte8> reporteInformesCompletos() {
+        List<Reporte8> reporteAux = null;
+        String token = null;
+        Usuario usuarioAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        if (usuarioAux != null) {
+            token = usuarioAux.getToken();
+        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget webTarget = cliente.target(URL_ADOLESCENTE_INFRACTOR).path("reporteInformesCompletos");
+        Invocation.Builder invocationBuilder= webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+        Response response = invocationBuilder.get();
+        if (response != null) {
+            if (response.getStatus() == 200) {
+                reporteAux = response.readEntity(new GenericType<List<Reporte8>>() {
                 });
             } else if (response.getStatus() == 204) {
                 reporteAux = null;

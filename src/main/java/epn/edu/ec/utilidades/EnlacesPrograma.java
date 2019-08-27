@@ -95,6 +95,7 @@ public class EnlacesPrograma {
     public String PATH_PANEL_REPORTE_7 = "/paginas/reportes/panel_generar_reporte_7.com";
     public String PATH_PANEL_REPORTE_8 = "/paginas/reportes/panel_generar_reporte_8.com";
     public String PATH_PANEL_REPORTE_9 = "/paginas/reportes/panel_generar_reporte_9.com";
+    public String PATH_PANEL_REPORTE_10 = "/paginas/reportes/panel_generar_reporte_10.com";
     
     public String PATH_PANEL_USUARIO_NUEVO = "/paginas/gestion/panel_administracion_usuario.com";
 

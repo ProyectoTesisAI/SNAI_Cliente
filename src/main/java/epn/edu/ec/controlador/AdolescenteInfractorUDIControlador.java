@@ -64,19 +64,6 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
         this.adolescenteInfractorCrear.setTipo("UZDI");
 
         adolescenteInfractorUDICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
-        adolescenteInfractorUDIEditar = new AdolescenteInfractorUDI();
-        AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
-        if (adolescenteInfractorUDIAux != null) {
-            adolescenteInfractorUDIEditar = adolescenteInfractorUDIAux;
-            guardado = true;
-            if (adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getCedula() != null && adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getDocumento() == null) {
-                tipoDocumento = "ECUATORIANA";
-            } else if (adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getCedula() == null && adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getDocumento() != null) {
-                tipoDocumento = "EXTRANJERA";
-            }
-            adolescenteInfractorEditar = adolescenteInfractorUDIEditar.getIdAdolescenteInfractor();
-        }
-
     }
 
     public AdolescenteInfractorUDI getAdolescenteInfractorUDICrear() {

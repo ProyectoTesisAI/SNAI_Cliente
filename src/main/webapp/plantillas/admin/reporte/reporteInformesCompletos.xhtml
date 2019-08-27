@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition>
+            <b:form id="form">
+                <b:row>                            
+                    <b:column span="3" offset="0">
+                        <h:commandButton value="Buscar" class="btn btn-primary btn-block" action="#{panelReportesControlador.buscarInformesCompletos()}">
+                            <f:ajax execute="form" render="tablaReporte10"/>
+                        </h:commandButton>
+                    </b:column>
+                </b:row>
+                <br/>
+                <br/>
+                <br/>
+                <h:commandLink>
+                    <p:graphicImage value="./../../resources/imagenes/icono_excel.png" title="EXPORTAR A EXCEL" height="40"/>
+                    <p:dataExporter type="xls" target="tablaReporte10" fileName="Edad_Lugar_Residencia_UDI" pageOnly="true"/>
+                </h:commandLink>
+                <br/>
+                <p:dataTable id="tablaReporte10" var="tp" value="#{panelReportesControlador.listaReportes8}" reflow="true" rows="20" paginator="true">
+                    <p:column headerText="Cédula" filterMatchMode="contains" filterBy="#{tp.cedula}">
+                        <h:outputText value="#{tp.cedula}"/>
+                    </p:column>
+                    <p:column headerText="Nombres" filterMatchMode="contains" filterBy="#{tp.nombres}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.nombres}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos" filterMatchMode="contains" filterBy="#{tp.apellidos}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Rol" filterMatchMode="contains" filterBy="#{tp.rol}">
+                        <h:outputText style="text-transform:uppercase" value="#{tp.rol}"/>
+                    </p:column>
+                    <p:column headerText="Informes Completos">
+                        <h:outputText value="#{tp.cantidadInformesCompletos}"/>
+                    </p:column>
+                </p:dataTable> 
+            </b:form>
+        </ui:composition>
+    </h:body>
+</html>

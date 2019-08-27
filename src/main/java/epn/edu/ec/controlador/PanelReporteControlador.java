@@ -11,6 +11,7 @@ import epn.edu.ec.modelo.Reporte5;
 import epn.edu.ec.modelo.Reporte6N;
 import epn.edu.ec.modelo.Reporte6S;
 import epn.edu.ec.modelo.Reporte7;
+import epn.edu.ec.modelo.Reporte8;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
@@ -45,6 +46,7 @@ public class PanelReporteControlador implements Serializable {
     private List<Reporte6N> listaReportes6NUDI;
     private List<Reporte7> listaReportes7CAI;
     private List<Reporte7> listaReportes7UDI;
+    private List<Reporte8> listaReportes8;
     private AdolescenteInfractorServicio servicio;
     private Date fechaBuscar;
     private String nacionalidad;
@@ -81,6 +83,7 @@ public class PanelReporteControlador implements Serializable {
         listaReportes6NUDI = new ArrayList<>();
         listaReportes7CAI = new ArrayList<>();
         listaReportes7UDI = new ArrayList<>();
+        listaReportes8 = new ArrayList<>();
         reporte1 = new Reporte1();
         reporte2 = new Reporte2();
         nacionalidad = null;
@@ -113,6 +116,7 @@ public class PanelReporteControlador implements Serializable {
         listaDescripcionReportes.add(reporte=new Reporte("Reporte 7", "Reporte para obtener los adolescetes por su nivel de educación"));
         listaDescripcionReportes.add(reporte=new Reporte("Reporte 8", "Reporte para obtener los adolescetes por su edad y nivel de educación"));
         listaDescripcionReportes.add(reporte=new Reporte("Reporte 9", "Reporte para obtener los adolescetes por su lugar de residencia"));
+        listaDescripcionReportes.add(reporte=new Reporte("Reporte 10", "Reporte para obtener los informes completos por cada usuario del sistema SNAI"));
     }
 
     public List<Reporte1> getListaReportes1CAI() {
@@ -235,6 +239,14 @@ public class PanelReporteControlador implements Serializable {
         this.listaReportes7UDI = listaReportes7UDI;
     }
 
+    public List<Reporte8> getListaReportes8() {
+        return listaReportes8;
+    }
+
+    public void setListaReportes8(List<Reporte8> listaReportes8) {
+        this.listaReportes8 = listaReportes8;
+    }
+    
     public List<DatosTipoPenalCAI> getTiposPenal() {
         return tiposPenal;
     }
@@ -550,6 +562,15 @@ public class PanelReporteControlador implements Serializable {
         }
     }
     
+    public List<Reporte8> buscarInformesCompletos() {
+        List<Reporte8> reporteRespuesta = servicio.reporteInformesCompletos();
+        if (reporteRespuesta != null) {
+            return listaReportes8 = reporteRespuesta;
+        } else {
+            return listaReportes8 = null;
+        }
+    }
+    
     public String generarReportes(Reporte reporte) {
 
         try {
@@ -571,6 +592,8 @@ public class PanelReporteControlador implements Serializable {
                 return enlaces.PATH_PANEL_REPORTE_8+"?faces-redirect=true";
             }else if("Reporte 9".equals(reporte.getNombre())){
                 return enlaces.PATH_PANEL_REPORTE_9+"?faces-redirect=true";
+            }else if("Reporte 10".equals(reporte.getNombre())){
+                return enlaces.PATH_PANEL_REPORTE_10+"?faces-redirect=true";
             }else{
                 return enlaces.PATH_ERROR+"?faces-redirect=true";
             }            

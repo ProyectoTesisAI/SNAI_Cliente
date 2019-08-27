@@ -183,7 +183,7 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtDiscapacidad1" value="Discapacidad"/>
-                            <b:selectOneMenu id="txtDiscapacidad1" update="txtModuloDiscapacidad" process="@this" value="#{ejeSaludControladorCAI.tipoD}">
+                            <b:selectOneMenu id="txtDiscapacidad1" update="txtModuloDiscapacidad1" process="@this" value="#{ejeSaludControladorCAI.tipoD}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="SI" />
                                 <f:selectItem itemLabel="NO"  itemValue="NO" />
@@ -191,7 +191,7 @@
                             </b:selectOneMenu>
                         </b:column>
                     </b:row>
-                    <h:panelGroup id="txtModuloDiscapacidad" style="margin: 0px; padding: 0px;">
+                    <h:panelGroup id="txtModuloDiscapacidad1" style="margin: 0px; padding: 0px;">
                         <b:row rendered="#{ejeSaludControladorCAI.esDiscapacidad}" >
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTipoDiscapacidad1" value="Tipo Discapacidad"/>
@@ -223,8 +223,8 @@
                     <br/>
                     <b:row>
                         <b:column span="4" offset="1">
-                            <h:outputLabel for="txtEnfermedadesRaras" value="Enfermedades Catastroficas Raras"/>
-                            <b:selectOneMenu id="txtEnfermedadesRaras" value="#{ejeSaludControladorCAI.ejeSalud.enfermadadesCatastroficas}">
+                            <h:outputLabel for="txtEnfermedadesRaras1" value="Enfermedades Catastroficas Raras"/>
+                            <b:selectOneMenu id="txtEnfermedadesRaras1" value="#{ejeSaludControladorCAI.ejeSalud.enfermadadesCatastroficas}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
