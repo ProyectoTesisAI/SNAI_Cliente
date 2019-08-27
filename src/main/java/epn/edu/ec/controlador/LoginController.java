@@ -44,28 +44,21 @@ public class LoginController implements Serializable{
     }
     
     
-    public void cifrarUsuario(){
-        String user=usuario.getUsuario();
-        user = DigestUtils.md5Hex(user);
-        System.out.println("USUARIO:"+ user);
-        
-        usuario.setUsuario(user.toUpperCase());
-    }
-    
-    public void cifrarContraseña(){
+    public String cifrarContraseña(){
         String password=usuario.getContraseña();
-        password=DigestUtils.md5Hex(password);
-        System.out.println("PASSWORD:"+ password);
-
-        usuario.setContraseña(password.toUpperCase());
+        password=DigestUtils.sha256Hex(password);
+        return password;
     }
     
     public String loguerUsuario(){
         
-        //cifrarUsuario();
-        //cifrarContraseña();
+        Usuario user= new Usuario();
         
-        Usuario usuarioLogueado= servicio.loguearUsuario(usuario);
+        user.setUsuario(usuario.getUsuario());
+        String contraseña=cifrarContraseña();
+        user.setContraseña(contraseña);
+        
+        Usuario usuarioLogueado= servicio.loguearUsuario(user);
         
         if(usuarioLogueado!=null){
             
