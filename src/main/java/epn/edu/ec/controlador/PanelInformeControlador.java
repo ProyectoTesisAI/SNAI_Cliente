@@ -36,9 +36,9 @@ public class PanelInformeControlador implements Serializable{
         if(usuario!=null){
             if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
                 listaInforme = servicio.listarInforme();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR/LIDER UZDI")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("LIDER UZDI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
                 listaInforme=servicio.listarInformesSoloUZDI();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
                 listaInforme=servicio.listarInformesSoloCAI();
             }else {
                 listaInforme = servicio.listarInformesPorUsuario(usuario);

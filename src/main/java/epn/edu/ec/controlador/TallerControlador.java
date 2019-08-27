@@ -91,7 +91,6 @@ public class TallerControlador implements Serializable {
         usuarioLogin = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
         tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTaller");
 
-        
         servicioTaller = new TallerServicio();
         servicioCai = new CaiServicio();
         servicioUdi = new UdiServicio();
@@ -120,23 +119,23 @@ public class TallerControlador implements Serializable {
             tipoCentro = "CAI";
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
-        
-        if ("ADMINISTRADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "SUBDIRECTOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
-            esTecnico=false;
+
+        if ("ADMINISTRADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "SUBDIRECTOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "LIDER UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
+            esTecnico = false;
         } else {
-            esTecnico=true;
-        
-            if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
+            esTecnico = true;
+
+            if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "TRABAJADOR SOCIAL UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
                 tipoCentro = "UZDI";
                 listaUdi = servicioUdi.listaUdi();
-                udi=usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
-                udiAux=udi;
-            
-            } else if("EQUIPO TECNICO PSICOLOGO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"EQUIPO TECNICO JURIDICO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())||"INSPECTOR EDUCADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())){
+                udi = usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
+                udiAux = udi;
+
+            } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "TRABAJADOR SOCIAL CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
                 tipoCentro = "CAI";
                 listaCai = servicioCai.listaCai();
-                cai=usuarioLogin.getIdRolUsuarioCentro().getIdCai();
-                caiAux=cai;
+                cai = usuarioLogin.getIdRolUsuarioCentro().getIdCai();
+                caiAux = cai;
             }
         }
     }
@@ -206,38 +205,36 @@ public class TallerControlador implements Serializable {
 
     public Integer getNumeroParticipantes() {
 
-        if(tipoCentro.equals("UZDI")){
-            cai=new CAI();
+        if (tipoCentro.equals("UZDI")) {
+            cai = new CAI();
+        } else if (tipoCentro.equals("CAI")) {
+            udi = new UDI();
         }
-        else if(tipoCentro.equals("CAI")){
-            udi=new UDI();
-        }
-        
+
         if (udi.getUdi() != null) {
 
             for (UDI u : listaUdi) {
                 if (u.getUdi().equals(udi.getUdi())) {
                     udi = u;
-                    udiAux=u;
+                    udiAux = u;
                     break;
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(udi);
-            udi=new UDI();
-            
+            udi = new UDI();
+
         } else if (cai.getCai() != null) {
             for (CAI c : listaCai) {
                 if (c.getCai().equals(cai.getCai())) {
                     cai = c;
-                    caiAux=c;
+                    caiAux = c;
                     break;
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
-            cai=new CAI();
-        }
-        else{
-            numeroParticipantes=0;
+            cai = new CAI();
+        } else {
+            numeroParticipantes = 0;
         }
         return numeroParticipantes;
     }
@@ -365,6 +362,7 @@ public class TallerControlador implements Serializable {
     public String getTipoTaller() {
         return tipoTaller;
     }
+
     /**
      * ***************************Eventos********************************************
      */
@@ -502,20 +500,20 @@ public class TallerControlador implements Serializable {
 
     }
 
-    private void asignarListadoRegistroAsistencia(){
-     
-        for(AdolescenteInfractor a: listadoAsistencia){
-            
-            if(a.getDocumento()!=null){
+    private void asignarListadoRegistroAsistencia() {
+
+        for (AdolescenteInfractor a : listadoAsistencia) {
+
+            if (a.getDocumento() != null) {
                 a.setCedula(a.getDocumento());
             }
         }
     }
-    
+
     public void guardarRegistroTaller() {
 
         try {
-           
+
             if (udiAux.getUdi() != null || caiAux.getCai() != null) {
 
                 if (numeroParticipantes > 0) {
@@ -529,7 +527,7 @@ public class TallerControlador implements Serializable {
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
                             asignarListadoRegistroAsistencia();
-                            tallerGuardado=true;
+                            tallerGuardado = true;
                             //tallerCrear=tallerAux;
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
 
@@ -555,39 +553,37 @@ public class TallerControlador implements Serializable {
     }
 
     public void guardarPDFAsistencia() {
-    
+
         //retorna el path del archivo-->Retorna: "file:D:/User/Documents/NetBeansProjects/SistemaReeducacionAI/SistemaReeducacionAI/src/main/java/epn/edu/ec/reportes/RegistroAsistencia.jasper"
         String ruta = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/RegistroAsistencia.jasper").toString();
         //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
         ruta = ruta.substring(6);
 
-
         Map<String, Object> parametros = new HashMap<>();
-        
-        String udiRescatado=tallerCrear.getIdUdi().getUdi();
-        String caiRescatado=tallerCrear.getIdCai().getCai();
-        if(udiRescatado !=null && caiRescatado==null){
+
+        String udiRescatado = tallerCrear.getIdUdi().getUdi();
+        String caiRescatado = tallerCrear.getIdCai().getCai();
+        if (udiRescatado != null && caiRescatado == null) {
             parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + udiRescatado);
-        }
-        else if(udiRescatado==null && caiRescatado!=null){
+        } else if (udiRescatado == null && caiRescatado != null) {
             parametros.put("txtCentro", "REGISTRO DE ASISTENCIA " + caiRescatado);
         }
-        
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
         ZonedDateTime zdt = ZonedDateTime.parse(tallerCrear.getFecha().toString(), dtf);
         LocalDate ld = zdt.toLocalDate();
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fecha = ld.format(fmt);
-        
+
         parametros.put("txtTema", "TALLER:  " + tallerCrear.getTema());
-        parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  "+fecha);
-        
+        parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " + fecha);
+
         try {
-            
-            List<AdolescenteInfractor> asistencia= new ArrayList<>();
-            for(AdolescenteInfractor a : listadoAsistencia){
-                if(a.getDocumento()!=null){
+
+            List<AdolescenteInfractor> asistencia = new ArrayList<>();
+            for (AdolescenteInfractor a : listadoAsistencia) {
+                if (a.getDocumento() != null) {
                     a.setCedula(a.getDocumento());
                 }
                 asistencia.add(a);

@@ -50,7 +50,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if ("COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if ("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 esUZDI = false;
                 esCAI = true;
             }
@@ -64,7 +64,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if ("COORDINADOR/LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if ("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 esCAI = false;
                 esUZDI = true;
             }
@@ -77,7 +77,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolPsicologo = false;
                 tipoRolJuridico = true;
@@ -92,7 +92,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if (rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolJuridico = false;
                 tipoRolPsicologo = true;
@@ -107,7 +107,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if ("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
                 tipoRolPsicologo = false;
                 tipoRolJuridico = false;
                 tipoRolInspector = true;
@@ -134,7 +134,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR/LIDER UZDI".equals(rolUsuario)) {
+            if ("ADMINISTRADOR".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario)) {
                 permitidoCrearAdolescenteUDI = true;
             }
         }
@@ -147,7 +147,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")) {
+            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")) {
                 permitidoCrearAdolescenteCAI = true;
             }
         }

@@ -113,7 +113,7 @@ public class UsuarioControlador implements Serializable {
     public void setTipoRol(String tipoRol) {
         this.tipoRol = tipoRol;
         this.rolCentroUsuario.getIdRol().setRol(tipoRol);
-        if ("ADMINISTRADOR".equals(rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
+        if ("ADMINISTRADOR".equals(rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(rolCentroUsuario.getIdRol().getRol()) || "LIDER UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
             estadoAdmin = true;
         } else {
             estadoAdmin = false;
@@ -121,7 +121,7 @@ public class UsuarioControlador implements Serializable {
     }
 
     public boolean isEstadoAdmin() {
-        if ("ADMINISTRADOR".equals(rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
+        if ("ADMINISTRADOR".equals(rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(rolCentroUsuario.getIdRol().getRol()) || "LIDER UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
             estadoAdmin = true;
         } else {
             estadoAdmin = false;
@@ -134,11 +134,11 @@ public class UsuarioControlador implements Serializable {
     }
 
     public boolean isEsUZDI() {
-        if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolCentroUsuario.getIdRol().getRol())) {
+        if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolCentroUsuario.getIdRol().getRol()) || "TRABAJADOR SOCIAL UZDI".equals(rolCentroUsuario.getIdRol().getRol())) {
             esUZDI = true;
             listaUdi = servicioUdi.listaUdi();
 
-        } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(rolCentroUsuario.getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(rolCentroUsuario.getIdRol().getRol())) {
+        } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(rolCentroUsuario.getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(rolCentroUsuario.getIdRol().getRol()) || "TRABAJADOR SOCIAL CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
             esUZDI = false;
             listaCai = servicioCai.listaCai();
         }
@@ -165,12 +165,12 @@ public class UsuarioControlador implements Serializable {
     public String guardarUsuario() {
         if (this.usuario != null && this.rolCentroUsuario != null) {
             RolCentroUsuario rcuAux = new RolCentroUsuario();
-            if ("ADMINISTRADOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR/LIDER UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(this.rolCentroUsuario.getIdRol().getRol())) {
+            if ("ADMINISTRADOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "LIDER UZDI".equals(this.rolCentroUsuario.getIdRol().getRol())|| "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(this.rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(this.rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(this.rolCentroUsuario.getIdRol().getRol())) {
                 rcuAux = servicioRCU.obtenerRolAdministrativo(rolCentroUsuario);
-            } else if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol())) {
+            } else if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "TRABAJADOR SOCIAL UZDI".equals(rolCentroUsuario.getIdRol().getRol())) {
                 rcuAux = servicioRCU.obtenerRolSoloUDI(rolCentroUsuario);
 
-            } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(this.rolCentroUsuario.getIdRol().getRol())) {
+            } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "TRABAJADOR SOCIAL CAI".equals(rolCentroUsuario.getIdRol().getRol())) {
                 rcuAux = servicioRCU.obtenerRolSoloCAI(rolCentroUsuario);
             }
             if (rcuAux != null) {

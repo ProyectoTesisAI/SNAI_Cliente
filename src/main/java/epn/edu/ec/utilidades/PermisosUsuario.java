@@ -50,7 +50,7 @@ public class PermisosUsuario {
             }
             else{
             
-                if(rolUsuario.equals("COORDINADOR/LIDER UZDI")){
+                if(rolUsuario.equals("LIDER UZDI")){
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
                 }
                 else if(rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI")){
