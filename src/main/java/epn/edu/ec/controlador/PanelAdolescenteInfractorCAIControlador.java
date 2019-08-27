@@ -33,11 +33,14 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
         listadoAdolescentesInfractoresCAI= new ArrayList<>();
         listadoAdolescentesInfractoresCAI=servicio.listaAdolescentesInfractoresCAI();
         
-        for(AdolescenteInfractorCAI a : listadoAdolescentesInfractoresCAI){
-            if(a.getIdAdolescenteInfractor().getDocumento()!=null){
-                a.getIdAdolescenteInfractor().setCedula(a.getIdAdolescenteInfractor().getDocumento());
+        if (listadoAdolescentesInfractoresCAI.size() > 0) {
+            for (AdolescenteInfractorCAI a : listadoAdolescentesInfractoresCAI) {
+                if (a.getIdAdolescenteInfractor().getDocumento() != null) {
+                    a.getIdAdolescenteInfractor().setCedula(a.getIdAdolescenteInfractor().getDocumento());
+                }
             }
         }
+        
     }
 
     public List<AdolescenteInfractorCAI> getListadoAdolescentesInfractoresCAI() {
