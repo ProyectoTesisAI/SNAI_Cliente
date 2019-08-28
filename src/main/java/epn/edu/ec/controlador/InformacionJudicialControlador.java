@@ -28,14 +28,13 @@ public class InformacionJudicialControlador implements Serializable {
     private boolean servicioComunidad;
     private boolean libertadAsistida;
     private int numeroMedidas = 0;
-    private int numeroMedidasGuardar=0;
     private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
+    private PermisosUsuario permisos;
 
     @PostConstruct
     public void init() {
 
-        permisosUsuario= new PermisosUsuario();
+        permisos= new PermisosUsuario();
         enlaces = new EnlacesPrograma();
         servicio = new InformacionJudicialServicio();
         guardado = false;
@@ -59,11 +58,7 @@ public class InformacionJudicialControlador implements Serializable {
                 servicioComunidad = informacionJudicial.getServicioComunidad();
                 libertadAsistida = informacionJudicial.getLibertadAsistida();
                 numeroMedidas = informacionJudicial.getNumeroMedidas();
-            } else {
-                informacionJudicial=new InformacionJudicial();
             }
-        } else {
-            adolescenteInfractorUDI = new AdolescenteInfractorUDI();
         }
 
     }
@@ -104,12 +99,10 @@ public class InformacionJudicialControlador implements Serializable {
     public void setAmonestacionVerbal(boolean amonestacionVerbal) {
         this.amonestacionVerbal = amonestacionVerbal;
         if (amonestacionVerbal) {
-            numeroMedidas++;
-            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
+            this.informacionJudicial.setAmonestacionVerbal(true);
 
-        } else if(!amonestacionVerbal) {
-            numeroMedidas--;
-            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
+        } else{
+            this.informacionJudicial.setAmonestacionVerbal(false);
         }
     }
 
@@ -120,11 +113,9 @@ public class InformacionJudicialControlador implements Serializable {
     public void setImposicionReglasConducta(boolean imposicionReglasConducta) {
         this.imposicionReglasConducta = imposicionReglasConducta;
         if (imposicionReglasConducta) {
-            numeroMedidas++;
-            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
-        } else if(!imposicionReglasConducta){
-            numeroMedidas--;
-            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
+            this.informacionJudicial.setImposicionReglasConducta(true);
+        } else{
+            this.informacionJudicial.setImposicionReglasConducta(false);
         }
     }
 
@@ -135,11 +126,9 @@ public class InformacionJudicialControlador implements Serializable {
     public void setApoyoSocioFamiliar(boolean apoyoSocioFamiliar) {
         this.apoyoSocioFamiliar = apoyoSocioFamiliar;
         if (apoyoSocioFamiliar) {
-            numeroMedidas++;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
-        } else if(!apoyoSocioFamiliar){
-            numeroMedidas--;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(true);
+        } else{
+            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(false);
         }
     }
 
@@ -150,11 +139,9 @@ public class InformacionJudicialControlador implements Serializable {
     public void setServicioComunidad(boolean servicioComunidad) {
         this.servicioComunidad = servicioComunidad;
         if (servicioComunidad) {
-            numeroMedidas++;
-            this.informacionJudicial.setServicioComunidad(servicioComunidad);
-        } else if(!servicioComunidad) {
-            numeroMedidas--;
-            this.informacionJudicial.setServicioComunidad(servicioComunidad);
+            this.informacionJudicial.setServicioComunidad(true);
+        } else{
+            this.informacionJudicial.setServicioComunidad(false);
         }
     }
 
@@ -165,15 +152,37 @@ public class InformacionJudicialControlador implements Serializable {
     public void setLibertadAsistida(boolean libertadAsistida) {
         this.libertadAsistida = libertadAsistida;
         if (libertadAsistida) {
-            numeroMedidas++;
-            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
-        } else if(!libertadAsistida){
-            numeroMedidas--;
-            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
+            this.informacionJudicial.setLibertadAsistida(true);
+        } else{
+            this.informacionJudicial.setLibertadAsistida(false);
         }
     }
 
     public int getNumeroMedidas() {
+        numeroMedidas=0;
+        if (amonestacionVerbal) {
+            numeroMedidas++;
+        }
+        
+        if (imposicionReglasConducta) {
+            numeroMedidas++;
+        }
+        
+        if (apoyoSocioFamiliar) {
+            numeroMedidas++;
+        }
+        
+        if (servicioComunidad) {
+            numeroMedidas++;
+        }
+        
+        if (libertadAsistida) {
+            numeroMedidas++;
+        }
+        
+        if(numeroMedidas<0){
+            numeroMedidas=0;
+        }
         return numeroMedidas;
     }
 
@@ -184,75 +193,68 @@ public class InformacionJudicialControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public void guardarInformacionJudicial() {
+    public String guardarInformacionJudicial() {
         
-        if(amonestacionVerbal==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
-        }
-        if(apoyoSocioFamiliar==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
-        }
-        if(imposicionReglasConducta==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
-        }
-        if(libertadAsistida==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
-        }
-        if(servicioComunidad==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setServicioComunidad(servicioComunidad);
-        }
-        this.informacionJudicial.setNumeroMedidas(numeroMedidasGuardar);
-        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+        if (numeroMedidas > 0 && numeroMedidas<6) {
+            this.informacionJudicial.setNumeroMedidas(numeroMedidas);
+            this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
-        InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
-        if (informacionJudicialAux!= null) {
-            guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
-            
+            InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
+            if (informacionJudicialAux != null) {
+                
+                guardado = true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
+                
+                String rol = permisos.RolUsuario();
+                if (rol != null) {
+                    if (rol.equals("ADMINISTRADOR")) {
+                        return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+                    }
+                    else{
+                        if(rol.equals("LIDER UZDI")){
+                            return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
+                        }
+                        else{
+                            return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                        }
+                    }
+                } else {
+                    return null;
+                }
+                
+
+            } else {
+                guardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+                return null;
+            }
+
         } else {
-            guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
+            return null;
         }
+        
+        
     }
     
     public void guardarEdicionInformacionJudicial() {
         
-        if(amonestacionVerbal==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setAmonestacionVerbal(amonestacionVerbal);
-        }
-        if(apoyoSocioFamiliar==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setOrientacionApoyoSocioFamiliar(apoyoSocioFamiliar);
-        }
-        if(imposicionReglasConducta==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setImposicionReglasConducta(imposicionReglasConducta);
-        }
-        if(libertadAsistida==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setLibertadAsistida(libertadAsistida);
-        }
-        if(servicioComunidad==true){
-            numeroMedidasGuardar++;
-            this.informacionJudicial.setServicioComunidad(servicioComunidad);
-        }
-        this.informacionJudicial.setNumeroMedidas(numeroMedidasGuardar);
-        this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
+        if (numeroMedidas > 0 && numeroMedidas<6) {
+            this.informacionJudicial.setNumeroMedidas(numeroMedidas);
+            this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
-        InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
-        if (informacionJudicialAux!= null) {
-            guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
-            
+            InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
+            if (informacionJudicialAux != null) {
+                guardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
+
+            } else {
+                guardado = true;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+            }
         } else {
-            guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
         }
+        
     }
 }
