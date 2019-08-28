@@ -2,10 +2,14 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.InformacionJudicial;
+import epn.edu.ec.modelo.MedidaSocioeducativa;
 import epn.edu.ec.servicios.InformacionJudicialServicio;
+import epn.edu.ec.servicios.MedidaSocioeducativaServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -211,11 +215,13 @@ public class InformacionJudicialControlador implements Serializable {
                         return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
                     }
                     else{
-                        if(rol.equals("LIDER UZDI")){
+                        if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
                             return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
                         }
-                        else{
-                            return enlaces.PATH_PANEL_UDI_USER+"?faces-redirect=true";
+                        else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                            return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                        } else {
+                            return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                         }
                     }
                 } else {
@@ -237,23 +243,94 @@ public class InformacionJudicialControlador implements Serializable {
         
     }
     
-    public void guardarEdicionInformacionJudicial() {
+    private void eliminarMedidasAnteriores(InformacionJudicial informacionJudicialAux){
+           
+        
+        if (informacionJudicialAux != null) {
+
+            MedidaSocioeducativaServicio servicioMedida = new MedidaSocioeducativaServicio();
+            List<MedidaSocioeducativa> listaMedidasSocioeducativasAux = servicioMedida.listaMedidasSocioeducativasPorAdolescente(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+
+            if (listaMedidasSocioeducativasAux != null) {
+                
+                for (MedidaSocioeducativa m : listaMedidasSocioeducativasAux) {
+
+                    if (null != m.getMedidaSocioeducativa()) {
+                        
+                        switch (m.getMedidaSocioeducativa()) {
+                            case "AMONESTACIÓN VERBAL":
+                                if (!informacionJudicial.getAmonestacionVerbal().equals(informacionJudicialAux.getAmonestacionVerbal())) {
+                                    servicioMedida.eliminarMedidaSocioeducativa(m.getIdMedidaSocioeducativa());
+                                }
+                                break;
+                            case "IMPOSICIÓN DE REGLAS DE CONDUCTA":
+                                if (!informacionJudicial.getImposicionReglasConducta().equals(informacionJudicialAux.getImposicionReglasConducta())) {
+                                    servicioMedida.eliminarMedidaSocioeducativa(m.getIdMedidaSocioeducativa());
+                                }
+                                break;
+                            case "ORIENTACIÓN Y APOYO PSICO SOCIO FAMILIAR":
+                                if (!informacionJudicial.getOrientacionApoyoSocioFamiliar().equals(informacionJudicialAux.getOrientacionApoyoSocioFamiliar())) {
+                                    servicioMedida.eliminarMedidaSocioeducativa(m.getIdMedidaSocioeducativa());
+                                }
+                                break;
+                            case "SERVICIO A LA COMUNIDAD":
+                                if (!informacionJudicial.getServicioComunidad().equals(informacionJudicialAux.getServicioComunidad())) {
+                                    servicioMedida.eliminarMedidaSocioeducativa(m.getIdMedidaSocioeducativa());
+                                }
+                                break;
+                            case "LIBERTAD ASISTIDA":
+                                if (!informacionJudicial.getLibertadAsistida().equals(informacionJudicialAux.getLibertadAsistida())) {
+                                    servicioMedida.eliminarMedidaSocioeducativa(m.getIdMedidaSocioeducativa());
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+        
+    
+    public String guardarEdicionInformacionJudicial() {
         
         if (numeroMedidas > 0 && numeroMedidas<6) {
             this.informacionJudicial.setNumeroMedidas(numeroMedidas);
             this.informacionJudicial.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
-
-            InformacionJudicial informacionJudicialAux = servicio.guardarInformacionJudicial(informacionJudicial);
-            if (informacionJudicialAux != null) {
+            
+            InformacionJudicial informacionJudicialPrevia = servicio.obtenerInformacionJudicial(adolescenteInfractorUDI.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
+            InformacionJudicial informacionJudicialAuxR = servicio.guardarInformacionJudicial(informacionJudicial);
+            if (informacionJudicialAuxR != null) {
+                
+                eliminarMedidasAnteriores(informacionJudicialPrevia);
                 guardado = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
 
+                String rol = permisos.RolUsuario();
+                if (rol != null) {
+                    if (rol.equals("ADMINISTRADOR")) {
+                        return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+                    }
+                    else {
+                       return null;
+                    }
+                    
+                } else {
+                    return null;
+                }
+            
             } else {
                 guardado = true;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+                return null;
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
+            return null;
         }
         
     }

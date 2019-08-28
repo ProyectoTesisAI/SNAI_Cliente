@@ -91,4 +91,8 @@ public class MedidaSocioeducativaServicio {
             return null;
         }
     }
+    
+    public void eliminarMedidaSocioeducativa(Integer id) {
+        Response response = conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA+"/"+id.toString(), "DELETE", true, null);
+    }
 }
