@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Named(value = "usuarioControlador")
 @ViewScoped
@@ -161,6 +162,13 @@ public class UsuarioControlador implements Serializable {
         return listaUsuariosDesactivos;
     }
 
+    //Metodo para cifrar
+    public String cifrarContraseña(){
+        String password=usuario.getContraseña();
+        password=DigestUtils.sha256Hex(password);
+        return password;
+    }
+    
     //Métodos para invocar a los diferentes servicios web************
     public String guardarUsuario() {
         if (this.usuario != null && this.rolCentroUsuario != null) {
@@ -174,6 +182,8 @@ public class UsuarioControlador implements Serializable {
                 rcuAux = servicioRCU.obtenerRolSoloCAI(rolCentroUsuario);
             }
             if (rcuAux != null) {
+                String passCifrado = cifrarContraseña();
+                this.usuario.setContraseña(passCifrado);
                 this.usuario.setIdRolUsuarioCentro(rcuAux);
                 this.usuario.setActivo(true);
                 Usuario usuarioAux = servicioUsuario.guardarUsuario(this.usuario);
