@@ -51,6 +51,9 @@ public class TallerEditarControlador implements Serializable {
     private String objetivoEspecifico;
     private String materiales;
     private String responsable;
+    
+    //Datos de taller del tema
+    private String tematicaTaller;
     private EnlacesPrograma enlaces;
     Taller tallerEditar;
     RegistroAsistencia registroAsistencia;
@@ -344,6 +347,15 @@ public class TallerEditarControlador implements Serializable {
         return tipoTaller;
     }
 
+    public String getTematicaTaller() {
+        return tematicaTaller;
+    }
+
+    public void setTematicaTaller(String tematicaTaller) {
+        this.tematicaTaller = tematicaTaller;
+    }
+
+    
     
     /**
      * ***************************Eventos********************************************
@@ -543,6 +555,7 @@ public class TallerEditarControlador implements Serializable {
                             asignarListadoRegistroAsistencia();
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ACTUALIZADO CORRECTAMENTE EL TALLER", "Aviso"));
                             guardado = true;
+                            tematicaTaller=tallerAux.getTema();
 
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER", "Aviso"));
