@@ -94,7 +94,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("LIDER UZDI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("LIDER UZDI") ){
                 }
                 else{
                     FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
@@ -116,7 +116,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("LIDER UZDI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI") ){
                     
                 }
                 else{
@@ -130,7 +130,30 @@ public class ValidarAccesoControlador implements Serializable{
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
     }
-   
+    
+    public void validarAccesoPanelJuridicoUzdi() throws IOException{
+        
+        try{
+            
+            String rolUsuario=RolUsuario();
+        
+            if(rolUsuario!=null){
+                
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("LIDER UZDI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("EQUIPO TECNICO JURIDICO UZDI") ){
+                    
+                }
+                else{
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+            
+        }catch(IOException e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+        }
+    }
+    
     public void validarAccesoPanelTrabajadorSocialUZDI() throws IOException{
         
         try{
@@ -139,7 +162,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("TRABAJADOR SOCIAL UZDI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("LIDER UZDI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN") || rolUsuario.equals("TRABAJADOR SOCIAL UZDI") ){
                     
                 }
                 else{
@@ -167,7 +190,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ){
                     
                 }
                 else{
@@ -191,7 +214,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("INSPECTOR EDUCADOR") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("INSPECTOR EDUCADOR") ){
                     
                 }
                 else{
@@ -215,7 +238,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") ){
                     
                 }
                 else{
@@ -239,7 +262,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") ){
                     
                 }
                 else{
@@ -263,7 +286,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("TRABAJADOR SOCIAL CAI") ){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("TRABAJADOR SOCIAL CAI") ){
                     
                 }
                 else{
@@ -287,7 +310,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
                     
                 }
                 else{
@@ -311,7 +334,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("TRABAJADOR SOCIAL CAI") 
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("TRABAJADOR SOCIAL CAI") 
                         || rolUsuario.equals("INSPECTOR EDUCADOR") || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI")){
                     
                 }
@@ -336,7 +359,7 @@ public class ValidarAccesoControlador implements Serializable{
         
             if(rolUsuario!=null){
                 
-                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ||rolUsuario.equals("TRABAJADOR SOCIAL CAI") 
+                if(rolUsuario.equals("ADMINISTRADOR") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN") ||rolUsuario.equals("TRABAJADOR SOCIAL CAI") 
                         || rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI") || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")){
                     
                 }
