@@ -7,15 +7,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">      
 
     <h:body>
-        <ui:composition template="./../../../../templates/menu.xhtml">
+        <ui:composition template="./../../../../../templates/menu.xhtml">
 
             <ui:define name="head">
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                <link rel="stylesheet" type="text/css" href="../../../../resources/css/default.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../../resources/css/cssLayout.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../../resources/css/menu2.css"/>
-                <link rel="stylesheet" type="text/css" href="../../../../resources/css/bootstrap.css"/>
-                <script src="../../../../resources/js/bootstrap.min.js"></script>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/default.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/cssLayout.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/menu2.css"/>
+                <link rel="stylesheet" type="text/css" href="../../../../../resources/css/bootstrap.css"/>
+                <script src="../../../../../resources/js/bootstrap.min.js"></script>
                 <f:event type="preRenderView" listener="#{validarAccesoControlador.validarAccesoPanelTrabjadorSocialCAI()}"/>
             </ui:define>
 
@@ -25,9 +25,12 @@
 
                 <!--<b:form id="panelUDI" style="margin-top: 50px;">-->
                 <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
-
-                                     
-                    <b:tab title="1" tooltip="DETALLE INFORMACIÓN">
+                    
+                    <b:tab title="1" tooltip="REPRESENTANTE">
+                        <ui:include src="../../../../../plantillas/cai/crear_admin_user/plantilla_representante.xhtml" />
+                    </b:tab>
+                    
+                    <b:tab title="2" tooltip="DETALLE INFORMACIÓN">
                         <ui:include src="../../../../../plantillas/cai/ver/plantilla_lista_detalle_infraccion.xhtml" />
                     </b:tab>
 
