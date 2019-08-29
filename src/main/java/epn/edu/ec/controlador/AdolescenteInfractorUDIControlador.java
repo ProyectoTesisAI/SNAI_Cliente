@@ -27,11 +27,9 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     private Validaciones validacion;
 
     private AdolescenteInfractor adolescenteInfractorCrear;
-    private AdolescenteInfractor adolescenteInfractorEditar;
     private AdolescenteInfractorServicio servicio;
 
     private AdolescenteInfractorUDI adolescenteInfractorUDICrear;
-    private AdolescenteInfractorUDI adolescenteInfractorUDIEditar;
     private AdolescenteInfractorUDIServicio servicioUDI;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisos;
@@ -57,7 +55,6 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
         }
 
         adolescenteInfractorCrear = new AdolescenteInfractor();
-        adolescenteInfractorEditar = new AdolescenteInfractor();
         servicio = new AdolescenteInfractorServicio();
 
         adolescenteInfractorUDICrear = new AdolescenteInfractorUDI();
@@ -82,28 +79,12 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
         this.adolescenteInfractorCrear = adolescenteInfractorCrear;
     }
 
-    public AdolescenteInfractor getAdolescenteInfractorEditar() {
-        return adolescenteInfractorEditar;
-    }
-
-    public void setAdolescenteInfractorEditar(AdolescenteInfractor adolescenteInfractorEditar) {
-        this.adolescenteInfractorEditar = adolescenteInfractorEditar;
-    }
-
     public AdolescenteInfractorServicio getServicio() {
         return servicio;
     }
 
     public void setServicio(AdolescenteInfractorServicio servicio) {
         this.servicio = servicio;
-    }
-
-    public AdolescenteInfractorUDI getAdolescenteInfractorUDIEditar() {
-        return adolescenteInfractorUDIEditar;
-    }
-
-    public void setAdolescenteInfractorUDIEditar(AdolescenteInfractorUDI adolescenteInfractorUDIEditar) {
-        this.adolescenteInfractorUDIEditar = adolescenteInfractorUDIEditar;
     }
 
     public AdolescenteInfractorUDIServicio getServicioUDI() {
@@ -166,7 +147,7 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     /**
      * ****Métodos para invocar a los diferentes servicios web************
      */
-    public String guardarAdolescenteInfractor() {
+    public void guardarAdolescenteInfractor() {
         if (this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor() != null) {
             
             Date fechaNacimiento=this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getFechaNacimiento();
@@ -177,86 +158,52 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
                     String cedula = this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getCedula();
                     if (validacion.cedulaValida(cedula)) {
-                        return guardarRegistroAdolescenteInfractor();
+                        guardarRegistroAdolescenteInfractor();
                         
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, HA INGRESADO UNA CÉDULA INCORRECTA", "Error"));
-                        return null;
                     }
 
                 } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                    return guardarRegistroAdolescenteInfractor();
-                }
-                else{
-                    return null;
+                    guardarRegistroAdolescenteInfractor();
                 }
             }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 18 AÑOS", "Error"));
-                return null;
             }
             
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
-            return null;
         }
     }
 
-    private String guardarRegistroAdolescenteInfractor() {
+    private void guardarRegistroAdolescenteInfractor() {
         
         AdolescenteInfractorUDI ai_udi = servicioUDI.guardarAdolescenteInfractorUDI(this.adolescenteInfractorUDICrear);
 
         if (ai_udi != null) {
-
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
             guardado = true;
-
-            String rol = permisos.RolUsuario();
-            if (rol != null) {
-                if (rol.equals("ADMINISTRADOR")) {
-                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
-                } else {
-                    return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
-                }
-            } else {
-                return null;
-            }
 
         } else {
             guardado = false;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR UZDI", "Error"));
+        }
+    }
+    
+    public String reedireccionGuardarAdolescenteInfractor() throws InterruptedException {
+        Thread.sleep(1250);
+        String rol = permisos.RolUsuario();
+        if (rol != null) {
+            if (rol.equals("ADMINISTRADOR")) {
+                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+            }
+        } else {
             return null;
         }
     }
     
-    
-    public void guardarEdicionAdolescenteInfractor() {
-        if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null) {
-            if (validacion.cedulaValida(this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getCedula()) && validacion.verificarFechaNacimiento(this.adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getFechaNacimiento())) {
-                if ("ECUATORIANA".equals(tipoDocumento)) {
-                    this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
-                    this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-                } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                    this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
-                    this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-                }
-
-                AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);
-                if (ai_udi != null) {
-                    guardado = false;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
-
-                } else {
-                    guardado = true;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
-                }
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA FECHA DE NACIMIENTO/CEDULA ES INCORRECTA", "Error"));
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
-        }
-    }
-
     public void limpiarMensajeCedula(AjaxBehaviorEvent evento) {
         String cedula = adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getCedula();
         if (validacion.cedulaValida(cedula)) {
@@ -286,42 +233,6 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
 
     public void validarFechaNacimiento(AjaxBehaviorEvent evento) {
         Date fecha = adolescenteInfractorUDICrear.getIdAdolescenteInfractor().getFechaNacimiento();
-        if (validacion.verificarFechaNacimiento(fecha)) {
-            mensaje1 = "Fecha correcta";
-        } else {
-            mensaje1 = "Fecha corresponde a una persona mayor de 17 años";
-        }
-    }
-
-    public void limpiarMensajeCedulaEditar(AjaxBehaviorEvent evento) {
-        String cedula = adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getCedula();
-        if (validacion.cedulaValida(cedula)) {
-            mensaje = "";
-        } else {
-            mensaje = "cédula incorrecta";
-        }
-    }
-
-    public void validarCedulaEditar(AjaxBehaviorEvent evento) {
-        String cedula = adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getCedula();
-        if (validacion.cedulaValida(cedula)) {
-            mensaje = "cédula correcta";
-        } else {
-            mensaje = "cédula incorrecta";
-        }
-    }
-
-    public void limpiarMensajeFechaNacimientoEditar(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
-        if (validacion.verificarFechaNacimiento(fecha)) {
-            mensaje1 = "";
-        } else {
-            mensaje1 = "Fecha incorrecta";
-        }
-    }
-
-    public void validarFechaNacimientoEditar(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
         if (validacion.verificarFechaNacimiento(fecha)) {
             mensaje1 = "Fecha correcta";
         } else {

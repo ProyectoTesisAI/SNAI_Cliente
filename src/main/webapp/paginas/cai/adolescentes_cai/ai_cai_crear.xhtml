@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"          
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">    
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
+        
         <ui:composition template="./../../../templates/menu.xhtml">
 
             <ui:define name="head">
@@ -24,8 +24,7 @@
 
                     <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
 
-                    <!--<b:panel look="primary" content-disabled="#{not empty adolescenteInfractorCAIControlador.adolescenteInfractorCAIEditar}">-->
-                    <b:panel look="primary" content-disabled="false">
+                    <b:panel look="primary" content-disabled="#{adolescenteInfractorCAIControlador.guardado}">
                         <f:facet name="heading">
                             <h:outputText value="ADOLESCENTE INFRACTOR CAI" style="color: white; font-weight: bold"  />
                         </f:facet>
@@ -151,7 +150,6 @@
                             <b:button onclick="$('.formGuardarAdolescenteInfractorCAI').modal('show')" class="btn btn-primary btn-block" value="Guardar"/>
                         </b:column>
 
-
                         <b:modal title="Adolescente Infractor CAI" styleClass="formGuardarAdolescenteInfractorCAI"
                                  closable="false"
                                  closeOnEscape="true">
@@ -160,15 +158,20 @@
                                 <b:column>
                                     <b:button largeScreen="half"  value="Cancelar"
                                               dismiss="modal" onclick="return false;"/>
-                                    <b:commandButton largeScreen="half" value="Guardar" look="success" update="@form"                  
-                                                     action="#{adolescenteInfractorCAIControlador.guardarAdolescenteInfractor()}"
-                                                     onclick="$('.modalPseudoClass2').modal('hide')"
+                                    
+                                    <b:commandButton largeScreen="half" value="Guardar" look="success" 
+                                                     actionListener="#{adolescenteInfractorCAIControlador.guardarAdolescenteInfractor()}" update="@form" 
+                                                     oncomplete="setBtnGuardarAdolescenteCAI();"
+                                                     onsuccess="$('.formGuardarAdolescenteInfractorCAI').modal('hide');"
                                                      />
-
-
-                                </b:column>
+                                    <b:remoteCommand name="setBtnGuardarAdolescenteCAI" 
+                                                     action="#{adolescenteInfractorCAIControlador.redireccionGuardarAdolescenteInfractor()}"
+                                                 />
+                                </b:column> 
                             </b:row>
                         </b:modal>
+
+                        
 
                     </b:panel>
                 </b:form>

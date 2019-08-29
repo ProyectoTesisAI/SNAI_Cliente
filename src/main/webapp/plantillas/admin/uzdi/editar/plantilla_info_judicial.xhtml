@@ -13,7 +13,7 @@
 
             <b:form id="formInfoJuducial">
 
-                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true"/> 
 
                 <b:panel look="primary" content-disabled="#{!informacionJudicialControlador.guardado}">
                     <f:facet name="heading">
@@ -108,18 +108,18 @@
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtFechaImposicionMedida" value="Fecha Imposición Medida"/>
-                            <b:dateTimePicker id="txtFechaImposicionMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaImposicionMedida}"/>
+                            <b:dateTimePicker id="txtFechaImposicionMedida" required="true" requiredMessage="Fecha Imposición Medida es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaImposicionMedida}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtFechaRepecionZonalResolucion" value="Fecha Recepción Zonal Resolución"/>
-                            <b:dateTimePicker id="txtFechaRepecionZonalResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaRecepcionZonalResolucion}"/>
+                            <b:dateTimePicker id="txtFechaRepecionZonalResolucion" required="true" requiredMessage="Fecha Recepción Zonal Resolución es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaRecepcionZonalResolucion}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtFormaImposicionMedida" value="Forma Imposición Medida"/>
-                            <b:selectOneMenu id="txtFormaImposicionMedida" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
+                            <b:selectOneMenu id="txtFormaImposicionMedida" required="true" requiredMessage="Forma Imposición Medida es requerida, ingrese un valor" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SENTENCIA"  itemValue="SENTENCIA" />
                                 <f:selectItem itemLabel="TERMINACIÓN ANTICIPADA DEL PROCESO"  itemValue="TERMINACIÓN ANTICIPADA DEL PROCESO" />
@@ -132,7 +132,7 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtFechaInicioCumplimientoMedida" value="Fecha Inicio Cumplimiento Medida"/>
-                            <b:dateTimePicker id="txtFechaInicioCumplimientoMedida" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaInicioCumplimientoMedida}"/>
+                            <b:dateTimePicker id="txtFechaInicioCumplimientoMedida" required="true" requiredMessage="Fecha Inicio Cumplimiento Medida es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{informacionJudicialControlador.informacionJudicial.fechaInicioCumplimientoMedida}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
@@ -215,7 +215,10 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{informacionJudicialControlador.guardarEdicionInformacionJudicial()}" update="@form" />
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener ="#{informacionJudicialControlador.guardarEdicionInformacionJudicial()}" update="@form" oncomplete="setBtnEditarInfoJudicial()" />
+                            <b:remoteCommand name="setBtnEditarInfoJudicial" id="remoteCommand2"
+                                             action="#{informacionJudicialControlador.redireccionEdicionInformacionJudicial()}"
+                                                 />
                         </b:column>
                     </b:row>
                 </b:panel>
