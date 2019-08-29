@@ -190,12 +190,12 @@
                                                     <h:outputText style="text-transform:uppercase" value="#{tp.responsable}"/>
                                                 </p:column>
 
-                                                <p:column headerText="Editar">
-                                                    <b:commandButton value="Editar" class="btn-block btn-primary" update="@form" actionListener="#{tallerControlador.obtenerItem(tp)}" oncomplete="$('.formItemTallerEditar').modal('show')"/>
+                                                <p:column width="60px;">
+                                                    <b:commandButton icon="pencil" tooltip="Editar la actividad seleccionada" class="btn-block btn-primary" update="@form" actionListener="#{tallerControlador.obtenerItem(tp)}" oncomplete="$('.formItemTallerEditar').modal('show')"/>
                                                 </p:column>
 
-                                                <p:column headerText="Quitar">
-                                                    <b:commandButton value="Quitar" class="btn-block btn-danger" update="@form" actionListener="#{tallerControlador.quitarItem(tp)}"/>
+                                                <p:column width="60px;">
+                                                    <b:commandButton icon="remove" tooltip="Quitar la actividad de la lista" class="btn-block btn-danger" update="@form" actionListener="#{tallerControlador.quitarItem(tp)}"/>
                                                 </p:column>
 
                                             </p:dataTable>
