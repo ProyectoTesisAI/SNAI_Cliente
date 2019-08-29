@@ -163,55 +163,85 @@
 
                                     <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
                                         <div class="col-md-10 col-md-offset-1">
-                                            <b:dataTable id="tablaTaller" value="#{tallerControlador.listaItemsTaller}" 
+                                            <p:dataTable id="tablaTaller" value="#{tallerControlador.listaItemsTaller}" 
                                                          widgetVar="tableWidgetVar"
-                                                         var="tp"
-                                                         fixed-header="true"
-                                                         scroll-x="true"
-                                                         scroll-size="1000px"
-                                                         responsive="false"
-                                                         searching="false"
-                                                         select="true"
-                                                         paginated="false"
-                                                         selectionMode="multiple"
-                                                         style="margin: 0 auto; width: 100%;"
-
+                                                         var="tp" 
+                                                         reflow="true"
+                                                         rows="10"
+                                                         paginator="false"
                                                          >
-                                                <b:dataTableColumn style="min-width: 60px;">
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Duración"/>
-                                                    </f:facet>
-                                                    <b:inputText style="color: #262626" id="txtDuracion" placeholder="mm"  value="#{tp.duracion}"/>  
-                                                </b:dataTableColumn>
-                                                <b:dataTableColumn>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Actividad"/>
-                                                    </f:facet>
-                                                    <b:inputTextarea rows="2" required="true" style="text-transform:uppercase" required-message="Activida es requerida, ingrese una actividad" value="#{tp.actividad}"/>
-                                                </b:dataTableColumn>
-                                                <b:dataTableColumn>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Objetivo Específico"/>
-                                                    </f:facet>
-                                                    <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
-                                                </b:dataTableColumn>
-                                                <b:dataTableColumn >
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Materiales"/>
-                                                    </f:facet>
-                                                    <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.materiales}"/>
-                                                </b:dataTableColumn>
-                                                <b:dataTableColumn>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Responsable"/>
-                                                    </f:facet>
-                                                    <b:inputTextarea rows="2" style="text-transform:uppercase" value="#{tp.responsable}"/>
-                                                </b:dataTableColumn>
+                                                <p:column headerText="Duración">
+                                                    <h:outputText style="color: #262626" id="txtDuracion" value="#{tp.duracion}"/>  
+                                                </p:column>
 
-                                            </b:dataTable>
+                                                <p:column headerText="Actividad">
+                                                    <h:outputText style="text-transform:uppercase" value="#{tp.actividad}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Objetivo Específico">
+                                                    <h:outputText style="text-transform:uppercase" value="#{tp.objetivoEspecifico}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Materiales" >
+                                                    <h:outputText style="text-transform:uppercase" value="#{tp.materiales}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Responsable">
+                                                    <h:outputText style="text-transform:uppercase" value="#{tp.responsable}"/>
+                                                </p:column>
+
+                                                <p:column headerText="Editar">
+                                                    <b:commandButton value="Editar" class="btn-block btn-primary" update="@form" actionListener="#{tallerControlador.obtenerItem(tp)}" oncomplete="$('.formItemTallerEditar').modal('show')"/>
+                                                </p:column>
+
+                                                <p:column headerText="Quitar">
+                                                    <b:commandButton value="Quitar" class="btn-block btn-danger" update="@form" actionListener="#{tallerControlador.quitarItem(tp)}"/>
+                                                </p:column>
+
+                                            </p:dataTable>
 
                                         </div>
                                     </div>
+                                    <b:modal title="Editar Actividad" styleClass="formItemTallerEditar"
+                                             id="modalEditarActividades"
+                                             closable="false"
+                                             closeOnEscape="true">
+                                        <b:row>
+                                            <b:column span="10" offset="1">                                        
+                                                <h:outputLabel for="txtItemActividad1" value="Actividad"/>
+                                                <b:inputText id="txtItemActividad1" requiredMessage="Actividad es requerido, ingrese un valor" placeholder="Actividad" value="#{tallerControlador.item.actividad}"/>
+                                            </b:column>
+                                            <b:column span="10" offset="1">                                        
+                                                <h:outputLabel for="txtItemObjetivo1" value="Objetivo Específico"/>
+                                                <b:inputText id="txtItemObjetivo1" requiredMessage="Objetivo Específico es requerido, ingrese un valor" placeholder="Objetivo Específico" value="#{tallerControlador.item.objetivoEspecifico}"/>
+                                            </b:column>
+                                            <b:column span="10" offset="1">                                        
+                                                <h:outputLabel for="txtItemMateriales1" value="Materiales"/>
+                                                <b:inputText id="txtItemMateriales1" requiredMessage="Nombres es requerido, ingrese un valor" placeholder="Materiales" value="#{tallerControlador.item.materiales}"/>             
+                                            </b:column>
+                                            <b:column span="10" offset="1">                                        
+                                                <h:outputLabel for="txtItemResponsable1" value="Responsable"/>
+                                                <b:inputText id="txtItemResponsable1" requiredMessage="Apellidos es requerido, ingrese un valor" placeholder="Responsable" value="#{tallerControlador.item.responsable}"/>
+                                            </b:column>
+                                            <b:column span="6" offset="1">
+                                                <h:outputLabel for="txtItemDuracion1" value="Duración"/>
+                                                <b:inputText style="color: #262626" id="txtItemDuracion1" placeholder="Duración"  value="#{tallerControlador.item.duracion}"/>
+                                            </b:column>
+                                        </b:row>
+                                        <br></br>
+                                        <b:row>
+                                            <b:column offset="1" span="5">
+                                                <b:button class="btn-block" value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                            </b:column>
+                                            <b:column span="5">
+                                                <b:commandButton class="btn-success btn-block" value="Agregar"
+                                                                 onclick="$('.formItemTallerEditar').modal('hide'); tableWidgetVar.DataTable({destroy: true, searching: false});tableWidgetVar.DataTable().responsive.recalc();" 
+                                                                 actionListener="#{tallerControlador.agregarActividadEditada()}">
+                                                    <f:ajax execute="modalEditarActividades" render="tablaTaller modalEditarActividades"/>
+                                                </b:commandButton>        
+                                            </b:column>
+                                        </b:row>
+                                    </b:modal>
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
                                             <div class="form-group">

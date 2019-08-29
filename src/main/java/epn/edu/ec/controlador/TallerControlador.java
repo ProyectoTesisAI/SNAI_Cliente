@@ -85,7 +85,9 @@ public class TallerControlador implements Serializable {
 
     boolean tallerGuardado = false;
     int indiceTaller = 0;
-
+    
+    private ItemTaller item;
+    
     @PostConstruct
     public void init() {
 
@@ -114,6 +116,8 @@ public class TallerControlador implements Serializable {
 
         listaItemsTaller = new ArrayList<>();
         listadoAsistencia = new ArrayList<>();
+        
+        item = new ItemTaller();
 
         if (isEsUzdi()) {
             tipoCentro = "UZDI";
@@ -375,6 +379,14 @@ public class TallerControlador implements Serializable {
         this.tematicaTaller = tematicaTaller;
     }
 
+    public ItemTaller getItem() {
+        return item;
+    }
+
+    public void setItem(ItemTaller item) {
+        this.item = item;
+    }
+    
     /**
      * ***************************Eventos********************************************
      */
@@ -626,4 +638,24 @@ public class TallerControlador implements Serializable {
         }
     }
 
+    public void obtenerItem(ItemTaller item){
+        this.item=item;
+    }
+    
+    public void agregarActividadEditada() {
+
+        ItemTaller itemAux = new ItemTaller();
+        itemAux.setDuracion(duracion);
+        itemAux.setActividad(actividad);
+        itemAux.setMateriales(materiales);
+        itemAux.setObjetivoEspecifico(objetivoEspecifico);
+        itemAux.setResponsable(responsable);
+
+        limpiarActividad();
+    }
+    
+    public void quitarItem(ItemTaller itemSeleccionado){
+        this.item=itemSeleccionado;
+        listaItemsTaller.remove(itemSeleccionado);
+    }
 }

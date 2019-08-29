@@ -39,4 +39,19 @@ public class ItemTallerServicio {
             return null;
         }
     }
+    
+    public Integer eliminarRegistroActividades(Integer idActividad){
+           
+        try {
+            Response response = conexion.conexion(URL_ITEM_TALLER_PSICOLOGIA + "/" + idActividad.toString(), "DELETE", true, null);
+            if (response != null) {
+                Integer resultado = response.getStatus();
+                return resultado;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
