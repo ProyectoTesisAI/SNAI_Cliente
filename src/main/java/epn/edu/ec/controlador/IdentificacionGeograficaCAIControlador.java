@@ -155,11 +155,9 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
     public List<DatosProvinciaCanton> getCantones() {
         cantones = new ArrayList<>();
         String provincia = identificacionGeografica.getProvinciaResidencia();
-        //System.out.println("Provincia del adoles: "+provincia);
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
-            System.out.println("No hay provincia seleccionada");
         }
         return cantones;
     }
@@ -170,7 +168,6 @@ public class IdentificacionGeograficaCAIControlador implements Serializable {
         if(provinciaNacimiento!=null){
             cantonesNacimiento = listarCantonesPorProvincia(provinciaNacimiento);
         }else{
-            System.out.println("No hay provincia de nacimiento ecuatoriana escogida");
         }
         return cantonesNacimiento;
     }

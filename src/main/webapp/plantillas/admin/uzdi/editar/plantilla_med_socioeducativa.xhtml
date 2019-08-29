@@ -80,7 +80,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa1()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa1()}" update="@form" oncomplete="setBtnEditarMedida1();"/>
+                                <b:remoteCommand name="setBtnEditarMedida1" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionEdicionMedida1()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -146,7 +149,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa2()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa2()}" update="@form" oncomplete="setBtnEditarMedida2();"/>
+                                <b:remoteCommand name="setBtnEditarMedida2" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionEdicionMedida2()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -211,7 +217,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa3()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa3()}" update="@form" oncomplete="setBtnEditarMedida3();"/>
+                                <b:remoteCommand name="setBtnEditarMedida3" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionEdicionMedida3()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -275,7 +284,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa4()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa4()}" update="@form" oncomplete="setBtnEditarMedida4();"/>
+                                <b:remoteCommand name="setBtnEditarMedida4" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionEdicionMedida4()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -337,7 +349,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa5()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarEdicionMedidaSocioeducativa5()}" update="@form" oncomplete="setBtnEditarMedida5();"/>
+                                <b:remoteCommand name="setBtnEditarMedida5" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionEdicionMedida5()}"
+                                                 />
                             </b:column>
                         </b:row>
 

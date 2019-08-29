@@ -187,7 +187,6 @@ public class EjecucionMedidaControlador implements Serializable {
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
-            System.out.println("No hay provincia seleccionada");
         }
         return cantones;
     }
