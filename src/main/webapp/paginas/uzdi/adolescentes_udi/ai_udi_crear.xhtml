@@ -156,9 +156,13 @@
                                     <b:button largeScreen="half"  value="Cancelar"
                                               dismiss="modal" onclick="return false;"/>
                                     <b:commandButton id="btnGuardarAdolescenteInfractorUDI" largeScreen="half" update="@form" value="Guardar" look="success"                    
-                                                     action="#{adolescenteInfractorUDIControlador.guardarAdolescenteInfractor()}"
-                                                     onclick="$('.modalPseudoClass2').modal('hide')"
+                                                     actionListener="#{adolescenteInfractorUDIControlador.guardarAdolescenteInfractor()}"
+                                                     oncomplete="setBtnGuardarAdolescenteUDI();"
+                                                     onsuccess="$('.formGuardarAdolescenteInfractorUDI').modal('hide');"
                                                      />
+                                    <b:remoteCommand name="setBtnGuardarAdolescenteUDI" id="remoteCommand2"
+                                                     action="#{adolescenteInfractorUDIControlador.reedireccionGuardarAdolescenteInfractor()}"
+                                                 />
 
                                 </b:column>
                             </b:row>

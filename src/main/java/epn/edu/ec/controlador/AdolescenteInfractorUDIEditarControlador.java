@@ -157,30 +157,47 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
      * ****Métodos para invocar a los diferentes servicios web************
      */
 
-    public void guardarEdicionAdolescenteInfractor() {
-
-                
+    
+    public void guardarAdolescenteInfractor() {
         if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null) {
+            
+            Date fechaNacimiento=this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
+            
+            if (validacion.verificarFechaNacimiento(fechaNacimiento)) {
+            
+                if ("ECUATORIANA".equals(tipoDocumento)) {
 
-            if ("ECUATORIANA".equals(tipoDocumento)) {
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
-            } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
-                this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+                    String cedula = this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getCedula();
+                    if (validacion.cedulaValida(cedula)) {
+                        guardarRegistroAdolescenteInfractor();
+                        
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, HA INGRESADO UNA CÉDULA INCORRECTA", "Error"));
+                    }
+
+                } else if ("EXTRANJERA".equals(tipoDocumento)) {
+                    guardarRegistroAdolescenteInfractor();
+                }
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 18 AÑOS", "Error"));
             }
             
-            AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);
-            if (ai_udi != null) {             
-                guardado = false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
-                
-            } else {
-                guardado = true;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
-            }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR UZDI", "Error"));
+        }
+    }
+
+    private void guardarRegistroAdolescenteInfractor() {
+        
+        AdolescenteInfractorUDI ai_udi = servicioUDI.guardarEdicionAdolescenteInfractorUDI(this.adolescenteInfractorUDIEditar);
+
+        if (ai_udi != null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR UZDI", "Información"));
+            guardado = false;
+
+        } else {
+            guardado = true;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR UZDI", "Error"));
         }
     }
 

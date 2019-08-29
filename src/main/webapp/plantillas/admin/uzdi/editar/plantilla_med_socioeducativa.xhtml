@@ -26,9 +26,9 @@
                     <b:growl id="growlMsg1" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     
                     <!--PANEL DE AMONESTACIÓN VERBAL -->
-                    <b:panel rendered="#{medidaSocioEducativaControlador.activarAmonestacionVerbal}" content-disabled="#{medidaSocioEducativaControlador.amonestacionVerbalGuardado}">
+                    <b:panel rendered="#{medidaSocioEducativaControlador.activarAmonestacionVerbal}" content-disabled="#{!medidaSocioEducativaControlador.amonestacionVerbalGuardado}">
                         <f:facet name="heading">
-                            <h:outputText value="AMONESTACIÓN VERBAL"/>
+                            <h:outputText value="AMONESTACIÓN VERBAL" class="text-primary"/>
                         </f:facet>
 
                         <b:row>
@@ -93,9 +93,9 @@
                     <b:growl id="growlMsg2" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     
                     <!--PANEL DE IMPOSICIÓN REGLAS CONDUCTA -->
-                    <b:panel rendered="#{medidaSocioEducativaControlador.activarImposicionReglasConducta}" content-disabled="#{medidaSocioEducativaControlador.imposicionReglasConductaGuardado}">
+                    <b:panel rendered="#{medidaSocioEducativaControlador.activarImposicionReglasConducta}" content-disabled="#{!medidaSocioEducativaControlador.imposicionReglasConductaGuardado}">
                         <f:facet name="heading">
-                            <h:outputText value="IMPOSICIÓN DE REGLAS DE CONDUCTA"/>
+                            <h:outputText value="IMPOSICIÓN DE REGLAS DE CONDUCTA" class="text-primary"/>
                         </f:facet>
 
                         <b:row>
@@ -157,9 +157,9 @@
                     
                     <b:growl id="growlMsg3" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE APOYO SOCIO FAMILIAR -->
-                    <b:panel rendered="#{medidaSocioEducativaControlador.activarApoyoSocioFamiliar}" content-disabled="#{medidaSocioEducativaControlador.apoyoSocioFamiliarGuardado}">
+                    <b:panel rendered="#{medidaSocioEducativaControlador.activarApoyoSocioFamiliar}" content-disabled="#{!medidaSocioEducativaControlador.apoyoSocioFamiliarGuardado}">
                         <f:facet name="heading">
-                            <h:outputText value="ORIENTACIÓN Y APOYO PSICO SOCIO FAMILIAR"/>
+                            <h:outputText value="ORIENTACIÓN Y APOYO PSICO SOCIO FAMILIAR" class="text-primary"/>
                         </f:facet>
 
                         <b:row>
@@ -222,9 +222,9 @@
                     
                     <b:growl id="growlMsg4" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE SERVICIO COMUNIDAD -->
-                    <b:panel rendered="#{medidaSocioEducativaControlador.activarServicioComunidad}" content-disabled="#{medidaSocioEducativaControlador.servicioComunidadGuardado}">
+                    <b:panel rendered="#{medidaSocioEducativaControlador.activarServicioComunidad}" content-disabled="#{!medidaSocioEducativaControlador.servicioComunidadGuardado}">
                         <f:facet name="heading">
-                            <h:outputText value="SERVICIO A LA COMUNIDAD"/>
+                            <h:outputText value="SERVICIO A LA COMUNIDAD" class="text-primary"/>
                         </f:facet>
 
                         <b:row>
@@ -286,9 +286,9 @@
                     
                     <b:growl id="growlMsg5" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE LIBERTAD ASISTIDA -->
-                    <b:panel rendered="#{medidaSocioEducativaControlador.activarLibertadAsistida}" content-disabled="#{medidaSocioEducativaControlador.libertadAsistidaGuardado}">
+                    <b:panel rendered="#{medidaSocioEducativaControlador.activarLibertadAsistida}" content-disabled="#{!medidaSocioEducativaControlador.libertadAsistidaGuardado}">
                         <f:facet name="heading">
-                            <h:outputText value="LIBERTAD ASISTIDA"/>
+                            <h:outputText value="LIBERTAD ASISTIDA" class="text-primary"/>
                         </f:facet>
 
                         <b:row>

@@ -7,6 +7,7 @@ import epn.edu.ec.servicios.InformacionJudicialServicio;
 import epn.edu.ec.servicios.MedidaSocioeducativaServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -197,7 +198,7 @@ public class InformacionJudicialControlador implements Serializable {
     /**
      * *******************Métodos para invocar a los diferentes servicios web*****************
      */
-    public String guardarInformacionJudicial() {
+    public void guardarInformacionJudicial() {
         
         if (numeroMedidas > 0 && numeroMedidas<6) {
             this.informacionJudicial.setNumeroMedidas(numeroMedidas);
@@ -209,35 +210,14 @@ public class InformacionJudicialControlador implements Serializable {
                 guardado = true;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
                 
-                String rol = permisos.RolUsuario();
-                if (rol != null) {
-                    if (rol.equals("ADMINISTRADOR")) {
-                        return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
-                    }
-                    else{
-                        if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
-                            return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI+"?faces-redirect=true";
-                        }
-                        else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                            return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
-                        } else {
-                            return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
-                        }
-                    }
-                } else {
-                    return null;
-                }
-                
 
             } else {
                 guardado = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
-                return null;
             }
 
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
-            return null;
         }
         
         
@@ -295,7 +275,7 @@ public class InformacionJudicialControlador implements Serializable {
     }
         
     
-    public String guardarEdicionInformacionJudicial() {
+    public void guardarEdicionInformacionJudicial(){
         
         if (numeroMedidas > 0 && numeroMedidas<6) {
             this.informacionJudicial.setNumeroMedidas(numeroMedidas);
@@ -308,30 +288,51 @@ public class InformacionJudicialControlador implements Serializable {
                 
                 eliminarMedidasAnteriores(informacionJudicialPrevia);
                 guardado = false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
-
-                String rol = permisos.RolUsuario();
-                if (rol != null) {
-                    if (rol.equals("ADMINISTRADOR")) {
-                        return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
-                    }
-                    else {
-                       return null;
-                    }
-                    
-                } else {
-                    return null;
-                }
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));            
             
             } else {
                 guardado = true;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
-                return null;
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
-            return null;
         }
         
+    }
+    
+    public String redireccionEdicionInformacionJudicial() throws InterruptedException {
+        Thread.sleep(1250);
+        String rol = permisos.RolUsuario();
+        if (rol != null) {
+            if (rol.equals("ADMINISTRADOR")) {
+                return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return null;
+            }
+
+        } else {
+            return null;
+        }
+    }
+    
+    public String redireccionGuardarInformacionJudicial() throws InterruptedException {
+        Thread.sleep(1250);
+        String rol = permisos.RolUsuario();
+        if (rol != null) {
+            if (rol.equals("ADMINISTRADOR")) {
+                return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+                    return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
+                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                    return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                } else {
+                    return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                }
+            }
+        } else {
+            return null;
+        }
+
     }
 }
