@@ -79,6 +79,8 @@ public class TallerEditarControlador implements Serializable {
     int indiceTaller = 0;
 
     private boolean guardado;
+    
+    private ItemTaller item;
 
     @PostConstruct
     public void init() {
@@ -107,6 +109,8 @@ public class TallerEditarControlador implements Serializable {
         listadoAsistencia = new ArrayList<>();
 
         guardado = false;
+        
+        item = new ItemTaller();
 
         if (isEsUzdi()) {
             tipoCentro = "UZDI";
@@ -355,7 +359,13 @@ public class TallerEditarControlador implements Serializable {
         this.tematicaTaller = tematicaTaller;
     }
 
-    
+    public ItemTaller getItem() {
+        return item;
+    }
+
+    public void setItem(ItemTaller item) {
+        this.item = item;
+    }
     
     /**
      * ***************************Eventos********************************************
@@ -404,7 +414,7 @@ public class TallerEditarControlador implements Serializable {
         itemAux.setResponsable(responsable);
 
         listaItemsTaller.add(itemAux);
-
+        
         limpiarActividad();
     }
 
@@ -471,6 +481,14 @@ public class TallerEditarControlador implements Serializable {
             servicioItemTaller.guardarItemTaller(i);
         }
 
+    }
+    
+    private void guardarItemsEditadosTaller(Taller tallerGuardado) {
+        for (ItemTaller i : listaItemsTaller) {
+            i.setIdItemTaller(i.getIdItemTaller());
+            i.setIdTaller(tallerGuardado);
+            servicioItemTaller.guardarItemTaller(i);
+        }
     }
 
     private void generarRegistroAsistencia(Taller taller) {
@@ -549,7 +567,7 @@ public class TallerEditarControlador implements Serializable {
 
                         if (tallerAux.getIdTaller() > 0) {
 
-                            guardarItemsTaller(tallerAux);//TAMBIEN SE DEBE CAMBIAR POR UN EDITAR
+                            guardarItemsEditadosTaller(tallerAux);//TAMBIEN SE DEBE CAMBIAR POR UN EDITAR
                             generarRegistroAsistencia(tallerAux);
                             guardarRegistroAsistencia(tallerAux);
                             asignarListadoRegistroAsistencia();
@@ -656,5 +674,26 @@ public class TallerEditarControlador implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO SE HA GENERADO EL REGISTRO DE ASISTENCIA", "ERROR"));
         }
     }
+    
+    public void obtenerItem(ItemTaller item){
+        this.item=item;
+    }
+    
+    public void agregarActividadEditada() {
 
+        ItemTaller itemAux = new ItemTaller();
+        itemAux.setDuracion(duracion);
+        itemAux.setActividad(actividad);
+        itemAux.setMateriales(materiales);
+        itemAux.setObjetivoEspecifico(objetivoEspecifico);
+        itemAux.setResponsable(responsable);
+
+        limpiarActividad();
+    }
+    
+    public void quitarItem(ItemTaller itemSeleccionado){ //Se elimina las actividades desde la base de datos
+        this.item=itemSeleccionado;
+        listaItemsTaller.remove(itemSeleccionado);
+        servicioItemTaller.eliminarRegistroActividades(item.getIdItemTaller());
+    }
 }
