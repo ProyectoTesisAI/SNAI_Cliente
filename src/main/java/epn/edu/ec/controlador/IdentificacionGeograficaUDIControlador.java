@@ -154,7 +154,6 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
-            System.out.println("No hay provincia seleccionada");
         }
         return cantones;
     }
@@ -165,7 +164,6 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
         if(provinciaNacimiento!=null){
             cantonesNacimiento = listarCantonesPorProvincia(provinciaNacimiento);
         }else{
-            System.out.println("No hay provincia de nacimiento ecuatoriana escogida");
         }
         return cantonesNacimiento;
     }

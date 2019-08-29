@@ -128,11 +128,9 @@ public class InformacionInfraccionControlador implements Serializable {
     public List<DatosProvinciaCanton> getCantones() {
         cantones = new ArrayList<>();
         String provincia = informacionInfraccion.getProvinciaDetencion();
-        //System.out.println("Provincia del adoles: "+provincia);
         if (provincia != null) {
             cantones = listarCantonesPorProvincia(provincia);
         } else {
-            System.out.println("No hay provincia seleccionada");
         }
         return cantones;
     }

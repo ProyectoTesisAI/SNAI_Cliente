@@ -23,9 +23,9 @@
                 </b:row>
 
                 <b:form id="formMedidaSocioeducativa1">
-                    
+
                     <b:growl id="growlMsg1" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                    
+
                     <!--PANEL DE AMONESTACIÓN VERBAL -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarAmonestacionVerbal}" content-disabled="#{medidaSocioEducativaControlador.amonestacionVerbalGuardado}">
                         <f:facet name="heading">
@@ -81,7 +81,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa1()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa1()}" update="@form" oncomplete="setBtnGuardarMedida1();"/>
+                                <b:remoteCommand name="setBtnGuardarMedida1" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionGuardarMedida1()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -90,9 +93,9 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa2">
-                    
+
                     <b:growl id="growlMsg2" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-                    
+
                     <!--PANEL DE IMPOSICIÓN REGLAS CONDUCTA -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarImposicionReglasConducta}" content-disabled="#{medidaSocioEducativaControlador.imposicionReglasConductaGuardado}">
                         <f:facet name="heading">
@@ -147,7 +150,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa2()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa2()}" update="@form" oncomplete="setBtnGuardarMedida2();"/>
+                                <b:remoteCommand name="setBtnGuardarMedida2" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionGuardarMedida2()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -155,7 +161,7 @@
                 </b:form>    
 
                 <b:form id="formMedidaSocioeducativa3">
-                    
+
                     <b:growl id="growlMsg3" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE APOYO SOCIO FAMILIAR -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarApoyoSocioFamiliar}" content-disabled="#{medidaSocioEducativaControlador.apoyoSocioFamiliarGuardado}">
@@ -212,7 +218,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa3()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa3()}" update="@form" oncomplete="setBtnGuardarMedida3();"/>
+                                <b:remoteCommand name="setBtnGuardarMedida3" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionGuardarMedida3()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -220,7 +229,7 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa4">
-                    
+
                     <b:growl id="growlMsg4" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE SERVICIO COMUNIDAD -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarServicioComunidad}" content-disabled="#{medidaSocioEducativaControlador.servicioComunidadGuardado}">
@@ -276,7 +285,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa4()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa4()}" update="@form" oncomplete="setBtnGuardarMedida4();"/>
+                                <b:remoteCommand name="setBtnGuardarMedida4" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionGuardarMedida4()}"
+                                                 />
                             </b:column>
                         </b:row>
 
@@ -284,7 +296,7 @@
                 </b:form>
 
                 <b:form id="formMedidaSocioeducativa5">
-                    
+
                     <b:growl id="growlMsg5" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                     <!--PANEL DE LIBERTAD ASISTIDA -->
                     <b:panel rendered="#{medidaSocioEducativaControlador.activarLibertadAsistida}" content-disabled="#{medidaSocioEducativaControlador.libertadAsistidaGuardado}">
@@ -338,7 +350,10 @@
 
                         <b:row>
                             <b:column span="3" offset="8">
-                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa5()}" update="@form"/>
+                                <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{medidaSocioEducativaControlador.guardarMedidaSocioeducativa5()}" update="@form" oncomplete="setBtnGuardarMedida5();"/>
+                                <b:remoteCommand name="setBtnGuardarMedida5" id="remoteCommand2"
+                                                 action="#{medidaSocioEducativaControlador.redireccionGuardarMedida5()}"
+                                                 />
                             </b:column>
                         </b:row>
 
