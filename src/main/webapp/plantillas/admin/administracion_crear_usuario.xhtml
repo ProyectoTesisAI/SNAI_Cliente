@@ -9,6 +9,8 @@
     <h:body>
         <ui:composition>
             <b:form>
+                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" />
+
                 <b:panel look="primary">
                     <f:facet name="heading">
                         <h:outputText value="NUEVO USUARIO" style="color: white; font-weight: bold"  />
@@ -45,11 +47,11 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel  for="txtUsuario" value="Usuario"/>
-                            <b:inputText id="txtUsuario" required="true" placeholder="Usuario" value="#{usuarioControlador.usuario.usuario}"/>
+                            <b:inputText id="txtUsuario" required="true" placeholder="Usuario" update="txtPassword" value="#{usuarioControlador.usuario.usuario}"/>
                         </b:column>
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel for="txtPassword" value="Constraseña"/>
-                            <b:inputText id="txtPassword" required="true" placeholder="*********" value="#{usuarioControlador.usuario.contraseña}"/>
+                            <b:inputText id="txtPassword" disabled="true" value="#{usuarioControlador.passAutogenerado}"/>
                         </b:column>
                     </b:row>
                 </b:panel>
@@ -108,9 +110,37 @@
                 </b:panel>
                 <b:row>
                     <b:column span="3" offset="8">
-                        <h:commandButton value="Guardar" class="btn btn-primary btn-block" action="#{usuarioControlador.guardarUsuario()}"/>
+                        <b:commandButton value="Guardar" class="btn btn-primary btn-block" update="@form:modalAdministracion" action="#{usuarioControlador.guardarUsuario()}" oncomplete="$('.formAdministracion').modal('show')"/>
                     </b:column>
                 </b:row>
+                <b:modal title="Infomación" styleClass="formAdministracion"
+                         id="modalAdministracion"
+                         closable="false"
+                         closeOnEscape="true">
+                    <b:row>
+                        <b:column span="10" offset="1">                                        
+                            <h:outputLabel>
+                                ESTE ES SU USUARIO Y CONTRASEÑA CREADA. NO SE PODRA VER LUEGO ASI QUE COPIELA Y GUARDELA!!!!!
+                            </h:outputLabel>
+                        </b:column>
+                        <b:column span="10" offset="1">                                        
+                            <h:outputLabel for="txtUsuario1" value="Usuario: "/>
+                            <h:outputText id="txtUsuario1" value="#{usuarioControlador.usuarioCreado}"/>
+                        </b:column>
+                        <b:column span="10" offset="1">                                        
+                            <h:outputLabel for="txtPass1" value="Contraseña: "/>
+                            <h:outputText id="txtPass1" value="#{usuarioControlador.passAutogenerado}"/>
+                        </b:column>
+                    </b:row>
+                    <br></br>
+                    <b:row>
+                        <b:column offset="1" span="5">
+                            <b:commandButton class="btn-block btn-success" value="Aceptar" update="@form" onclick="$('.formAdministracion').modal('hide');">
+                                <f:ajax execute="modalAdministracion" render="@form"/>
+                            </b:commandButton>
+                        </b:column>
+                    </b:row>
+                </b:modal>
             </b:form>
         </ui:composition>
     </h:body>
