@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AsistenciaAdolescente;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class AsistenciaAdolescentesServicio {
 
     private final ConexionServicio<AsistenciaAdolescente> conexion;
-    private static final String URL_REGISTRO_ASISTENCIA_ADOLESCENTE = Constantes.URL_REGISTRO_ASISTENCIA_ADOLESCENTE;
+    private static final String URL_REGISTRO_ASISTENCIA_ADOLESCENTE = URLServicios.URL_REGISTRO_ASISTENCIA_ADOLESCENTE;
     
     public AsistenciaAdolescentesServicio() {
         conexion = new ConexionServicio<>();

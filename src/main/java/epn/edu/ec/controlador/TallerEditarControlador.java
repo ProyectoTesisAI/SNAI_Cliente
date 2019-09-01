@@ -15,6 +15,7 @@ import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.servicios.UdiServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -74,11 +75,15 @@ public class TallerEditarControlador implements Serializable {
 
     String tipoCentro;
     boolean esUzdi;
+    boolean esTecnico;
+    boolean esTecnicoCAI;
+    boolean esTecnicoUDI;
     Integer numeroParticipantes;
 
     int indiceTaller = 0;
 
     private boolean guardado;
+    private PermisosUsuario permisos;
     
     private ItemTaller item;
 
@@ -107,7 +112,7 @@ public class TallerEditarControlador implements Serializable {
 
         listaItemsTaller = new ArrayList<>();
         listadoAsistencia = new ArrayList<>();
-
+        permisos= new PermisosUsuario();
         guardado = false;
         
         item = new ItemTaller();
@@ -121,12 +126,13 @@ public class TallerEditarControlador implements Serializable {
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
 
+        
         //////////EN EL CASO DE QUE EL TALLER SE HAYA GUARDADO////////////////////
         Taller tallerAux = (Taller) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("taller_psicologia");
 
         if (tallerAux != null) {
-            
-            tipoTaller=tallerAux.getTipo();
+
+            tipoTaller = tallerAux.getTipo();
             tallerEditar = tallerAux;
 
             if (tallerAux.getIdCai() != null) {
@@ -138,6 +144,38 @@ public class TallerEditarControlador implements Serializable {
                 tipoCentro = "UZDI";
                 listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
                 udi = tallerEditar.getIdUdi();
+            }
+
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if ("ADMINISTRADOR".equals(rol) || "SUBDIRECTOR".equals(rol) || "LIDER UZDI".equals(rol) || "COORDINADOR CAI".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rol)) {
+                    esTecnico = false; //content-disable=true
+                    esTecnicoCAI = false;
+                    esTecnicoUDI = false;
+
+                    if (tallerAux.getTipo().equals("INSPECTOR EDUCADOR")) {
+                        esTecnico = true; //content-disable=true
+                        esTecnicoCAI = false;
+                        esTecnicoUDI = true;
+                    }
+
+                } else {
+                    esTecnico = true; //content-disable=true
+
+                    if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rol) || "EQUIPO TECNICO JURIDICO UZDI".equals(rol) || "TRABAJADOR SOCIAL UZDI".equals(rol)) {
+
+                        esTecnicoCAI = true;
+                        esTecnicoUDI = true;
+                        tipoCentro = "UZDI";
+                        //udiAux = udi;
+
+                    } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
+                        esTecnicoCAI = true;
+                        esTecnicoUDI = true;
+                        tipoCentro = "CAI";
+                        //caiAux = cai;
+                    }
+                }
             }
 
             List<ItemTaller> itemsAux = servicioTaller.obtenerItemsPorTalleres(tallerEditar.getIdTaller());
@@ -366,6 +404,31 @@ public class TallerEditarControlador implements Serializable {
     public void setItem(ItemTaller item) {
         this.item = item;
     }
+
+    public boolean isEsTecnico() {
+        return esTecnico;
+    }
+
+    public void setEsTecnico(boolean esTecnico) {
+        this.esTecnico = esTecnico;
+    }
+
+    public boolean isEsTecnicoCAI() {
+        return esTecnicoCAI;
+    }
+
+    public void setEsTecnicoCAI(boolean esTecnicoCAI) {
+        this.esTecnicoCAI = esTecnicoCAI;
+    }
+
+    public boolean isEsTecnicoUDI() {
+        return esTecnicoUDI;
+    }
+
+    public void setEsTecnicoUDI(boolean esTecnicoUDI) {
+        this.esTecnicoUDI = esTecnicoUDI;
+    }
+    
     
     /**
      * ***************************Eventos********************************************

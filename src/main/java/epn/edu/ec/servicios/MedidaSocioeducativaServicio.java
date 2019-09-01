@@ -2,7 +2,7 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.MedidaSocioeducativa;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -11,7 +11,7 @@ public class MedidaSocioeducativaServicio {
     
     private final ConexionServicio<MedidaSocioeducativa> conexion;    
     private final ConexionServicio<AdolescenteInfractorUDI> conexionAdolescenteUDI;    
-    private static final String URL_MEDIDA_SOCIOEDUCATIVA=Constantes.URL_MEDIDA_SOCIOEDUCATIVA;  
+    private static final String URL_MEDIDA_SOCIOEDUCATIVA=URLServicios.URL_MEDIDA_SOCIOEDUCATIVA;  
     
     public MedidaSocioeducativaServicio(){
         conexion= new ConexionServicio<>();

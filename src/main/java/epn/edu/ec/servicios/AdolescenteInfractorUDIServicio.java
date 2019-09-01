@@ -2,7 +2,7 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -11,8 +11,8 @@ public class AdolescenteInfractorUDIServicio {
 
     private final ConexionServicio<AdolescenteInfractorUDI> conexion;
     private final ConexionServicio<AdolescenteInfractor> conexionAI;
-    private static final String URL_ADOLESCENTE_INFRACTOR_UDI = Constantes.URL_ADOLESCENTE_UDI;
-    private static final String URL_ADOLESCENTE_INFRACTOR = Constantes.URL_ADOLESCENTE;
+    private static final String URL_ADOLESCENTE_INFRACTOR_UDI = URLServicios.URL_ADOLESCENTE_UDI;
+    private static final String URL_ADOLESCENTE_INFRACTOR = URLServicios.URL_ADOLESCENTE;
 
     public AdolescenteInfractorUDIServicio() {
         conexion = new ConexionServicio<>();
@@ -40,15 +40,10 @@ public class AdolescenteInfractorUDIServicio {
 
         try {
             AdolescenteInfractorUDI adolescenteInfractorUDIAux = null;
-            Response responseAI = conexionAI.conexion(URL_ADOLESCENTE_INFRACTOR, "PUT", true, adolescenteInfractorUDI.getIdAdolescenteInfractor());
-            if (responseAI != null) {
-                if (responseAI.getStatus() == 200) {
-                    Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_UDI, "PUT", true, adolescenteInfractorUDI);
-                    if (response != null) {
-                        if (response.getStatus() == 200) {
-                            adolescenteInfractorUDIAux = response.readEntity(AdolescenteInfractorUDI.class);
-                        }
-                    }
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_UDI, "PUT", true, adolescenteInfractorUDI);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    adolescenteInfractorUDIAux = response.readEntity(AdolescenteInfractorUDI.class);
                 }
             }
             return adolescenteInfractorUDIAux;

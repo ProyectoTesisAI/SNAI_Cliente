@@ -11,7 +11,7 @@ import epn.edu.ec.modelo.Reporte6N;
 import epn.edu.ec.modelo.Reporte6S;
 import epn.edu.ec.modelo.Reporte7;
 import epn.edu.ec.modelo.Reporte8;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.Date;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -25,7 +25,7 @@ public class AdolescenteInfractorServicio {
     private final ConexionServicio<Date> conexionFecha;
     private final ConexionServicio<String> conexionString;
     private final ConexionServicio<EjecucionMedidaCAI> conexionMedida;
-    private static final String URL_ADOLESCENTE_INFRACTOR = Constantes.URL_ADOLESCENTE;
+    private static final String URL_ADOLESCENTE_INFRACTOR = URLServicios.URL_ADOLESCENTE;
 
     public AdolescenteInfractorServicio() {
         conexion = new ConexionServicio<>();

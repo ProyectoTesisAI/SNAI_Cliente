@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.InformacionInfraccion;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class InformacionInfraccionServicio {
     
     private final ConexionServicio<InformacionInfraccion> conexion;    
-    private static final String URL_INFORMACION_INFRACCION=Constantes.URL_INFORMACION_INFRACCION;  
+    private static final String URL_INFORMACION_INFRACCION=URLServicios.URL_INFORMACION_INFRACCION;  
     
     public InformacionInfraccionServicio(){
         conexion= new ConexionServicio<>();

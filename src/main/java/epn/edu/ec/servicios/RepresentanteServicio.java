@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Representante;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class RepresentanteServicio {
     
     private final ConexionServicio<Representante> conexion;    
-    private static final String URL_REPRESENTANTE=Constantes.URL_REPRESENTANTE;  
+    private static final String URL_REPRESENTANTE=URLServicios.URL_REPRESENTANTE;  
     
     public RepresentanteServicio(){
         conexion= new ConexionServicio<>();

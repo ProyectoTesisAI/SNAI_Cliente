@@ -191,17 +191,23 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
     }
     
     public String reedireccionGuardarAdolescenteInfractor() throws InterruptedException {
-        Thread.sleep(1250);
-        String rol = permisos.RolUsuario();
-        if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
-                return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
+        if(guardado==true){
+            Thread.sleep(1250);
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if (rol.equals("ADMINISTRADOR")) {
+                    return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
+                } else {
+                    return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                }
             } else {
-                return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                return null;
             }
-        } else {
+        }
+        else{
             return null;
         }
+        
     }
     
     public void limpiarMensajeCedula(AjaxBehaviorEvent evento) {

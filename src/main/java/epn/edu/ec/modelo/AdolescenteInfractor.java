@@ -23,11 +23,12 @@ public class AdolescenteInfractor implements Serializable {
     //variable local
     private Integer edad;
     //Verificadores
-    private Validaciones validacion = new Validaciones();
+    private final Validaciones validacion;
     private Boolean verificadorCedula;
     private Boolean verificadorFechaNacimiento;
     
     public AdolescenteInfractor() {
+        validacion = new Validaciones();
     }
 
     public Integer getIdAdolescenteInfractor() {

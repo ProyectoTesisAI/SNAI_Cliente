@@ -6,7 +6,7 @@ import epn.edu.ec.modelo.AsistenciaAdolescente;
 import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -17,7 +17,7 @@ public class RegistroAsistenciaServicio {
     private final ConexionServicio<UDI> conexionUDI;
     private final ConexionServicio<CAI> conexionCAI;
     private final ConexionServicio<Taller> conexionTaller;
-    private static final String URL_REGISTRO_ASISTENCIA=Constantes.URL_REGISTRO_ASISTENCIA; 
+    private static final String URL_REGISTRO_ASISTENCIA=URLServicios.URL_REGISTRO_ASISTENCIA; 
     
     public RegistroAsistenciaServicio(){
         conexion= new ConexionServicio<>();

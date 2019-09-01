@@ -2,7 +2,7 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -12,7 +12,7 @@ public class DetalleInfraccionCAIServicio {
 
     private final ConexionServicio<DetalleInfraccionCAI> conexionDetalle;
     private final ConexionServicio<AdolescenteInfractorCAI> conexionAdolescente;
-    private static final String URL_DETALLE_INFRACCION = Constantes.URL_DETALLE_INFRACCION_CAI;
+    private static final String URL_DETALLE_INFRACCION = URLServicios.URL_DETALLE_INFRACCION_CAI;
     
     public DetalleInfraccionCAIServicio() {
         conexionDetalle = new ConexionServicio<>();

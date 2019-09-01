@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.UnidadZonal;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class UnidadZonalServicio {
     
     private final ConexionServicio<UnidadZonal> conexion;
-    private static final String URL_UNIDAD_ZONAL=Constantes.URL_UNIDAD_ZONAL;  
+    private static final String URL_UNIDAD_ZONAL=URLServicios.URL_UNIDAD_ZONAL;  
     
     public UnidadZonalServicio(){
         conexion= new ConexionServicio<>();

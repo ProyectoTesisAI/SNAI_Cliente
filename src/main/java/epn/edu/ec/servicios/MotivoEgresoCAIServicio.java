@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.MotivoEgresoCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class MotivoEgresoCAIServicio {
         
     private final ConexionServicio<MotivoEgresoCAI> conexion;    
-    private static final String URL_MOTIVO_EGRESO=Constantes.URL_MOTIVO_EGRESO_CAI;  
+    private static final String URL_MOTIVO_EGRESO=URLServicios.URL_MOTIVO_EGRESO_CAI;  
     
     public MotivoEgresoCAIServicio(){
         conexion= new ConexionServicio<>();

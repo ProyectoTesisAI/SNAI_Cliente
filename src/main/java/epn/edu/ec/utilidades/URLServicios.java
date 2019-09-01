@@ -9,7 +9,7 @@ package epn.edu.ec.utilidades;
  *
  * @author User
  */
-public class Constantes {
+public class URLServicios {
 
     public static final String URL_ADOLESCENTE = "https://localhost:8181/SistemaSNAI_Servidor/webresources/Adolescente_Infractor";
     public static final String URL_DETALLE_INFRACCION_CAI = "https://localhost:8181/SistemaSNAI_Servidor/webresources/Detalle_Infraccion_Cai";

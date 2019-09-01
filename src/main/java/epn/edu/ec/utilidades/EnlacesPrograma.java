@@ -75,6 +75,7 @@ public class EnlacesPrograma {
     
     public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_ADMININSTRADOR = "/paginas/cai/admin/crear/panel_crear_medida_cai.com";
     public String PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_USUARIO= "/paginas/cai/user/crear/panel_crear_medida_cai.com";
+    public String PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMINISTRADOR = "/paginas/cai/admin/editar/panel_crear_medida_cai.com";
     //Algunos usuarios no pueden crear nuevas registros de la tabla EjecucioMedida, solo pueden ver
     public String PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO = "/paginas/cai/user/crear/panel_ver_medida_cai.com";
     

@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Usuario;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class UsuarioServicio {
     
     private final ConexionServicio<Usuario> conexion;
-    private static final String URL_USUARIO=Constantes.URL_USUARIO;
+    private static final String URL_USUARIO=URLServicios.URL_USUARIO;
 
     public UsuarioServicio() {
         this.conexion = new ConexionServicio<>();

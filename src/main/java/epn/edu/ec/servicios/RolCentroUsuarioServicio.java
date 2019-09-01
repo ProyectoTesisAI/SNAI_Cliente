@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.RolCentroUsuario;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class RolCentroUsuarioServicio {
     
     private final ConexionServicio<RolCentroUsuario> conexion;
-    private static final String URL_ROL_CENTRO_USUARIO=Constantes.URL_ROL_CENTRO_USUARIO;
+    private static final String URL_ROL_CENTRO_USUARIO=URLServicios.URL_ROL_CENTRO_USUARIO;
 
     public RolCentroUsuarioServicio() {
         this.conexion = new ConexionServicio<>();

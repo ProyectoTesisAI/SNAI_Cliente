@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.EjeEducativo;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class EjeEducativoServicio {
 
     private final ConexionServicio<EjeEducativo> conexion;
-    private static final String URL_EJE_EDUCATIVO = Constantes.URL_EJE_EDUCATIVO;
+    private static final String URL_EJE_EDUCATIVO = URLServicios.URL_EJE_EDUCATIVO;
     
     public EjeEducativoServicio() {
         conexion = new ConexionServicio<>();

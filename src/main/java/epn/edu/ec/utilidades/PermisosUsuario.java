@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
  */
 public class PermisosUsuario {
 
-    private EnlacesPrograma enlaces;
+    private final EnlacesPrograma enlaces;
 
     public PermisosUsuario() {
         enlaces = new EnlacesPrograma();
@@ -161,7 +161,7 @@ public class PermisosUsuario {
         if (rolUsuario != null) {
 
             if ("ADMINISTRADOR".equals(rolUsuario)) {
-                return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_EDITAR_ADMINISTRADOR + "?faces-redirect=true";
+                return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return null;
             }

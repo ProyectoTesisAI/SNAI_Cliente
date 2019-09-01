@@ -7,6 +7,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
@@ -22,34 +23,19 @@ import javax.faces.view.ViewScoped;
 public class ValidarAccesoControlador implements Serializable{
     
     private final EnlacesPrograma enlaces;
+    private final PermisosUsuario permisos;
     
     public ValidarAccesoControlador(){
         enlaces= new EnlacesPrograma();
+        permisos=new PermisosUsuario();
     }
-    
-    private String RolUsuario(){
-    
-        Usuario usuarioLoginAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-
-        if(usuarioLoginAux!=null){
-            String rolUsuario=usuarioLoginAux.getIdRolUsuarioCentro().getIdRol().getRol();
-            
-            if(rolUsuario!=null){
-                return rolUsuario;
-            }
-            else{
-                return null;
-            }
-        }   
-        else{
-            return null;
-        }
-    }
+   
 
     public void verificarSesionAdministrador() throws IOException{
     
         try{
-            String rolUsuario=RolUsuario();
+            
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
       
@@ -62,7 +48,7 @@ public class ValidarAccesoControlador implements Serializable{
             }
             
         }catch(IOException e){
-            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
     }
 
@@ -70,7 +56,7 @@ public class ValidarAccesoControlador implements Serializable{
     
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -79,7 +65,7 @@ public class ValidarAccesoControlador implements Serializable{
             }
             
         }catch(IOException e){
-            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.PATH_ERROR);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
     }
     
@@ -90,7 +76,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -112,7 +98,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -135,7 +121,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -158,7 +144,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -186,7 +172,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -210,7 +196,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -234,7 +220,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -258,7 +244,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -282,7 +268,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -306,7 +292,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -330,7 +316,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 
@@ -355,7 +341,7 @@ public class ValidarAccesoControlador implements Serializable{
         
         try{
             
-            String rolUsuario=RolUsuario();
+            String rolUsuario=permisos.RolUsuario();
         
             if(rolUsuario!=null){
                 

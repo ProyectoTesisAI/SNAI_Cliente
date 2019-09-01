@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.InformacionCambioMedidaCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class InformacionCambioMedidaServicio {
         
     private final ConexionServicio<InformacionCambioMedidaCAI> conexion;    
-    private static final String URL_INFORMACION_CAMBIO_MEDIDA=Constantes.URL_INFORMACION_CAMBIO_MEDIDA_CAI;  
+    private static final String URL_INFORMACION_CAMBIO_MEDIDA=URLServicios.URL_INFORMACION_CAMBIO_MEDIDA_CAI;  
     
     public InformacionCambioMedidaServicio(){
         conexion= new ConexionServicio<>();
