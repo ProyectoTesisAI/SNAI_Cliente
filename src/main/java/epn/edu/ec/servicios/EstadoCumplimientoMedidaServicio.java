@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.EstadoCumplimientoMedida;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class EstadoCumplimientoMedidaServicio {
 
     private final ConexionServicio<EstadoCumplimientoMedida> conexion;
-    private static final String URL_ESTADO_CUMPLIMIENTO_MEDIDA = Constantes.URL_ESTADO_CUMPLIMIENTO_MEDIDA;
+    private static final String URL_ESTADO_CUMPLIMIENTO_MEDIDA = URLServicios.URL_ESTADO_CUMPLIMIENTO_MEDIDA;
     
     public EstadoCumplimientoMedidaServicio() {
         conexion = new ConexionServicio<>();

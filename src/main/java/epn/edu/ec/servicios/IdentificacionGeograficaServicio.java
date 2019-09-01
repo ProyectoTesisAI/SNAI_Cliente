@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
         
 import epn.edu.ec.modelo.IdentificacionGeografica;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class IdentificacionGeograficaServicio {
     
     private final ConexionServicio<IdentificacionGeografica> conexion;    
-    private static final String URL_IDENTIFICACION_GEOGRAFICA=Constantes.URL_IDENTIFICACION_GEOGRAFICA;  
+    private static final String URL_IDENTIFICACION_GEOGRAFICA=URLServicios.URL_IDENTIFICACION_GEOGRAFICA;  
     
     public IdentificacionGeograficaServicio(){
         conexion= new ConexionServicio<>();

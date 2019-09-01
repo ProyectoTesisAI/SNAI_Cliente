@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.DatosProvinciaCanton;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class DatosProvinciaCantonServicio {
 
     private final ConexionServicio<DatosProvinciaCanton> conexion;
-    private static final String URL_DATOS_PROVINCIA_CANTON = Constantes.URL_DATOS_PROVINCIA_CANTON;
+    private static final String URL_DATOS_PROVINCIA_CANTON = URLServicios.URL_DATOS_PROVINCIA_CANTON;
     
     public DatosProvinciaCantonServicio() {
         conexion = new ConexionServicio<>();

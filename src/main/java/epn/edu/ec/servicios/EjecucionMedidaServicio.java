@@ -2,7 +2,7 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -12,7 +12,7 @@ public class EjecucionMedidaServicio {
 
     private final ConexionServicio<DetalleInfraccionCAI> conexionDI;
     private final ConexionServicio<EjecucionMedidaCAI> conexionEM;
-    private static final String URL_EJECUCION_MEDIDA = Constantes.URL_EJECUCION_MEDIDA_CAI;
+    private static final String URL_EJECUCION_MEDIDA = URLServicios.URL_EJECUCION_MEDIDA_CAI;
     
     public EjecucionMedidaServicio() {
         conexionDI = new ConexionServicio<>();

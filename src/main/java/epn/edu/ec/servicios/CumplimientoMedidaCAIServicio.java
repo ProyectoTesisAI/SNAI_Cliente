@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.CumplimientoMedidaCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class CumplimientoMedidaCAIServicio {
 
     private final ConexionServicio<CumplimientoMedidaCAI> conexion;
-    private static final String URL_CUMPLIMIENTO_MEDIDA_CAI = Constantes.URL_CUMPLIMIENTO_MEDIDA_CAI;
+    private static final String URL_CUMPLIMIENTO_MEDIDA_CAI = URLServicios.URL_CUMPLIMIENTO_MEDIDA_CAI;
     
     public CumplimientoMedidaCAIServicio() {
         conexion = new ConexionServicio<>();

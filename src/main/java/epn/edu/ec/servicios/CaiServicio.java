@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.CAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class CaiServicio {
 
     private final ConexionServicio<CAI> conexion;
-    private static final String URL_CAI = Constantes.URL_CAI;
+    private static final String URL_CAI = URLServicios.URL_CAI;
     
     public CaiServicio() {
         conexion = new ConexionServicio<>();

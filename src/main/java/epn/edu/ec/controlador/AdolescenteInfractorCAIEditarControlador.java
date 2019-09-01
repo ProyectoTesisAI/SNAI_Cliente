@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
@@ -15,9 +14,9 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-@Named(value = "adolescenteInfractorCAIControlador")
+@Named(value = "adolescenteInfractorCAIEditarControlador")
 @ViewScoped
-public class AdolescenteInfractorCAIControlador implements Serializable {
+public class AdolescenteInfractorCAIEditarControlador implements Serializable {
 
     //mensajes que controlan las validaciones
     private String mensaje = "";
@@ -26,10 +25,10 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
 
-    private AdolescenteInfractor adolescenteInfractorCrear;
-    private AdolescenteInfractorCAI adolescenteInfractorCAICrear;
+    private AdolescenteInfractor adolescenteInfractorEditar;
+   
+    private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
     private AdolescenteInfractorCAIServicio servicioCAI;
-    private EnlacesPrograma enlaces;
     private PermisosUsuario permisos;
     private boolean guardado;
 
@@ -40,7 +39,6 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
     @PostConstruct
     public void init() {
         permisos = new PermisosUsuario();
-        enlaces = new EnlacesPrograma();
         servicioCAI = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
@@ -51,28 +49,37 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
             tipoDocumento = "EXTRANJERA";
         }
 
-        adolescenteInfractorCrear = new AdolescenteInfractor();
-
-        adolescenteInfractorCAICrear = new AdolescenteInfractorCAI();
-        this.adolescenteInfractorCrear.setTipo("CAI");
-        adolescenteInfractorCAICrear.setIdAdolescenteInfractor(adolescenteInfractorCrear);
+        adolescenteInfractorEditar = new AdolescenteInfractor();
+        adolescenteInfractorCAIEditar = new AdolescenteInfractorCAI();
         
+        AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
+        if (adolescenteInfractorCAIAux != null) {
+        
+            adolescenteInfractorCAIEditar = adolescenteInfractorCAIAux;
+            guardado = true;
+            if (adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getCedula() != null && adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getDocumento() == null) {
+                tipoDocumento = "ECUATORIANA";
+            } else if (adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getCedula() == null && adolescenteInfractorCAIAux.getIdAdolescenteInfractor().getDocumento() != null) {
+                tipoDocumento = "EXTRANJERA";
+            }
+            adolescenteInfractorEditar = adolescenteInfractorCAIEditar.getIdAdolescenteInfractor();
+        }
     }
 
-    public AdolescenteInfractorCAI getAdolescenteInfractorCAICrear() {
-        return adolescenteInfractorCAICrear;
+    public AdolescenteInfractor getAdolescenteInfractorEditar() {
+        return adolescenteInfractorEditar;
     }
 
-    public void setAdolescenteInfractorCAICrear(AdolescenteInfractorCAI adolescenteInfractorCAICrear) {
-        this.adolescenteInfractorCAICrear = adolescenteInfractorCAICrear;
+    public void setAdolescenteInfractorEditar(AdolescenteInfractor adolescenteInfractorEditar) {
+        this.adolescenteInfractorEditar = adolescenteInfractorEditar;
     }
 
-    public AdolescenteInfractor getAdolescenteInfractorCrear() {
-        return adolescenteInfractorCrear;
+    public AdolescenteInfractorCAI getAdolescenteInfractorCAIEditar() {
+        return adolescenteInfractorCAIEditar;
     }
 
-    public void setAdolescenteInfractorCrear(AdolescenteInfractor adolescenteInfractorCrear) {
-        this.adolescenteInfractorCrear = adolescenteInfractorCrear;
+    public void setAdolescenteInfractorCAIEditar(AdolescenteInfractorCAI adolescenteInfractorCAIEditar) {
+        this.adolescenteInfractorCAIEditar = adolescenteInfractorCAIEditar;
     }
 
     public AdolescenteInfractorCAIServicio getServicioCAI() {
@@ -117,13 +124,13 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
-        this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
+        this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
         if ("ECUATORIANA".equals(tipoDocumento)) {
             esCedula = true;
-            this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setDocumento(null);
+            this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setDocumento(null);
         } else if ("EXTRANJERA".equals(tipoDocumento)) {
             esCedula = false;
-            this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().setCedula(null);
+            this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().setCedula(null);
         }
     }
 
@@ -140,27 +147,26 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         this.esCedula = esCedula;
     }
 
-    //Métodos para invocar a los diferentes servicios web************
-    public void guardarAdolescenteInfractor() {
-        
-        if (this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor() != null) {
+    public void guardarEdicionAdolescenteInfractor() {
+
+        if (this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor() != null) {
             
-            Date fechaNacimiento=this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento();
+            Date fechaNacimiento=this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
             
             if (validacion.verificarFechaNacimiento(fechaNacimiento)) {
             
                 if ("ECUATORIANA".equals(tipoDocumento)) {
 
-                    String cedula = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
+                    String cedula = this.adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getCedula();
                     if (validacion.cedulaValida(cedula)) {
-                        guardarRegistroAdolescenteInfractor();
+                        guardarRegistroAdolescenteInfractorEditar();
                         
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, HA INGRESADO UNA CÉDULA INCORRECTA", "Error"));
                     }
 
                 } else if ("EXTRANJERA".equals(tipoDocumento)) {
-                    guardarRegistroAdolescenteInfractor();
+                    guardarRegistroAdolescenteInfractorEditar();
                 }
             }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 18 AÑOS", "Error"));
@@ -172,42 +178,22 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         
     }
 
-    private void guardarRegistroAdolescenteInfractor() {
+    private void guardarRegistroAdolescenteInfractorEditar() {
         
-        AdolescenteInfractorCAI ai_cai = servicioCAI.guardarAdolescenteInfractorCAI(this.adolescenteInfractorCAICrear);
+        AdolescenteInfractorCAI ai_cai = servicioCAI.guardarEdicionAdolescenteInfractorCAI(this.adolescenteInfractorCAIEditar);
                
         if (ai_cai != null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
-            guardado = true;
+            guardado = false;
 
         } else {
-            guardado = false;
+            guardado = true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR CAI", "Error"));
         }
     }
     
-    public String redireccionGuardarAdolescenteInfractor() throws InterruptedException {
-        if(guardado==true){
-            Thread.sleep(1250);
-            String rol = permisos.RolUsuario();
-            if (rol != null) {
-                if (rol.equals("ADMINISTRADOR")) {
-                    return enlaces.PATH_PANEL_CAI_ADMINISTRADOR + "?faces-redirect=true";
-                } else {
-                    return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
-                }
-            } else {
-                return null;
-            }
-        }
-        else{
-            return null;
-        }
-        
-    }
-    
-    public void limpiarMensajeCedula(AjaxBehaviorEvent evento) {
-        String cedula = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
+    public void limpiarMensajeCedulaEditar(AjaxBehaviorEvent evento) {
+        String cedula = adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getCedula();
         if (validacion.cedulaValida(cedula)) {
             mensaje = "";
         } else {
@@ -215,9 +201,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         }
     }
 
-    public void validarCedula(AjaxBehaviorEvent evento) {
-
-        String cedula = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
+    public void validarCedulaEditar(AjaxBehaviorEvent evento) {
+        String cedula = adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getCedula();
         if (validacion.cedulaValida(cedula)) {
             mensaje = "cédula correcta";
         } else {
@@ -225,8 +210,8 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         }
     }
 
-    public void limpiarMensajeFechaNacimiento(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento();
+    public void limpiarMensajeFechaNacimientoEditar(AjaxBehaviorEvent evento) {
+        Date fecha = adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
         if (validacion.verificarFechaNacimiento(fecha)) {
             mensaje1 = "";
         } else {
@@ -234,13 +219,12 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
         }
     }
 
-    public void validarFechaNacimiento(AjaxBehaviorEvent evento) {
-        Date fecha = adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getFechaNacimiento();
+    public void validarFechaNacimientoEditar(AjaxBehaviorEvent evento) {
+        Date fecha = adolescenteInfractorCAIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
         if (validacion.verificarFechaNacimiento(fecha)) {
             mensaje1 = "Fecha correcta";
         } else {
-            mensaje1 = "Fecha incorrecta";
+            mensaje1 = "Fecha corresponde a una persona mayor de 17 años";
         }
     }
-
 }

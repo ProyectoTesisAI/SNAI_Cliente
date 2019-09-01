@@ -2,7 +2,7 @@ package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Informe;
 import epn.edu.ec.modelo.Usuario;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -12,7 +12,7 @@ public class InformeServicio {
     
     private final ConexionServicio<Informe> conexion;
     private final ConexionServicio<Usuario> conexionU;
-    private static final String URL_INFORME=Constantes.URL_INFORME;
+    private static final String URL_INFORME=URLServicios.URL_INFORME;
     
     public InformeServicio(){
         conexion= new ConexionServicio<>();

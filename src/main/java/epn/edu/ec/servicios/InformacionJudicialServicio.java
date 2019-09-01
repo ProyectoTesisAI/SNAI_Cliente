@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.InformacionJudicial;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class InformacionJudicialServicio {
      
     private final ConexionServicio<InformacionJudicial> conexion;    
-    private static final String URL_INFORMACION_JUDICIAL=Constantes.URL_INFORMACION_JUDICIAL;  
+    private static final String URL_INFORMACION_JUDICIAL=URLServicios.URL_INFORMACION_JUDICIAL;  
     
     public InformacionJudicialServicio(){
         conexion= new ConexionServicio<>();

@@ -7,7 +7,7 @@ import epn.edu.ec.modelo.ItemTaller;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.modelo.Usuario;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -19,7 +19,7 @@ public class TallerServicio {
     private final ConexionServicio<Usuario> conexionUsuario;
     private final ConexionServicio<UDI> conexionUDI;
     private final ConexionServicio<CAI> conexionCAI;
-    private static final String URL_TALLER=Constantes.URL_TALLER;
+    private static final String URL_TALLER=URLServicios.URL_TALLER;
     
     public TallerServicio(){
         conexion= new ConexionServicio<>();

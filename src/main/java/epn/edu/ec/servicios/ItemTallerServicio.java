@@ -7,7 +7,7 @@ package epn.edu.ec.servicios;
 
 
 import epn.edu.ec.modelo.ItemTaller;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 /**
@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 public class ItemTallerServicio {
     
     private final ConexionServicio<ItemTaller> conexion;    
-    private static final String URL_ITEM_TALLER_PSICOLOGIA=Constantes.URL_ITEM_TALLER; 
+    private static final String URL_ITEM_TALLER_PSICOLOGIA=URLServicios.URL_ITEM_TALLER; 
     
     public ItemTallerServicio(){
         conexion= new ConexionServicio<>();

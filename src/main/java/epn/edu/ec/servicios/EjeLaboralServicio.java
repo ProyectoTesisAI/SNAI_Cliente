@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.EjeLaboral;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class EjeLaboralServicio {
 
     private final ConexionServicio<EjeLaboral> conexion;
-    private static final String URL_EJE_LABORAL = Constantes.URL_EJE_LABORAL;
+    private static final String URL_EJE_LABORAL = URLServicios.URL_EJE_LABORAL;
     
     public EjeLaboralServicio() {
         conexion = new ConexionServicio<>();

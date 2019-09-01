@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.DatosPais;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class DatosPaisServicio {
 
     private final ConexionServicio<DatosPais> conexion;
-    private static final String URL_DATOS_PAIS = Constantes.URL_DATOS_PAIS;
+    private static final String URL_DATOS_PAIS = URLServicios.URL_DATOS_PAIS;
     
     public DatosPaisServicio() {
         conexion = new ConexionServicio<>();

@@ -52,7 +52,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2 col-md-offset-1">
+                                        <div class="col-md-3 col-md-offset-1">
                                             <div class="form-group">
                                                 <b:panelGrid columns="1">
                                                     <h:outputLabel for="dtpHoraInicio" value="Hora Inicio"/>
@@ -80,13 +80,13 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtUzdi" disabled="#{tallerControlador.esTecnico}" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                    <b:selectOneMenu id="txtUzdi" disabled="#{tallerControlador.esTecnicoUDI}" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
                                                         <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                         <f:selectItems value="#{tallerControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                     </b:selectOneMenu>
 
                                                     <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtCai" disabled="#{tallerControlador.esTecnico}" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                    <b:selectOneMenu id="txtCai" disabled="#{tallerControlador.esTecnicoCAI}" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
                                                         <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                                         <f:selectItems value="#{tallerControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                     </b:selectOneMenu>

@@ -6,7 +6,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.UDI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 public class UdiServicio {
     
     private final ConexionServicio<UDI> conexion;
-    private static final String URL_UDI=Constantes.URL_UDI; 
+    private static final String URL_UDI=URLServicios.URL_UDI; 
     
     public UdiServicio(){
         conexion= new ConexionServicio<>();

@@ -6,7 +6,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.RegistroFotografico;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 public class RegistroFotograficoServicio {
  
     private final ConexionServicio<RegistroFotografico> conexion;    
-    private static final String URL_REGISTRO_FOTOGRAFICO=Constantes.URL_REGISTRO_FOTOGRAFICO;
+    private static final String URL_REGISTRO_FOTOGRAFICO=URLServicios.URL_REGISTRO_FOTOGRAFICO;
     
     public RegistroFotograficoServicio(){
         conexion= new ConexionServicio<>();

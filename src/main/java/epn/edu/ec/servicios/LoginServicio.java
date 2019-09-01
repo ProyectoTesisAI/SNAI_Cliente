@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.Usuario;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class LoginServicio {
     
     private final ConexionServicio<Usuario> conexion;    
-    private static final String URL_USUARIO_LOGIN=Constantes.URL_USUARIO;
+    private static final String URL_USUARIO_LOGIN=URLServicios.URL_USUARIO;
     
     public LoginServicio(){
         conexion= new ConexionServicio<>();

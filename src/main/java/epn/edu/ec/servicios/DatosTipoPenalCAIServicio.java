@@ -1,7 +1,7 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.DatosTipoPenalCAI;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 public class DatosTipoPenalCAIServicio {
     
     private final ConexionServicio<DatosTipoPenalCAI> conexion;
-    private static final String URL_DATOS_TIPO_PENAL_CAI=Constantes.URL_DATOS_TIPO_PENAL_CAI;
+    private static final String URL_DATOS_TIPO_PENAL_CAI=URLServicios.URL_DATOS_TIPO_PENAL_CAI;
     
     public DatosTipoPenalCAIServicio() {
         conexion = new ConexionServicio<>();

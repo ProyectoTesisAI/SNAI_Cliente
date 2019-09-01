@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.EjeSalud;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class EjeSaludServicio {
 
     private final ConexionServicio<EjeSalud> conexion;
-    private static final String URL_EJE_SALUD = Constantes.URL_EJE_SALUD;
+    private static final String URL_EJE_SALUD = URLServicios.URL_EJE_SALUD;
     
     public EjeSaludServicio() {
         conexion = new ConexionServicio<>();

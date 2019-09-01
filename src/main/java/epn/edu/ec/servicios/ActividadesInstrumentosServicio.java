@@ -1,13 +1,13 @@
 package epn.edu.ec.servicios;
 
 import epn.edu.ec.modelo.ActividadesInstrumentos;
-import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.URLServicios;
 import javax.ws.rs.core.Response;
 
 public class ActividadesInstrumentosServicio {
 
     private final ConexionServicio<ActividadesInstrumentos> conexion;
-    private static final String URL_ACTIVIDADES_INSTRUMENTOS = Constantes.URL_ACTIVIDADES_INSTRUMENTOS;
+    private static final String URL_ACTIVIDADES_INSTRUMENTOS = URLServicios.URL_ACTIVIDADES_INSTRUMENTOS;
     
     public ActividadesInstrumentosServicio() {
         conexion = new ConexionServicio<>();

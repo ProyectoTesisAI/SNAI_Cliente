@@ -14,7 +14,7 @@ import epn.edu.ec.servicios.ItemTallerServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.servicios.UdiServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -58,7 +58,6 @@ public class TallerControlador implements Serializable {
     //Datos de taller del tema
     private String tematicaTaller;
     
-    private EnlacesPrograma enlaces;
     Taller tallerCrear;
     RegistroAsistencia registroAsistencia;
     UDI udi;
@@ -82,11 +81,14 @@ public class TallerControlador implements Serializable {
     boolean esUzdi;
     Integer numeroParticipantes;
     boolean esTecnico;
+    boolean esTecnicoCAI;
+    boolean esTecnicoUDI;
 
     boolean tallerGuardado = false;
     int indiceTaller = 0;
     
     private ItemTaller item;
+    private PermisosUsuario permisos;
     
     @PostConstruct
     public void init() {
@@ -105,7 +107,6 @@ public class TallerControlador implements Serializable {
         servicioAsistencia = new AsistenciaAdolescentesServicio();
 
         tallerCrear = new Taller();
-        enlaces = new EnlacesPrograma();
         registroAsistencia = new RegistroAsistencia();
         udi = new UDI();
         cai = new CAI();
@@ -117,6 +118,7 @@ public class TallerControlador implements Serializable {
         listaItemsTaller = new ArrayList<>();
         listadoAsistencia = new ArrayList<>();
         
+        permisos= new PermisosUsuario();
         item = new ItemTaller();
 
         if (isEsUzdi()) {
@@ -128,22 +130,42 @@ public class TallerControlador implements Serializable {
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
 
-        if ("ADMINISTRADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "SUBDIRECTOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "LIDER UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "COORDINADOR CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
-            esTecnico = false;
-        } else {
-            esTecnico = true;
+        String rol = permisos.RolUsuario();
+        if (rol != null) {
+            if ("ADMINISTRADOR".equals(rol) || "SUBDIRECTOR".equals(rol) || "LIDER UZDI".equals(rol) || "COORDINADOR CAI".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rol)) {
+                esTecnico = false; //content-disable=true
+                esTecnicoCAI=false;
+                esTecnicoUDI=false;
+                
+                if(tipoTaller.equals("INSPECTOR EDUCADOR")){
+                    esTecnico=true; //content-disable=true
+                    esTecnicoCAI=false; 
+                    esTecnicoUDI=true;
+                    tipoCentro = "CAI";
+                    listaCai = servicioCai.listaCai();
+                }
+                
+            } else {
+                esTecnico = true; //content-disable=true
+                
 
-            if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "TRABAJADOR SOCIAL UZDI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
-                tipoCentro = "UZDI";
-                listaUdi = servicioUdi.listaUdi();
-                udi = usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
-                udiAux = udi;
+                if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rol) || "EQUIPO TECNICO JURIDICO UZDI".equals(rol) || "TRABAJADOR SOCIAL UZDI".equals(rol)) {
+                    
+                    esTecnicoCAI=true; 
+                    esTecnicoUDI=true;
+                    tipoCentro = "UZDI";
+                    listaUdi = servicioUdi.listaUdi();
+                    udi = usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
+                    udiAux = udi;
 
-            } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "INSPECTOR EDUCADOR".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol()) || "TRABAJADOR SOCIAL CAI".equals(usuarioLogin.getIdRolUsuarioCentro().getIdRol().getRol())) {
-                tipoCentro = "CAI";
-                listaCai = servicioCai.listaCai();
-                cai = usuarioLogin.getIdRolUsuarioCentro().getIdCai();
-                caiAux = cai;
+                } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
+                    esTecnicoCAI=true; 
+                    esTecnicoUDI=true;
+                    tipoCentro = "CAI";
+                    listaCai = servicioCai.listaCai();
+                    cai = usuarioLogin.getIdRolUsuarioCentro().getIdCai();
+                    caiAux = cai;
+                }
             }
         }
     }
@@ -386,6 +408,16 @@ public class TallerControlador implements Serializable {
     public void setItem(ItemTaller item) {
         this.item = item;
     }
+
+    public boolean isEsTecnicoCAI() {
+        return esTecnicoCAI;
+    }
+
+    public boolean isEsTecnicoUDI() {
+        return esTecnicoUDI;
+    }
+    
+    
     
     /**
      * ***************************Eventos********************************************

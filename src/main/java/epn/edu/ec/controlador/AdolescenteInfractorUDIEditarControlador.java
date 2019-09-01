@@ -158,7 +158,7 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
      */
 
     
-    public void guardarAdolescenteInfractor() {
+    public void guardarEdicionAdolescenteInfractor() {
         if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null) {
             
             Date fechaNacimiento=this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().getFechaNacimiento();
