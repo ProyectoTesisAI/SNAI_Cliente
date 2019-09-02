@@ -41,7 +41,7 @@
                         <h:panelGroup id="tipoDocumento">
                             <b:column span="4" offset="2">                                                   
                                 <h:outputLabel for="txtCedula" value="Cédula" rendered="#{adolescenteInfractorUDIEditarControlador.esCedula}"/>
-                                <b:inputText id="txtCedula" placeholder="Cédula" rendered="#{adolescenteInfractorUDIEditarControlador.esCedula}" maxlength="10" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.cedula}">
+                                <b:inputText id="txtCedula" mask="{regex:'[0-9\u0600-\u06FF]*'}" placeholder="Cédula" rendered="#{adolescenteInfractorUDIEditarControlador.esCedula}" maxlength="10" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.cedula}">
                                     <f:ajax event="blur" listener="#{adolescenteInfractorUDIEditarControlador.limpiarMensajeCedulaEditar}" render="txtCedula mensaje-cedula" />
                                     <f:ajax event="keyup" listener="#{adolescenteInfractorUDIEditarControlador.validarCedulaEditar}" render="mensaje-cedula" />
                                 </b:inputText>
@@ -87,7 +87,7 @@
 
                         <b:column span="4" offset="2">   
                             <h:outputLabel for="txtEdad" value="Edad "/>
-                            <b:inputText mask="integer" id="txtEdad" disabled="true" placeholder="Edad" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.edad}"/>                     
+                            <b:inputText mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtEdad" disabled="true" placeholder="Edad" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.edad}"/>                     
                         </b:column>
                     </b:row>
 

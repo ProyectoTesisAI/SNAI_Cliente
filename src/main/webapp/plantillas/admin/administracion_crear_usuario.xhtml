@@ -8,10 +8,12 @@
 
     <h:body>
         <ui:composition>
+            
             <b:form>
-                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" />
-
-                <b:panel look="primary">
+                
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
+                <b:panel look="primary" content-disabled="#{usuarioControlador.guardado}" >
                     <f:facet name="heading">
                         <h:outputText value="NUEVO USUARIO" style="color: white; font-weight: bold"  />
                     </f:facet>
@@ -28,15 +30,16 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtCedula" value="Cédula"/>
-                            <b:inputText id="txtCedula" placeholder="Cédula" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{usuarioControlador.usuario.cedula}">
+                            <b:inputText id="txtCedula" mask="{regex:'[0-9\u0600-\u06FF]*'}"  placeholder="Cédula" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{usuarioControlador.usuario.cedula}">
                                 <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
                                 <f:ajax event="keyup" listener="#{usuarioControlador.validarCedula}" render="mensaje-cedula" />
                             </b:inputText>
+                            <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{usuarioControlador.mensajeCedula}"/>
                         </b:column>
-                        <h:outputText style="color: red; font-size: 14px;" id="mensaje-cedula" class="mensaje-error" value="#{usuarioControlador.mensajeCedula}"/>
+                        
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel for="txtTelefono" value="Teléfono"/>
-                            <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{usuarioControlador.usuario.telefono}">
+                            <b:inputText id="txtTelefono" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="10" placeholder="Teléfono" value="#{usuarioControlador.usuario.telefono}">
                                 <f:ajax event="blur" listener="#{usuarioControlador.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
                                 <f:ajax event="keyup" listener="#{usuarioControlador.validarNumeroContacto}" render="mensaje-telefono" />
                             </b:inputText>
@@ -47,23 +50,61 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel  for="txtUsuario" value="Usuario"/>
-                            <b:inputText id="txtUsuario" required="true" placeholder="Usuario" update="txtPassword" value="#{usuarioControlador.usuario.usuario}"/>
+                            <b:inputText id="txtUsuario" required="true" requiredMessage="Usuario es requerido, ingrese un valor" placeholder="Usuario" value="#{usuarioControlador.usuario.usuario}"/>
                         </b:column>
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel for="txtPassword" value="Constraseña"/>
-                            <b:inputText id="txtPassword" disabled="true" value="#{usuarioControlador.passAutogenerado}"/>
+                            <b:inputText id="txtPassword" required="true" requiredMessage="Contraseña es requerida, genere contraseña" disabled="true" value="#{usuarioControlador.passAutogenerado}"/>
                         </b:column>
                     </b:row>
+                    
+                    <b:row>
+                        <b:column span="3" offset="8">
+                            <b:commandButton value="Generar Contraseña" class="btn btn-default btn-block" onclick="$('.formAdministracion').modal('show')">
+                                <f:ajax render="txtPass1 txtPassword" listener="#{usuarioControlador.generarPassword}"/>
+                                <f:ajax execute="txtUsuario" render="txtUsuario1" />
+                            </b:commandButton>
+                        </b:column>
+                    </b:row>
+                    
+                    <b:modal title="Infomación" styleClass="formAdministracion"
+                             id="modalAdministracion"
+                             closable="false"
+                             closeOnEscape="true">
+                        <b:row>
+                            <b:column span="10" offset="1">                                        
+                                <h:outputLabel>
+                                    ESTE ES SU USUARIO Y CONTRASEÑA CREADA. NO SE PODRA VER LUEGO ASI QUE COPIELA Y GUARDELA!!!!!
+                                </h:outputLabel>
+                            </b:column>
+                            <b:column span="10" offset="1">                                        
+                                <h:outputLabel for="txtUsuario1" value="Usuario: "/>
+                                <h:outputText id="txtUsuario1" value="#{usuarioControlador.usuario.usuario}"/>
+                            </b:column>
+                            <b:column span="10" offset="1">                                        
+                                <h:outputLabel for="txtPass1" value="Contraseña: "/>
+                                <h:outputText id="txtPass1" value="#{usuarioControlador.passAutogenerado}"/>
+                            </b:column>
+                        </b:row>
+                        <br></br>
+                        <b:row>
+                            <b:column offset="1" span="5">
+                                <b:button class="btn-block btn-success" value="Aceptar" dismiss="modal" onclick="return false;"/>
+                            </b:column>
+                        </b:row>
+                    </b:modal>
+                    
                 </b:panel>
-                <b:panel look="primary">
+                
+                <b:panel look="primary" content-disabled="#{usuarioControlador.guardado}">
                     <f:facet name="heading">
                         <h:outputText value="ASIGNAR ROL-CENTRO" style="color: white; font-weight: bold"  />
                     </f:facet>
                     <b:row>
                         <b:column span="6" offset="1">                                        
-                            <h:outputLabel for="txtRol" value="ROL"/>
-                            <b:selectOneMenu id="txtRol" update="rol,rolesTecnicos" process="@this" value="#{usuarioControlador.tipoRol}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                            <h:outputLabel for="txtRol" value="Rol"/>
+                            <b:selectOneMenu id="txtRol" required="true" requiredMessage="Rol es requerido, seleccione una opción"  update="rol,rolesTecnicos" process="@this" value="#{usuarioControlador.tipoRol}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="ADMINISTRADOR"  itemValue="ADMINISTRADOR" />
                                 <f:selectItem itemLabel="SUBDIRECTOR"  itemValue="SUBDIRECTOR" />
                                 <f:selectItem itemLabel="DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN"  itemValue="DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN" />
@@ -110,37 +151,14 @@
                 </b:panel>
                 <b:row>
                     <b:column span="3" offset="8">
-                        <b:commandButton value="Guardar" class="btn btn-primary btn-block" update="@form:modalAdministracion" action="#{usuarioControlador.guardarUsuario()}" oncomplete="$('.formAdministracion').modal('show')"/>
+                        <b:commandButton value="Guardar" class="btn btn-primary btn-block" update="@form" 
+                                         oncomplete="setBtnRedireccionPanelAdministracion();" actionListener="#{usuarioControlador.guardarUsuario()}" />
+                        <b:remoteCommand name="setBtnRedireccionPanelAdministracion" 
+                                         action="#{usuarioControlador.redireccionPanelAdministracion()}"
+                                                 />
                     </b:column>
                 </b:row>
-                <b:modal title="Infomación" styleClass="formAdministracion"
-                         id="modalAdministracion"
-                         closable="false"
-                         closeOnEscape="true">
-                    <b:row>
-                        <b:column span="10" offset="1">                                        
-                            <h:outputLabel>
-                                ESTE ES SU USUARIO Y CONTRASEÑA CREADA. NO SE PODRA VER LUEGO ASI QUE COPIELA Y GUARDELA!!!!!
-                            </h:outputLabel>
-                        </b:column>
-                        <b:column span="10" offset="1">                                        
-                            <h:outputLabel for="txtUsuario1" value="Usuario: "/>
-                            <h:outputText id="txtUsuario1" value="#{usuarioControlador.usuarioCreado}"/>
-                        </b:column>
-                        <b:column span="10" offset="1">                                        
-                            <h:outputLabel for="txtPass1" value="Contraseña: "/>
-                            <h:outputText id="txtPass1" value="#{usuarioControlador.passAutogenerado}"/>
-                        </b:column>
-                    </b:row>
-                    <br></br>
-                    <b:row>
-                        <b:column offset="1" span="5">
-                            <b:commandButton class="btn-block btn-success" value="Aceptar" update="@form" onclick="$('.formAdministracion').modal('hide');">
-                                <f:ajax execute="modalAdministracion" render="@form"/>
-                            </b:commandButton>
-                        </b:column>
-                    </b:row>
-                </b:modal>
+                
             </b:form>
         </ui:composition>
     </h:body>

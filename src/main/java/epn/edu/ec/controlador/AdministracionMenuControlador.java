@@ -1,5 +1,6 @@
 package epn.edu.ec.controlador;
 
+import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -24,12 +25,24 @@ public class AdministracionMenuControlador implements Serializable {
     private boolean permitidoCrearAdolescenteUDI;
     private boolean permitidoCrearAdolescenteCAI;
     private boolean permitidoCrearUsuario;
+    private String usuario;
 
     @PostConstruct
     public void init() {
 
         enlaces = new EnlacesPrograma();
         permisosUsuario = new PermisosUsuario();
+        
+        Usuario usuarioLoginAux = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+
+        if (usuarioLoginAux != null) {
+            usuario=usuarioLoginAux.getNombres()+" "+usuarioLoginAux.getApellidos()+"  ";
+        }
+    
+    }
+
+    public String getUsuario() {
+        return usuario;
     }
 
     public boolean isTipoRolAdministrador() {

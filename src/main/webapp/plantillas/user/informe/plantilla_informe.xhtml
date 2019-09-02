@@ -42,6 +42,10 @@
                                             <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula">
                                                 <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
                                             </p:column>
+                                            
+                                            <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.documento}" headerText="Documento">
+                                                <h:outputText value="#{ai.idAdolescenteInfractor.documento}" />
+                                            </p:column>
 
                                             <p:column filterMatchMode="contains" filterBy="#{ai.asistio}" headerText="¿Asistió?">
                                                 <b:selectBooleanCheckbox  value="#{ai.asistio}"/>

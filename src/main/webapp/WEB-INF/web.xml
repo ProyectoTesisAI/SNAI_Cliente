@@ -40,4 +40,9 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/error/error_sesion.com</location>
     </error-page>
+    
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/error_sesion.com</location>
+    </error-page>
 </web-app>

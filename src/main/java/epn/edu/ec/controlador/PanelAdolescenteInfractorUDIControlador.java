@@ -34,14 +34,16 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         listadoAdolescentesInfractoresUDI = new ArrayList<>();
         listadoAdolescentesInfractoresUDI = servicio.listaAdolescentesInfractoresUDI();
         
-        if (listadoAdolescentesInfractoresUDI.size() > 0) {
-            for (AdolescenteInfractorUDI a : listadoAdolescentesInfractoresUDI) {
-                if (a.getIdAdolescenteInfractor().getDocumento() != null) {
-                    a.getIdAdolescenteInfractor().setCedula(a.getIdAdolescenteInfractor().getDocumento());
+        if (listadoAdolescentesInfractoresUDI != null) {
+            if (listadoAdolescentesInfractoresUDI.size() > 0) {
+                for (AdolescenteInfractorUDI a : listadoAdolescentesInfractoresUDI) {
+                    if (a.getIdAdolescenteInfractor().getDocumento() != null) {
+                        a.getIdAdolescenteInfractor().setCedula(a.getIdAdolescenteInfractor().getDocumento());
+                    }
                 }
             }
         }
-        
+
     }
 
     public List<AdolescenteInfractorUDI> getListadoAdolescentesInfractoresUDI() {

@@ -290,8 +290,10 @@ public class InformeControlador implements Serializable{
             } 
             else {
                 if (registroAux.size() > 0) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ADOLESCENTES INFRACTORES PERTENECIENTES A " , "Aviso"));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "REGISTRO DE ADOLESCENTES INFRACTORES" , "Aviso"));
                     listaParaChequeo = registroAux;
+                    
+                    
                 }
             }
         }

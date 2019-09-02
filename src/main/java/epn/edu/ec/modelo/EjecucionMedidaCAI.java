@@ -128,17 +128,20 @@ public class EjecucionMedidaCAI implements Serializable {
         int acumulador = 0;
         int a = 0;
         int m = 0;
+        int d=0;
         if (anios != null) {
             a = anios * 365;
-            if (meses != null) {
-                m = meses * 30;
-                if (dias != null) {
-                    acumulador = a + m + dias;
-                }
-            }
-            tiempoSentenDias = acumulador;
-            return tiempoSentenDias;
         }
+        if (meses != null) {
+            m = meses * 30;
+        }
+        
+        if (dias != null) {
+            d=dias;
+        }
+          
+        acumulador=a+m+d;
+        tiempoSentenDias = acumulador;
         return tiempoSentenDias;
     }
 
@@ -153,12 +156,13 @@ public class EjecucionMedidaCAI implements Serializable {
         int ac = 0;
         if (fechaAprehension != null && fechaReporteCAI!=null) {
             //Date fechaResolucion = idEjecucionMedida.getFechaReporte();
-            Date fechaResolucion = fechaReporteCAI;
+            Date fechaResolucionaAux = fechaReporteCAI;
+            
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
             ZonedDateTime zdt1 = ZonedDateTime.parse(fechaAprehension.toString(), dtf);
             LocalDate ld1 = zdt1.toLocalDate();
 
-            ZonedDateTime zdt2 = ZonedDateTime.parse(fechaResolucion.toString(), dtf);
+            ZonedDateTime zdt2 = ZonedDateTime.parse(fechaResolucionaAux.toString(), dtf);
             LocalDate ld2 = zdt2.toLocalDate();
 
             DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");

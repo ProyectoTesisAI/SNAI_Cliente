@@ -62,8 +62,8 @@ public class TallerControlador implements Serializable {
     RegistroAsistencia registroAsistencia;
     UDI udi;
     CAI cai;
-    UDI udiAux;
-    CAI caiAux;
+//    UDI udiAux;
+//    CAI caiAux;
 
     List<UDI> listaUdi;
     List<CAI> listaCai;
@@ -110,8 +110,8 @@ public class TallerControlador implements Serializable {
         registroAsistencia = new RegistroAsistencia();
         udi = new UDI();
         cai = new CAI();
-        udiAux = new UDI();
-        caiAux = new CAI();
+  //      udiAux = new UDI();
+  //      caiAux = new CAI();
         listaUdi = new ArrayList<>();
         listaCai = new ArrayList<>();
 
@@ -156,7 +156,7 @@ public class TallerControlador implements Serializable {
                     tipoCentro = "UZDI";
                     listaUdi = servicioUdi.listaUdi();
                     udi = usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
-                    udiAux = udi;
+    //                udiAux = udi;
 
                 } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
                     esTecnicoCAI=true; 
@@ -164,7 +164,7 @@ public class TallerControlador implements Serializable {
                     tipoCentro = "CAI";
                     listaCai = servicioCai.listaCai();
                     cai = usuarioLogin.getIdRolUsuarioCentro().getIdCai();
-                    caiAux = cai;
+    //                caiAux = cai;
                 }
             }
         }
@@ -246,23 +246,23 @@ public class TallerControlador implements Serializable {
             for (UDI u : listaUdi) {
                 if (u.getUdi().equals(udi.getUdi())) {
                     udi = u;
-                    udiAux = u;
+      //              udiAux = u;
                     break;
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(udi);
-            udi = new UDI();
+//            udi = new UDI();
 
         } else if (cai.getCai() != null) {
             for (CAI c : listaCai) {
                 if (c.getCai().equals(cai.getCai())) {
                     cai = c;
-                    caiAux = c;
+      //              caiAux = c;
                     break;
                 }
             }
             numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
-            cai = new CAI();
+//            cai = new CAI();
         } else {
             numeroParticipantes = 0;
         }
@@ -446,13 +446,13 @@ public class TallerControlador implements Serializable {
 
     private void asignarUdiCai() {
 
-        if (udiAux.getIdUdi() != null) {
+        if (udi.getIdUdi() != null) {
 
-            tallerCrear.setIdUdi(udiAux);
+            tallerCrear.setIdUdi(udi);
             tallerCrear.setIdCai(null);
 
-        } else if (caiAux.getIdCai() != null) {
-            tallerCrear.setIdCai(caiAux);
+        } else if (cai.getIdCai() != null) {
+            tallerCrear.setIdCai(cai);
             tallerCrear.setIdUdi(null);
         }
     }
@@ -570,7 +570,7 @@ public class TallerControlador implements Serializable {
 
         try {
 
-            if (udiAux.getUdi() != null || caiAux.getCai() != null) {
+            if (udi.getUdi() != null || cai.getCai() != null) {
 
                 if (numeroParticipantes > 0) {
                     Taller tallerAux = guardarTaller();
@@ -635,6 +635,12 @@ public class TallerControlador implements Serializable {
 
         parametros.put("txtTema", "TALLER:  " + tallerCrear.getTema());
         parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " + fecha);
+        
+        String rutaImagen = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/logo_ministerio.png").toString();
+        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
+        rutaImagen = rutaImagen.substring(6);
+
+        parametros.put("imgBackground", rutaImagen);
 
         try {
 
@@ -653,7 +659,7 @@ public class TallerControlador implements Serializable {
             if (response instanceof HttpServletResponse) {
                 HttpServletResponse hsr = (HttpServletResponse) response;
                 hsr.setContentType("application/pdf");
-                hsr.addHeader("Content-disposition", "attachment; filename=jsfReporte.pdf");
+                hsr.addHeader("Content-disposition", "attachment; filename=Registro_Asistencia.pdf");
                 try {
                     ServletOutputStream stream = hsr.getOutputStream();
                     JasperExportManager.exportReportToPdfStream(jasperPrint, stream);

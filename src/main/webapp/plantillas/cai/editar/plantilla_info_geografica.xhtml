@@ -156,7 +156,7 @@
                             </b:column>
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTelefono" value="Teléfono"/>
-                                <b:inputText id="txtTelefono" maxlength="10" placeholder="Teléfono" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.telefono}">
+                                <b:inputText id="txtTelefono" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="10" placeholder="Teléfono" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.telefono}">
                                     <f:ajax event="blur" listener="#{identificacionGeograficaControladorCAI.limpiarMensajeNumeroContacto}" render="txtTelefono mensaje-telefono" />
                                     <f:ajax event="keyup" listener="#{identificacionGeograficaControladorCAI.validarNumeroContacto}" render="mensaje-telefono" />
                                 </b:inputText>
