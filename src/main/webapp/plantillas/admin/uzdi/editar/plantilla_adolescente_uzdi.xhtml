@@ -32,10 +32,11 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNacionalidadCAI" value="Nacionalidad"/>
-                            <b:selectOneMenu id="txtNacionalidadCAI" update="tipoDocumento" process="@this" value="#{adolescenteInfractorUDIEditarControlador.tipoDocumento}">
+                            <b:selectOneMenu id="txtNacionalidadCAI" value="#{adolescenteInfractorUDIEditarControlador.tipoDocumento}">
                                 <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
                                 <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
                                 <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
+                                <f:ajax render="tipoDocumento"/>
                             </b:selectOneMenu>
                         </b:column>
                         <h:panelGroup id="tipoDocumento">

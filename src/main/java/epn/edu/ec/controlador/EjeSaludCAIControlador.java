@@ -76,13 +76,11 @@ public class EjeSaludCAIControlador implements Serializable{
                 }
                 else if(saludableAux.equals("NO SALUDABLE")){
                     saludable=false;
-                    
-                    if(ejeSalud.getConsumeSustancias()==true){
-                        consumeSustancias=true;
-                    }
-                    else{
-                        consumeSustancias=false;
-                    }
+                }
+                if (ejeSalud.getConsumeSustancias() == true) {
+                    consumeSustancias = true;
+                } else {
+                    consumeSustancias = false;
                 }
                 if (ejeSalud.getDiscapacidad() != null) {
                     tipoD = "SI";
@@ -143,13 +141,7 @@ public class EjeSaludCAIControlador implements Serializable{
             this.ejeSalud.setNumeroHistoriaClinica(null);
             this.ejeSalud.setRecibeTratamiento(null);
             this.ejeSalud.setTomaMedicacion(null);
-            this.ejeSalud.setConsumeSustancias(null);
-            this.ejeSalud.setTipoSustancia(null);
-            this.ejeSalud.setRecibeTratamientoDrogas(null);
-            this.ejeSalud.setDiscapacidad(null);
-            this.ejeSalud.setTipoDiscapacidad(null);
-            this.ejeSalud.setPorcentajeDiscapacidad(null);
-            this.ejeSalud.setEnfermadadesCatastroficas(null);
+            
         }else if(saludable==false){
             ejeSalud.setSituacionSalud("NO SALUDABLE");
         }
@@ -175,6 +167,7 @@ public class EjeSaludCAIControlador implements Serializable{
     }
 
     public void setTipoD(String tipoD) {
+        ejeSalud.setDiscapacidad(tipoD);
         this.tipoD = tipoD;
         if("SI".equals(tipoD)){
             esDiscapacidad=true;
@@ -223,6 +216,21 @@ public class EjeSaludCAIControlador implements Serializable{
         /*********************Métodos para invocar a los diferentes servicios web******************/
     
     public void guardarEjeSaludCAI(){
+        
+        if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            this.ejeSalud.setTipoDiscapacidad("NINGUNA");
+            this.ejeSalud.setPorcentajeDiscapacidad(0);
+        }
+        
+        if(!consumeSustancias){
+            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setRecibeTratamiento(false);
+        }
+        
+        if(!esMujer){
+            this.ejeSalud.setTiempoGestacionMes(null);
+            this.ejeSalud.setEmbarazo(false);
+        }
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 

@@ -81,12 +81,11 @@ public class EjeSaludUDIControlador implements Serializable {
                     saludable = true;
                 } else if (saludableAux.equals("NO SALUDABLE")) {
                     saludable = false;
-
-                    if (ejeSalud.getConsumeSustancias() == true) {
-                        consumeSustancias = true;
-                    } else {
-                        consumeSustancias = false;
-                    }
+                }
+                if (ejeSalud.getConsumeSustancias() == true) {
+                    consumeSustancias = true;
+                } else {
+                    consumeSustancias = false;
                 }
                 if (ejeSalud.getDiscapacidad() != null) {
                     tipoD = "SI";
@@ -143,6 +142,10 @@ public class EjeSaludUDIControlador implements Serializable {
         this.saludable = saludable;
         if (saludable == true) {
             ejeSalud.setSituacionSalud("SALUDABLE");
+            this.ejeSalud.setDiagnosticoEnfermedad(null);
+            this.ejeSalud.setNumeroHistoriaClinica(null);
+            this.ejeSalud.setRecibeTratamiento(null);
+            this.ejeSalud.setTomaMedicacion(null);
         } else if (saludable == false) {
             ejeSalud.setSituacionSalud("NO SALUDABLE");
         }
@@ -168,8 +171,10 @@ public class EjeSaludUDIControlador implements Serializable {
 
     public void setTipoD(String tipoD) {
         this.tipoD = tipoD;
+        
         if("SI".equals(tipoD)){
             esDiscapacidad=true;
+            
         }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
             esDiscapacidad=false;
         }
