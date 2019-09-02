@@ -125,10 +125,13 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+        this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setNacionalidad(tipoDocumento);
         if ("ECUATORIANA".equals(tipoDocumento)) {
             esCedula = true;
+            this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setDocumento(null);
         } else if ("EXTRANJERA".equals(tipoDocumento)) {
             esCedula = false;
+            this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor().setCedula(null);
         }
     }
 
