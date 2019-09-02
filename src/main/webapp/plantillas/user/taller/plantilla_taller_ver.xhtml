@@ -38,7 +38,7 @@
                                             <div class="col-md-2 col-md-offset-1 ">
                                                 <div class="form-group">
                                                     <h:outputLabel for="txtNumeroTaller" value="Taller Nro" />
-                                                    <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerEditarControlador.tallerEditar.numeroTaller}" />
+                                                    <b:inputText  placeholder="Taller Nro" mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerEditarControlador.tallerEditar.numeroTaller}" />
                                                 </div>
 
                                             </div>
@@ -225,7 +225,7 @@
                     <h:form>
                         <div class="row">
                             <div class="col-md-3 col-md-offset-4">                                                  
-                                <b:commandButton id="btnDescargarRegistroAsistencia" value="Registro de Asistencia" class="btn btn-block btn-danger"  action="#{tallerEditarControlador.guardarPDFAsistencia()}"/> 
+                                <b:commandButton id="btnDescargarRegistroAsistencia" icon="download" value="Registro de Asistencia" class="btn btn-block btn-success"  action="#{tallerEditarControlador.guardarPDFAsistencia()}"/> 
                             </div> 
                         </div>
                     </h:form>

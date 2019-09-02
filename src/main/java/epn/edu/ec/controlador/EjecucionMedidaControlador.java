@@ -12,6 +12,7 @@ import epn.edu.ec.servicios.EjecucionMedidaServicio;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -41,6 +42,7 @@ public class EjecucionMedidaControlador implements Serializable {
     private PermisosUsuario permisosUsuario;
     String tipoMedida;
     boolean esSocioeducativa=true;
+    private Date fechaIngresoProcesoCAI=null;
     
     @PostConstruct
     public void init() {
@@ -68,8 +70,9 @@ public class EjecucionMedidaControlador implements Serializable {
         
         if(detalleInfraccionCAIAux != null){
             
-            detalleInfraccionCAI=detalleInfraccionCAIAux;            
-            ejecucionMedidaCAI.setFechaReporteCAI(detalleInfraccionCAI.getIdAdolescenteInfractorCAI().getFechaIngresoProceso());
+            detalleInfraccionCAI=detalleInfraccionCAIAux;
+            fechaIngresoProcesoCAI=detalleInfraccionCAI.getIdAdolescenteInfractorCAI().getFechaIngresoProceso();
+            ejecucionMedidaCAI.setFechaReporteCAI(fechaIngresoProcesoCAI);
             
             List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
             
@@ -210,6 +213,7 @@ public class EjecucionMedidaControlador implements Serializable {
         }
         
         ejecucionMedidaCAI=medidaSeleccionada;
+        ejecucionMedidaCAI.setFechaReporteCAI(fechaIngresoProcesoCAI);
     }
     
     public void guardarEjecucionMedida() {

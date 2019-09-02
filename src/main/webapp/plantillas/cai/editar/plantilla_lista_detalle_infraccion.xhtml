@@ -103,25 +103,8 @@
                                 </b:selectOneMenu>
                             </b:column>
                         </b:row>
-
-                        <b:row>
-                            <b:column span="6" offset="0">
-                                <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
-                                <b:selectOneMenu id="txtUnidadJudicial" value="#{detalleInfraccionControlador.detalleInfraccion.unidadJudicial}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
-                                    <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
-                                    <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
-                                </b:selectOneMenu>
-                            </b:column>
-
-                            <b:column span="6" offset="0">
-                                <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
-                                <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{detalleInfraccionControlador.detalleInfraccion.nombreUnidadJudicial}"/>
-                            </b:column>
-                        </b:row>
-
-                        <b:row>
+                        
+                         <b:row>
                             <b:column span="6" offset="0">
                                 <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
                                 <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{detalleInfraccionControlador.detalleInfraccion.numeroCausa}"/>
@@ -132,6 +115,32 @@
                                 <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{detalleInfraccionControlador.detalleInfraccion.nombreJuez}"/>
                             </b:column>
                         </b:row>
+                        <br/><br/>
+
+                        <b:row>
+                            <b:column span="12" offset="0">
+                                <h3>UNIDAD JUDICIAL</h3>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column span="12" offset="0">
+                                <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
+                                <b:selectOneMenu id="txtUnidadJudicial" value="#{detalleInfraccionControlador.detalleInfraccion.unidadJudicial}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
+                                    <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
+                                    <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
+                                </b:selectOneMenu>
+                            </b:column>
+
+                            <b:column span="12" offset="0">
+                                <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
+                                <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{detalleInfraccionControlador.detalleInfraccion.nombreUnidadJudicial}"/>
+                            </b:column>
+                        </b:row>
+
+                       
                         <br></br>
                         <b:row>
                             <b:column span="4" offset="1">

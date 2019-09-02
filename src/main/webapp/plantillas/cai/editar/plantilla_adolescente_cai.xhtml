@@ -95,7 +95,7 @@
                         </b:column>
                         <b:column span="4" offset="2">                                    
                             <h:outputLabel for="txtEdad" value="Edad "/>
-                            <b:inputText mask="integer" id="txtEdad" readonly="true" placeholder="Edad" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.edad}"/>                                    
+                            <b:inputText mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtEdad" readonly="true" placeholder="Edad" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.edad}"/>                                    
                         </b:column>
                     </b:row>
 
@@ -127,7 +127,7 @@
 
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtNumeroHijos" value="Número Hijos"/>
-                            <b:inputText id="txtNumeroHijos" placeholder="Número Hijos" mask="numeric" maxlength="2" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.numeroHijos}"/>                                        
+                            <b:inputText id="txtNumeroHijos" placeholder="Número Hijos" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.numeroHijos}"/>                                        
                         </b:column>
                     </b:row>
                     <b:row>

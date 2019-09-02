@@ -11,6 +11,7 @@ import epn.edu.ec.servicios.UdiServicio;
 import epn.edu.ec.servicios.UsuarioServicio;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PasswordGenerator;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,10 +41,12 @@ public class UsuarioControlador implements Serializable {
     private Validaciones validacion;
 
     private EnlacesPrograma enlaces;
+    private PermisosUsuario permisos;
 
     private String tipoRol;
     private boolean estadoAdmin;
     private boolean esUZDI;
+    private boolean guardado;
 
     private List<UDI> listaUdi;
     private List<CAI> listaCai;
@@ -56,6 +59,7 @@ public class UsuarioControlador implements Serializable {
 
     @PostConstruct
     public void init() {
+        permisos= new PermisosUsuario();
         servicioUsuario = new UsuarioServicio();
         usuario = new Usuario();
         servicioRCU = new RolCentroUsuarioServicio();
@@ -172,29 +176,43 @@ public class UsuarioControlador implements Serializable {
         return passAutogenerado;
     }
 
+    public void setPassAutogenerado(String passAutogenerado) {
+        this.passAutogenerado = passAutogenerado;
+    }
+    
+
     public String getUsuarioCreado() {
         return usuarioCreado;
     }
 
+    public boolean isGuardado() {
+        return guardado;
+    }
+
+    
+    
     //Metodo para cifrar
-    public String cifrarContraseña() {
+    private String cifrarContraseña() {
         String password = usuario.getContraseña();
         password = DigestUtils.sha256Hex(password);
         return password;
     }
 
-    //Metodo para autogenerar constraseña
-    public String autogenerarPassword() {
-        String password = null;
-        password=generador.generarPassword();
-        System.out.println("Password autogenerado: "+password);
-        return password;
-    }
 
+    public void generarPassword(AjaxBehaviorEvent evento){ 
+        if(passAutogenerado == null){
+            passAutogenerado=generador.generarPassword();
+        }
+        
+    }
+    
     //Métodos para invocar a los diferentes servicios web************
     public void guardarUsuario() {
+    
         if (this.usuario != null && this.rolCentroUsuario != null) {
+            
             RolCentroUsuario rcuAux = new RolCentroUsuario();
+            
             if ("ADMINISTRADOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "SUBDIRECTOR".equals(this.rolCentroUsuario.getIdRol().getRol()) || "LIDER UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(this.rolCentroUsuario.getIdRol().getRol()) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(this.rolCentroUsuario.getIdRol().getRol()) || "COORDINADOR CAI".equals(this.rolCentroUsuario.getIdRol().getRol())) {
                 rcuAux = servicioRCU.obtenerRolAdministrativo(rolCentroUsuario);
             } else if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "EQUIPO TECNICO JURIDICO UZDI".equals(this.rolCentroUsuario.getIdRol().getRol()) || "TRABAJADOR SOCIAL UZDI".equals(rolCentroUsuario.getIdRol().getRol())) {
@@ -204,8 +222,7 @@ public class UsuarioControlador implements Serializable {
                 rcuAux = servicioRCU.obtenerRolSoloCAI(rolCentroUsuario);
             }
             if (rcuAux != null) {
-                passAutogenerado=autogenerarPassword();
-                usuarioCreado=this.usuario.getUsuario();
+                
                 this.usuario.setContraseña(passAutogenerado);
                 String passCifrado = cifrarContraseña();
                 this.usuario.setContraseña(passCifrado);
@@ -213,7 +230,7 @@ public class UsuarioControlador implements Serializable {
                 this.usuario.setActivo(true);
                 Usuario usuarioAux = servicioUsuario.guardarUsuario(this.usuario);
                 if (usuarioAux != null) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioNuevo", usuarioAux);
+                    guardado=true;
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
@@ -221,11 +238,32 @@ public class UsuarioControlador implements Serializable {
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
             }
-        } else {
-            System.out.println("Se tiene un usuario en null");
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No ha ingresado todos los datos, verifique y vuelta a intentarlo", "Error"));
         }
     }
 
+    public String redireccionPanelAdministracion() throws InterruptedException {
+        if(guardado==true){
+            Thread.sleep(1250);
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if (rol.equals("ADMINISTRADOR")) {
+                    return enlaces.PATH_PANEL_USUARIO_NUEVO+"?faces-redirect=true";
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        }
+        else{
+            return null;
+        }
+        
+    }
+    
     public String DesactivarUsuario(Usuario usuario) {
         if (usuario != null && usuario.getActivo() == true) {
             usuario.setActivo(false);

@@ -38,7 +38,7 @@
                                         <div class="col-md-2 col-md-offset-1 ">
                                             <div class="form-group">
                                                 <h:outputLabel for="txtNumeroTaller" value="Taller Nro" />
-                                                <b:inputText  placeholder="Taller Nro" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerControlador.tallerCrear.numeroTaller}" />
+                                                <b:inputText  placeholder="Taller Nro" mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtNumeroTaller" style="text-transform:uppercase" requiredMessage="Taller Nro es requerido, ingrese un valor" required="true" value="#{tallerControlador.tallerCrear.numeroTaller}" />
                                             </div>
 
                                         </div>
@@ -143,7 +143,7 @@
                                             </b:column>
                                             <b:column span="6" offset="1">
                                                 <h:outputLabel for="txtItemDuracion" value="Duración"/>
-                                                <b:inputText style="color: #262626" id="txtItemDuracion" placeholder="Duración"  value="#{tallerControlador.duracion}"/>
+                                                <b:inputText style="color: #262626" mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtItemDuracion" placeholder="Duración en minutos"  value="#{tallerControlador.duracion}"/>
                                             </b:column>
                                         </b:row>
                                         <br></br>
@@ -153,7 +153,7 @@
                                             </b:column>
                                             <b:column span="5">
                                                 <b:commandButton class="btn-success btn-block" value="Agregar"
-                                                                 onclick="$('.formItemTaller').modal('hide'); tableWidgetVar.DataTable({destroy: true, searching: false});tableWidgetVar.DataTable().responsive.recalc();" 
+                                                                 onclick="$('.formItemTaller').modal('hide');" 
                                                                  actionListener="#{tallerControlador.agregarActividad()}">
                                                     <f:ajax execute="modalActividades" render="tablaTaller modalActividades"/>
                                                 </b:commandButton>        
@@ -175,7 +175,7 @@
                                                 </p:column>
 
                                                 <p:column headerText="Actividad">
-                                                    <h:outputText style="text-transform:uppercase" value="#{tp.actividad}"/>
+                                                    <h:outputText  value="#{tp.actividad}"/>
                                                 </p:column>
 
                                                 <p:column headerText="Objetivo Específico">
@@ -190,12 +190,16 @@
                                                     <h:outputText style="text-transform:uppercase" value="#{tp.responsable}"/>
                                                 </p:column>
 
-                                                <p:column width="60px;">
-                                                    <b:commandButton icon="pencil" tooltip="Editar la actividad seleccionada" class="btn-block btn-primary" update="@form" actionListener="#{tallerControlador.obtenerItem(tp)}" oncomplete="$('.formItemTallerEditar').modal('show')"/>
+                                                <p:column rendered="#{not empty tp}">
+                                                    <b:commandButton icon="pencil" rendered="#{not empty tp}" tooltip="Editar la actividad seleccionada" class="btn-block btn-primary" actionListener="#{tallerControlador.obtenerItem(tp)}" oncomplete="$('.formItemTallerEditar').modal('show');">
+                                                        <f:ajax execute="tablaTaller" render="@form"/>
+                                                    </b:commandButton>
                                                 </p:column>
 
-                                                <p:column width="60px;">
-                                                    <b:commandButton icon="remove" tooltip="Quitar la actividad de la lista" class="btn-block btn-danger" update="@form" actionListener="#{tallerControlador.quitarItem(tp)}"/>
+                                                <p:column rendered="#{not empty tp}">
+                                                    <b:commandButton icon="trash" rendered="#{not empty tp}" tooltip="Quitar la actividad de la lista" class="btn-block btn-danger" actionListener="#{tallerControlador.quitarItem(tp)}">
+                                                        <f:ajax execute="tablaTaller" render="tablaTaller"/>
+                                                    </b:commandButton>
                                                 </p:column>
 
                                             </p:dataTable>
@@ -225,7 +229,7 @@
                                             </b:column>
                                             <b:column span="6" offset="1">
                                                 <h:outputLabel for="txtItemDuracion1" value="Duración"/>
-                                                <b:inputText style="color: #262626" id="txtItemDuracion1" placeholder="Duración"  value="#{tallerControlador.item.duracion}"/>
+                                                <b:inputText style="color: #262626" mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtItemDuracion1" placeholder="Duración"  value="#{tallerControlador.item.duracion}"/>
                                             </b:column>
                                         </b:row>
                                         <br></br>
@@ -235,7 +239,7 @@
                                             </b:column>
                                             <b:column span="5">
                                                 <b:commandButton class="btn-success btn-block" value="Agregar"
-                                                                 onclick="$('.formItemTallerEditar').modal('hide'); tableWidgetVar.DataTable({destroy: true, searching: false});tableWidgetVar.DataTable().responsive.recalc();" 
+                                                                 onclick="$('.formItemTallerEditar').modal('hide');" 
                                                                  actionListener="#{tallerControlador.agregarActividadEditada()}">
                                                     <f:ajax execute="modalEditarActividades" render="tablaTaller modalEditarActividades"/>
                                                 </b:commandButton>        
@@ -329,7 +333,7 @@
             <h:form rendered="#{tallerControlador.tallerGuardado}">
                 <div class="row">
                     <div class="col-md-3 col-md-offset-4">                                                  
-                        <b:commandButton id="btnDescargarRegistroAsistencia" value="Registro de Asistencia" class="btn btn-block btn-danger"  action="#{tallerControlador.guardarPDFAsistencia()}"/> 
+                        <b:commandButton id="btnDescargarRegistroAsistencia" icon="download" value="Registro de Asistencia" class="btn btn-block btn-success"  action="#{tallerControlador.guardarPDFAsistencia()}"/> 
                     </div> 
                 </div>
             </h:form>

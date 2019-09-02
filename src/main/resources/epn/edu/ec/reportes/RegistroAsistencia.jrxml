@@ -2,10 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c9d7c4ac-9f08-4507-9aa4-7b0d535a36b7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="866"/>
 	<parameter name="txtCentro" class="java.lang.String"/>
 	<parameter name="txtTema" class="java.lang.String"/>
 	<parameter name="txtFecha" class="java.lang.String"/>
+	<parameter name="imgBackground" class="java.lang.String" isForPrompting="false"/>
 	<field name="nombres" class="java.lang.String"/>
 	<field name="apellidos" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -13,7 +14,7 @@
 		<band height="802" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement x="0" y="0" width="595" height="802" uuid="83aab08c-5dd6-4650-8f96-cfd513451c8f"/>
-				<imageExpression><![CDATA["D:\\User\\Desktop\\ministerio_justicia.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{imgBackground}]]></imageExpression>
 			</image>
 		</band>
 	</background>

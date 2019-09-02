@@ -4,8 +4,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -71,6 +70,26 @@
 
                     <b:row>
                         <b:column span="4" offset="1">
+                            <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
+                            <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
+                        </b:column>
+
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
+                            <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
+                        </b:column>
+                    </b:row>
+                    
+                    <br/>
+                    <br/>
+                    <b:row>
+                        <b:column span="10" offset="1">
+                            <h3>UNIDAD JUDICIAL</h3>
+                        </b:column>
+                    </b:row>
+                    <br/>
+                    <b:row>
+                        <b:column span="10" offset="1">
                             <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
                             <b:selectOneMenu id="txtUnidadJudicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.unidadJudicial}">
                                 <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -80,21 +99,9 @@
                             </b:selectOneMenu>
                         </b:column>
 
-                        <b:column span="4" offset="2">
+                        <b:column span="10" offset="1">
                             <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
                             <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreUnidadJudicial}"/>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column span="4" offset="1">
-                            <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
-                            <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
-                        </b:column>
-
-                        <b:column span="4" offset="2">
-                            <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
-                            <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
                         </b:column>
                     </b:row>
                 </b:panel>

@@ -57,7 +57,7 @@
                             <h:panelGroup id="tipoDocumento">
                                 <b:column span="4" offset="2">                                        
                                     <h:outputLabel for="txtCedula" value="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}"/>
-                                    <b:inputText id="txtCedula" placeholder="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.cedula}">
+                                    <b:inputText id="txtCedula" mask="{regex:'[0-9\u0600-\u06FF]*'}" placeholder="Cédula" rendered="#{adolescenteInfractorCAIControlador.esCedula}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" maxlength="10" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.cedula}">
                                         <f:ajax event="blur" listener="#{adolescenteInfractorCAIControlador.limpiarMensajeCedula}" render="txtCedula mensaje-cedula" />
                                         <f:ajax event="keyup" listener="#{adolescenteInfractorCAIControlador.validarCedula}" render="mensaje-cedula" />
                                     </b:inputText>
@@ -103,7 +103,7 @@
                             </b:column>
                             <b:column span="4" offset="2">                                    
                                 <h:outputLabel for="txtEdad" value="Edad "/>
-                                <b:inputText mask="integer" id="txtEdad" readonly="true" placeholder="Edad" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.edad}"/>                                    
+                                <b:inputText mask="{regex:'[0-9\u0600-\u06FF]*'}" id="txtEdad" readonly="true" placeholder="Edad" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.edad}"/>                                    
                             </b:column>
                         </b:row>
 
@@ -135,7 +135,7 @@
 
                             <b:column span="4" offset="1">                                        
                                 <h:outputLabel for="txtNumeroHijos" value="Número Hijos"/>
-                                <b:inputText id="txtNumeroHijos" placeholder="Número Hijos" mask="numeric" maxlength="2" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.numeroHijos}"/>                                        
+                                <b:inputText id="txtNumeroHijos" placeholder="Número Hijos" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.idAdolescenteInfractor.numeroHijos}"/>                                        
                             </b:column>
                         </b:row>
                         <b:row>

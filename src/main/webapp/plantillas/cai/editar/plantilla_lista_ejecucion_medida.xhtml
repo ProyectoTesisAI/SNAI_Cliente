@@ -39,17 +39,17 @@
                             <h:outputText value="#{te.tiempoSentenDias}" />
                         </p:column>
 
-                        <p:column headerText="Editar Infracción"  width="150"> 
+                        <p:column headerText="Editar Medida"  width="150"> 
                             <b:commandButton value="Editar Medida" class="btn btn-success" update="@form:modalMedida" actionListener="#{ejecucionMedidaControlador.obtenerEjecucionMedidaSeleccionada(te)}" oncomplete="$('.formEjeccionMedida').modal('show')" />
                         </p:column>
-                        <p:column headerText="Acción" width="190">
+                        <p:column headerText="Editar Ejecución Medida">
                             <b:commandButton value="Editar Ejecución" class="btn btn-primary" action="#{ejecucionMedidaControlador.editarInformacion(te)}">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>
                     </p:dataTable>
                     
-                    <b:modal title="Agregar Medida" style-class="formEjeccionMedida"
+                    <b:modal title="Editar Medida" style-class="formEjeccionMedida"
                              id="modalMedida"
                              closable="false"
                              closeOnEscape="true"
@@ -87,7 +87,12 @@
                         <b:row style="padding-top: 13px;">    
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
-                                <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
+                                <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}">
+                                    <f:ajax event="keyup" render="txtAlertaPreventiva" />
+                                    <f:ajax event="blur" render="txtAlertaPreventiva" />
+                                    <f:ajax event="keyup" render="txtTiempoPrivacionLibertadDias" />
+                                    <f:ajax event="blur" render="txtTiempoPrivacionLibertadDias" />
+                                </b:dateTimePicker>
                             </b:column>
 
                             <b:column span="4" offset="2">
@@ -161,29 +166,38 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoAnios" value="Años"/>
-                                <b:inputText id="txtTiempoAnios" placeholder="Tiempo" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}"/>
+                                <b:inputText id="txtTiempoAnios" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" placeholder="Tiempo"  value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}">
+                                    <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
+                                    <f:ajax event="blur" render="txtTiempoSentenciaDias" />
+                                </b:inputText>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoMeses" value="Meses"/>
-                                <b:inputText id="txtTiempoMeses" placeholder="Meses" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}"/>
+                                <b:inputText id="txtTiempoMeses" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="3" placeholder="Meses"  value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}">
+                                    <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
+                                    <f:ajax event="blur" render="txtTiempoSentenciaDias" />
+                                </b:inputText>
                             </b:column>
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoDias" value="Días"/>
-                                <b:inputText id="txtTiempoDias" placeholder="Días" update="txtTiempoSentenciaDias" process="@this" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}"/>
+                                <b:inputText id="txtTiempoDias" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" placeholder="Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}">
+                                    <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
+                                    <f:ajax event="blur" render="txtTiempoSentenciaDias" />
+                                </b:inputText>
                             </b:column>
                         </b:row>
 
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoSentenciaDias" value="Tiempo de Sentencia en Días"/>
-                                <b:inputText disabled="true" id="txtTiempoSentenciaDias" placeholder="Tiempo de Sentencia en Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoSentenDias}"/>
+                                <b:inputText disabled="true" mask="{regex:'[0-9\u0600-\u06FF]*'}"  id="txtTiempoSentenciaDias" placeholder="Tiempo de Sentencia en Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoSentenDias}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoPrivacionLibertadDias" value="Tiempo de Privacion de Libertad(Días)"/>
-                                <b:inputText disabled="true" id="txtTiempoPrivacionLibertadDias" placeholder="Tiempo de Privacion de Libertad(Días)" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoPrivacionLibertad}"/>
+                                <b:inputText disabled="true"  id="txtTiempoPrivacionLibertadDias" placeholder="Tiempo de Privacion de Libertad(Días)" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.tiempoPrivacionLibertad}"/>
                             </b:column>
                         </b:row>
 

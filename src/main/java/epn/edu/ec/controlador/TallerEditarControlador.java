@@ -146,38 +146,6 @@ public class TallerEditarControlador implements Serializable {
                 udi = tallerEditar.getIdUdi();
             }
 
-            String rol = permisos.RolUsuario();
-            if (rol != null) {
-                if ("ADMINISTRADOR".equals(rol) || "SUBDIRECTOR".equals(rol) || "LIDER UZDI".equals(rol) || "COORDINADOR CAI".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rol)) {
-                    esTecnico = false; //content-disable=true
-                    esTecnicoCAI = false;
-                    esTecnicoUDI = false;
-
-                    if (tallerAux.getTipo().equals("INSPECTOR EDUCADOR")) {
-                        esTecnico = true; //content-disable=true
-                        esTecnicoCAI = false;
-                        esTecnicoUDI = true;
-                    }
-
-                } else {
-                    esTecnico = true; //content-disable=true
-
-                    if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rol) || "EQUIPO TECNICO JURIDICO UZDI".equals(rol) || "TRABAJADOR SOCIAL UZDI".equals(rol)) {
-
-                        esTecnicoCAI = true;
-                        esTecnicoUDI = true;
-                        tipoCentro = "UZDI";
-                        //udiAux = udi;
-
-                    } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
-                        esTecnicoCAI = true;
-                        esTecnicoUDI = true;
-                        tipoCentro = "CAI";
-                        //caiAux = cai;
-                    }
-                }
-            }
-
             List<ItemTaller> itemsAux = servicioTaller.obtenerItemsPorTalleres(tallerEditar.getIdTaller());
 
             if (itemsAux != null) {
@@ -700,6 +668,12 @@ public class TallerEditarControlador implements Serializable {
         
         parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " +fecha);
         parametros.put("txtTema", "TALLER:  " + tallerEditar.getTema());
+        
+        String rutaImagen = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/logo_ministerio.png").toString();
+        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
+        rutaImagen = rutaImagen.substring(6);
+
+        parametros.put("imgBackground", rutaImagen);
 
         try {
             
@@ -719,7 +693,7 @@ public class TallerEditarControlador implements Serializable {
             if (response instanceof HttpServletResponse) {
                 HttpServletResponse hsr = (HttpServletResponse) response;
                 hsr.setContentType("application/pdf");
-                hsr.addHeader("Content-disposition", "attachment; filename=jsfReporte.pdf");
+                hsr.addHeader("Content-disposition", "attachment; filename=Registro_Asistencia.pdf");
                 try {
                     ServletOutputStream stream = hsr.getOutputStream();
                     JasperExportManager.exportReportToPdfStream(jasperPrint, stream);

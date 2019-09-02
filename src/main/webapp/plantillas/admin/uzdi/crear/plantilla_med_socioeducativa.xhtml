@@ -33,12 +33,12 @@
                         </f:facet>
 
                         <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtMedidaSocioeducativa" value="Medida Socioeducativa"/>
                                 <b:inputText id="txtMedidaSocioeducativa" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.medidaSocioeducativa}"/>                 
                             </b:column>
 
-                            <b:column span="4" offset="2">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa.institucionEjecutoraMedida}"/>
                             </b:column>
@@ -47,27 +47,8 @@
                                 <h:outputLabel for="txtFechaFinMedida" value="Fecha de ejecución de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.fechaFinMedida}"/>
                             </b:column>
-
-                            <b:row rendered="false">
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTiempoMeses" rendered="false" value="Tiempo(Meses)"/>
-                                    <b:inputText id="txtTiempoMeses" update="txtFechaFinMedida" rendered="false" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoMeses}"/>
-                                </b:column>
-
-                                <b:column span="4" offset="2">
-                                    <h:outputLabel for="txtTiempoDia1" rendered="false" value="Tiempo(Día)"/>
-                                    <b:inputText id="txtTiempoDia1" update="txtFechaFinMedida" rendered="false" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoDia}"/>
-                                </b:column>
-
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTiempoHoras" rendered="false" value="Tiempo(Horas)"/>
-                                    <b:inputText id="txtTiempoHoras" update="txtFechaFinMedida" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoHoras}"/>
-                                </b:column>
-                            </b:row>
-                        </b:row>
-
-                        <b:row>
-                            <b:column span="4" offset="1">
+                            
+                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCumplioMedida" value="Cumplió medida"/>
                                 <b:selectOneMenu id="txtCumplioMedida" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.cumplioMedida}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -103,40 +84,34 @@
                         </f:facet>
 
                         <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtMedidaSocioeducativa2" value="Medida Socioeducativa"/>
                                 <b:inputText id="txtMedidaSocioeducativa2" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.medidaSocioeducativa}"/>                 
                             </b:column>
 
-                            <b:column span="4" offset="2">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida2" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida2" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.institucionEjecutoraMedida}"/>
                             </b:column>
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses2" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoMeses}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia2" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoDia}"/>
                             </b:column>
+                        </b:row>
+                        <b:row>
 
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida2" value="Fecha de fin de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida2" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.fechaFinMedida}"/>
                             </b:column>
-                        </b:row>
-                        <b:row rendered="false">
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtTiempoHoras2" rendered="false" value="Tiempo(Horas)"/>
-                                <b:inputText id="txtTiempoHoras2" update="txtFechaFinMedida2" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoHoras}"/>
-                            </b:column>
-                        </b:row>
 
-                        <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCumplioMedida2" value="Cumplió medida"/>
                                 <b:selectOneMenu id="txtCumplioMedida2" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.cumplioMedida}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -170,41 +145,34 @@
                         </f:facet>
 
                         <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtMedidaSocioeducativa3" value="Medida Socioeducativa"/>
                                 <b:inputText id="txtMedidaSocioeducativa3" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.medidaSocioeducativa}"/>                 
                             </b:column>
 
-                            <b:column span="4" offset="2">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida3" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida3" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.institucionEjecutoraMedida}"/>
                             </b:column>
-                        </b:row>
-                        <b:row>
+
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses3" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses3" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoMeses}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia3" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia3" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoDia}"/>
                             </b:column>
+                        </b:row>
+                        <b:row>
 
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida3" value="Fecha de fin de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida3" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.fechaFinMedida}"/>
                             </b:column>
-                        </b:row>
-                        <b:row rendered="false">
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtTiempoHoras3" rendered="false" value="Tiempo(Horas)"/>
-                                <b:inputText id="txtTiempoHoras3" update="txtFechaFinMedida3" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoHoras}"/>
-                            </b:column>
-                        </b:row>
 
-                        <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCumplioMedida3" value="Cumplió medida"/>
                                 <b:selectOneMenu id="txtCumplioMedida3" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.cumplioMedida}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
@@ -238,35 +206,24 @@
                         </f:facet>
 
                         <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtMedidaSocioeducativa4" value="Medida Socioeducativa"/>
                                 <b:inputText id="txtMedidaSocioeducativa4" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.medidaSocioeducativa}"/>                 
                             </b:column>
 
-                            <b:column span="4" offset="2">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida4" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida4" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.institucionEjecutoraMedida}"/>
                             </b:column>
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoHoras4" value="Tiempo(Horas)"/>
-                                <b:inputText id="txtTiempoHoras4" update="txtFechaFinMedida4" required="true" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoHoras}"/>
+                                <b:inputText id="txtTiempoHoras4" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida4" required="true" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoHoras}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">                
                                 <h:outputLabel for="txtFechaFinMedida4" value="Fecha de fin de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida4" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.fechaFinMedida}"/>
-                            </b:column>
-                        </b:row>
-                        <b:row rendered="false">
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtTiempoMeses4" rendered="false" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses4" update="txtFechaFinMedida4" rendered="false" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoMeses}"/>
-                            </b:column>
-
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtTiempoDia4" rendered="false" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia4" update="txtFechaFinMedida4" rendered="false" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoDia}"/>
                             </b:column>
                         </b:row>
 
@@ -305,40 +262,32 @@
                         </f:facet>
 
                         <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtMedidaSocioeducativa5" value="Medida Socioeducativa"/>
                                 <b:inputText id="txtMedidaSocioeducativa5" disabled="true" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.medidaSocioeducativa}"/>                 
                             </b:column>
 
-                            <b:column span="4" offset="2">
+                            <b:column span="10" offset="1">
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida5" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida5" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.institucionEjecutoraMedida}"/>
                             </b:column>
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses5" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses5" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoMeses}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia5" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia5" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoDia}"/>
                             </b:column>
 
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida5" value="Fecha de fin de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida5" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.fechaFinMedida}"/>
                             </b:column>
-                        </b:row>
-                        <b:row rendered="false">
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtTiempoHoras5" rendered="false" value="Tiempo(Horas)"/>
-                                <b:inputText id="txtTiempoHoras5" update="txtFechaFinMedida5" rendered="false" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoHoras}"/>
-                            </b:column>
-                        </b:row>
 
-                        <b:row>
-                            <b:column span="4" offset="1">
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCumplioMedida5" value="Cumplió medida"/>
                                 <b:selectOneMenu id="txtCumplioMedida5" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.cumplioMedida}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
