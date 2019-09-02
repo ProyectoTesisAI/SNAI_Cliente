@@ -12,8 +12,8 @@
 
             <h:form enctype="multipart/form-data"> 
 
-                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary" collapsible="false" >
                     <f:facet name="heading">
                         <h:outputText value="CREAR INFORME DE RESULTADOS" style="color: white; font-weight: bold"  />
@@ -118,8 +118,8 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
-                                            <h:outputLabel for="txtAntecedentesJustificacion" value="Antecedentes y Justificacion" />
-                                            <b:inputTextarea id="txtAntecedentesJustificacion" required="true" placeholder="Antecedentes y Justificacion" style="text-transform:uppercase" value="#{informeControlador.informe.adolescentesJustificacion}"/>
+                                            <h:outputLabel for="txtAntecedentesJustificacion" value="Antecedentes y Justificación" />
+                                            <b:inputTextarea id="txtAntecedentesJustificacion" required="true" requiredMessage="Antecedentes y Justificación es requerido, ingrese un valor" placeholder="Antecedentes y Justificación" style="text-transform:uppercase" value="#{informeControlador.informe.adolescentesJustificacion}"/>
                                         </div>
                                     </div>
                                 </div>

@@ -38,6 +38,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import static org.omnifaces.util.Faces.getSession;
 
 @Named(value = "tallerEditarControlador")
 @ViewScoped
@@ -632,12 +633,11 @@ public class TallerEditarControlador implements Serializable {
 
     }
 
+    @SuppressWarnings("empty-statement")
     public void guardarPDFAsistencia() {
-        //retorna el path del archivo-->Retorna: "file:D:/User/Documents/NetBeansProjects/SistemaReeducacionAI/SistemaReeducacionAI/src/main/java/epn/edu/ec/reportes/RegistroAsistencia.jasper"
-        String ruta = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/RegistroAsistencia.jasper").toString();
-        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
-        ruta = ruta.substring(6);
-
+        
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/reportes/RegistroAsistencia.jasper");
+        
         Map<String, Object> parametros = new HashMap<String, Object>();
         
         String udiRescatado=null;
@@ -669,9 +669,7 @@ public class TallerEditarControlador implements Serializable {
         parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " +fecha);
         parametros.put("txtTema", "TALLER:  " + tallerEditar.getTema());
         
-        String rutaImagen = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/logo_ministerio.png").toString();
-        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
-        rutaImagen = rutaImagen.substring(6);
+        String rutaImagen = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/reportes/logo_ministerio.png");
 
         parametros.put("imgBackground", rutaImagen);
 

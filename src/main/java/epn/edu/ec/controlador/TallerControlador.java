@@ -611,11 +611,8 @@ public class TallerControlador implements Serializable {
 
     public void guardarPDFAsistencia() {
 
-        //retorna el path del archivo-->Retorna: "file:D:/User/Documents/NetBeansProjects/SistemaReeducacionAI/SistemaReeducacionAI/src/main/java/epn/edu/ec/reportes/RegistroAsistencia.jasper"
-        String ruta = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/RegistroAsistencia.jasper").toString();
-        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
-        ruta = ruta.substring(6);
-
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/reportes/RegistroAsistencia.jasper");
+        
         Map<String, Object> parametros = new HashMap<>();
 
         String udiRescatado = tallerCrear.getIdUdi().getUdi();
@@ -636,9 +633,7 @@ public class TallerControlador implements Serializable {
         parametros.put("txtTema", "TALLER:  " + tallerCrear.getTema());
         parametros.put("txtFecha", "FECHA DE REALIZACIÓN:  " + fecha);
         
-        String rutaImagen = getClass().getClassLoader().getResource("/epn/edu/ec/reportes/logo_ministerio.png").toString();
-        //elimino los 6 primeros caracteres, es decir elimino: "file:/", para obtener solo la ruta del archivo
-        rutaImagen = rutaImagen.substring(6);
+        String rutaImagen = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/reportes/logo_ministerio.png");
 
         parametros.put("imgBackground", rutaImagen);
 
@@ -671,7 +666,6 @@ public class TallerControlador implements Serializable {
             }
 
         } catch (JRException e) {
-            System.out.println("Error:  " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO SE HA GENERADO EL REGISTRO DE ASISTENCIA", "ERROR"));
         }
     }
