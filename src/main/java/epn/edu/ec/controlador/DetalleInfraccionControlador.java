@@ -37,43 +37,44 @@ public class DetalleInfraccionControlador implements Serializable {
     private PermisosUsuario permisosUsuario;
 
     private String provincia;
+
     @PostConstruct
     public void init() {
 
-        permisosUsuario= new PermisosUsuario();
+        permisosUsuario = new PermisosUsuario();
         servicio = new DetalleInfraccionCAIServicio();
         detalleInfraccion = new DetalleInfraccionCAI();
         guardado = false;
 
         provincias = new ArrayList<>();
         servicioCAIPC = new DatosProvinciaCantonServicio();
-        
+
         tiposPenal = new ArrayList<>();
         servicioTP = new DatosTipoPenalCAIServicio();
 
         adolescenteInfractorCAI = new AdolescenteInfractorCAI();
-        listaDetalleInfraccion= new ArrayList<>();
-        
+        listaDetalleInfraccion = new ArrayList<>();
+
         AdolescenteInfractorCAI adolescenteInfractorCAIAux = (AdolescenteInfractorCAI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_cai");
 
         if (adolescenteInfractorCAIAux != null) {
-            
-            adolescenteInfractorCAI=adolescenteInfractorCAIAux;
-            
+
+            adolescenteInfractorCAI = adolescenteInfractorCAIAux;
+
             List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
-            
-            if (listaAux.isEmpty()!=true) {
+
+            if (listaAux.isEmpty() != true) {
                 listaDetalleInfraccion = listaAux;
-            } 
-        } 
-        List<DatosProvinciaCanton> provinciasAux = servicioCAIPC.listarDatosProvinciaCanton();
-        if(provinciasAux!=null){
-            provincias=provinciasAux;
+            }
         }
-        
-        List<DatosTipoPenalCAI> tiposPenalAux=servicioTP.listarDatosTipoPenalCAI();
-        if(tiposPenalAux!=null){
-            tiposPenal=tiposPenalAux;
+        List<DatosProvinciaCanton> provinciasAux = servicioCAIPC.listarDatosProvinciaCanton();
+        if (provinciasAux != null) {
+            provincias = provinciasAux;
+        }
+
+        List<DatosTipoPenalCAI> tiposPenalAux = servicioTP.listarDatosTipoPenalCAI();
+        if (tiposPenalAux != null) {
+            tiposPenal = tiposPenalAux;
         }
     }
 
@@ -120,7 +121,7 @@ public class DetalleInfraccionControlador implements Serializable {
     public DatosTipoPenalCAIServicio getServicioTP() {
         return servicioTP;
     }
-    
+
     public boolean isGuardado() {
         return guardado;
     }
@@ -128,7 +129,7 @@ public class DetalleInfraccionControlador implements Serializable {
     public void setGuardado(boolean guardado) {
         this.guardado = guardado;
     }
-    
+
     public List<DatosProvinciaCanton> listarCantonesPorProvincia(String provincia) {
         List<DatosProvinciaCanton> cantonesAux = new ArrayList<>();
 
@@ -156,61 +157,62 @@ public class DetalleInfraccionControlador implements Serializable {
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
-    
-    
 
     /**
-     * *******************Métodos para invocar a los diferentes servicios web*****************
+     * *******************Métodos para invocar a los diferentes servicios
+     * web*****************
      */
     public void guardarDetalleInfraccion() {
         
-        this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
-        
-        DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
-        if (detalleInfraccionAux != null) {
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
-            
-            List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
-            
-            if (listaAux.isEmpty()!=true) {
-                listaDetalleInfraccion = listaAux;
-            } 
-            
-            
+        if (this.detalleInfraccion.getNombreJuez().isEmpty() || this.detalleInfraccion.getNombreUnidadJudicial().isEmpty() || this.detalleInfraccion.getNumeroCausa().isEmpty() || this.detalleInfraccion.getProvinciaInfraccion().isEmpty() || this.detalleInfraccion.getCantonInfraccion().isEmpty() || this.detalleInfraccion.getTipoPenal().isEmpty() || this.detalleInfraccion.getUnidadJudicial().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HAY CAMPOS DE DEBEN SER LLENADOS", "Error"));
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
+            this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
+
+            DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
+            if (detalleInfraccionAux != null) {
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
+
+                List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
+
+                if (listaAux.isEmpty() != true) {
+                    listaDetalleInfraccion = listaAux;
+                }
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
+            }
         }
     }
-    
-    
-    public void obtenerDetalleInfraccionSeleccionada(DetalleInfraccionCAI infraccionSeleccionada){
-        detalleInfraccion=infraccionSeleccionada;
+
+    public void obtenerDetalleInfraccionSeleccionada(DetalleInfraccionCAI infraccionSeleccionada) {
+        detalleInfraccion = infraccionSeleccionada;
     }
-    
-    public String agregarMedida(DetalleInfraccionCAI detalle){
-        
-        String redireccionEjecucionMedida=permisosUsuario.redireccionEjecucionMedida();
-        
-        if(redireccionEjecucionMedida!=null){
+
+    public String agregarMedida(DetalleInfraccionCAI detalle) {
+
+        String redireccionEjecucionMedida = permisosUsuario.redireccionEjecucionMedida();
+
+        if (redireccionEjecucionMedida != null) {
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
             return redireccionEjecucionMedida;
-        }else{
+        } else {
             return null;
-        }    
+        }
     }
-    
-    public String editarMedida(DetalleInfraccionCAI detalle){
-        
-        String redireccionEjecucionMedida=permisosUsuario.redireccionEditarEjecucionMedida();
-        
-        if(redireccionEjecucionMedida!=null){
+
+    public String editarMedida(DetalleInfraccionCAI detalle) {
+
+        String redireccionEjecucionMedida = permisosUsuario.redireccionEditarEjecucionMedida();
+
+        if (redireccionEjecucionMedida != null) {
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("detalle_infraccion_cai", detalle);
             return redireccionEjecucionMedida;
-        }else{
+        } else {
             return null;
-        }    
+        }
     }
 }

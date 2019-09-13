@@ -20,6 +20,7 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
+
                             <b:selectOneMenu id="txtTipoPenal" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.tipoPenal}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
@@ -71,12 +72,12 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
-                            <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
+                            <b:inputText id="txtNumeroCausa" required="true" placeholder="N° Causa" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.numeroCausa}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
-                            <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
+                            <b:inputText id="txtNombreJuez" required="true" placeholder="Nombre Juez" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreJuez}"/>
                         </b:column>
                     </b:row>
                     
@@ -101,7 +102,7 @@
 
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
-                            <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreUnidadJudicial}"/>
+                            <b:inputText id="txtNombreUnidad" rendered="true" placeholder="Nombre de Unidad Judicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.nombreUnidadJudicial}"/>
                         </b:column>
                     </b:row>
                 </b:panel>

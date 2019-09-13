@@ -73,7 +73,7 @@ public class Validaciones {
                 //para saber si la edad es la correcta
                 Period periodo = Period.between(fechaNac, ahora);
                 edad = periodo.getYears();
-                if (edad < 18) {
+                if (edad < 26) {
                     verificarEdad = true;
                 } else {
                     verificarEdad = false;

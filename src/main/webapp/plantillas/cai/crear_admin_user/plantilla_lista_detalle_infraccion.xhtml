@@ -36,8 +36,8 @@
                         <b:row>
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
-                                <b:selectOneMenu  select2="true" id="txtTipoPenal" style="width:100%; z-index: 1050;" value="#{detalleInfraccionControlador.detalleInfraccion.tipoPenal}" >
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <b:selectOneMenu  select2="true" id="txtTipoPenal" required="true" style="width:100%; z-index: 1050;" value="#{detalleInfraccionControlador.detalleInfraccion.tipoPenal}" >
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -46,7 +46,8 @@
                         <b:row>
                             <b:column span="6" offset="0">
                                 <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
-                                <b:selectOneMenu  id="txtProvinciaDetencion" update="txtCantonDetencion" process="@this" value="#{detalleInfraccionControlador.detalleInfraccion.provinciaInfraccion}">
+
+                                <b:selectOneMenu  id="txtProvinciaDetencion" required="true" update="txtCantonDetencion" process="@this" value="#{detalleInfraccionControlador.detalleInfraccion.provinciaInfraccion}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                     <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
@@ -77,8 +78,9 @@
 
                             <b:column span="6" offset='0'>
                                 <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
-                                <b:selectOneMenu id="txtCantonDetencion" value="#{detalleInfraccionControlador.detalleInfraccion.cantonInfraccion}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <b:selectOneMenu id="txtCantonDetencion" required="true" value="#{detalleInfraccionControlador.detalleInfraccion.cantonInfraccion}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+
                                     <f:selectItems value="#{detalleInfraccionControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -87,12 +89,12 @@
                         <b:row>
                             <b:column span="6" offset="0">
                                 <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
-                                <b:inputText id="txtNumeroCausa" placeholder="N° Causa" value="#{detalleInfraccionControlador.detalleInfraccion.numeroCausa}"/>
+                                <b:inputText id="txtNumeroCausa" placeholder="N° Causa" required="true" value="#{detalleInfraccionControlador.detalleInfraccion.numeroCausa}"/>
                             </b:column>
 
                             <b:column span="6" offset="0">
                                 <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
-                                <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" value="#{detalleInfraccionControlador.detalleInfraccion.nombreJuez}"/>
+                                <b:inputText id="txtNombreJuez" placeholder="Nombre Juez" required="true" value="#{detalleInfraccionControlador.detalleInfraccion.nombreJuez}"/>
                             </b:column>
                         </b:row>
                         <br></br>
@@ -106,8 +108,8 @@
                         <b:row>
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
-                                <b:selectOneMenu id="txtUnidadJudicial" value="#{detalleInfraccionControlador.detalleInfraccion.unidadJudicial}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <b:selectOneMenu id="txtUnidadJudicial" required="true" value="#{detalleInfraccionControlador.detalleInfraccion.unidadJudicial}">
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
                                     <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
                                     <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
@@ -116,7 +118,7 @@
 
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtNombreUnidad" value="Nombre de Unidad Judicial"/>
-                                <b:inputText id="txtNombreUnidad" placeholder="Nombre de Unidad Judicial" value="#{detalleInfraccionControlador.detalleInfraccion.nombreUnidadJudicial}"/>
+                                <b:inputText id="txtNombreUnidad" required="true" placeholder="Nombre de Unidad Judicial" value="#{detalleInfraccionControlador.detalleInfraccion.nombreUnidadJudicial}"/>
                             </b:column>
                         </b:row>
                         <br/>

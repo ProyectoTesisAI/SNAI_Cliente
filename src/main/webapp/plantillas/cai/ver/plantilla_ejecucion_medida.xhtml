@@ -46,19 +46,18 @@
                     <b:row>
                         <br/>
                         <b:column span="4" offset="1">
-                            <h:outputLabel for="txtFechaIngreso" value="Fecha de Ingreso"/>
-                            <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
-                        </b:column>
-
-                        <b:column span="4" offset="2">
                             <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
-                            <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                            <b:dateTimePicker id="txtFechaResolucion" rendered="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                        </b:column>
+                        <b:column span="4" offset="2">
+                            <h:outputLabel for="txtFechaIngreso" rendered="false" value="Fecha de Ingreso"/>
+                            <b:dateTimePicker id="txtFechaIngreso" required="true" rendered="false" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
                         </b:column>
                     </b:row>    
                     <b:row style="padding-top: 13px;">    
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
-                            <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
+                            <b:dateTimePicker id="txtFechaAprehencion" required="true" placeholder="dd/mm/aa" showTime="false" update="txtAlertaPreventiva,txtTiempoPrivacionLibertadDias" process="@this" value="#{informacionCambioMedidaControlador.ejecucionMedidaCAI.fechaAprehension}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
