@@ -75,14 +75,15 @@
                             </b:column>
 
                             <b:column span="4" offset="1">
-                                <h:outputLabel for="txtFechaIngreso" value="Fecha de Aprehesión de AI"/>
-                                <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
-                            </b:column>
-
-                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
                                 <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
                             </b:column>
+                            
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtFechaIngreso" rendered="false" value="Fecha de Aprehesión de AI"/>
+                                <b:dateTimePicker id="txtFechaIngreso" rendered="false" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
+                            </b:column>
+                            
                         </b:row>    
                         <b:row style="padding-top: 13px;">    
                             <b:column span="4" offset="1">

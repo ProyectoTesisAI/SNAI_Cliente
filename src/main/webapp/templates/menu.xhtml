@@ -92,8 +92,8 @@
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"/>
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" />
                         </p:submenu>
-                        <p:submenu label="Reportes" rendered="#{administracionMenuControlador.tipoRolAdministradorOSubdirector}">
-                            <p:menuitem value="• &nbsp; Reportes Varios" rendered="#{administracionMenuControlador.tipoRolAdministradorOSubdirector}" outcome="#{enlacesPrograma.PATH_PANEL_REPORTE}"/>
+                        <p:submenu label="Reportes" rendered="#{administracionMenuControlador.permitidoVerReportes}">
+                            <p:menuitem value="• &nbsp; Reportes Varios" rendered="#{administracionMenuControlador.permitidoVerReportes}" outcome="#{enlacesPrograma.PATH_PANEL_REPORTE}"/>
                         </p:submenu>
                         <p:submenu label="Administración Usuarios" rendered="#{administracionMenuControlador.tipoRolAdministrador}">
                             <p:menuitem value="• &nbsp; Gestionar Usuario" rendered="#{administracionMenuControlador.permitidoCrearUsuario}" outcome="#{enlacesPrograma.PATH_PANEL_USUARIO_NUEVO}"/>
