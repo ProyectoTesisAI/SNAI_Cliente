@@ -20,8 +20,9 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
-                            <b:selectOneMenu id="txtTipoPenal" required="true" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.tipoPenal}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+
+                            <b:selectOneMenu id="txtTipoPenal" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.tipoPenal}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                             </b:selectOneMenu>
                         </b:column>
@@ -30,8 +31,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
-                            <b:selectOneMenu id="txtProvinciaDetencion" required="true" update="txtCantonDetencion" process="@this" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.provinciaInfraccion}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                            <b:selectOneMenu id="txtProvinciaDetencion" update="txtCantonDetencion" process="@this" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.provinciaInfraccion}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                 <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                 <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
@@ -61,8 +62,8 @@
 
                         <b:column span="4" offset='2'>
                             <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
-                            <b:selectOneMenu id="txtCantonDetencion" required="true" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.cantonInfraccion}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                            <b:selectOneMenu id="txtCantonDetencion" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.cantonInfraccion}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItems value="#{ejecucionMedidaControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
                             </b:selectOneMenu>
                         </b:column>
@@ -91,8 +92,8 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
-                            <b:selectOneMenu id="txtUnidadJudicial" required="true" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.unidadJudicial}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtUnidadJudicial" value="#{ejecucionMedidaControlador.detalleInfraccionCAI.unidadJudicial}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
                                 <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
                                 <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />

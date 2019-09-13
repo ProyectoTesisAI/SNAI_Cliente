@@ -130,7 +130,7 @@
                                         <b:row>
                                             <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{usuarioControlador.esUZDI}"/>
                                             <b:selectOneMenu id="txtUzdi" rendered="#{usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idUdi}">
-                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                 <f:selectItems value="#{usuarioControlador.listaUdi}" var="u" itemValue="#{u}" itemLabel="#{u.udi}" />
                                             </b:selectOneMenu>
                                         </b:row>
@@ -139,7 +139,7 @@
                                         <b:row>
                                             <h:outputLabel for="txtCai" value="CAI" rendered="#{!usuarioControlador.esUZDI}"/>
                                             <b:selectOneMenu id="txtCai" rendered="#{!usuarioControlador.esUZDI}" value="#{usuarioControlador.rolCentroUsuario.idCai}">
-                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                 <f:selectItems value="#{usuarioControlador.listaCai}" var="c" itemValue="#{c}" itemLabel="#{c.cai}" />
                                             </b:selectOneMenu>
                                         </b:row>

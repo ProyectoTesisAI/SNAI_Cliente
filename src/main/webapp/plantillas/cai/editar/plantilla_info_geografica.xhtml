@@ -37,7 +37,7 @@
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtEstadoProvincia1" value="Estado/Provincia"/>
                                 <b:selectOneMenu id="txtEstadoProvincia1" update="txtCiudadNacimiento1" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                     <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                     <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
@@ -69,7 +69,7 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtCiudadNacimiento1" value="Cantón de nacimiento"/>
                                 <b:selectOneMenu id="txtCiudadNacimiento1" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{identificacionGeograficaControladorCAI.cantonesNacimiento}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -82,7 +82,7 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
                                 <b:selectOneMenu id="txtPaisNacimiento" select2="true" disabled="#{!identificacionGeograficaControladorCAI.guardado}" style="width:100%" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{identificacionGeograficaControladorCAI.paises}" var="pais" itemValue="#{pais.pais}" itemLabel="#{pais.pais}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -112,8 +112,8 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtProvincia" value="Provincia"/>
-                                <b:selectOneMenu id="txtProvincia" update="txtCanton" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.provinciaResidencia}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                <b:selectOneMenu id="txtProvincia" required="true" requiredMessage="Provincia es requerida, seleccione una opción" update="txtCanton" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.provinciaResidencia}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                     <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                     <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
@@ -143,8 +143,8 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCanton" value="Cantón"/>
-                                <b:selectOneMenu id="txtCanton" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.cantonResidencia}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                <b:selectOneMenu id="txtCanton" required="true" requiredMessage="Cantón es requerido, seleccione una opción" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.cantonResidencia}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{identificacionGeograficaControladorCAI.cantones}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -166,7 +166,7 @@
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h:outputLabel for="txtDireccionDomicilio" value="Dirección del domicilio"/>
-                                <b:inputText id="txtDireccionDomicilio" maxlength="125" placeholder="Dirección del domicilio" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.direccionDomicilio}"/>
+                                <b:inputText id="txtDireccionDomicilio" maxlength="125" required="true" requiredMessage="Dirección del domicilio es requerido, ingrese un valor" placeholder="Dirección del domicilio" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.direccionDomicilio}"/>
                             </b:column>
                         </b:row>
                         <b:row>                                                    

@@ -38,7 +38,6 @@
                             </b:column>
                             <b:column span="9" offset="1">
                                 <h:outputLabel for="txtCAI" value="CAI"/>
-
                                 <b:selectOneMenu id="txtCAI" required="true" value="#{ejecucionMedidaControlador.cai}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
@@ -117,7 +116,7 @@
                                 <b:column span="9" offset="1">
                                     <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
                                     <b:selectOneMenu id="txtMedidaCautelar" required="#{!ejecucionMedidaControlador.esSocioeducativa}" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                         <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
                                         <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
                                         <f:selectItem itemLabel="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"  itemValue="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"/>

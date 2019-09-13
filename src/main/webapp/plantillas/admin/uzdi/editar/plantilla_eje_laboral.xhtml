@@ -22,8 +22,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtTrabaja" value="Trabaja"/>
-                            <b:selectOneMenu id="txtTrabaja" value="#{ejeLaboralControlador.trabaja}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtTrabaja" required="true" requiredMessage="Trabaja es requerido, seleccione un opción" value="#{ejeLaboralControlador.trabaja}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                                 <f:ajax render="trabaja"/>
@@ -51,7 +51,7 @@
 
                                     <h:outputLabel for="txtRamaActividadEconomica" value="Rama Actividad Económica"/>
                                     <b:selectOneMenu id="txtRamaActividadEconomica" value="#{ejeLaboralControlador.ejeLaboral.ramaActividadEconomica}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="COMERCIO"  itemValue="COMERCIO" />
                                         <f:selectItem itemLabel="SERVICIOS"  itemValue="SERVICIOS" />
                                         <f:selectItem itemLabel="INDUSTRIA"  itemValue="INDUSTRIA" />
@@ -65,7 +65,7 @@
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtAfiliacionIess" value="Afiliación IESS"/>
                                     <b:selectOneMenu id="txtAfiliacionIess"  value="#{ejeLaboralControlador.ejeLaboral.afiliacionIess}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="SI"  itemValue="true" />
                                         <f:selectItem itemLabel="NO"  itemValue="false" />
                                     </b:selectOneMenu>                                              
@@ -74,7 +74,7 @@
                                 <b:column span="4" offset="2">
                                     <h:outputLabel for="txtIngresoMensual" value="Ingreso Mensual"/>
                                     <b:selectOneMenu id="txtIngresoMensual" value="#{ejeLaboralControlador.ejeLaboral.ingresoMensual}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="$1,00 a $50,00"  itemValue="$1,00 a $50,00" />
                                         <f:selectItem itemLabel="$51,00 a $100,00"  itemValue="$51,00 a $100,00" />
                                         <f:selectItem itemLabel="$101,00 a $ 150,00"  itemValue="$101,00 a $ 150,00" />
@@ -108,7 +108,7 @@
                     <br/>
                     <b:column span="10" offset="1">
                         <h:outputLabel for="txtInclinacionVocacional" value="Inclinación Vocacional"/>
-                        <b:inputText id="txtInclinacionVocacional" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
+                        <b:inputText id="txtInclinacionVocacional" required="true" requiredMessage="Inclinación Vocacional es requerido, ingrese un valor" maxlength="80" placeholder="Inclinación Vocacional" value="#{ejeLaboralControlador.ejeLaboral.inclinacionVocacion}"/>
                     </b:column>
                     
                     <b:row>

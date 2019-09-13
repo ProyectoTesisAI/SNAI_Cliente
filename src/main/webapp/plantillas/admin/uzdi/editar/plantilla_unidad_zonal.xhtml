@@ -23,14 +23,14 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtUnidadZonal" value="Unidad Zonal"/>
-                            <b:selectOneMenu id="txtUnidadZonal" value="#{unidadZonalControlador.udi.udi}">
+                            <b:selectOneMenu id="txtUnidadZonal" required="true" requiredMessage="Unidad Zonal es requerido, seleccione una opción" value="#{unidadZonalControlador.udi.udi}">
                                 <f:selectItems value="#{unidadZonalControlador.listaUDI}"  var="u"  itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                             </b:selectOneMenu>
                         </b:column>                                                
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtExpendiente" value="Expediente"/>                                             
-                            <b:inputText id="txtExpendiente" placeholder="Expediente" maxlength="10" value="#{unidadZonalControlador.unidadZonal.numeroExpediente}"/>
+                            <b:inputText id="txtExpendiente" required="true" requiredMessage="Expedientente es requerido, ingrese un valor" placeholder="Expediente" maxlength="10" value="#{unidadZonalControlador.unidadZonal.numeroExpediente}"/>
                         </b:column>
                     </b:row>
                     <b:row>

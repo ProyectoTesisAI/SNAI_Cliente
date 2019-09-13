@@ -41,7 +41,7 @@
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNacionalidadCAI" value="Nacionalidad"/>
                             <b:selectOneMenu id="txtNacionalidadCAI" update="tipoDocumento" process="@this" value="#{adolescenteInfractorCAIEditarControlador.tipoDocumento}">
-                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                                <f:selectItem itemLabel="Seleccione una opción"   itemDisabled="true" />
                                 <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
                                 <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
                             </b:selectOneMenu>
@@ -64,16 +64,16 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtGenero" value="Género"/>
-                            <b:selectOneMenu id="txtGenero" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.genero}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                            <b:selectOneMenu id="txtGenero" required="true" requiredMessage="Género es requerido, seleccione una opción" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.genero}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="MASCULINO"  itemValue="MASCULINO" />
                                 <f:selectItem itemLabel="FEMENINO"  itemValue="FEMENINO" />
                             </b:selectOneMenu>                                        
                         </b:column>
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel  for="txtEtnia" value="Etnia"/>
-                            <b:selectOneMenu id="txtEtnia" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.etnia}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                            <b:selectOneMenu id="txtEtnia" required="true" requiredMessage="Etnia es requerido, ingrese una opción" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.etnia}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="MESTIZOS"  itemValue="MESTIZOS" />
                                 <f:selectItem itemLabel="INDÍGENAS"  itemValue="INDÍGENAS" />
                                 <f:selectItem itemLabel="AFROECUATORIANOS"  itemValue="AFROECUATORIANOS" />
@@ -87,7 +87,7 @@
                     <b:row>
                         <b:column span="4" offset="1">                                        
                             <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
-                            <b:dateTimePicker id="txtFechaNacimiento" placeholder="Fecha" showTime="false" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.fechaNacimiento}">
+                            <b:dateTimePicker id="txtFechaNacimiento" required="true" requiredMessage="Fecha Nacimiento es requerido, ingrese un valor" placeholder="Fecha" showTime="false" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.fechaNacimiento}">
                                 <f:ajax event="blur" listener="#{adolescenteInfractorCAIEditarControlador.validarFechaNacimientoEditar}" render="mensaje-edad txtEdad" />
                                 <f:ajax event="blur" listener="#{adolescenteInfractorCAIEditarControlador.limpiarMensajeFechaNacimientoEditar}" render="txtFechaNacimiento mensaje-edad" />
                             </b:dateTimePicker>
@@ -104,7 +104,7 @@
                         <b:column span="4" offset="1">                                       
                             <h:outputLabel for="txtRegistroSocial" value="Registro Social"/>
                             <b:selectOneMenu id="txtRegistroSocial" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.registroSocial}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>                                        
@@ -113,7 +113,7 @@
                         <b:column span="4" offset="2">                                        
                             <h:outputLabel for="txtEstadoCivil" value="Estado Civil"/>
                             <b:selectOneMenu id="txtEstadoCivil" value="#{adolescenteInfractorCAIEditarControlador.adolescenteInfractorCAIEditar.idAdolescenteInfractor.estadoCivil}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SOLTERO"  itemValue="SOLTERO" />
                                 <f:selectItem itemLabel="CASADO"  itemValue="CASADO" />
                                 <f:selectItem itemLabel="VIUDO"  itemValue="VIUDO" />

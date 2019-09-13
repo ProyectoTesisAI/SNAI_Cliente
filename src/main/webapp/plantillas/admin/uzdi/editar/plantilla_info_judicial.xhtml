@@ -23,8 +23,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtReincidencia" value="Reincidencia"/>
-                            <b:selectOneMenu id="txtReincidencia" value="#{informacionJudicialControlador.informacionJudicial.reincidencia}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtReincidencia" required="true" requiredMessage="Reincidencia es requerido, seleccione una opción" value="#{informacionJudicialControlador.informacionJudicial.reincidencia}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -33,12 +33,12 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNombreFiscal" value="Nombre Fiscal"/>
-                            <b:inputText id="txtNombreFiscal" maxlength="40" placeholder="Nombre Fiscal" value="#{informacionJudicialControlador.informacionJudicial.nombreFiscal}"/>
+                            <b:inputText id="txtNombreFiscal" required="true" requiredMessage="Nombre Fiscal es requerido, ingrese un valor" maxlength="40" placeholder="Nombre Fiscal" value="#{informacionJudicialControlador.informacionJudicial.nombreFiscal}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtNombreJuez" value="Nombre Juez"/>
-                            <b:inputText id="txtNombreJuez" maxlength="40" placeholder="Nombre Juez" value="#{informacionJudicialControlador.informacionJudicial.nombreJuez}"/>
+                            <b:inputText id="txtNombreJuez" maxlength="40" placeholder="Nombre Juez" required="true" requiredMessage="Nombre Juez es requerido, ingrese un valor" value="#{informacionJudicialControlador.informacionJudicial.nombreJuez}"/>
                         </b:column>
                     </b:row>
                     <br/>
@@ -54,8 +54,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
-                            <b:selectOneMenu id="txtUnidadJudicial" value="#{informacionJudicialControlador.informacionJudicial.unidadJudicial}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtUnidadJudicial" required="true" requiredMessage="Unidad Judicial es requerido, seleccione una opción" value="#{informacionJudicialControlador.informacionJudicial.unidadJudicial}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
                                 <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
                                 <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
@@ -64,7 +64,7 @@
                         </b:column>
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtNombreUnidadJudicial" value="Nombre Unidad Judicial"/>
-                            <b:inputText id="txtNombreUnidadJudicial" maxlength="100" placeholder="Nombre Unidad Judicial" value="#{informacionJudicialControlador.informacionJudicial.nombreUnidadJudicial}"/>
+                            <b:inputText id="txtNombreUnidadJudicial" required="true" requiredMessage="Nombre Unidad Judicial es requerido, ingrese un valor" maxlength="100" placeholder="Nombre Unidad Judicial" value="#{informacionJudicialControlador.informacionJudicial.nombreUnidadJudicial}"/>
                         </b:column>                   
                     </b:row>
                     <br/>
@@ -79,8 +79,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtDefensor" value="Defensor"/>
-                            <b:selectOneMenu id="txtDefensor" value="#{informacionJudicialControlador.informacionJudicial.defensor}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtDefensor" required="true" requiredMessage="Defensor es requerido, seleccione una opción" value="#{informacionJudicialControlador.informacionJudicial.defensor}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="PÚBLICO"  itemValue="PÚBLICO" />
                                 <f:selectItem itemLabel="PRIVADO"  itemValue="PRIVADO" />
                             </b:selectOneMenu>
@@ -88,7 +88,7 @@
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtNombreDefensor" value="Nombre Defensor"/>
-                            <b:inputText id="txtNombreDefensor" maxlength="40" placeholder="Nombre Defensor" value="#{informacionJudicialControlador.informacionJudicial.nombreDefensor}"/>
+                            <b:inputText id="txtNombreDefensor" maxlength="40" placeholder="Nombre Defensor" required="true" requiredMessage="Nombre Defensor es requerido, ingrese un valor" value="#{informacionJudicialControlador.informacionJudicial.nombreDefensor}"/>
                         </b:column>
                     </b:row>
                     <br/>
@@ -103,7 +103,7 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNumeroCausa" value="N° Causa"/>
-                            <b:inputText id="txtNumeroCausa" maxlength="10" placeholder="N° Causa" value="#{informacionJudicialControlador.informacionJudicial.numeroCausa}"/>
+                            <b:inputText id="txtNumeroCausa" required="true" requiredMessage="N° Causa es requerido, ingrese un valor"  maxlength="10" placeholder="N° Causa" value="#{informacionJudicialControlador.informacionJudicial.numeroCausa}"/>
                         </b:column>
 
                         <b:column span="4" offset="2">
@@ -120,7 +120,7 @@
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtFormaImposicionMedida" value="Forma Imposición Medida"/>
                             <b:selectOneMenu id="txtFormaImposicionMedida" required="true" requiredMessage="Forma Imposición Medida es requerida, ingrese un valor" value="#{informacionJudicialControlador.informacionJudicial.formaImposicionMedida}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SENTENCIA"  itemValue="SENTENCIA" />
                                 <f:selectItem itemLabel="TERMINACIÓN ANTICIPADA DEL PROCESO"  itemValue="TERMINACIÓN ANTICIPADA DEL PROCESO" />
                                 <f:selectItem itemLabel="RESOLUCIÓN"  itemValue="RESOLUCIÓN" />
@@ -137,8 +137,8 @@
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtTipoTerminacionAnticipadaMedida" value="Tipo Terminación Anticipada Medida"/>
-                            <b:selectOneMenu id="txtTipoTerminacionAnticipadaMedida" value="#{informacionJudicialControlador.informacionJudicial.tipoTerminacionAnticipadaMedida}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtTipoTerminacionAnticipadaMedida" required="true" requiredMessage="Tipo Terminación Anticipada Medida es requerido, ingrese un valor" value="#{informacionJudicialControlador.informacionJudicial.tipoTerminacionAnticipadaMedida}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="CONCILIACIÓN FISCAL"  itemValue="CONCILIACIÓN FISCAL" />
                                 <f:selectItem itemLabel="CONCILIACIÓN JUDICIAL"  itemValue="CONCILIACIÓN JUDICIAL" />
                                 <f:selectItem itemLabel="MEDIACIÓN PENAL"  itemValue="MEDIACIÓN PENAL" />
@@ -161,7 +161,7 @@
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtAmonestacionVerbal" value="Amonestación Verbal"/>
                             <b:selectOneMenu id="txtAmonestacionVerbal" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.amonestacionVerbal}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -170,7 +170,7 @@
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtImposicionReglasConducta" value="Imposición reglas Conducta"/>
                             <b:selectOneMenu id="txtImposicionReglasConducta" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.imposicionReglasConducta}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -180,7 +180,7 @@
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtOrientacionApoyoSocioFamiliar" value="Orientación Apoyo Psico Socio Familiar"/>
                             <b:selectOneMenu id="txtOrientacionApoyoSocioFamiliar" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.apoyoSocioFamiliar}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -189,7 +189,7 @@
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtServicioComunidad" value="Servicio Comunidad"/>
                             <b:selectOneMenu id="txtServicioComunidad"  update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.servicioComunidad}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -199,7 +199,7 @@
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtLibertadAsistida" value="Libertad Asistida"/>
                             <b:selectOneMenu id="txtLibertadAsistida" update="txtNumeroMedidas" process="@this" value="#{informacionJudicialControlador.libertadAsistida}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                                 <!--<f:ajax render=":panelUDI:numeroMedidas"/>-->

@@ -13,7 +13,7 @@
                     <b:column span="12" offset="0">
                         <h:outputLabel for="txtTipoInfraccion" value="Tipo Infracción"/>
                         <b:selectOneMenu id="txtTipoInfraccion" select2="true" style="width:100%" value="#{panelReportesControlador.reporte1.tipoDelto}">
-                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                             <f:selectItems value="#{panelReportesControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                         </b:selectOneMenu>
                     </b:column>

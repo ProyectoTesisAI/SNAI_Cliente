@@ -24,13 +24,13 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtCodigoUnicoElectrico" value="Código Único Eléctrico"/>
-                            <b:inputText id="txtCodigoUnicoElectrico" maxlength="10" placeholder="Código Unico Eléctrico" value="#{ejeEducativoControladorCAI.ejeEducativo.codigoUnicoElectrico}"/>
+                            <b:inputText id="txtCodigoUnicoElectrico" maxlength="10" required="true" requiredMessage="Código Único Eléctrico es requerido, ingrese un valor" placeholder="Código Unico Eléctrico" value="#{ejeEducativoControladorCAI.ejeEducativo.codigoUnicoElectrico}"/>
                         </b:column>
 
                         <b:column span="5" offset="1">
                             <h:outputLabel for="txtCoordinacionZonalEducacionDomicilioEstudiante" value="Coordinación Zonal Educación"/>
-                            <b:selectOneMenu id="txtCoordinacionZonalEducacionDomicilioEstudiante" value="#{ejeEducativoControladorCAI.ejeEducativo.coordinacionZonalEducacionDomicilioEstudiante}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtCoordinacionZonalEducacionDomicilioEstudiante" required="true" requiredMessage="Coordinación Zonal Educación es requerido, seleccione una opción" value="#{ejeEducativoControladorCAI.ejeEducativo.coordinacionZonalEducacionDomicilioEstudiante}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="ZONA 1"  itemValue="ZONA 1" />
                                 <f:selectItem itemLabel="ZONA 2"  itemValue="ZONA 2" />
                                 <f:selectItem itemLabel="ZONA 3"  itemValue="ZONA 3" />
@@ -46,7 +46,7 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txtDistritoEducativoDomicilioEstudiante" value="Distrito Educativo"/>
-                            <b:inputText id="txtDistritoEducativoDomicilioEstudiante" maxlength="20" placeholder="Distrito Educativo" value="#{ejeEducativoControladorCAI.ejeEducativo.distritoEducativoDomicilioEstudiante}"/>
+                            <b:inputText id="txtDistritoEducativoDomicilioEstudiante" required="true" requiredMessage="Distrito Educativo es requerido, ingrese un valor" maxlength="20" placeholder="Distrito Educativo" value="#{ejeEducativoControladorCAI.ejeEducativo.distritoEducativoDomicilioEstudiante}"/>
                         </b:column>
                     </b:row>
                     <br/>
@@ -61,8 +61,8 @@
                     <b:row>    
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtEstudia" value="Estudia"/>
-                            <b:selectOneMenu id="txtEstudia" value="#{ejeEducativoControladorCAI.estudia}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtEstudia" required="true" requiredMessage="Estudia es requerido, seleccione una opción" value="#{ejeEducativoControladorCAI.estudia}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true"/>
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                                 <f:ajax render="estudia"/>
@@ -92,7 +92,7 @@
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtUltimoNivelEducativoAprobado" value="Último Nivel Educativo Aprobado"/>
                                     <b:selectOneMenu id="txtUltimoNivelEducativoAprobado" value="#{ejeEducativoControladorCAI.ejeEducativo.ultimoNivelEducativoAprobado}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="1er año de basica"  itemValue="1er año de basica" />
                                         <f:selectItem itemLabel="2do año de basica"  itemValue="2do año de basica" />
                                         <f:selectItem itemLabel="3er año de basica"  itemValue="3er año de basica" />
@@ -129,7 +129,7 @@
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtSostenimientoUltimoNivelAprobado" value="Sostenimiento Último Nivel Aprobado"/>
                                     <b:selectOneMenu id="txtSostenimientoUltimoNivelAprobado" value="#{ejeEducativoControladorCAI.ejeEducativo.sostenimientoUltimoNivelAprobado}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="FISCAL"  itemValue="FISCAL" />
                                         <f:selectItem itemLabel="FISCOMISIONAL"  itemValue="FISCOMISIONAL" />
                                         <f:selectItem itemLabel="MUNICIPAL"  itemValue="MUNICIPAL" />
@@ -143,7 +143,7 @@
                                 <b:column span="5" offset="1">
                                     <h:outputLabel for="txtAniosRezagoEscolar" value="Años de Rezago escolar"/>
                                     <b:selectOneMenu id="txtAniosRezagoEscolar" value="#{ejeEducativoControladorCAI.ejeEducativo.aniosRezagoEscolar}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="MENOS DE 1 AÑO"  itemValue="MENOS DE 1 AÑO" />
                                         <f:selectItem itemLabel="1 AÑO"  itemValue="1 AÑO" />
                                         <f:selectItem itemLabel="2 AÑOS"  itemValue="2 AÑOS" />
@@ -167,7 +167,7 @@
                                 <b:column span="5" offset="1">
                                     <h:outputLabel for="txtSostenimiento" value="Sostenimiento"/>
                                     <b:selectOneMenu id="txtSostenimiento" value="#{ejeEducativoControladorCAI.ejeEducativo.sostenimiento}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="FISCAL"  itemValue="FISCAL" />
                                         <f:selectItem itemLabel="FISCOMISIONAL"  itemValue="FISCOMISIONAL" />
                                         <f:selectItem itemLabel="MUNICIPAL"  itemValue="MUNICIPAL" />
@@ -178,7 +178,7 @@
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtRegimenEducativo" value="Régimen Educativo"/>
                                     <b:selectOneMenu id="txtRegimenEducativo" value="#{ejeEducativoControladorCAI.ejeEducativo.regimenEducativo}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="COSTA"  itemValue="COSTA" />
                                         <f:selectItem itemLabel="SIERRA"  itemValue="SIERRA" />
                                     </b:selectOneMenu>
@@ -189,7 +189,7 @@
                                 <b:column span="5" offset="1">
                                     <h:outputLabel for="txtNivelEducativoActual" value="Nivel Educativo Actual"/>
                                     <b:selectOneMenu id="txtNivelEducativoActual" value="#{ejeEducativoControladorCAI.ejeEducativo.nivelEducativoActual}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="1er año de basica"  itemValue="1er año de basica" />
                                         <f:selectItem itemLabel="2do año de basica"  itemValue="2do año de basica" />
                                         <f:selectItem itemLabel="3er año de basica"  itemValue="3er año de basica" />
@@ -219,7 +219,7 @@
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtTipoOferta" value="Tipo de Oferta"/>
                                     <b:selectOneMenu id="txtTipoOferta" value="#{ejeEducativoControladorCAI.ejeEducativo.tipoOferta}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="BASICA"  itemValue="BASICA" />
                                         <f:selectItem itemLabel="BACHILLERATO"  itemValue="BACHILLERATO" />
                                         <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />

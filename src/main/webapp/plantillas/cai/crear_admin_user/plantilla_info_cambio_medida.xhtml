@@ -23,8 +23,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtAceptacionCambioMedida" value="Aceptación de cambio de medida"/>
-                            <b:selectOneMenu id="txtAceptacionCambioMedida" value="#{informacionCambioMedidaControlador.aceptaCambioMedida}" process="@this" update="panelAceptaCambioMedida">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtAceptacionCambioMedida" required="true" requiredMessage="Aceptación de cambio de medida es requerido, seleccione una opción" value="#{informacionCambioMedidaControlador.aceptaCambioMedida}" process="@this" update="panelAceptaCambioMedida">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>
@@ -55,18 +55,10 @@
                             </b:row>
                             <br/>
                             <b:row>
-                                <!--                                <b:column span="4" offset="1">
-                                                                    <h:outputLabel for="txtCambioMedida" value="Cambio de medida socioeducativa"/>
-                                                                    <b:selectOneMenu id="txtCambioMedida" update="txtCumplimientoMedidad6080,txtFechaCumplimiento6080,txtAlertaCambio6080" process="@this" value="#{informacionCambioMedidaControlador.informacionCambioMedida.cambioMedidaSocioeducativa}">
-                                                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                                                        <f:selectItem itemLabel="60% DE CUMPLIMIENTO"  itemValue="60% DE CUMPLIMIENTO" />
-                                                                        <f:selectItem itemLabel="80% DE CUMPLIMIENTO"  itemValue="80% DE CUMPLIMIENTO" />
-                                                                    </b:selectOneMenu>
-                                                                </b:column>-->
-                                <b:column span="4" offset="1">
+                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtCambioMedida" value="Cambio de medida socioeducativa"/>
                                     <b:selectOneMenu id="txtCambioMedida" update="tipoCumplimiento" process="@this" value="#{informacionCambioMedidaControlador.tipoCumplimiento}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="60% DE CUMPLIMIENTO"  itemValue="60% DE CUMPLIMIENTO" />
                                         <f:selectItem itemLabel="80% DE CUMPLIMIENTO"  itemValue="80% DE CUMPLIMIENTO" />
                                     </b:selectOneMenu>
@@ -122,8 +114,8 @@
                             <b:row>
                                 <b:column span="5" offset="1">
                                     <h:outputLabel for="txtEspecificacionNuevaMedida" value="Especificación de la Nueva Medida"/>
-                                    <b:selectOneMenu id="txtEspecificacionNuevaMedida" value="#{informacionCambioMedidaControlador.informacionCambioMedida.especificacionNuevaMedida}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <b:selectOneMenu id="txtEspecificacionNuevaMedida" required="true" requiredMessage="Especificación de la Nueva Medida es requerdido, seleccione una opción" value="#{informacionCambioMedidaControlador.informacionCambioMedida.especificacionNuevaMedida}">
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
                                         <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
                                         <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
