@@ -23,8 +23,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtMotivoSalida" value="Motivo de salida"/>
-                            <b:selectOneMenu id="txtMotivoSalida" update="mostrarOcultarTrasladoCAI" process="@this" value="#{motivoEgresoCAIControlador.tipoMotivoSalida}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                            <b:selectOneMenu id="txtMotivoSalida" required="true" requiredMessage="Morivo de salida es requerida, seleccione una opción" update="mostrarOcultarTrasladoCAI" process="@this" value="#{motivoEgresoCAIControlador.tipoMotivoSalida}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="MEDIACIÓN - CONCILIACIÓN"  itemValue="MEDIACIÓN - CONCILIACIÓN" />
                                 <f:selectItem itemLabel="SUSPENSIÓN DEL PROCESO A PRUEBA"  itemValue="SUSPENSIÓN DEL PROCESO A PRUEBA" />
                                 <f:selectItem itemLabel="REMISIÓN"  itemValue="REMISIÓN" />
@@ -42,21 +42,21 @@
 
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtFechaSalida" value="Fecha Salida del Centro"/>
-                            <b:dateTimePicker id="txtFechaSalida" placeholder="dd/mm/aa" showTime="false" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.fechaSalidaCentro}"/>
+                            <b:dateTimePicker id="txtFechaSalida" required="true" requiredMessage="Fecha Salida del Centro es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{motivoEgresoCAIControlador.motivoEgresoCAI.fechaSalidaCentro}"/>
                         </b:column>
                     </b:row> 
                     <h:panelGroup id="mostrarOcultarTrasladoCAI">
-                        <b:panel rendered="#{motivoEgresoCAIControlador.esTrasladoCAI}">
+                        <h:panelGroup rendered="#{motivoEgresoCAIControlador.esTrasladoCAI}">
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtCAITraslado" value="CAI Traslado"/>
                                     <b:selectOneMenu id="txtCAITraslado" value="#{motivoEgresoCAIControlador.cai.cai}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItems value="#{motivoEgresoCAIControlador.listaCAI}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}"/>
                                     </b:selectOneMenu>
                                 </b:column>
                             </b:row>
-                        </b:panel>
+                        </h:panelGroup>>
                     </h:panelGroup>
                     <b:row>
                         <b:column span="3" offset="8">

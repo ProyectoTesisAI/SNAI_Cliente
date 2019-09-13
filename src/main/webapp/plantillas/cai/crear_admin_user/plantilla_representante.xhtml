@@ -23,8 +23,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNacionalidad" value="Nacionalidad"/>
-                            <b:selectOneMenu id="txtNacionalidad" update="tipoDocumentoRepresentante" process="@this" value="#{representanteControladorCAI.tipoDocumento}">
-                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                            <b:selectOneMenu id="txtNacionalidad" required="true" requiredMessage="Nacionalidad es requerido, seleccione una opción" update="tipoDocumentoRepresentante" process="@this" value="#{representanteControladorCAI.tipoDocumento}">
+                                <f:selectItem itemLabel="Seleccione una opción"   itemDisabled="true" />
                                 <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
                                 <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
                             </b:selectOneMenu> 
@@ -46,17 +46,17 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNombresR" value="Nombres"/>
-                            <b:inputText id="txtNombresR" placeholder="Nombres" maxlength="40" value="#{representanteControladorCAI.representante.nombres}"/>
+                            <b:inputText id="txtNombresR" required="true" requiredMessage="Nombres es requerido, ingrese un valor" placeholder="Nombres" maxlength="40" value="#{representanteControladorCAI.representante.nombres}"/>
                         </b:column>
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtApellidosR" value="Apellidos"/>
-                            <b:inputText id="txtApellidosR" placeholder="Nombres" maxlength="40" value="#{representanteControladorCAI.representante.apellidos}"/>
+                            <b:inputText id="txtApellidosR" placeholder="Apellidos" required="true" requiredMessage="Apellidos es requerido, ingrese un valor"  maxlength="40" value="#{representanteControladorCAI.representante.apellidos}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtParentesco" value="Parentesco"/>
-                            <b:inputText id="txtParentesco" placeholder="Parentesco" maxlength="15" value="#{representanteControladorCAI.representante.parentesco}"/>
+                            <b:inputText id="txtParentesco" required="true" requiredMessage="Parentesco es requerido, ingrese un valor" placeholder="Parentesco" maxlength="15" value="#{representanteControladorCAI.representante.parentesco}"/>
                         </b:column>
                     </b:row>    
                     <b:row>

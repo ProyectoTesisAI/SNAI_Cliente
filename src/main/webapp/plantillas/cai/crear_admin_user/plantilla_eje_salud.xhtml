@@ -22,8 +22,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtSituacionSalud" value="Situación Salud"/>
-                            <b:selectOneMenu id="txtSituacionSalud" value="#{ejeSaludControladorCAI.saludable}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtSituacionSalud" required="true" requiredMessage="Situación Salud es requerido, seleccione una opción" value="#{ejeSaludControladorCAI.saludable}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SALUDABLE"  itemValue="true" />
                                 <f:selectItem itemLabel="NO SALUDABLE"  itemValue="false" />
                                 <f:ajax render="@form"/>
@@ -55,7 +55,7 @@
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtRecibeTratamiento" value="Recibe Tratamiento"/>
                                 <b:selectOneMenu id="txtRecibeTratamiento"  value="#{ejeSaludControladorCAI.ejeSalud.recibeTratamiento}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
                                 </b:selectOneMenu>
@@ -64,95 +64,14 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTomaMedicacion" value="Toma medicación"/>
                                 <b:selectOneMenu id="txtTomaMedicacion" value="#{ejeSaludControladorCAI.ejeSalud.tomaMedicacion}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <br/>
-                        <br/>
-
-                        <b:row>
-                            <b:column span="10" offset="1">
-                                <h3>CONSUMO DE SUSTANCIAS</h3>
-                            </b:column>
-                        </b:row>
-                        <br/>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtConsumeSustancias" value="Consume sustancias"/>
-                                <b:selectOneMenu id="txtConsumeSustancias"  process="@this" update="consumeSustancias" value="#{ejeSaludControladorCAI.consumeSustancias}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
-                                    <f:selectItem itemLabel="NO"  itemValue="false" />
-
-                                </b:selectOneMenu>
-                            </b:column>
-                        </b:row>
-                        <h:panelGroup id="consumeSustancias" style="margin: 0px; padding: 0px;">
-
-                            <b:row rendered="#{ejeSaludControladorCAI.consumeSustancias}" >
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
-                                    <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorCAI.ejeSalud.tipoSustancia}"/>
-                                </b:column>
-
-                                <b:column span="4" offset="2">
-                                    <h:outputLabel for="txtRecibeTratamientoDrogas" value="Recibe Tratamiento Drogas"/>
-                                    <b:selectOneMenu id="txtRecibeTratamientoDrogas" value="#{ejeSaludControladorCAI.ejeSalud.recibeTratamientoDrogas}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-                                        <f:selectItem itemLabel="SI"  itemValue="true" />
-                                        <f:selectItem itemLabel="NO"  itemValue="false" />
-                                    </b:selectOneMenu>
-                                </b:column>
-                            </b:row>
-
-                        </h:panelGroup>
-                        <br/>
-                        <br/>
-
-
-                        <b:row>
-                            <b:column span="10" offset="1">
-                                <h3>DISCAPACIDAD</h3>
-                            </b:column>
-                        </b:row>
-                        <br/>
-                        <b:row>
-                            <b:column span="4" offset="1">
-                                <h:outputLabel for="txtDiscapacidad" value="Discapacidad"/>
-                                <b:selectOneMenu id="txtDiscapacidad" update="txtModuloDiscapacidad" process="@this" value="#{ejeSaludControladorCAI.tipoD}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="SI" />
-                                    <f:selectItem itemLabel="NO"  itemValue="NO" />
-                                    <f:selectItem itemLabel="EN PROCESO DE CERTIFICACIÓN"  itemValue="EN PROCESO DE CERTIFICACIÓN" />
+                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                    <f:selectItem itemLabel="NO"  itemValue="false" />
                                 </b:selectOneMenu>
                             </b:column>
                         </b:row>
-                        <h:panelGroup id="txtModuloDiscapacidad" style="margin: 0px; padding: 0px;">
-                            <b:row rendered="#{ejeSaludControladorCAI.esDiscapacidad}" >
-                                <b:column span="4" offset="1">
-                                    <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
-                                    <b:selectOneMenu id="txtTipoDiscapacidad" value="#{ejeSaludControladorCAI.ejeSalud.tipoDiscapacidad}">
-                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                        <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
-                                        <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
-                                        <f:selectItem itemLabel="INTELECTUAL O SENSORIAL"  itemValue="INTELECTUAL O SENSORIAL" />
-                                        <f:selectItem itemLabel="MENTAL"  itemValue="MENTAL" />
-                                    </b:selectOneMenu>
-                                </b:column>
-
-                                <b:column span="4" offset="2">
-                                    <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
-                                    <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorCAI.ejeSalud.porcentajeDiscapacidad}"/>
-                                </b:column>
-
-                            </b:row>
-                        </h:panelGroup> 
                         <br/>
                         <br/>
-
 
                         <b:row>
                             <b:column span="10" offset="1">
@@ -171,6 +90,9 @@
                             </b:column>
                         </b:row>    
                     </h:panelGroup>
+                    <br/>
+                    <br/>
+                    
                     <b:row>
                         <b:column span="10" offset="1">
                             <h3>CONSUMO DE SUSTANCIAS</h3>
@@ -180,8 +102,8 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtConsumeSustancias1" value="Consume sustancias"/>
-                            <b:selectOneMenu id="txtConsumeSustancias1"  process="@this" update="consumeSustancias1" value="#{ejeSaludControladorCAI.consumeSustancias}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtConsumeSustancias1" required="true" requiredMessage="Consume sustancias es requerido, seleccione una opción"  process="@this" update="consumeSustancias1" value="#{ejeSaludControladorCAI.consumeSustancias}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
 
@@ -199,7 +121,7 @@
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtRecibeTratamientoDrogas1" value="Recibe Tratamiento Drogas"/>
                                 <b:selectOneMenu id="txtRecibeTratamientoDrogas1" value="#{ejeSaludControladorCAI.ejeSalud.recibeTratamientoDrogas}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
                                 </b:selectOneMenu>
@@ -220,7 +142,7 @@
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtDiscapacidad1" value="Discapacidad"/>
-                            <b:selectOneMenu id="txtDiscapacidad1" update="txtModuloDiscapacidad1" process="@this" value="#{ejeSaludControladorCAI.tipoD}">
+                            <b:selectOneMenu id="txtDiscapacidad1" required="true" requiredMessage="Discapacidad es requerido, seleccione una opción" update="txtModuloDiscapacidad1" process="@this" value="#{ejeSaludControladorCAI.tipoD}">
                                 <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="SI" />
                                 <f:selectItem itemLabel="NO"  itemValue="NO" />
@@ -247,7 +169,11 @@
                             </b:column>
 
                         </b:row>
-                    </h:panelGroup>                     
+                    </h:panelGroup> 
+                    <br/>
+                    <br/>
+
+                    
                     <h:panelGroup rendered="#{ejeSaludControladorCAI.esMujer}">
 
                         <b:row>
@@ -260,7 +186,7 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtEmbarazo" value="Embarazo"/>
                                 <b:selectOneMenu id="txtEmbarazo" update="txtTiempGestacionMes" process="@this" value="#{ejeSaludControladorCAI.ejeSalud.embarazo}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
                                 </b:selectOneMenu>
@@ -269,7 +195,7 @@
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempGestacionMes" value="Tiempo de Gestación (Mes)"/>
                                 <b:selectOneMenu id="txtTiempGestacionMes" disabled="#{!ejeSaludControladorCAI.ejeSalud.embarazo}" value="#{ejeSaludControladorCAI.ejeSalud.tiempoGestacionMes}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="1"  itemValue="1" />
                                     <f:selectItem itemLabel="2"  itemValue="2" />
                                     <f:selectItem itemLabel="3"  itemValue="3" />

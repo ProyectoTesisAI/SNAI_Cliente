@@ -23,18 +23,18 @@
                     <b:row>
                         <b:column span="4" offset="1">                                                    
                             <h:outputLabel for="txtNombres" value="Nombres"/>
-                            <b:inputText id="txtNombres" placeholder="Nombres" maxlength="20" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.nombres}"/>
+                            <b:inputText id="txtNombres" placeholder="Nombres" required="true" requiredMessage="Nombres es requerido, ingrese un valor" maxlength="20" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.nombres}"/>
                         </b:column>
                         <b:column span="4" offset="2">                                                    
                             <h:outputLabel for="txtApellidos" value="Apellidos"/>
-                            <b:inputText id="txtApellidos" placeholder="Apellidos" maxlength="30"  value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.apellidos}"/>
+                            <b:inputText id="txtApellidos" placeholder="Apellidos" required="true" requiredMessage="Apellidos es requerido, ingrese un valor" maxlength="30"  value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.apellidos}"/>
                         </b:column>                                                
                     </b:row>
                     <b:row>
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtNacionalidadCAI" value="Nacionalidad"/>
-                            <b:selectOneMenu id="txtNacionalidadCAI" value="#{adolescenteInfractorUDIEditarControlador.tipoDocumento}">
-                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                            <b:selectOneMenu id="txtNacionalidadCAI" required="true" requiredMessage="Nacionalidad es requerido, seleccione un opción" value="#{adolescenteInfractorUDIEditarControlador.tipoDocumento}">
+                                <f:selectItem itemLabel="Seleccione una opción"   itemDisabled="true" />
                                 <f:selectItem itemLabel="ECUATORIANA"  itemValue="ECUATORIANA" />
                                 <f:selectItem itemLabel="EXTRANJERA"  itemValue="EXTRANJERA" />
                                 <f:ajax render="tipoDocumento"/>
@@ -57,8 +57,8 @@
                     <b:row>
                         <b:column span="4" offset="1">                               
                             <h:outputLabel for="txtGenero" value="Género"/>
-                            <b:selectOneMenu id="txtGenero" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.genero}">
-                                <f:selectItem itemLabel="Seleccione una opcion"   itemDisabled="false" />
+                            <b:selectOneMenu id="txtGenero" required="true" requiredMessage="Género es requerido, seleccione un opción" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.genero}">
+                                <f:selectItem itemLabel="Seleccione una opción"   itemDisabled="true" />
                                 <f:selectItem itemLabel="MASCULINO"  itemValue="MASCULINO" />
                                 <f:selectItem itemLabel="FEMENINO"  itemValue="FEMENINO" />
                             </b:selectOneMenu>
@@ -66,8 +66,8 @@
                         </b:column>
                         <b:column span="4" offset="2">          
                             <h:outputLabel for="txtEtnia" value="Etnia"/>
-                            <b:selectOneMenu id="txtEtnia" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.etnia}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                            <b:selectOneMenu id="txtEtnia" required="true" requiredMessage="Etnia es requerido, seleccione una opción" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.etnia}">
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="MESTIZOS"  itemValue="MESTIZOS" />
                                 <f:selectItem itemLabel="INDÍGENAS"  itemValue="INDÍGENAS" />
                                 <f:selectItem itemLabel="AFROECUATORIANOS"  itemValue="AFROECUATORIANOS" />
@@ -80,7 +80,7 @@
                     <b:row>
                         <b:column span="4" offset="1">       
                             <h:outputLabel for="txtFechaNacimiento" value="Fecha Nacimiento"/>
-                            <b:dateTimePicker id="txtFechaNacimiento" required="true" placeholder="Fecha"  showTime="false" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.fechaNacimiento}">
+                            <b:dateTimePicker id="txtFechaNacimiento" required="true" requiredMessage="Fecha Nacimiento es requerido, ingrese un valor" placeholder="Fecha"  showTime="false" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.fechaNacimiento}">
                                 <f:ajax event="blur" listener="#{adolescenteInfractorUDIEditarControlador.validarFechaNacimientoEditar}" render="mensaje-edad txtEdad" />
                                 <f:ajax event="blur" listener="#{adolescenteInfractorUDIEditarControlador.limpiarMensajeFechaNacimientoEditar}" render="txtFechaNacimiento mensaje-edad" />
                             </b:dateTimePicker>
@@ -101,7 +101,7 @@
                         <b:column span="4" offset="2">     
                             <h:outputLabel for="txtEstadoCivil" value="Estado Civil"/>
                             <b:selectOneMenu id="txtEstadoCivil" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.estadoCivil}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SOLTERO"  itemValue="SOLTERO" />
                                 <f:selectItem itemLabel="CASADO"  itemValue="CASADO" />
                                 <f:selectItem itemLabel="VIUDO"  itemValue="VIUDO" />
@@ -119,7 +119,7 @@
                         <b:column span="4" offset="2">
                             <h:outputLabel for="txtRegistroSocial" value="Registro Social"/>
                             <b:selectOneMenu id="txtRegistroSocial" value="#{adolescenteInfractorUDIEditarControlador.adolescenteInfractorUDIEditar.idAdolescenteInfractor.registroSocial}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="SI"  itemValue="true" />
                                 <f:selectItem itemLabel="NO"  itemValue="false" />
                             </b:selectOneMenu>

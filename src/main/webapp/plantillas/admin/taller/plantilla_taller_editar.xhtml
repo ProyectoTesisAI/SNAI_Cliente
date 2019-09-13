@@ -81,13 +81,13 @@
 
                                                     <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerEditarControlador.esUzdi}"/>
                                                     <b:selectOneMenu id="txtUzdi" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                         <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                     </b:selectOneMenu>
 
                                                     <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
                                                     <b:selectOneMenu id="txtCai" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
+                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                         <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                     </b:selectOneMenu>
                                                 </div>

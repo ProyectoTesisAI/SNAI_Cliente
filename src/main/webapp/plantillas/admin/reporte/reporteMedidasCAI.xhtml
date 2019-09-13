@@ -13,7 +13,7 @@
                     <b:column span="6" offset="0">
                         <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
                         <b:selectOneMenu id="txtTipoMedida" required="true" update="tipoMedida" process="@this" value="#{panelReportesControlador.tipoMedida}">
-                            <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                            <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                             <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
                             <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
                         </b:selectOneMenu>
@@ -22,7 +22,7 @@
                         <b:column span="6" offset="0">
                             <h:outputLabel for="txtMedidaSocioeducativa" rendered="#{panelReportesControlador.esSocioeducativa}" value="Medida Socioeducativa Privativa de Libertidad"/>
                             <b:selectOneMenu id="txtMedidaSocioeducativa" rendered="#{panelReportesControlador.esSocioeducativa}" value="#{panelReportesControlador.medidaCAI.medidaCautelar}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
                                 <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
                                 <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
@@ -36,7 +36,7 @@
                         <b:column span="6" offset="0">
                             <h:outputLabel for="txtMedidaCautelar" rendered="#{!panelReportesControlador.esSocioeducativa}" value="Medida Cautelar"/>
                             <b:selectOneMenu id="txtMedidaCautelar" rendered="#{!panelReportesControlador.esSocioeducativa}" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
-                                <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                 <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
                                 <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
                                 <f:selectItem itemLabel="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"  itemValue="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"/>
