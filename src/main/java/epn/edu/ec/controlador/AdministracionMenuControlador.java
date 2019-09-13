@@ -25,6 +25,7 @@ public class AdministracionMenuControlador implements Serializable {
     private boolean permitidoCrearAdolescenteUDI;
     private boolean permitidoCrearAdolescenteCAI;
     private boolean permitidoCrearUsuario;
+    private boolean permitidoVerReportes;
     private String usuario;
 
     @PostConstruct
@@ -61,11 +62,11 @@ public class AdministracionMenuControlador implements Serializable {
     public boolean isTipoRolAdministradorOSubdirector() {
         String rolUsuario = permisosUsuario.RolUsuario();
         if (rolUsuario != null) {
-            if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolPsicologo = false;
                 tipoRolJuridico = false;
-                tipoRolAdministrador = false;
+                tipoRolAdministrador = true;
                 tipoRolAdministradorOSubdirector = true;
             }
         }
@@ -179,6 +180,16 @@ public class AdministracionMenuControlador implements Serializable {
             }
         }
         return permitidoCrearAdolescenteCAI;
+    }
+
+    public boolean isPermitidoVerReportes() {
+        String rolUsuario = permisosUsuario.RolUsuario();
+        if (rolUsuario != null) {
+            if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario)) {
+                permitidoVerReportes = true;
+            }
+        }
+        return permitidoVerReportes;
     }
 
     public String validarTallerPsicologia() {

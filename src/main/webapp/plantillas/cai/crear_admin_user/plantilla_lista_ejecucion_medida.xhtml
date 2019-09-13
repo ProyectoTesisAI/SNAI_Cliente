@@ -39,7 +39,7 @@
                             <b:column span="9" offset="1">
                                 <h:outputLabel for="txtCAI" value="CAI"/>
 
-                                <b:selectOneMenu id="txtCAI" value="#{ejecucionMedidaControlador.cai}">
+                                <b:selectOneMenu id="txtCAI" required="true" value="#{ejecucionMedidaControlador.cai}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
                                 </b:selectOneMenu>
@@ -51,22 +51,22 @@
 
                             <b:column span="10" offset="1" >
                                 <h3>Fechas correspondientes a la Medida</h3>
-                            </b:column>
+                            </b:column>                          
 
                             <b:column span="4" offset="1">
-                                <h:outputLabel for="txtFechaIngreso" value="Fecha de Aprehesión de AI"/>
-                                <b:dateTimePicker id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
-                            </b:column>
-
-                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtFechaResolucion" value="Fecha de Resolución"/>
-                                <b:dateTimePicker id="txtFechaResolucion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                                <b:dateTimePicker id="txtFechaResolucion" required="true" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaResolucion}"/>
+                            </b:column>
+                            
+                            <b:column span="4" offset="2">
+                                <h:outputLabel rendered="false" for="txtFechaIngreso" value="Fecha de Aprehesión de AI"/>
+                                <b:dateTimePicker rendered="false" id="txtFechaIngreso" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
                             </b:column>
                         </b:row>    
                         <b:row style="padding-top: 13px;">    
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
-                                <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}">
+                                <b:dateTimePicker id="txtFechaAprehencion" required="true" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}">
                                     <f:ajax event="keyup" render="txtAlertaPreventiva" />
                                     <f:ajax event="blur" render="txtAlertaPreventiva" />
                                     <f:ajax event="keyup" render="txtTiempoPrivacionLibertadDias" />
@@ -88,7 +88,7 @@
 
                             <b:column span="9" offset="1">
                                 <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
-                                <b:selectOneMenu id="txtTipoMedida" process="@this" update="tipoMedida" value="#{ejecucionMedidaControlador.tipoMedida}">
+                                <b:selectOneMenu id="txtTipoMedida" required="true" process="@this" update="tipoMedida" value="#{ejecucionMedidaControlador.tipoMedida}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
                                     <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
@@ -101,7 +101,7 @@
                             <b:row rendered="#{ejecucionMedidaControlador.esSocioeducativa}" >
                                 <b:column span="9" offset="1">
                                     <h:outputLabel for="txtMedidaSocioeducativa"  value="Medida Socioeducativa Privativa de Libertidad"/>
-                                    <b:selectOneMenu id="txtMedidaSocioeducativa" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                    <b:selectOneMenu id="txtMedidaSocioeducativa" required="#{ejecucionMedidaControlador.esSocioeducativa}" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
                                         <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
                                         <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
                                         <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
@@ -116,7 +116,7 @@
                             <b:row  rendered="#{!ejecucionMedidaControlador.esSocioeducativa}">
                                 <b:column span="9" offset="1">
                                     <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
-                                    <b:selectOneMenu id="txtMedidaCautelar" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
+                                    <b:selectOneMenu id="txtMedidaCautelar" required="#{!ejecucionMedidaControlador.esSocioeducativa}" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
                                         <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
                                         <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
                                         <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
@@ -145,7 +145,7 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoAnios" value="Años"/>
-                                <b:inputText id="txtTiempoAnios" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" placeholder="Tiempo"  value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}">
+                                <b:inputText id="txtTiempoAnios" mask="{regex:'[0-9\u0600-\u06FF]*'}" required="true" maxlength="2" placeholder="Tiempo"  value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.anios}">
                                     <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
                                     <f:ajax event="blur" render="txtTiempoSentenciaDias" />
                                 </b:inputText>
@@ -153,7 +153,7 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoMeses" value="Meses"/>
-                                <b:inputText id="txtTiempoMeses" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="3" placeholder="Meses" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}">
+                                <b:inputText id="txtTiempoMeses" mask="{regex:'[0-9\u0600-\u06FF]*'}" required="true" maxlength="3" placeholder="Meses" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.meses}">
                                     <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
                                     <f:ajax event="blur" render="txtTiempoSentenciaDias" />
                                 </b:inputText>
@@ -161,7 +161,7 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoDias" value="Días"/>
-                                <b:inputText id="txtTiempoDias" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" placeholder="Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}">
+                                <b:inputText id="txtTiempoDias" mask="{regex:'[0-9\u0600-\u06FF]*'}" required="true" maxlength="4" placeholder="Días" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.dias}">
                                     <f:ajax event="keyup" render="txtTiempoSentenciaDias" />
                                     <f:ajax event="blur" render="txtTiempoSentenciaDias" />
                                 </b:inputText>
@@ -183,7 +183,7 @@
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h:outputLabel for="txtObervacionesProceso" value="Observaciones de proceso judicial"/>
-                                <b:inputTextarea id="txtObervacionesProceso" placeholder="Observaciones de proceso judicial" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.observacionesProcesoJudicial}"/>
+                                <b:inputTextarea id="txtObervacionesProceso" required="true" placeholder="Observaciones de proceso judicial" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.observacionesProcesoJudicial}"/>
                             </b:column>
                         </b:row>
 
