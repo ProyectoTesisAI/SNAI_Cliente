@@ -41,6 +41,33 @@
                                 <h:outputLabel for="txtInstitucionEjecutoraMedida" value="Institución Ejecutora Medida"/>
                                 <b:inputText id="txtInstitucionEjecutoraMedida" maxlength="50" placeholder="Institución Ejecutora Medida"  value="#{medidaSocioEducativaControlador.medidaSocioeducativa.institucionEjecutoraMedida}"/>
                             </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoMeses" value="Tiempo(Meses)"/>
+                                <b:inputText id="txtTiempoMeses" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Meses) es requerido, ingrese un valor" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoMeses}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida" />
+                                </b:inputText>
+                            </b:column>
+
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtTiempoDia" value="Tiempo(Día)"/>
+                                <b:inputText id="txtTiempoDia" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Día)" requiredMessage="Tiempo(Día) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoDia}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida" />
+                                </b:inputText>
+                            </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoHoras" value="Tiempo(Horas)"/>
+                                <b:inputText id="txtTiempoHoras" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Horas) es requerido, ingrese un valor" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa.tiempoHoras}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida" />
+                                </b:inputText>
+                            </b:column>
+                        </b:row>    
+
+                        <b:row>
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtFechaFinMedida" value="Fecha de ejecución de medida"/>
@@ -93,15 +120,29 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses2" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Meses) es requerido, ingrese un valor" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoMeses}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida2" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida2" />
+                                </b:inputText>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia2" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida2" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Día) es requerido, ingrese un valor" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoDia}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida2" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida2" />
+                                </b:inputText>
                             </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoHoras2" value="Tiempo(Horas)"/>
+                                <b:inputText id="txtTiempoHoras2" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Horas) es requerido, ingrese un valor" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa2.tiempoHoras}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida2" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida2" />
+                                </b:inputText>
+                            </b:column>
+                        </b:row>    
 
-                        </b:row>
                         <b:row>
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida2" value="Fecha de fin de medida"/>
@@ -153,13 +194,30 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses3" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Meses) es requerido, ingrese un valor" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoMeses}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida3" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida3" />
+                                </b:inputText>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia3" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida3" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Día)" requiredMessage="Tiempo(Día) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoDia}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida3" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida3" />
+                                </b:inputText>
                             </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoHoras3" value="Tiempo(Horas)"/>
+                                <b:inputText id="txtTiempoHoras3" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Horas)" requiredMessage="Tiempo(Horas) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa3.tiempoHoras}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida3" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida3" />
+                                </b:inputText>    
+                            </b:column>
+                       </b:row>    
+
+                        <b:row>
 
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida3" value="Fecha de fin de medida"/>
@@ -174,8 +232,6 @@
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
                                 </b:selectOneMenu>
                             </b:column>
-
-
                         </b:row>
 
                         <b:row>
@@ -211,18 +267,38 @@
                             </b:column>
 
                             <b:column span="4" offset="1">
-                                <h:outputLabel for="txtTiempoHoras4" value="Tiempo(Horas)"/>
-                                <b:inputText id="txtTiempoHoras4" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida4" required="true" placeholder="Tiempo(Horas)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoHoras}"/>
+                                <h:outputLabel for="txtTiempoMeses4" value="Tiempo(Meses)"/>
+                                <b:inputText id="txtTiempoMeses4" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Meses) es requerido, ingrese un valor" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoMeses}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida4" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida4" />
+                                </b:inputText>    
                             </b:column>
 
-                            <b:column span="4" offset="2">                
+                            <b:column span="4" offset="2">
+                                <h:outputLabel for="txtTiempoDia4" value="Tiempo(Día)"/>
+                                <b:inputText id="txtTiempoDia4" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Día)" requiredMessage="Tiempo(Día) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoDia}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida4" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida4" />
+                                </b:inputText>  
+                            </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoHoras4" value="Tiempo(Horas)"/>
+                                <b:inputText id="txtTiempoHoras4" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Horas)" requiredMessage="Tiempo(Horas) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.tiempoHoras}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida4" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida4" />
+                                </b:inputText>  
+                            </b:column>
+                       </b:row>    
+                        
+                        <b:row>
+
+                            <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida4" value="Fecha de fin de medida"/>
                                 <b:dateTimePicker id="txtFechaFinMedida4" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.fechaFinMedida}"/>
                             </b:column>
-                        </b:row>
-                        
-                        <b:row>
-                            <b:column span="4" offset="1">
+
+                            <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCumplioMedida4" value="Cumplió medida"/>
                                 <b:selectOneMenu id="txtCumplioMedida4" value="#{medidaSocioEducativaControlador.medidaSocioeducativa4.cumplioMedida}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
@@ -268,13 +344,30 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTiempoMeses5" value="Tiempo(Meses)"/>
-                                <b:inputText id="txtTiempoMeses5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoMeses}"/>
+                                <b:inputText id="txtTiempoMeses5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" requiredMessage="Tiempo(Meses) es requerido, ingrese un valor" placeholder="Tiempo(Meses)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoMeses}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida5" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida5" />
+                                </b:inputText>  
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempoDia5" value="Tiempo(Día)"/>
-                                <b:inputText id="txtTiempoDia5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="2" update="txtFechaFinMedida5" required="true" placeholder="Tiempo(Día)" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoDia}"/>
+                                <b:inputText id="txtTiempoDia5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Día)" requiredMessage="Tiempo(Día) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoDia}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida5" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida5" />
+                                </b:inputText>  
                             </b:column>
+                            
+                            <b:column span="4" offset="1">
+                                <h:outputLabel for="txtTiempoHoras5" value="Tiempo(Horas)"/>
+                                <b:inputText id="txtTiempoHoras5" mask="{regex:'[0-9\u0600-\u06FF]*'}" maxlength="4" required="true" placeholder="Tiempo(Horas)" requiredMessage="Tiempo(Horas) es requerido, ingrese un valor" value="#{medidaSocioEducativaControlador.medidaSocioeducativa5.tiempoHoras}">
+                                    <f:ajax event="keyup" render="txtFechaFinMedida5" />
+                                    <f:ajax event="blur" render="txtFechaFinMedida5" />
+                                </b:inputText>  
+                            </b:column>
+                        </b:row>
+                        
+                        <b:row>
 
                             <b:column span="4" offset="1">                
                                 <h:outputLabel for="txtFechaFinMedida5" value="Fecha de fin de medida"/>
