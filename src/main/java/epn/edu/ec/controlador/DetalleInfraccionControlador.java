@@ -165,7 +165,7 @@ public class DetalleInfraccionControlador implements Serializable {
     public void guardarDetalleInfraccion() {
         
         if (this.detalleInfraccion.getNombreJuez().isEmpty() || this.detalleInfraccion.getNombreUnidadJudicial().isEmpty() || this.detalleInfraccion.getNumeroCausa().isEmpty() || this.detalleInfraccion.getProvinciaInfraccion().isEmpty() || this.detalleInfraccion.getCantonInfraccion().isEmpty() || this.detalleInfraccion.getTipoPenal().isEmpty() || this.detalleInfraccion.getUnidadJudicial().isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HAY CAMPOS DE DEBEN SER LLENADOS", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Provincia Detención, Cantón Detención, N° Causa, Nombre Juez, Nombre de Unida Judicial deben de tener un valor", "Error"));
         } else {
             this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
 
@@ -191,7 +191,7 @@ public class DetalleInfraccionControlador implements Serializable {
     }
 
     public String agregarMedida(DetalleInfraccionCAI detalle) {
-        System.out.println("pudo entrar a agregar medida");
+
         String redireccionEjecucionMedida = permisosUsuario.redireccionEjecucionMedida();
 
         if (redireccionEjecucionMedida != null) {

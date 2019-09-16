@@ -16,6 +16,7 @@
                 <link rel="stylesheet" type="text/css" href="../../../resources/css/menu2.css"/>
                 <link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.css"/>
                 <script src="../../../resources/js/bootstrap.min.js"></script>
+                <f:event type="preRenderView" listener="#{validarAccesoControlador.verificarSesionUsuario()}"/>
             </ui:define>
 
             <ui:define name="content">
@@ -32,7 +33,7 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtFechaIngresoProcesoCAI" value="Fecha de Ingreso de proceso"/>
-                                <b:dateTimePicker id="txtFechaIngresoProcesoCAI" placeholder="dd/mm/aa" required="true" requiredMessage="Es requerido, ingrese un valor" showTodayButton="true" showTime="false" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.fechaIngresoProceso}"/>
+                                <b:dateTimePicker id="txtFechaIngresoProcesoCAI" placeholder="dd/mm/aa" required="true" requiredMessage="Fecha de Ingreso de proceso es requerido, ingrese un valor" showTodayButton="true" showTime="false" value="#{adolescenteInfractorCAIControlador.adolescenteInfractorCAICrear.fechaIngresoProceso}"/>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -171,9 +172,8 @@
                             </b:row>
                         </b:modal>
 
-                        
+                    </b:panel>   
 
-                    </b:panel>
                 </b:form>
             </ui:define>
         </ui:composition>

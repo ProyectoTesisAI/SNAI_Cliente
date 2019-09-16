@@ -302,9 +302,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*AMONESTACION VERBAL
         DONDE NO HAY MESES, DIAS, HORAS
          */
-        this.medidaSocioeducativa.setTiempoDia(0);
-        this.medidaSocioeducativa.setTiempoHoras(0);
-        this.medidaSocioeducativa.setTiempoMeses(0);
         this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
@@ -322,9 +319,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*AMONESTACION VERBAL
         DONDE NO HAY MESES, DIAS, HORAS
          */
-        this.medidaSocioeducativa.setTiempoDia(0);
-        this.medidaSocioeducativa.setTiempoHoras(0);
-        this.medidaSocioeducativa.setTiempoMeses(0);
         this.medidaSocioeducativa.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa);
@@ -342,7 +336,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*IMPOSICION REGLAS CONDUCTA
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa2.setTiempoHoras(0);
         this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
@@ -360,7 +353,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*IMPOSICION REGLAS CONDUCTA
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa2.setTiempoHoras(0);
         this.medidaSocioeducativa2.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa2);
@@ -378,7 +370,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*APOYO PSICO SOCIO FAMILAR
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa3.setTiempoHoras(0);
         this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
@@ -396,7 +387,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*APOYO PSICO SOCIO FAMILAR
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa3.setTiempoHoras(0);
         this.medidaSocioeducativa3.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa3);
@@ -414,7 +404,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*SERVICIO COMUNIDAD
         DONDE NO HAY MESES, DIAS
          */
-        this.medidaSocioeducativa4.setTiempoMeses(0);
         this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
@@ -432,7 +421,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*SERVICIO COMUNIDAD
         DONDE NO HAY MESES, DIAS
          */
-        this.medidaSocioeducativa4.setTiempoMeses(0);
         this.medidaSocioeducativa4.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa4);
@@ -450,7 +438,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*LIBERTAD ASISTIDA
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa5.setTiempoHoras(0);
         this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);
@@ -468,7 +455,6 @@ public class MedidaSocioEducativaControlador implements Serializable {
         /*LIBERTAD ASISTIDA
         DONDE NO HAY HORAS
          */
-        this.medidaSocioeducativa5.setTiempoHoras(0);
         this.medidaSocioeducativa5.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
 
         MedidaSocioeducativa medidaSocioeducativaAux = servicio.guardarMedidaSocioeducativa(medidaSocioeducativa5);

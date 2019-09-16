@@ -169,7 +169,7 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
                     guardarRegistroAdolescenteInfractorEditar();
                 }
             }else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 18 AÑOS", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 26 AÑOS", "Error"));
             }
             
         } else {
