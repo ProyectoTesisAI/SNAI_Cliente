@@ -22,19 +22,19 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 @Named(value = "loginController")
 @ViewScoped
-public class LoginController implements Serializable{
+public class LoginController implements Serializable {
 
     private Usuario usuario;
     private LoginServicio servicio;
     private EnlacesPrograma enlaces;
-    
+
     @PostConstruct
-    public void init(){
-        usuario= new Usuario();
-        servicio= new LoginServicio();
-        enlaces= new EnlacesPrograma();
+    public void init() {
+        usuario = new Usuario();
+        servicio = new LoginServicio();
+        enlaces = new EnlacesPrograma();
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -42,41 +42,44 @@ public class LoginController implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
-    public String cifrarContraseña(){
-        String password=usuario.getContraseña();
-        password=DigestUtils.sha256Hex(password);
+
+    public String cifrarContraseña() {
+        String password = usuario.getContraseña();
+        password = DigestUtils.sha256Hex(password);
         return password;
     }
-    
-    public String loguerUsuario(){
-        
-        Usuario user= new Usuario();
-        
+
+    public String loguerUsuario() {
+
+        Usuario user = new Usuario();
+
         user.setUsuario(usuario.getUsuario());
-        String contraseña=cifrarContraseña();
+        String contraseña = cifrarContraseña();
         user.setContraseña(contraseña);
-        
-        Usuario usuarioLogueado= servicio.loguearUsuario(user);
-        
-        if(usuarioLogueado!=null){
-            
-            String rolUsuario=usuarioLogueado.getIdRolUsuarioCentro().getIdRol().getRol();
+
+        Usuario usuarioLogueado = servicio.loguearUsuario(user);
+
+        if (usuarioLogueado != null) {
+
+            String rolUsuario = usuarioLogueado.getIdRolUsuarioCentro().getIdRol().getRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogin", usuarioLogueado);
-            
+
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
-                return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
-            }           
-        }
-        else{
+                if (rolUsuario.equals("TRABAJADOR SOCIAL CAI")) {
+                    return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
+                } else if (rolUsuario.equals("TRABAJADOR SOCIAL UZDI")) {
+                    return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                } else {
+                    return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
+                }
+            }
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "USUARIO O CONTRASEÑA INCORRECTA", "Error"));
             return null;
         }
-        
+
     }
 
-    
 }

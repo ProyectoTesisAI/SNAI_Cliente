@@ -339,7 +339,7 @@ public class InformacionJudicialControlador implements Serializable {
                         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "8");
                         return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                     } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "1");
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
                         return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                     } else {
                         return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";

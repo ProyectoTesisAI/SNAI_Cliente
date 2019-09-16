@@ -480,7 +480,7 @@ public class MedidaSocioEducativaControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                 } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "3");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
@@ -503,7 +503,7 @@ public class MedidaSocioEducativaControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                 } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "3");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
@@ -526,7 +526,7 @@ public class MedidaSocioEducativaControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                 } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "3");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
@@ -549,7 +549,7 @@ public class MedidaSocioEducativaControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                 } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "3");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
@@ -572,7 +572,7 @@ public class MedidaSocioEducativaControlador implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                 } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "2");
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "3");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
