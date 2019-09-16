@@ -39,7 +39,7 @@
                             <b:column span="9" offset="1">
                                 <h:outputLabel for="txtCAI" value="CAI"/>
                                 <b:selectOneMenu id="txtCAI" value="#{ejecucionMedidaControlador.cai}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{ejecucionMedidaControlador.listaCAI}" var="c" itemValue="#{c}" itemLabel="#{c.cai}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -88,7 +88,7 @@
                             <b:column span="9" offset="1">
                                 <h:outputLabel for="txtTipoMedida" value="Tipo de medida"/>
                                 <b:selectOneMenu id="txtTipoMedida"  process="@this" update="tipoMedida" value="#{ejecucionMedidaControlador.tipoMedida}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD"  itemValue="MEDIDA SOCIOEDUCATIVA PRIVATIVA DE LIBERTAD" />
                                     <f:selectItem itemLabel="MEDIDA CAUTELAR"  itemValue="MEDIDA CAUTELAR" />
                                 </b:selectOneMenu>
@@ -101,7 +101,7 @@
                                 <b:column span="9" offset="1">
                                     <h:outputLabel for="txtMedidaSocioeducativa"  value="Medida Socioeducativa Privativa de Libertidad"/>
                                     <b:selectOneMenu id="txtMedidaSocioeducativa" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="Internamiento domiciliario (Art.379.1 CNA)"  itemValue="Internamiento domiciliario (Art.379.1 CNA)" />
                                         <f:selectItem itemLabel="Internamiento fin de semana (Art.379.2 CNA)"  itemValue="Internamiento fin de semana (Art.379.2 CNA)" />
                                         <f:selectItem itemLabel="Internamiento institucional (Art.379.4 CNA)"  itemValue="Internamiento institucional (Art.379.4 CNA)" />
@@ -116,7 +116,7 @@
                                 <b:column span="9" offset="1">
                                     <h:outputLabel for="txtMedidaCautelar" value="Medida Cautelar"/>
                                     <b:selectOneMenu id="txtMedidaCautelar" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.medidaCautelar}">
-                                        <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"  itemValue="1. La permanencia del adolescente en su propio domicilio, con la vigilancia que el Juez disponga"/>
                                         <f:selectItem itemLabel="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"  itemValue="2. La obligación de someterse al cuidado de una persona o entidad de atención, que informarán regularmente al Juez sobre la conducta del adolescente"/>
                                         <f:selectItem itemLabel="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"  itemValue="3. La obligación de presentarse ante el Juez con la periodicidad que éste ordene"/>
