@@ -45,7 +45,7 @@
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtOcupacionAdolescente" value="Ocupación"/>
-                                    <b:inputText id="txtOcupacionAdolescente" maxlength="30" placeholder="Ocupación" value="#{ejeLaboralControlador.ejeLaboral.ocupacionAdolescente}"/>
+                                    <b:inputText id="txtOcupacionAdolescente" required="true" requiredMessage="Ocupación es requerido, ingrese un valor" maxlength="30" placeholder="Ocupación" value="#{ejeLaboralControlador.ejeLaboral.ocupacionAdolescente}"/>
                                 </b:column>
                                 <b:column span="4" offset="2">
 
@@ -86,12 +86,12 @@
 
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtNumeroHorasTrabajo" value="Número Horas Trabajo"/>
-                                    <b:inputText id="txtNumeroHorasTrabajo" mask="integer" placeholder="Número Horas Trabajo" value="#{ejeLaboralControlador.ejeLaboral.numeroHorasTrabajo}"/>
+                                    <b:inputText id="txtNumeroHorasTrabajo" required="true" requiredMessage="Número Horas Trabajo es requerido, ingrese un valor"  mask="integer" placeholder="Número Horas Trabajo" value="#{ejeLaboralControlador.ejeLaboral.numeroHorasTrabajo}"/>
                                 </b:column>
 
                                 <b:column span="10" offset="1">
                                     <h:outputLabel for="txtDescripcionActividad" value="Descripción Actividad"/>
-                                    <b:inputText id="txtDescripcionActividad" maxlength="100" placeholder="Descripción Actividad"  value="#{ejeLaboralControlador.ejeLaboral.descripcionActividad}"/>
+                                    <b:inputText id="txtDescripcionActividad" required="true" requiredMessage="Descripción Actividad es requerido, ingrese un valor" maxlength="100" placeholder="Descripción Actividad"  value="#{ejeLaboralControlador.ejeLaboral.descripcionActividad}"/>
                                 </b:column>
 
                             </b:row>

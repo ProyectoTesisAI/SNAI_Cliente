@@ -31,13 +31,13 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento1" value="País de nacimiento"/>
-                                <b:inputText id="txtPaisNacimiento1" maxlength="50" disabled="#{identificacionGeograficaControladorCAI.esEcuatoriana}" placeholder="País de nacimiento" value="ECUADOR"/>
+                                <b:inputText id="txtPaisNacimiento1"  maxlength="50" disabled="#{identificacionGeograficaControladorCAI.esEcuatoriana}" placeholder="País de nacimiento" value="ECUADOR"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtEstadoProvincia1" value="Estado/Provincia"/>
-                                <b:selectOneMenu id="txtEstadoProvincia1" update="txtCiudadNacimiento1" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <b:selectOneMenu id="txtEstadoProvincia1" required="true" requiredMessage="Estado/Provincia es requerido, seleccione una opción" update="txtCiudadNacimiento1" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                     <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                     <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                     <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />
@@ -68,7 +68,7 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtCiudadNacimiento1" value="Cantón de nacimiento"/>
-                                <b:selectOneMenu id="txtCiudadNacimiento1" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}">
+                                <b:selectOneMenu id="txtCiudadNacimiento1" required="true" requiredMessage="Cantón de nacimiento es requerido, seleccione una opción" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{identificacionGeograficaControladorCAI.cantonesNacimiento}" var="canton" itemValue="#{canton.canton}" itemLabel="#{canton.canton}"/>
                                 </b:selectOneMenu>
@@ -81,7 +81,7 @@
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtPaisNacimiento" value="País de nacimiento"/>
-                                <b:selectOneMenu id="txtPaisNacimiento" select2="true" disabled="#{identificacionGeograficaControladorCAI.guardado}" style="width:100%" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}">
+                                <b:selectOneMenu id="txtPaisNacimiento" required="true" requiredMessage="País de nacimiento es requerido, seleccione una opción" select2="true" disabled="#{identificacionGeograficaControladorCAI.guardado}" style="width:100%" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.paisNacimiento}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{identificacionGeograficaControladorCAI.paises}" var="pais" itemValue="#{pais.pais}" itemLabel="#{pais.pais}"/>
                                 </b:selectOneMenu>
@@ -89,13 +89,13 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtEstadoProvincia" value="Estado/Provincia"/>
-                                <b:inputText id="txtEstadoProvincia" maxlength="50" placeholder="Estado/Provincia" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}"/>
+                                <b:inputText id="txtEstadoProvincia" required="true" requiredMessage="Estado/Provincia es requerido, ingrese un valor" maxlength="50" placeholder="Estado/Provincia" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.estadoOProvinciaNacimiento}"/>
                             </b:column>
                         </b:row>
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtCiudadNacimiento" value="Ciudad de nacimiento"/>
-                                <b:inputText id="txtCiudadNacimiento" maxlength="50" placeholder="Ciudad de nacimiento" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}"/>
+                                <b:inputText id="txtCiudadNacimiento" required="true" requiredMessage="Ciudad de nacimiento es requerido, ingrese un valor" maxlength="50" placeholder="Ciudad de nacimiento" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.ciudadOCantonNacimiento}"/>
                             </b:column>
                         </b:row>
                     </h:panelGroup>
@@ -113,7 +113,7 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtProvincia" value="Provincia"/>
                                 <b:selectOneMenu id="txtProvincia" required="true" requiredMessage="Provincia es requerido, seleccione una opción" update="txtCanton" process="@this" value="#{identificacionGeograficaControladorCAI.identificacionGeografica.provinciaResidencia}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                     <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                     <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                     <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />

@@ -32,7 +32,7 @@
                         <h:panelGroup id="tipoDocumentoRepresentante">
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCedulaR" rendered="#{representanteControladorUDI.esCedula}" value="Cédula"/>
-                                <b:inputText id="txtCedulaR" mask="{regex:'[0-9\u0600-\u06FF]*'}" placeholder="Cédula" maxlength="10" rendered="#{representanteControladorUDI.esCedula}" value="#{representanteControladorUDI.representante.cedula}">
+                                <b:inputText id="txtCedulaR" mask="{regex:'[0-9\u0600-\u06FF]*'}" required="true" requiredMessage="Cédula es requerida, ingrese un valor" placeholder="Cédula" maxlength="10" rendered="#{representanteControladorUDI.esCedula}" value="#{representanteControladorUDI.representante.cedula}">
                                     <f:ajax event="blur" listener="#{representanteControladorUDI.limpiarMensajeCedula}" render="txtCedulaR mensaje-cedulaRepresentante" />
                                     <f:ajax event="keyup" listener="#{representanteControladorUDI.validarCedula}" render="mensaje-cedulaRepresentante" />
                                 </b:inputText>
