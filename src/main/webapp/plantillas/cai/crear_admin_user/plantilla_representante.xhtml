@@ -32,14 +32,14 @@
                         <h:panelGroup id="tipoDocumentoRepresentante">
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtCedulaR" rendered="#{representanteControladorCAI.esCedula}" value="Cédula"/>
-                                <b:inputText id="txtCedulaR" placeholder="Cédula" maxlength="10" mask="{regex:'[0-9\u0600-\u06FF]*'}" rendered="#{representanteControladorCAI.esCedula}" value="#{representanteControladorCAI.representante.cedula}">
+                                <b:inputText id="txtCedulaR" required="true" requiredMessage="Cédula es requerida, ingrese un valor" placeholder="Cédula" maxlength="10" mask="{regex:'[0-9\u0600-\u06FF]*'}" rendered="#{representanteControladorCAI.esCedula}" value="#{representanteControladorCAI.representante.cedula}">
                                     <f:ajax event="blur" listener="#{representanteControladorCAI.limpiarMensajeCedula}" render="txtCedulaR mensaje-cedulaRepresentante" />
                                     <f:ajax event="keyup" listener="#{representanteControladorCAI.validarCedula}" render="mensaje-cedulaRepresentante" />
                                 </b:inputText>
                                 <h:outputText style="color: red; font-size: 14px;" rendered="#{representanteControladorCAI.esCedula}" id="mensaje-cedulaRepresentante" class="mensaje-error" value="#{representanteControladorCAI.mensaje}"/>
 
                                 <h:outputLabel for="txtDocumentoR" value="Documento/Pasaporte" rendered="#{!representanteControladorCAI.esCedula}"/>
-                                <b:inputText id="txtDocumentoR" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControladorCAI.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControladorCAI.representante.documento}"/>
+                                <b:inputText id="txtDocumentoR" required="true" requiredMessage="Documento/Pasaporte es requerido, ingrese un valor" placeholder="Documento/Pasaporte" maxlength="25" rendered="#{!representanteControladorCAI.esCedula}" required="true" requiredMessage="Documento/Pasaporte es requerida, ingrese un valor" value="#{representanteControladorCAI.representante.documento}"/>
                             </b:column>
                         </h:panelGroup>
                     </b:row>

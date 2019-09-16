@@ -40,7 +40,7 @@
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtFechaReporteCulminacion" value="Fecha Reporte Culminación"/>
-                                    <b:dateTimePicker id="txtFechaReporteCulminacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteCulminacion}"/>
+                                    <b:dateTimePicker id="txtFechaReporteCulminacion" required="true" requiredMessage="Fecha Reporte Culminación es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteCulminacion}"/>
                                 </b:column>
                             </b:row>
                         </h:panelGroup>
@@ -58,13 +58,13 @@
                                 <h:panelGroup id="tipoCentro">
                                     <b:column span="4" offset="2">
                                         <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}"/>
-                                        <b:selectOneMenu id="txtUzdi" required="true" rendered="#{estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.udi.udi}">
+                                        <b:selectOneMenu id="txtUzdi" required="true" requiredMessage="UZDI es requerida, seleccione una opción"  rendered="#{estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.udi.udi}">
                                             <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                             <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                         </b:selectOneMenu>
 
                                         <h:outputLabel for="txtCai" value="CAI" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}"/>
-                                        <b:selectOneMenu id="txtCai" required="true" rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.cai.cai}">
+                                        <b:selectOneMenu id="txtCai" required="true" requiredMessage="CAI es requerida, seleccione una opción"  rendered="#{!estadoCumplimientoMedidaControlador.esUzdi}" value="#{estadoCumplimientoMedidaControlador.cai.cai}">
                                             <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                             <f:selectItems value="#{estadoCumplimientoMedidaControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                         </b:selectOneMenu>
@@ -74,7 +74,7 @@
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtFechaReporteDerivacion" value="Fecha Reporte Derivación"/>
-                                    <b:dateTimePicker id="txtFechaReporteDerivacion" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteDerivacion}"/>
+                                    <b:dateTimePicker id="txtFechaReporteDerivacion" required="true" requiredMessage="Fecha Reporte Derivación es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteDerivacion}"/>
                                 </b:column>
                             </b:row>
                         </h:panelGroup>
@@ -82,7 +82,7 @@
                             <b:row>
                                 <b:column span="4" offset="1">
                                     <h:outputLabel for="txtFechaReporteIncumplimiento" value="Fecha Reporte Incumplimiento"/>
-                                    <b:dateTimePicker id="txtFechaReporteIncumplimiento" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteIncumplimiento}"/>
+                                    <b:dateTimePicker id="txtFechaReporteIncumplimiento" required="true" requiredMessage="Fecha Reporte Incumplimiento es requerida, ingrese un valor" placeholder="dd/mm/aa" showTime="false" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReporteIncumplimiento}"/>
                                 </b:column>
 
                                 <b:column span="4" offset="2">                
@@ -107,7 +107,7 @@
 
                                 <b:column span="4" offset="2">
                                     <h:outputLabel for="txtFechaReanudacion" value="Fecha Reanudación"/>
-                                    <b:datepicker id="txtFechaReanudacion" placeholder="dd/mm/aa" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReanudacion}"/>
+                                    <b:datepicker id="txtFechaReanudacion" required="true" requiredMessage="Fecha Reanudación es requerida, ingrese un valor" placeholder="dd/mm/aa" value="#{estadoCumplimientoMedidaControlador.estadoCumplimientoMedida.fechaReanudacion}"/>
                                 </b:column>
                             </b:row>
                         </h:panelGroup>

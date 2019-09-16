@@ -301,34 +301,46 @@ public class InformacionJudicialControlador implements Serializable {
     }
     
     public String redireccionEdicionInformacionJudicial() throws InterruptedException {
-        Thread.sleep(1250);
-        String rol = permisos.RolUsuario();
-        if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
-                return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+        
+        if (guardado == false) {
+            Thread.sleep(1250);
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if (rol.equals("ADMINISTRADOR")) {
+                    return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+                } else {
+                    return null;
+                }
+
             } else {
                 return null;
             }
-
         } else {
             return null;
         }
+        
     }
     
     public String redireccionGuardarInformacionJudicial() throws InterruptedException {
-        Thread.sleep(1250);
-        String rol = permisos.RolUsuario();
-        if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
-                return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
-            } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
-                    return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
-                    return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+        
+        if (guardado == true) {
+
+            Thread.sleep(1250);
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if (rol.equals("ADMINISTRADOR")) {
+                    return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
                 } else {
-                    return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                    if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+                        return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
+                    } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                        return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                    } else {
+                        return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                    }
                 }
+            } else {
+                return null;
             }
         } else {
             return null;
