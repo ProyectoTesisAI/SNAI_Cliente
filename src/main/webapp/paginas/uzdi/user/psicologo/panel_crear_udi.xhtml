@@ -23,7 +23,18 @@
 
                 <h1>PSICOLOGÍA</h1>
                 <br/>
-                <ui:include src="../../../../plantillas/admin/uzdi/crear/plantilla_eje_salud.xhtml" />
+                <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                    
+                    <b:tab title="1" tooltip="ADOLESCENTE INFRACTOR">
+                        <ui:include src="../../../../plantillas/admin/uzdi/crear/plantilla_adolescente_uzdi.xhtml" />
+                    </b:tab>
+                    
+                    <b:tab title="2" tooltip="EJE SALUD">
+                        <ui:include src="../../../../plantillas/admin/uzdi/crear/plantilla_eje_salud.xhtml" />
+                    </b:tab>
+
+                </b:tabView>
+                
                 
             </ui:define>
         </ui:composition>
