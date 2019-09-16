@@ -162,7 +162,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario)) {
+            if ("ADMINISTRADOR".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)) {
                 permitidoCrearAdolescenteUDI = true;
             }
         }
