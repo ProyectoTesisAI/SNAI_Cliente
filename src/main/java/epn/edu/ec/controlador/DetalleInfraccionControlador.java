@@ -191,7 +191,7 @@ public class DetalleInfraccionControlador implements Serializable {
     }
 
     public String agregarMedida(DetalleInfraccionCAI detalle) {
-
+        System.out.println("pudo entrar a agregar medida");
         String redireccionEjecucionMedida = permisosUsuario.redireccionEjecucionMedida();
 
         if (redireccionEjecucionMedida != null) {
