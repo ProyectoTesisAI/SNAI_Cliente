@@ -43,14 +43,13 @@
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h:outputLabel for="txtDiagnosticoEnfermedad" value="Diagnóstico Enfermedad"/>
-                                <b:inputText id="txtDiagnosticoEnfermedad" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorCAI.ejeSalud.diagnosticoEnfermedad}"/>
+                                <b:inputText id="txtDiagnosticoEnfermedad"  required="true" requiredMessage="Diagnóstico Enfermedad es requerido, ingrese un valor" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorCAI.ejeSalud.diagnosticoEnfermedad}"/>
                             </b:column>
                         </b:row>
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtNumeroHistoriaClinica" value="N° Historia Clínica"/>
-                                <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorCAI.ejeSalud.numeroHistoriaClinica}"/>
-                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-historia" class="mensaje-error" value="#{ejeSaludControladorCAI.mensaje}"/>
+                                <b:inputText id="txtNumeroHistoriaClinica" required="true" requiredMessage="N° Historia Clínica es requerido, ingrese un valor" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorCAI.ejeSalud.numeroHistoriaClinica}"/>
                             </b:column>
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtRecibeTratamiento" value="Recibe Tratamiento"/>
@@ -115,7 +114,7 @@
                         <b:row rendered="#{ejeSaludControladorCAI.consumeSustancias}" >
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTipoSustancia1" value="Tipo de sustancia"/>
-                                <b:inputText id="txtTipoSustancia1" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorCAI.ejeSalud.tipoSustancia}"/>
+                                <b:inputText id="txtTipoSustancia1" maxlength="20" required="true" requiredMessage="Tipo de sustancia es requerido, ingrese un valor" placeholder="Tipo de sustancia" value="#{ejeSaludControladorCAI.ejeSalud.tipoSustancia}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
@@ -165,7 +164,7 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtPorcentajeDiscapacidad1" value="Porcentaje Discapacidad"/>
-                                <b:inputText id="txtPorcentajeDiscapacidad1" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorCAI.ejeSalud.porcentajeDiscapacidad}"/>
+                                <b:inputText id="txtPorcentajeDiscapacidad1" required="true" requiredMessage="Porcentaje Discapacidad es requerido, ingrese un valor" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorCAI.ejeSalud.porcentajeDiscapacidad}"/>
                             </b:column>
 
                         </b:row>

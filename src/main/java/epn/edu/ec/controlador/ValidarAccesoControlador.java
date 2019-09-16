@@ -5,7 +5,6 @@
  */
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.IOException;
@@ -359,6 +358,30 @@ public class ValidarAccesoControlador implements Serializable{
         }catch(IOException e){
             FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
         }
+        
+    }
+    
+    public void validarAccesoReportes() throws IOException {
+        
+        try {
+
+            String rolUsuario = permisos.RolUsuario();
+
+            if (rolUsuario != null) {
+                if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario)) {
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+                }
+            }
+            else{
+                FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE+enlaces.PATH_ERROR);
+            }
+
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(enlaces.URL_BASE + enlaces.PATH_ERROR);
+        }
+        
+        
         
     }
 
