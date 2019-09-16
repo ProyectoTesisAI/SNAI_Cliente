@@ -29,7 +29,7 @@
                                  paginator="true"  >
 
                         <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
-                            <h:outputText value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
+                            <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
                         </p:column>
 
                         <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula/Documento">
