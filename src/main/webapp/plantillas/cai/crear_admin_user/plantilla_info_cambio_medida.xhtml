@@ -41,7 +41,7 @@
                     <b:row>
                         <b:column span="10" offset="1">
                             <h:outputLabel for="txObservaciones" value="Observaciones"/>
-                            <b:inputText id="txObservaciones" placeholder="Observaciones"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.observaciones}"/>
+                            <b:inputText id="txObservaciones" required="true" requiredMessage="Observaciones es requerida, ingrese un valor" placeholder="Observaciones"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.observaciones}"/>
                         </b:column>
                     </b:row>
                     <br/>
