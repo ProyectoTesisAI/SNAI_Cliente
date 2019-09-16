@@ -43,19 +43,18 @@
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h:outputLabel for="txtDiagnosticoEnfermedad" value="Diagnóstico Enfermedad"/>
-                                <b:inputText id="txtDiagnosticoEnfermedad" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorUDI.ejeSalud.diagnosticoEnfermedad}"/>
+                                <b:inputText id="txtDiagnosticoEnfermedad" required="true" requiredMessage="Diagnóstico Enfermedad es requerido, ingrese un valor"  maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorUDI.ejeSalud.diagnosticoEnfermedad}"/>
                             </b:column>
                         </b:row>
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtNumeroHistoriaClinica" value="N° Historia Clínica"/>
-                                <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorUDI.ejeSalud.numeroHistoriaClinica}">
+                                <b:inputText id="txtNumeroHistoriaClinica" required="true" requiredMessage="N° Historia Clínica es requerido, ingrese un valor"  maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorUDI.ejeSalud.numeroHistoriaClinica}">
                                  </b:inputText>
-                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-historia" class="mensaje-error" value="#{ejeSaludControladorUDI.mensaje}"/>
                             </b:column>
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtRecibeTratamiento" value="Recibe Tratamiento"/>
-                                <b:selectOneMenu id="txtRecibeTratamiento"  value="#{ejeSaludControladorUDI.ejeSalud.recibeTratamiento}">
+                                <b:selectOneMenu id="txtRecibeTratamiento" required="true" requiredMessage="Recibe Tratamiento es requerido, seleccione una opción" value="#{ejeSaludControladorUDI.ejeSalud.recibeTratamiento}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
@@ -64,7 +63,7 @@
 
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTomaMedicacion" value="Toma medicación"/>
-                                <b:selectOneMenu id="txtTomaMedicacion"  value="#{ejeSaludControladorUDI.ejeSalud.tomaMedicacion}">
+                                <b:selectOneMenu id="txtTomaMedicacion" required="true" requiredMessage="Toma medicación es requerido, seleccione una opción" value="#{ejeSaludControladorUDI.ejeSalud.tomaMedicacion}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
@@ -114,7 +113,7 @@
                         <b:row rendered="#{ejeSaludControladorUDI.consumeSustancias}" >
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
-                                <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
+                                <b:inputText id="txtTipoSustancia" required="true" requiredMessage="Tipo de sustancia es requerido, ingrese un valor" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
@@ -153,7 +152,7 @@
                         <b:row rendered="#{ejeSaludControladorUDI.esDiscapacidad}" >
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTipoDiscapacidad" value="Tipo Discapacidad"/>
-                                <b:selectOneMenu id="txtTipoDiscapacidad" value="#{ejeSaludControladorUDI.ejeSalud.tipoDiscapacidad}">
+                                <b:selectOneMenu id="txtTipoDiscapacidad" required="true" requiredMessage="Tipo Discapacidad es requerido, seleccione una opción" value="#{ejeSaludControladorUDI.ejeSalud.tipoDiscapacidad}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="NINGUNA"  itemValue="NINGUNA" />
                                     <f:selectItem itemLabel="FÍSICA"  itemValue="FÍSICA" />
@@ -164,7 +163,7 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
-                                <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
+                                <b:inputText id="txtPorcentajeDiscapacidad" required="true" requiredMessage="Porcentaje Discapacidad es requerido, ingrese un valor" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
                             </b:column>
 
                         </b:row>

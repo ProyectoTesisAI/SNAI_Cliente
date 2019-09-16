@@ -22,7 +22,7 @@
                         <b:column span="4" offset="1">
                             <h:outputLabel for="txtProvinciaDetencion" value="Provincia Detención"/>
                             <b:selectOneMenu id="txtProvinciaDetencion" required="true" requiredMessage="Provincia Detenciónes requerido, seleccione una opción" update="txtCantonDetencion" process="@this" value="#{informacionInfraccionControlador.informacionInfraccion.provinciaDetencion}">
-                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                 <f:selectItem itemLabel="AZUAY"  itemValue="AZUAY" />
                                 <f:selectItem itemLabel="BOLIVAR"  itemValue="BOLIVAR" />
                                 <f:selectItem itemLabel="CAÑAR"  itemValue="CAÑAR" />

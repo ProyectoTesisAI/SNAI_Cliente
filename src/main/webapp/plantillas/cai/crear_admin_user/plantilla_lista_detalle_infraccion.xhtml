@@ -80,7 +80,6 @@
                                 <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
                                 <b:selectOneMenu id="txtCantonDetencion"  value="#{detalleInfraccionControlador.detalleInfraccion.cantonInfraccion}">
                                     <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
-
                                     <f:selectItems value="#{detalleInfraccionControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>

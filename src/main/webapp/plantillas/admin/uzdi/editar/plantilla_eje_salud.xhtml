@@ -42,17 +42,14 @@
                         <b:row>
                             <b:column span="10" offset="1">
                                 <h:outputLabel for="txtDiagnosticoEnfermedad" value="Diagnóstico Enfermedad"/>
-                                <b:inputText id="txtDiagnosticoEnfermedad" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorUDI.ejeSalud.diagnosticoEnfermedad}"/>
+                                <b:inputText id="txtDiagnosticoEnfermedad" required="true" requiredMessage="Diagnóstico Enfermedad es requerido, ingrese un valor" maxlength="100" placeholder="Diagnóstico Enfermedad" value="#{ejeSaludControladorUDI.ejeSalud.diagnosticoEnfermedad}"/>
                             </b:column>
                         </b:row>
                         <b:row>
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtNumeroHistoriaClinica" value="N° Historia Clínica"/>
-                                <b:inputText id="txtNumeroHistoriaClinica" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorUDI.ejeSalud.numeroHistoriaClinica}">
-                                    <!--<f:ajax event="blur" listener="{ejeSaludControladorUDI.limpiarMensaje}" render="txtNumeroHistoriaClinica mensaje-historia" />-->
-                                    <!--<f:ajax event="keyup" listener="{ejeSaludControladorUDI.validarSoloNumero}" render="mensaje-historia" />-->
+                                <b:inputText id="txtNumeroHistoriaClinica" required="true" requiredMessage="N° Historia Clínica es requerido, ingrese un valor" maxlength="10" placeholder="N° Historia Clínica" value="#{ejeSaludControladorUDI.ejeSalud.numeroHistoriaClinica}">
                                 </b:inputText>
-                                <h:outputText style="color: red; font-size: 14px;" id="mensaje-historia" class="mensaje-error" value="#{ejeSaludControladorUDI.mensaje}"/>
                             </b:column>
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtRecibeTratamiento" value="Recibe Tratamiento"/>
@@ -115,7 +112,7 @@
                         <b:row rendered="#{ejeSaludControladorUDI.consumeSustancias}" >
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtTipoSustancia" value="Tipo de sustancia"/>
-                                <b:inputText id="txtTipoSustancia" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
+                                <b:inputText id="txtTipoSustancia" required="true" requiredMessage="Tipo de sustancia es requerido, ingrese un valor" maxlength="20" placeholder="Tipo de sustancia" value="#{ejeSaludControladorUDI.ejeSalud.tipoSustancia}"/>
                             </b:column>
 
                             <b:column span="4" offset="2">
@@ -164,7 +161,7 @@
 
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtPorcentajeDiscapacidad" value="Porcentaje Discapacidad"/>
-                                <b:inputText id="txtPorcentajeDiscapacidad" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
+                                <b:inputText id="txtPorcentajeDiscapacidad" required="true" requiredMessage="Porcentaje Discapacidad es requerido, ingrese un valor" placeholder="Porcentaje Discapacidad" mask="numeric" value="#{ejeSaludControladorUDI.ejeSalud.porcentajeDiscapacidad}"/>
                             </b:column>
 
                         </b:row>
@@ -193,7 +190,7 @@
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtTiempGestacionMes" value="Tiempo de Gestación (Mes)"/>
                                 <b:selectOneMenu id="txtTiempGestacionMes" disabled="#{!ejeSaludControladorUDI.ejeSalud.embarazo}" value="#{ejeSaludControladorUDI.ejeSalud.tiempoGestacionMes}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="false" />
                                     <f:selectItem itemLabel="1"  itemValue="1" />
                                     <f:selectItem itemLabel="2"  itemValue="2" />
                                     <f:selectItem itemLabel="3"  itemValue="3" />
