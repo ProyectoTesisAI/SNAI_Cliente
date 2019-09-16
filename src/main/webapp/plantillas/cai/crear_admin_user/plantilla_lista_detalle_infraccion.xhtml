@@ -37,7 +37,7 @@
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtTipoPenal" value="Tipo Penal"/><!-->aqui se rescata informacion de la base, hay que tener en cuenta que es mucha informacion para poder quemar en codigo<-->
                                 <b:selectOneMenu  select2="true" id="txtTipoPenal"  style="width:100%; z-index: 1050;" value="#{detalleInfraccionControlador.detalleInfraccion.tipoPenal}" >
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{detalleInfraccionControlador.tiposPenal}" var="tipos" itemLabel="#{tipos.tipoPenal}" itemValue="#{tipos.tipoPenal}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -79,7 +79,7 @@
                             <b:column span="6" offset='0'>
                                 <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
                                 <b:selectOneMenu id="txtCantonDetencion"  value="#{detalleInfraccionControlador.detalleInfraccion.cantonInfraccion}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItems value="#{detalleInfraccionControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -108,7 +108,7 @@
                             <b:column span="12" offset="0">
                                 <h:outputLabel for="txtUnidadJudicial" value="Unidad Judicial"/>
                                 <b:selectOneMenu id="txtUnidadJudicial"  value="#{detalleInfraccionControlador.detalleInfraccion.unidadJudicial}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                     <f:selectItem itemLabel="ESPECIALIZADA"  itemValue="ESPECIALIZADA" />
                                     <f:selectItem itemLabel="UNIDAD DE FAMILIA"  itemValue="UNIDAD DE FAMILIA" />
                                     <f:selectItem itemLabel="MULTICOMPETENTE"  itemValue="MULTICOMPETENTE" />
