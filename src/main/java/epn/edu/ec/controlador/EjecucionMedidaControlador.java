@@ -218,28 +218,35 @@ public class EjecucionMedidaControlador implements Serializable {
     
     public void guardarEjecucionMedida() {
 
-        for(CAI c: listaCAI){
-            if(c.getCai().equals(cai.getCai())){
-                cai=c;
-            }
-        }
-        this.ejecucionMedidaCAI.setIdCai(cai);
-        
-        this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
-
-        EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
-        if (ejecucionMedidaAux != null) {
-            
-            List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
-            
-            if(listaAux.isEmpty()!=true){            
-                listaEjecucionMedida=listaAux;
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
+        if(ejecucionMedidaCAI.getFechaResolucion()== null || ejecucionMedidaCAI.getFechaAprehension() == null || ejecucionMedidaCAI.getAnios() == null || ejecucionMedidaCAI.getMeses() == null || ejecucionMedidaCAI.getDias() == null ){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fecha Resolución, Fecha de Aprehensión, Años, Meses, Días deben de tener un valor", "Error"));
             
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJECUCIÓN MEDIDA", "Error"));
+            
+            for (CAI c : listaCAI) {
+                if (c.getCai().equals(cai.getCai())) {
+                    cai = c;
+                }
+            }
+            this.ejecucionMedidaCAI.setIdCai(cai);
+
+            this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
+
+            EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
+            if (ejecucionMedidaAux != null) {
+
+                List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
+
+                if (listaAux.isEmpty() != true) {
+                    listaEjecucionMedida = listaAux;
+                }
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJECUCIÓN MEDIDA", "Error"));
+            }
         }
+        
     }
 
     public String agregarInformacion(EjecucionMedidaCAI ejecucion){
