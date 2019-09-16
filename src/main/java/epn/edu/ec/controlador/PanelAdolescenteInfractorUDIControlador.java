@@ -59,7 +59,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         String gestionInformacionAdolescenteUzdi = permisosUsuario.redireccionGestionInformacionUzdi();
 
         if (gestionInformacionAdolescenteUzdi != null) {
-
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "0");
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
             return gestionInformacionAdolescenteUzdi;
         } else {
@@ -71,6 +71,7 @@ public class PanelAdolescenteInfractorUDIControlador implements Serializable {
         String gestionEdicionInformacionAdolescenteUzdi = permisosUsuario.redireccionGestionEdicionInformacionUzdi();
         
         if (gestionEdicionInformacionAdolescenteUzdi != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "0");
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_udi", ai_udi);
             return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
         } else {

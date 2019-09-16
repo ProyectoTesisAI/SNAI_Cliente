@@ -35,6 +35,8 @@ public class InformacionJudicialControlador implements Serializable {
     private int numeroMedidas = 0;
     private EnlacesPrograma enlaces;
     private PermisosUsuario permisos;
+    
+    private Integer tabActual=0;
 
     @PostConstruct
     public void init() {
@@ -307,6 +309,7 @@ public class InformacionJudicialControlador implements Serializable {
             String rol = permisos.RolUsuario();
             if (rol != null) {
                 if (rol.equals("ADMINISTRADOR")) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "8");
                     return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
                 } else {
                     return null;
@@ -329,11 +332,14 @@ public class InformacionJudicialControlador implements Serializable {
             String rol = permisos.RolUsuario();
             if (rol != null) {
                 if (rol.equals("ADMINISTRADOR")) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "8");
                     return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
                 } else {
                     if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "8");
                         return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
                     } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "1");
                         return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                     } else {
                         return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";

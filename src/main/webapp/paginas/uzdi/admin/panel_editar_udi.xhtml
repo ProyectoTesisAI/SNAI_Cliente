@@ -23,7 +23,7 @@
                 <h1>EDITAR - INFORMACIÓN COMPLETA</h1>
 
                 <!--<b:form id="panelUDI" style="margin-top: 50px;">-->
-                <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                <b:tabView pills="true" activeIndex="#{validarAccesoControlador.obtenerIndiceActual()}"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
 
                     <b:tab title="1" tooltip="UNIDAD ZONAL">
                         <ui:include src="../../../plantillas/admin/uzdi/editar/plantilla_unidad_zonal.xhtml" />
