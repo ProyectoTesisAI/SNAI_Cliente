@@ -385,4 +385,14 @@ public class ValidarAccesoControlador implements Serializable{
         
     }
 
+    public String obtenerIndiceActual(){
+        String indice="";
+        indice = (String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("indiceActual");
+        if(indice==null){
+            indice="0";//se redirige a la pestaña inicial
+        }else{
+            return indice;
+        }
+        return indice;
+    }
 }
