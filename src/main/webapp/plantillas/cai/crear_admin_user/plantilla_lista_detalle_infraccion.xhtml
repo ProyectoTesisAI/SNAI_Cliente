@@ -79,8 +79,7 @@
                             <b:column span="6" offset='0'>
                                 <h:outputLabel for="txtCantonDetencion" value="Cantón Detención"/>
                                 <b:selectOneMenu id="txtCantonDetencion"  value="#{detalleInfraccionControlador.detalleInfraccion.cantonInfraccion}">
-                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="false" />
-
+                                    <f:selectItem itemLabel="Seleccione una opcion"  itemDisabled="true" />
                                     <f:selectItems value="#{detalleInfraccionControlador.cantones}" var="cantones" itemLabel="#{cantones.canton}" itemValue="#{cantones.canton}"/>
                                 </b:selectOneMenu>
                             </b:column>
@@ -160,7 +159,7 @@
                         </p:column>
 
                         <p:column headerText="Añadir Medida" width="150">
-                            <b:commandButton value="Añadir Medida" class="btn btn-success" action="#{detalleInfraccionControlador.agregarMedida(td)}">
+                            <b:commandButton value="Añadir Medida" class="btn btn-block btn-success" action="#{detalleInfraccionControlador.agregarMedida(td)}">
                                 <f:ajax execute="@form" />
                             </b:commandButton>
                         </p:column>
