@@ -66,7 +66,7 @@ public class PanelInformeControlador implements Serializable{
             String rolActual = permisosUsuario.RolUsuario();
 
             if(rolActual!=null){
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", informe.getIdTaller());
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", informe.getIdTaller());
 
                 if ("ADMINISTRADOR".equals(rolActual)){
                     return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";

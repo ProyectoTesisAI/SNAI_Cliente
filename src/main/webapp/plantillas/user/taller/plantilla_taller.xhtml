@@ -80,14 +80,14 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtUzdi" disabled="#{tallerControlador.esTecnicoUDI}" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                    <b:selectOneMenu id="txtUzdi" disabled="#{tallerControlador.esTecnicoUDI}" rendered="#{tallerControlador.esUzdi}" value="#{tallerControlador.uzdiSeleccionada}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="0" />
                                                         <f:selectItems value="#{tallerControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                     </b:selectOneMenu>
 
                                                     <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtCai" disabled="#{tallerControlador.esTecnicoCAI}" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                    <b:selectOneMenu id="txtCai" disabled="#{tallerControlador.esTecnicoCAI}" rendered="#{!tallerControlador.esUzdi}" value="#{tallerControlador.caiSeleccionado}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="0" />
                                                         <f:selectItems value="#{tallerControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                     </b:selectOneMenu>
                                                 </div>
@@ -167,7 +167,7 @@
                                                          widgetVar="tableWidgetVar"
                                                          var="tp" 
                                                          reflow="true"
-                                                         rows="10"
+                                                         rows="20"
                                                          paginator="false"
                                                          >
                                                 <p:column headerText="Duración">
@@ -278,13 +278,12 @@
                             </b:tab>
 
                             <b:tab title="Registro de Asistencia">
-                                <b:panel content-disabled="true" style="border: transparent">
-
+                                <b:panel  style="border: transparent">
                                     <div class="row" style="margin-top: 50px;">
                                         <div class="col-md-10 col-md-offset-1 ">
                                             <div class="form-group">
                                                 <h:outputLabel for="txTematica" value="Temática"/>
-                                                <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase" value="#{tallerControlador.tematicaTaller}"/>
+                                                <b:inputText  placeholder="Temática" id="txTematica" disabled="true" style="text-transform:uppercase" value="#{tallerControlador.tematicaTaller}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -293,7 +292,7 @@
                                         <div class="col-md-3 col-md-offset-1">
                                             <div class="form-group">
                                                 <h:outputLabel for="txtFechaAsistencia" value="Fecha"/>
-                                                <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" required="true" placeholder="FECHA"  showTime="false" value="#{tallerControlador.tallerCrear.fecha}"/>  
+                                                <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" disabled="true" placeholder="FECHA"  showTime="false" value="#{tallerControlador.tallerCrear.fecha}"/>  
                                             </div>
                                         </div>
 
@@ -304,18 +303,17 @@
                                     <div class="row" style="margin-top: 35px;">
                                         <div class="col-md-10 col-md-offset-1">
 
-                                            <p:dataTable var="ai" value="#{tallerControlador.listadoAsistencia}"  reflow="true"  rows="5"
-                                                         paginator="false"  >
+                                            <p:dataTable var="ai" value="#{tallerControlador.listadoAsistencia}"  reflow="true" paginator="true" rows="25" >
 
-                                                <p:column  headerText="Nombres">
+                                                <p:column filterMatchMode="contains" filterBy="#{ai.nombres}" headerText="Nombres" >
                                                     <h:outputText style="text-transform:uppercase" value="#{ai.nombres}" />
                                                 </p:column>
 
-                                                <p:column headerText="Apellidos">
+                                                <p:column filterMatchMode="contains" filterBy="#{ai.apellidos}" headerText="Apellidos">
                                                     <h:outputText style="text-transform:uppercase" value="#{ai.apellidos}" />
                                                 </p:column>
 
-                                                <p:column  headerText="Cédula/Documento">
+                                                <p:column filterMatchMode="contains" filterBy="#{ai.cedula}" headerText="Cédula/Documento">
                                                     <h:outputText value="#{ai.cedula}" />
                                                 </p:column>
                                             </p:dataTable>

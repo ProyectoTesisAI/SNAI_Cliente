@@ -14,6 +14,7 @@ import epn.edu.ec.servicios.ItemTallerServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.servicios.UdiServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.File;
 import java.io.IOException;
@@ -60,10 +61,8 @@ public class TallerControlador implements Serializable {
     
     Taller tallerCrear;
     RegistroAsistencia registroAsistencia;
-    UDI udi;
-    CAI cai;
-//    UDI udiAux;
-//    CAI caiAux;
+    String uzdiSeleccionada;
+    String caiSeleccionado;
 
     List<UDI> listaUdi;
     List<CAI> listaCai;
@@ -108,10 +107,7 @@ public class TallerControlador implements Serializable {
 
         tallerCrear = new Taller();
         registroAsistencia = new RegistroAsistencia();
-        udi = new UDI();
-        cai = new CAI();
-  //      udiAux = new UDI();
-  //      caiAux = new CAI();
+
         listaUdi = new ArrayList<>();
         listaCai = new ArrayList<>();
 
@@ -137,7 +133,7 @@ public class TallerControlador implements Serializable {
                 esTecnicoCAI=false;
                 esTecnicoUDI=false;
                 
-                if(tipoTaller.equals("INSPECTOR EDUCADOR")){
+                if(tipoTaller.equals(Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR)){
                     esTecnico=true; //content-disable=true
                     esTecnicoCAI=false; 
                     esTecnicoUDI=true;
@@ -146,8 +142,8 @@ public class TallerControlador implements Serializable {
                 }
                 
             } else {
+
                 esTecnico = true; //content-disable=true
-                
 
                 if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rol) || "EQUIPO TECNICO JURIDICO UZDI".equals(rol) || "TRABAJADOR SOCIAL UZDI".equals(rol)) {
                     
@@ -155,16 +151,14 @@ public class TallerControlador implements Serializable {
                     esTecnicoUDI=true;
                     tipoCentro = "UZDI";
                     listaUdi = servicioUdi.listaUdi();
-                    udi = usuarioLogin.getIdRolUsuarioCentro().getIdUdi();
-    //                udiAux = udi;
+                    uzdiSeleccionada = usuarioLogin.getIdRolUsuarioCentro().getIdUdi().getUdi();
 
                 } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
                     tipoCentro = "CAI";
                     listaCai = servicioCai.listaCai();
-                    cai = usuarioLogin.getIdRolUsuarioCentro().getIdCai();
-    //                caiAux = cai;
+                    caiSeleccionado = usuarioLogin.getIdRolUsuarioCentro().getIdCai().getCai();
                 }
             }
         }
@@ -197,6 +191,7 @@ public class TallerControlador implements Serializable {
             esUzdi = false;
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
+        numeroParticipantes=0;
     }
 
     public boolean isEsUzdi() {
@@ -232,40 +227,33 @@ public class TallerControlador implements Serializable {
     public UdiServicio getServicioUdi() {
         return servicioUdi;
     }
+    
+    public String getUzdiSeleccionada() {
+        return uzdiSeleccionada;
+    }
+
+    public void setUzdiSeleccionada(String uzdiSeleccionada) {
+        
+        this.uzdiSeleccionada = uzdiSeleccionada;
+        this.caiSeleccionado=null;
+        UDI uzdiAux= new UDI();
+        uzdiAux.setUdi(uzdiSeleccionada);
+        numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(uzdiAux);
+    }
+
+    public String getCaiSeleccionado() {
+        return caiSeleccionado;
+    }
+
+    public void setCaiSeleccionado(String caiSeleccionado) {
+        this.caiSeleccionado = caiSeleccionado;
+        this.uzdiSeleccionada=null;
+        CAI caiAux= new CAI();
+        caiAux.setCai(caiSeleccionado);
+        numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(caiAux);
+    }
 
     public Integer getNumeroParticipantes() {
-
-        if (tipoCentro.equals("UZDI")) {
-            cai = new CAI();
-        } else if (tipoCentro.equals("CAI")) {
-            udi = new UDI();
-        }
-
-        if (udi.getUdi() != null) {
-
-            for (UDI u : listaUdi) {
-                if (u.getUdi().equals(udi.getUdi())) {
-                    udi = u;
-      //              udiAux = u;
-                    break;
-                }
-            }
-            numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorUdi(udi);
-//            udi = new UDI();
-
-        } else if (cai.getCai() != null) {
-            for (CAI c : listaCai) {
-                if (c.getCai().equals(cai.getCai())) {
-                    cai = c;
-      //              caiAux = c;
-                    break;
-                }
-            }
-            numeroParticipantes = servicioTaller.obtenerNumeroAdolescentePorCai(cai);
-//            cai = new CAI();
-        } else {
-            numeroParticipantes = 0;
-        }
         return numeroParticipantes;
     }
 
@@ -311,22 +299,6 @@ public class TallerControlador implements Serializable {
 
     public void setIndiceTaller(int indiceTaller) {
         this.indiceTaller = indiceTaller;
-    }
-
-    public UDI getUdi() {
-        return udi;
-    }
-
-    public void setUdi(UDI udi) {
-        this.udi = udi;
-    }
-
-    public CAI getCai() {
-        return cai;
-    }
-
-    public void setCai(CAI cai) {
-        this.cai = cai;
     }
 
     public Integer getDuracion() {
@@ -416,9 +388,7 @@ public class TallerControlador implements Serializable {
     public boolean isEsTecnicoUDI() {
         return esTecnicoUDI;
     }
-    
-    
-    
+
     /**
      * ***************************Eventos********************************************
      */
@@ -446,13 +416,30 @@ public class TallerControlador implements Serializable {
 
     private void asignarUdiCai() {
 
-        if (udi.getIdUdi() != null) {
+        CAI caiAux = null;
+        UDI uzdiAux = null;
+        
+        for (UDI u : listaUdi) {
 
-            tallerCrear.setIdUdi(udi);
+            if (u.getUdi().equals(uzdiSeleccionada)) {
+                uzdiAux=u;
+                break;
+            }
+        }
+        for (CAI c : listaCai) {
+            if (c.getCai().equals(caiSeleccionado)) {
+                caiAux = c;
+                break;
+            }
+        }
+
+        if ( uzdiAux != null) {
+
+            tallerCrear.setIdUdi(uzdiAux);
             tallerCrear.setIdCai(null);
 
-        } else if (cai.getIdCai() != null) {
-            tallerCrear.setIdCai(cai);
+        } else if (caiAux != null) {
+            tallerCrear.setIdCai(caiAux);
             tallerCrear.setIdUdi(null);
         }
     }
@@ -461,6 +448,7 @@ public class TallerControlador implements Serializable {
 
         try {
             if (usuarioLogin != null) {
+                
                 asignarUdiCai();
                 tallerCrear.setNumeroTotalParticipantes(numeroParticipantes);
                 tallerCrear.setIdUsuario(usuarioLogin);
@@ -570,35 +558,40 @@ public class TallerControlador implements Serializable {
 
         try {
 
-            if (udi.getUdi() != null || cai.getCai() != null) {
+            if (uzdiSeleccionada != null || caiSeleccionado != null) {
 
-                if (numeroParticipantes > 0) {
-                    Taller tallerAux = guardarTaller();
+                if (listaItemsTaller.size() > 0) {
 
-                    if (tallerAux != null) {
+                    if (numeroParticipantes > 0) {
+                        Taller tallerAux = guardarTaller();
 
-                        if (tallerAux.getIdTaller() > 0) {
+                        if (tallerAux != null) {
 
-                            guardarItemsTaller(tallerAux);
-                            generarRegistroAsistencia(tallerAux);
-                            guardarRegistroAsistencia(tallerAux);
-                            asignarListadoRegistroAsistencia();
-                            tallerGuardado = true;
-                            tematicaTaller=tallerAux.getTema();
-                            //tallerCrear=tallerAux;
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
+                            if (tallerAux.getIdTaller() > 0) {
+
+                                guardarItemsTaller(tallerAux);
+                                generarRegistroAsistencia(tallerAux);
+                                guardarRegistroAsistencia(tallerAux);
+                                asignarListadoRegistroAsistencia();
+                                tallerGuardado = true;
+                                tematicaTaller = tallerAux.getTema();
+                                //tallerCrear=tallerAux;
+                                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL TALLER", "Información"));
+
+                            } else {
+                                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                            }
 
                         } else {
                             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
                         }
-
                     } else {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
                     }
                 } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
+                    
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "INGRESE AL MENOS UNA ACTIVIDAD", "Aviso"));
                 }
-
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "NO HA SELECCIONADO UNA CAI O UDI PARA EL TALLER", "Aviso"));
             }

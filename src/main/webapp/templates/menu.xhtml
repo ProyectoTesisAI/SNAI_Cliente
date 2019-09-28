@@ -53,8 +53,6 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h:outputText style="font-size: 13px;" value="#{administracionMenuControlador.usuario}"/><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><b:commandLink style-class="some-class"  value="Cerrar Sesión" action="#{administracionMenuControlador.cerrarSesion()}"/></li>
-<!--                                            <li role="separator" class="divider"></li>
-                                            <li><a href="#">Cambiar Contraseña</a></li>-->
                                         </ul>
                                     </li>
                                 </ul>
@@ -79,17 +77,17 @@
                         </p:submenu>
                         <p:submenu expanded="false" label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
                             <p:menuitem value="• &nbsp; Crear Taller"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
-                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"  />
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerJuridico()}"  />
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu  label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
                             <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
-                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}" />
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerPsicologo()}" />
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
                         </p:submenu>
                         <p:submenu label="Inspector Educador" rendered="#{administracionMenuControlador.tipoRolInspector}">
                             <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
-                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTaller}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerInspectorEducador()}"/>
                             <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" />
                         </p:submenu>
                         <p:submenu label="Reportes" rendered="#{administracionMenuControlador.permitidoVerReportes}">

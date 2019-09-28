@@ -80,14 +80,14 @@
                                                 <div class="form-group">
 
                                                     <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerEditarControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtUzdi" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                    <b:selectOneMenu id="txtUzdi" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.uzdiSeleccionada}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="0"/>
                                                         <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                     </b:selectOneMenu>
 
                                                     <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtCai" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
-                                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                                    <b:selectOneMenu id="txtCai" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.caiSeleccionado}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="0" />
                                                         <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                     </b:selectOneMenu>
                                                 </div>
@@ -166,7 +166,7 @@
                                                          widgetVar="tableWidgetVar"
                                                          var="tp" 
                                                          reflow="true"
-                                                         rows="10"
+                                                         rows="20"
                                                          paginator="false"  >
                                                 <p:column headerText="Duración">
                                                     <h:outputText id="txtDuracion" value="#{tp.duracion}"/>  
@@ -275,13 +275,13 @@
 
                             <b:tab title="Registro de Asistencia">
 
-                                <b:panel content-disabled="true" style="border: transparent">
+                                <b:panel  style="border: transparent">
 
                                     <div class="row" style="margin-top: 50px;">
                                         <div class="col-md-10 col-md-offset-1 ">
                                             <div class="form-group">
                                                 <h:outputLabel for="txTematica" value="Temática"/>
-                                                <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase"  value="#{tallerEditarControlador.tematicaTaller}" />
+                                                <b:inputText  placeholder="Temática" id="txTematica" disabled="true" style="text-transform:uppercase"  value="#{tallerEditarControlador.tallerEditar.tema}" />
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <div class="col-md-3 col-md-offset-1">
                                             <div class="form-group">
                                                 <h:outputLabel for="txtFechaAsistencia" value="Fecha"/>
-                                                <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase"  placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
+                                                <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" disabled="true" placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
                                             </div>
                                         </div>
 
@@ -300,8 +300,8 @@
                                         <div class="col-md-10 col-md-offset-1">
                                             <h4 class="text-center">REGISTRO ASISTENCIA</h4>
                                             <br/>
-                                            <p:dataTable var="ai" value="#{tallerEditarControlador.listadoAsistencia}" reflow="true"  rows="30"
-                                                         paginator="false"  >
+                                            <p:dataTable var="ai" value="#{tallerEditarControlador.listadoAsistencia}" reflow="true" rows="25" paginator="true"  >
+                                                
                                                 <p:column filterMatchMode="contains" filterBy="#{ai.nombres}" headerText="Nombres">
                                                     <h:outputText value="#{ai.nombres}" />
                                                 </p:column>

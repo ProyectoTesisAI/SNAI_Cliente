@@ -79,13 +79,13 @@
                                                     <div class="form-group">
 
                                                         <h:outputLabel for="txtUzdi"  value="UZDI" rendered="#{tallerEditarControlador.esUzdi}"/>
-                                                        <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.udi.udi}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <b:selectOneMenu id="txtUzdi" required="true" rendered="#{tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.uzdiSeleccionada}" update="txtNumeroTotalParticipantes" process="@this">
                                                             <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                             <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                         </b:selectOneMenu>
 
                                                         <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
-                                                        <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.cai.cai}" update="txtNumeroTotalParticipantes" process="@this">
+                                                        <b:selectOneMenu id="txtCai" required="true" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.caiSeleccionado}" update="txtNumeroTotalParticipantes" process="@this">
                                                             <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                                             <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                         </b:selectOneMenu>
