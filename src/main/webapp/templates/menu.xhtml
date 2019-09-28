@@ -78,17 +78,17 @@
                         <p:submenu expanded="false" label="Jurídico" rendered="#{administracionMenuControlador.tipoRolJuridico}">
                             <p:menuitem value="• &nbsp; Crear Taller"  action="#{administracionMenuControlador.validarTallerJuridico}"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerJuridico()}"  />
-                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInformeJuridico()}"/>
                         </p:submenu>
                         <p:submenu  label="Psicólogo" rendered="#{administracionMenuControlador.tipoRolPsicologo}">
                             <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerPsicologia }"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerPsicologo()}" />
-                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}"/>
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInformePsicologo()}"/>
                         </p:submenu>
                         <p:submenu label="Inspector Educador" rendered="#{administracionMenuControlador.tipoRolInspector}">
                             <p:menuitem value="• &nbsp; Crear Taller" action="#{administracionMenuControlador.validarTallerInspectorEducador}"/>
                             <p:menuitem value="• &nbsp; Gestionar Talleres" action="#{administracionMenuControlador.gestionarTallerInspectorEducador()}"/>
-                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInforme()}" />
+                            <p:menuitem value="• &nbsp; Gestionar Informe" action="#{administracionMenuControlador.gestionarInformeInspectorEducador()}" />
                         </p:submenu>
                         <p:submenu label="Reportes" rendered="#{administracionMenuControlador.permitidoVerReportes}">
                             <p:menuitem value="• &nbsp; Reportes Varios" rendered="#{administracionMenuControlador.permitidoVerReportes}" outcome="#{enlacesPrograma.PATH_PANEL_REPORTE}"/>

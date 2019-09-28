@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.Taller;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.TallerServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -49,7 +50,21 @@ public class PanelTallerControlador implements Serializable {
             }else {
                 listaTalleres = servicio.listaTalleresSinInformePorUsuario(usuario);
             }
+            
+            if (tipoTaller == null) {
+
+                if (rol.equals("ADMINISTRADOR") || rol.equals("SUBDIRECTOR") || rol.equals("LIDER UZDI") || rol.equals("COORDINADOR CAI") || rol.contains("DIRECTOR") || rol.contains("PSICOLOGO")) {
+                    tipoTaller = Constantes.TIPO_TALLER_PSICOLOGIA;
+                } else if (rol.contains("JURIDICO")) {
+                    tipoTaller = Constantes.TIPO_TALLER_JURIDICO;
+                } else if (rol.contains("INSPECTOR EDUCADOR")) {
+                    tipoTaller = Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
+                }
+
+            }
         }
+        
+        
         
         if(listaTalleres.size() > 0){
         

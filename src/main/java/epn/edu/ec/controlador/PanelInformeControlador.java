@@ -19,6 +19,7 @@ import javax.inject.Named;
 public class PanelInformeControlador implements Serializable{
 
     private List<Informe> listaInforme;
+    private List<Informe> listaInformePorTipo;
     private InformeServicio servicio;
     private EnlacesPrograma enlaces;
     private Usuario usuario;
@@ -31,9 +32,11 @@ public class PanelInformeControlador implements Serializable{
         servicio = new InformeServicio();
         enlaces=new EnlacesPrograma();
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-
+        String tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
+        
         listaInforme = new ArrayList<>();
         if(usuario!=null){
+            
             if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
                 listaInforme = servicio.listarInforme();
             }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("LIDER UZDI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
@@ -43,17 +46,23 @@ public class PanelInformeControlador implements Serializable{
             }else {
                 listaInforme = servicio.listarInformesPorUsuario(usuario);
             }
-        }else{
-            System.out.println("Hubo un problema");
+        }
+        
+        if(listaInforme.size() > 0){
+        
+            listaInformePorTipo= new ArrayList<>();
+            
+            for(Informe i: listaInforme){
+                
+                if(i.getIdTaller().getTipo().equals(tipoTaller)){
+                    listaInformePorTipo.add(i);
+                }
+            }
         }
     }
 
     public List<Informe> getListaInforme() {
-        return listaInforme;
-    }
-
-    public void setListaInforme(List<Informe> listaInforme) {
-        this.listaInforme = listaInforme;
+        return listaInformePorTipo;
     }
 
     public InformeServicio getServicio() {

@@ -113,7 +113,7 @@
                                         <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                             <div class="col-md-10 col-md-offset-1">
                                                 
-                                                <p:dataTable var="tp" value="#{tallerEditarControlador.listaItemsTaller}"  reflow="true"  rows="10"
+                                                <p:dataTable var="tp" value="#{tallerEditarControlador.listaItemsTaller}"  reflow="true"  rows="25"
                                                              paginator="false" widgetVar="tableWidgetVar" >
                                                     <p:column headerText="Duración">
                                                         <h:outputText id="txtDuracion" value="#{tp.duracion}"/>  
@@ -163,13 +163,13 @@
 
                             <b:tab title="Registro de Asistencia">
 
-                                    <b:panel  style="border: transparent" content-disabled="true">
+                                    <b:panel  style="border: transparent">
 
                                         <div class="row" style="margin-top: 50px;">
                                             <div class="col-md-10 col-md-offset-1 ">
                                                 <div class="form-group">
                                                     <h:outputLabel for="txTematica" value="Temática"/>
-                                                    <b:inputText  placeholder="Temática" id="txTematica" style="text-transform:uppercase" required="true" value="#{tallerEditarControlador.tallerEditar.tema}" />
+                                                    <b:inputText  placeholder="Temática" id="txTematica" disabled="true" style="text-transform:uppercase" value="#{tallerEditarControlador.tallerEditar.tema}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -178,17 +178,9 @@
                                             <div class="col-md-3 col-md-offset-1">
                                                 <div class="form-group">
                                                     <h:outputLabel for="txtFechaAsistencia" value="Fecha"/>
-                                                    <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" required="true" placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
+                                                    <b:dateTimePicker id="txtFechaAsistencia" style="text-transform:uppercase" disabled="true"  placeholder="FECHA"  showTime="false" value="#{tallerEditarControlador.tallerEditar.fecha}"/>  
                                                 </div>
                                             </div>
-
-                                        </div>
-
-                                        <div class="row" style="margin-top: 20px;">
-
-                                            <div class="col-md-3 col-md-offset-1">
-                                                <b:growl id="growlRegistro" globalOnly="false" severity="info,warn,error"/>
-                                            </div>                                          
 
                                         </div>
 
@@ -196,8 +188,8 @@
                                             <div class="col-md-10 col-md-offset-1">
                                                 <h4 class="text-center">REGISTRO ASISTENCIA</h4>
                                                 <br/>
-                                                <p:dataTable var="ai"  value="#{tallerEditarControlador.listadoAsistencia}"  reflow="true"  rows="5"
-                                                             paginator="false"  >
+                                                <p:dataTable var="ai"  value="#{tallerEditarControlador.listadoAsistencia}"  reflow="true"  rows="25"
+                                                             paginator="true"  >
 
                                                     <p:column  filterMatchMode="contains" filterBy="#{ai.nombres}" headerText="Nombres">
                                                         <h:outputText style="text-transform:uppercase" value="#{ai.nombres}" />

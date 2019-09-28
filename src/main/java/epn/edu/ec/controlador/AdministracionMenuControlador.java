@@ -314,12 +314,53 @@ public class AdministracionMenuControlador implements Serializable {
     }
 
     
-    public String gestionarInforme() {
+    public String gestionarInformePsicologo() {
 
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
 
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_PSICOLOGIA;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
+            }
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+    
+    public String gestionarInformeJuridico() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_JURIDICO;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
+            }
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+    
+    public String gestionarInformeInspectorEducador() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -330,6 +371,8 @@ public class AdministracionMenuControlador implements Serializable {
         }
     }
 
+    
+    
     public String validarGestionInformacionAdolescenteUZDI() {
 
         String rolUsuario = permisosUsuario.RolUsuario();
