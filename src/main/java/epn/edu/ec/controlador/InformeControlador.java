@@ -86,7 +86,7 @@ public class InformeControlador implements Serializable{
         servicioRegistroFotografico= new RegistroFotograficoServicio();
         servicioAsistencia= new AsistenciaAdolescentesServicio();
         
-        Taller tallerRescatado = (Taller) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("taller_psicologia");
+        Taller tallerRescatado = (Taller) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("taller_seleccionado");
 
         if (tallerRescatado != null) {
             

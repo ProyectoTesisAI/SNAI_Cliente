@@ -19,6 +19,7 @@ import javax.faces.view.ViewScoped;
 public class PanelTallerControlador implements Serializable {
 
     private List<Taller> listaTalleres;
+    private List<Taller> listaTalleresPorTipo;
     private TallerServicio servicio;
     private EnlacesPrograma enlaces;
     private Usuario usuario;
@@ -32,30 +33,40 @@ public class PanelTallerControlador implements Serializable {
         enlaces = new EnlacesPrograma();
         usuario = new Usuario();
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
+        String tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
         
         listaTalleres = new ArrayList<>();
         if(usuario!=null){
-            if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
+            
+            String rol=usuario.getIdRolUsuarioCentro().getIdRol().getRol();
+            
+            if(rol.equals("ADMINISTRADOR")|| rol.equals("SUBDIRECTOR")){
                 listaTalleres = servicio.listaTalleresSinInforme();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("LIDER UZDI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
+            }else if(rol.equals("LIDER UZDI") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
                 listaTalleres=servicio.listaTalleresSinInformeSoloUZDI();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
+            }else if(rol.equals("COORDINADOR CAI") || rol.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
                 listaTalleres=servicio.listaTalleresSinInformeSoloCAI();
             }else {
                 listaTalleres = servicio.listaTalleresSinInformePorUsuario(usuario);
             }
-        }else{
-            System.out.println("Hubo un problema");
+        }
+        
+        if(listaTalleres.size() > 0){
+        
+            listaTalleresPorTipo= new ArrayList<>();
+            
+            for(Taller e: listaTalleres){
+                
+                if(e.getTipo().equals(tipoTaller)){
+                    listaTalleresPorTipo.add(e);
+                }
+            }
         }
 
     }
 
     public List<Taller> getListaTalleres() {
-        return listaTalleres;
-    }
-
-    public void setListaTalleres(List<Taller> listaTalleres) {
-        this.listaTalleres = listaTalleres;
+        return listaTalleresPorTipo;
     }
 
     public TallerServicio getServicio() {
@@ -68,7 +79,7 @@ public class PanelTallerControlador implements Serializable {
             String rolActual = permisosUsuario.RolUsuario();
 
             if(rolActual!=null){
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
 
                 if ("ADMINISTRADOR".equals(rolActual)){
                     return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";
@@ -96,7 +107,7 @@ public class PanelTallerControlador implements Serializable {
             
             if(rolActual!=null){
                 
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
             
                 if ("ADMINISTRADOR".equals(rolActual)){
                     return enlaces.PATH_TALLER_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
@@ -149,7 +160,7 @@ public class PanelTallerControlador implements Serializable {
             String rolActual = permisosUsuario.RolUsuario();
             if(rolActual!=null){
                 
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_psicologia", taller);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
 
                 if(rolActual.equals("ADMINISTRADOR")){
                 

@@ -1,6 +1,7 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Usuario;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -198,7 +199,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            String tipoTaller = "PSICOLOGIA";
+            String tipoTaller = Constantes.TIPO_TALLER_PSICOLOGIA;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
             if (rolUsuario.equals("ADMINISTRADOR")) {
@@ -219,7 +220,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            String tipoTaller = "JURÍDICO";
+            String tipoTaller = Constantes.TIPO_TALLER_JURIDICO;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
             if (rolUsuario.equals("ADMINISTRADOR")) {
@@ -239,7 +240,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            String tipoTaller = "INSPECTOR EDUCADOR";
+            String tipoTaller = Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
             if (rolUsuario.equals("ADMINISTRADOR")) {
@@ -252,13 +253,56 @@ public class AdministracionMenuControlador implements Serializable {
             return enlaces.PATH_ERROR;
         }
     }
+    
 
-    public String gestionarTaller() {
+    public String gestionarTallerJuridico() {
 
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
 
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_JURIDICO;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
+            } else {
+                return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
+            }
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+    
+    public String gestionarTallerPsicologo() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_PSICOLOGIA;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
+            if ("ADMINISTRADOR".equals(rolUsuario)) {
+                return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
+            
+            }else {
+                return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
+            }
+        } else {
+            return enlaces.PATH_ERROR + "?faces-redirect=true";
+        }
+    }
+    
+    public String gestionarTallerInspectorEducador() {
+
+        String rolUsuario = permisosUsuario.RolUsuario();
+
+        if (rolUsuario != null) {
+
+            String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
+            
             if ("ADMINISTRADOR".equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -269,6 +313,7 @@ public class AdministracionMenuControlador implements Serializable {
         }
     }
 
+    
     public String gestionarInforme() {
 
         String rolUsuario = permisosUsuario.RolUsuario();
