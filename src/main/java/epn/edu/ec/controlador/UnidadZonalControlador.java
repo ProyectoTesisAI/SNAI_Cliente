@@ -5,8 +5,6 @@ import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.modelo.UnidadZonal;
 import epn.edu.ec.servicios.UdiServicio;
 import epn.edu.ec.servicios.UnidadZonalServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +28,10 @@ public class UnidadZonalControlador implements Serializable{
     private UDI udi; 
     private List<UDI> listaUDI;
     private UdiServicio servicioUDI;
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
 
     @PostConstruct
     public void init(){
         
-        permisosUsuario= new PermisosUsuario();
-        enlaces= new EnlacesPrograma();
         servicio = new UnidadZonalServicio();
         servicioUDI = new UdiServicio();
         guardado=false;

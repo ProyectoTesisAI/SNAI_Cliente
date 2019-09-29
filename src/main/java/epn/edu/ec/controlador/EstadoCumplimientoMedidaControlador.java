@@ -7,8 +7,6 @@ import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.EstadoCumplimientoMedidaServicio;
 import epn.edu.ec.servicios.UdiServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +35,6 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
     private boolean culminadaGuardada;
     private boolean derivadaGuardada;
     private boolean incumplimientoGuardada;
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
 
     //variables usadas para la derivacion de centro
     String tipoCentro;
@@ -53,7 +49,6 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
     @PostConstruct
     public void init() {
         
-        permisosUsuario= new PermisosUsuario();
         controladorCai = new CaiServicio();
         controladorUdi = new UdiServicio();
         udi = new UDI();
@@ -61,7 +56,6 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
         listaUdi = new ArrayList<>();
         listaCai = new ArrayList<>();
 
-        enlaces = new EnlacesPrograma();
         servicio = new EstadoCumplimientoMedidaServicio();
 
         estadoCumplimientoMedida = new EstadoCumplimientoMedida();

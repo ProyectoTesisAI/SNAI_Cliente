@@ -5,6 +5,7 @@ import epn.edu.ec.modelo.InformacionJudicial;
 import epn.edu.ec.modelo.MedidaSocioeducativa;
 import epn.edu.ec.servicios.InformacionJudicialServicio;
 import epn.edu.ec.servicios.MedidaSocioeducativaServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -472,16 +473,23 @@ public class MedidaSocioEducativaControlador implements Serializable {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            
             } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+            
+                if (rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                
+                } else if (rol.equals(Constantes.ROL_JURIDICO_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "5");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                 }
@@ -495,16 +503,23 @@ public class MedidaSocioEducativaControlador implements Serializable {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            
             } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+            
+                if (rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                
+                } else if (rol.equals(Constantes.ROL_JURIDICO_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "5");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                 }
@@ -518,16 +533,23 @@ public class MedidaSocioEducativaControlador implements Serializable {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            
             } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+            
+                if (rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                
+                } else if (rol.equals(Constantes.ROL_JURIDICO_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "5");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                 }
@@ -541,16 +563,24 @@ public class MedidaSocioEducativaControlador implements Serializable {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+            
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            
             } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+            
+                if (rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                
+                } else if (rol.equals(Constantes.ROL_JURIDICO_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "5");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                 }
@@ -564,16 +594,24 @@ public class MedidaSocioEducativaControlador implements Serializable {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+            
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
+            
             } else {
-                if (rol.equals("LIDER UZDI") || rol.equals("SUBDIRECTOR") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+            
+                if (rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rol.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                
+                } else if (rol.equals(Constantes.ROL_JURIDICO_UZDI)) {
+                
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "5");
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
+                
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
                 }
@@ -586,8 +624,11 @@ public class MedidaSocioEducativaControlador implements Serializable {
     public String redireccionEdicionMedida1() throws InterruptedException {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
+        
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+        
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -602,8 +643,11 @@ public class MedidaSocioEducativaControlador implements Serializable {
     public String redireccionEdicionMedida2() throws InterruptedException {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
+        
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+        
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -618,8 +662,11 @@ public class MedidaSocioEducativaControlador implements Serializable {
     public String redireccionEdicionMedida3() throws InterruptedException {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
+        
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+        
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -634,8 +681,11 @@ public class MedidaSocioEducativaControlador implements Serializable {
     public String redireccionEdicionMedida4() throws InterruptedException {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
+        
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+        
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
@@ -650,8 +700,11 @@ public class MedidaSocioEducativaControlador implements Serializable {
     public String redireccionEdicionMedida5() throws InterruptedException {
         Thread.sleep(1250);
         String rol = permisosUsuario.RolUsuario();
+        
         if (rol != null) {
-            if (rol.equals("ADMINISTRADOR")) {
+        
+            if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+            
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "9");
                 return enlaces.PATH_PANEL_EDITAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {

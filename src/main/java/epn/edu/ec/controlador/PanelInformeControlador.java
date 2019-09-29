@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.Informe;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.InformeServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -77,7 +78,7 @@ public class PanelInformeControlador implements Serializable{
             if(rolActual!=null){
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", informe.getIdTaller());
 
-                if ("ADMINISTRADOR".equals(rolActual)){
+                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
                     return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";
                 }
                 else{
@@ -101,7 +102,7 @@ public class PanelInformeControlador implements Serializable{
             if(rolActual!=null){
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar", informe);
 
-                if ("ADMINISTRADOR".equals(rolActual)){
+                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
                     return enlaces.PATH_INFORME_VER_ADMINISTRADOR+"?faces-redirect=true";
                 }
                 else{
@@ -125,7 +126,7 @@ public class PanelInformeControlador implements Serializable{
             if(rolActual!=null){
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("informe_psicologia_editar", informe);
 
-                if ("ADMINISTRADOR".equals(rolActual)){
+                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
                     return enlaces.PATH_INFORME_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
                 }
                 else{
@@ -147,7 +148,7 @@ public class PanelInformeControlador implements Serializable{
         
         if(rolActual!=null){
     
-            if ("ADMINISTRADOR".equals(rolActual)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)) {
                 int statusRespuesta = servicio.eliminarInforme(informeSeleccionado.getIdInforme());
 
                 if (statusRespuesta == 200 || statusRespuesta==204) {

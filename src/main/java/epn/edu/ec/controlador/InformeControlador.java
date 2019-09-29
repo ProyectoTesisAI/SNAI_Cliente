@@ -15,7 +15,6 @@ import epn.edu.ec.servicios.InformeServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.RecursosEspeciales;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,7 +61,6 @@ public class InformeControlador implements Serializable{
     Integer duracionActividades=0;
     private Date horaFin;
     
-    private EnlacesPrograma enlaces;
     private boolean informeGuardado;
     private RecursosEspeciales recursosEspeciales;
 
@@ -70,7 +68,6 @@ public class InformeControlador implements Serializable{
     public void init(){
         
         recursosEspeciales= new RecursosEspeciales();
-        enlaces= new EnlacesPrograma();
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
         taller= new Taller();

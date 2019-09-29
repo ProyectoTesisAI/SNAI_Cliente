@@ -3,6 +3,7 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
@@ -83,7 +84,7 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
     
     public String eliminarAdolescenteInfractor(AdolescenteInfractorCAI adolescenteSeleccionado) {
         String rolActual = permisosUsuario.RolUsuario();
-        if ("ADMINISTRADOR".equals(rolActual)) {
+        if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)) {
             int statusRespuesta = servicioAI.eliminarAdolescenteInfractor(adolescenteSeleccionado.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
 
             if (statusRespuesta == 200) {

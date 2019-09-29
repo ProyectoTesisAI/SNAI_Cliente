@@ -12,8 +12,6 @@ import epn.edu.ec.modelo.InformacionInfraccion;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DatosTipoPenalCAIServicio;
 import epn.edu.ec.servicios.InformacionInfraccionServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +38,9 @@ public class InformacionInfraccionControlador implements Serializable {
     private List<DatosTipoPenalCAI> tiposPenal;
     private DatosTipoPenalCAIServicio servicioTP;
     
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
-
     @PostConstruct
     public void init() {
         
-        permisosUsuario= new PermisosUsuario();
-        enlaces= new EnlacesPrograma();
         servicio = new InformacionInfraccionServicio();
 
         informacionInfraccion = new InformacionInfraccion();

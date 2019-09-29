@@ -3,8 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.EjeEducativo;
 import epn.edu.ec.servicios.EjeEducativoServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,12 +21,10 @@ public class EjeEducativoUDIControlador implements Serializable{
     
     private boolean guardado;
     private boolean estudia;
-    private PermisosUsuario permisosUsuario;
     
      @PostConstruct
     public void init(){
         
-        permisosUsuario= new PermisosUsuario();
         servicio= new EjeEducativoServicio();
         
         ejeEducativo=new EjeEducativo();

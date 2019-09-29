@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.EjeSalud;
 import epn.edu.ec.servicios.EjeSaludServicio;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -30,7 +29,6 @@ public class EjeSaludCAIControlador implements Serializable{
     private boolean guardado;
     private boolean saludable;
     private boolean consumeSustancias;
-    private PermisosUsuario permisosUsuario;
     
     private String genero;
     private boolean esMujer;
@@ -41,7 +39,6 @@ public class EjeSaludCAIControlador implements Serializable{
      @PostConstruct
     public void init(){
         
-        permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
         servicio= new EjeSaludServicio();
         

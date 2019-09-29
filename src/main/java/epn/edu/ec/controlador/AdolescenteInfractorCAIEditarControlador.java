@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,7 +28,6 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
    
     private AdolescenteInfractorCAI adolescenteInfractorCAIEditar;
     private AdolescenteInfractorCAIServicio servicioCAI;
-    private PermisosUsuario permisos;
     private boolean guardado;
 
     //Objetos para saber si es cedula o documento
@@ -38,7 +36,7 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
 
     @PostConstruct
     public void init() {
-        permisos = new PermisosUsuario();
+        
         servicioCAI = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
