@@ -1,6 +1,5 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
@@ -24,7 +23,6 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class EjecucionMedidaControlador implements Serializable {
 
-    private AdolescenteInfractorCAI adolescenteInfractorCai;
     private DetalleInfraccionCAI detalleInfraccionCAI;
     private EjecucionMedidaCAI ejecucionMedidaCAI;
     private List<EjecucionMedidaCAI> listaEjecucionMedida;
@@ -56,7 +54,6 @@ public class EjecucionMedidaControlador implements Serializable {
         listaCAI = new ArrayList<>();
         listaCAI = servicioCAI.listaCai();
 
-        adolescenteInfractorCai = new AdolescenteInfractorCAI();
         ejecucionMedidaCAI = new EjecucionMedidaCAI();
         listaEjecucionMedida = new ArrayList<>();
         guardado = false;

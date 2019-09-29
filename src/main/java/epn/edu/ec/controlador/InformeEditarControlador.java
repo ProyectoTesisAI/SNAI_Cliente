@@ -10,7 +10,6 @@ import epn.edu.ec.servicios.InformeServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.RegistroFotograficoServicio;
 import epn.edu.ec.servicios.TallerServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.RecursosEspeciales;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +31,7 @@ public class InformeEditarControlador implements Serializable{
 
     private List<Part> imagenes;
     private List<RegistroFotografico> registroFotografico;
-    private List<RegistroFotografico> registroFotograficoRescatado;
+    private List<RegistroFotografico> registroFotograficoAEliminar;
     
     List<AsistenciaAdolescente> listaParaChequeo;
     List<ItemTaller> listaItemsTaller;
@@ -50,17 +49,15 @@ public class InformeEditarControlador implements Serializable{
     InformeServicio servicioInforme;
     private boolean informeGuardado;
     
-    private EnlacesPrograma enlaces;
     private RecursosEspeciales recursosEspeciales;
 
     @PostConstruct
     public void init(){
         
         recursosEspeciales= new RecursosEspeciales();
-        enlaces=new EnlacesPrograma();
         imagenes= new ArrayList<>();
         registroFotografico= new ArrayList<>();
-        registroFotograficoRescatado= new ArrayList<>();
+        registroFotograficoAEliminar= new ArrayList<>();
         taller= new Taller();
         informeEditar= new Informe();
         listaParaChequeo= new ArrayList<>();
@@ -93,7 +90,6 @@ public class InformeEditarControlador implements Serializable{
             
             if(registroFotograficoAux!=null){
                 registroFotografico=registroFotograficoAux;
-                registroFotograficoRescatado=registroFotograficoAux;
             }
         
         }
@@ -197,19 +193,10 @@ public class InformeEditarControlador implements Serializable{
         this.listaParaChequeo = listaParaChequeo;
     }
 
-    public List<RegistroFotografico> getRegistroFotograficoRescatado() {
-        return registroFotograficoRescatado;
-    }
-
-    public void setRegistroFotograficoRescatado(List<RegistroFotografico> registroFotograficoRescatado) {
-        this.registroFotograficoRescatado = registroFotograficoRescatado;
-    }
-
     public boolean isInformeGuardado() {
         return informeGuardado;
     }
 
-    
     /*************************************************************/
     
     public String onFlowProcess(FlowEvent event) {
@@ -292,6 +279,7 @@ public class InformeEditarControlador implements Serializable{
         for (RegistroFotografico r : registroFotografico) {
             if(r==registroSeleccionado){
                 registroFotografico.remove(r);
+                registroFotograficoAEliminar.add(r);
                 break;
             }
         }
@@ -358,51 +346,28 @@ public class InformeEditarControlador implements Serializable{
     
     private void guardarRegistroFotografico(Informe informe){
         
-        List<RegistroFotografico> asistencia= new ArrayList<>();
-        List<RegistroFotografico> asistenciaBorrar= new ArrayList<>();
-        
-        for(RegistroFotografico rf1: registroFotografico){
-        
-            if(rf1.getIdRegistroFotografico()==null){
-                asistencia.add(rf1);
-            }
-            else{
-                
-                for(RegistroFotografico rf2: registroFotograficoRescatado){
+        if(registroFotograficoAEliminar.size()>0){
             
-                    // si las fotos no se han cambiado
-                    if(rf1==rf2){
-                        asistencia.add(rf2);
-                        break;
-                    }
-                    //si he borrado una foto
-                    else if(rf2.getIdRegistroFotografico()!=null){
-                        //si agrego una nuevo imagen
-                        asistenciaBorrar.add(rf2);
-                        break;
-                    }
-                    
+            for(RegistroFotografico registro : registroFotograficoAEliminar){
+                
+                if(registro.getIdRegistroFotografico() != null){
+                    servicioRegistroFotografico.eliminarRegistroFotografico(registro.getIdRegistroFotografico());
                 }
-            }
-        
                 
+            }
         }
         
-        
-        for(RegistroFotografico r: asistenciaBorrar){
-            servicioRegistroFotografico.eliminarRegistroFotografico(r.getIdRegistroFotografico());
-        }
-        
-        if(asistencia.size()>0){
+        if(registroFotografico.size()>0){
             
-            for(RegistroFotografico registro : asistencia){
+            for(RegistroFotografico registro : registroFotografico){
                 
                 if(registro.getImagen()!=null){
-                   registro.setIdInforme(informe);
-                   servicioRegistroFotografico.guardarRegistroFotografico(registro);
+                    registro.setIdInforme(informe);
+                    servicioRegistroFotografico.guardarRegistroFotografico(registro);
                 }
             }
         }
+        
     }
     
     public void guardarInformeResultados(){

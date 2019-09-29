@@ -10,7 +10,7 @@
     <h:body>
         <ui:composition>
 
-            <h:form enctype="multipart/form-data"> 
+            <b:form enctype="multipart/form-data"> 
 
                 <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
                 
@@ -127,7 +127,7 @@
                                 <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
                                     <div class="col-md-10 col-md-offset-1">
 
-                                        <p:dataTable var="tp" value="#{informeControlador.listaItemsTaller}" reflow="true"  rows="10"
+                                        <p:dataTable var="tp" value="#{informeControlador.listaItemsTaller}" reflow="true"  rows="25"
                                                      paginator="false"  >
                                             <p:column headerText="Duración">
                                                 <h:outputText value="#{tp.duracion}"/>  
@@ -259,7 +259,7 @@
 
                     </p:wizard>
                 </b:panel>
-            </h:form>
+            </b:form>
         </ui:composition>   
     </h:body>
 </html>

@@ -50,7 +50,7 @@ public class AdministracionMenuControlador implements Serializable {
     public boolean isTipoRolAdministrador() {
         String rolUsuario = permisosUsuario.RolUsuario();
         if (rolUsuario != null) {
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolPsicologo = false;
                 tipoRolJuridico = false;
@@ -63,7 +63,7 @@ public class AdministracionMenuControlador implements Serializable {
     public boolean isTipoRolAdministradorOSubdirector() {
         String rolUsuario = permisosUsuario.RolUsuario();
         if (rolUsuario != null) {
-            if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolPsicologo = false;
                 tipoRolJuridico = false;
@@ -79,7 +79,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if ("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO CAI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO CAI".equals(rolUsuario) || "TRABAJADOR SOCIAL CAI".equals(rolUsuario) || "INSPECTOR EDUCADOR".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_PSICOLOGO_CAI.equals(rolUsuario) || Constantes.ROL_JURIDICO_CAI.equals(rolUsuario) || Constantes.ROL_TRABAJADOR_SOCIAL_CAI.equals(rolUsuario) || Constantes.ROL_INSPECTOR_EDUCADOR.equals(rolUsuario) || Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario)) {
                 esUZDI = false;
                 esCAI = true;
             }
@@ -93,7 +93,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if ("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "EQUIPO TECNICO PSICOLOGO UZDI".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario) || "TRABAJADOR SOCIAL UZDI".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario) || Constantes.ROL_PSICOLOGO_UZDI.equals(rolUsuario) || Constantes.ROL_JURIDICO_UZDI.equals(rolUsuario) || Constantes.ROL_TRABAJADOR_SOCIAL_UZDI.equals(rolUsuario) || Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario)) {
                 esCAI = false;
                 esUZDI = true;
             }
@@ -106,7 +106,7 @@ public class AdministracionMenuControlador implements Serializable {
         String rolUsuario = permisosUsuario.RolUsuario();
 
         if (rolUsuario != null) {
-            if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (rolUsuario.contains("JURIDICO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolPsicologo = false;
                 tipoRolJuridico = true;
@@ -121,7 +121,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if (rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (rolUsuario.contains("PSICOLOGO") || rolUsuario.contains("DIRECTOR") || rolUsuario.contains("LIDER") || rolUsuario.contains("COORDINADOR") || Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario)) {
                 tipoRolInspector = false;
                 tipoRolJuridico = false;
                 tipoRolPsicologo = true;
@@ -136,7 +136,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("INSPECTOR EDUCADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario)) {
+            if (Constantes.ROL_INSPECTOR_EDUCADOR.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario)) {
                 tipoRolPsicologo = false;
                 tipoRolJuridico = false;
                 tipoRolInspector = true;
@@ -150,7 +150,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 permitidoCrearUsuario = true;
             }
         }
@@ -163,7 +163,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "EQUIPO TECNICO JURIDICO UZDI".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_JURIDICO_UZDI.equals(rolUsuario)) {
                 permitidoCrearAdolescenteUDI = true;
             }
         }
@@ -176,7 +176,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI") || rolUsuario.equals("INSPECTOR EDUCADOR")) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || rolUsuario.equals(Constantes.ROL_JURIDICO_CAI) || rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                 permitidoCrearAdolescenteCAI = true;
             }
         }
@@ -186,7 +186,7 @@ public class AdministracionMenuControlador implements Serializable {
     public boolean isPermitidoVerReportes() {
         String rolUsuario = permisosUsuario.RolUsuario();
         if (rolUsuario != null) {
-            if ("ADMINISTRADOR".equals(rolUsuario) || "SUBDIRECTOR".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rolUsuario) || "COORDINADOR CAI".equals(rolUsuario) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rolUsuario) || "LIDER UZDI".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario)) {
                 permitidoVerReportes = true;
             }
         }
@@ -202,7 +202,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTaller = Constantes.TIPO_TALLER_PSICOLOGIA;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
-            if (rolUsuario.equals("ADMINISTRADOR")) {
+            if (rolUsuario.equals(Constantes.ROL_ADMINISTRADOR)) {
                 return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
@@ -223,7 +223,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTaller = Constantes.TIPO_TALLER_JURIDICO;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
-            if (rolUsuario.equals("ADMINISTRADOR")) {
+            if (rolUsuario.equals(Constantes.ROL_ADMINISTRADOR)) {
                 return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
@@ -243,7 +243,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTaller = Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTaller", tipoTaller);
 
-            if (rolUsuario.equals("ADMINISTRADOR")) {
+            if (rolUsuario.equals(Constantes.ROL_ADMINISTRADOR)) {
                 return enlaces.PATH_TALLER_CREAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_TALLER_CREAR_USER + "?faces-redirect=true";
@@ -264,7 +264,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_JURIDICO;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
@@ -283,7 +283,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_PSICOLOGIA;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             
             }else {
@@ -303,7 +303,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
@@ -323,7 +323,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_PSICOLOGIA;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
@@ -342,7 +342,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_JURIDICO;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
@@ -361,7 +361,7 @@ public class AdministracionMenuControlador implements Serializable {
             String tipoTallerSeleccionadoMenu=Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tipoTallerSeleccionadoMenu", tipoTallerSeleccionadoMenu);
             
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORME_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return enlaces.PATH_PANEL_INFORME_USER + "?faces-redirect=true";
@@ -379,7 +379,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 
@@ -396,7 +396,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_CAI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 

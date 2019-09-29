@@ -1,11 +1,8 @@
 package epn.edu.ec.controlador;
 
-import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.modelo.Representante;
 import epn.edu.ec.servicios.RepresentanteServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -24,13 +21,10 @@ public class RepresentanteUDIControlador implements Serializable {
     //Objeto que contiene el codigo de las validaciones
     private Validaciones validacion;
 
-    private AdolescenteInfractor adolescenteInfractorCrear;
     private AdolescenteInfractorUDI adolescenteInfractorUDI;
     private Representante representante;
     private RepresentanteServicio servicio;
     private boolean guardado;
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
 
     //Objetos para saber si es cedula o documento
     String tipoDocumento;
@@ -39,9 +33,7 @@ public class RepresentanteUDIControlador implements Serializable {
     @PostConstruct
     public void init() {
 
-        permisosUsuario = new PermisosUsuario();
         validacion = new Validaciones();
-        enlaces = new EnlacesPrograma();
         servicio = new RepresentanteServicio();
 
         representante = new Representante();
@@ -53,7 +45,6 @@ public class RepresentanteUDIControlador implements Serializable {
             tipoDocumento = "EXTRANJERA";
         }
 
-        adolescenteInfractorCrear = new AdolescenteInfractor();
         adolescenteInfractorUDI = new AdolescenteInfractorUDI();
         AdolescenteInfractorUDI adolescenteInfractorUDIAux = (AdolescenteInfractorUDI) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("adolescente_infractor_udi");
 

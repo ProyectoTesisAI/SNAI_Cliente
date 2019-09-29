@@ -41,11 +41,11 @@ public class PanelTallerControlador implements Serializable {
             
             String rol=usuario.getIdRolUsuarioCentro().getIdRol().getRol();
             
-            if(rol.equals("ADMINISTRADOR")|| rol.equals("SUBDIRECTOR")){
+            if(rol.equals(Constantes.ROL_ADMINISTRADOR)|| rol.equals(Constantes.ROL_SUBDIRECTOR)){
                 listaTalleres = servicio.listaTalleresSinInforme();
-            }else if(rol.equals("LIDER UZDI") || rol.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
+            }else if(rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_DIRECTOR_UZDI)){
                 listaTalleres=servicio.listaTalleresSinInformeSoloUZDI();
-            }else if(rol.equals("COORDINADOR CAI") || rol.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
+            }else if(rol.equals(Constantes.ROL_COORDINADOR_CAI) || rol.equals( Constantes.ROL_DIRECTOR_CAI)){
                 listaTalleres=servicio.listaTalleresSinInformeSoloCAI();
             }else {
                 listaTalleres = servicio.listaTalleresSinInformePorUsuario(usuario);
@@ -53,11 +53,11 @@ public class PanelTallerControlador implements Serializable {
             
             if (tipoTaller == null) {
 
-                if (rol.equals("ADMINISTRADOR") || rol.equals("SUBDIRECTOR") || rol.equals("LIDER UZDI") || rol.equals("COORDINADOR CAI") || rol.contains("DIRECTOR") || rol.contains("PSICOLOGO")) {
+                if (rol.equals(Constantes.ROL_ADMINISTRADOR) || rol.equals(Constantes.ROL_SUBDIRECTOR) || rol.equals(Constantes.ROL_LIDER_UZDI) || rol.equals(Constantes.ROL_COORDINADOR_CAI) || rol.contains("DIRECTOR") || rol.contains("PSICOLOGO")) {
                     tipoTaller = Constantes.TIPO_TALLER_PSICOLOGIA;
                 } else if (rol.contains("JURIDICO")) {
                     tipoTaller = Constantes.TIPO_TALLER_JURIDICO;
-                } else if (rol.contains("INSPECTOR EDUCADOR")) {
+                } else if (rol.contains(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                     tipoTaller = Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR;
                 }
 
@@ -96,7 +96,7 @@ public class PanelTallerControlador implements Serializable {
             if(rolActual!=null){
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
 
-                if ("ADMINISTRADOR".equals(rolActual)){
+                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
                     return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";
                 }
                 else{
@@ -124,7 +124,7 @@ public class PanelTallerControlador implements Serializable {
                 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
             
-                if ("ADMINISTRADOR".equals(rolActual)){
+                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
                     return enlaces.PATH_TALLER_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
                 }
                 else{
@@ -148,7 +148,7 @@ public class PanelTallerControlador implements Serializable {
         
         if(rolActual!=null){
             
-            if ("ADMINISTRADOR".equals(rolActual)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)) {
                 int statusRespuesta = servicio.eliminarTaller(tallerSeleccionado.getIdTaller());
 
                 if (statusRespuesta == 200 || statusRespuesta==204) {
@@ -177,7 +177,7 @@ public class PanelTallerControlador implements Serializable {
                 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
 
-                if(rolActual.equals("ADMINISTRADOR")){
+                if(rolActual.equals(Constantes.ROL_ADMINISTRADOR)){
                 
                     return enlaces.PATH_INFORME_CREAR_ADMINISTRADOR+"?faces-redirect=true";
                 }else{

@@ -4,6 +4,7 @@ import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
@@ -195,7 +196,7 @@ public class AdolescenteInfractorUDIControlador implements Serializable {
             Thread.sleep(1250);
             String rol = permisos.RolUsuario();
             if (rol != null) {
-                if (rol.equals("ADMINISTRADOR")) {
+                if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
                     return enlaces.PATH_PANEL_UDI_ADMINISTRADOR + "?faces-redirect=true";
                 } else {
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";

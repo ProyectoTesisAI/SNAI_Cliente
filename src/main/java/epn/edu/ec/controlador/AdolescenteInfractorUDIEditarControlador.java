@@ -4,8 +4,6 @@ import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.AdolescenteInfractorServicio;
 import epn.edu.ec.servicios.AdolescenteInfractorUDIServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -31,8 +29,6 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
 
     private AdolescenteInfractorUDI adolescenteInfractorUDIEditar;
     private AdolescenteInfractorUDIServicio servicioUDI;
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisos;
     private boolean guardado;
 
     //Objetos para saber si es cedula o documento
@@ -42,8 +38,6 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
     @PostConstruct
     public void init() {
         
-        permisos= new PermisosUsuario();
-        enlaces=  new EnlacesPrograma();
         servicioUDI = new AdolescenteInfractorUDIServicio();
         guardado = false;
         validacion = new Validaciones();
@@ -159,8 +153,6 @@ public class AdolescenteInfractorUDIEditarControlador implements Serializable {
     /**
      * ****Métodos para invocar a los diferentes servicios web************
      */
-
-    
     public void guardarEdicionAdolescenteInfractor() {
         if (this.adolescenteInfractorUDIEditar.getIdAdolescenteInfractor() != null) {
             

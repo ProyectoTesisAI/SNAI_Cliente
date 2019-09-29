@@ -3,7 +3,6 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.ActividadesInstrumentos;
 import epn.edu.ec.modelo.AdolescenteInfractorUDI;
 import epn.edu.ec.servicios.ActividadesInstrumentosServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -20,12 +19,10 @@ public class ActividadesInstrumentosControlador implements Serializable{
     private ActividadesInstrumentos actividadesInstrumentos;
     private ActividadesInstrumentosServicio servicio;
     private boolean guardado;
-    private PermisosUsuario permisosUsuario;
     
     @PostConstruct
     public void init(){
         
-        permisosUsuario= new PermisosUsuario();
         servicio= new ActividadesInstrumentosServicio();
         
         actividadesInstrumentos= new ActividadesInstrumentos();

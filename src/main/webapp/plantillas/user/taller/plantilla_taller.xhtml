@@ -12,8 +12,8 @@
 
             <b:form>
 
-                <b:growl id="growlMsg" globalOnly="true" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
-
+                <b:growl id="growlMsg" show-detail="false" show-summary="true" allowDismiss="true" delay="5000" escape="true" /> 
+                
                 <b:panel look="primary">
                     <f:facet name="heading">
                         <h:outputText value="CREAR TALLER #{tallerControlador.tipoTaller}" style="color: white; font-weight: bold"  />
@@ -167,7 +167,7 @@
                                                          widgetVar="tableWidgetVar"
                                                          var="tp" 
                                                          reflow="true"
-                                                         rows="20"
+                                                         rows="25"
                                                          paginator="false"
                                                          >
                                                 <p:column headerText="Duración">
@@ -203,7 +203,6 @@
                                                 </p:column>
 
                                             </p:dataTable>
-
                                         </div>
                                     </div>
                                     <b:modal title="Editar Actividad" styleClass="formItemTallerEditar"

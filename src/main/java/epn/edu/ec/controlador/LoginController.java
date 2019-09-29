@@ -7,6 +7,7 @@ package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.LoginServicio;
+import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -64,14 +65,19 @@ public class LoginController implements Serializable {
             String rolUsuario = usuarioLogueado.getIdRolUsuarioCentro().getIdRol().getRol();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogin", usuarioLogueado);
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_TALLER_ADMINISTRADOR + "?faces-redirect=true";
             } else {
-                if (rolUsuario.equals("TRABAJADOR SOCIAL CAI")) {
+                if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_CAI)) {
+                
                     return enlaces.PATH_PANEL_CAI_USER + "?faces-redirect=true";
-                } else if (rolUsuario.equals("TRABAJADOR SOCIAL UZDI")) {
+                
+                } else if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_UZDI)) {
+                
                     return enlaces.PATH_PANEL_UDI_USER + "?faces-redirect=true";
+                
                 } else {
+                
                     return enlaces.PATH_PANEL_TALLER_USER + "?faces-redirect=true";
                 }
             }

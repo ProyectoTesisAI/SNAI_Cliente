@@ -7,8 +7,6 @@ import epn.edu.ec.modelo.IdentificacionGeografica;
 import epn.edu.ec.servicios.DatosPaisServicio;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.IdentificacionGeograficaServicio;
-import epn.edu.ec.utilidades.EnlacesPrograma;
-import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,8 +36,6 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
     private List<DatosProvinciaCanton> cantones;
     private List<DatosProvinciaCanton> cantonesNacimiento;
     private DatosProvinciaCantonServicio servicioCAIPC;
-    private EnlacesPrograma enlaces;
-    private PermisosUsuario permisosUsuario;
     
     private List<DatosPais> paises;
     private DatosPaisServicio servicioP;
@@ -50,9 +46,7 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
     @PostConstruct
     public void init() {
 
-        permisosUsuario= new PermisosUsuario();
         validacion = new Validaciones();
-        enlaces = new EnlacesPrograma();
         servicio = new IdentificacionGeograficaServicio();
 
         identificacionGeografica = new IdentificacionGeografica();
