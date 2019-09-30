@@ -86,6 +86,12 @@ public class EjeLaboralControlador implements Serializable{
             ejeLaboral.setTrabaja(true);
         }else if(trabaja==false){
             ejeLaboral.setTrabaja(false);
+            ejeLaboral.setOcupacionAdolescente(null);
+            ejeLaboral.setRamaActividadEconomica(null);
+            ejeLaboral.setAfiliacionIess(false);
+            ejeLaboral.setIngresoMensual(null);
+            ejeLaboral.setNumeroHorasTrabajo(0);
+            ejeLaboral.setDescripcionActividad(null);
         }
     }
     

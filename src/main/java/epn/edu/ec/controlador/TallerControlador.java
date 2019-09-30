@@ -118,11 +118,11 @@ public class TallerControlador implements Serializable {
         item = new ItemTaller();
 
         if (isEsUzdi()) {
-            tipoCentro = "UZDI";
+            this.setTipoCentro("UZDI");
             listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de datos
 
         } else {
-            tipoCentro = "CAI";
+            this.setTipoCentro("CAI");
             listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
         }
 
@@ -133,12 +133,13 @@ public class TallerControlador implements Serializable {
                 esTecnicoCAI=false;
                 esTecnicoUDI=false;
                 
+                
                 if(tipoTaller.equals(Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR)){
                     esTecnico=true; //content-disable=true
                     esTecnicoCAI=false; 
                     esTecnicoUDI=true;
-                    tipoCentro = "CAI";
-                    listaCai = servicioCai.listaCai();
+                    this.setTipoCentro("CAI");
+  //                  listaCai = servicioCai.listaCai();
                 }
                 
             } else {
@@ -149,16 +150,16 @@ public class TallerControlador implements Serializable {
                     
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
-                    tipoCentro = "UZDI";
-                    listaUdi = servicioUdi.listaUdi();
-                    uzdiSeleccionada = usuarioLogin.getIdRolUsuarioCentro().getIdUdi().getUdi();
+                    this.setTipoCentro( "UZDI");
+    //                listaUdi = servicioUdi.listaUdi();
+                    this.setUzdiSeleccionada(usuarioLogin.getIdRolUsuarioCentro().getIdUdi().getUdi());
 
                 } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
-                    tipoCentro = "CAI";
-                    listaCai = servicioCai.listaCai();
-                    caiSeleccionado = usuarioLogin.getIdRolUsuarioCentro().getIdCai().getCai();
+                    this.setTipoCentro("CAI"); //tipoCentro = "CAI";
+    //                listaCai = servicioCai.listaCai();
+                    this.setCaiSeleccionado(usuarioLogin.getIdRolUsuarioCentro().getIdCai().getCai());
                 }
             }
         }

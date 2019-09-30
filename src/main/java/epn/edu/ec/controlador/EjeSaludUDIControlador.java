@@ -83,7 +83,7 @@ public class EjeSaludUDIControlador implements Serializable {
                 } else {
                     consumeSustancias = false;
                 }
-                if (ejeSalud.getDiscapacidad() != null) {
+                if (ejeSalud.getDiscapacidad().equals("SI")) {
                     tipoD = "SI";
                 } else {
                     tipoD = "NO";
@@ -170,9 +170,10 @@ public class EjeSaludUDIControlador implements Serializable {
         
         if("SI".equals(tipoD)){
             esDiscapacidad=true;
-            
+            ejeSalud.setDiscapacidad("SI");
         }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
             esDiscapacidad=false;
+            ejeSalud.setDiscapacidad("NO");
         }
     }
 
@@ -224,7 +225,7 @@ public class EjeSaludUDIControlador implements Serializable {
         }
         
         if(!consumeSustancias){
-            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setTipoSustancia(null);
             this.ejeSalud.setRecibeTratamiento(false);
         }
         
@@ -255,7 +256,7 @@ public class EjeSaludUDIControlador implements Serializable {
         }
         
         if(!consumeSustancias){
-            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setTipoSustancia(null);
             this.ejeSalud.setRecibeTratamiento(false);
         }
         
