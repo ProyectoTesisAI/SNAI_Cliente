@@ -195,21 +195,58 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
             ActivarCulminada = false;
             ActivarDerivada = false;
             ActivarIncumplimiento = false;
+            
+            estadoCumplimientoMedida.setFechaReporteCulminacion(null);
+            
+            estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setFechaReporteDerivacion(null);
+            
+            estadoCumplimientoMedida.setFechaReporteIncumplimiento(null);
+            estadoCumplimientoMedida.setEstadoIncumplimiento(null);
+            estadoCumplimientoMedida.setReanudacionMedida(null);
+            estadoCumplimientoMedida.setFechaReanudacion(null);
+            
         } else if (estado.equals("CULMINADA")) {
             ActivarEjecucion = false;
             ActivarCulminada = true;
             ActivarDerivada = false;
             ActivarIncumplimiento = false;
+            
+            estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setFechaReporteDerivacion(null);
+            
+            estadoCumplimientoMedida.setFechaReporteIncumplimiento(null);
+            estadoCumplimientoMedida.setEstadoIncumplimiento(null);
+            estadoCumplimientoMedida.setReanudacionMedida(null);
+            estadoCumplimientoMedida.setFechaReanudacion(null);
+            
         } else if (estado.equals("DERIVADA")) {
             ActivarEjecucion = false;
             ActivarCulminada = false;
             ActivarDerivada = true;
             ActivarIncumplimiento = false;
+            
+            estadoCumplimientoMedida.setFechaReporteCulminacion(null);
+            
+            estadoCumplimientoMedida.setFechaReporteIncumplimiento(null);
+            estadoCumplimientoMedida.setEstadoIncumplimiento(null);
+            estadoCumplimientoMedida.setReanudacionMedida(null);
+            estadoCumplimientoMedida.setFechaReanudacion(null);
+            
         } else if (estado.equals("INCUMPLIMIENTO")) {
             ActivarEjecucion = false;
             ActivarCulminada = false;
             ActivarDerivada = false;
             ActivarIncumplimiento = true;
+            
+            estadoCumplimientoMedida.setFechaReporteCulminacion(null);
+            
+            estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
+            estadoCumplimientoMedida.setFechaReporteDerivacion(null);
+            
         }
     }
 
@@ -352,28 +389,32 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
      */
     public void guardarEstadoCumplimientoMedida() {
 
-        for (UDI u : listaUdi) {
-            if (u.getUdi().equals(udi.getUdi())) {
-                udi = u;
-                break;
+        if (estado.equals("DERIVADA")) {
+
+            for (UDI u : listaUdi) {
+                if (u.getUdi().equals(udi.getUdi())) {
+                    udi = u;
+                    break;
+                }
+            }
+            for (CAI c : listaCai) {
+                if (c.getCai().equals(cai.getCai())) {
+                    cai = c;
+                    break;
+                }
+            }
+            if (udi.getIdUdi() != null) {
+                this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(udi);
+            } else {
+                this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+            }
+            if (cai.getIdCai() != null) {
+                this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(cai);
+            } else {
+                this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
             }
         }
-        for (CAI c : listaCai) {
-            if (c.getCai().equals(cai.getCai())) {
-                cai = c;
-                break;
-            }
-        }
-        if (udi.getIdUdi() != null) {
-            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(udi);
-        } else {
-            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
-        }
-        if (cai.getIdCai() != null) {
-            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(cai);
-        } else {
-            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
-        }
+        
         this.estadoCumplimientoMedida.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
         this.estadoCumplimientoMedida.setSituacionActual(estado);
 
@@ -390,28 +431,32 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
 
     public void guardarEdicionEstadoCumplimientoMedida() {
 
-        for (UDI u : listaUdi) {
-            if (u.getUdi().equals(udi.getUdi())) {
-                udi = u;
-                break;
+        if (estado.equals("DERIVADA")) {
+
+            for (UDI u : listaUdi) {
+                if (u.getUdi().equals(udi.getUdi())) {
+                    udi = u;
+                    break;
+                }
+            }
+            for (CAI c : listaCai) {
+                if (c.getCai().equals(cai.getCai())) {
+                    cai = c;
+                    break;
+                }
+            }
+            if (udi.getIdUdi() != null) {
+                this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(udi);
+            } else {
+                this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
+            }
+            if (cai.getIdCai() != null) {
+                this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(cai);
+            } else {
+                this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
             }
         }
-        for (CAI c : listaCai) {
-            if (c.getCai().equals(cai.getCai())) {
-                cai = c;
-                break;
-            }
-        }
-        if (udi.getIdUdi() != null) {
-            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(udi);
-        } else {
-            this.estadoCumplimientoMedida.setUzdiReceptoraDerivacion(null);
-        }
-        if (cai.getIdCai() != null) {
-            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(cai);
-        } else {
-            this.estadoCumplimientoMedida.setCaiReceptoraDerivacion(null);
-        }
+        
         this.estadoCumplimientoMedida.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
         this.estadoCumplimientoMedida.setSituacionActual(estado);
 

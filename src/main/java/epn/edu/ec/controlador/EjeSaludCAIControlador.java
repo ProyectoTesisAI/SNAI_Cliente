@@ -79,7 +79,8 @@ public class EjeSaludCAIControlador implements Serializable{
                 } else {
                     consumeSustancias = false;
                 }
-                if (ejeSalud.getDiscapacidad() != null) {
+                if (ejeSalud.getDiscapacidad().equals("SI")) {
+                    
                     tipoD = "SI";
                 } 
                 else {
@@ -168,8 +169,10 @@ public class EjeSaludCAIControlador implements Serializable{
         this.tipoD = tipoD;
         if("SI".equals(tipoD)){
             esDiscapacidad=true;
+            ejeSalud.setDiscapacidad("SI");
         }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
             esDiscapacidad=false;
+            ejeSalud.setDiscapacidad("NO");
         }
     }
 
@@ -220,7 +223,7 @@ public class EjeSaludCAIControlador implements Serializable{
         }
         
         if(!consumeSustancias){
-            this.ejeSalud.setTipoSustancia("NINGUNO");
+            this.ejeSalud.setTipoSustancia(null);
             this.ejeSalud.setRecibeTratamiento(false);
         }
         
@@ -246,6 +249,21 @@ public class EjeSaludCAIControlador implements Serializable{
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
+        if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            this.ejeSalud.setTipoDiscapacidad("NINGUNA");
+            this.ejeSalud.setPorcentajeDiscapacidad(0);
+        }
+        
+        if(!consumeSustancias){
+            this.ejeSalud.setTipoSustancia(null);
+            this.ejeSalud.setRecibeTratamiento(false);
+        }
+        
+        if(!esMujer){
+            this.ejeSalud.setTiempoGestacionMes(null);
+            this.ejeSalud.setEmbarazo(false);
+        }
+        
         EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(this.ejeSalud);
         if (ejeSaludCAIAux != null) {
             guardado=false;

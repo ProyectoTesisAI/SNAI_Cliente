@@ -85,9 +85,20 @@ public class EjeEducativoUDIControlador implements Serializable{
         this.estudia = estudia;
         if(estudia==true){
             ejeEducativo.setEstudia(true);
+            ejeEducativo.setRazonNoEstudia(null);
+            ejeEducativo.setUltimoNivelEducativoAprobado(null);
+            ejeEducativo.setNombreUnidadEducativaUltimaAprobado(null);
+            ejeEducativo.setSostenimientoUltimoNivelAprobado(null);
+            ejeEducativo.setAniosRezagoEscolar(null);
         }
         else if(estudia==false){
             ejeEducativo.setEstudia(false);
+            ejeEducativo.setSostenimiento(null);
+            ejeEducativo.setRegimenEducativo(null);
+            ejeEducativo.setNivelEducativoActual(null);
+            ejeEducativo.setTipoOferta(null);
+            ejeEducativo.setNombreUnidadEducativa(null);
+            
         }
         
     }
