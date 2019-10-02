@@ -230,7 +230,7 @@ public class EjecucionMedidaControlador implements Serializable {
                 }
             }
             this.ejecucionMedidaCAI.setIdCai(cai);
-            this.ejecucionMedidaCAI.setFechaIngresoCai(this.ejecucionMedidaCAI.getFechaAprehension());
+            this.ejecucionMedidaCAI.setFechaIngresoCai(fechaIngresoProcesoCAI);
             this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
 
             EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
