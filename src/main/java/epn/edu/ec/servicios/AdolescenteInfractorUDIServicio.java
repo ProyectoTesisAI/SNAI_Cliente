@@ -83,5 +83,36 @@ public class AdolescenteInfractorUDIServicio {
             return null;
         }   
     }
+    
+    public List<AdolescenteInfractorUDI> listaAdolescentesInfractoresConZonaUDI() {
 
+        try {
+
+            List<AdolescenteInfractorUDI> listaAdolescentesUDIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_UDI+"/listarAdolescenteConZona", "GET", true, null);
+            if (response.getStatus() == 200) {
+                listaAdolescentesUDIAux = response.readEntity(new GenericType<List<AdolescenteInfractorUDI>>() {
+                });
+            }
+            return listaAdolescentesUDIAux;
+        } catch (Exception e) {
+            return null;
+        }   
+    }
+
+    public List<AdolescenteInfractorUDI> listaAdolescentesInfractoresSinZonaUDI() {
+
+        try {
+
+            List<AdolescenteInfractorUDI> listaAdolescentesUDIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_UDI+"/listarAdolescenteSinZona", "GET", true, null);
+            if (response.getStatus() == 200) {
+                listaAdolescentesUDIAux = response.readEntity(new GenericType<List<AdolescenteInfractorUDI>>() {
+                });
+            }
+            return listaAdolescentesUDIAux;
+        } catch (Exception e) {
+            return null;
+        }   
+    }
 }
