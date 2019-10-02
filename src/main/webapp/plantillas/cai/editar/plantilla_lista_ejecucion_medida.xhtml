@@ -80,8 +80,8 @@
                             </b:column>
                             
                             <b:column span="4" offset="2">
-                                <h:outputLabel for="txtFechaIngreso" rendered="false" value="Fecha de Aprehesión de AI"/>
-                                <b:dateTimePicker id="txtFechaIngreso" rendered="false" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
+                                <h:outputLabel for="txtFechaIngreso" rendered="true" value="Fecha de Ingreso de Proceso"/>
+                                <b:dateTimePicker id="txtFechaIngreso" rendered="true" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.fechaIngresoProcesoCAI}"/>
                             </b:column>
                             
                         </b:row>    
@@ -89,9 +89,7 @@
                             <b:column span="4" offset="1">
                                 <h:outputLabel for="txtFechaAprehencion" value="Fecha de Aprehención"/>
                                 <b:dateTimePicker id="txtFechaAprehencion" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaAprehension}">
-                                    <f:ajax event="keyup" render="txtAlertaPreventiva" />
                                     <f:ajax event="blur" render="txtAlertaPreventiva" />
-                                    <f:ajax event="keyup" render="txtTiempoPrivacionLibertadDias" />
                                     <f:ajax event="blur" render="txtTiempoPrivacionLibertadDias" />
                                 </b:dateTimePicker>
                             </b:column>

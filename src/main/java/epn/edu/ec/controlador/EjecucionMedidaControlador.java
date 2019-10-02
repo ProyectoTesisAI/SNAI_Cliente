@@ -191,6 +191,10 @@ public class EjecucionMedidaControlador implements Serializable {
         return cantones;
     }
 
+    public Date getFechaIngresoProcesoCAI() {
+        return fechaIngresoProcesoCAI;
+    }
+    
     /**
      * *******************Métodos para invocar a los diferentes servicios
      * web*****************

@@ -3,6 +3,9 @@ package epn.edu.ec.controlador;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
+import epn.edu.ec.utilidades.Constantes;
+import epn.edu.ec.utilidades.EnlacesPrograma;
+import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
 import java.util.Date;
@@ -33,6 +36,9 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
     //Objetos para saber si es cedula o documento
     String tipoDocumento;
     boolean esCedula;
+    
+    private PermisosUsuario permisos;
+    private EnlacesPrograma enlaces;
 
     @PostConstruct
     public void init() {
@@ -40,6 +46,8 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
         servicioCAI = new AdolescenteInfractorCAIServicio();
         guardado = false;
         validacion = new Validaciones();
+        permisos=new PermisosUsuario();
+        enlaces = new EnlacesPrograma();
 
         if (isEsCedula()) {
             tipoDocumento = "ECUATORIANA";
@@ -188,6 +196,28 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
             guardado = true;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCETE INFRACTOR CAI", "Error"));
         }
+    }
+    
+    public String redireccionEdicionAdolescenteInfractor() throws InterruptedException {
+        
+        if (guardado == false) {
+            Thread.sleep(1250);
+            String rol = permisos.RolUsuario();
+            if (rol != null) {
+                if (rol.equals(Constantes.ROL_ADMINISTRADOR)) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("indiceActual", "0");
+                    return enlaces.PATH_PANEL_EDITAR_CAI_ADMINISTRADOR + "?faces-redirect=true";
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+        
     }
     
     public void limpiarMensajeCedulaEditar(AjaxBehaviorEvent evento) {

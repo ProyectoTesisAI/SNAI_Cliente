@@ -139,7 +139,10 @@
 
                     <b:row>
                         <b:column span="3" offset="8">
-                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{adolescenteInfractorCAIEditarControlador.guardarEdicionAdolescenteInfractor()}" update="@form"/>
+                            <b:commandButton value="Guardar" class="btn btn-primary btn-block" actionListener="#{adolescenteInfractorCAIEditarControlador.guardarEdicionAdolescenteInfractor()}" update="@form" oncomplete="setBtnEditarAdolescenteInfractor()"/>
+                            <b:remoteCommand name="setBtnEditarAdolescenteInfractor" id="remoteCommand2"
+                                             action="#{adolescenteInfractorCAIEditarControlador.redireccionEdicionAdolescenteInfractor()}"
+                                                 />
                         </b:column>
                     </b:row>
 
