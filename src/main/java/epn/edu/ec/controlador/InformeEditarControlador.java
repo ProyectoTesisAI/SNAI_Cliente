@@ -256,6 +256,7 @@ public class InformeEditarControlador implements Serializable{
             for (int i = 0; i < imagenes.size(); i++) {
                 if(registroFotografico.size()<=4){
                     if(imagenes.get(i) != null ){
+                        
                         RegistroFotografico registro= new RegistroFotografico();
                         InputStream imagen= recursosEspeciales.resizeImage(imagenes.get(i).getInputStream(), 800, 600);
                         byte[] array= Utils.toByteArray(imagen);
@@ -293,13 +294,10 @@ public class InformeEditarControlador implements Serializable{
             int cantidadRegistro=0;
             for(AsistenciaAdolescente asistencia : listaParaChequeo){
             
-                if(asistencia.getAsistio()==true){
-                
-                    AsistenciaAdolescente asistenciAux= servicioAsistencia.guardarRegistroAsistenciaAdolescente(asistencia);
-                
-                    if(asistenciAux!=null){
-                        cantidadRegistro++;
-                    }
+                AsistenciaAdolescente asistenciAux= servicioAsistencia.guardarRegistroAsistenciaAdolescente(asistencia);
+
+                if(asistenciAux!=null){
+                    cantidadRegistro++;
                 }
             }
 
@@ -361,7 +359,7 @@ public class InformeEditarControlador implements Serializable{
             
             for(RegistroFotografico registro : registroFotografico){
                 
-                if(registro.getImagen()!=null){
+                if(registro.getIdRegistroFotografico() == null){
                     registro.setIdInforme(informe);
                     servicioRegistroFotografico.guardarRegistroFotografico(registro);
                 }
@@ -370,36 +368,50 @@ public class InformeEditarControlador implements Serializable{
         
     }
     
-    public void guardarInformeResultados(){
-        
-        try{
+    public void guardarInformeResultados() {
 
-            int asistencia=guardarRegistroAsistencia();
-            if(asistencia >0){
+        try {
 
-                Informe informeAux= guardarInforme();
+            if (cantidadAsistentes > 0) {
 
-                if(informeAux != null){
-                    
-                    guardarRegistroFotografico(informeAux);
-                    
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME","Aviso" ));
-                    informeGuardado=true;
+                if (registroFotografico.size() > 0) {
+
+                    int asistencia = guardarRegistroAsistencia();
+                    if (asistencia > 0) {
+
+                        Informe informeAux = guardarInforme();
+
+                        if (informeAux != null) {
+
+                            guardarRegistroFotografico(informeAux);
+
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME", "Aviso"));
+                            informeGuardado = true;
+                        } else {
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME", "Error"));
+                            informeGuardado = false;
+                        }
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA", "Error"));
+                        informeGuardado = false;
+                    }
+
+                } else {
+                    informeGuardado = false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE INGRESAR AL MENOS UNA IMAGEN", "Aviso"));
                 }
-                else{
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Error" ));
-                    informeGuardado=false;
-                }
+
+            } else {
+                informeGuardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR LA ASISTENCIA DE LOS ADOLESCENTES INFRACTORES", "Aviso"));
+
             }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA","Error" ));
-                informeGuardado=false;
-            }
-        }catch(Exception e){
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
-            informeGuardado=false;
-        } 
+
+        } catch (Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME", "Aviso"));
+            informeGuardado = false;
+        }
     }
     
 }

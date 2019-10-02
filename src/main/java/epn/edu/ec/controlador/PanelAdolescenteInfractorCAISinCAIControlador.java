@@ -15,9 +15,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-@Named(value = "panelAdolescenteInfractorCAIControlador")
+@Named(value = "panelAdolescenteInfractorCAISinCAIControlador")
 @ViewScoped
-public class PanelAdolescenteInfractorCAIControlador implements Serializable{
+public class PanelAdolescenteInfractorCAISinCAIControlador implements Serializable{
 
     private List<AdolescenteInfractorCAI> listadoAdolescentesInfractoresCAI;
     private AdolescenteInfractorCAIServicio servicio;
@@ -32,7 +32,7 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
         servicioAI = new AdolescenteInfractorServicio();
         enlaces=new EnlacesPrograma();
         listadoAdolescentesInfractoresCAI= new ArrayList<>();
-        listadoAdolescentesInfractoresCAI=servicio.listaAdolescentesInfractoresCAI();
+        listadoAdolescentesInfractoresCAI=servicio.listaAdolescentesInfractoresNoAsignadosCAI();
         
         if (listadoAdolescentesInfractoresCAI != null) {
             if (listadoAdolescentesInfractoresCAI.size() > 0) {
@@ -62,7 +62,9 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
         
         if(gestionInformacionAdolescenteCai!=null){
 
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
+            AdolescenteInfractorCAI adolescenteRescatado= servicio.obtenerAdolescenteInfractorCAI(ai_cai.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
             return gestionInformacionAdolescenteCai;
         }else{
             return null;
@@ -75,7 +77,9 @@ public class PanelAdolescenteInfractorCAIControlador implements Serializable{
         
         if(gestionInformacionAdolescenteCai!=null){
 
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
+            AdolescenteInfractorCAI adolescenteRescatado= servicio.obtenerAdolescenteInfractorCAI(ai_cai.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
             return gestionInformacionAdolescenteCai;
         }else{
             return null;

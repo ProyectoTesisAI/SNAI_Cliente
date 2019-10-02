@@ -407,28 +407,42 @@ public class InformeControlador implements Serializable{
     
     public void guardarInformeResultados(){
         
-        try{
+        try {
+            if (cantidadAsistentes > 0) {
+                
+                if(registroFotografico.size()>0){
+                
+                int asistencia = guardarRegistroAsistencia();
+                if (asistencia > 0) {
 
-            int asistencia=guardarRegistroAsistencia();
-            if(asistencia >0){
+                    Informe informeAux = guardarInforme();
 
-                Informe informeAux= guardarInforme();
+                    if (informeAux != null) {
 
-                if(informeAux != null){
-                    
-                    guardarRegistroFotografico(informeAux);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME","Aviso" ));
-                    informeGuardado=true;
+                        guardarRegistroFotografico(informeAux);
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL INFORME", "Aviso"));
+                        informeGuardado = true;
+                    } else {
+                        informeGuardado = false;
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME", "Aviso"));
+                    }
+                } else {
+                    informeGuardado = false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA", "Aviso"));
+                }
                 }
                 else{
-                    informeGuardado=false;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
+                    informeGuardado = false;
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE INGRESAR AL MENOS UNA IMAGEN", "Aviso"));
+  
                 }
+
+                
+            } else {
+                informeGuardado = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR LA ASISTENCIA DE LOS ADOLESCENTES INFRACTORES", "Aviso"));
             }
-            else{
-                informeGuardado=false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DE ASISTENCIA","Aviso" ));
-            }
+
         }catch(Exception e){
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL INFORME","Aviso" ));
