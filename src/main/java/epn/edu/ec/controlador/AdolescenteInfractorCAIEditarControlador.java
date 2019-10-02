@@ -189,6 +189,7 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
         AdolescenteInfractorCAI ai_cai = servicioCAI.guardarEdicionAdolescenteInfractorCAI(this.adolescenteInfractorCAIEditar);
                
         if (ai_cai != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
             guardado = false;
 
