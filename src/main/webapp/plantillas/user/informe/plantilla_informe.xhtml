@@ -157,7 +157,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtDesarrollo" value="Desarrollo"/>
-                                            <b:inputText id="txtDesarrollo" placeholder="Desarrollo" style="text-transform:uppercase" value="#{informeControlador.informe.socializacionDesarrollo}"/>
+                                            <b:inputText id="txtDesarrollo" required="true" requiredMessage="Desarrollo es requerido, ingrese un valor" placeholder="Desarrollo" style="text-transform:uppercase" value="#{informeControlador.informe.socializacionDesarrollo}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtObjetivosEspecificos" value="Objetivos Especificos"/>
-                                            <b:inputText id="txtObjetivosEspecificos" placeholder="Objetivos Especificos" style="text-transform:uppercase" value="#{informeControlador.informe.socializacionObjetivos}"/>
+                                            <b:inputText id="txtObjetivosEspecificos" required="true" requiredMessage="Objetivos Especificos es requerido, ingrese un valor" placeholder="Objetivos Especificos" style="text-transform:uppercase" value="#{informeControlador.informe.socializacionObjetivos}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtCierreEvaluacion" value="Cierre y Evaluación"/>
-                                            <b:inputTextarea id="txtCierreEvaluacion" placeholder="Cierre y Evaluación" style="text-transform:uppercase" value="#{informeControlador.informe.cierreEvaluacion}"/>
+                                            <b:inputTextarea id="txtCierreEvaluacion" required="true" requiredMessage="Cierre y Evaluación es requerido, ingrese un valor"  placeholder="Cierre y Evaluación" style="text-transform:uppercase" value="#{informeControlador.informe.cierreEvaluacion}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtConclusiones" value="Conclusiones"/>
-                                            <b:inputTextarea id="txtConclusiones" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informeControlador.informe.conclusiones}"/>
+                                            <b:inputTextarea id="txtConclusiones" required="true" requiredMessage="Conclusiones es requerido, ingrese un valor" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informeControlador.informe.conclusiones}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -249,6 +249,8 @@
                                         </b:dataTable>
                                     </div>
                                 </div>
+                                <br/>
+                                <br/>
                                 <div class="row">
                                     <div class=" col-md-3 col-md-offset-8">
                                         <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" actionListener="#{informeControlador.guardarInformeResultados()}" update="@form"/>

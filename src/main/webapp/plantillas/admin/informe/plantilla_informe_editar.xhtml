@@ -149,7 +149,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtDesarrollo" value="Desarrollo"/>
-                                            <b:inputText id="txtDesarrollo" placeholder="Desarrollo" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionDesarrollo}"/>
+                                            <b:inputText id="txtDesarrollo" placeholder="Desarrollo" required="true" requiredMessage="Desarrollo es requerido, ingrese un valor" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionDesarrollo}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtObjetivosEspecificos" value="Objetivos Especificos"/>
-                                            <b:inputText id="txtObjetivosEspecificos" placeholder="Objetivos Especificos" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionObjetivos}"/>
+                                            <b:inputText id="txtObjetivosEspecificos" placeholder="Objetivos Especificos" required="true" requiredMessage="Objetivos Especificos es requerido, ingrese un valor" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.socializacionObjetivos}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtCierreEvaluacion" value="Cierre y Evaluación"/>
-                                            <b:inputTextarea id="txtCierreEvaluacion" placeholder="Cierre y Evaluación" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.cierreEvaluacion}"/>
+                                            <b:inputTextarea id="txtCierreEvaluacion" placeholder="Cierre y Evaluación" style="text-transform:uppercase" required="true" requiredMessage="Cierre y Evaluación es requerido, ingrese un valor" value="#{informeEditarControlador.informeEditar.cierreEvaluacion}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group">
                                             <h:outputLabel for="txtConclusiones" value="Conclusiones"/>
-                                            <b:inputTextarea id="txtConclusiones" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.conclusiones}"/>
+                                            <b:inputTextarea id="txtConclusiones" required="true" requiredMessage="Conclusiones es requerido, ingrese un valor" placeholder="Conclusiones" style="text-transform:uppercase" value="#{informeEditarControlador.informeEditar.conclusiones}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -242,6 +242,8 @@
                                     </b:dataTable>
                                 </div>
                             </div>
+                            <br/>
+                            <br/>
                             <div class="row">
                                 <div class=" col-md-3 col-md-offset-8">
                                     <b:commandButton id="btnTaller" value="Guardar Informe" class="btn btn-primary btn-block" actionListener="#{informeEditarControlador.guardarInformeResultados()}" update="@form"/>

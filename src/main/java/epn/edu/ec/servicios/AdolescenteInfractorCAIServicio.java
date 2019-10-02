@@ -90,4 +90,43 @@ public class AdolescenteInfractorCAIServicio {
         }
         
     }
+    
+    
+    public List<AdolescenteInfractorCAI> listaAdolescentesInfractoresAsignadosCAI() {
+
+        try {
+
+            List<AdolescenteInfractorCAI> listaAdolescentesCAIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI+"/AdolescentesAsignadosCAI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaAdolescentesCAIAux = response.readEntity(new GenericType<List<AdolescenteInfractorCAI>>() {
+                    });
+                }
+            }
+            return listaAdolescentesCAIAux;
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    public List<AdolescenteInfractorCAI> listaAdolescentesInfractoresNoAsignadosCAI() {
+
+        try {
+
+            List<AdolescenteInfractorCAI> listaAdolescentesCAIAux = null;
+            Response response = conexion.conexion(URL_ADOLESCENTE_INFRACTOR_CAI+"/AdolescentesNoAsignadosCAI", "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaAdolescentesCAIAux = response.readEntity(new GenericType<List<AdolescenteInfractorCAI>>() {
+                    });
+                }
+            }
+            return listaAdolescentesCAIAux;
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
 }

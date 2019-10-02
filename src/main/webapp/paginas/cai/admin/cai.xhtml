@@ -6,10 +6,10 @@
       xmlns:h="http://java.sun.com/jsf/html"          
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+
     <h:body>
-       <ui:composition template="./../../../templates/menu.xhtml">
-            
+        <ui:composition template="./../../../templates/menu.xhtml">
+
             <ui:define name="head">
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                 <link rel="stylesheet" type="text/css" href="../../../resources/css/default.css"/>
@@ -19,49 +19,91 @@
                 <script src="../../../resources/js/bootstrap.min.js"></script>
                 <f:event type="preRenderView" listener="#{validarAccesoControlador.verificarSesionAdministrador()}"/>
             </ui:define>
-            
+
             <ui:define name="content">
                 <h:form id="form">
-                    
-                    <h1>PANEL CAI</h1>
-                    <br/>
-                    <br/>
-                    <p:dataTable id="tabla" var="ai" value="#{panelAdolescenteInfractorCAIControlador.listadoAdolescentesInfractoresCAI}"  reflow="true"  rows="20"
-                                 paginator="true"  >
 
-                        <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
-                            <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
-                        </p:column>
+                    <b:tabView pills="true" activeIndex="0"  contentStyle="border: 1px solid #AFAFAF; padding:40px" tabPosition="top" >
+                        <b:tab title="Con CAI">
 
-                        <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula/Documento">
-                            <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
-                        </p:column>
+                            <h1>PANEL CAI</h1>
+                            <br/>
+                            <br/>
+                            <p:dataTable id="tabla" var="ai" value="#{panelAdolescenteInfractorCAIConCAIControlador.listadoAdolescentesInfractoresCAI}"  reflow="true"  rows="20"
+                                         paginator="true"  >
 
-                        <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.edad}" headerText="Edad">
-                            <h:outputText value="#{ai.idAdolescenteInfractor.edad}" />
-                        </p:column>
+                                <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
+                                    <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
+                                </p:column>
 
-                        <p:column headerText="Ver / Agregar Información">
-                            <b:commandButton value="Ver / Agregar" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIControlador.agregarInformacion(ai)}">
-                                <f:ajax execute="@form" />
-                            </b:commandButton>
-                        </p:column>
-                        <p:column headerText="Editar Información">
-                            <b:commandButton value="Editar" class="btn btn-primary btn-block" action="#{panelAdolescenteInfractorCAIControlador.editarInformacion(ai)}">
-                                <f:ajax execute="@form" />
-                            </b:commandButton>
-                        </p:column>
-                        <p:column headerText="Eliminar">
-                            <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorCAIControlador.eliminarAdolescenteInfractor(ai)}" update="@form">
-                                <f:ajax execute="@form"/>
-                            </b:commandButton>
-                        </p:column>
+                                <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula/Documento">
+                                    <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
+                                </p:column>
 
-                    </p:dataTable>
+                                <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.nacionalidad}" headerText="CAI">
+                                    <h:outputText value="#{ai.idAdolescenteInfractor.nacionalidad}" />
+                                </p:column>
+
+                                <p:column headerText="Ver / Agregar Información">
+                                    <b:commandButton value="Ver / Agregar" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAIConCAIControlador.agregarInformacion(ai)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar Información">
+                                    <b:commandButton value="Editar" class="btn btn-primary btn-block" action="#{panelAdolescenteInfractorCAIConCAIControlador.editarInformacion(ai)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                                <p:column headerText="Eliminar">
+                                    <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorCAIConCAIControlador.eliminarAdolescenteInfractor(ai)}" update="@form">
+                                        <f:ajax execute="@form"/>
+                                    </b:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </b:tab>
+
+                        <b:tab title="SIN CAI">
+
+                            <h1>PANEL CAI</h1>
+                            <br/>
+                            <br/>
+                            <p:dataTable id="tabla" var="ai" value="#{panelAdolescenteInfractorCAISinCAIControlador.listadoAdolescentesInfractoresCAI}"  reflow="true"  rows="20"
+                                         paginator="true"  >
+
+                                <p:column  filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" headerText="Nombres">
+                                    <h:outputText style="text-transform: uppercase" value="#{ai.idAdolescenteInfractor.apellidos} #{ai.idAdolescenteInfractor.nombres}" />
+                                </p:column>
+
+                                <p:column filterMatchMode="contains" filterBy="#{ai.idAdolescenteInfractor.cedula}" headerText="Cédula/Documento">
+                                    <h:outputText value="#{ai.idAdolescenteInfractor.cedula}" />
+                                </p:column>
+
+                                <p:column headerText="Ver / Agregar Información">
+                                    <b:commandButton value="Ver / Agregar" class="btn btn-success btn-block" action="#{panelAdolescenteInfractorCAISinCAIControlador.agregarInformacion(ai)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                                <p:column headerText="Editar Información">
+                                    <b:commandButton value="Editar" class="btn btn-primary btn-block" action="#{panelAdolescenteInfractorCAISinCAIControlador.editarInformacion(ai)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                                <p:column headerText="Eliminar">
+                                    <b:commandButton value="Eliminar" class="btn btn-danger btn-block" action="#{panelAdolescenteInfractorCAISinCAIControlador.eliminarAdolescenteInfractor(ai)}" update="@form">
+                                        <f:ajax execute="@form"/>
+                                    </b:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </b:tab>
+                    </b:tabView>
 
                 </h:form>
             </ui:define>
-       </ui:composition>
+        </ui:composition>
     </h:body>
 </html>
 
