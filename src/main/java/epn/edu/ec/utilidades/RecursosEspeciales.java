@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
+
 /**
  *
  * @author User
@@ -20,16 +21,27 @@ import javax.imageio.ImageIO;
 public class RecursosEspeciales {
     
     
-    public InputStream resizeImage(InputStream inputStreamImagen,int ancho, int alto) {
+    public InputStream cambioResolucionImagen(InputStream inputStreamImagen) {
 
         try {
+            
             BufferedImage imagenOriginal = ImageIO.read(inputStreamImagen);
             
             int tipoImagen = ((imagenOriginal.getType() == 0) ? BufferedImage.TYPE_INT_ARGB : imagenOriginal.getType());
-            BufferedImage resizedImage = new BufferedImage(ancho, alto, tipoImagen);
+            int anchoAux= imagenOriginal.getWidth();
+            int altoAux=imagenOriginal.getHeight();
+            
+            while(anchoAux > 875 || altoAux > 875) {
+                
+                anchoAux= (int) (anchoAux/1.25F);
+                altoAux= (int)(altoAux/1.25F);
+                
+            }
+            
+            BufferedImage resizedImage = new BufferedImage(anchoAux, altoAux, tipoImagen);
 
             Graphics2D g2d = resizedImage.createGraphics();
-            g2d.drawImage(imagenOriginal, 0, 0, ancho, alto, null);
+            g2d.drawImage(imagenOriginal, 0, 0, anchoAux, altoAux, null);
             g2d.dispose();
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

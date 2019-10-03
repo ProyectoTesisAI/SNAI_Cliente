@@ -13,7 +13,7 @@ import epn.edu.ec.servicios.ItemTallerServicio;
 import epn.edu.ec.servicios.RegistroAsistenciaServicio;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.servicios.UdiServicio;
-import epn.edu.ec.utilidades.PermisosUsuario;
+import epn.edu.ec.utilidades.Constantes;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -80,7 +80,7 @@ public class TallerEditarControlador implements Serializable {
     int indiceTaller = 0;
 
     private boolean guardado;
-    private PermisosUsuario permisos;
+    private boolean esTipoTallerInspectorEducador;
 
     private ItemTaller item;
 
@@ -105,8 +105,8 @@ public class TallerEditarControlador implements Serializable {
         listaItemsTaller = new ArrayList<>();
         listaItemsTallerEliminados = new ArrayList<>();
         listadoAsistencia = new ArrayList<>();
-        permisos = new PermisosUsuario();
         guardado = false;
+        esTipoTallerInspectorEducador=false;
 
         item = new ItemTaller();
 
@@ -127,6 +127,8 @@ public class TallerEditarControlador implements Serializable {
             tipoTaller = tallerAux.getTipo();
             tallerEditar = tallerAux;
             numeroParticipantes=tallerEditar.getNumeroTotalParticipantes();
+            
+            
             if (tallerAux.getIdCai() != null) {
                 tipoCentro = "CAI";
                 listaCai = servicioCai.listaCai(); //muestro la lista de CAIs rescatadas de la base de datos
@@ -136,6 +138,10 @@ public class TallerEditarControlador implements Serializable {
                 tipoCentro = "UZDI";
                 listaUdi = servicioUdi.listaUdi(); //muestro la lista de UDIs rescatadas de la base de 
                 uzdiSeleccionada = tallerEditar.getIdUdi().getUdi();
+            }
+            
+            if(tipoTaller.equals(Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR)){
+                esTipoTallerInspectorEducador=true;
             }
 
             List<ItemTaller> itemsAux = servicioTaller.obtenerItemsPorTalleres(tallerEditar.getIdTaller());
@@ -378,6 +384,11 @@ public class TallerEditarControlador implements Serializable {
         this.esTecnicoUDI = esTecnicoUDI;
     }
 
+    public boolean isEsTipoTallerInspectorEducador() {
+        return esTipoTallerInspectorEducador;
+    }
+    
+    
     /**
      * ***************************Eventos********************************************
      */
@@ -603,11 +614,11 @@ public class TallerEditarControlador implements Serializable {
                             }
 
                         } else {
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER DE PSICOLOGÍA", "Aviso"));
+                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL TALLER", "Aviso"));
                             guardado = false;
                         }
                     } else {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "LA UZDI O CAI SELECCIONADA NO CUENTA CON ADOLESCENTES INFRACTORES", "Aviso"));
                         guardado = false;
                     }
                 } else {
