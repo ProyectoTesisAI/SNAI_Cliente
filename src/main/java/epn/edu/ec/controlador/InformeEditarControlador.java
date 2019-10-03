@@ -258,7 +258,7 @@ public class InformeEditarControlador implements Serializable{
                     if(imagenes.get(i) != null ){
                         
                         RegistroFotografico registro= new RegistroFotografico();
-                        InputStream imagen= recursosEspeciales.resizeImage(imagenes.get(i).getInputStream(), 800, 600);
+                        InputStream imagen= recursosEspeciales.cambioResolucionImagen(imagenes.get(i).getInputStream());
                         byte[] array= Utils.toByteArray(imagen);
                         registro.setImagen(array);
                         registroFotografico.add(registro);

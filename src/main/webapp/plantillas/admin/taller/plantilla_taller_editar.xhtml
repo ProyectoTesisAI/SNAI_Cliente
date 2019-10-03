@@ -68,7 +68,7 @@
                                         <div class="col-md-2 col-md-offset-1">
                                             <div class="form-group">
                                                 <h:outputLabel for="selecTipoCentro" value="CAI/UZDI"/>
-                                                <b:selectOneMenu id="selecTipoCentro" required="true" update="tipoCentro" process="@this" value="#{tallerEditarControlador.tipoCentro}" >
+                                                <b:selectOneMenu id="selecTipoCentro" disabled="#{tallerEditarControlador.esTipoTallerInspectorEducador}" required="true" update="tipoCentro" process="@this" value="#{tallerEditarControlador.tipoCentro}" >
                                                     <f:selectItem itemLabel="UZDI"  itemValue="UZDI"/>
                                                     <f:selectItem itemLabel="CAI"  itemValue="CAI"/>
                                                 </b:selectOneMenu>
@@ -85,8 +85,8 @@
                                                         <f:selectItems value="#{tallerEditarControlador.listaUdi}" var="u" itemValue="#{u.udi}" itemLabel="#{u.udi}" />
                                                     </b:selectOneMenu>
 
-                                                    <h:outputLabel for="txtCai" value="CAI" rendered="#{!tallerEditarControlador.esUzdi}"/>
-                                                    <b:selectOneMenu id="txtCai" rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.caiSeleccionado}" update="txtNumeroTotalParticipantes" process="@this">
+                                                    <h:outputLabel for="txtCai" value="CAI"  rendered="#{!tallerEditarControlador.esUzdi}"/>
+                                                    <b:selectOneMenu id="txtCai"  rendered="#{!tallerEditarControlador.esUzdi}" value="#{tallerEditarControlador.caiSeleccionado}" update="txtNumeroTotalParticipantes" process="@this">
                                                         <f:selectItem itemLabel="Seleccione una opción" itemValue="0" />
                                                         <f:selectItems value="#{tallerEditarControlador.listaCai}" var="c" itemValue="#{c.cai}" itemLabel="#{c.cai}" />
                                                     </b:selectOneMenu>
