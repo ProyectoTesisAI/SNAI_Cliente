@@ -186,26 +186,32 @@
                                 <h:outputLabel for="txtEmbarazo" value="Embarazo"/>
                                 <b:selectOneMenu id="txtEmbarazo" update="txtTiempGestacionMes" process="@this" value="#{ejeSaludControladorCAI.ejeSalud.embarazo}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="SI"  itemValue="true" />
                                     <f:selectItem itemLabel="NO"  itemValue="false" />
+                                    <f:selectItem itemLabel="SI"  itemValue="true" />
+                                    <f:ajax render="estadoEmbarazo"/>
                                 </b:selectOneMenu>
                             </b:column>
 
-                            <b:column span="4" offset="2">
-                                <h:outputLabel for="txtTiempGestacionMes" value="Tiempo de Gestación (Mes)"/>
-                                <b:selectOneMenu id="txtTiempGestacionMes" disabled="#{!ejeSaludControladorCAI.ejeSalud.embarazo}" value="#{ejeSaludControladorCAI.ejeSalud.tiempoGestacionMes}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
-                                    <f:selectItem itemLabel="1"  itemValue="1" />
-                                    <f:selectItem itemLabel="2"  itemValue="2" />
-                                    <f:selectItem itemLabel="3"  itemValue="3" />
-                                    <f:selectItem itemLabel="4"  itemValue="4" />
-                                    <f:selectItem itemLabel="5"  itemValue="5" />
-                                    <f:selectItem itemLabel="6"  itemValue="6" />
-                                    <f:selectItem itemLabel="7"  itemValue="7" />
-                                    <f:selectItem itemLabel="8"  itemValue="8" />
-                                    <f:selectItem itemLabel="9"  itemValue="9" />
-                                </b:selectOneMenu>
-                            </b:column>
+                            <h:panelGroup id="estadoEmbarazo"  >
+
+                                <b:column span="4" offset="2" rendered="#{ejeSaludControladorCAI.ejeSalud.embarazo}">
+                                    <h:outputLabel for="txtTiempGestacionMes" value="Tiempo de Gestación (Mes)"/>
+                                    <b:selectOneMenu id="txtTiempGestacionMes"  value="#{ejeSaludControladorCAI.ejeSalud.tiempoGestacionMes}">
+                                        <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
+                                        <f:selectItem itemLabel="1"  itemValue="1" />
+                                        <f:selectItem itemLabel="2"  itemValue="2" />
+                                        <f:selectItem itemLabel="3"  itemValue="3" />
+                                        <f:selectItem itemLabel="4"  itemValue="4" />
+                                        <f:selectItem itemLabel="5"  itemValue="5" />
+                                        <f:selectItem itemLabel="6"  itemValue="6" />
+                                        <f:selectItem itemLabel="7"  itemValue="7" />
+                                        <f:selectItem itemLabel="8"  itemValue="8" />
+                                        <f:selectItem itemLabel="9"  itemValue="9" />
+                                    </b:selectOneMenu>
+                                </b:column>
+
+                            </h:panelGroup>
+                            
                         </b:row>
                     </h:panelGroup>                                    
                     <b:row>
