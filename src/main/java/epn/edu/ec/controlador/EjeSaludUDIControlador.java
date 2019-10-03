@@ -233,6 +233,11 @@ public class EjeSaludUDIControlador implements Serializable {
             this.ejeSalud.setTiempoGestacionMes(null);
             this.ejeSalud.setEmbarazo(false);
         }
+        else{
+            if(this.ejeSalud.getEmbarazo() == false){
+                this.ejeSalud.setTiempoGestacionMes(null);
+            }
+        }
         
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorUDI.getIdAdolescenteInfractor());
@@ -263,6 +268,11 @@ public class EjeSaludUDIControlador implements Serializable {
         if(!esMujer){
             this.ejeSalud.setTiempoGestacionMes(null);
             this.ejeSalud.setEmbarazo(false);
+        }
+        else{
+            if(this.ejeSalud.getEmbarazo() == false){
+                this.ejeSalud.setTiempoGestacionMes(null);
+            }
         }
         
         

@@ -1,6 +1,7 @@
 package epn.edu.ec.controlador;
 
 import epn.edu.ec.modelo.Taller;
+import epn.edu.ec.modelo.UDI;
 import epn.edu.ec.modelo.Usuario;
 import epn.edu.ec.servicios.TallerServicio;
 import epn.edu.ec.utilidades.Constantes;
@@ -37,6 +38,8 @@ public class PanelTallerControlador implements Serializable {
         String tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
         
         listaTalleres = new ArrayList<>();
+        listaTalleresPorTipo= new ArrayList<>();
+        
         if(usuario!=null){
             
             String rol=usuario.getIdRolUsuarioCentro().getIdRol().getRol();
@@ -62,21 +65,14 @@ public class PanelTallerControlador implements Serializable {
                 }
 
             }
-        }
-        
-        
-        
-        if(listaTalleres.size() > 0){
-        
-            listaTalleresPorTipo= new ArrayList<>();
             
-            for(Taller e: listaTalleres){
-                
-                if(e.getTipo().equals(tipoTaller)){
-                    listaTalleresPorTipo.add(e);
-                }
-            }
+            filtrarTalleresPorTipo(tipoTaller);
+            combinarTalleresUzdiCai();
         }
+        
+        
+        
+        
 
     }
 
@@ -87,6 +83,43 @@ public class PanelTallerControlador implements Serializable {
     public TallerServicio getServicio() {
         return servicio;
     }
+    
+    private void filtrarTalleresPorTipo(String tipoTaller){
+    
+        if(listaTalleres.size() > 0){
+
+            for(Taller e: listaTalleres){
+                
+                if(e.getTipo().equals(tipoTaller)){
+                    listaTalleresPorTipo.add(e);
+                    
+                }
+            }
+            
+        }
+    }
+    
+    private void combinarTalleresUzdiCai() {
+
+        if (listaTalleresPorTipo != null) {
+
+            if (listaTalleresPorTipo.size() > 0) {
+                for (Taller t : listaTalleresPorTipo) {
+
+                    if (t.getIdCai() != null) {
+
+                        UDI udi = new UDI();
+                        udi.setUdi(t.getIdCai().getCai());
+
+                        t.setIdUdi(udi);
+                    }
+                }
+            }
+        }
+        
+
+    }
+    
 
     public String verTaller(Taller taller) {
 
@@ -94,14 +127,25 @@ public class PanelTallerControlador implements Serializable {
             String rolActual = permisosUsuario.RolUsuario();
 
             if(rolActual!=null){
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
+                
+                Taller tallerAux= servicio.obtenerTallerPorId(taller.getIdTaller());
+                
+                if (tallerAux != null) {
 
-                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
-                    return enlaces.PATH_TALLER_VER_ADMINISTRADOR+"?faces-redirect=true";
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", tallerAux);
+
+                    if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)) {
+                        return enlaces.PATH_TALLER_VER_ADMINISTRADOR + "?faces-redirect=true";
+                    } else {
+                        return enlaces.PATH_TALLER_VER_USER + "?faces-redirect=true";
+                    }
                 }
                 else{
-                    return enlaces.PATH_TALLER_VER_USER+"?faces-redirect=true";
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
+                    return enlaces.PATH_ERROR+"?faces-redirect=true";
+                
                 }
+                
             }
             else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
@@ -122,14 +166,25 @@ public class PanelTallerControlador implements Serializable {
             
             if(rolActual!=null){
                 
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", taller);
-            
-                if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)){
-                    return enlaces.PATH_TALLER_EDITAR_ADMINISTRADOR+"?faces-redirect=true";
+                Taller tallerAux= servicio.obtenerTallerPorId(taller.getIdTaller());
+                
+                if (tallerAux != null) {
+
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("taller_seleccionado", tallerAux);
+
+                    if (Constantes.ROL_ADMINISTRADOR.equals(rolActual)) {
+                        return enlaces.PATH_TALLER_EDITAR_ADMINISTRADOR + "?faces-redirect=true";
+                    } else {
+                        return enlaces.PATH_ERROR + "?faces-redirect=true";
+                    }
                 }
                 else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));
                     return enlaces.PATH_ERROR+"?faces-redirect=true";
+                
                 }
+                
+                
             }
             else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR", "ERROR"));

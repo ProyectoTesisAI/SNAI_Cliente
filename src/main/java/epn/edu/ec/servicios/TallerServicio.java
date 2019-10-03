@@ -28,6 +28,25 @@ public class TallerServicio {
         conexionCAI= new ConexionServicio<>();
     }
     
+    
+    public Taller obtenerTallerPorId(Integer idTaller){
+        
+        try {
+            Taller tallerAux = null;
+            Response response = conexion.conexion(URL_TALLER+"/"+idTaller.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    tallerAux = response.readEntity(Taller.class);
+                }
+            }
+
+            return tallerAux;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
     public Taller guardarTaller(Taller taller){
         
         try {

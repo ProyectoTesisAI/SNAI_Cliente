@@ -231,6 +231,11 @@ public class EjeSaludCAIControlador implements Serializable{
             this.ejeSalud.setTiempoGestacionMes(null);
             this.ejeSalud.setEmbarazo(false);
         }
+        else{
+            if(ejeSalud.getEmbarazo() == false){
+                ejeSalud.setTiempoGestacionMes(null);
+            }
+        }
         
         this.ejeSalud.setIdAdolescenteInfractor(adolescenteInfractorCAI.getIdAdolescenteInfractor());
 
@@ -262,6 +267,11 @@ public class EjeSaludCAIControlador implements Serializable{
         if(!esMujer){
             this.ejeSalud.setTiempoGestacionMes(null);
             this.ejeSalud.setEmbarazo(false);
+        }
+        else{
+            if(this.ejeSalud.getEmbarazo() == false){
+                this.ejeSalud.setTiempoGestacionMes(null);
+            }
         }
         
         EjeSalud ejeSaludCAIAux = servicio.guardarEjeSalud(this.ejeSalud);

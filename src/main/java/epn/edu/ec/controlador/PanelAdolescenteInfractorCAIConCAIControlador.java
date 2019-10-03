@@ -64,8 +64,14 @@ public class PanelAdolescenteInfractorCAIConCAIControlador implements Serializab
 
             AdolescenteInfractorCAI adolescenteRescatado= servicio.obtenerAdolescenteInfractorCAI(ai_cai.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
-            return gestionInformacionAdolescenteCai;
+            if(adolescenteRescatado != null){
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
+                return gestionInformacionAdolescenteCai;
+            }
+            else{
+                return enlaces.PATH_ERROR + "?faces-redirect=true";
+            }
+            
         }else{
             return null;
         }     
@@ -79,8 +85,15 @@ public class PanelAdolescenteInfractorCAIConCAIControlador implements Serializab
 
             AdolescenteInfractorCAI adolescenteRescatado= servicio.obtenerAdolescenteInfractorCAI(ai_cai.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
             
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
-            return gestionInformacionAdolescenteCai;
+            if(adolescenteRescatado != null){
+            
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", adolescenteRescatado);
+                return gestionInformacionAdolescenteCai;
+            }
+            else{
+                return enlaces.PATH_ERROR + "?faces-redirect=true";
+            }
+            
         }else{
             return null;
         }     
