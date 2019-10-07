@@ -26,12 +26,7 @@ public class EjecucionMedidaCAI implements Serializable {
     private String observacionesProcesoJudicial;
     private CAI idCai;
     private DetalleInfraccionCAI idDetalleInfraccionCAI;
-    
-    //Fecha de reporte
-    private Date fechaReporteCAI;
-    //Cumplimiento de medida
-    private Date fechaCumplimiento100;
-    private Date alertaCumplimiento100;
+
 
     public EjecucionMedidaCAI() {
     }
@@ -154,15 +149,13 @@ public class EjecucionMedidaCAI implements Serializable {
         int d = 0;
         int m = 0;
         int ac = 0;
-        if (fechaAprehension != null && fechaReporteCAI!=null) {
-            //Date fechaResolucion = idEjecucionMedida.getFechaReporte();
-            Date fechaResolucionaAux = fechaReporteCAI;
+        if (fechaAprehension != null && fechaIngresoCai!=null) {
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
             ZonedDateTime zdt1 = ZonedDateTime.parse(fechaAprehension.toString(), dtf);
             LocalDate ld1 = zdt1.toLocalDate();
 
-            ZonedDateTime zdt2 = ZonedDateTime.parse(fechaResolucionaAux.toString(), dtf);
+            ZonedDateTime zdt2 = ZonedDateTime.parse(fechaIngresoCai.toString(), dtf);
             LocalDate ld2 = zdt2.toLocalDate();
 
             DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -211,39 +204,4 @@ public class EjecucionMedidaCAI implements Serializable {
         this.idDetalleInfraccionCAI = idDetalleInfraccionCAI;
     }
 
-    public Date getFechaCumplimiento100() {
-        if (fechaAprehension != null) {
-            Calendar fechaAux1 = Calendar.getInstance();
-            fechaAux1.setTime(fechaAprehension);
-            fechaAux1.add(Calendar.DATE, tiempoSentenDias);
-            fechaCumplimiento100 = fechaAux1.getTime();
-        }
-        return fechaCumplimiento100;
-    }
-
-    public void setFechaCumplimiento100(Date fechaCumplimiento100) {
-        this.fechaCumplimiento100 = fechaCumplimiento100;
-    }
-
-    public Date getAlertaCumplimiento100() {
-        if (fechaCumplimiento100 != null) {
-            Calendar fechaAux1 = Calendar.getInstance();
-            fechaAux1.setTime(fechaCumplimiento100);
-            fechaAux1.add(Calendar.DATE, -14);
-            alertaCumplimiento100 = fechaAux1.getTime();
-        }
-        return alertaCumplimiento100;
-    }
-
-    public void setAlertaCumplimiento100(Date alertaCumplimiento100) {
-        this.alertaCumplimiento100 = alertaCumplimiento100;
-    }
-
-    public Date getFechaReporteCAI() {
-        return fechaReporteCAI;
-    }
-
-    public void setFechaReporteCAI(Date fechaReporteCAI) {
-        this.fechaReporteCAI = fechaReporteCAI;
-    }
  }

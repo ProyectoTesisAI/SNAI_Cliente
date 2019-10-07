@@ -81,7 +81,7 @@
                             
                             <b:column span="4" offset="2">
                                 <h:outputLabel for="txtFechaIngreso" rendered="true" value="Fecha de Ingreso de Proceso"/>
-                                <b:dateTimePicker id="txtFechaIngreso" rendered="true" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.fechaIngresoProcesoCAI}"/>
+                                <b:dateTimePicker id="txtFechaIngreso" rendered="true" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{ejecucionMedidaControlador.ejecucionMedidaCAI.fechaIngresoCai}"/>
                             </b:column>
                             
                         </b:row>    
@@ -218,7 +218,7 @@
                                           onclick="setBtnEjecucionMedida()"/>
 
                                 <b:remoteCommand name="setBtnEjecucionMedida" id="remoteCommand2"
-                                                 actionListener="#{ejecucionMedidaControlador.guardarEjecucionMedida()}"
+                                                 actionListener="#{ejecucionMedidaControlador.guardarEdicionEjecucionMedida()}"
                                                  update="@form" />
                             </b:column>
                         </b:row>

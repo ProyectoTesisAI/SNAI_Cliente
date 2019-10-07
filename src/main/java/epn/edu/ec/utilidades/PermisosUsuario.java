@@ -43,17 +43,17 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_CREAR_UDI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 
-                if (rolUsuario.equals("LIDER UZDI") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")) {
+                if (rolUsuario.equals(Constantes.ROL_LIDER_UZDI) || rolUsuario.equals(Constantes.ROL_SUBDIRECTOR) || rolUsuario.equals(Constantes.ROL_DIRECTOR_UZDI)) {
                     return enlaces.PATH_PANEL_CREAR_UDI_LIDER_UZDI + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO PSICOLOGO UZDI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_PSICOLOGO_UZDI)) {
                     return enlaces.PATH_PANEL_CREAR_UDI_PSICOLOGO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("TRABAJADOR SOCIAL UZDI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_UZDI)) {
                     return enlaces.PATH_PANEL_CREAR_UDI_TRABAJADOR_SOCIAL + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO JURIDICO UZDI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_JURIDICO_UZDI)) {
                     return enlaces.PATH_PANEL_CREAR_UDI_JURIDICO + "?faces-redirect=true";
                 } else {
                     return null;
@@ -86,19 +86,19 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_CREAR_CAI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 
-                if (rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")) {
+                if (rolUsuario.equals(Constantes.ROL_COORDINADOR_CAI) || rolUsuario.equals(Constantes.ROL_SUBDIRECTOR) || rolUsuario.equals(Constantes.ROL_DIRECTOR_CAI)) {
                     return enlaces.PATH_PANEL_CREAR_CAI_COORDINADOR + "?faces-redirect=true";
-                } else if (rolUsuario.equals("INSPECTOR EDUCADOR")) {
+                } else if (rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                     return enlaces.PATH_PANEL_CREAR_CAI_INSPECTOR_EDUCADOR + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_PSICOLOGO_CAI)) {
                     return enlaces.PATH_PANEL_CREAR_CAI_PSICOLOGO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_JURIDICO_CAI)) {
                     return enlaces.PATH_PANEL_CREAR_CAI_JURIDICO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("TRABAJADOR SOCIAL CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_CAI)) {
                     return enlaces.PATH_PANEL_CREAR_CAI_TRABAJADOR_SOCIAL + "?faces-redirect=true";
                 } else {
                     return null;
@@ -115,7 +115,7 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_EDITAR_CAI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return null;
@@ -131,19 +131,19 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_ADMININSTRADOR + "?faces-redirect=true";
             } else {
 
-                if (rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")) {
+                if (rolUsuario.equals(Constantes.ROL_COORDINADOR_CAI) || rolUsuario.equals(Constantes.ROL_SUBDIRECTOR) || rolUsuario.equals(Constantes.ROL_DIRECTOR_CAI)) {
                     return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("INSPECTOR EDUCADOR")) {
+                } else if (rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                     return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_PSICOLOGO_CAI)) {
                     return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_JURIDICO_CAI)) {
                     return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_CREAR_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("TRABAJADOR SOCIAL CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_CAI)) {
                     return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_VER_USUARIO + "?faces-redirect=true";
                 } else {
                     return null;
@@ -160,7 +160,7 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_EJECUCION_MEDIDA_CAI_EDITAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return null;
@@ -176,19 +176,19 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_ADMINISTRADOR + "?faces-redirect=true";
             } else {
 
-                if (rolUsuario.equals("COORDINADOR CAI") || rolUsuario.equals("SUBDIRECTOR") || rolUsuario.equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")) {
+                if (rolUsuario.equals(Constantes.ROL_COORDINADOR_CAI) || rolUsuario.equals(Constantes.ROL_SUBDIRECTOR) || rolUsuario.equals(Constantes.ROL_DIRECTOR_CAI)) {
                     return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("INSPECTOR EDUCADOR")) {
+                } else if (rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                     return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_INSPECTOR_EDUCADOR + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO PSICOLOGO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_PSICOLOGO_CAI)) {
                     return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("EQUIPO TECNICO JURIDICO CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_JURIDICO_CAI)) {
                     return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO + "?faces-redirect=true";
-                } else if (rolUsuario.equals("TRABAJADOR SOCIAL CAI")) {
+                } else if (rolUsuario.equals(Constantes.ROL_TRABAJADOR_SOCIAL_CAI)) {
                     return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_USUARIO + "?faces-redirect=true";
                 } else {
                     return null;
@@ -205,7 +205,7 @@ public class PermisosUsuario {
 
         if (rolUsuario != null) {
 
-            if ("ADMINISTRADOR".equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
                 return enlaces.PATH_PANEL_INFORMACION_MEDIDA_CAI_EDITAR_ADMINISTRADOR + "?faces-redirect=true";
             } else {
                 return null;

@@ -128,7 +128,7 @@ public class TallerControlador implements Serializable {
 
         String rol = permisos.RolUsuario();
         if (rol != null) {
-            if ("ADMINISTRADOR".equals(rol) || "SUBDIRECTOR".equals(rol) || "LIDER UZDI".equals(rol) || "COORDINADOR CAI".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN".equals(rol) || "DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN".equals(rol)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rol) || Constantes.ROL_SUBDIRECTOR.equals(rol) || Constantes.ROL_LIDER_UZDI.equals(rol) || Constantes.ROL_COORDINADOR_CAI.equals(rol) || Constantes.ROL_DIRECTOR_CAI.equals(rol) || Constantes.ROL_DIRECTOR_UZDI.equals(rol)) {
                 esTecnico = false; //content-disable=true
                 esTecnicoCAI=false;
                 esTecnicoUDI=false;
@@ -146,7 +146,7 @@ public class TallerControlador implements Serializable {
 
                 esTecnico = true; //content-disable=true
 
-                if ("EQUIPO TECNICO PSICOLOGO UZDI".equals(rol) || "EQUIPO TECNICO JURIDICO UZDI".equals(rol) || "TRABAJADOR SOCIAL UZDI".equals(rol)) {
+                if (Constantes.ROL_PSICOLOGO_UZDI.equals(rol) || Constantes.ROL_JURIDICO_UZDI.equals(rol) || Constantes.ROL_TRABAJADOR_SOCIAL_UZDI.equals(rol)) {
                     
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
@@ -154,7 +154,7 @@ public class TallerControlador implements Serializable {
     //                listaUdi = servicioUdi.listaUdi();
                     this.setUzdiSeleccionada(usuarioLogin.getIdRolUsuarioCentro().getIdUdi().getUdi());
 
-                } else if ("EQUIPO TECNICO PSICOLOGO CAI".equals(rol) || "EQUIPO TECNICO JURIDICO CAI".equals(rol) || "INSPECTOR EDUCADOR".equals(rol) || "TRABAJADOR SOCIAL CAI".equals(rol)) {
+                } else if (Constantes.ROL_PSICOLOGO_CAI.equals(rol) || Constantes.ROL_JURIDICO_CAI.equals(rol) || Constantes.ROL_INSPECTOR_EDUCADOR.equals(rol) || Constantes.ROL_TRABAJADOR_SOCIAL_CAI.equals(rol)) {
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
                     this.setTipoCentro("CAI"); //tipoCentro = "CAI";

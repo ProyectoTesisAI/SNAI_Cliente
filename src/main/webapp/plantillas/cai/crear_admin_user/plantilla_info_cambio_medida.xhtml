@@ -57,51 +57,31 @@
                             <b:row>
                                  <b:column span="4" offset="1">
                                     <h:outputLabel for="txtCambioMedida" value="Cambio de medida socioeducativa"/>
-                                    <b:selectOneMenu id="txtCambioMedida" update="tipoCumplimiento" process="@this" value="#{informacionCambioMedidaControlador.tipoCumplimiento}">
+                                    <b:selectOneMenu id="txtCambioMedida" update="txtCumplimientoMedidad6080,txtFechaCumplimiento6080,txtAlertaCambio6080" process="@this" value="#{informacionCambioMedidaControlador.tipoCumplimiento}">
                                         <f:selectItem itemLabel="Seleccione una opción"  itemDisabled="true" />
                                         <f:selectItem itemLabel="60% DE CUMPLIMIENTO"  itemValue="60% DE CUMPLIMIENTO" />
                                         <f:selectItem itemLabel="80% DE CUMPLIMIENTO"  itemValue="80% DE CUMPLIMIENTO" />
                                     </b:selectOneMenu>
                                 </b:column>
                             </b:row>
-                            <h:panelGroup id="tipoCumplimiento">
-                                <b:panel rendered="#{informacionCambioMedidaControlador.es60}"><!-->60% de cumplimiento<-->
-                                    <b:row>
-                                        <b:column span="4" offset="1">
-                                            <h:outputLabel  for="txtCumplimientoMedidad60" value="Cumplimiento días del 60%"/>
-                                            <b:inputText id="txtCumplimientoMedidad60" disabled="true" placeholder="Días"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.cumplimieno6080TiempoPrivacionLibertad}"/>
-                                        </b:column>
-                                        <b:column span="4" offset="2">                
-                                            <h:outputLabel for="txtFechaCumplimiento60" value="Fecha de cumplimiento de 60%"/>
-                                            <b:dateTimePicker id="txtFechaCumplimiento60" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.fechaCumplimiento6080}"/>
-                                        </b:column>
-                                    </b:row>
-                                    <b:row>
-                                        <b:column span="4" offset="1">
-                                            <h:outputLabel for="txtAlertaCambio60" value="Alerta cambio de medida 60%"/>
-                                            <b:dateTimePicker id="txtAlertaCambio60" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.alertaCambioMedida}"/>
-                                        </b:column>
-                                    </b:row>
-                                </b:panel>
-                                <b:panel rendered="#{!informacionCambioMedidaControlador.es60}"><!-->80% de cumplimiento<-->
-                                    <b:row>
-                                        <b:column span="4" offset="1">
-                                            <h:outputLabel  for="txtCumplimientoMedidad80" value="Cumplimiento días del 80%"/>
-                                            <b:inputText id="txtCumplimientoMedidad80" disabled="true" placeholder="Días"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.cumplimieno6080TiempoPrivacionLibertad}"/>
-                                        </b:column>
-                                        <b:column span="4" offset="2">                
-                                            <h:outputLabel for="txtFechaCumplimiento80" value="Fecha de cumplimiento de 80%"/>
-                                            <b:dateTimePicker id="txtFechaCumplimiento80" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.fechaCumplimiento6080}"/>
-                                        </b:column>
-                                    </b:row>
-                                    <b:row>
-                                        <b:column span="4" offset="1">
-                                            <h:outputLabel for="txtAlertaCambio80" value="Alerta cambio de medida 80%"/>
-                                            <b:dateTimePicker id="txtAlertaCambio80" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.alertaCambioMedida}"/>
-                                        </b:column>
-                                    </b:row>
-                                </b:panel>
-                            </h:panelGroup>
+                            
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel  for="txtCumplimientoMedidad6080" value="Cumplimiento días del 60% o 80%"/>
+                                    <b:inputText id="txtCumplimientoMedidad6080" disabled="true" placeholder="Días"  value="#{informacionCambioMedidaControlador.informacionCambioMedida.cumplimieno6080TiempoPrivacionLibertad}"/>
+                                </b:column>
+                                <b:column span="4" offset="2">                
+                                    <h:outputLabel for="txtFechaCumplimiento6080" value="Fecha de cumplimiento de 60% o 80%"/>
+                                    <b:dateTimePicker id="txtFechaCumplimiento6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.fechaCumplimiento6080}"/>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column span="4" offset="1">
+                                    <h:outputLabel for="txtAlertaCambio6080" value="Alerta cambio de medida  60% o80%"/>
+                                    <b:dateTimePicker id="txtAlertaCambio6080" disabled="true" placeholder="dd/mm/aa" showTime="false" value="#{informacionCambioMedidaControlador.informacionCambioMedida.alertaCambioMedida}"/>
+                                </b:column>
+                            </b:row>
+                            
                             <br/>
                             <br/>
 

@@ -2,6 +2,7 @@ package epn.edu.ec.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.faces.context.FacesContext;
 
 public class CumplimientoMedidaCAI implements Serializable {
 
@@ -9,9 +10,11 @@ public class CumplimientoMedidaCAI implements Serializable {
     private Date fechaCumplimiento100;
     private Date alertaCambioMedida;
 
+    
     public CumplimientoMedidaCAI() {
     }
 
+    
     public EjecucionMedidaCAI getIdEjecucionMedidaCAI() {
         return idEjecucionMedidaCAI;
     }
