@@ -4,13 +4,16 @@ import epn.edu.ec.modelo.CAI;
 import epn.edu.ec.modelo.DatosProvinciaCanton;
 import epn.edu.ec.modelo.DetalleInfraccionCAI;
 import epn.edu.ec.modelo.EjecucionMedidaCAI;
+import epn.edu.ec.modelo.InformacionCambioMedidaCAI;
 import epn.edu.ec.servicios.CaiServicio;
 import epn.edu.ec.servicios.DatosProvinciaCantonServicio;
 import epn.edu.ec.servicios.DetalleInfraccionCAIServicio;
 import epn.edu.ec.servicios.EjecucionMedidaServicio;
+import epn.edu.ec.servicios.InformacionCambioMedidaServicio;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -68,8 +71,9 @@ public class EjecucionMedidaControlador implements Serializable {
         if(detalleInfraccionCAIAux != null){
             
             detalleInfraccionCAI=detalleInfraccionCAIAux;
+            
             fechaIngresoProcesoCAI=detalleInfraccionCAI.getIdAdolescenteInfractorCAI().getFechaIngresoProceso();
-            ejecucionMedidaCAI.setFechaReporteCAI(fechaIngresoProcesoCAI);
+            ejecucionMedidaCAI.setFechaIngresoCai(fechaIngresoProcesoCAI);
             
             List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
             
@@ -214,7 +218,7 @@ public class EjecucionMedidaControlador implements Serializable {
         }
         
         ejecucionMedidaCAI=medidaSeleccionada;
-        ejecucionMedidaCAI.setFechaReporteCAI(fechaIngresoProcesoCAI);
+        //ejecucionMedidaCAI.setFechaReporteCAI(fechaIngresoProcesoCAI);
     }
     
     public void guardarEjecucionMedida() {
@@ -236,6 +240,42 @@ public class EjecucionMedidaControlador implements Serializable {
             EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
             if (ejecucionMedidaAux != null) {
 
+                List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
+
+                if (listaAux.isEmpty() != true) {
+                    listaEjecucionMedida = listaAux;
+                }
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJECUCIÓN MEDIDA", "Información"));
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJECUCIÓN MEDIDA", "Error"));
+            }
+        }
+        
+    }
+    
+    public void guardarEdicionEjecucionMedida() {
+
+        if(ejecucionMedidaCAI.getFechaResolucion()== null || ejecucionMedidaCAI.getFechaAprehension() == null || ejecucionMedidaCAI.getAnios() == null || ejecucionMedidaCAI.getMeses() == null || ejecucionMedidaCAI.getDias() == null ){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fecha Resolución, Fecha de Aprehensión, Años, Meses, Días deben de tener un valor", "Error"));
+            
+        } else {
+            
+            for (CAI c : listaCAI) {
+                if (c.getCai().equals(cai.getCai())) {
+                    cai = c;
+                }
+            }
+            this.ejecucionMedidaCAI.setIdCai(cai);
+            this.ejecucionMedidaCAI.setFechaIngresoCai(fechaIngresoProcesoCAI);
+            this.ejecucionMedidaCAI.setIdDetalleInfraccionCAI(detalleInfraccionCAI);
+
+            EjecucionMedidaCAI ejecucionMedidaAux = servicio.guardarEjecucionMedidaCAI(ejecucionMedidaCAI);
+            if (ejecucionMedidaAux != null) {
+
+                editarInformacionCambioMedida(ejecucionMedidaAux);
+                
+                //obtengo la lista auxiliar de Medidas, para mostrarlas en la tabla
                 List<EjecucionMedidaCAI> listaAux = servicio.obtenerMedidasPorInfraccionCAI(detalleInfraccionCAI);
 
                 if (listaAux.isEmpty() != true) {
@@ -275,4 +315,92 @@ public class EjecucionMedidaControlador implements Serializable {
             return null;
         } 
     }
+    
+    private void editarInformacionCambioMedida(EjecucionMedidaCAI  ejecucionMedidaCAI){
+        
+        InformacionCambioMedidaServicio servicioCambioMedida= new InformacionCambioMedidaServicio();
+        
+        InformacionCambioMedidaCAI infoCambioMedidaCAI= servicioCambioMedida.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
+        if(infoCambioMedidaCAI != null){
+        
+            String cambioMedidaSocioeducativa=infoCambioMedidaCAI.getCambioMedidaSocioeducativa();
+            Integer cumplimieno6080Tiempo=getCumplimieno6080TiempoPrivacionLibertad(cambioMedidaSocioeducativa, ejecucionMedidaCAI);
+            
+            if(cumplimieno6080Tiempo != null){
+                
+                Date fechaCumplimiento= getFechaCumplimiento6080(cambioMedidaSocioeducativa, ejecucionMedidaCAI, cumplimieno6080Tiempo);
+            
+                if(fechaCumplimiento != null){
+                    
+                    Date fechaAlertaCambioMedida=getAlertaCambioMedida(fechaCumplimiento);
+                    
+                    
+                    infoCambioMedidaCAI.setCumplimieno6080TiempoPrivacionLibertad(cumplimieno6080Tiempo);;
+                    infoCambioMedidaCAI.setFechaCumplimiento6080(fechaCumplimiento);
+                    infoCambioMedidaCAI.setAlertaCambioMedida(fechaAlertaCambioMedida);
+                    servicioCambioMedida.guardarInformacionCambioMedidaCAI(infoCambioMedidaCAI);
+                }
+            }
+        
+        }
+        
+        
+    }
+    
+    private Integer getCumplimieno6080TiempoPrivacionLibertad(String cambioMedidaSocioeducativa, EjecucionMedidaCAI idEjecucionMedidaCAI) {
+        
+        Integer cumplimieno6080TiempoPrivacionLibertad=null;
+        
+        if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI!=null){
+           
+            if (idEjecucionMedidaCAI.getTiempoSentenDias()!=null) {
+            
+                if (cambioMedidaSocioeducativa.equals("60% DE CUMPLIMIENTO")) {
+                    int tiempo60=(idEjecucionMedidaCAI.getTiempoSentenDias()*60)/100;
+                    cumplimieno6080TiempoPrivacionLibertad=tiempo60;
+                    return cumplimieno6080TiempoPrivacionLibertad;
+                } else if (cambioMedidaSocioeducativa.equals("80% DE CUMPLIMIENTO")) {
+                    int tiempo80=(idEjecucionMedidaCAI.getTiempoSentenDias()*80)/100;
+                    cumplimieno6080TiempoPrivacionLibertad=tiempo80;
+                    return cumplimieno6080TiempoPrivacionLibertad;
+                }
+            }
+        }
+        
+        return cumplimieno6080TiempoPrivacionLibertad;
+    }
+
+    private Date getFechaCumplimiento6080(String cambioMedidaSocioeducativa, EjecucionMedidaCAI idEjecucionMedidaCAI, Integer cumplimieno6080TiempoPrivacionLibertad) {
+        
+        Date fechaCumplimiento6080=null;
+        
+        if(cambioMedidaSocioeducativa!=null && idEjecucionMedidaCAI!=null){
+            
+            if(idEjecucionMedidaCAI.getFechaAprehension()!=null){
+                
+                Calendar fechaAux = Calendar.getInstance();
+                fechaAux.setTime(idEjecucionMedidaCAI.getFechaAprehension());
+                fechaAux.add(Calendar.DATE, cumplimieno6080TiempoPrivacionLibertad);
+                fechaCumplimiento6080=fechaAux.getTime();
+            }
+        }
+        
+        return fechaCumplimiento6080;
+    }
+
+    private Date getAlertaCambioMedida(Date fechaCumplimiento6080) {
+        
+        Date alertaCambioMedida=null;
+        
+        if(fechaCumplimiento6080!=null){
+            Calendar fechaAlerta= Calendar.getInstance();
+            fechaAlerta.setTime(fechaCumplimiento6080);
+            fechaAlerta.add(Calendar.DATE, -14);
+            alertaCambioMedida=fechaAlerta.getTime();
+        }
+        return alertaCambioMedida;
+    }
+
+ 
+    
 }

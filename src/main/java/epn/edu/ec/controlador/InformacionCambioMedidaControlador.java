@@ -32,8 +32,7 @@ public class InformacionCambioMedidaControlador implements Serializable {
     
     private String tipoCumplimiento;
     private boolean es60;
-    
-    private Date fechaProceso;
+
 
     @PostConstruct
     public void init() {
@@ -59,7 +58,6 @@ public class InformacionCambioMedidaControlador implements Serializable {
 
             ejecucionMedidaCAI = ejecucionMedidaCAIAux;
             cai = ejecucionMedidaCAI.getIdCai();
-            fechaProceso=ejecucionMedidaCAIAux.getIdDetalleInfraccionCAI().getIdAdolescenteInfractorCAI().getFechaIngresoProceso();
             InformacionCambioMedidaCAI informacionCambioMedidaAux = servicio.obtenerInformacionCambioMedidaCAI(ejecucionMedidaCAI.getIdEjecucionMedidaCai());
 
             if (informacionCambioMedidaAux != null) {
@@ -168,14 +166,8 @@ public class InformacionCambioMedidaControlador implements Serializable {
         this.es60 = es60;
     }
 
-    public Date getFechaProceso() {
-        return fechaProceso;
-    }
-
-    /**
-     * *******************Métodos para invocar a los diferentes servicios
-     * web*****************
-     */
+    /*** *******************Métodos para invocar a los diferentes servicios* web******************/
+    
     public void guardarInformacionCambioMedida() {
 
         if (this.informacionCambioMedida != null) {

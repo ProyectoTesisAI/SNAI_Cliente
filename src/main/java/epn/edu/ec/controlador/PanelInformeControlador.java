@@ -38,11 +38,11 @@ public class PanelInformeControlador implements Serializable{
         listaInforme = new ArrayList<>();
         if(usuario!=null){
             
-            if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("ADMINISTRADOR")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("SUBDIRECTOR")){
+            if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_ADMINISTRADOR)||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_SUBDIRECTOR)){
                 listaInforme = servicio.listarInforme();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("LIDER UZDI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS NO PRIVATIVAS Y PREVENCIÓN")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_LIDER_UZDI)||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_DIRECTOR_UZDI)){
                 listaInforme=servicio.listarInformesSoloUZDI();
-            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("COORDINADOR CAI")||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals("DIRECTOR TECNICO DE MEDIDAS PRIVATIVAS Y ATENCIÓN")){
+            }else if(usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_COORDINADOR_CAI)||usuario.getIdRolUsuarioCentro().getIdRol().getRol().equals(Constantes.ROL_DIRECTOR_CAI)){
                 listaInforme=servicio.listarInformesSoloCAI();
             }else {
                 listaInforme = servicio.listarInformesPorUsuario(usuario);

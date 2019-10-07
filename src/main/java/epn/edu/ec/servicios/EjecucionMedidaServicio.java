@@ -75,4 +75,22 @@ public class EjecucionMedidaServicio {
         }       
 
     }
+    
+    public List<EjecucionMedidaCAI> obtenerMedidasPorIdAdolescenteCAI(Integer idAdolesceneteCAI) {
+
+        try {
+            List<EjecucionMedidaCAI> listaEjecucionMedidasAux = null;
+            Response response = conexionEM.conexion(URL_EJECUCION_MEDIDA + "/ListaMedidasPorIdAdolescente/" + idAdolesceneteCAI.toString(), "GET", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    listaEjecucionMedidasAux = response.readEntity(new GenericType<List<EjecucionMedidaCAI>>() {});
+                }
+            }
+
+            return listaEjecucionMedidasAux;
+        } catch (Exception e) {
+            return null;
+        }
+       
+    }
 }

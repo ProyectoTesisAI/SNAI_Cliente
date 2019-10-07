@@ -66,7 +66,7 @@ public class UsuarioControlador implements Serializable {
         servicioRCU = new RolCentroUsuarioServicio();
         rolCentroUsuario = new RolCentroUsuario();
         Rol rol = new Rol();
-        rol.setRol("ADMINISTRADOR");
+        rol.setRol(Constantes.ROL_ADMINISTRADOR);
         rolCentroUsuario.setIdRol(rol);
         enlaces = new EnlacesPrograma();
         validacion = new Validaciones();

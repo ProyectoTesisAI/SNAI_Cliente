@@ -1,14 +1,25 @@
 package epn.edu.ec.controlador;
 
+import com.ibm.icu.util.Calendar;
 import epn.edu.ec.modelo.AdolescenteInfractor;
 import epn.edu.ec.modelo.AdolescenteInfractorCAI;
+import epn.edu.ec.modelo.EjecucionMedidaCAI;
+import epn.edu.ec.modelo.InformacionCambioMedidaCAI;
 import epn.edu.ec.servicios.AdolescenteInfractorCAIServicio;
+import epn.edu.ec.servicios.EjecucionMedidaServicio;
+import epn.edu.ec.servicios.InformacionCambioMedidaServicio;
 import epn.edu.ec.utilidades.Constantes;
 import epn.edu.ec.utilidades.EnlacesPrograma;
 import epn.edu.ec.utilidades.PermisosUsuario;
 import epn.edu.ec.utilidades.Validaciones;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -189,6 +200,9 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
         AdolescenteInfractorCAI ai_cai = servicioCAI.guardarEdicionAdolescenteInfractorCAI(this.adolescenteInfractorCAIEditar);
                
         if (ai_cai != null) {
+            
+            editarEjecucionMedida(ai_cai);
+            
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adolescente_infractor_cai", ai_cai);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL ADOLESCETE INFRACTOR CAI", "Información"));
             guardado = false;
@@ -256,4 +270,65 @@ public class AdolescenteInfractorCAIEditarControlador implements Serializable {
             mensaje1 = "Fecha corresponde a una persona mayor de 17 años";
         }
     }
+    
+    
+    private Integer obtenerTiempoPrivacionLibertad(Date fechaAprehension, Date fechaReporteCAI) {
+        int a = 0, d = 0, m = 0, ac = 0;
+        Integer tiempoPrivacionLibertad = null;
+
+        if (fechaAprehension != null && fechaReporteCAI != null) {
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
+            ZonedDateTime zdt1 = ZonedDateTime.parse(fechaAprehension.toString(), dtf);
+            LocalDate ld1 = zdt1.toLocalDate();
+
+            ZonedDateTime zdt2 = ZonedDateTime.parse(fechaReporteCAI.toString(), dtf);
+            LocalDate ld2 = zdt2.toLocalDate();
+
+            DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fecha1 = ld1.format(fmt1);
+            LocalDate fechaA = LocalDate.parse(fecha1, fmt1);
+
+            DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fecha2 = ld2.format(fmt2);
+            LocalDate fechaR = LocalDate.parse(fecha2, fmt2);
+
+            Period periodo = Period.between(fechaR, fechaA);
+            d = periodo.getDays() * -1;
+            m = periodo.getMonths() * -1;
+            a = periodo.getYears() * -1;
+            tiempoPrivacionLibertad = d + (m * 30) + (a * 365);
+            return tiempoPrivacionLibertad;
+        }
+        return tiempoPrivacionLibertad;
+    }
+
+    private void editarEjecucionMedida(AdolescenteInfractorCAI ai_cai) {
+
+        EjecucionMedidaServicio servicioMedida = new EjecucionMedidaServicio();
+
+        try{
+            List<EjecucionMedidaCAI> listaMedidas = servicioMedida.obtenerMedidasPorIdAdolescenteCAI(ai_cai.getIdAdolescenteInfractor().getIdAdolescenteInfractor());
+            if (listaMedidas != null) {
+
+                for (EjecucionMedidaCAI e : listaMedidas) {
+
+                    Date fechaIngresoProceso = ai_cai.getFechaIngresoProceso();
+                    Date fechaAprehension = e.getFechaAprehension();
+
+                    Integer tiempoPrivacionLibertad = obtenerTiempoPrivacionLibertad(fechaAprehension, fechaIngresoProceso);
+
+                    e.setTiempoPrivacionLibertad(tiempoPrivacionLibertad);
+                    e.setFechaIngresoCai(fechaIngresoProceso);
+
+                    servicioMedida.guardarEjecucionMedidaCAI(e);
+                }
+            }
+        }catch(Exception e){
+        }
+        
+    }
+    
+    
+       
 }
