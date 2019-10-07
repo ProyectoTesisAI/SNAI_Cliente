@@ -128,21 +128,42 @@ public class TallerControlador implements Serializable {
 
         String rol = permisos.RolUsuario();
         if (rol != null) {
-            if (Constantes.ROL_ADMINISTRADOR.equals(rol) || Constantes.ROL_SUBDIRECTOR.equals(rol) || Constantes.ROL_LIDER_UZDI.equals(rol) || Constantes.ROL_COORDINADOR_CAI.equals(rol) || Constantes.ROL_DIRECTOR_CAI.equals(rol) || Constantes.ROL_DIRECTOR_UZDI.equals(rol)) {
+
+            if (Constantes.ROL_ADMINISTRADOR.equals(rol) || Constantes.ROL_SUBDIRECTOR.equals(rol) ) {
                 esTecnico = false; //content-disable=true
                 esTecnicoCAI=false;
                 esTecnicoUDI=false;
                 
-                
                 if(tipoTaller.equals(Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR)){
-                    esTecnico=true; //content-disable=true
+                    
+                    esTecnico=true;
                     esTecnicoCAI=false; 
-                    esTecnicoUDI=true;
                     this.setTipoCentro("CAI");
-  //                  listaCai = servicioCai.listaCai();
                 }
                 
-            } else {
+            }else if(Constantes.ROL_LIDER_UZDI.equals(rol) || Constantes.ROL_DIRECTOR_UZDI.equals(rol)) {
+                
+                esTecnico = true; //content-disable=true
+                //seteo en false ya que se quiere que se despliegue el listado de UZDI
+                esTecnicoUDI=false;
+                this.setTipoCentro("UZDI"); 
+                
+            }else if(Constantes.ROL_COORDINADOR_CAI.equals(rol) || Constantes.ROL_DIRECTOR_CAI.equals(rol) ){
+                
+                esTecnico = true; //content-disable=true
+                //seteo en false ya que se quiere que se despliegue el listado de CAI
+                esTecnicoCAI=false;
+                this.setTipoCentro("CAI"); 
+                
+                if(tipoTaller.equals(Constantes.TIPO_TALLER_INSPECTOR_EDUCADOR)){
+                
+                    esTecnico=true;
+                    esTecnicoCAI=false; 
+                    this.setTipoCentro("CAI");
+                }
+                
+            }
+            else {
 
                 esTecnico = true; //content-disable=true
 
@@ -151,14 +172,12 @@ public class TallerControlador implements Serializable {
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
                     this.setTipoCentro( "UZDI");
-    //                listaUdi = servicioUdi.listaUdi();
                     this.setUzdiSeleccionada(usuarioLogin.getIdRolUsuarioCentro().getIdUdi().getUdi());
 
                 } else if (Constantes.ROL_PSICOLOGO_CAI.equals(rol) || Constantes.ROL_JURIDICO_CAI.equals(rol) || Constantes.ROL_INSPECTOR_EDUCADOR.equals(rol) || Constantes.ROL_TRABAJADOR_SOCIAL_CAI.equals(rol)) {
                     esTecnicoCAI=true; 
                     esTecnicoUDI=true;
-                    this.setTipoCentro("CAI"); //tipoCentro = "CAI";
-    //                listaCai = servicioCai.listaCai();
+                    this.setTipoCentro("CAI");
                     this.setCaiSeleccionado(usuarioLogin.getIdRolUsuarioCentro().getIdCai().getCai());
                 }
             }
