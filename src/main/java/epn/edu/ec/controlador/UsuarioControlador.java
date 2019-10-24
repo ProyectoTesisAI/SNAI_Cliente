@@ -289,11 +289,16 @@ public class UsuarioControlador implements Serializable {
             usuario.setActivo(false);
             Usuario usuarioAux = servicioUsuario.desactivarUsuario(usuario);
             if (usuarioAux != null) {
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioDesactivado", usuario);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
+                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
+                
                 return enlaces.PATH_PANEL_USUARIO_NUEVO + "?faces-redirect=true";
+            
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
+                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
                 return null;
             }
         } else {
