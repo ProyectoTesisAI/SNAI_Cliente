@@ -215,15 +215,25 @@ public class UsuarioControlador implements Serializable {
             
             RolCentroUsuario rcuAux = new RolCentroUsuario();
             
-            if (Constantes.ROL_ADMINISTRADOR.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_SUBDIRECTOR.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_LIDER_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_DIRECTOR_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_DIRECTOR_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_COORDINADOR_CAI.equals(this.rolCentroUsuario.getIdRol().getRol())) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                || Constantes.ROL_SUBDIRECTOR.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                || Constantes.ROL_LIDER_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                || Constantes.ROL_DIRECTOR_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                || Constantes.ROL_DIRECTOR_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                || Constantes.ROL_COORDINADOR_CAI.equals(this.rolCentroUsuario.getIdRol().getRol())) {
             
                 rcuAux = servicioRCU.obtenerRolAdministrativo(rolCentroUsuario);
             
-            } else if (Constantes.ROL_PSICOLOGO_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_JURIDICO_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_TRABAJADOR_SOCIAL_UZDI.equals(rolCentroUsuario.getIdRol().getRol())) {
+            } else if (Constantes.ROL_PSICOLOGO_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                       || Constantes.ROL_JURIDICO_UZDI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                       || Constantes.ROL_TRABAJADOR_SOCIAL_UZDI.equals(rolCentroUsuario.getIdRol().getRol())) {
             
                 rcuAux = servicioRCU.obtenerRolSoloUDI(rolCentroUsuario);
 
-            } else if (Constantes.ROL_PSICOLOGO_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_JURIDICO_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_INSPECTOR_EDUCADOR.equals(this.rolCentroUsuario.getIdRol().getRol()) || Constantes.ROL_TRABAJADOR_SOCIAL_CAI.equals(rolCentroUsuario.getIdRol().getRol())) {
+            } else if (Constantes.ROL_PSICOLOGO_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                       || Constantes.ROL_JURIDICO_CAI.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                       || Constantes.ROL_INSPECTOR_EDUCADOR.equals(this.rolCentroUsuario.getIdRol().getRol()) 
+                       || Constantes.ROL_TRABAJADOR_SOCIAL_CAI.equals(rolCentroUsuario.getIdRol().getRol())) {
                 rcuAux = servicioRCU.obtenerRolSoloCAI(rolCentroUsuario);
             }
             if (rcuAux != null) {
@@ -236,16 +246,21 @@ public class UsuarioControlador implements Serializable {
                 Usuario usuarioAux = servicioUsuario.guardarUsuario(this.usuario);
                 if (usuarioAux != null) {
                     guardado=true;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                        FacesMessage.SEVERITY_INFO, "Se ha guardado correctamente el Usuario ", "Aviso"));
                 } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                        FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
                 }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Ha ocurrido un error, no se guardó el Usuario", "Error"));
             }
         }
         else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No ha ingresado todos los datos, verifique y vuelta a intentarlo", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "No ha ingresado todos los datos, verifique y vuelta a intentarlo", 
+                "Error"));
         }
     }
 
