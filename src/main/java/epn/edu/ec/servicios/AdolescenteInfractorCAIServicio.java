@@ -52,6 +52,22 @@ public class AdolescenteInfractorCAIServicio {
         }
         
     }
+    
+    public AdolescenteInfractor editarAdolescenteInfractor(AdolescenteInfractorCAI adolescenteInfractor) {
+        
+        try {
+            AdolescenteInfractor adolescenteInfractorAux = null;
+            Response response = conexionAI.conexion(URL_ADOLESCENTE_INFRACTOR, "PUT", true, adolescenteInfractor.getIdAdolescenteInfractor());
+            if (response != null) {
+                if (response.getStatus() == 200) {
+                    adolescenteInfractorAux = response.readEntity(AdolescenteInfractor.class);
+                }
+            }
+            return adolescenteInfractorAux;
+        } catch (Exception e) {
+            return null;
+        }       
+    }
 
     public AdolescenteInfractorCAI obtenerAdolescenteInfractorCAI(Integer id) {
 
