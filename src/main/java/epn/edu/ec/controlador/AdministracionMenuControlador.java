@@ -163,7 +163,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_JURIDICO_UZDI.equals(rolUsuario)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_SUBDIRECTOR.equals(rolUsuario) || Constantes.ROL_LIDER_UZDI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_UZDI.equals(rolUsuario) || Constantes.ROL_JURIDICO_UZDI.equals(rolUsuario)) {
                 permitidoCrearAdolescenteUDI = true;
             }
         }
@@ -176,7 +176,7 @@ public class AdministracionMenuControlador implements Serializable {
 
         if (rolUsuario != null) {
 
-            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || rolUsuario.equals(Constantes.ROL_JURIDICO_CAI) || rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
+            if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)|| Constantes.ROL_SUBDIRECTOR.equals(rolUsuario) || Constantes.ROL_COORDINADOR_CAI.equals(rolUsuario) || Constantes.ROL_DIRECTOR_CAI.equals(rolUsuario) || rolUsuario.equals(Constantes.ROL_JURIDICO_CAI) || rolUsuario.equals(Constantes.ROL_INSPECTOR_EDUCADOR)) {
                 permitidoCrearAdolescenteCAI = true;
             }
         }
