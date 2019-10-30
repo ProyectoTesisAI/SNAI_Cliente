@@ -76,4 +76,22 @@ public class DetalleInfraccionCAIServicio {
         }       
 
     }
+    
+    public int eliminarDetalleInfraccion(Integer id) {
+
+        try {
+            int statusRespuesta = 0;
+            Response response = conexionDetalle.conexion(URL_DETALLE_INFRACCION + "/" + id.toString(), "DELETE", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200 || response.getStatus() == 204) {
+                    statusRespuesta = 200;
+                }
+            }
+
+            return statusRespuesta;
+        } catch (Exception e) {
+            return 0;
+        }
+        
+    }
 }

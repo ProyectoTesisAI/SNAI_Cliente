@@ -63,7 +63,7 @@ public class DetalleInfraccionControlador implements Serializable {
 
             List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
 
-            if (listaAux.isEmpty() != true) {
+            if (listaAux != null) {
                 listaDetalleInfraccion = listaAux;
             }
         }
@@ -213,6 +213,18 @@ public class DetalleInfraccionControlador implements Serializable {
             return redireccionEjecucionMedida;
         } else {
             return null;
+        }
+    }
+    
+    public void eliminarInfraccion(DetalleInfraccionCAI detalle) {
+
+        int estadoEliminar=servicio.eliminarDetalleInfraccion(detalle.getIdDetalleInfraccion());
+        if(estadoEliminar == 200){
+            listaDetalleInfraccion.remove(detalle);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE LA INFRACCIÓN", "Error"));
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL ELIMINAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
         }
     }
 }

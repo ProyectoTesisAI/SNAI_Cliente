@@ -93,4 +93,22 @@ public class EjecucionMedidaServicio {
         }
        
     }
+    
+    public int eliminarEjecucionMedida(Integer id) {
+
+        try {
+            int statusRespuesta = 0;
+            Response response = conexionEM.conexion(URL_EJECUCION_MEDIDA + "/" + id.toString(), "DELETE", true, null);
+            if (response != null) {
+                if (response.getStatus() == 200 || response.getStatus() == 204) {
+                    statusRespuesta = 200;
+                }
+            }
+
+            return statusRespuesta;
+        } catch (Exception e) {
+            return 0;
+        }
+        
+    }
 }
