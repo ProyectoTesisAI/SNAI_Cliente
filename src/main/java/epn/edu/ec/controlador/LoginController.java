@@ -55,6 +55,8 @@ public class LoginController implements Serializable {
         Usuario user = new Usuario();
 
         user.setUsuario(usuario.getUsuario());
+        
+        //cifro la contraseña mediante SHA256
         String contraseña = cifrarContraseña();
         user.setContraseña(contraseña);
 
@@ -63,6 +65,8 @@ public class LoginController implements Serializable {
         if (usuarioLogueado != null) {
 
             String rolUsuario = usuarioLogueado.getIdRolUsuarioCentro().getIdRol().getRol();
+            
+            //creo una sesión auxiliar denominada usuarioLogin, donde almaceno de forma temporal la información del usuario
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogin", usuarioLogueado);
 
             if (Constantes.ROL_ADMINISTRADOR.equals(rolUsuario)) {
@@ -82,7 +86,8 @@ public class LoginController implements Serializable {
                 }
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "USUARIO O CONTRASEÑA INCORRECTA", "Error"));
+            FacesContext.getCurrentInstance()
+                    .addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "USUARIO O CONTRASEÑA INCORRECTA", "Error"));
             return null;
         }
 

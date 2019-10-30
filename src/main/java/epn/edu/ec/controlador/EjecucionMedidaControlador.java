@@ -401,6 +401,16 @@ public class EjecucionMedidaControlador implements Serializable {
         return alertaCambioMedida;
     }
 
- 
+    public void eliminarEjecucionMedida(EjecucionMedidaCAI medida) {
+
+        int estadoEliminar=servicio.eliminarEjecucionMedida(medida.getIdEjecucionMedidaCai());
+        if(estadoEliminar == 200){
+            listaEjecucionMedida.remove(medida);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA ELIMINADO CORRECTAMENTE LA INFRACCIÓN", "Error"));
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL ELIMINAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
+        }
+    }
     
 }

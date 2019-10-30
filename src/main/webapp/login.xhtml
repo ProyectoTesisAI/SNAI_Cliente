@@ -47,18 +47,23 @@
 
                         <div class="form-group">
                             <h:outputLabel for="txtUsuario" value="Usuario"/>
-                            <b:inputText class="form-control" placeholder="Usuario" id="txtUsuario"  required="true" requiredMessage="Usuario es requerido, ingrese un valor" value="#{loginController.usuario.usuario}">
+                            <b:inputText class="form-control" placeholder="Usuario" id="txtUsuario" 
+                                         required="true" requiredMessage="Usuario es requerido, ingrese un valor" 
+                                         value="#{loginController.usuario.usuario}">
                             </b:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel for="txtContraseña" value="Contraseña"/>
-                            <b:inputText class="form-control" placeholder="Contraseña" id="txtContraseña"   required="true" requiredMessage="Contraseña es requerida, ingrese un valor" type="password" value="#{loginController.usuario.contraseña}">
+                            <b:inputText class="form-control" placeholder="Contraseña" id="txtContraseña"   
+                                         required="true" requiredMessage="Contraseña es requerida, ingrese un valor" 
+                                         type="password" value="#{loginController.usuario.contraseña}">
                             </b:inputText>
                         </div>
 
                         <div class="form-group">
-                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" action="#{loginController.loguerUsuario()}" update="@form"/> 
+                            <b:commandButton class="btn btn-primary btn-block"  icon="ui-icon-key" value="Ingresar" 
+                                             action="#{loginController.loguerUsuario()}" update="@form"/> 
                         </div>
                     </b:form>
                 </div>

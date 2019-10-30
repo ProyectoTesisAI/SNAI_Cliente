@@ -41,6 +41,12 @@
                         <p:column headerText="Editar Infracción"  width="150"> 
                             <b:commandButton value="Editar Infracción" class="btn btn-primary" update="@form:modalInfraccion" actionListener="#{detalleInfraccionControlador.obtenerDetalleInfraccionSeleccionada(td)}" oncomplete="$('.formDetaInfraccion').modal('show')" />
                         </p:column>
+                        
+                        <p:column headerText="Eliminar Infracción"  width="150"> 
+                            <b:commandButton value="Eliminar Infracción" class="btn btn-danger" actionListener="#{detalleInfraccionControlador.eliminarInfraccion(td)}" >
+                                <f:ajax execute="dtDetalleInfraccion" render="@form"/>
+                            </b:commandButton>
+                        </p:column>
                         <p:column headerText="Editar Medida" width="150">
                             <b:commandButton value="Editar Medida" class="btn btn-success" action="#{detalleInfraccionControlador.editarMedida(td)}">
                                 <f:ajax execute="@form" />

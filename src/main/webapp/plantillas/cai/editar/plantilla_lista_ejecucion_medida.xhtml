@@ -21,7 +21,7 @@
                         <h:outputText value="EJECUCIÓN DE LA MEDIDA" style="color: white; font-weight: bold"  />
                     </f:facet>
 
-                    <p:dataTable var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
+                    <p:dataTable id="dtEjecucionMedida" var="te" value="#{ejecucionMedidaControlador.listaEjecucionMedida}" reflow="true"  rows="10"
                                  paginator="true" widgetVar="ejecucionMedidaTable">
                         <p:column filterMatchMode="contains" filterBy="#{te.idDetalleInfraccionCAI.numeroCausa}" headerText="Infracción" width="110">
                             <h:outputText value="#{te.idDetalleInfraccionCAI.numeroCausa}" />
@@ -42,6 +42,13 @@
                         <p:column headerText="Editar Medida"  width="150"> 
                             <b:commandButton value="Editar Medida" class="btn btn-success" update="@form:modalMedida" actionListener="#{ejecucionMedidaControlador.obtenerEjecucionMedidaSeleccionada(te)}" oncomplete="$('.formEjeccionMedida').modal('show')" />
                         </p:column>
+                        
+                        <p:column headerText="Eliminar Medida"  width="150"> 
+                            <b:commandButton value="Eliminar Medida" class="btn btn-danger"  actionListener="#{ejecucionMedidaControlador.eliminarEjecucionMedida(te)}" >
+                                <f:ajax execute="dtEjecucionMedida" render="@form"/>
+                            </b:commandButton>
+                        </p:column>
+                        
                         <p:column headerText="Editar Ejecución Medida">
                             <b:commandButton value="Editar Ejecución" class="btn btn-primary" action="#{ejecucionMedidaControlador.editarInformacion(te)}">
                                 <f:ajax execute="@form" />

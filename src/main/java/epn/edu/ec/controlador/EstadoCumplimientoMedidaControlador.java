@@ -418,14 +418,24 @@ public class EstadoCumplimientoMedidaControlador implements Serializable {
         this.estadoCumplimientoMedida.setIdAdolescenteInfractorUDI(adolescenteInfractorUDI);
         this.estadoCumplimientoMedida.setSituacionActual(estado);
 
-        EstadoCumplimientoMedida estadoCumplimientoMedidaAux = servicio.guardarEstadoCumplimientoMedida(estadoCumplimientoMedida);
+        EstadoCumplimientoMedida estadoCumplimientoMedidaAux = 
+                servicio.guardarEstadoCumplimientoMedida(estadoCumplimientoMedida);
+        
         if (estadoCumplimientoMedidaAux != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, 
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA",
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO ESTADO CUMPLIMIENTO MEDIDA", 
+                    "Error")
+            );
         }
     }
 

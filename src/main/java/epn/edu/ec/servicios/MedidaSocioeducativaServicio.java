@@ -75,10 +75,13 @@ public class MedidaSocioeducativaServicio {
         
         try {
             MedidaSocioeducativa medidaMasAlta = null;
-            Response response = conexion.conexion(URL_MEDIDA_SOCIOEDUCATIVA + "/MedidaMasAlta/AdolescenteUDI/" + idAdolescenteUZDI.toString(), "GET", true, null);
+            Response response = conexion.conexion(
+                    URL_MEDIDA_SOCIOEDUCATIVA + "/MedidaMasAlta/AdolescenteUDI/" + idAdolescenteUZDI.toString(),
+                    "GET", true, null);
             if (response != null) {
                 if (response.getStatus() == 200) {
-                    List<MedidaSocioeducativa> medidasSocioeducativas = response.readEntity(new GenericType<List<MedidaSocioeducativa>>() {
+                    List<MedidaSocioeducativa> medidasSocioeducativas = 
+                            response.readEntity(new GenericType<List<MedidaSocioeducativa>>() {
                     });
                     if (medidasSocioeducativas != null) {
                         medidaMasAlta = medidasSocioeducativas.get(0);

@@ -105,11 +105,19 @@ public class EjeLaboralControlador implements Serializable{
         EjeLaboral ejeLaboralAux = servicio.guardarEjeLaboral(ejeLaboral);
         if (ejeLaboralAux != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE LABORAL", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO,
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE LABORAL", 
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE LABORAL", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE LABORAL", 
+                    "Error")
+            );
         }
     }
     

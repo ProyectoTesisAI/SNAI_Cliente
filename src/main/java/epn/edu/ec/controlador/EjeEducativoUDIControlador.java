@@ -113,11 +113,19 @@ public class EjeEducativoUDIControlador implements Serializable{
         EjeEducativo ejeEducativoUDIAux = servicio.guardarEjeEducativo(ejeEducativo);
         if (ejeEducativoUDIAux != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE EDUCATIVO", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, 
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE EDUCATIVO", 
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE EDUCATIVO", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE EDUCATIVO", 
+                    "Error")
+            );
         }
     }
 

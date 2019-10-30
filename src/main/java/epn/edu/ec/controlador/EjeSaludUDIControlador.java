@@ -245,11 +245,19 @@ public class EjeSaludUDIControlador implements Serializable {
         EjeSalud ejeSaludUDIAux = servicio.guardarEjeSalud(ejeSalud);
         if (ejeSaludUDIAux != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO,
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO EJE SALUD", 
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO EJE SALUD", 
+                    "Error")
+            );
         }
     }
     
