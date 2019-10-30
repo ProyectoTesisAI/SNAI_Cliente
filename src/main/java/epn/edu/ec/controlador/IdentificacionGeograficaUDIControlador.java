@@ -179,11 +179,19 @@ public class IdentificacionGeograficaUDIControlador implements Serializable {
         IdentificacionGeografica identificacionGeograficaAux = servicio.guardarIdentificacionGeografica(identificacionGeografica);
         if (identificacionGeograficaAux != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, 
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN GEOGRÁFICA", 
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN GEOGRÁFICA", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN GEOGRÁFICA", 
+                    "Error")
+            );
         }
     }
     

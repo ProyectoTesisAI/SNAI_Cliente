@@ -131,11 +131,19 @@ public class UnidadZonalControlador implements Serializable{
         UnidadZonal uz= servicio.guardarUnidadZonal(unidadZonal);
         if (uz != null) {
             guardado=true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO UNIDAD ZONAL", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, 
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO UNIDAD ZONAL", 
+                    "Información")
+            );
             
         } else {
             guardado=false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO UNIDAD ZONAL", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO UNIDAD ZONAL",
+                    "Error")
+            );
         }
     }
     

@@ -207,16 +207,28 @@ public class InformacionJudicialControlador implements Serializable {
             if (informacionJudicialAux != null) {
                 
                 guardado = true;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", "Información"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                        FacesMessage.SEVERITY_INFO, 
+                        "SE HA GUARDADO CORRECTAMENTE EL REGISTRO INFORMACIÓN JUDICIAL", 
+                        "Información")
+                );
                 
 
             } else {
                 guardado = false;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                        FacesMessage.SEVERITY_ERROR, 
+                        "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO INFORMACIÓN JUDICIAL",
+                        "Error")
+                );
             }
 
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "DEBE DE SELECCIONAR AL MENOS UNA MEDIDA SOCIOEDUCATIVA", 
+                    "Error")
+            );
         }
         
         

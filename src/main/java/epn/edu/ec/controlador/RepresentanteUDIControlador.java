@@ -108,6 +108,7 @@ public class RepresentanteUDIControlador implements Serializable {
     }
 
     public void setTipoDocumento(String tipoDocumento) {
+        this.representante.setNacionalidad(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
         if ("ECUATORIANA".equals(tipoDocumento)) {
             esCedula = true;
@@ -138,17 +139,23 @@ public class RepresentanteUDIControlador implements Serializable {
      */
     public void guardarRepresentante() {
 
-        this.representante.setNacionalidad(tipoDocumento);
         this.representante.setIdAdolescenteInfracto(adolescenteInfractorUDI.getIdAdolescenteInfractor());
 
         Representante representanteAux = servicio.guardarRepresentante(representante);
         if (representanteAux != null) {
             guardado = true;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO REPRESENTANTE", "Información"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, 
+                    "SE HA GUARDADO CORRECTAMENTE EL REGISTRO REPRESENTANTE", 
+                    "Información")
+            );
 
         } else {
             guardado = false;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO REPRESENTANTE", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, 
+                    "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO REPRESENTANTE", 
+                    "Error"));
         }
     }
 

@@ -69,7 +69,8 @@ public class ConexionServicio<T> {
             Invocation.Builder invocationBuilder=null;
             
             if(necesitaToken){
-                invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8").header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
+                invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+                                             .header(HttpHeaders.AUTHORIZATION,"Bearer "+token );
 
             }
             else{
@@ -82,7 +83,6 @@ public class ConexionServicio<T> {
             if (tipoPeticion.equals("GET")) {
                 
                 response = invocationBuilder.get();
-                String headers= response.getHeaderString(HttpHeaders.AUTHORIZATION);
             } 
             else if (tipoPeticion.equals("POST")) {
                 
