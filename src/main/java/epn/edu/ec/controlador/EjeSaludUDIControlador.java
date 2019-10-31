@@ -85,8 +85,11 @@ public class EjeSaludUDIControlador implements Serializable {
                 }
                 if (ejeSalud.getDiscapacidad().equals("SI")) {
                     tipoD = "SI";
-                } else {
+                }else if(ejeSalud.getDiscapacidad().equals("NO")) {
                     tipoD = "NO";
+                }
+                else{
+                    tipoD="EN PROCESO DE CERTIFICACIÓN";
                 }
             }
             genero = adolescenteInfractorUDIAux.getIdAdolescenteInfractor().getGenero();
@@ -171,9 +174,12 @@ public class EjeSaludUDIControlador implements Serializable {
         if("SI".equals(tipoD)){
             esDiscapacidad=true;
             ejeSalud.setDiscapacidad("SI");
-        }else if("NO".equals(tipoD) || "EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+        }else if("NO".equals(tipoD)){
             esDiscapacidad=false;
             ejeSalud.setDiscapacidad("NO");
+        }else if("EN PROCESO DE CERTIFICACIÓN".equals(tipoD)){
+            esDiscapacidad=false;
+            ejeSalud.setDiscapacidad("EN PROCESO DE CERTIFICACIÓN");
         }
     }
 

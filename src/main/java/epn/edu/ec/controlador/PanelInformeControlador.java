@@ -25,6 +25,7 @@ public class PanelInformeControlador implements Serializable{
     private EnlacesPrograma enlaces;
     private Usuario usuario;
     private PermisosUsuario permisosUsuario;
+    private String tipoTaller;
 
     @PostConstruct
     public void init() {
@@ -33,7 +34,7 @@ public class PanelInformeControlador implements Serializable{
         servicio = new InformeServicio();
         enlaces=new EnlacesPrograma();
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        String tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
+        tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
         
         listaInforme = new ArrayList<>();
         if(usuario!=null){
@@ -70,6 +71,15 @@ public class PanelInformeControlador implements Serializable{
         return servicio;
     }
 
+    public String getTipoTaller() {
+        return tipoTaller;
+    }
+
+    public void setTipoTaller(String tipoTaller) {
+        this.tipoTaller = tipoTaller;
+    }
+
+    
     public String verTaller(Informe informe) {
 
         try {

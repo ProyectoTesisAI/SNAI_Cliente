@@ -23,54 +23,54 @@
             
             <ui:define name="content">
                 <!-- Panel para la creación de la Ficha de Planificación del Taller-->
-                    <div class="panel panel-default">
+                <div class="panel panel-default">
 
-                        <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center "> TALLERES SIN INFORME</div>
-                        <div class="panel-body" style="padding: 40px;">
+                    <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center ">LISTA TALLERES SIN INFORME - <h:outputText  value="#{ panelTallerControlador.tipoTaller}" /></div>
+                    <div class="panel-body" style="padding: 40px;">
 
-                            <b:form id="form">
+                        <b:form id="form">
 
-                                <p:dataTable var="tp" value="#{panelTallerControlador.listaTalleres}" reflow="true"  rows="25"
-                                             paginator="true"  >
+                            <p:dataTable var="tp" value="#{panelTallerControlador.listaTalleres}" reflow="true"  rows="25"
+                                         paginator="true"  >
 
-                                    <p:column  filterMatchMode="contains" filterBy="#{tp.tipo}" headerText="Tipo">
-                                        <h:outputText style="text-transform:uppercase" value="#{tp.tipo}" />
-                                    </p:column>
+                                <p:column  filterMatchMode="contains" filterBy="#{tp.tipo}" headerText="Tipo">
+                                    <h:outputText style="text-transform:uppercase" value="#{tp.tipo}" />
+                                </p:column>
 
-                                    <p:column  filterMatchMode="contains" filterBy="#{tp.idUdi.udi}" headerText="CAI/UZDI">
-                                        <h:outputText style="text-transform: uppercase" value="#{tp.idUdi.udi}" />
-                                    </p:column>
-                                    
-                                    <p:column filterMatchMode="contains" filterBy="#{tp.tema}" headerText="Tema">
-                                        <h:outputText style="text-transform:uppercase" value="#{tp.tema}" />
-                                    </p:column>
+                                <p:column  filterMatchMode="contains" filterBy="#{tp.idUdi.udi}" headerText="CAI/UZDI">
+                                    <h:outputText style="text-transform: uppercase" value="#{tp.idUdi.udi}" />
+                                </p:column>
 
-                                    <p:column filterMatchMode="contains" filterBy="#{tp.fecha}" headerText="Fecha">
-                                        <h:outputText value="#{tp.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    
-                                    <p:column filterMatchMode="contains" filterBy="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" headerText="Elaborado">
-                                        <h:outputText style="text-transform:uppercase" value="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" />
-                                    </p:column>
+                                <p:column filterMatchMode="contains" filterBy="#{tp.tema}" headerText="Tema">
+                                    <h:outputText style="text-transform:uppercase" value="#{tp.tema}" />
+                                </p:column>
 
-                                    <p:column headerText="Ver Taller">
-                                        <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelTallerControlador.verTaller(tp)}">
-                                            <f:ajax execute="@form" />
-                                        </b:commandButton>
-                                    </p:column>
-                                    <p:column headerText="Agregar Informe">
-                                        <b:commandButton  value="Agregar Informe" class="btn btn-primary btn-block" action="#{panelTallerControlador.agregarInforme(tp)}">
-                                            <f:ajax execute="@form" />
-                                        </b:commandButton>
-                                    </p:column>
-                                </p:dataTable> 
- 
-                            </b:form>
-                        </div>
+                                <p:column filterMatchMode="contains" filterBy="#{tp.fecha}" headerText="Fecha">
+                                    <h:outputText value="#{tp.fecha}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column filterMatchMode="contains" filterBy="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" headerText="Elaborado">
+                                    <h:outputText style="text-transform:uppercase" value="#{tp.idUsuario.apellidos} #{tp.idUsuario.nombres}" />
+                                </p:column>
+
+                                <p:column headerText="Ver Taller">
+                                    <b:commandButton value="Ver Taller" class="btn btn-success btn-block" action="#{panelTallerControlador.verTaller(tp)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                                <p:column headerText="Agregar Informe">
+                                    <b:commandButton  value="Agregar Informe" class="btn btn-primary btn-block" action="#{panelTallerControlador.agregarInforme(tp)}">
+                                        <f:ajax execute="@form" />
+                                    </b:commandButton>
+                                </p:column>
+                            </p:dataTable> 
+
+                        </b:form>
                     </div>
-                    <!-- Fin del Panel para la creación de Fichas de Planificación del Taller-->
+                </div>
+                <!-- Fin del Panel para la creación de Fichas de Planificación del Taller-->
             </ui:define>
         </ui:composition>
         
