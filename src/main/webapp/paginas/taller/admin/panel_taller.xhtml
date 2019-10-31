@@ -24,10 +24,11 @@
                 <!-- Panel para la creación de la Ficha de Planificación del Taller-->
                 <div class="panel panel-default">
 
-                    <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center "> LISTA DE TALLERES SIN INFORME</div>
+                    <div style="background-color: #337ab8; color: white; font-weight: bold" class="panel-heading text-center ">LISTA TALLERES SIN INFORME - <h:outputText  value="#{ panelTallerControlador.tipoTaller}" /></div>
                     <div class="panel-body" style="padding: 40px;">
 
                         <b:form id="form">
+
 
                             <p:dataTable var="tp" value="#{panelTallerControlador.listaTalleres}" reflow="true"  rows="25"
                                          paginator="true"  >
@@ -35,7 +36,7 @@
                                 <p:column  filterMatchMode="contains" filterBy="#{tp.tipo}" headerText="Tipo">
                                     <h:outputText style="text-transform: uppercase" value="#{tp.tipo}" />
                                 </p:column>
-                                
+
                                 <p:column  filterMatchMode="contains" filterBy="#{tp.idUdi.udi}" headerText="CAI/UZDI">
                                     <h:outputText style="text-transform: uppercase" value="#{tp.idUdi.udi}" />
                                 </p:column>

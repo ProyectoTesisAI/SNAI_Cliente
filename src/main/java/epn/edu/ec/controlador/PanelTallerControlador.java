@@ -26,6 +26,7 @@ public class PanelTallerControlador implements Serializable {
     private EnlacesPrograma enlaces;
     private Usuario usuario;
     private PermisosUsuario permisosUsuario;
+    private String tipoTaller; 
 
     @PostConstruct
     public void init() {
@@ -35,7 +36,7 @@ public class PanelTallerControlador implements Serializable {
         enlaces = new EnlacesPrograma();
         usuario = new Usuario();
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogin");
-        String tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
+        tipoTaller = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipoTallerSeleccionadoMenu");
         
         listaTalleres = new ArrayList<>();
         listaTalleresPorTipo= new ArrayList<>();
@@ -83,6 +84,15 @@ public class PanelTallerControlador implements Serializable {
     public TallerServicio getServicio() {
         return servicio;
     }
+
+    public String getTipoTaller() {
+        return tipoTaller;
+    }
+
+    public void setTipoTaller(String tipoTaller) {
+        this.tipoTaller = tipoTaller;
+    }
+    
     
     private void filtrarTalleresPorTipo(String tipoTaller){
     
