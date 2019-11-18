@@ -154,14 +154,12 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
 
                     String cedula = this.adolescenteInfractorCAICrear.getIdAdolescenteInfractor().getCedula();
                     if (validacion.cedulaValida(cedula)) {
-                        guardarRegistroAdolescenteInfractor();
-                        
+                        guardarRegistroAdolescenteInfractor();               
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                             FacesMessage.SEVERITY_ERROR, 
                             "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, HA INGRESADO UNA CÉDULA INCORRECTA", "Error"));
                     }
-
                 } else if ("EXTRANJERA".equals(tipoDocumento)) {
                     guardarRegistroAdolescenteInfractor();
                 }
@@ -170,13 +168,11 @@ public class AdolescenteInfractorCAIControlador implements Serializable {
                     FacesMessage.SEVERITY_ERROR,
                     "ERROR AL GUARDAR EL ADOLESCENTE INFRACTOR, NO DEBE SER MAYOR DE 26 AÑOS", "Error"));
             }
-            
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, 
                 "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DEL ADOLESCENTE INFRACTOR CAI", "Error"));
         }
-        
     }
 
     private void guardarRegistroAdolescenteInfractor() {
