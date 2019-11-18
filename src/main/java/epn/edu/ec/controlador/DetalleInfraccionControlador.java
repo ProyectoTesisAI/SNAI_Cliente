@@ -164,15 +164,23 @@ public class DetalleInfraccionControlador implements Serializable {
      */
     public void guardarDetalleInfraccion() {
         
-        if (this.detalleInfraccion.getNombreJuez().isEmpty() || this.detalleInfraccion.getNombreUnidadJudicial().isEmpty() || this.detalleInfraccion.getNumeroCausa().isEmpty() || this.detalleInfraccion.getProvinciaInfraccion().isEmpty() || this.detalleInfraccion.getCantonInfraccion().isEmpty() || this.detalleInfraccion.getTipoPenal().isEmpty() || this.detalleInfraccion.getUnidadJudicial().isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Provincia Detención, Cantón Detención, N° Causa, Nombre Juez, Nombre de Unida Judicial deben de tener un valor", "Error"));
+        if (this.detalleInfraccion.getNombreJuez().isEmpty() || this.detalleInfraccion.getNombreUnidadJudicial().isEmpty() 
+            || this.detalleInfraccion.getNumeroCausa().isEmpty() || this.detalleInfraccion.getProvinciaInfraccion().isEmpty() 
+            || this.detalleInfraccion.getCantonInfraccion().isEmpty() || this.detalleInfraccion.getTipoPenal().isEmpty() 
+            || this.detalleInfraccion.getUnidadJudicial().isEmpty()) {
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, 
+                "Provincia Detención, Cantón Detención, N° Causa, Nombre Juez, Nombre de Unida Judicial deben de tener un valor",
+                "Error"));
         } else {
             this.detalleInfraccion.setIdAdolescenteInfractorCAI(adolescenteInfractorCAI);
 
             DetalleInfraccionCAI detalleInfraccionAux = servicio.guardarDetalleInfraccionCAI(detalleInfraccion);
             if (detalleInfraccionAux != null) {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "SE HA GUARDADO CORRECTAMENTE EL REGISTRO DETALLE INFRACCIÓN", "Información"));
 
                 List<DetalleInfraccionCAI> listaAux = servicio.obtenerDetallesInfraccionCAI(adolescenteInfractorCAI);
 
@@ -181,7 +189,8 @@ public class DetalleInfraccionControlador implements Serializable {
                 }
 
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO DETALLE INFRACCIÓN", "Error"));
             }
         }
     }
