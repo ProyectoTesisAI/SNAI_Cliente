@@ -86,11 +86,13 @@ public class ConexionServicio<T> {
             } 
             else if (tipoPeticion.equals("POST")) {
                 
-                response = invocationBuilder.post(Entity.entity(informacionAEnviar, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+                response = invocationBuilder.post(Entity.entity(informacionAEnviar, MediaType.APPLICATION_JSON + 
+                                                                ";charset=UTF-8"));
             } 
             else if (tipoPeticion.equals("PUT")) {
                 
-                response = invocationBuilder.put(Entity.entity(informacionAEnviar, MediaType.APPLICATION_JSON + ";charset=UTF-8"));
+                response = invocationBuilder.put(Entity.entity(informacionAEnviar, MediaType.APPLICATION_JSON +
+                                                               ";charset=UTF-8"));
             }
             else if (tipoPeticion.equals("DELETE")) {
                 
